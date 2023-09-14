@@ -877,12 +877,9 @@ $(document).ready(function () {
         let addOption2 = document.querySelector("#boardRegId > input[type=checkbox]") ? 'Механический селектор переключения режима работы местн./дист.' : ''; 
         let addOptions = addOption1 ? addOption1 + ' ' + 'и' + ' ' +  addOption2 : addOption2;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        h6 = $("input[name='typeEndSwich']:checked").val() ? $("input[name='typeEndSwich']:checked").val() : 2;
-        h7 = $("input[name='commandBlockType']:checked").val() ? $("input[name='commandBlockType']:checked").val() : 2;
         h9 = document.querySelector('#signal').value ? document.querySelector('#signal').value : '0';
         h10 = document.querySelector('#commandSignal').value ? document.querySelector('#commandSignal').value : 0;
         h11 = $("input[name='signalMoment']:checked").val() ? $("input[name='signalMoment']:checked").val() : '0';
-
 // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // json0
         let j00 = document.querySelector('#organization').value; //Фирма
@@ -891,15 +888,17 @@ $(document).ready(function () {
         let j03 = document.querySelector('#email').value; // email
         let j04 = document.querySelector('#numbersOfEp').value; // кол-во
         let j05 = ''; //цена
+        json0 = [j00, j01, j02, j03, j04, j05];
 
         //json1
         let j10 = 'Электроприводы многообортные ЭП4'; //тип арматуры
         let j11 = document.querySelector('#mark-gen').innerText; //маркировка
         let j12 = 'АО Тулаэлектропривод'; //завод
-        let j14 = document.querySelector("#closingTime").value; //время закрытия
-        let j15 = '?';//макс крут момент
-        let j16 = document.querySelector('#flange').value; //присоединение к приводу
-        let j17 = $("input[name='placeForEnv']:checked").closest('.form-check').find('.form-check-label').text(); // установка
+        let j13 = document.querySelector("#closingTime").value; //время закрытия
+        let j14 = '?';//макс крут момент
+        let j15 = document.querySelector('#flange').value; //присоединение к приводу
+        let j16 = $("input[name='placeForEnv']:checked").closest('.form-check').find('.form-check-label').text(); // установка
+        json1 = [j10, j11, j12, j13, j14, j15, j16];
 
         //json2
         let j20 = $("input[name='execution']:checked").closest('.form-check').find('.form-check-label').text(); //исполнение по назначению
@@ -907,20 +906,22 @@ $(document).ready(function () {
         let j22 = $("input[name='protection']:checked").closest('.form-check').find('.form-check-label').text(); //Влагозащита
         let j23 = $("input[name='rotating']:checked").closest('.form-check').find('.form-check-label').text(); //Вращение вых вала
         let j24 = $('#climatic-modification option:selected').text(); //Температура
+        json2 = [j20, j21, j22, j23, j24];
 
         //json3
-        let j30 = //Тип БУ
+        let j30 = document.querySelector("#controle-blocks").value;
         let j31 = checkCommandBlock();// Тип управления
-        let j32 = //Тип БКВ
-        let j33 = //Механический указатель
-        let j34 = // Сигнализация положения
-        let j35 =  // Сигнал момэнт
-        let j36 = // сигналы дист управления
-        let j37 = // Дублирование RS485
+        let j32 = '?';//Тип БКВ
+        let j33 = '?';//Механический указатель
+        let j34 = '?';// Сигнализация положения
+        let j35 =  '?';// Сигнал момэнт
+        let j36 = '?';// сигналы дист управления
+        let j37 = '?';// Дублирование RS485
         let j38 = 'одиночные';// Промежуточные выключатели
         let j39 = 'одиночные';// Моментные выключатели
         let j310 = 'одиночные';// Концевые выключатели
-        let j311 = // Монтаж БУ
+        let j311 = '?';// Монтаж БУ
+        json3 = [j30, j31, j32, j33, j34, j35, j36, j37, j38, j39, j310, j311];
 
         //json4
         let j40 = document.querySelector("#cap > input[type=checkbox]").checked ? 'Есть' : 'Отсутствует'; //Защитный колпак
@@ -928,6 +929,7 @@ $(document).ready(function () {
         let j42 = document.querySelector("#mechSelectorId > input[type=checkbox]") ? 'Есть' : 'Отсутствует'; //Механический селектор
         let j43 = addOptions;//Доп опции 
         let j44 = document.querySelector('#addReqarea').value ? document.querySelector('#addReqarea').value : '' + TuMp;
+        json4 = [j40, j41, j42, j43, j44];
 
         //json5
         let j50 = $("input[name='working-mode']:checked").closest('.form-check').find('.form-check-label').text(); //Назначение по режиму работы
@@ -935,12 +937,14 @@ $(document).ready(function () {
         let j52 = $("input[name='connectionForEp4']:checked").closest('.form-check').find('.form-check-label').text(); //Электрическое подключение (расшифровка)
         let j53 = 'SIL-3'; // SIL
         let j54 = $("input[name='special']:checked").val(); //Специальное исполнение
-        let j55 = ''; //Масса
+        let j55 = '?'; //Масса
+        json5 = [j50, j51, j52, j53, j54, j55];
 
         //json6
         let j60 = '?';  //Кабельные вводы
         let j61 = '?'; //Штепсельные разъемы
         let j62 = '?'; //Тип подводимых кабелей
+        json6 = [j60, j61, j62];
         
         //json7
         let j70 = $("input[name='connection-type']:checked").val();//Тип присоединения выходного вала
@@ -950,6 +954,7 @@ $(document).ready(function () {
         let j74 = '';//Наличие типа функции
         let j75 = '';//Функция при питании
         let j76 = ''; //Условие для запуска функции
+        json5 = [j70, j71, j72, j73, j74, j75, j76];
 
 
         // CХЕМА
@@ -969,36 +974,38 @@ $(document).ready(function () {
             schemeForSend = 44;
         }
 
-        console.log([j1, j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12, j13]);
-        console.log([h1, h2, h3, h4, h5, h6, h7, h8, h9, h10, h11, h12, h13, h14, h15, h16, h17, h18, h19, h20, h21, h22, h23]);
-        console.log([p1, p2, p3, p4, p5, p6]);
-        console.log();
+        console.log(json0);
+        console.log(json1);
+        console.log(json2);
+        console.log(json3);
+        console.log(json4);
+        console.log(json5);
 
-        function DOCX(id) {
-            window.open(`http://217.144.103.121/Tula/${id}`);
-        }
-        function EXEL(id) {
-            window.open(`http://217.144.103.121/TulaEXEL/${id}`);
-        }
-        function sendToServer() {
-            let post = fetch('http://217.144.103.121/download', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json;charset=utf-8' },
-                body: JSON.stringify({
-                    jsn1: [j1, j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12, j13],
-                    jsn2: [h1, h2, h3, h4, h5, h6, h7, h8, h9, h10, h11, h12, h13, h14, h15, h16, h17, h18, h19, h20, h21, h22, h23],
-                    jsn3: [p1, p2, p3, p4, p5, p6, schemeForSend, document.querySelector('#upper-limit').value, document.querySelector('#rotation-frequency').value],
-                    jsn4: [],
-                }),
-            })
-                .then((response) => response.json())
-                .then((data) => {
-                    let id = data.id;
-                    DOCX(id);
-                    EXEL(id);
-                });
-        }
-        sendToServer();
+        // function DOCX(id) {
+        //     window.open(`http://217.144.103.121/Tula/${id}`);
+        // }
+        // function EXEL(id) {
+        //     window.open(`http://217.144.103.121/TulaEXEL/${id}`);
+        // }
+        // function sendToServer() {
+        //     let post = fetch('http://217.144.103.121/download', {
+        //         method: 'POST',
+        //         headers: { 'Content-Type': 'application/json;charset=utf-8' },
+        //         body: JSON.stringify({
+        //             jsn1: [j1, j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12, j13],
+        //             jsn2: [h1, h2, h3, h4, h5, h6, h7, h8, h9, h10, h11, h12, h13, h14, h15, h16, h17, h18, h19, h20, h21, h22, h23],
+        //             jsn3: [p1, p2, p3, p4, p5, p6, schemeForSend, document.querySelector('#upper-limit').value, document.querySelector('#rotation-frequency').value],
+        //             jsn4: [],
+        //         }),
+        //     })
+        //         .then((response) => response.json())
+        //         .then((data) => {
+        //             let id = data.id;
+        //             DOCX(id);
+        //             EXEL(id);
+        //         });
+        // }
+        // sendToServer();
     });
 
     // сокрытия пункта кабельных вводов
