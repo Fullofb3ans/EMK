@@ -872,6 +872,7 @@ $(document).ready(function () {
         let tuMpX1 = document.querySelector('#maxStepMp').value ? 'МП40-' + document.querySelector('#maxStepMp').value : '';
         let tuMpX2 = document.querySelector('#stepForOne').value;
         let TuMp = tuMpX1 ? tuMpX1 + '-' + tuMpX2 : '';
+        let optForBu = $('#control-block-optionsset option:selected').val() != 'noValue' ? $('#control-block-optionsset option:selected').val() : '';
 
         let addOption1 = document.querySelector("#mechSelectorId > input[type=checkbox]") ? 'Механический селектор переключения режима работы местн./дист.' : ''; 
         let addOption2 = document.querySelector("#boardRegId > input[type=checkbox]") ? 'Механический селектор переключения режима работы местн./дист.' : ''; 
@@ -913,9 +914,10 @@ $(document).ready(function () {
         let j31 = checkCommandBlock();// Тип управления
         let j32 = '?';//Тип БКВ
         let j33 = '?';//Механический указатель
-        let j34 = '?';// Сигнализация положения
+        let j34 = '6';// Сигнализация положения
+        optForBu == 'Y' ? j34 = '8' :  optForBu == 'Z' ?  j34 = '12' : optForBu == 'V' ? j34 = '8' :  optForBu == 'W' ? j34 = '12' : '6';
         let j35 =  '?';// Сигнал момэнт
-        let j36 = '?';// сигналы дист управления
+        let j36 = '24В';// сигналы дист управления
         let j37 = '?';// Дублирование RS485
         let j38 = 'одиночные';// Промежуточные выключатели
         let j39 = 'одиночные';// Моментные выключатели
