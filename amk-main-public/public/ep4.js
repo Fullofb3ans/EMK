@@ -926,27 +926,28 @@ $(document).ready(function () {
         json3 = [j30, j31, j32, j33, j34, j35, j36, j37, j38, j39, j310, j311];
 
         //json4
-        let j40 = document.querySelector("#cap > input[type=checkbox]").checked ? 'Есть' : 'Отсутствует'; //Защитный колпак
-        let j41 = document.querySelector("#color-1").checked ? 'Серый' : document.querySelector("#ralColor").value; //Цвет
-        let j42 = document.querySelector("#mechSelectorId > input[type=checkbox]") ? 'Есть' : 'Отсутствует'; //Механический селектор
-        let j43 = addOptions;//Доп опции 
-        let j44 = document.querySelector('#addReqarea').value ? document.querySelector('#addReqarea').value : '' + TuMp;
-        json4 = [j40, j41, j42, j43, j44];
+        let j40 = $("input[name='connectionForEp4']:checked").val(); //Электрическое подключение (обозначение)
+        let j41 = document.querySelector("#cap > input[type=checkbox]").checked ? 'Есть' : 'Отсутствует'; //Защитный колпак
+        let j42 = document.querySelector("#color-1").checked ? 'Серый' : document.querySelector("#ralColor").value; //Цвет
+        let j43 = document.querySelector("#mechSelectorId > input[type=checkbox]") ? 'Есть' : 'Отсутствует'; //Механический селектор
+        let j44 = addOptions;//Доп опции 
+        let j45 = document.querySelector('#addReqarea').value ? document.querySelector('#addReqarea').value : '' + TuMp;
+        json4 = [j40, j41, j42, j43, j44, j45];
 
         //json5
         let j50 = $("input[name='working-mode']:checked").closest('.form-check').find('.form-check-label').text(); //Назначение по режиму работы
-        let j51 = $("input[name='connectionForEp4']:checked").val(); //Электрическое подключение (обозначение)
-        let j52 = $("input[name='connectionForEp4']:checked").closest('.form-check').find('.form-check-label').text(); //Электрическое подключение (расшифровка)
-        let j53 = 'SIL-3'; // SIL
-        let j54 = $("input[name='special']:checked").val(); //Специальное исполнение
-        let j55 = '?'; //Масса
-        json5 = [j50, j51, j52, j53, j54, j55];
+        let j51 = $("input[name='connectionForEp4']:checked").closest('.form-check').find('.form-check-label').text(); //Электрическое подключение (расшифровка)
+        let j52 = 'SIL-3'; // SIL
+        let j53 = $("input[name='special']:checked").val(); //Специальное исполнение
+        let j54 = '?'; //Масса
+        json5 = [j50, j51, j52, j53, j54];
 
         //json6
-        let j60 = '?';  //Кабельные вводы
-        let j61 = '?'; //Штепсельные разъемы
-        let j62 = '?'; //Тип подводимых кабелей
-        json6 = [j60, j61, j62];
+        let j60 = '?'; //Номинальное давление
+        let j61 = '?';  //Кабельные вводы
+        let j62 = '?'; //Штепсельные разъемы
+        let j63 = '?'; //Тип подводимых кабелей
+        json6 = [j60, j61, j62, j63];
         
         //json7
         let j70 = $("input[name='connection-type']:checked").val();//Тип присоединения выходного вала
