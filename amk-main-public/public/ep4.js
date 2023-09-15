@@ -892,7 +892,7 @@ $(document).ready(function () {
         
         // ДОП ОПЦИИ
         let addOption1 = document.querySelector("#mechSelectorId > input[type=checkbox]") ? 'Механический селектор переключения режима работы местн./дист.' : ''; 
-        let addOption2 = document.querySelector("#boardRegId > input[type=checkbox]") ? 'Механический селектор переключения режима работы местн./дист.' : ''; 
+        let addOption2 = document.querySelector("#boardRegId > input[type=checkbox]") ? 'Плата регистратор' : ''; 
         let addOptions = addOption1 ? addOption1 + ' ' + 'и' + ' ' +  addOption2 : addOption2;
 // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
