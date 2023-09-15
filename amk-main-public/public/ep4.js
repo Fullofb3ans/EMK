@@ -910,7 +910,7 @@ $(document).ready(function () {
         let j11 = TuMp ? document.querySelector('#mark-gen').innerText + '/' + TuMp : document.querySelector('#mark-gen').innerText; //маркировка
         let j12 = 'АО Тулаэлектропривод'; //завод
         let j13 = document.querySelector("#closingTime").value; //время закрытия
-        let j14 = document.querySelector("#maxRMoment").value; //Максимальный крутящий момент
+        let j14 = document.querySelector("#upper-limit").value; //Максимальный крутящий момент
         let j15 = document.querySelector('#flange').value; //присоединение к приводу
         let j16 = $("input[name='placeForEnv']:checked").closest('.form-check').find('.form-check-label').text(); // установка
         let j17 = document.querySelector('#rotation-frequency').value; // частота вращения
@@ -983,7 +983,7 @@ $(document).ready(function () {
 
         //json6
         let j60 = '?'; //Номинальное давление
-        let j61 = $("input[name='connection-type']:checked").val();//Тип присоединения выходного вала
+        let j61 = $("input[name='connection-type']:checked").closest('.form-check').find('.form-check-label').text();//Тип присоединения выходного вала
         let j62 = '?'; //Кабельные вводы
         let j63 = '?'; //Штепсельные разъемы
         let j64 = '?'; //Тип подводимых кабелей
