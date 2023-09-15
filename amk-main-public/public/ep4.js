@@ -876,18 +876,18 @@ $(document).ready(function () {
         
         // CХЕМА
         let schemeForSend = ''
-        if (document.querySelector('#scheme-40') && document.querySelector('#scheme-40').checked) {
-            schemeForSend = 40;
-        } else if (document.querySelector('#scheme-41') && document.querySelector('#scheme-41').checked) {
-            schemeForSend = 41;
-        } else if (document.querySelector('#scheme-410') && document.querySelector('#scheme-410').checked) {
-            schemeForSend = 410;
-        } else if (document.querySelector('#scheme-43') && document.querySelector('#scheme-43').checked) {
-            schemeForSend = 43;
-        } else if (document.querySelector('#scheme-430') && document.querySelector('#scheme-430').checked) {
-            schemeForSend = 430;
-        } else if (document.querySelector('#scheme-44') && document.querySelector('#scheme-44').checked) {
-            schemeForSend = 44;
+        if (document.querySelector("#\\/img\\/scheme-40") && document.querySelector("#\\/img\\/scheme-40").checked) {
+            schemeForSend = 'Конструктивная схема 40';
+        } else if (document.querySelector("#\\/img\\/scheme-41") && document.querySelector("#\\/img\\/scheme-41").checked) {
+            schemeForSend = 'Конструктивная схема 41';
+        } else if (document.querySelector("#\\/img\\/scheme-410") && document.querySelector("#\\/img\\/scheme-410").checked) {
+            schemeForSend = 'Конструктивная схема 410';
+        } else if (document.querySelector("#\\/img\\/scheme-43") && document.querySelector("#\\/img\\/scheme-43").checked) {
+            schemeForSend = 'Конструктивная схема 43';
+        } else if (document.querySelector("#\\/img\\/scheme-430") && document.querySelector("#\\/img\\/scheme-430").checked) {
+            schemeForSend = 'Конструктивная схема 430';
+        } else if (document.querySelector("#\\/img\\/scheme-44") && document.querySelector("#\\/img\\/scheme-44").checked) {
+            schemeForSend = 'Конструктивная схема 44';
         }
         
         // ДОП ОПЦИИ
@@ -977,7 +977,7 @@ $(document).ready(function () {
         let j50 = $("input[name='working-mode']:checked").closest('.form-check').find('.form-check-label').text(); //Назначение по режиму работы
         let j51 = $("input[name='connectionForEp4']:checked").closest('.form-check').find('.form-check-label').text(); //Электрическое подключение (расшифровка)
         let j52 = 'SIL-3'; // SIL
-        let j53 = $("input[name='special']:checked").val(); //Специальное исполнение
+        let j53 = $("input[name='special']:checked").closest('.form-check').find('.form-check-label').text(); //Специальное исполнение
         let j54 = '?'; //Масса
         // json5 = [j50, j51, j52, j53, j54];
 
