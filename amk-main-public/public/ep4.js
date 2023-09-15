@@ -872,97 +872,10 @@ $(document).ready(function () {
         let tuMpX1 = document.querySelector('#maxStepMp').value ? 'МП40-' + document.querySelector('#maxStepMp').value : '';
         let tuMpX2 = document.querySelector('#stepForOne').value;
         let TuMp = tuMpX1 ? tuMpX1 + '-' + tuMpX2 : '';
-        let optForBu = $('#control-block-optionsset option:selected').val() != 'noValue' ? $('#control-block-optionsset option:selected').val() : '';
-
-        let addOption1 = document.querySelector("#mechSelectorId > input[type=checkbox]") ? 'Механический селектор переключения режима работы местн./дист.' : ''; 
-        let addOption2 = document.querySelector("#boardRegId > input[type=checkbox]") ? 'Механический селектор переключения режима работы местн./дист.' : ''; 
-        let addOptions = addOption1 ? addOption1 + ' ' + 'и' + ' ' +  addOption2 : addOption2;
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        h9 = document.querySelector('#signal').value ? document.querySelector('#signal').value : '0';
-        h10 = document.querySelector('#commandSignal').value ? document.querySelector('#commandSignal').value : 0;
-        h11 = $("input[name='signalMoment']:checked").val() ? $("input[name='signalMoment']:checked").val() : '0';
-// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // json0
-        let j00 = document.querySelector('#organization').value; //Фирма
-        let j01 = document.querySelector('#fio').value; // Фио
-        let j02 = document.querySelector('#phone').value; // Телефон
-        let j03 = document.querySelector('#email').value; // email
-        let j04 = document.querySelector('#numbersOfEp').value; // кол-во
-        let j05 = ''; //цена
-        json0 = [j00, j01, j02, j03, j04, j05];
-
-        //json1
-        let j10 = 'Электроприводы многообортные ЭП4'; //тип арматуры
-        let j11 = document.querySelector('#mark-gen').innerText; //маркировка
-        let j12 = 'АО Тулаэлектропривод'; //завод
-        let j13 = document.querySelector("#closingTime").value; //время закрытия
-        let j14 = '?';//макс крут момент
-        let j15 = document.querySelector('#flange').value; //присоединение к приводу
-        let j16 = $("input[name='placeForEnv']:checked").closest('.form-check').find('.form-check-label').text(); // установка
-        json1 = [j10, j11, j12, j13, j14, j15, j16];
-
-        //json2
-        let j20 = $("input[name='execution']:checked").closest('.form-check').find('.form-check-label').text(); //исполнение по назначению
-        let j21 = $("input[name='working-mode']:checked").closest('.form-check').find('.form-check-label').text(); //режим работы
-        let j22 = $("input[name='protection']:checked").closest('.form-check').find('.form-check-label').text(); //Влагозащита
-        let j23 = $("input[name='rotating']:checked").closest('.form-check').find('.form-check-label').text(); //Вращение вых вала
-        let j24 = $('#climatic-modification option:selected').text(); //Температура
-        json2 = [j20, j21, j22, j23, j24];
-
-        //json3
-        let j30 = document.querySelector("#controle-blocks").value;
-        let j31 = checkCommandBlock();// Тип управления
-        let j32 = '?';//Тип БКВ
-        let j33 = '?';//Механический указатель
-        let j34 = '6';// Сигнализация положения
-        optForBu == 'Y' ? j34 = '8' :  optForBu == 'Z' ?  j34 = '12' : optForBu == 'V' ? j34 = '8' :  optForBu == 'W' ? j34 = '12' : '6';
-        let j35 =  '?';// Сигнал момэнт
-        let j36 = '24В';// сигналы дист управления
-        let j37 = '?';// Дублирование RS485
-        let j38 = 'одиночные';// Промежуточные выключатели
-        let j39 = 'одиночные';// Моментные выключатели
-        let j310 = 'одиночные';// Концевые выключатели
-        let j311 = '?';// Монтаж БУ
-        json3 = [j30, j31, j32, j33, j34, j35, j36, j37, j38, j39, j310, j311];
-
-        //json4
-        let j40 = $("input[name='connectionForEp4']:checked").val(); //Электрическое подключение (обозначение)
-        let j41 = document.querySelector("#cap > input[type=checkbox]").checked ? 'Есть' : 'Отсутствует'; //Защитный колпак
-        let j42 = document.querySelector("#color-1").checked ? 'Серый' : document.querySelector("#ralColor").value; //Цвет
-        let j43 = document.querySelector("#mechSelectorId > input[type=checkbox]") ? 'Есть' : 'Отсутствует'; //Механический селектор
-        let j44 = addOptions;//Доп опции 
-        let j45 = document.querySelector('#addReqarea').value ? document.querySelector('#addReqarea').value : '' + TuMp;
-        json4 = [j40, j41, j42, j43, j44, j45];
-
-        //json5
-        let j50 = $("input[name='working-mode']:checked").closest('.form-check').find('.form-check-label').text(); //Назначение по режиму работы
-        let j51 = $("input[name='connectionForEp4']:checked").closest('.form-check').find('.form-check-label').text(); //Электрическое подключение (расшифровка)
-        let j52 = 'SIL-3'; // SIL
-        let j53 = $("input[name='special']:checked").val(); //Специальное исполнение
-        let j54 = '?'; //Масса
-        json5 = [j50, j51, j52, j53, j54];
-
-        //json6
-        let j60 = '?'; //Номинальное давление
-        let j61 = '?';  //Кабельные вводы
-        let j62 = '?'; //Штепсельные разъемы
-        let j63 = '?'; //Тип подводимых кабелей
-        json6 = [j60, j61, j62, j63];
+        optForBu = $('#control-block-optionsset option:selected').val() != 'noValue' ? $('#control-block-optionsset option:selected').val() : '';
         
-        //json7
-        let j70 = $("input[name='connection-type']:checked").val();//Тип присоединения выходного вала
-        let j71 = '';//Защита от коррозии
-        let j72 = '';//Ручной маховик
-        let j73 = '';//Наличие обогрев
-        let j74 = '';//Наличие типа функции
-        let j75 = '';//Функция при питании
-        let j76 = ''; //Условие для запуска функции
-        json5 = [j70, j71, j72, j73, j74, j75, j76];
-
-
         // CХЕМА
-        let schemeForSend = '';
-
+        let schemeForSend = ''
         if (document.querySelector('#scheme-40') && document.querySelector('#scheme-40').checked) {
             schemeForSend = 40;
         } else if (document.querySelector('#scheme-41') && document.querySelector('#scheme-41').checked) {
@@ -976,39 +889,150 @@ $(document).ready(function () {
         } else if (document.querySelector('#scheme-44') && document.querySelector('#scheme-44').checked) {
             schemeForSend = 44;
         }
+        
+        // ДОП ОПЦИИ
+        let addOption1 = document.querySelector("#mechSelectorId > input[type=checkbox]") ? 'Механический селектор переключения режима работы местн./дист.' : ''; 
+        let addOption2 = document.querySelector("#boardRegId > input[type=checkbox]") ? 'Механический селектор переключения режима работы местн./дист.' : ''; 
+        let addOptions = addOption1 ? addOption1 + ' ' + 'и' + ' ' +  addOption2 : addOption2;
+// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        console.log(json0);
-        console.log(json1);
-        console.log(json2);
-        console.log(json3);
-        console.log(json4);
-        console.log(json5);
+        // json0
+        let j00 = document.querySelector('#organization').value; //Фирма
+        let j01 = document.querySelector('#fio').value; // Фио
+        let j02 = document.querySelector('#phone').value; // Телефон
+        let j03 = document.querySelector('#email').value; // email
+        let j04 = document.querySelector('#numbersOfEp').value; // кол-во
+        let j05 = ''; //цена
+        // json0 = [j00, j01, j02, j03, j04, j05];
 
-        // function DOCX(id) {
-        //     window.open(`http://217.144.103.121/Tula/${id}`);
-        // }
-        // function EXEL(id) {
-        //     window.open(`http://217.144.103.121/TulaEXEL/${id}`);
-        // }
-        // function sendToServer() {
-        //     let post = fetch('http://217.144.103.121/download', {
-        //         method: 'POST',
-        //         headers: { 'Content-Type': 'application/json;charset=utf-8' },
-        //         body: JSON.stringify({
-        //             jsn1: [j1, j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12, j13],
-        //             jsn2: [h1, h2, h3, h4, h5, h6, h7, h8, h9, h10, h11, h12, h13, h14, h15, h16, h17, h18, h19, h20, h21, h22, h23],
-        //             jsn3: [p1, p2, p3, p4, p5, p6, schemeForSend, document.querySelector('#upper-limit').value, document.querySelector('#rotation-frequency').value],
-        //             jsn4: [],
-        //         }),
-        //     })
-        //         .then((response) => response.json())
-        //         .then((data) => {
-        //             let id = data.id;
-        //             DOCX(id);
-        //             EXEL(id);
-        //         });
-        // }
-        // sendToServer();
+        //json1
+        let j10 = 'Электроприводы многообортные ЭП4'; //тип арматуры
+        let j11 = TuMp ? document.querySelector('#mark-gen').innerText + '/' + TuMp : document.querySelector('#mark-gen').innerText; //маркировка
+        let j12 = 'АО Тулаэлектропривод'; //завод
+        let j13 = document.querySelector("#closingTime").value; //время закрытия
+        let j14 = document.querySelector("#maxRMoment").value; //Максимальный крутящий момент
+        let j15 = document.querySelector('#flange').value; //присоединение к приводу
+        let j16 = $("input[name='placeForEnv']:checked").closest('.form-check').find('.form-check-label').text(); // установка
+        let j17 = document.querySelector('#rotation-frequency').value; // частота вращения
+        let j18 = schemeForSend; // частота вращения
+        // json1 = [j10, j11, j12, j13, j14, j15, j16, j17, j18];
+
+        //json2
+        let j20 = $("input[name='execution']:checked").closest('.form-check').find('.form-check-label').text(); //исполнение по назначению
+        let j21 = $("input[name='working-mode']:checked").closest('.form-check').find('.form-check-label').text(); //режим работы
+        let j22 = $("input[name='protection']:checked").closest('.form-check').find('.form-check-label').text(); //Влагозащита
+        let j23 = $("input[name='rotating']:checked").closest('.form-check').find('.form-check-label').text(); //Вращение вых вала
+        let j24 = $('#climatic-modification option:selected').text(); //Температура
+        // json2 = [j20, j21, j22, j23, j24];
+
+        //json3
+        let BoMark = document.querySelector("#controle-blocks-series").value; 
+        let j30 = document.querySelector("#controle-blocks").value; // тип бу 
+        let j31 = checkCommandBlock(); // Тип управления
+        let j32 = selectRemoteSignal(); // сигналы дист управления
+
+        let j33 = '?'; //Тип БКВ
+        BoMark == 'Э0' ? j33 = 'ВИМУ' : BoMark == 'Э1' ? j33 = 'ЭИМУ' : BoMark == 'Э2' ? j33 = 'ЭБКВ' : BoMark == 'М1' ? j33 = 'МБКВ' : 'пропущен конфигуратор';
+
+        let j34 = '?'; //Механический указатель
+        document.querySelector("#pointer > input[type=checkbox]").checked ? j34 = 'Есть' : 'Отсутствует';
+
+        let j35 = selectPositionSignal(); // Сигнализация положения
+
+        document.querySelector("#signalMoment-1").checked ? j35 =  'Есть' : 'Отсутствует'; // Сигнал момэнт
+
+        let j36 = ''; // Дублирование RS485
+        j30 == 'Э18' ? j36 = 'Есть' : j30 == 'Э110' ? j36 = 'Есть' : j30 == 'Э24' ? j36 = 'Есть' : j30 == 'Э26' ? j36 = 'Есть' :  'Отсутствует';
+        
+        let j37 = '';
+        optForBu = 'Z' || 'W' ? j37 = 'сдвоенные' : 'одиночные'; // Промежуточные выключатели
+        
+        let j38 = ''; // Моментные выключатели
+        optForBu = 'Z' || 'W' ? j38 = 'сдвоенные' : 'одиночные'; // Моментные выключатели
+        
+        let j39 = 'одиночные'; // Концевые выключатели
+        optForBu = 'Z' || 'W' ? j39 = 'сдвоенные' : 'одиночные'; // Концевые выключатели
+
+        let j310 =  'Отсутствует';
+
+        let j311 = ''; // Монтаж БУ
+        j30 == 'Э0' ? j311 = 'На приводе' : j30 == 'М1' ? j311 = 'На приводе' : 'Выносной';
+
+        // json3 = [j30, j31, j32, j33, j34, j35, j36, j37, j38, j39, j310, j311];
+
+        //json4
+        let j40 = $("input[name='connectionForEp4']:checked").val(); //Электрическое подключение (обозначение)
+        let j41 = document.querySelector("#cap > input[type=checkbox]").checked ? 'Есть' : 'Отсутствует'; //Защитный колпак
+        let j42 = document.querySelector("#color-1").checked ? 'Серый' : document.querySelector("#ralColor").value; //Цвет
+        let j43 = document.querySelector("#mechSelectorId > input[type=checkbox]") ? 'Есть' : 'Отсутствует'; //Механический селектор
+        let j44 = addOptions;//Доп опции 
+        let j45 = document.querySelector('#addReqarea').value ? document.querySelector('#addReqarea').value : '' + TuMp; //Дополнительные требования
+        // json4 = [j40, j41, j42, j43, j44, j45];
+
+        //json5
+        let j50 = $("input[name='working-mode']:checked").closest('.form-check').find('.form-check-label').text(); //Назначение по режиму работы
+        let j51 = $("input[name='connectionForEp4']:checked").closest('.form-check').find('.form-check-label').text(); //Электрическое подключение (расшифровка)
+        let j52 = 'SIL-3'; // SIL
+        let j53 = $("input[name='special']:checked").val(); //Специальное исполнение
+        let j54 = '?'; //Масса
+        // json5 = [j50, j51, j52, j53, j54];
+
+        //json6
+        let j60 = '?'; //Номинальное давление
+        let j61 = $("input[name='connection-type']:checked").val();//Тип присоединения выходного вала
+        let j62 = '?'; //Кабельные вводы
+        let j63 = '?'; //Штепсельные разъемы
+        let j64 = '?'; //Тип подводимых кабелей
+        // json6 = [j60, j61, j62, j63];
+        
+        //json7
+        let j70 = '';//Защита от коррозии
+        let j71 = '';//Ручной маховик
+        let j72 = '';//Наличие обогрев
+        let j73 = '';//Наличие типа функции
+        let j74 = '';//Функция при питании
+        let j75 = ''; //Условие для запуска функции
+        // json7 = [j70, j71, j72, j73, j74, j75, j76];
+
+        console.log([j00, j01, j02, j03, j04, j05],
+            [j10, j11, j12, j13, j14, j15, j16, j17, j18],
+            [j20, j21, j22, j23, j24],
+            [j30, j31, j32, j33, j34, j35, j36, j37, j38, j39, j310, j311],
+            [j40, j41, j42, j43, j44, j45],
+            [j50, j51, j52, j53, j54],
+            [j60, j61, j62, j63, j64],
+            [j70, j71, j72, j73, j74, j75]);
+
+
+        function DOCX(id) {
+            window.open(`http://217.144.103.121/Tula/${id}`);
+        }
+        function EXEL(id) {
+            window.open(`http://217.144.103.121/TulaEXEL/${id}`);
+        }
+        function sendToServer() {
+            let post = fetch('http://217.144.103.121/download', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json;charset=utf-8' },
+                body: JSON.stringify({
+                    jsn0: [j00, j01, j02, j03, j04, j05],
+                    jsn1: [j10, j11, j12, j13, j14, j15, j16, j17, j18],
+                    jsn2: [j20, j21, j22, j23, j24],
+                    jsn3: [j30, j31, j32, j33, j34, j35, j36, j37, j38, j39, j310, j311],
+                    jsn4: [j40, j41, j42, j43, j44, j45],
+                    jsn5: [j50, j51, j52, j53, j54],
+                    jsn6: [j60, j61, j62, j63, j64],
+                    jsn7: [j70, j71, j72, j73, j74, j75],
+                }),
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    let id = data.id;
+                    DOCX(id);
+                    EXEL(id);
+                });
+        }
+        sendToServer();
     });
 
     // сокрытия пункта кабельных вводов
@@ -1194,15 +1218,15 @@ $(document).ready(function () {
     //     }
     // });
     // Стиль для модуля Номинальный крутящий момент
-    // $('#roundMomentMp').on('change', function (e) {
-    //     if (document.querySelector('#roundMomentMp').value != undefined) {
-    //         document.querySelector('.roundMomentMp').classList.add('ReqValueOk');
-    //         document.querySelector('.roundMomentMp').classList.remove('noReqValue');
-    //     } else {
-    //         document.querySelector('.roundMomentMp').classList.add('noReqValue');
-    //         document.querySelector('.roundMomentMp').classList.remove('ReqValueOk');
-    //     }
-    // });
+    $('#maxRMomentFieldset').on('change', function (e) {
+        if (document.querySelector('#maxRMoment').value != undefined) {
+            document.querySelector('#maxRMomentFieldset').classList.add('ReqValueOk');
+            document.querySelector('#maxRMomentFieldset').classList.remove('noReqValue');
+        } else {
+            document.querySelector('#maxRMomentFieldset').classList.add('noReqValue');
+            document.querySelector('#maxRMomentFieldset').classList.remove('ReqValueOk');
+        }
+    });
     // Стиль для модуля Крутящий момент привода
     $('#tuMpField').on('change', function (e) {
         if (document.querySelector('#roundMomentEngine').value != '') {
@@ -1660,4 +1684,86 @@ $(document).ready(function () {
        rotAtMin = document.querySelector("#rotation-frequency").value;
        if(closNumbers && rotAtMin ) {x.value = closNumbers/(rotAtMin/60)}
     });
+
+    // ОТОБРАЖЕНИЕ пункта защиты IP54
+    $('#executionWrapLegend').on('change', function (e) {
+        if(document.querySelector("#execution-Н").checked){
+        document.querySelector("#hProtection").style.display = 'block';
+    }
+    else {document.querySelector("#hProtection").style.display = 'none'}
+     });
+
+     function signalSelect() {
+
+        // let positionSignal = 
+        // let remoteSignal = 
+        // let BoMark = document.querySelector("#controle-blocks-series").value;
+        // let j30 = document.querySelector("#controle-blocks").value;
+        // let optForBu = $('#control-block-optionsset option:selected').val() != 'noValue' ? $('#control-block-optionsset option:selected').val() : '';
+
+     }
+
+    
+        function selectRemoteSignal() {
+
+        let BoMark = document.querySelector("#controle-blocks-series").value;
+        optForBu = $('#control-block-optionsset option:selected').val() != 'noValue' ? $('#control-block-optionsset option:selected').val() : '';
+
+        if(BoMark == 'Э0'){
+          return remoteSignal = 'Привод с шестью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 24 В';
+        }
+        else if (BoMark == 'Э1') {
+            if(optForBu == 'X'){
+                return remoteSignal = 'Привод с шестью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 220 В (кроме приводов с твердотельным пускателем);'
+            }
+            if(optForBu == 'Y'){
+                return remoteSignal = 'Привод с восемью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 24 В (кроме приводов с твердотельным пускателем);'
+            }
+            if(optForBu == 'Z'){
+                return remoteSignal = 'Привод с двенадцатью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 24 В (кроме приводов с твердотельным пускателем);'
+            }
+            if(optForBu == 'V'){
+                return remoteSignal = 'Привод с восемью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 220 В (кроме приводов с твердотельным пускателем);'
+            }
+            if(optForBu == 'W'){
+                return remoteSignal = 'Привод с двенадцатью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 220 В (кроме приводов с твердотельным пускателем);'
+            }
+            else {
+                return remoteSignal = 'Привод с шестью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 24 В;'
+            }
+        }
+        else {
+            return remoteSignal = 'Только для ЭИМУ или ВИМУ';
+        }
+     } 
+
+        function selectPositionSignal() {
+
+        let BoMark = document.querySelector("#controle-blocks").value;
+
+        if(BoMark == 'Э11'){
+          return positionSignal = '';
+        }
+        else if (BoMark == 'Э12' || BoMark == 'Э13'|| BoMark == 'Э16'|| BoMark == 'Э17') {
+            return positionSignal = '4–20 мА';
+            }
+        else if (BoMark == 'Э14' || BoMark == 'Э18') {
+            return positionSignal = 'RS485 Modbus';
+            }
+        else if (BoMark == 'Э15') {
+            return positionSignal = '4–20 мА и RS485 Modbus';}
+        else if (BoMark == 'Э19' || BoMark == 'Э110') {
+            return positionSignal = 'Profibus DP';
+            }
+        else if (BoMark == 'Э22') {
+            return positionSignal = '4-20мА';
+            }
+        else if (BoMark == 'Э23' || BoMark == 'Э24') {
+            return positionSignal = 'RS485 Profibus';
+            }
+        else if (BoMark == 'Э25' || BoMark == 'Э26') {
+            return positionSignal = 'RS485 Profibus';
+            }
+        }
+
 });
