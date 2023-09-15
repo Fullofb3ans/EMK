@@ -271,6 +271,16 @@
                         </div>
                     </fieldset>
 
+                    <fieldset class="row mb-3 noReqValue" id = 'maxRMomentFieldset'>
+                        <legend class ='blockNumber'>9</legend>
+                        <div class="col-sm-9">
+                            <legend class="col-form-label col-sm-3 pt-0">Максимальный крутящий момент</legend>
+                            <div class="form-check">
+                                <input class="form-check-input ch-mark" type="number"  name="maxRMoment" id="maxRMoment">
+                            </div>
+                        </div>
+                    </fieldset>
+
                     <fieldset class="row mb-3 noReqValue" id ='waterProtection'>
                         <legend class ='blockNumber'>10</legend>
                         <div class="col-sm-9">
@@ -282,6 +292,10 @@
                             <div class="form-check">
                                 <input class="form-check-input ch-mark" type="radio" value="2" name="protection" id="protection-2">
                                 <label class="form-check-label" for="protection-2">IP68</label>
+                            </div>
+                            <div class="form-check" id ='hProtection'>
+                                <input class="form-check-input ch-mark" type="radio" value="3" name="protection" id="protection-3">
+                                <label class="form-check-label" for="protection-3">IP54</label>
                             </div>
                         </div>
                     </fieldset>
@@ -580,7 +594,7 @@
                         </div>
                     </fieldset>
 
-                    <fieldset class="row mb-3 noReqValue typeEndSwich" style="">
+                    <!-- <fieldset class="row mb-3 noReqValue typeEndSwich" style="">
                         <legend class ='blockNumber'>21</legend>
                         <div class="col-sm-9" id="typeEndSwich">
                             <legend class="col-form-label col-sm-3 pt-0">Тип блока концевых выключателей</legend>
@@ -608,9 +622,9 @@
                                 <label class="form-check-label" for="commandBlockType-2">ВИМУ (установка на стене, на стойке и т. п.)</label>
                             </div>
                         </div>
-                    </fieldset>
+                    </fieldset> -->
                     
-                    <fieldset class="row mb-3 noReqValue signal" style="">
+                    <!-- <fieldset class="row mb-3 noReqValue signal" style="">
                         <legend class ='blockNumber'>23</legend>
                         <div>
                         <legend class="col-form-label col-sm-3 pt-0">Сигнализация положения</legend>
@@ -627,9 +641,9 @@
                             <option value="8">12 реле</option>
                         </select>
                     </div>
-                    </fieldset>
+                    </fieldset> -->
                     
-                    <fieldset class="row mb-3 noReqValue commandSignal" style="">
+                    <!-- <fieldset class="row mb-3 noReqValue commandSignal" style="">
                         <legend class ='blockNumber'>24</legend>
                         <div>
                             <legend class="col-form-label col-sm-3 pt-0">Сигнали дистанционного управления (только для Эиму и ВИМУ)</legend>
@@ -643,7 +657,7 @@
                                 <option value="5">220 B AC</option>
                             </select>
                         </div>
-                    </fieldset>
+                    </fieldset> -->
 
                     <fieldset class="row mb-3  signalMoment optionalField" style="">
                         <legend class ='blockNumber'>25</legend>
@@ -874,7 +888,7 @@
                     <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title">Опциональный набор функций ВИМУ и коды исполнения</h5>
+                                <h5 class="modal-title">Опциональный набор функций ЭИМУ и коды исполнения</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
@@ -899,7 +913,7 @@
                                     </thead>
                                     <tbody>
                                     <tr>
-                                        <td>Базовый набор функций ВИМУ</td>
+                                        <td>Базовый набор функций ЭИМУ</td>
                                         <td data-target="Э11" class="table-success"></td>
                                         <td data-target="Э12" class="table-success"></td>
                                         <td data-target="Э13" class="table-success"></td>
