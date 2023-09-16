@@ -21,6 +21,7 @@ import os
 
 import conf
 from conf import mk_DOCX
+from conf import mk_XL
 
 
 def make_clean():
@@ -197,10 +198,10 @@ def download_file(jsn = Body()):
                 row_cells[0].text = ks[i]
                 cell = tbl1.cell(i, 1)
                 cell.text = vs[i]
-    
 
 
-    '''Работа с .xlsx'''
+    wb = mk_XL([jsn0, jsn1, jsn2, jsn3, jsn4, jsn5, jsn6, jsn7])
+    '''Работа с .xlsx
     # Load in the workbook
     wb = load_workbook('Формат_ТКП.xlsx')
 
@@ -220,7 +221,7 @@ def download_file(jsn = Body()):
     for i in range(16, 52):
         k = 'G' + str(i)
         keys.append(k)
-    '''
+        
     ans = [ f'{jsn4[0]}', #0 "Поворотный/многооборотный",
             
             f'{jsn2[1]}', #1 "Запорный/ регулирующий",
@@ -353,7 +354,7 @@ def download_file(jsn = Body()):
     #сохранение файлов с уникальным id
     ID = randint(0, 1000)
     doc_new.save(f'Tula{ID}.docx')
-    #wb.save(f"Tula{ID}.xlsx")
+    wb.save(f"Tula{ID}.xlsx")
     #convert(f"Tula{ID}.docx")
 
 
