@@ -29,7 +29,7 @@
 }
 
 #constructive-scheme-img > img{
-  border: 1px solid gray;
+  border: 1px solid rgb(249 84 0 / 41%);
   min-width: 51%;
   max-width: 95%;
   border-radius: 17px;
@@ -413,6 +413,10 @@ transition-duration: 0.4s;
 cursor: pointer;
 border-radius: 10px;
 }
+
+#ralColor{
+  margin-top: 0.5%;
+  margin-left: 1%;}
 
 @media (max-width: 851px) {
   .flexCont {
