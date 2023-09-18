@@ -874,24 +874,24 @@ $(document).ready(function () {
         let TuMp = tuMpX1 ? tuMpX1 + '-' + tuMpX2 : '';
         optForBu = $('#control-block-optionsset option:selected').val() != 'noValue' ? $('#control-block-optionsset option:selected').val() : '';
 
-        // Расчет массы
-        let mass;
-        if((document.querySelector("#execution-Н").checked) || (document.querySelector("#execution-Ш").checked) || (document.querySelector("#execution-S"))) {
-            if($("input[name='constructive-scheme']:checked").val() == '40'){ mass = 'Не более 42'};
-            if($("input[name='constructive-scheme']:checked").val() == '41'){ mass = 'Не более 75'};
-            if($("input[name='constructive-scheme']:checked").val() == '410'){ mass = 'Не более 117'};
-            if($("input[name='constructive-scheme']:checked").val() == '43'){ mass = 'Не более 250'};
-            if($("input[name='constructive-scheme']:checked").val() == '430'){ mass = 'Не более 480'};
-            if($("input[name='constructive-scheme']:checked").val() == '44'){ mass = 'Не более 380'};
-        }
-        else if(document.querySelector("#execution-В").checked || document.querySelector("#execution-С").checked) {
-            if($("input[name='constructive-scheme']:checked").val() == '40'){ mass = 'Не более 42'};
-            if($("input[name='constructive-scheme']:checked").val() == '41'){ mass = 'Не более 75'};
-            if($("input[name='constructive-scheme']:checked").val() == '410'){ mass = 'Не более 117'};
-            if($("input[name='constructive-scheme']:checked").val() == '43'){ mass = 'Не более 250'};
-            if($("input[name='constructive-scheme']:checked").val() == '430'){ mass = 'Не более 480'};
-            if($("input[name='constructive-scheme']:checked").val() == '44'){ mass = 'Не более 380'}; 
-        }
+        // // Расчет массы
+        // let mass;
+        // if((document.querySelector("#execution-Н").checked) || (document.querySelector("#execution-Ш").checked) || (document.querySelector("#execution-S"))) {
+        //     if($("input[name='constructive-scheme']:checked").val() == '40'){ mass = 'Не более 42'};
+        //     if($("input[name='constructive-scheme']:checked").val() == '41'){ mass = 'Не более 75'};
+        //     if($("input[name='constructive-scheme']:checked").val() == '410'){ mass = 'Не более 117'};
+        //     if($("input[name='constructive-scheme']:checked").val() == '43'){ mass = 'Не более 250'};
+        //     if($("input[name='constructive-scheme']:checked").val() == '430'){ mass = 'Не более 480'};
+        //     if($("input[name='constructive-scheme']:checked").val() == '44'){ mass = 'Не более 380'};
+        // }
+        // else if(document.querySelector("#execution-В").checked || document.querySelector("#execution-С").checked) {
+        //     if($("input[name='constructive-scheme']:checked").val() == '40'){ mass = 'Не более 42'};
+        //     if($("input[name='constructive-scheme']:checked").val() == '41'){ mass = 'Не более 75'};
+        //     if($("input[name='constructive-scheme']:checked").val() == '410'){ mass = 'Не более 117'};
+        //     if($("input[name='constructive-scheme']:checked").val() == '43'){ mass = 'Не более 250'};
+        //     if($("input[name='constructive-scheme']:checked").val() == '430'){ mass = 'Не более 480'};
+        //     if($("input[name='constructive-scheme']:checked").val() == '44'){ mass = 'Не более 380'}; 
+        // }
         
         // CХЕМА
         let schemeForSend = ''
@@ -949,15 +949,15 @@ $(document).ready(function () {
 
         let j30 = document.querySelector("#controle-blocks").value; // тип бу 
         let j31 = checkCommandBlock(); // Тип управления
-        let j32 = selectRemoteSignal(); // сигналы дист управления
+        let j32 = selectPositionSignal();// сигналы дист управления
 
         let j33 = ''; //Тип БКВ
-        BoMark == 'Э0' ? j33 = 'ВИМУ' : BoMark == 'Э1' ? j33 = 'ЭИМУ' : BoMark == 'Э2' ? j33 = 'ЭБКВ' : BoMark == 'М1' ? j33 = 'МБКВ' : 'пропущен конфигуратор';
+        BoMark == 'Э0' ? j33 = 'ЭИМУ' : BoMark == 'Э1' ? j33 = 'ЭИМУ' : BoMark == 'Э2' ? j33 = 'ЭБКВ' : BoMark == 'М1' ? j33 = 'МБКВ' : 'пропущен конфигуратор';
 
         let j34 = ''; //Механический указатель
         document.querySelector("#pointer > input[type=checkbox]").checked ? j34 = 'Есть' : 'Отсутствует';
 
-        let j35 = selectPositionSignal(); // Сигнализация положения
+        let j35 =  selectRemoteSignal();// Сигнализация положения
 
         let j36 = '';
         document.querySelector("#signalMoment-1").checked ? j36 =  'Есть' : 'Отсутствует'; // Сигнал момэнт
@@ -997,7 +997,7 @@ $(document).ready(function () {
         let j51 = $("input[name='connectionForEp4']:checked").closest('.form-check').find('.form-check-label').text(); //Электрическое подключение (расшифровка)
         let j52 = 'SIL-3'; // SIL
         let j53 = $("input[name='special']:checked").closest('.form-check').find('.form-check-label').text(); //Специальное исполнение
-        let j54 = mass; //Масса
+        // let j54 = mass; //Масса
         // json5 = [j50, j51, j52, j53, j54];
 
         //json6
