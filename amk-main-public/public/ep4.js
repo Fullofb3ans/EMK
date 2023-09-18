@@ -896,17 +896,17 @@ $(document).ready(function () {
         // CХЕМА
         let schemeForSend = ''
         if (document.querySelector("#\\/img\\/scheme-40") && document.querySelector("#\\/img\\/scheme-40").checked) {
-            schemeForSend = 'Конструктивная схема 40';
+            schemeForSend = '40';
         } else if (document.querySelector("#\\/img\\/scheme-41") && document.querySelector("#\\/img\\/scheme-41").checked) {
-            schemeForSend = 'Конструктивная схема 41';
+            schemeForSend = '41';
         } else if (document.querySelector("#\\/img\\/scheme-410") && document.querySelector("#\\/img\\/scheme-410").checked) {
-            schemeForSend = 'Конструктивная схема 410';
+            schemeForSend = '410';
         } else if (document.querySelector("#\\/img\\/scheme-43") && document.querySelector("#\\/img\\/scheme-43").checked) {
-            schemeForSend = 'Конструктивная схема 43';
+            schemeForSend = '43';
         } else if (document.querySelector("#\\/img\\/scheme-430") && document.querySelector("#\\/img\\/scheme-430").checked) {
-            schemeForSend = 'Конструктивная схема 430';
+            schemeForSend = '430';
         } else if (document.querySelector("#\\/img\\/scheme-44") && document.querySelector("#\\/img\\/scheme-44").checked) {
-            schemeForSend = 'Конструктивная схема 44';
+            schemeForSend = '44';
         }
         
         // ДОП ОПЦИИ
@@ -1770,7 +1770,7 @@ $(document).ready(function () {
         else if (BoMark == 'Э12' || BoMark == 'Э13'|| BoMark == 'Э16'|| BoMark == 'Э17') {
             return positionSignal = '4–20 мА';
             }
-        else if (BoMark == 'Э14' || BoMark == 'Э18') {
+        else if (BoMark == 'Э14' || BoMark == 'Э18' || BoMark == 'Э01') {
             return positionSignal = 'RS485 Modbus';
             }
         else if (BoMark == 'Э15') {
@@ -1786,6 +1786,12 @@ $(document).ready(function () {
             }
         else if (BoMark == 'Э25' || BoMark == 'Э26') {
             return positionSignal = 'RS485 Profibus';
+        }
+        else if (document.querySelector("#m1-2").checked){
+            return positionSignal = 'Потенциометр 100 Ом';
+            }
+        else {
+            return positionSignal = '4-20мА';
             }
         }
 
