@@ -169,7 +169,7 @@ def download_file(jsn = Body()):
     
     '''Работа с .xlsx'''
     xl = mk_XL(ID, [jsn0, jsn1, jsn2, jsn3, jsn4, jsn5, jsn6, jsn7])
-    xl.ep4()
+    wb = xl.ep4()
 
 
     
@@ -179,6 +179,7 @@ def download_file(jsn = Body()):
 
     #сохранение файлов с уникальным id
     doc_new.save(f'Tula{ID}.docx')
+    wb.save(f"Tula{ID}.xlsx")
     #convert(f"Tula{ID}.docx")
 
 

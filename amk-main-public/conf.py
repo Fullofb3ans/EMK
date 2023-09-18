@@ -47,6 +47,14 @@ class mk_XL():
         self.ID = ID
     
     def get_engin(self, mark, sh, Mom, V, flc):
+        if float(sh) not in [40.0, 41.0, 410.0, 43.0, 430.0, 44.0]:
+            print("Ниче не будет", sh)
+        if float(V) not in [4.0, 5.6, 8.0, 11.0, 16.0, 22.0, 32.0, 45.0, 63.0, 90.0, 125.0, 180.0, 2.0, 40.0, 2.8]:
+            print("Ниче не будет", V)
+        if float(Mom) not in [15.0, 30.0, 60.0, 120.0, 90.0, 250.0, 400.0, 500.0, 630.0, 1000.0, 1500.0, 2000.0, 3000.0, 4000.0, 6000.0, 8000.0, 12000.0, 16000.0, 20000.0, 24000.0]:
+            print("Ниче не будет", Mom)
+        if flc not in ['МК', 'F07', 'АК', 'АЧ', 'F10', 'Б', 'F14', 'В', 'F16', 'Г', 'F25', 'Д', 'F30', 'F40', 'F35']:
+            print("Ниче не будет", flc)
         ans = []
         for i in range(6):
             ans.append("")
@@ -61,18 +69,19 @@ class mk_XL():
                     print(i, str(sheet1[f"F{i}"].value))
 
             for i in anss:
-                if (str(sheet1[f"C{i}"].value) == str(sh)) and (str(sheet1[f"E{i}"].value) == str(Mom)) and (str(sheet1[f"D{i}"].value) == str(V)) and (str(sheet1[f"F{i}"].value) == str(flc)):
+                if (str(sheet1[f"C{i}"].value) == str(float(sh))) and (str(sheet1[f"E{i}"].value) == str(float(Mom))) and (str(sheet1[f"D{i}"].value) == str(float(V))) and (str(sheet1[f"F{i}"].value) == str(float(flc))):
                     ansi.append(i)
-                    print(i)
+                    
             
             if ansi != []:
                 for i in anss:
                     ans[0] = sheet1[f"J{i}"].value
-                    #ans[1] = sheet1[f"K{i}"].value
+                    ans[1] = sheet1[f"K{i}"].value
                     ans[2] = sheet1[f"L{i}"].value
                     ans[3] = sheet1[f"M{i}"].value
                     ans[4] = "380"
                     ans[5] = "3"
+                    ans[6] = sheet1[f"G{i}"].value
         return ans
 
     def ep4(self):
@@ -83,16 +92,15 @@ class mk_XL():
 
         #Лицевая часть
         current_date = date.today()
-        keys = ["I7", "C9", "C10", "C12", "C61"]
+        keys = ["I7", "C9", "C10", "C12", "C49"]
         ans = [ID, a[0][0], "", a[1][1], str(current_date)]
 
         #Техническая часть
-        keys = []
-        for i in range(16, 42):
+        for i in range(16, 40):
             k = 'G' + str(i)
             keys.append(k)
 
-        ans = [
+        ans = ans + [
             f'{a[1][0]}', #4 "Поворотный/многооборотный",
             
             f'{a[2][1]}', #5 "Запорный/ регулирующий",
@@ -112,8 +120,8 @@ class mk_XL():
             f'{a[4][2]}', #15 "Цвет окраски",
 
             f'{a[4][0]}', #16.1 "Электрическое подключение",
-            f'{a[3][1]}', #16.2 "Электрическое подключение (расшифровка)",
-            f'{a[3][3]}', #17 "Концевые выключатели (реле)",
+            f'{a[5][1]}', #16.2 "Электрическое подключение (расшифровка)",
+            f'{a[3][10]}', #17 "Концевые выключатели (реле)",
             f'{a[3][8]}', #18 "Промежуточные выключатели (опция)",
             f'{a[3][9]}', #19 "Моментные выключатели"
             f'{a[3][4]}', #20 "Механический указатель положения",
@@ -123,17 +131,12 @@ class mk_XL():
 
             f'{a[5][2]}', #24 "Требования по функциональной безопасности SIL",
             f'{a[5][3]}', #25 "Специальное исполнение",
-            None,
-            f'{a[5][4]} кг'  #27 "Масса привода, кг"
         ]
 
-        for i in range(len(keys)):
-            if ans[i] != None:
-                sheet[keys[i]].value = ans[i]
-                print(keys[i], ans[i])
         
+        
+
         #Характеристики двигателя
-        keys = []
         for i in range(43, 49):
             k = 'G' + str(i)
             keys.append(k)
@@ -148,15 +151,15 @@ class mk_XL():
         V = a[1][7]
         #фланец
         flc = a[1][5]
-        ans = self.get_engin(mark, sh, Mom, V, flc)
+        ans = ans + self.get_engin(mark, sh, Mom, V, flc)
+        print(ans)
 
-        
-        '''
-        #Схема подключения, номер (если известна)
-        sheet["G59"].value = "пока нет понимания как это формируется, помощь ТЭП и зала. Если известен номер заполняется автоматически, если нет - ОЛ направляется  на доработку "
 
-        #Сборочный чертеж, номер
-        sheet["G460"].value = "пока нет понимания как это формируется, помощь ТЭП и зала. Если известен номер заполняется автоматически, если нет - ОЛ направляется  на доработку "
-        '''
-        
-        wb.save(f"Tula{ID}.xlsx")
+        for i in range(len(keys)):
+            if ans[i] != None:
+                sheet[keys[i]].value = ans[i]
+
+        sheet[keys[i]].value = ans[6]
+        #wb.save(f"Tula{ID}.xlsx")
+
+        return wb
