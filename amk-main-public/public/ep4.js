@@ -873,6 +873,25 @@ $(document).ready(function () {
         let tuMpX2 = document.querySelector('#stepForOne').value;
         let TuMp = tuMpX1 ? tuMpX1 + '-' + tuMpX2 : '';
         optForBu = $('#control-block-optionsset option:selected').val() != 'noValue' ? $('#control-block-optionsset option:selected').val() : '';
+
+        // Расчет массы
+        let mass;
+        if((document.querySelector("#execution-Н").checked) || (document.querySelector("#execution-Ш").checked) || (document.querySelector("#execution-S"))) {
+            if($("input[name='constructive-scheme']:checked").val() == '40'){ mass = 'Не более 42'};
+            if($("input[name='constructive-scheme']:checked").val() == '41'){ mass = 'Не более 75'};
+            if($("input[name='constructive-scheme']:checked").val() == '410'){ mass = 'Не более 117'};
+            if($("input[name='constructive-scheme']:checked").val() == '43'){ mass = 'Не более 250'};
+            if($("input[name='constructive-scheme']:checked").val() == '430'){ mass = 'Не более 480'};
+            if($("input[name='constructive-scheme']:checked").val() == '44'){ mass = 'Не более 380'};
+        }
+        else if(document.querySelector("#execution-В").checked || document.querySelector("#execution-С").checked) {
+            if($("input[name='constructive-scheme']:checked").val() == '40'){ mass = 'Не более 42'};
+            if($("input[name='constructive-scheme']:checked").val() == '41'){ mass = 'Не более 75'};
+            if($("input[name='constructive-scheme']:checked").val() == '410'){ mass = 'Не более 117'};
+            if($("input[name='constructive-scheme']:checked").val() == '43'){ mass = 'Не более 250'};
+            if($("input[name='constructive-scheme']:checked").val() == '430'){ mass = 'Не более 480'};
+            if($("input[name='constructive-scheme']:checked").val() == '44'){ mass = 'Не более 380'}; 
+        }
         
         // CХЕМА
         let schemeForSend = ''
@@ -978,7 +997,7 @@ $(document).ready(function () {
         let j51 = $("input[name='connectionForEp4']:checked").closest('.form-check').find('.form-check-label').text(); //Электрическое подключение (расшифровка)
         let j52 = 'SIL-3'; // SIL
         let j53 = $("input[name='special']:checked").closest('.form-check').find('.form-check-label').text(); //Специальное исполнение
-        let j54 = '?'; //Масса
+        let j54 = mass; //Масса
         // json5 = [j50, j51, j52, j53, j54];
 
         //json6
