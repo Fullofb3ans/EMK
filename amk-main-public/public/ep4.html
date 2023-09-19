@@ -780,7 +780,7 @@
                                         <input class="form-check-input" type="checkbox" name="m1-signal" value="1" id="m1-7" data-position="6">
                                         <label class="form-check-label" for="m1-7">Блокировка возможности повторного включения двигателя привода по электрической цепи, содержащей нормально замкнутый контакт моментного выключателя, размыканием которого был выключен двигатель привода при достижении крутящего момента, заданного при настройке блока (фиксация моментных выключателей)</label>
                                     </div>
-                                    <div class="col-sm-9">
+                                    <div class="col-sm-9 noReqValue" id ='upperLimitInM' style="padding: 1%;">
                                         <label>Верхний предел настройки путевых выключателей в оборотах выходного вала</label>
                                         <select class="form-select" name="upper-limitForM1" id="upper-limitForM1">
                                             <option value="" selected disabled >Выберите значение</option>
@@ -801,7 +801,7 @@
                             <div class="modal-footer">
                                 <div class="modal-title m-auto">Код исполнения: <span class="cur-m1-value">М10</span></div>
                                 <button type="button" class="btn btn-secondary" id="clear-m1">Сбросить</button>
-                                <button type="button" class="btn btn-primary" id="m1-submit">Применить</button>
+                                <button type="button" class="btn btn-primary" id="m1-submit" disabled>Применить</button>
                             </div>
                         </div>
                     </div>
