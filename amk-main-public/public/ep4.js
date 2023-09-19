@@ -1723,6 +1723,20 @@ $(document).ready(function () {
 
         }});
 
+// Открытие пункта виму эиму для блока управления
+    $('#control-block-fieldset').on('change', function (e) {
+            if ($('#controle-blocks-series').val()=='Э1') 
+        {
+            document.querySelector('.commandBlockType').style.display = 'block';
+        } 
+        else {
+            document.querySelector('.commandBlockType').classList.remove('ReqValueOk');
+            document.querySelector('.commandBlockType').classList.add('noReqValue');
+            document.querySelector("#commandBlockType-2").checked = false;
+            document.querySelector("#commandBlockType-1").checked = false;
+            document.querySelector('.commandBlockType').style.display = 'none';
+        }
+    });
 // Открытие доп оснащения для блока управления при Э1
     $('#control-block-fieldset').on('change', function (e) {
             if ($('#controle-blocks-series').val()=='Э1') 
