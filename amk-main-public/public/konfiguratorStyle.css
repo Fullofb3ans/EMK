@@ -261,7 +261,7 @@ outline: 0;
 }
 
 .btn-close:hover {
-  background-color: rgb(198 198 197 / 19%);;
+  background-color: #a1a1a1;
   color: black;
 }
 
@@ -379,8 +379,74 @@ border-radius: 10px;
 }
 
 #e1-submit:hover {
-background-color: #a1a1a1;
+background-color: rgb(198 198 197 / 19%);
 color: black;
+}
+
+#e2-submit{
+  padding: 7px;
+  background: #d1e7dd;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+#e2-submit:hover {
+  background-color: rgb(198 198 197 / 19%);
+  color: black;
+}
+
+#control-block-config{
+  padding: 7px;
+  margin-top: 1%;
+  background: rgb(229 229 229 / 97%);
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+#control-block-config:hover{
+  background-color: rgb(198, 198, 197);
+  color: black;
+}
+
+#clear-e2{
+  padding: 7px;
+  background: rgb(249 84 0 / 41%);
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+#clear-m1{
+  padding: 7px;
+  background: rgb(249 84 0 / 41%);
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+#clear-e2:hover{
+  background-color: #a1a1a1;
+  color: black;
+}
+
+#clear-m1:hover{
+  background-color: #a1a1a1;
+  color: black;
+}
+
+#m1-submit{
+  padding: 7px;
+  background: #d1e7dd;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+#m1-submit:hover{
+  background-color: rgb(198 198 197 / 19%);
+  color: black;
 }
 
 .is-valid{
