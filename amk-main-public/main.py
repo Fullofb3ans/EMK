@@ -25,12 +25,15 @@ from conf import mk_XL
 
 
 
-def make_clean():
+def make_clean(Id):
     pul = os.listdir(path='.')
     if len(pul) >= 10:
         for file in pul:
             if "Tula" in file:
                 os.remove(file)
+    for file in pul:
+        if f"Tula{Id}" in file:
+            os.remove(file)
 
 
 
@@ -97,11 +100,11 @@ def root():
 @app.get("/Tula/{ID}", response_class = FileResponse)
 def download_file(ID):
     #headers = {'Content-Disposition': f'attachment; filename="Tula{ID}.pdf"'}
-    return FileResponse(f'Tula{ID}.docx', filename='демо ОЛ ТЭП.docx', media_type='application/docx')#, headers=headers)
+    return FileResponse(f'Tula{ID}.docx', filename=f'ОЛ ТЭП {ID}.docx', media_type='application/docx')#, headers=headers)
 
 @app.get("/TulaEXEL/{ID}", response_class = FileResponse)
 def download_file(ID):
-    return FileResponse(f'Tula{ID}.xlsx', filename='демо Формат ТКП.xlsx', media_type='application/xlsx')#, headers=headers)
+    return FileResponse(f'Tula{ID}.xlsx', filename=f'ТКП {ID}.xlsx', media_type='application/xlsx')#, headers=headers)
 
 
 
@@ -175,7 +178,7 @@ def download_file(jsn = Body()):
     
     '''Работа с файлами'''
     #сборщик мусора
-    make_clean()
+    make_clean(ID)
 
     #сохранение файлов с уникальным id
     doc_new.save(f'Tula{ID}.docx')

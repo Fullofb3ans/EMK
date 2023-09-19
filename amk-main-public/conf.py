@@ -20,7 +20,6 @@ class mk_DOCX():
 
         names1 = ["Тип арматуры", "Маркировка", "Завод-изготовитель",  "Требуемое время закрытия", "Максимальный крутящий момент", "Присоединение к приводу", "Установка"]
         ans1 = self.list1[:-2]
-        print(len(names1), len(ans1))
         for i in range(len(names1)):
             names1[i] = str(names1[i])
             ans1[i] = str(ans1[i])
@@ -28,16 +27,11 @@ class mk_DOCX():
         names2 = ['Исполнение по назначению', 'Режим работы', 'Степень защиты от проникновения пыли и влаги', 'Вращение выходного вала при закрывании', 'Температура окружающей среды (Климат)'] + ['Тип блока управления ', 'Сигнал дистанционного момента', 'Тип блока концевых выключателей (без встроенного пускателя)', 'Механический указатель сигнализации положения', 'Сигнализация положения', 'Сигнал «Момент» 4-20 мА', 'Дублирование шины RS485'] + ["Электрическое подключение", 'Защитный колпак', 'Цвет окраски', 'Напряжение питания электродвигателя', 'Количество эл./приводов', 'Дополнительные опции', 'Дополнительные требования']
         ans2 = self.list2 + [self.list3[0]] + self.list3[2:-4] + self.list4[:3] + ["330 В, 3 Фазы", self.list0[-2]] + self.list4[-2:]
 
-        print(len(names2), len(ans2))
         for i in range(len(names2)):
             names2[i] = str(names2[i])
             ans2[i] = str(ans2[i])
 
         ans3 = self.list0[:-2]
-
-        print(len(ans3))
-        for i in range(len(ans3)):
-            print(ans3[i])
 
         return {"names1" : names1, "names2" : names2, "ans1" : ans1, "ans2" : ans2, "ans3" : ans3}
     
@@ -47,6 +41,7 @@ class mk_XL():
         self.ID = ID
     
     def get_engin(self, mark, sh, Mom, V, flc):
+        '''
         if float(sh) not in [40.0, 41.0, 410.0, 43.0, 430.0, 44.0]:
             print("Ниче не будет", sh)
         if float(V) not in [4.0, 5.6, 8.0, 11.0, 16.0, 22.0, 32.0, 45.0, 63.0, 90.0, 125.0, 180.0, 2.0, 40.0, 2.8]:
@@ -55,8 +50,9 @@ class mk_XL():
             print("Ниче не будет", Mom)
         if flc not in ['МК', 'F07', 'АК', 'АЧ', 'F10', 'Б', 'F14', 'В', 'F16', 'Г', 'F25', 'Д', 'F30', 'F40', 'F35']:
             print("Ниче не будет", flc)
+        '''
         ans = []
-        for i in range(6):
+        for i in range(7):
             ans.append("")
         if mark[:3] == "ЭП4":
             wb1 = load_workbook('ep4.xlsx')
@@ -69,7 +65,7 @@ class mk_XL():
                     print(i, str(sheet1[f"F{i}"].value))
 
             for i in anss:
-                if (str(sheet1[f"C{i}"].value) == str(float(sh))) and (str(sheet1[f"E{i}"].value) == str(float(Mom))) and (str(sheet1[f"D{i}"].value) == str(float(V))) and (str(sheet1[f"F{i}"].value) == str(float(flc))):
+                if (str(sheet1[f"C{i}"].value) == str(float(sh))) and (str(sheet1[f"E{i}"].value) == str(float(Mom))) and (str(sheet1[f"D{i}"].value) == str(float(V))) and (str(sheet1[f"F{i}"].value) == str(flc)):
                     ansi.append(i)
                     
             
@@ -125,7 +121,7 @@ class mk_XL():
             f'{a[3][8]}', #18 "Промежуточные выключатели (опция)",
             f'{a[3][9]}', #19 "Моментные выключатели"
             f'{a[3][4]}', #20 "Механический указатель положения",
-            f'{a[3][2]}', #21 "Дистанционный указатель положения /датчики обратной связи)",
+            f'{a[3][2]} / {a[3][5]}', #21 "Дистанционный указатель положения /датчики обратной связи)",
             f'{a[4][3]}', #22 "Ручной селектор/переключение местного дистанционного управления",
             f'{a[3][11]}', #23 "Монтаж блока управления ",
 
@@ -152,14 +148,13 @@ class mk_XL():
         #фланец
         flc = a[1][5]
         ans = ans + self.get_engin(mark, sh, Mom, V, flc)
-        print(ans)
 
 
         for i in range(len(keys)):
             if ans[i] != None:
                 sheet[keys[i]].value = ans[i]
 
-        sheet[keys[i]].value = ans[6]
+        sheet["G41"].value = f"Не более {ans[-1]} кг"
         #wb.save(f"Tula{ID}.xlsx")
 
         return wb
