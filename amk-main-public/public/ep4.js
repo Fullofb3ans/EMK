@@ -600,7 +600,7 @@ $(document).ready(function () {
                 if (cur_constructive_scheme == '43' || cur_constructive_scheme == '430' || cur_constructive_scheme == '44'){
                     document.querySelector("#connectionForEp4-1div").style.display = 'none';
                     document.querySelector("#connectionForEp4-2div").style.display = 'none';
-                    document.querySelector("#connectionForEp4-3div").checked = 'true';
+                    document.querySelector("#connectionForEp4-3").checked = 'true';
                     document.querySelector("#connectionForEp4-4div").style.display = 'none';
                     document.querySelector("#connectionForEp4-5div").style.display = 'none';
                     document.querySelector("#connectionForEp4-6div").style.display = 'none';
@@ -990,7 +990,7 @@ $(document).ready(function () {
 
         let j30 = document.querySelector("#controle-blocks").value; // тип бу 
         let j31 = checkCommandBlock(); // Тип управления
-        let j32 = selectPositionSignal();// сигналы дист управления
+        let j32 =  selectRemoteSignal();// сигналы дист управления
 
         let j33 = ''; //Тип БКВ
         if(BoMark == 'Э0'){
@@ -1009,7 +1009,7 @@ $(document).ready(function () {
         let j34 = ''; //Механический указатель
         document.querySelector("#pointer > input[type=checkbox]").checked ? j34 = 'Есть' : 'Отсутствует';
 
-        let j35 =  selectRemoteSignal();// Сигнализация положения
+        let j35 =  selectPositionSignal();// Сигнализация положения
 
         let j36 = '';
         document.querySelector("#signalMoment-1").checked ? j36 =  'Есть' : 'Отсутствует'; // Сигнал момэнт
@@ -1822,7 +1822,7 @@ $(document).ready(function () {
         let BoMark = document.querySelector("#controle-blocks").value;
 
         if(BoMark == 'Э11'){
-          return positionSignal = '';
+          return positionSignal = 'отсутсвуют';
         }
         else if (BoMark == 'Э12' || BoMark == 'Э13'|| BoMark == 'Э16'|| BoMark == 'Э17') {
             return positionSignal = '4–20 мА';
