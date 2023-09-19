@@ -1218,7 +1218,12 @@ $(document).ready(function () {
             $(document.querySelector('#controle-blocks')).show();
             $('#controle-blocks').val('Э01');
             $('#control-block-config').hide();
-        } else {
+        } 
+        else if
+            ($(this).val() === ''){
+                $('#control-block-config').hide();
+            }
+        else {
             $(document.querySelector('#controle-blocks')).hide();
             $('#control-block-config').show();
         }
@@ -1724,6 +1729,27 @@ $(document).ready(function () {
             document.querySelector('.timeMode').classList.add('noReqValue');
             document.querySelector('.timeMode').classList.remove('ReqValueOk');
 
+        }});
+        
+// СТИЛИ ДЛЯ РЕЖИМА РАБОТЫ
+        $('#upperLimitInM').on('change', function (e) {
+            if (document.querySelector("#upper-limitForM1").value != '') 
+        {
+            document.querySelector('#upperLimitInM').classList.add('ReqValueOk');
+            document.querySelector('#upperLimitInM').classList.remove('noReqValue');
+        } 
+        else {
+            document.querySelector('#upperLimitInM').classList.add('noReqValue');
+            document.querySelector('#upperLimitInM').classList.remove('ReqValueOk');
+        }});
+        // Ограничение конфигуратора при пропуске верхнего предела
+        $('#m1-form').on('change', function (e) {
+            if (document.querySelector("#upper-limitForM1").value == '') 
+        {
+            document.querySelector("#m1-submit").disabled = true;
+        } 
+        else {            
+            document.querySelector("#m1-submit").disabled = false;
         }});
 
 // Открытие пункта виму эиму для блока управления
