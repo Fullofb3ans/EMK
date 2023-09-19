@@ -569,7 +569,6 @@ $(document).ready(function () {
     $(document).on('change', "input[name='constructive-scheme']", function (e) {
         $('#step-5').show();
         let execution = $("input[name='execution']:checked").val();
-
         let cur_constructive_scheme = $("input[name='constructive-scheme']:checked").val();
         let cur_flange_value = $('#flange').val();
 
@@ -597,9 +596,28 @@ $(document).ready(function () {
             });
         }
 
+                // СОКРЫТИЕ КАБЕЛЬНЫЙ ПОДКЛЮЧЕНИЙ ДЛЯ СХем 43/44/430
+                if (cur_constructive_scheme == '43' || cur_constructive_scheme == '430' || cur_constructive_scheme == '44'){
+                    document.querySelector("#step-5 > fieldset:nth-child(10) > div > div:nth-child(2)").style.display = 'none';
+                    document.querySelector("#step-5 > fieldset:nth-child(10) > div > div:nth-child(3)").style.display = 'none';
+                    document.querySelector("#step-5 > fieldset:nth-child(10) > div > div:nth-child(5)").style.display = 'none';
+                    document.querySelector("#step-5 > fieldset:nth-child(10) > div > div:nth-child(6)").style.display = 'none';
+                    document.querySelector("#step-5 > fieldset:nth-child(10) > div > div:nth-child(7)").style.display = 'none';
+                    document.querySelector("#step-5 > fieldset:nth-child(10) > div > div:nth-child(8)").style.display = 'none';
+                }
+                else{
+                    document.querySelector("#step-5 > fieldset:nth-child(10) > div > div:nth-child(2)").style.display = 'block';
+                    document.querySelector("#step-5 > fieldset:nth-child(10) > div > div:nth-child(3)").style.display = 'block';
+                    document.querySelector("#step-5 > fieldset:nth-child(10) > div > div:nth-child(5)").style.display = 'block';
+                    document.querySelector("#step-5 > fieldset:nth-child(10) > div > div:nth-child(6)").style.display = 'block';
+                    document.querySelector("#step-5 > fieldset:nth-child(10) > div > div:nth-child(7)").style.display = 'block';
+                    document.querySelector("#step-5 > fieldset:nth-child(10) > div > div:nth-child(8)").style.display = 'block';
+                }
+
+
         let series = {
             ep4: {
-                Э0: 'Выносной интеллектуальный модуль управления с пускателем  Э0',
+                Э0: 'Электронный модуль датчиков Э0',
                 Э1: 'Встроенный интеллектуальный модуль управления  с пускателем Э1',
                 // 'Э1S': 'Серия Э1S',
                 Э2: 'Электронный блок концевых выключателей без пускателя Э2',
@@ -744,6 +762,22 @@ $(document).ready(function () {
                 $('#controle-blocks').closest('fieldset').addClass('ReqValueOk');
         }
 
+    // ДОП ОПЦИИ ДЛЯ БЛОКА
+        let tOption = '';
+        document.querySelector("#tOption").checked ? tOption = document.querySelector("#tOption").value : '';
+        
+        let PanelOption = '';
+        document.querySelector("#PanelOption").checked ? PanelOption = document.querySelector("#PanelOption").value : '';
+        
+        let bluetoothOption = '';
+        document.querySelector("#bluetoothOption").checked ? bluetoothOption = document.querySelector("#bluetoothOption").value : '';
+        
+        let regOption = '';
+        document.querySelector("#regOption").checked ? regOption = document.querySelector("#regOption").value : '';
+
+        let optionssetCheckBox = tOption + PanelOption + bluetoothOption + regOption;
+      
+// //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         let x7 = $('#climatic-modification').val() ? $('#climatic-modification').val() : 'X'; // Номер варианта температурного исполнения
         switch (x7) {
             case 'X':
@@ -834,6 +868,9 @@ $(document).ready(function () {
 
         let suffix = '';
 
+        let VE = '';
+        document.querySelector("#commandBlockType-2").checked ? VE = 'В' : '';
+
         if (constructive_scheme === '40') {
             suffix += '-40';
         }
@@ -844,10 +881,10 @@ $(document).ready(function () {
         }
 
         is_true = [x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12].includes('X');
-        mark_gen.text(x0 + x1 + x2 + '-' + x3 + '-' + x4 + '-' + x5 + '-' + x6 + optForBu +  '-' + x7 + '-' + x8 + x9 + x10 + x11 + x12 + x13 + suffix);
+        mark_gen.text(x0 + x1 + x2 + '-' + x3 + '-' + x4 + '-' + x5 + '-' + VE + x6 + optionssetCheckBox + optForBu +  '-' + x7 + '-' + x8 + x9 + x10 + x11 + x12 + x13 + suffix);
         let check = document.querySelector('#tuMpCheck > input[type=checkbox]');
         if (check.checked) {
-            mark_gen.text(x0 + x1 + x2 + '-' + x3 + '-' + x4 + '-' + x5 + '-' + x6 + '-' + x7 + '-' + x8 + x9 + x10 + x11 + x12 + x13 + suffix + '/' + 'МП40' + '-' + tuMpX1 + '-' + tuMpX2);
+            mark_gen.text(x0 + x1 + x2 + '-' + x3 + '-' + x4 + '-' + x5 + '-' + VE + x6 + optionssetCheckBox + optForBu + '-' + x7 + '-' + x8 + x9 + x10 + x11 + x12 + x13 + suffix + '/' + 'МП40' + '-' + tuMpX1 + '-' + tuMpX2);
         }
 
         // $('#certs-pdf').empty();
@@ -872,7 +909,8 @@ $(document).ready(function () {
         let tuMpX1 = document.querySelector('#maxStepMp').value ? 'МП40-' + document.querySelector('#maxStepMp').value : '';
         let tuMpX2 = document.querySelector('#stepForOne').value;
         let TuMp = tuMpX1 ? tuMpX1 + '-' + tuMpX2 : '';
-        optForBu = $('#control-block-optionsset option:selected').val() != 'noValue' ? $('#control-block-optionsset option:selected').val() : '';
+        let optForBu = $('#control-block-optionsset option:selected').val() != 'noValue' ? $('#control-block-optionsset option:selected').val() : '';
+
 
         // // Расчет массы
         // let mass;
@@ -952,7 +990,18 @@ $(document).ready(function () {
         let j32 = selectPositionSignal();// сигналы дист управления
 
         let j33 = ''; //Тип БКВ
-        BoMark == 'Э0' ? j33 = 'ЭИМУ' : BoMark == 'Э1' ? j33 = 'ЭИМУ' : BoMark == 'Э2' ? j33 = 'ЭБКВ' : BoMark == 'М1' ? j33 = 'МБКВ' : 'пропущен конфигуратор';
+        if(BoMark == 'Э0'){
+            j33 = 'ЭИМУ';
+        } 
+        else if (BoMark == 'Э2'){
+            j33 = 'ЭБКВ';
+        }
+         else if (BoMark == 'М1'){
+            j33 = 'МБКВ';
+        }
+         else if (BoMark == 'Э1'){
+            document.querySelector("#commandBlockType-1").checked ? j33 = 'ЭИМУ' : document.querySelector("#commandBlockType-2").checked ? j33 = 'ВИМУ' : 'Конфигуратор пропущен';
+        }
 
         let j34 = ''; //Механический указатель
         document.querySelector("#pointer > input[type=checkbox]").checked ? j34 = 'Есть' : 'Отсутствует';
@@ -975,11 +1024,11 @@ $(document).ready(function () {
         if (optForBu == 'Z' || optForBu =='W') {j310 = 'сдвоенные'}; // Концевые выключатели
 
         let j311 = ''; // Монтаж БУ
-        if(BoMark == 'Э0'){
-            j311 = 'На приводе'
-        } else if (BoMark == 'М1'){
-            j311 = 'На приводе'
-        } else {j311 = 'Выносной'};
+        if(BoMark == 'Э1'){
+            j311 = 'Выносной';
+        } else {
+            j311 = 'На приводе';
+        };
 
         // json3 = [j30, j31, j32, j33, j34, j35, j36, j37, j38, j39, j310, j311];
 
@@ -997,7 +1046,7 @@ $(document).ready(function () {
         let j51 = $("input[name='connectionForEp4']:checked").closest('.form-check').find('.form-check-label').text(); //Электрическое подключение (расшифровка)
         let j52 = 'SIL-3'; // SIL
         let j53 = $("input[name='special']:checked").closest('.form-check').find('.form-check-label').text(); //Специальное исполнение
-        // let j54 = mass; //Масса
+        let j54 = ''; //Масса
         // json5 = [j50, j51, j52, j53, j54];
 
         //json6
@@ -1015,7 +1064,7 @@ $(document).ready(function () {
         let j73 = '';//Наличие типа функции
         let j74 = '';//Функция при питании
         let j75 = ''; //Условие для запуска функции
-        // json7 = [j70, j71, j72, j73, j74, j75, j76];
+        // json7 = [j70, j71, j72, j73, j74, j75];
 
         console.log([j00, j01, j02, j03, j04, j05],
             [j10, j11, j12, j13, j14, j15, j16, j17, j18],
@@ -1605,25 +1654,25 @@ $(document).ready(function () {
         let base = document.querySelector('#controle-blocks').value;
         switch (base) {
             case 'Э11':
-                return 'Базовый набор функций ЭИМУ';
+                return 'Базовый набор функций';
             case 'Э12':
-                return '1)Базовый набор функций ЭИМУ 2)Передача информации о положении выходного звена привода посредством токового сигнала (4–20 мА)';
+                return '1)Базовый набор функций 2)Передача информации о положении выходного звена привода посредством токового сигнала (4–20 мА)';
             case 'Э13':
-                return '1)Базовый набор функций ЭИМУ 2)Передача информации о положении выходного звена привода посредством токового сигнала (4–20 мА)  3)Передача текущего значения движущего момента на выходном звене привода посредством токового сигнала (4–20 мА).';
+                return '1)Базовый набор функций 2)Передача информации о положении выходного звена привода посредством токового сигнала (4–20 мА)  3)Передача текущего значения движущего момента на выходном звене привода посредством токового сигнала (4–20 мА).';
             case 'Э14':
-                return '1)Базовый набор функций ЭИМУ 2)Диагностирование отказов опциональных модулей.  3)Автоматический выбор активного интерфейса дистанционного управления.';
+                return '1)Базовый набор функций 2)Диагностирование отказов опциональных модулей.  3)Автоматический выбор активного интерфейса дистанционного управления.';
             case 'Э15':
-                return '1)Базовый набор функций ЭИМУ 2)Диагностирование отказов опциональных модулей.  3)Автоматический выбор активного интерфейса дистанционного управления.  4) Передача информации о положении выходного звена привода посредством токового сигнала (4–20 мА)  5)Передача текущего значения движущего момента на выходном звене привода посредством токового сигнала (4–20 мА).';
+                return '1)Базовый набор функций 2)Диагностирование отказов опциональных модулей.  3)Автоматический выбор активного интерфейса дистанционного управления.  4) Передача информации о положении выходного звена привода посредством токового сигнала (4–20 мА)  5)Передача текущего значения движущего момента на выходном звене привода посредством токового сигнала (4–20 мА).';
             case 'Э16':
-                return '1)Базовый набор функций ЭИМУ 2)Аналоговое управление приводом — прием от дистанционного пульта и отработка токового сигнала (4–20 мА) задания положения выходного звена привода с контролем наличия связи  3)Диагностирование отказов опциональных модулей.  4)Автоматический выбор активного интерфейса дистанционного управления.';
+                return '1)Базовый набор функций 2)Аналоговое управление приводом — прием от дистанционного пульта и отработка токового сигнала (4–20 мА) задания положения выходного звена привода с контролем наличия связи  3)Диагностирование отказов опциональных модулей.  4)Автоматический выбор активного интерфейса дистанционного управления.';
             case 'Э17':
-                return '1)Базовый набор функций ЭИМУ 2)Передача информации о положении выходного звена привода посредством токового сигнала (4–20 мА)  3)Передача текущего значения движущего момента на выходном звене привода посредством токового сигнала (4–20 мА).  4) Аналоговое управление приводом — прием от дистанционного пульта и отработка токового сигнала (4–20 мА) задания положения выходного звена привода с контролем наличия связи  5) Диагностирование отказов опциональных модулей.  6)Автоматический выбор активного интерфейса дистанционного управления.';
+                return '1)Базовый набор функций 2)Передача информации о положении выходного звена привода посредством токового сигнала (4–20 мА)  3)Передача текущего значения движущего момента на выходном звене привода посредством токового сигнала (4–20 мА).  4) Аналоговое управление приводом — прием от дистанционного пульта и отработка токового сигнала (4–20 мА) задания положения выходного звена привода с контролем наличия связи  5) Диагностирование отказов опциональных модулей.  6)Автоматический выбор активного интерфейса дистанционного управления.';
             case 'Э18':
-                return '1)Базовый набор функций ЭИМУ 2)Цифровое управление и настройка привода с дублированием каналов связи посредством цифрового канала связи, интерфейс RS485, протокол обмена — MODBUS RTU  3)Диагностирование отказов опциональных модулей.   4)Автоматический выбор активного интерфейса дистанционного управления.';
+                return '1)Базовый набор функций 2)Цифровое управление и настройка привода с дублированием каналов связи посредством цифрового канала связи, интерфейс RS485, протокол обмена — MODBUS RTU  3)Диагностирование отказов опциональных модулей.   4)Автоматический выбор активного интерфейса дистанционного управления.';
             case 'Э19':
-                return '1)Базовый набор функций ЭИМУ 2)Цифровое управление приводом посредством цифрового канала связи, интерфейс RS485, протокол обмена — PROFIBUS DP  3)Диагностирование отказов опциональных модулей.   4)Автоматический выбор активного интерфейса дистанционного управления.';
+                return '1)Базовый набор функций 2)Цифровое управление приводом посредством цифрового канала связи, интерфейс RS485, протокол обмена — PROFIBUS DP  3)Диагностирование отказов опциональных модулей.   4)Автоматический выбор активного интерфейса дистанционного управления.';
             case 'Э110':
-                return '1)Базовый набор функций ЭИМУ 2)Цифровое управление приводом с дублированием каналов связи посредством цифрового канала связи, интерфейс RS485, протокол обмена — PROFIBUS DP.  3)Диагностирование отказов опциональных модулей.   4)Автоматический выбор активного интерфейса дистанционного управления.';
+                return '1)Базовый набор функций 2)Цифровое управление приводом с дублированием каналов связи посредством цифрового канала связи, интерфейс RS485, протокол обмена — PROFIBUS DP.  3)Диагностирование отказов опциональных модулей.   4)Автоматический выбор активного интерфейса дистанционного управления.';
             case 'Э22':
                 return 'Передача информации о положении выходного вала привода посредством токового сигнала (4-20 мА или 0-5 мА)';
             case 'Э23':
@@ -1643,9 +1692,9 @@ $(document).ready(function () {
             case 'Э2':
                 return 'Пропущен конфигуратор';
             case 'Э01':
-                return 'Выносной интеллектуальный модуль управления с пускателем';
+                return 'Электронный модуль датчиков';
             case 'Э0':
-                return 'Выносной интеллектуальный модуль управления с пускателем';
+                return 'Электронный модуль датчиков';
             default:
                 console.log(base);
                 return (g6 = m1 + m2 + m3 + m4 + m5 + m6 + m7 + m8);
@@ -1679,10 +1728,12 @@ $(document).ready(function () {
             if ($('#controle-blocks-series').val()=='Э1') 
         {
             document.querySelector("#control-block-optionsset").style.display = 'block';
+            document.querySelector("#control-block-optionssetCheckBox").style.display = 'block';
         } 
         else {
             $('#controle-blocks-options').val('noValue')
             document.querySelector("#control-block-optionsset").style.display = 'none';
+            document.querySelector("#control-block-optionssetCheckBox").style.display = 'none';
             document.querySelector("#control-block-optionsset").classList.remove('ReqValueOk');
             document.querySelector("#control-block-optionsset").classList.add('noReqValue');
         }
@@ -1705,27 +1756,16 @@ $(document).ready(function () {
        x = document.querySelector("#closingTime");
        closNumbers = document.querySelector("#closeNumbers").value;
        rotAtMin = document.querySelector("#rotation-frequency").value;
-       if(closNumbers && rotAtMin ) {x.value = closNumbers/(rotAtMin/60)}
+       if(closNumbers && rotAtMin ) {x.value = Math.round(closNumbers/(rotAtMin/60))}
     });
 
-    // ОТОБРАЖЕНИЕ пункта защиты IP54
-    $('#executionWrapLegend').on('change', function (e) {
-        if(document.querySelector("#execution-Н").checked){
-        document.querySelector("#hProtection").style.display = 'block';
-    }
-    else {document.querySelector("#hProtection").style.display = 'none'}
-     });
-
-     function signalSelect() {
-
-        // let positionSignal = 
-        // let remoteSignal = 
-        // let BoMark = document.querySelector("#controle-blocks-series").value;
-        // let j30 = document.querySelector("#controle-blocks").value;
-        // let optForBu = $('#control-block-optionsset option:selected').val() != 'noValue' ? $('#control-block-optionsset option:selected').val() : '';
-
-     }
-
+    // // ОТОБРАЖЕНИЕ пункта защиты IP54
+    // $('#executionWrapLegend').on('change', function (e) {
+    //     if(document.querySelector("#execution-Н").checked){
+    //     document.querySelector("#hProtection").style.display = 'block';
+    // }
+    // else {document.querySelector("#hProtection").style.display = 'none'}
+    //  });
     
         function selectRemoteSignal() {
 
@@ -1790,8 +1830,11 @@ $(document).ready(function () {
         else if (document.querySelector("#m1-2").checked){
             return positionSignal = 'Потенциометр 100 Ом';
             }
-        else {
+        else if(document.querySelector("#m1-3").checked){
             return positionSignal = '4-20мА';
+            }
+            else {
+                return positionSignal ='отсутсвуют';
             }
         }
 
