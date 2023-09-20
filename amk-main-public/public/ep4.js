@@ -951,9 +951,9 @@ $(document).ready(function () {
         }
         
         // ДОП ОПЦИИ
-        let addOption1 = document.querySelector("#mechSelectorId > input[type=checkbox]") ? 'Механический селектор переключения режима работы местн./дист.' : ''; 
-        let addOption2 = document.querySelector("#boardRegId > input[type=checkbox]") ? 'Плата регистратор' : ''; 
-        let addOptions = addOption1 ? addOption1 + ' ' + 'и' + ' ' +  addOption2 : addOption2;
+        let addOption1 = document.querySelector("#mechSelectorId > input[type=checkbox]").checked ? 'Механический селектор переключения режима работы местн./дист.' : ''; 
+        let addOption2 = document.querySelector("#boardRegId > input[type=checkbox]").checked ? 'Плата регистратор' : ''; 
+        let addOptions = addOption1 ? addOption1 + ' ' + '' + ' ' +  addOption2 : addOption2;
 // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         // json0
@@ -1007,12 +1007,14 @@ $(document).ready(function () {
         }
 
         let j34 = ''; //Механический указатель
-        document.querySelector("#pointer > input[type=checkbox]").checked ? j34 = 'Есть' : 'Отсутствует';
+        if (document.querySelector("#pointer > input[type=checkbox]").checked) {j34 = 'Есть'}
+         else{'Отсутствует'};
 
         let j35 =  selectPositionSignal();// Сигнализация положения
 
-        let j36 = '';
-        document.querySelector("#signalMoment-1").checked ? j36 =  'Есть' : 'Отсутствует'; // Сигнал момэнт
+        let j36 = ''; // Сигнал момэнт
+        if (document.querySelector("#signalMoment-1").checked) {j36 = 'Есть'}
+         else{'Отсутствует'};
 
         let j37 = 'Отсутствует'; // Дублирование RS485
         j30 == 'Э18' ? j37 = 'Есть' : j30 == 'Э110' ? j37 = 'Есть' : j30 == 'Э24' ? j37 = 'Есть' : j30 == 'Э26' ? j37 = 'Есть' :  'Отсутствует';
