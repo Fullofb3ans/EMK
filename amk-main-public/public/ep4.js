@@ -493,7 +493,6 @@ $(document).ready(function () {
                 }
             });
         });
-
         $.each(
             [
                 ...new Set(
@@ -951,7 +950,7 @@ $(document).ready(function () {
         }
         
         // ДОП ОПЦИИ
-        let addOption1 = document.querySelector("#mechSelectorId > input[type=checkbox]").checked ? 'Механический селектор переключения режима работы местн./дист.' : ''; 
+        let addOption1 = document.querySelector("#PanelOption").checked ? 'Механический селектор переключения режима работы местн./дист.' : ''; 
         let addOption2 = document.querySelector("#boardRegId > input[type=checkbox]").checked ? 'Плата регистратор' : ''; 
         let addOptions = addOption1 ? addOption1 + ' ' + '' + ' ' +  addOption2 : addOption2;
 // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1061,6 +1060,11 @@ $(document).ready(function () {
         let j62 = '?'; //Кабельные вводы
         let j63 = '?'; //Штепсельные разъемы
         let j64 = '?'; //Тип подводимых кабелей
+        let j65 = '';
+        if (document.querySelector("#sixsixVCheck").checked){
+            j65 = '660'
+        }
+        else {'380'}
         // json6 = [j60, j61, j62, j63];
         
         //json7
@@ -1078,7 +1082,7 @@ $(document).ready(function () {
             [j30, j31, j32, j33, j34, j35, j36, j37, j38, j39, j310, j311],
             [j40, j41, j42, j43, j44, j45],
             [j50, j51, j52, j53, j54],
-            [j60, j61, j62, j63, j64],
+            [j60, j61, j62, j63, j64, j65],
             [j70, j71, j72, j73, j74, j75]);
 
 
@@ -1111,6 +1115,17 @@ $(document).ready(function () {
                 });
         }
         sendToServer();
+    });
+    
+    // Сокрытие пункта доп 660В
+    $('#executionWrapLegend').on('change', function (e) {
+        if (document.querySelector("#execution-Ш").checked || document.querySelector("#execution-S").checked) {
+            document.querySelector("#sixsixV").style.display = 'block';
+        } else {
+            document.querySelector("#execution-Ш").checked = false;
+            document.querySelector("#execution-S").checked = false;
+            document.querySelector("#sixsixV").style.display = 'none';
+        }
     });
 
     // сокрытия пункта кабельных вводов
