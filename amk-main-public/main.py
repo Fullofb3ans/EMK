@@ -67,7 +67,8 @@ origins = [
     "http://localhost",
     "http://localhost:8080",
     "http://localhost:8080/eps.html",
-    "http://localhost:8080/eps.js"
+    "http://localhost:8080/eps.js",
+    "https://emk.websto.pro"
 ]
 
 app.add_middleware(

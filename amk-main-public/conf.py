@@ -71,13 +71,13 @@ class mk_XL():
             
             if ansi != []:
                 for i in anss:
-                    ans[0] = sheet1[f"J{i}"].value
-                    ans[1] = sheet1[f"K{i}"].value
-                    ans[2] = sheet1[f"L{i}"].value
-                    ans[3] = sheet1[f"M{i}"].value
-                    ans[4] = "380"
+                    ans[0] = str(sheet1[f"J{i}"].value) + " Вт"
+                    ans[1] = str(sheet1[f"K{i}"].value) + " Вт"
+                    ans[2] = str(sheet1[f"L{i}"].value) + " А"
+                    ans[3] = str(sheet1[f"M{i}"].value) + " А"
+                    ans[4] = "380 В"
                     ans[5] = "3"
-                    ans[6] = sheet1[f"G{i}"].value
+                    ans[6] = str(sheet1[f"G{i}"].value) + " кг"
         return ans
 
     def ep4(self):
@@ -88,11 +88,11 @@ class mk_XL():
 
         #Лицевая часть
         current_date = date.today()
-        keys = ["I7", "C9", "C10", "C12", "C49"]
-        ans = [ID, a[0][0], "", a[1][1], str(current_date)]
+        keys = ["I7", "C9", "C10", "C12", "I12", "C49"]
+        ans = [ID, f"{a[0][0]} {a[0][1]} {a[0][2]} {a[0][3]}", "", a[1][1], a[0][5], str(current_date)]
 
         #Техническая часть
-        for i in range(16, 40):
+        for i in range(16, 39):
             k = 'G' + str(i)
             keys.append(k)
 
@@ -115,8 +115,7 @@ class mk_XL():
             f'{a[2][2]}', #14 "Уровень пылевлагозащиты",
             f'{a[4][2]}', #15 "Цвет окраски",
 
-            f'{a[4][0]}', #16.1 "Электрическое подключение",
-            f'{a[5][1]}', #16.2 "Электрическое подключение (расшифровка)",
+            f'{a[4][0]} - {a[5][1]}', #16 "Электрическое подключение",
             f'{a[3][10]}', #17 "Концевые выключатели (реле)",
             f'{a[3][8]}', #18 "Промежуточные выключатели (опция)",
             f'{a[3][9]}', #19 "Моментные выключатели"
