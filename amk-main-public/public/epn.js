@@ -751,7 +751,7 @@ $(document).ready(function () {
 
         function sendToServer() {
             timer = 0;
-           let post =  fetch('http://217.144.103.121/download', {
+           let post =  fetch('/download', {
                method: 'POST',
                 headers: { 'Content-Type': 'application/json;charset=utf-8' },
                body: JSON.stringify({
@@ -761,7 +761,7 @@ $(document).ready(function () {
                 }),
             })
             .then ((response) => response.json())
-            .then ((response) => window.open(`http://217.144.103.121/Tula/${response.id}`));
+            .then ((response) => window.open(`/Tula/${response.id}`));
         }
     });
 
