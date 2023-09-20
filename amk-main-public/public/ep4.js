@@ -1080,13 +1080,13 @@ $(document).ready(function () {
 
 
         function DOCX(id) {
-            window.open(`http://217.144.103.121/Tula/${id}`);
+            window.open(`/Tula/${id}`);
         }
         function EXEL(id) {
-            window.open(`http://217.144.103.121/TulaEXEL/${id}`);
+            window.open(`/TulaEXEL/${id}`);
         }
         function sendToServer() {
-            let post = fetch('http://217.144.103.121/download', {
+            let post = fetch('/download', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json;charset=utf-8' },
                 body: JSON.stringify({
