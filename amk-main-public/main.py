@@ -63,11 +63,8 @@ app.mount("/static", StaticFiles(directory="/", html=True))
 
 
 origins = [
-    "http://217.144.103.121",
-    "http://localhost",
-    "http://localhost:8080",
-    "http://localhost:8080/eps.html",
-    "http://localhost:8080/eps.js",
+    "https://217.144.103.121",
+    "https://localhost:8080",
     "https://emk.websto.pro"
 ]
 
@@ -83,19 +80,19 @@ app.add_middleware(
 
 @app.get("/")
 def root():
-    return RedirectResponse("http://127.0.0.1:8000/static/select.html")
+    return RedirectResponse("https://emk.websto.pro/static/select.html")
 
 @app.get("/ep4")
 def root():
-    return RedirectResponse("http://127.0.0.1:8000/static/ep4.html")
+    return RedirectResponse("https://emk.websto.pro/static/ep4.html")
 
 @app.get("/epn")
 def root():
-    return RedirectResponse("http://127.0.0.1:8000/static/epn.html")
+    return RedirectResponse("https://emk.websto.pro/static/epn.html")
 
 @app.get("/ep4Reductor")
 def root():
-    return RedirectResponse("http://127.0.0.1:8000/static/ep4Reductor.html")
+    return RedirectResponse("https://emk.websto.pro/static/ep4Reductor.html")
 
 
 @app.get("/Tula/{ID}", response_class = FileResponse)

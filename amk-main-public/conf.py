@@ -25,7 +25,7 @@ class mk_DOCX():
             ans1[i] = str(ans1[i])
 
         names2 = ['Исполнение по назначению', 'Режим работы', 'Степень защиты от проникновения пыли и влаги', 'Вращение выходного вала при закрывании', 'Температура окружающей среды (Климат)'] + ['Тип блока управления ', 'Сигнал дистанционного момента', 'Тип блока концевых выключателей (без встроенного пускателя)', 'Механический указатель сигнализации положения', 'Сигнализация положения', 'Сигнал «Момент» 4-20 мА', 'Дублирование шины RS485'] + ["Электрическое подключение", 'Защитный колпак', 'Цвет окраски', 'Напряжение питания электродвигателя', 'Количество эл./приводов', 'Дополнительные опции', 'Дополнительные требования']
-        ans2 = self.list2 + [self.list3[0]] + self.list3[2:-4] + self.list4[:3] + ["330 В, 3 Фазы", self.list0[-2]] + self.list4[-2:]
+        ans2 = self.list2 + [self.list3[0]] + self.list3[2:-4] + self.list4[:3] + ["330 В, 3 фазы", self.list0[-2]] + self.list4[-2:]
 
         for i in range(len(names2)):
             names2[i] = str(names2[i])
@@ -62,7 +62,7 @@ class mk_XL():
             for i in range(9, 575):
                 if str(sheet1[f"F{i}"].value) == str(flc):
                     anss.append(i)
-                    print(i, str(sheet1[f"F{i}"].value))
+                    #print(i, str(sheet1[f"F{i}"].value))
 
             for i in anss:
                 if (str(sheet1[f"C{i}"].value) == str(float(sh))) and (str(sheet1[f"E{i}"].value) == str(float(Mom))) and (str(sheet1[f"D{i}"].value) == str(float(V))) and (str(sheet1[f"F{i}"].value) == str(flc)):
@@ -89,7 +89,7 @@ class mk_XL():
         #Лицевая часть
         current_date = date.today()
         keys = ["I7", "C9", "C10", "C12", "I12", "C49"]
-        ans = [ID, f"{a[0][0]} {a[0][1]} {a[0][2]} {a[0][3]}", "", a[1][1], a[0][5], str(current_date)]
+        ans = [ID, f"Организация: {a[0][0]}   ФИО представителя: {a[0][1]}   Тел.: {a[0][2]}   email: {a[0][3]}", "", a[1][1], a[0][4], str(current_date)]
 
         #Техническая часть
         for i in range(16, 39):
@@ -132,7 +132,7 @@ class mk_XL():
         
 
         #Характеристики двигателя
-        for i in range(43, 49):
+        for i in range(42, 48):
             k = 'G' + str(i)
             keys.append(k)
 
@@ -153,7 +153,7 @@ class mk_XL():
             if ans[i] != None:
                 sheet[keys[i]].value = ans[i]
 
-        sheet["G41"].value = f"Не более {ans[-1]} кг"
+        sheet["G40"].value = f"Не более {ans[-1]} кг"
         #wb.save(f"Tula{ID}.xlsx")
 
         return wb
