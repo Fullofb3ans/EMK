@@ -1080,10 +1080,10 @@ $(document).ready(function () {
 
 
         function DOCX(id) {
-            window.open(`/Tula/${id}`);
+            window.open(`https://emk.websto.pro/Tula/${id}`);
         }
         function EXEL(id) {
-            window.open(`/TulaEXEL/${id}`);
+            window.open(`https://emk.websto.pro/TulaEXEL/${id}`);
         }
         function sendToServer() {
             let post = fetch('/download', {
