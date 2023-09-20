@@ -1086,7 +1086,7 @@ $(document).ready(function () {
             window.open(`https://emk.websto.pro/TulaEXEL/${id}`);
         }
         function sendToServer() {
-            let post = fetch('/download', {
+            let post = fetch('https://emk.websto.pro/Tula/download', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json;charset=utf-8' },
                 body: JSON.stringify({
