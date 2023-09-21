@@ -1053,11 +1053,11 @@ $(document).ready(function () {
         let j62 = '?'; //Кабельные вводы
         let j63 = '?'; //Штепсельные разъемы
         let j64 = '?'; //Тип подводимых кабелей
-        let j65 = '';
+        let j65 = '380';
         if (document.querySelector("#special-4").checked){
-            j65 = '660'
+            j65 = '660';
         }
-        else {'380'}
+    
         // json6 = [j60, j61, j62, j63];
         
         //json7
@@ -1096,7 +1096,7 @@ $(document).ready(function () {
                     jsn3: [j30, j31, j32, j33, j34, j35, j36, j37, j38, j39, j310, j311],
                     jsn4: [j40, j41, j42, j43, j44, j45],
                     jsn5: [j50, j51, j52, j53, j54],
-                    jsn6: [j60, j61, j62, j63, j64],
+                    jsn6: [j60, j61, j62, j63, j64, j65],
                     jsn7: [j70, j71, j72, j73, j74, j75],
                 }),
             })
@@ -1108,17 +1108,6 @@ $(document).ready(function () {
                 });
         }
         sendToServer();
-    });
-    
-    // Сокрытие пункта доп 660В
-    $('#executionWrapLegend').on('change', function (e) {
-        if (document.querySelector("#execution-Ш").checked || document.querySelector("#execution-S").checked) {
-            document.querySelector("#sixsixV").style.display = 'block';
-        } else {
-            document.querySelector("#execution-Ш").checked = false;
-            document.querySelector("#execution-S").checked = false;
-            document.querySelector("#sixsixV").style.display = 'none';
-        }
     });
 
     // сокрытия пункта кабельных вводов
