@@ -459,7 +459,7 @@ $(document).ready(function () {
 
         torques_arr = torques['ep4'][connectionType];
 
-        $('#step-3').show();
+        // $('#step-3').show();
         $.each(
             [
                 ...new Set(
@@ -475,7 +475,7 @@ $(document).ready(function () {
     });
 
     $('.ch-time-limit ').on('change', function (e) {
-        $('#step-4').show();
+        // $('#step-4').show();
         var upper_limit = $('#upper-limit').val();
         var cur_time_limit = $('#time-limit').val();
         var times_options = [];
@@ -566,7 +566,7 @@ $(document).ready(function () {
     });
 
     $(document).on('change', "input[name='constructive-scheme']", function (e) {
-        $('#step-5').show();
+        // $('#step-5').show();
         let execution = $("input[name='execution']:checked").val();
         let cur_constructive_scheme = $("input[name='constructive-scheme']:checked").val();
         let cur_flange_value = $('#flange').val();
@@ -825,15 +825,16 @@ $(document).ready(function () {
         }
 
         let x11 = $("input[name='color']:checked").val() ? $("input[name='color']:checked").val() : 'X'; // Цвет окраски
-        switch (x11) {
-            case 'X':
-                $("input[name='color']").closest('fieldset').removeClass('ReqValueOk');
-                $("input[name='color']").closest('fieldset').addClass('noReqValue');
-                break;
-            default:
+        if ($("input[name='color']:checked").val() == '1' || document.querySelector("#ralColor").value != '') 
+            {
                 $("input[name='color']").closest('fieldset').removeClass('noReqValue');
                 $("input[name='color']").closest('fieldset').addClass('ReqValueOk');
-        }
+            }
+            else {
+                $("input[name='color']").closest('fieldset').removeClass('ReqValueOk');
+                $("input[name='color']").closest('fieldset').addClass('noReqValue');
+            }
+        
 
         let x12 = $("input[name='connectionForEp4']:checked").val() ? $("input[name='connectionForEp4']:checked").val() : 'X'; // Электрическое подключение
         switch (x12) {
@@ -847,15 +848,7 @@ $(document).ready(function () {
         }
 
         let x13 = $("input[name='special']:checked").val() ? $("input[name='special']:checked").val() : ''; // Специальное исполнение
-        switch (x13) {
-            case 'X':
-                $("input[name='special']").closest('fieldset').removeClass('ReqValueOk');
-                $("input[name='special']").closest('fieldset').addClass('noReqValue');
-                break;
-            default:
-                $("input[name='special']").closest('fieldset').removeClass('noReqValue');
-                $("input[name='special']").closest('fieldset').addClass('ReqValueOk');
-        }
+
 
         let optForBu = $('#control-block-optionsset option:selected').val() != 'noValue' ? $('#control-block-optionsset option:selected').val() : '';
 
@@ -903,7 +896,7 @@ $(document).ready(function () {
         //     );
         // }
 
-        modal_button.toggle(!is_true);
+        // modal_button.toggle(!is_true);
         mark_gen.toggleClass('is-invalid', is_true).toggleClass('is-valid', !is_true);
     });
 
@@ -1007,26 +1000,26 @@ $(document).ready(function () {
 
         let j34 = ''; //Механический указатель
         if (document.querySelector("#pointer > input[type=checkbox]").checked) {j34 = 'Есть'}
-         else{j34 = 'Отсутствует'};
+         else {j34 = 'Отсутствует'};
 
         let j35 =  selectPositionSignal();// Сигнализация положения
 
         let j36 = ''; // Сигнал момэнт
         if (document.querySelector("#signalMoment-1").checked) {j36 = 'Есть'}
-         else{j36 = 'Отсутствует'};
+         else {j36 = 'Отсутствует'};
 
         let j37 = ''; // Дублирование RS485
         if(j30 == 'Э18' || j30 == 'Э110'|| j30 == 'Э24' || j30 == 'Э26') {j37 = 'Есть'}
         else {j37 = 'Отсутствует'};
         
-        let j38 = 'одиночные';
-        if (optForBu == 'Z' || optForBu =='W') {j38 = 'сдвоенные'}; // Промежуточные выключатели
+        let j38 = 'Одиночные';
+        if (optForBu == 'Z' || optForBu =='W') {j38 = 'Сдвоенные'}; // Промежуточные выключатели
         
-        let j39 = 'одиночные'; // Моментные выключатели
-        if (optForBu == 'Z' || optForBu =='W') {j39 = 'сдвоенные'}; // Моментные выключатели
+        let j39 = 'Одиночные'; // Моментные выключатели
+        if (optForBu == 'Z' || optForBu =='W') {j39 = 'Сдвоенные'}; // Моментные выключатели
         
-        let j310 = 'одиночные'; // Концевые выключатели
-        if (optForBu == 'Z' || optForBu =='W') {j310 = 'сдвоенные'}; // Концевые выключатели
+        let j310 = 'Одиночные'; // Концевые выключатели
+        if (optForBu == 'Z' || optForBu =='W') {j310 = 'Сдвоенные'}; // Концевые выключатели
 
         let j311 = ''; // Монтаж БУ
         if(BoMark == 'Э1'){
@@ -1061,7 +1054,7 @@ $(document).ready(function () {
         let j63 = '?'; //Штепсельные разъемы
         let j64 = '?'; //Тип подводимых кабелей
         let j65 = '';
-        if (document.querySelector("#sixsixVCheck").checked){
+        if (document.querySelector("#special-4").checked){
             j65 = '660'
         }
         else {'380'}
@@ -1898,5 +1891,54 @@ $(document).ready(function () {
                 return positionSignal ='отсутсвуют';
             }
         }
+// ОТКРЫТИЕ ПО ШАГАМ
+$('#step-1').on('change', function (e) {
+    if($("input[name='working-mode']:checked").val() != undefined && $("input[name='execution']:checked").val() != undefined){
+$('#step-2').show();}
+else { $('#step-2').hide();}
+});
+$('#step-2').on('change', function (e) {
+    if($("input[name='connection-type']:checked").val() != undefined && document.querySelector("#upper-limit") != '' && document.querySelector("#rotation-frequency").value != '')
+    {
+    $('#step-3').show();
+    }
+    else { $('#step-3').hide();}
+});
+$('#step-3').on('change', function (e) {
+    if($("input[name='constructive-scheme']:checked").val() != '1' && document.querySelector("#closeNumbers").value && document.querySelector("#flange").value)
+    {$('#step-4').show();}
+    else { $('#step-4').hide();}
+});
+$('#step-4').on('change', function (e) {
+if(document.querySelector("#control-block-fieldset").classList.contains('ReqValueOk') && document.querySelector("#climatic-modification").value != '')
+{$('#step-5').show();}
+else { $('#step-5').hide();}
+});
+$('#step-5').on('change', function (e) {
+    if($("input[name='rotating']:checked").val() != undefined && $("input[name='protection']:checked").val()!= undefined)
+    {$('#step-6').show();}
+    else { $('#step-6').hide();}
+});
+$('#step-6').on('change', function (e) {
+    if($("input[name='color']:checked").val() != undefined && $("input[name='connectionForEp4']:checked").val()!= undefined)
+    {$('#step-7').show();}
+});
+$('#step-6').on('change', function (e) {
+    if($("input[name='special']:checked").val() != undefined){
+    $("input[name='special']").closest('fieldset').removeClass('noReqValue');
+    $("input[name='special']").closest('fieldset').addClass('ReqValueOk');
+    $('#step-8').show();}
+    else { $('#step-8').hide();}
+});
+$('#step-8').on('change', function (e) {
+    if($("input[name='placeForEnv']:checked").val() != undefined)
+    {$('#step-9').show();}
+    else { $('#step-9').hide();}
+});
+$('#step-9').on('change', function (e) {
+    if(document.querySelector("#organization").value != '' && document.querySelector("#fio").value != '' && document.querySelector("#phone").value != '' && document.querySelector("#email").value != '' && document.querySelector("#numbersOfEp") != '')
+    {$('#step-10').show();}
+    else { $('#step-10').hide();}
+});
 
 });
