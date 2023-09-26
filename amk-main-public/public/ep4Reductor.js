@@ -1,4 +1,4 @@
-// http://www.tulaprivod.ru/dokument/sertificat/EP_4_44545atomn_2022_12.pdf
+////https://www.tulaprivod.ru/dokument/rukovodstva/EP_4_2022_15_v3.pdf
 $(document).ready(function () {
     $(document).on('click', '#e1-table th, #e1-table td', function (e) {
         let target = $(this).data('target');
@@ -9,181 +9,181 @@ $(document).ready(function () {
     });
 
     // КОНСТАНТЫ ДЛЯ JSON
-    const Rn = {
-        'РН 2': {
-            АК: {
-                60: {
-                    8: '158',
-                    11: '115',
-                    16: '80',
-                    22: '57',
-                    32: '40',
-                    45: '28',
-                    63: '20',
-                    90: '14',
-                    125: '10',
-                    180: '7',
-                },
+const Rn = {
+    'РН 2': {
+        АК: {
+            60: {
+                8: '158',
+                11: '115',
+                16: '80',
+                22: '57',
+                32: '40',
+                45: '28',
+                63: '20',
+                90: '14',
+                125: '10',
+                180: '7',
             },
         },
+    },
 
-        'РН 4': {
-            АК: {
-                90: {
-                    180: '7',
-                },
-                120: {
-                    4: '315',
-                    5.6: '225',
-                    8: '158',
-                    11: '115',
-                    16: '80',
-                    22: '57',
-                    32: '40',
-                    45: '28',
-                    63: '20',
-                    90: '14',
-                    125: '10',
-                },
+    'РН 4': {
+        АК: {
+            90: {
+                180: '7',
+            },
+            120: {
+                4: '315',
+                5.6: '225',
+                8: '158',
+                11: '115',
+                16: '80',
+                22: '57',
+                32: '40',
+                45: '28',
+                63: '20',
+                90: '14',
+                125: '10',
             },
         },
+    },
 
-        'РН 8': {
-            Б: {
-                250: {
-                    4: '315',
-                    5.6: '225',
-                    8: '158',
-                    11: '115',
-                    16: '80',
-                    22: '57',
-                    32: '40',
-                    45: '28',
-                    63: '20',
-                    90: '14',
-                    125: '10',
-                    180: '7',
-                },
+    'РН 8': {
+        Б: {
+            250: {
+                4: '315',
+                5.6: '225',
+                8: '158',
+                11: '115',
+                16: '80',
+                22: '57',
+                32: '40',
+                45: '28',
+                63: '20',
+                90: '14',
+                125: '10',
+                180: '7',
             },
         },
+    },
 
-        'РН 16': {
-            Б: {
-                400: {
-                    180: '7',
-                },
-                500: {
-                    4: '315',
-                    5.6: '225',
-                    8: '158',
-                    11: '115',
-                    16: '80',
-                    22: '57',
-                    32: '40',
-                    45: '28',
-                    90: '14',
-                },
+    'РН 16': {
+        Б: {
+            400: {
+                180: '7',
+            },
+            500: {
+                4: '315',
+                5.6: '225',
+                8: '158',
+                11: '115',
+                16: '80',
+                22: '57',
+                32: '40',
+                45: '28',
+                90: '14',
             },
         },
+    },
 
-        'РН 32': {
-            В: {
-                1000: {
-                    4: '315',
-                    5.6: '225',
-                    8: '158',
-                    11: '115',
-                    16: '80',
-                    22: '57',
-                    32: '40',
-                    45: '28',
-                    63: '20',
-                },
+    'РН 32': {
+        В: {
+            1000: {
+                4: '315',
+                5.6: '225',
+                8: '158',
+                11: '115',
+                16: '80',
+                22: '57',
+                32: '40',
+                45: '28',
+                63: '20',
             },
         },
-    };
+    },
+};
 
-    //ЗАПОЛНЕНИЕ ДОП ИНПУТОВ РЕДУКТОРА
-    $('#rn').on('change', function (e) {
-        switch ($('#rn').val()) {
-            case 'РН 2':
-                $('#roundOut').val('890 - 2 200');
-                $('#armFlange').val('F14');
-                $('#roundOutMoment').val('2000');
-                break;
+//ЗАПОЛНЕНИЕ ДОП ИНПУТОВ РЕДУКТОРА
+$('#rn').on('change', function (e) {
+    switch ($('#rn').val()) {
+        case 'РН 2':
+            $('#roundOut').val('890 - 2 200');
+            $('#armFlange').val('F14');
+            $('#roundOutMoment').val('2000');
+            break;
 
-            case 'РН 4':
-                $('#roundOut').val('1780 - 4 400');
-                $('#armFlange').val('F16');
-                $('#roundOutMoment').val('4000');
-                break;
+        case 'РН 4':
+            $('#roundOut').val('1780 - 4 400');
+            $('#armFlange').val('F16');
+            $('#roundOutMoment').val('4000');
+            break;
 
-            case 'РН 8':
-                $('#roundOut').val('3 700 - 9 250');
-                $('#armFlange').val('F25');
-                $('#roundOutMoment').val('8000');
-                break;
+        case 'РН 8':
+            $('#roundOut').val('3 700 - 9 250');
+            $('#armFlange').val('F25');
+            $('#roundOutMoment').val('8000');
+            break;
 
-            case 'РН 16':
-                $('#roundOut').val('7 400 - 18 500');
-                $('#armFlange').val('F30');
-                $('#roundOutMoment').val('16000');
-                break;
+        case 'РН 16':
+            $('#roundOut').val('7 400 - 18 500');
+            $('#armFlange').val('F30');
+            $('#roundOutMoment').val('16000');
+            break;
 
-            case 'РН 32':
-                $('#roundOut').val('14 800 - 37 000');
-                $('#armFlange').val('F35');
-                $('#roundOutMoment').val('32000');
-                break;
-        }
-    });
+        case 'РН 32':
+            $('#roundOut').val('14 800 - 37 000');
+            $('#armFlange').val('F35');
+            $('#roundOutMoment').val('32000');
+            break;
+    }
+});
 
-    //ЗАПОЛНЕНИЕ СЕЛЕКТА С РЕДУКТОРОМ
-    $('.timeMode').on('change', function (e) {
-        let select = $(document.querySelector('#rn'));
-        $(select).empty().append(new Option('Укажите значение', ''));
+//ЗАПОЛНЕНИЕ СЕЛЕКТА С РЕДУКТОРОМ
+$('.timeMode').on('change', function (e) {
+    let select = $(document.querySelector('#rn'));
+    $(select).empty().append(new Option('Укажите значение', ''));
 
-        ValuesArr = Rn;
-        let selectArr = [];
+    ValuesArr = Rn;
+    let selectArr = [];
 
-        $.each(ValuesArr, function (key, item) {
-            $.each(item, function (index, arr) {
-                {
-                    if (!selectArr.includes(key)) {
-                        selectArr.push(key);
-                    }
+    $.each(ValuesArr, function (key, item) {
+        $.each(item, function (index, arr) {
+            {
+                if (!selectArr.includes(key)) {
+                    selectArr.push(key);
                 }
-            });
-        });
-        $.each(selectArr, function (key, item) {
-            $(select).append(new Option(item, item));
+            }
         });
     });
+    $.each(selectArr, function (key, item) {
+        $(select).append(new Option(item, item));
+    });
+});
 
-    $('#rn').on('change', function (e) {
-        let execVal = document.querySelector('#rn').value;
+$('#rn').on('change', function (e) {
+    let execVal = document.querySelector('#rn').value;
 
-        let select = $(document.querySelector('#flange'));
-        $(select).empty().append(new Option('Укажите значение', ''));
+    let select = $(document.querySelector('#flange'));
+    $(select).empty().append(new Option('Укажите значение', ''));
 
-        ValuesArr = Rn[execVal];
-        let selectArr = [];
+    ValuesArr = Rn[execVal];
+    let selectArr = [];
 
-        $.each(ValuesArr, function (key, item) {
-            $.each(item, function (index, arr) {
-                {
-                    if (!selectArr.includes(key)) {
-                        selectArr.push(key);
-                    }
+    $.each(ValuesArr, function (key, item) {
+        $.each(item, function (index, arr) {
+            {
+                if (!selectArr.includes(key)) {
+                    selectArr.push(key);
                 }
-            });
-        });
-        $.each(selectArr, function (key, item) {
-            $(select).append(new Option(item, item));
+            }
         });
     });
+    $.each(selectArr, function (key, item) {
+        $(select).append(new Option(item, item));
+    });
+});
 
-    $('#flange').on('change', function (e) {
+$('#flange').on('change', function (e) {
         let execVal = document.querySelector('#rn').value;
         let execVal2 = document.querySelector('#flange').value;
 
@@ -244,18 +244,20 @@ $(document).ready(function () {
         });
     });
 
+    // КОНСТАНТЫ ДЛЯ JSON
     const certs_pdf = {
         ep4: {
             Н: {
-                cert: 'ep4n-cert.pdf',
-                decl: 'ep4n-decl.pdf',
+                cert: 'certEp4.pdf',
+                decl: 'declarationEp4.pdf',
             },
             В: {
-                cert: 'ep4v-cert.pdf',
-                decl: 'ep4v-decl.pdf',
+                cert: 'certEp4.pdf',
+                decl: 'declarationEp4.pdf',
             },
         },
     };
+
     const cheme_img = {
         ep4: {
             40: 'ep4-scheme-40.png',
@@ -269,11 +271,11 @@ $(document).ready(function () {
 
     const executions = {
         ep4: {
-            Н: 'Общепромышленное исполнение',
-            В: 'Взрывозащищенное исполнение для подгруппы IIB',
-            Ш: 'рудничное (шахтное) исполнение',
-            S: 'искробезопасное рудничное (шахтное) исполнение',
-            С: 'взрывозащищенное исполнение для подгруппы IIС',
+            Н: ' Общепромышленное исполнение',
+            В: ' Взрывозащищенное исполнение для подгруппы IIB',
+            Ш: ' Рудничное (шахтное) исполнение',
+            S: ' Искробезопасное рудничное (шахтное) исполнение',
+            С: ' Взрывозащищенное исполнение для подгруппы IIС',
         },
     };
 
@@ -361,20 +363,172 @@ $(document).ready(function () {
         },
     };
 
+    // ЗАПОЛНЕНИЕ НОМИНАЛЬНОГО КРУТЯЩЕГО МОМЕНТА С JSON
+    $('#executionWrapLegend').on('change', function (e) {
+        // $('#step-3').show();
+
+        let select = $(document.querySelector('#roundMomentMp'));
+        $(select).empty().append(new Option('Укажите значение', ''));
+
+        // console.log(ValuesArr);
+        let selectArr = [];
+
+        $.each(ValuesArr, function (key, item) {
+            $.each(item, function (index, arr) {
+                {
+                    if (!selectArr.includes(key)) {
+                        selectArr.push(key);
+                        // console.log(selectArr);
+                    }
+                }
+            });
+        });
+        selectArr.sort((a, b) => a - b);
+        $.each(selectArr, function (key, item) {
+            $(select).append(new Option(item, item));
+        });
+    });
+
+    // ЗАПОЛНЕНИЕ КРУТЯЩЕГО МОМЕНТА ПРИВОДА С JSON
+    $('#roundMomentMp').on('change', function (e) {
+        // $('#step-3').show();
+
+        let execVal = $('#roundMomentMp').val();
+        // console.log(execVal);
+
+        let select = $(document.querySelector('#roundMomentEngine'));
+        $(select).empty().append(new Option('Укажите значение', ''));
+
+        ValuesArr = tuMp[execVal];
+        // console.log(ValuesArr);
+        let selectArr = [];
+
+        $.each(ValuesArr, function (key, item) {
+            $.each(item, function (index, arr) {
+                {
+                    if (!selectArr.includes(key)) {
+                        selectArr.push(key);
+                        // console.log(selectArr);
+                    }
+                }
+            });
+        });
+        selectArr.sort((a, b) => a - b);
+        $.each(selectArr, function (key, item) {
+            $(select).append(new Option(item, item));
+        });
+    });
+
+    // ЗАПОЛНЕНИЕ ДиапазонА усилий на штоке модуля С JSON
+    $('#roundMomentEngine').on('change', function (e) {
+        // $('#step-3').show();
+
+        let execVal = $('#roundMomentMp').val();
+        let execVal2 = $('#roundMomentEngine').val();
+        // console.log(execVal);
+
+        let select = $(document.querySelector('#roundMomentInterval'));
+        $(select).empty().append(new Option('Укажите значение', ''));
+
+        ValuesArr = tuMp[execVal][execVal2];
+        // console.log(ValuesArr);
+        let selectArr = [];
+
+        $.each(ValuesArr, function (key, item) {
+            $.each(item, function (index, arr) {
+                {
+                    if (!selectArr.includes(key)) {
+                        selectArr.push(key);
+                        // console.log(selectArr);
+                    }
+                }
+            });
+        });
+        selectArr.sort((a, b) => b - a);
+        $.each(selectArr, function (key, item) {
+            $(select).append(new Option(item, item));
+        });
+    });
+
+    // ЗАПОЛНЕНИЕ ХОДА ШТОКА МОДУЛЯ ЗА ОДИН ОБОРОТ С JSON
+    $('#roundMomentInterval').on('change', function (e) {
+        // $('#step-3').show();
+
+        let execVal = $('#roundMomentMp').val();
+        let execVal2 = $('#roundMomentEngine').val();
+        let execVal3 = $('#roundMomentInterval').val();
+        // console.log(execVal);
+
+        let select = $(document.querySelector('#stepForOne'));
+        $(select).empty().append(new Option('Укажите значение', ''));
+
+        ValuesArr = tuMp[execVal][execVal2][execVal3];
+        // console.log(ValuesArr);
+        let selectArr = [];
+
+        $.each(
+            [
+                ...new Set(
+                    ValuesArr.sort(function (a, b) {
+                        return a - b;
+                    })
+                ),
+            ],
+            function (index, item) {
+                select.append(new Option(item, item, false, !selectArr.includes(item)));
+            }
+        );
+
+        selectArr.sort();
+        $.each(selectArr, function (key, item) {
+            $(select).append(new Option(item, item));
+        });
+    });
+
+    let cur_constructive_scheme = false;
+
+    let execution_id = '';
+
     let m1BlockModal = new bootstrap.Modal($('#block-configure-m1'));
     let m2BlockModal = new bootstrap.Modal($('#block-configure-m2'));
     let vimuBlockModal = new bootstrap.Modal($('#block-configure-e1'));
     let e2BlockModal = new bootstrap.Modal($('#block-configure-e2'));
+    let e1SBlockModal = new bootstrap.Modal($('#e1SModal'));
 
-    $('.ch-time-limit ').on('change', function (e) {
-        $('#step-3').show();
-        $('#step-4').show();
+    $('.ch-upper-limit').on('change', function (e) {
+        let connectionType = $("input[name='connection-type']:checked").val();
+        console.log(connectionType);
+
+        let execution = $("input[name='execution']:checked").val();
+        var cur_upper_limit = $('#upper-limit').val();
+        var upper_limit = $('#upper-limit').empty().append(new Option('Выберите значение', ''));
+
+        torques_arr = torques['ep4'][connectionType];
+
+        // $('#step-3').show();
+        $.each(
+            [
+                ...new Set(
+                    torques_arr.sort(function (a, b) {
+                        return a - b;
+                    })
+                ),
+            ],
+            function (index, item) {
+                upper_limit.append(new Option(item, item, false, item == cur_upper_limit));
+            }
+        );
+    });
+
+    $('.upperLimitFieldset').on('change', function (e) {
+        // $('#step-4').show();
         var upper_limit = $('#upper-limit').val();
         var cur_time_limit = $('#time-limit').val();
         var times_options = [];
 
         select_options = $('#rotation-frequency');
         time_limits_arr = time_limits['ep4'];
+        console.log(time_limits_arr);
 
         select_options.empty().append(new Option('Выберите значение', ''));
 
@@ -385,7 +539,6 @@ $(document).ready(function () {
                 }
             });
         });
-
         $.each(
             [
                 ...new Set(
@@ -428,7 +581,7 @@ $(document).ready(function () {
                         .append(
                             $('<input>').prop({
                                 type: 'radio',
-                                id: 'scheme-' + item,
+                                id: '/img/' + 'scheme-' + item,
                                 name: 'constructive-scheme',
                                 value: item,
                                 class: 'form-check-input ch-mark',
@@ -438,10 +591,10 @@ $(document).ready(function () {
                         .append(
                             $('<label>')
                                 .prop({
-                                    for: 'scheme-' + item,
+                                    for:  'scheme-' + item,
                                     class: 'form-check-label',
                                 })
-                                .text('Конструктивная схема ' + item)
+                                .text(' Конструктивная схема ' + item)
                         )
                 );
             });
@@ -451,16 +604,16 @@ $(document).ready(function () {
             $('#constructive-scheme-img').empty();
         }
 
-        if (document.getElementsByName('constructive-scheme').length < 2) {
-            $('#schemeFieldSet').hide();
-        } else {
-            $('#schemeFieldSet').show();
-        }
+        // if (document.getElementsByName('constructive-scheme').length < 2) {
+        //     $('#schemeFieldSet').hide();
+        // } else {
+        //     $('#schemeFieldSet').show();
+        // }
     });
 
     $(document).on('change', "input[name='constructive-scheme']", function (e) {
-        $('#step-5').show();
-
+        // $('#step-5').show();
+        let execution = $("input[name='execution']:checked").val();
         let cur_constructive_scheme = $("input[name='constructive-scheme']:checked").val();
         let cur_flange_value = $('#flange').val();
 
@@ -468,6 +621,7 @@ $(document).ready(function () {
         let rotation_frequency = $('#rotation-frequency').val();
         let connectionType = $("input[name='connection-type']:checked").val();
 
+        let flanges_select = $('#flange').empty().append(new Option('Выберите значение', ''));
         let control_block = $('#controle-blocks');
         let cur_control_block = $('#controle-blocks').val();
 
@@ -481,17 +635,57 @@ $(document).ready(function () {
             } else {
                 flanges_arr = flanges['ep4'][cur_constructive_scheme][upper_limit][0][connectionType];
             }
+
+            $.each(flanges_arr, function (key, item) {
+                flanges_select.append(new Option(item, item, false, cur_flange_value == item));
+            });
         }
 
-        let series = {
+                // СОКРЫТИЕ КАБЕЛЬНЫЙ ПОДКЛЮЧЕНИЙ ДЛЯ СХем 43/44/430
+                if (cur_constructive_scheme == '43' || cur_constructive_scheme == '430' || cur_constructive_scheme == '44'){
+                    document.querySelector("#firstCon").style.display = 'none';
+                    document.querySelector("#twoCon").style.display = 'none';
+                    document.querySelector("#threeCon").checked = 'true';
+                    document.querySelector("#fourCon").style.display = 'none';
+                    document.querySelector("#fiveCon").style.display = 'none';
+                    document.querySelector("#sixCon").style.display = 'none';
+                    document.querySelector("#sevenCon").style.display = 'none';
+                    document.querySelector("#eightCon").style.display = 'none';
+                }
+                else{
+                    document.querySelector("#firstCon").style.display = 'flow';
+                    document.querySelector("#twoCon").style.display = 'flow';
+                    document.querySelector("#fourCon").style.display = 'flow';
+                    document.querySelector("#fiveCon").style.display = 'flow';
+                    document.querySelector("#sixCon").style.display = 'flow';
+                    document.querySelector("#sevenCon").style.display = 'flow';
+                    document.querySelector("#eightCon").style.display = 'flow';
+                }
+
+         series = {
             ep4: {
-                Э0: 'Выносной интеллектуальный модуль управления с пускателем  Э0',
+                Э0: 'Электронный модуль датчиков Э0',
                 Э1: 'Встроенный интеллектуальный модуль управления  с пускателем Э1',
-                // 'Э1S': 'Серия Э1S',
+                Э1S: 'Электронный интеллектуальный модуль управления для искробезопасных приводов Э1S',
                 Э2: 'Электронный блок концевых выключателей без пускателя Э2',
                 М1: 'Механический блок концевых выключателей без пускателя М1',
             },
         };
+        
+        if(cur_constructive_scheme !== '41' && cur_constructive_scheme !== '410'){
+            delete series['ep4']['Э1S'];
+        }
+        else {
+            series = {
+                ep4: {
+                    Э0: 'Электронный модуль датчиков Э0',
+                    Э1: 'Встроенный интеллектуальный модуль управления  с пускателем Э1',
+                    Э1S: 'Электронный интеллектуальный модуль управления для искробезопасных приводов Э1S',
+                    Э2: 'Электронный блок концевых выключателей без пускателя Э2',
+                    М1: 'Механический блок концевых выключателей без пускателя М1',
+                },
+            };
+        }
 
         if (!!cur_constructive_scheme) {
             // $("#controle-blocks").empty().append(new Option('Выберите значение', ''));
@@ -513,6 +707,18 @@ $(document).ready(function () {
                 );
         }
     });
+
+    // $(document).on("change", function(e){
+    //     let flange = document.querySelector('#flange');
+    //     let a = document.querySelector('#rotation-frequency');
+    //     let b = document.querySelector('#time-limit')
+    //     if (a.value === '' && b.value === '') {
+    //         flange.value = '';
+    //         $(flange).attr('disabled', true);
+    //         }
+    //         else {$(flange).attr('disabled', false);}
+    //     }
+    // );
 
     // ЗАПОЛНЕНИЕ ИСПОЛНЕНИЯ ДЛЯ ЕП4
     $.each(executions['ep4'], function (key, item) {
@@ -554,15 +760,15 @@ $(document).ready(function () {
 
         let x0 = 'ЭП4';
         let x1 = $("input[name='working-mode']:checked").val() ? $("input[name='working-mode']:checked").val() : ''; // Назначение по режимам работы
-        switch (x1) {
-            case '':
-                $("input[name='working-mode']").closest('fieldset').removeClass('ReqValueOk');
-                $("input[name='working-mode']").closest('fieldset').addClass('noReqValue');
-                break;
-            default:
-                $("input[name='working-mode']").closest('fieldset').removeClass('noReqValue');
-                $("input[name='working-mode']").closest('fieldset').addClass('ReqValueOk');
-        }
+        // switch (x1) {
+        //     case 'X':
+        //         $("input[name='working-mode']").closest('fieldset').removeClass('ReqValueOk');
+        //         $("input[name='working-mode']").closest('fieldset').addClass('noReqValue');
+        //         break;
+        //     default:
+        //         $("input[name='working-mode']").closest('fieldset').removeClass('noReqValue');
+        //         $("input[name='working-mode']").closest('fieldset').addClass('ReqValueOk');
+        // }
 
         x2 = $("input[name='execution']:checked").val() ? $("input[name='execution']:checked").val() : 'X'; // Исполнение по взрывозащите
         switch (x2) {
@@ -618,6 +824,22 @@ $(document).ready(function () {
                 $('#controle-blocks').closest('fieldset').addClass('ReqValueOk');
         }
 
+    // ДОП ОПЦИИ ДЛЯ БЛОКА
+        let tOption = '';
+        document.querySelector("#tOption").checked ? tOption = document.querySelector("#tOption").value : '';
+        
+        let PanelOption = '';
+        document.querySelector("#PanelOption").checked ? PanelOption = document.querySelector("#PanelOption").value : '';
+        
+        let bluetoothOption = '';
+        document.querySelector("#bluetoothOption").checked ? bluetoothOption = document.querySelector("#bluetoothOption").value : '';
+        
+        let regOption = '';
+        document.querySelector("#regOption").checked ? regOption = document.querySelector("#regOption").value : '';
+
+        let optionssetCheckBox = tOption + PanelOption + bluetoothOption + regOption;
+      
+// //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         let x7 = $('#climatic-modification').val() ? $('#climatic-modification').val() : 'X'; // Номер варианта температурного исполнения
         switch (x7) {
             case 'X':
@@ -663,15 +885,16 @@ $(document).ready(function () {
         }
 
         let x11 = $("input[name='color']:checked").val() ? $("input[name='color']:checked").val() : 'X'; // Цвет окраски
-        switch (x11) {
-            case 'X':
-                $("input[name='color']").closest('fieldset').removeClass('ReqValueOk');
-                $("input[name='color']").closest('fieldset').addClass('noReqValue');
-                break;
-            default:
+        if ($("input[name='color']:checked").val() == '1' || document.querySelector("#ralColor").value != '') 
+            {
                 $("input[name='color']").closest('fieldset').removeClass('noReqValue');
                 $("input[name='color']").closest('fieldset').addClass('ReqValueOk');
-        }
+            }
+            else {
+                $("input[name='color']").closest('fieldset').removeClass('ReqValueOk');
+                $("input[name='color']").closest('fieldset').addClass('noReqValue');
+            }
+        
 
         let x12 = $("input[name='connectionForEp4']:checked").val() ? $("input[name='connectionForEp4']:checked").val() : 'X'; // Электрическое подключение
         switch (x12) {
@@ -685,15 +908,6 @@ $(document).ready(function () {
         }
 
         let x13 = $("input[name='special']:checked").val() ? $("input[name='special']:checked").val() : ''; // Специальное исполнение
-        switch (x13) {
-            case 'X':
-                $("input[name='special']").closest('fieldset').removeClass('ReqValueOk');
-                $("input[name='special']").closest('fieldset').addClass('noReqValue');
-                break;
-            default:
-                $("input[name='special']").closest('fieldset').removeClass('noReqValue');
-                $("input[name='special']").closest('fieldset').addClass('ReqValueOk');
-        }
 
         let x14 = $("select[name='rn']").val() ? $("input[name='rn']").val() : ''; // Специальное исполнение
         switch (x14) {
@@ -727,7 +941,8 @@ $(document).ready(function () {
 
         let rnx1 = document.querySelector('#rn').value ? document.querySelector('#rn').value : '';
 
-        // let rnx2 = document.querySelector("#rotation-frequency").value ? document.querySelector("#rotation-frequency").value : 'X';
+        let optForBu = $('#control-block-optionsset option:selected').val() != 'noValue' ? $('#control-block-optionsset option:selected').val() : '';
+
 
         let constructive_scheme = $("input[name='constructive-scheme']:checked").val();
 
@@ -737,127 +952,246 @@ $(document).ready(function () {
 
         let suffix = '';
 
+        let VE = '';
+        document.querySelector("#commandBlockType-2").checked ? VE = 'В' : '';
+
         if (constructive_scheme === '40') {
             suffix += '-40';
         }
         //
         if (cbs === 'Э0') {
             x6 = 'Э01';
+            // suffix += '\\ВИМУ-';
         }
 
         is_true = [x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, rnx1].includes('X');
-        mark_gen.text(x0 + x1 + x2 + '-' + x3 + '-' + x4 + '-' + x5 + '-' + x6 + '-' + x7 + '-' + x8 + x9 + x10 + x11 + x12 + x13 + suffix + '/' + rnx1);
-        // let check = document.querySelector("#tuMpCheck > input[type=checkbox]");
-        // if(check.checked){mark_gen.text(x0 + x1 + x2 + '-' + x3 + '-' + x4 + '-' + x5 + '-' + x6 + '-' + x7 + '-' + x8 + x9 + x10 + x11 + x12 + x13 + suffix + '/' + 'МП40' + '-' + 'X' + '-' + tuMpX);}
+        mark_gen.text(x0 + x1 + x2 + '-' + x3 + '-' + x4 + '-' + x5 + '-' + VE + x6 + optionssetCheckBox + optForBu +  '-' + x7 + '-' + x8 + x9 + x10 + x11 + x12 + x13 + suffix + '/' + rnx1);
 
-        $('#certs-pdf').empty();
-        if (!is_true && certs_pdf['ep4'][x2] !== undefined) {
-            $('#certs-pdf').append(
-                $('<a>')
-                    .attr({ href: 'pdf/' + certs_pdf['ep4'][x2]['cert'], target: '_blank' })
-                    .text('Сертификат')
-                    .css('padding', '1.5%'),
-                $('<a>')
-                    .attr({ href: 'pdf/' + certs_pdf['ep4'][x2]['decl'], target: '_blank' })
-                    .text('Декларация')
-                    .css('padding', '1.5%')
-            );
-        }
+        // $('#certs-pdf').empty();
+        // if (!is_true && certs_pdf['ep4'][x2] !== undefined) {
+        //     $('#certs-pdf').append(
+        //         $('<a>')
+        //             .attr({ href: 'pdf/' + certs_pdf['ep4'][x2]['cert'], target: '_blank' })
+        //             .text('Сертификат')
+        //             .css('padding', '1.5%'),
+        //         $('<a>')
+        //             .attr({ href: 'pdf/' + certs_pdf['ep4'][x2]['decl'], target: '_blank' })
+        //             .text('Декларация')
+        //             .css('padding', '1.5%')
+        //     );
+        // }
 
-        modal_button.toggle(!is_true);
+        // modal_button.toggle(!is_true);
         mark_gen.toggleClass('is-invalid', is_true).toggleClass('is-valid', !is_true);
     });
 
-    $(document.querySelector("#modal-button > button")).on('click', function () {
-        console.log('hea');
-        let CapText = document.querySelector('#cap > input[type=checkbox]').checked ? '1' : '0';
-        let PointerText = document.querySelector('#pointer > input[type=checkbox]').checked ? '1' : '0';
-        let ArmText = document.querySelector('#arm > input[type=checkbox]').checked ? document.querySelector('#arm').innerText + ' ' : '';
-        let addOptSel = document.querySelector("#mechSelectorId > input[type=checkbox]").checked ? 1 : 0;
-        let addOptBoard = document.querySelector("#boardRegId > input[type=checkbox]").checked ? 2 : 0;
-        let allOpt = addOptSel + addOptBoard;
+    $(document.querySelector('#modal-button > button')).on('click', function () {
+        let optForBu = $('#control-block-optionsset option:selected').val() != 'noValue' ? $('#control-block-optionsset option:selected').val() : '';
 
-        let color = $("input[name='color']:checked").val();
-        if (color == '1') {
-            color = '0';
-        } else if (color == '2') {
-            color = '1';
+
+        // // Расчет массы
+        // let mass;
+        // if((document.querySelector("#execution-Н").checked) || (document.querySelector("#execution-Ш").checked) || (document.querySelector("#execution-S"))) {
+        //     if($("input[name='constructive-scheme']:checked").val() == '40'){ mass = 'Не более 42'};
+        //     if($("input[name='constructive-scheme']:checked").val() == '41'){ mass = 'Не более 75'};
+        //     if($("input[name='constructive-scheme']:checked").val() == '410'){ mass = 'Не более 117'};
+        //     if($("input[name='constructive-scheme']:checked").val() == '43'){ mass = 'Не более 250'};
+        //     if($("input[name='constructive-scheme']:checked").val() == '430'){ mass = 'Не более 480'};
+        //     if($("input[name='constructive-scheme']:checked").val() == '44'){ mass = 'Не более 380'};
+        // }
+        // else if(document.querySelector("#execution-В").checked || document.querySelector("#execution-С").checked) {
+        //     if($("input[name='constructive-scheme']:checked").val() == '40'){ mass = 'Не более 42'};
+        //     if($("input[name='constructive-scheme']:checked").val() == '41'){ mass = 'Не более 75'};
+        //     if($("input[name='constructive-scheme']:checked").val() == '410'){ mass = 'Не более 117'};
+        //     if($("input[name='constructive-scheme']:checked").val() == '43'){ mass = 'Не более 250'};
+        //     if($("input[name='constructive-scheme']:checked").val() == '430'){ mass = 'Не более 480'};
+        //     if($("input[name='constructive-scheme']:checked").val() == '44'){ mass = 'Не более 380'}; 
+        // }
+        
+        // CХЕМА
+        let schemeForSend = ''
+        if (document.querySelector("#\\/img\\/scheme-40") && document.querySelector("#\\/img\\/scheme-40").checked) {
+            schemeForSend = '40';
+        } else if (document.querySelector("#\\/img\\/scheme-41") && document.querySelector("#\\/img\\/scheme-41").checked) {
+            schemeForSend = '41';
+        } else if (document.querySelector("#\\/img\\/scheme-410") && document.querySelector("#\\/img\\/scheme-410").checked) {
+            schemeForSend = '410';
+        } else if (document.querySelector("#\\/img\\/scheme-43") && document.querySelector("#\\/img\\/scheme-43").checked) {
+            schemeForSend = '43';
+        } else if (document.querySelector("#\\/img\\/scheme-430") && document.querySelector("#\\/img\\/scheme-430").checked) {
+            schemeForSend = '430';
+        } else if (document.querySelector("#\\/img\\/scheme-44") && document.querySelector("#\\/img\\/scheme-44").checked) {
+            schemeForSend = '44';
+        }
+        
+        // ДОП ОПЦИИ
+        let addOption1 = document.querySelector("#PanelOption").checked ? 'Механический селектор переключения режима работы местн./дист.' : ''; 
+        let addOption2 = document.querySelector("#boardRegId > input[type=checkbox]").checked ? 'Плата регистратор' : ''; 
+        let addOptions = addOption1 ? addOption1 + ' ' + '' + ' ' +  addOption2 : addOption2;
+// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        // json0
+        let j00 = document.querySelector('#organization').value; //Фирма
+        let j01 = document.querySelector('#fio').value; // Фио
+        let j02 = document.querySelector('#phone').value; // Телефон
+        let j03 = document.querySelector('#email').value; // email
+        let j04 = document.querySelector('#numbersOfEp').value; // кол-во
+        let j05 = ''; //цена
+        // json0 = [j00, j01, j02, j03, j04, j05];
+
+        //json1
+        let j10 = 'Электроприводы многообортные ЭП4'; //тип арматуры
+        let j11 = document.querySelector('#mark-gen').innerText; //маркировка
+        let j12 = 'АО Тулаэлектропривод'; //завод
+        let j13 = document.querySelector("#turnTime").value; //время закрытия
+        let j14 = document.querySelector("#upper-limit").value; //Максимальный крутящий момент
+        let j15 = document.querySelector('#flange').value; //присоединение к приводу
+        let j16 = $("input[name='placeForEnv']:checked").closest('.form-check').find('.form-check-label').text(); // установка
+        let j17 = document.querySelector('#rotation-frequency').value; // частота вращения
+        let j18 = schemeForSend; // конструктивная схема
+        // json1 = [j10, j11, j12, j13, j14, j15, j16, j17, j18];
+
+        //json2
+        let j20 = $("input[name='execution']:checked").closest('.form-check').find('.form-check-label').text(); //исполнение по назначению
+        let j21 = $("input[name='working-mode']:checked").closest('.form-check').find('.form-check-label').text(); //режим работы
+        let j22 = $("input[name='protection']:checked").closest('.form-check').find('.form-check-label').text(); //Влагозащита
+        let j23 = $("input[name='rotating']:checked").closest('.form-check').find('.form-check-label').text(); //Вращение вых вала
+        let j24 = $('#climatic-modification option:selected').text(); //Температура
+        // json2 = [j20, j21, j22, j23, j24];
+
+        //json3
+        let BoMark = document.querySelector("#controle-blocks-series").value; 
+
+        let j30 = document.querySelector("#controle-blocks").value; // тип бу 
+        let j31 = checkCommandBlock(); // Тип управления
+        let j32 =  selectRemoteSignal();// сигналы дист управления
+
+        let j33 = ''; //Тип БКВ
+        if(BoMark == 'Э0'){
+            j33 = 'ЭИМУ';
+        } 
+        else if (BoMark == 'Э2'){
+            j33 = 'ЭБКВ';
+        }
+         else if (BoMark == 'М1'){
+            j33 = 'МБКВ';
+        }
+         else if (BoMark == 'Э1'){
+            document.querySelector("#commandBlockType-1").checked ? j33 = 'ЭИМУ' : document.querySelector("#commandBlockType-2").checked ? j33 = 'ВИМУ' : 'Конфигуратор пропущен';
         }
 
-        //создание jsona
-        j1 = 'ЭП4 с редуктором';
-        j2 = document.querySelector('#mark-gen').innerText;
-        j3 = 'АО Тулаэлектропривод';
-        j4 = document.querySelector('#pressure').value;
-        j5 = document.querySelector('#diameter').value;
-        j6 = document.querySelector('#closingTimeTo').value;
-        j7 = document.querySelector('#closingTimeFrom').value;
-        j8 = document.querySelector('#maxRMoment').value;
-        j9 = document.querySelector('#maxRMoment2').value;
-        j10 = document.querySelector("#flange").value;
-        j11 = document.querySelector('#closeNumbers').value;
-        j12 = document.querySelector('#working-env').value;
-        j13 = $("input[name='placeForEnv']:checked").val();
+        let j34 = ''; //Механический указатель
+        if (document.querySelector("#pointer > input[type=checkbox]").checked) {j34 = 'Есть'}
+         else {j34 = 'Отсутствует'};
 
-        // Вторая часть jsona
-        h1 = $("input[name='execution']:checked").closest('.form-check').find('.form-check-label').text();
-        h2 = $("input[name='working-mode']:checked").closest('.form-check').find('.form-check-label').text();
-        h3 = $("input[name='protection']:checked").closest('.form-check').find('.form-check-label').text();
-        h4 = $("input[name='rotating']:checked").closest('.form-check').find('.form-check-label').text();
-        h5 = $('#climatic-modification option:selected').text();
-        h6 = $("input[name='typeEndSwich']:checked").val();
-        h7 = $("input[name='commandBlockType']:checked").val();
-        h8 = PointerText;
-        h9 = document.querySelector('#signal').value;
-        h10 = document.querySelector('#commandSignal').value;
-        h11 = $("input[name='signalMoment']:checked").val() ? $("input[name='signalMoment']:checked").val() : '0';
-        h12 = $("input[name='tire']:checked").val() ? $("input[name='tire']:checked").val() : '0';
-        h13 = document.querySelector('#cabels-1').checked ? '1' : '0';
-        h14 = document.querySelector('#cabels-1').checked ? document.querySelector('#cabels-1').value : '0';
-        h15 = document.querySelector('#stepse-1').checked ? '1' : '0';
-        h16 = document.querySelector('#stepse-1').checked ? document.querySelector('#inputStepse').value : '-';
-        h17 = document.querySelector('#stepse-1').checked ? document.querySelector('#inputTypeStepse').value : '-';
-        h18 = color;
-        h19 = document.querySelector('#ralColor').value ? document.querySelector('#ralColor').value : '0';
-        h20 = CapText;
-        h21 = document.querySelector('#numbersOfEp').value;
-        h22 = allOpt;
-        h23 = document.querySelector('#addReqarea').value;
-        // ДОБАВИТЬ ARMTEXT
-        // третья часть
-        p1 = day = '';
-        p2 = month = '';
-        p3 = document.querySelector('#organization').value;
-        p4 = document.querySelector('#fio').value;
-        p5 = document.querySelector('#phone').value;
-        p6 = document.querySelector('#email').value;
+        let j35 =  selectPositionSignal();// Сигнализация положения
 
-        // ОБЩЕЕ
-        // (json = {
-        //     1: [j1, j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12, j13],
-        //     2: [h1, h2, h3, h4, h5, h6, h7, h8, h9, h10, h11, h12, h13, h14, h15, h16, h17, h18, h19, h20, h21, h22, h23],
-        //     3: [p1, p2, p3, p4, p5, p6],
-        // }),
-           
+        let j36 = ''; // Сигнал момэнт
+        if (document.querySelector("#signalMoment-1").checked) {j36 = 'Есть'}
+         else {j36 = 'Отсутствует'};
 
-        sendToServer();
+        let j37 = ''; // Дублирование RS485
+        if(j30 == 'Э18' || j30 == 'Э110'|| j30 == 'Э24' || j30 == 'Э26') {j37 = 'Есть'}
+        else {j37 = 'Отсутствует'};
+        
+        let j38 = 'Одиночные';
+        if (optForBu == 'Z' || optForBu =='W') {j38 = 'Сдвоенные'}; // Промежуточные выключатели
+        
+        let j39 = 'Одиночные'; // Моментные выключатели
+        if (optForBu == 'Z' || optForBu =='W') {j39 = 'Сдвоенные'}; // Моментные выключатели
+        
+        let j310 = 'Одиночные'; // Концевые выключатели
+        if (optForBu == 'Z' || optForBu =='W') {j310 = 'Сдвоенные'}; // Концевые выключатели
 
+        let j311 = ''; // Монтаж БУ
+        if(BoMark == 'Э1'){
+            j311 = 'Выносной';
+        } else {
+            j311 = 'На приводе';
+        };
+
+        // json3 = [j30, j31, j32, j33, j34, j35, j36, j37, j38, j39, j310, j311];
+
+        //json4
+        let j40 = $("input[name='connectionForEp4']:checked").val(); //Электрическое подключение (обозначение)
+        let j41 = document.querySelector("#cap > input[type=checkbox]").checked ? 'Есть' : 'Отсутствует'; //Защитный колпак
+        let j42 = document.querySelector("#color-1").checked ? 'Серый' : document.querySelector("#ralColor").value; //Цвет
+        let j43 = document.querySelector("#mechSelectorId > input[type=checkbox]") ? 'Есть' : 'Отсутствует'; //Механический селектор
+        let j44 = addOptions;//Доп опции 
+        let j45 = document.querySelector('#addReqarea').value ? document.querySelector('#addReqarea').value : ''; //Дополнительные требования
+        // json4 = [j40, j41, j42, j43, j44, j45];
+
+        //json5
+        let j50 = $("input[name='working-mode']:checked").closest('.form-check').find('.form-check-label').text(); //Назначение по режиму работы
+        let j51 = $("input[name='connectionForEp4']:checked").closest('.form-check').find('.form-check-label').text(); //Электрическое подключение (расшифровка)
+        let j52 = 'SIL-3'; // SIL
+        let j53 = $("input[name='special']:checked").closest('.form-check').find('.form-check-label').text(); //Специальное исполнение
+        let j54 = ''; //Масса
+        // json5 = [j50, j51, j52, j53, j54];
+
+        //json6
+        let j60 = '?'; //Номинальное давление
+        let j61 = $("input[name='connection-type']:checked").closest('.form-check').find('.form-check-label').text();//Тип присоединения выходного вала
+        let j62 = '?'; //Кабельные вводы
+        let j63 = '?'; //Штепсельные разъемы
+        let j64 = '?'; //Тип подводимых кабелей
+        let j65 = '380';
+        if (document.querySelector("#special-4").checked){
+            j65 = '660';
+        }
+    
+        // json6 = [j60, j61, j62, j63];
+        
+        //json7
+        let j70 = '';//Защита от коррозии
+        let j71 = '';//Ручной маховик
+        let j72 = '';//Наличие обогрев
+        let j73 = '';//Наличие типа функции
+        let j74 = '';//Функция при питании
+        let j75 = ''; //Условие для запуска функции
+        // json7 = [j70, j71, j72, j73, j74, j75];
+
+        console.log([j00, j01, j02, j03, j04, j05],
+            [j10, j11, j12, j13, j14, j15, j16, j17, j18],
+            [j20, j21, j22, j23, j24],
+            [j30, j31, j32, j33, j34, j35, j36, j37, j38, j39, j310, j311],
+            [j40, j41, j42, j43, j44, j45],
+            [j50, j51, j52, j53, j54],
+            [j60, j61, j62, j63, j64, j65],
+            [j70, j71, j72, j73, j74, j75]);
+
+
+        function DOCX(id) {
+            window.open(`https://emk.websto.pro/Tula/${id}`);
+        }
+        function EXEL(id) {
+            window.open(`https://emk.websto.pro/TulaEXEL/${id}`);
+        }
         function sendToServer() {
-            timer = 0;
-           let post =  fetch('/download', {
-               method: 'POST',
+            let post = fetch('/download', {
+                method: 'POST',
                 headers: { 'Content-Type': 'application/json;charset=utf-8' },
-               body: JSON.stringify({
-                   jsn1: [j1, j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12, j13],
-                   jsn2: [h1, h2, h3, h4, h5, h6, h7, h8, h9, h10, h11, h12, h13, h14, h15, h16, h17, h18, h19, h20, h21, h22, h23],
-                   jsn3: [p1, p2, p3, p4, p5, p6],
+                body: JSON.stringify({
+                    jsn0: [j00, j01, j02, j03, j04, j05],
+                    jsn1: [j10, j11, j12, j13, j14, j15, j16, j17, j18],
+                    jsn2: [j20, j21, j22, j23, j24],
+                    jsn3: [j30, j31, j32, j33, j34, j35, j36, j37, j38, j39, j310, j311],
+                    jsn4: [j40, j41, j42, j43, j44, j45],
+                    jsn5: [j50, j51, j52, j53, j54],
+                    jsn6: [j60, j61, j62, j63, j64, j65],
+                    jsn7: [j70, j71, j72, j73, j74, j75],
                 }),
             })
-            .then ((response) => response.json())
-            .then ((response) => window.open(`/Tula/${response.id}`));
+                .then((response) => response.json())
+                .then((data) => {
+                    let id = data.id;
+                    DOCX(id);
+                    EXEL(id);
+                });
         }
+        sendToServer();
     });
-    
+
     // сокрытия пункта кабельных вводов
     $('.cableField').on('change', function (e) {
         if (!document.querySelector('#cabels-1').checked) {
@@ -942,6 +1276,18 @@ $(document).ready(function () {
         vimuBlockModal.hide();
     });
 
+    $('#e1s-submit').on('click', function (e) {
+        $('#controle-blocks').val($('input.cur-e1s-value').val()).trigger('change');
+        e1SBlockModal.hide();
+    });
+
+    $('#e1SModal').on('change', function (e) {
+        let mod = $("input[name='Э1Sopt']:checked").val();
+        $('.cur-e1s-value')
+            .text(mod)
+            .val(mod);
+    });
+
     $('#e2-form input').on('change', function (e) {
         let mod = $("input[name='e2']:checked").val();
         $('.cur-e2-value').text(mod).val(mod);
@@ -949,7 +1295,7 @@ $(document).ready(function () {
 
     $('#clear-e2').on('click', function (e) {
         $('#e2-form')[0].reset();
-        $('.cur-e2-value').text('E21').val('E21');
+        $('.cur-e2-value').text('Э21').val('Э21');
     });
 
     $('#e2-submit').on('click', function (e) {
@@ -959,13 +1305,19 @@ $(document).ready(function () {
 
     // КНОПКИ В КОНФИГУРАТОР
     $('#controle-blocks-series').on('click', function (e) {
+        console.log($(this).val());
         // $("#controle-blocks").val('');
 
         if ($(this).val() === 'Э0') {
             $(document.querySelector('#controle-blocks')).show();
             $('#controle-blocks').val('Э01');
             $('#control-block-config').hide();
-        } else {
+        } 
+        else if
+            ($(this).val() === ''){
+                $('#control-block-config').hide();
+            }
+        else {
             $(document.querySelector('#controle-blocks')).hide();
             $('#control-block-config').show();
         }
@@ -982,291 +1334,619 @@ $(document).ready(function () {
         } else if (cbs === 'Э2') {
             e2BlockModal.show();
         }
+         else if (cbs === 'Э1S') {
+            e1SBlockModal.show();
+        }
     });
 
     $('#controle-blocks-series').on('change', function (e) {
         let cbs = $('#controle-blocks-series').val();
         let cb = $('#controle-blocks');
-        if (cbs === 'Э1' || cbs === 'Э2' || cbs === 'ВЭ' || cbs === '' || cbs === 'М1') {
+        if (cbs === 'Э1' || cbs === 'Э2' || cbs === 'ВЭ' || cbs === '' || cbs === 'М1'|| cbs === 'Э1S') {
             $(cb).val('');
         } else {
             cb.val(cbs);
         }
     });
-    // Открытия поля с чертежом
-    $('#drawing').on('change', function (e) {
-        if (document.querySelector('#drawing').value != 3) {
-            document.querySelector('#upload').classList.toggle('none');
-        }
-    });
+    // // Открытия поля с чертежом
+    // $('#drawing').on('change', function (e) {
+    //     if (document.querySelector('#drawing').value != 3) {
+    //         document.querySelector('#upload').classList.toggle('none');
+    //     }
+    // });
     // СТИЛЬ ДЛЯ ПОЛЯ С ДАННЫМИ
     $('.persInfo').on('change', function (e) {
-        if (document.querySelector('#organization').value != '' && document.querySelector('#fio').value != '' && document.querySelector('#phone').value != '' && document.querySelector('#email').value != '' ) {
+        if (document.querySelector('#organization').value != '' && document.querySelector('#fio').value != '' && document.querySelector('#phone').value != '' && document.querySelector('#email').value != '') {
             document.querySelector('.persInfo ').classList.remove('noReqValue');
             document.querySelector('.persInfo ').classList.add('ReqValueOk');
-        } else {document.querySelector('.persInfo ').classList.remove('ReqValueOk');
-        document.querySelector('.persInfo ').classList.add('noReqValue');}
+        } else {
+            document.querySelector('.persInfo ').classList.remove('ReqValueOk');
+            document.querySelector('.persInfo ').classList.add('noReqValue');
+        }
     });
     // СТИЛЬ ДЛЯ ПОЛЯ Со схемами
     $('№schemeFieldSet').on('change', function (e) {
-        if (document.querySelector('#organization').value != '' && document.querySelector('#fio').value != '' && document.querySelector('#phone').value != '' && document.querySelector('#email').value != '' ) {
+        if (document.querySelector('#organization').value != '' && document.querySelector('#fio').value != '' && document.querySelector('#phone').value != '' && document.querySelector('#email').value != '') {
             document.querySelector('.persInfo ').classList.remove('noReqValue');
             document.querySelector('.persInfo ').classList.add('ReqValueOk');
-        } else {document.querySelector('.persInfo ').classList.remove('ReqValueOk');
-        document.querySelector('.persInfo ').classList.add('noReqValue');}
-    });
-    // Стиль для модуля Модуль прямоходный
-    $('.tuMpField').on('change', function (e) {
-        if(document.querySelector("#tuMpCheck > input[type=checkbox]").checked)
-        {document.querySelector('.tuMpField ').classList.add('ReqValueOk');
-         document.querySelector('.tuMpField ').classList.remove('noReqValue');
-        }
-        else {document.querySelector('.tuMpField ').classList.add('noReqValue');
-         document.querySelector('.tuMpField ').classList.remove('ReqValueOk');
+        } else {
+            document.querySelector('.persInfo ').classList.remove('ReqValueOk');
+            document.querySelector('.persInfo ').classList.add('noReqValue');
         }
     });
-    // Стиль для модуля Наибольший ход, мм
-    $('#maxStepMp').on('change', function (e) {
-        if(document.querySelector("#maxStepMp").value != '') 
-        {document.querySelector('#maxStepMp ').classList.add('ReqValueOk');
-         document.querySelector('#maxStepMp ').classList.remove('noReqValue');
-        }
-        else 
-        {document.querySelector('#maxStepMp').classList.add('noReqValue');
-         document.querySelector('#maxStepMp').classList.remove('ReqValueOk');
-        }
-    });
-    // Стиль для модуля Номинальный крутящий момент
-    $('#roundMomentMp').on('change', function (e) {
-        if(document.querySelector("#roundMomentMp").value != undefined) 
-        {document.querySelector('.roundMomentMp').classList.add('ReqValueOk');
-         document.querySelector('.roundMomentMp').classList.remove('noReqValue');
-        }
-        else 
-        {document.querySelector('.roundMomentMp').classList.add('noReqValue');
-         document.querySelector('.roundMomentMp').classList.remove('ReqValueOk');
+
+
+    // Стиль для модуля требуемого время закрытия
+    $('#stepClose').on('change', function (e) {
+        if (document.querySelector('#closeNumbers').value != '' && document.querySelector('#rotation-frequency').value != '') {
+            console.log('uslovue');
+            document.querySelector('.closingTime').classList.remove('noReqValue');
+            document.querySelector('.closingTime').classList.add('ReqValueOk');
+        } else {
+            document.querySelector('.closingTime').classList.remove('ReqValueOk');
+            document.querySelector('.closingTime').classList.add('noReqValue');
         }
     });
-    // Стиль для модуля Крутящий момент привода
-    $('#tuMpField').on('change', function (e) {
-        if(document.querySelector("#roundMomentEngine").value != '') 
-        {document.querySelector('.roundMomentEngine').classList.add('ReqValueOk');
-         document.querySelector('.roundMomentEngine').classList.remove('noReqValue');
-        }
-        else 
-        {document.querySelector('.roundMomentEngine').classList.add('noReqValue');
-         document.querySelector('.roundMomentEngine').classList.remove('ReqValueOk');
-        }
-    });
-    // Стиль для модуля Диапазон усилий на штоке модуля при настройке привода на крутящий момент
-    $('#tuMpField').on('change', function (e) {
-        if(document.querySelector("#roundMomentInterval").value != '') 
-        {document.querySelector('.roundMomentInterval').classList.add('ReqValueOk');
-         document.querySelector('.roundMomentInterval').classList.remove('noReqValue');
-        }
-        else 
-        {document.querySelector('.roundMomentInterval').classList.add('noReqValue');
-         document.querySelector('.roundMomentInterval').classList.remove('ReqValueOk');
-        }
-    });
-    // Стиль для модуля Ход штока модуля за один оборот
-    $('#tuMpField').on('change', function (e) {
-        if(document.querySelector("#stepForOne").value != '') 
-        {document.querySelector('.stepForOne').classList.add('ReqValueOk');
-         document.querySelector('.stepForOne').classList.remove('noReqValue');
-        }
-        else 
-        {document.querySelector('.stepForOne').classList.add('noReqValue');
-         document.querySelector('.stepForOne').classList.remove('ReqValueOk');
-        }
-    });
-    // Стиль для модуля номинальное давление
-    $('#pressure').on('change', function (e) {
-        if(document.querySelector("#pressure").value != '') 
-        {document.querySelector('.pressure').classList.add('ReqValueOk');
-         document.querySelector('.pressure').classList.remove('noReqValue');
-        }
-        else 
-        {document.querySelector('.pressure').classList.add('noReqValue');
-         document.querySelector('.pressure').classList.remove('ReqValueOk');
-        }
-    });
-    // Стиль для модуля диаметр
-    $('#diameter').on('change', function (e) {
-        if(document.querySelector("#diameter").value != '') 
-        {document.querySelector('.diameter').classList.add('ReqValueOk');
-         document.querySelector('.diameter').classList.remove('noReqValue');
-        }
-        else 
-        {document.querySelector('.diameter').classList.add('noReqValue');
-         document.querySelector('.diameter').classList.remove('ReqValueOk');
-        }
-    });
-    // Стиль для модуля Время закрытия
-    $('.closingTime').on('change', function (e) {
-        if(document.querySelector("#closingTimeFrom").value!= '' && document.querySelector("#closingTimeTo").value!= ''  ) 
-        {document.querySelector('.closingTime').classList.add('ReqValueOk');
-         document.querySelector('.closingTime').classList.remove('noReqValue');
-        }
-        else 
-        {document.querySelector('.closingTime').classList.add('noReqValue');
-         document.querySelector('.closingTime').classList.remove('ReqValueOk');
-        }
-    });
-    // Стиль для модуля макс крут момент
-    $('.maxRMoment').on('change', function (e) {
-        if(document.querySelector("#maxRMoment").value!= '') 
-        {document.querySelector('.maxRMoment').classList.add('ReqValueOk');
-         document.querySelector('.maxRMoment').classList.remove('noReqValue');
-        }
-        else 
-        {document.querySelector('.maxRMoment').classList.add('noReqValue');
-         document.querySelector('.maxRMoment').classList.remove('ReqValueOk');
-        }
-    });
+    // // Стиль для модуля макс крут момент
+    // $('.maxRMoment').on('change', function (e) {
+    //     if (document.querySelector('#maxRMoment').value != '') {
+    //         document.querySelector('.maxRMoment').classList.add('ReqValueOk');
+    //         document.querySelector('.maxRMoment').classList.remove('noReqValue');
+    //     } else {
+    //         document.querySelector('.maxRMoment').classList.add('noReqValue');
+    //         document.querySelector('.maxRMoment').classList.remove('ReqValueOk');
+    //     }
+    // });
     // Стиль для модуля макс крут момент на закрывание
-    $('.maxRMoment2').on('change', function (e) {
-        if(document.querySelector("#maxRMoment2").value!= '') 
-        {document.querySelector('.maxRMoment2').classList.add('ReqValueOk');
-         document.querySelector('.maxRMoment2').classList.remove('noReqValue');
-        }
-        else 
-        {document.querySelector('.maxRMoment2').classList.add('noReqValue');
-         document.querySelector('.maxRMoment2').classList.remove('ReqValueOk');
-        }
-    });
+    // $('.maxRMoment2').on('change', function (e) {
+    //     if (document.querySelector('#maxRMoment2').value != '') {
+    //         document.querySelector('.maxRMoment2').classList.add('ReqValueOk');
+    //         document.querySelector('.maxRMoment2').classList.remove('noReqValue');
+    //     } else {
+    //         document.querySelector('.maxRMoment2').classList.add('noReqValue');
+    //         document.querySelector('.maxRMoment2').classList.remove('ReqValueOk');
+    //     }
+    // });
     // Стиль для блока типа вала
-    $('.valType').on('change', function (e) {
-        if(document.querySelector("#valType").value!= '' && document.querySelector("#outStock").value!= '' && document.querySelector("#dStock").value!= '') 
-        {document.querySelector('.valType').classList.add('ReqValueOk');
-         document.querySelector('.valType').classList.remove('noReqValue');
-        }
-        else 
-        {document.querySelector('.valType').classList.add('noReqValue');
-         document.querySelector('.valType').classList.remove('ReqValueOk');
-        }
-    });
+    // $('.valType').on('change', function (e) {
+    //     if (document.querySelector('#valType').value != '' && document.querySelector('#outStock').value != '' && document.querySelector('#dStock').value != '') {
+    //         document.querySelector('.valType').classList.add('ReqValueOk');
+    //         document.querySelector('.valType').classList.remove('noReqValue');
+    //     } else {
+    //         document.querySelector('.valType').classList.add('noReqValue');
+    //         document.querySelector('.valType').classList.remove('ReqValueOk');
+    //     }
+    // });
     // Стиль для блока обороты для закрытия
     $('.closeNumbers').on('change', function (e) {
-        if(document.querySelector("#closeNumbers").value!= '') 
-        {document.querySelector('.closeNumbers').classList.add('ReqValueOk');
-         document.querySelector('.closeNumbers').classList.remove('noReqValue');
-        }
-        else 
-        {document.querySelector('.closeNumbers').classList.add('noReqValue');
-         document.querySelector('.closeNumbers').classList.remove('ReqValueOk');
-        }
-    });
-    // Стиль для блока рабочей среды
-    $('.working-env').on('change', function (e) {
-        if(document.querySelector("#working-env").value!= '') 
-        {document.querySelector('.working-env').classList.add('ReqValueOk');
-         document.querySelector('.working-env').classList.remove('noReqValue');
-        }
-        else 
-        {document.querySelector('.working-env').classList.add('noReqValue');
-         document.querySelector('.working-env').classList.remove('ReqValueOk');
+        if (document.querySelector('#closeNumbers').value != '') {
+            document.querySelector('.closeNumbers').classList.add('ReqValueOk');
+            document.querySelector('.closeNumbers').classList.remove('noReqValue');
+        } else {
+            document.querySelector('.closeNumbers').classList.add('noReqValue');
+            document.querySelector('.closeNumbers').classList.remove('ReqValueOk');
         }
     });
+    // // Стиль для блока рабочей среды
+    // $('.working-env').on('change', function (e) {
+    //     if (document.querySelector('#working-env').value != '') {
+    //         document.querySelector('.working-env').classList.add('ReqValueOk');
+    //         document.querySelector('.working-env').classList.remove('noReqValue');
+    //     } else {
+    //         document.querySelector('.working-env').classList.add('noReqValue');
+    //         document.querySelector('.working-env').classList.remove('ReqValueOk');
+    //     }
+    // });
     // Стиль для блока установки
     $('.placeForEnv').on('change', function (e) {
-        if(document.querySelector("#placeForEnv-1").checked || document.querySelector("#placeForEnv-2").checked) 
-        {document.querySelector('.placeForEnv').classList.add('ReqValueOk');
-         document.querySelector('.placeForEnv').classList.remove('noReqValue');
-        }
-        else 
-        {document.querySelector('.placeForEnv').classList.add('noReqValue');
-         document.querySelector('.placeForEnv').classList.remove('ReqValueOk');
+        if (document.querySelector('#placeForEnv-1').checked || document.querySelector('#placeForEnv-2').checked) {
+            document.querySelector('.placeForEnv').classList.add('ReqValueOk');
+            document.querySelector('.placeForEnv').classList.remove('noReqValue');
+        } else {
+            document.querySelector('.placeForEnv').classList.add('noReqValue');
+            document.querySelector('.placeForEnv').classList.remove('ReqValueOk');
         }
     });
     // Тип блока концевых выключателей
     $('.typeEndSwich').on('change', function (e) {
-        if(document.querySelector("#typeEndSwich-1").checked || document.querySelector("#typeEndSwich-2").checked) 
-        {document.querySelector('.typeEndSwich').classList.add('ReqValueOk');
-         document.querySelector('.typeEndSwich').classList.remove('noReqValue');
-        }
-        else 
-        {document.querySelector('.typeEndSwich').classList.add('noReqValue');
-         document.querySelector('.typeEndSwich').classList.remove('ReqValueOk');
+        if (document.querySelector('#typeEndSwich-1').checked || document.querySelector('#typeEndSwich-2').checked) {
+            document.querySelector('.typeEndSwich').classList.add('ReqValueOk');
+            document.querySelector('.typeEndSwich').classList.remove('noReqValue');
+        } else {
+            document.querySelector('.typeEndSwich').classList.add('noReqValue');
+            document.querySelector('.typeEndSwich').classList.remove('ReqValueOk');
         }
     });
     // Тип блока управления привода
     $('.commandBlockType').on('change', function (e) {
-        if(document.querySelector("#commandBlockType-1").checked || document.querySelector("#commandBlockType-2").checked) 
-        {document.querySelector('.commandBlockType').classList.add('ReqValueOk');
-         document.querySelector('.commandBlockType').classList.remove('noReqValue');
-        }
-        else 
-        {document.querySelector('.commandBlockType').classList.add('noReqValue');
-         document.querySelector('.commandBlockType').classList.remove('ReqValueOk');
+        if (document.querySelector('#commandBlockType-1').checked || document.querySelector('#commandBlockType-2').checked) {
+            document.querySelector('.commandBlockType').classList.add('ReqValueOk');
+            document.querySelector('.commandBlockType').classList.remove('noReqValue');
+        } else {
+            document.querySelector('.commandBlockType').classList.add('noReqValue');
+            document.querySelector('.commandBlockType').classList.remove('ReqValueOk');
         }
     });
     // Сигнализация положения
     $('.signal').on('change', function (e) {
-        if(document.querySelector("#signal").value != '') 
-        {document.querySelector('.signal').classList.add('ReqValueOk');
-         document.querySelector('.signal').classList.remove('noReqValue');
-        }
-        else 
-        {document.querySelector('.signal').classList.add('noReqValue');
-         document.querySelector('.signal').classList.remove('ReqValueOk');
+        if (document.querySelector('#signal').value != '') {
+            document.querySelector('.signal').classList.add('ReqValueOk');
+            document.querySelector('.signal').classList.remove('noReqValue');
+        } else {
+            document.querySelector('.signal').classList.add('noReqValue');
+            document.querySelector('.signal').classList.remove('ReqValueOk');
         }
     });
-    // Сигналы дист управления 
+    // Сигналы дист управления
     $('.commandSignal').on('change', function (e) {
-        if(document.querySelector("#commandSignal").value != '') 
-        {document.querySelector('.commandSignal').classList.add('ReqValueOk');
-         document.querySelector('.commandSignal').classList.remove('noReqValue');
-        }
-        else 
-        {document.querySelector('.commandSignal').classList.add('noReqValue');
-         document.querySelector('.commandSignal').classList.remove('ReqValueOk');
+        if (document.querySelector('#commandSignal').value != '') {
+            document.querySelector('.commandSignal').classList.add('ReqValueOk');
+            document.querySelector('.commandSignal').classList.remove('noReqValue');
+        } else {
+            document.querySelector('.commandSignal').classList.add('noReqValue');
+            document.querySelector('.commandSignal').classList.remove('ReqValueOk');
         }
     });
-    // Сигнал момент 4-20 
+    // Сигнал момент 4-20
     // $('.signalMoment').on('change', function (e) {
-        
-    //     if(document.querySelector("#signalMoment-1").checked) 
+
+    //     if(document.querySelector("#signalMoment-1").checked)
     //     {document.querySelector('.signalMoment').classList.add('ReqValueOk');
     //      document.querySelector('.signalMoment').classList.remove('optionalField');
     //     }
-    //     else 
+    //     else
     //     {document.querySelector('.signalMoment').classList.add('optionalField');
     //      document.querySelector('.signalMoment').classList.remove('ReqValueOk');
     //     }
     // });
     // // Дублирование шины
     // $('.tire').on('change', function (e) {
-    //     if(document.querySelector("#tire-1").checked) 
+    //     if(document.querySelector("#tire-1").checked)
     //     {document.querySelector('.tire').classList.add('ReqValueOk');
     //      document.querySelector('.tire').classList.remove('optionalField');
     //     }
-    //     else 
+    //     else
     //     {document.querySelector('.tire').classList.add('optionalField');
     //      document.querySelector('.tire').classList.remove('ReqValueOk');
     //     }
     // });
     // Кабельные вводы
-    $('.cableField').on('change', function (e) {
-        if(document.querySelector("#cabels-2").checked || document.querySelector("#cabelsInput-1").value != '') 
-        {document.querySelector('.cableField').classList.add('ReqValueOk');
-         document.querySelector('.cableField').classList.remove('noReqValue');
-        }
-        else 
-        {document.querySelector('.cableField').classList.add('noReqValue');
-         document.querySelector('.cableField').classList.remove('ReqValueOk');
+    // $('.cableField').on('change', function (e) {
+    //     if (document.querySelector('#cabels-2').checked || document.querySelector('#cabelsInput-1').value != '') {
+    //         document.querySelector('.cableField').classList.add('ReqValueOk');
+    //         document.querySelector('.cableField').classList.remove('noReqValue');
+    //     } else {
+    //         document.querySelector('.cableField').classList.add('noReqValue');
+    //         document.querySelector('.cableField').classList.remove('ReqValueOk');
+    //     }
+    // });
+    // // Штепсельные разъемы
+    // $('.stepseField').on('change', function (e) {
+    //     if (!document.querySelector('#stepse-1').checked || (document.querySelector('#inputStepse').value != '' && document.querySelector('#inputTypeStepse').value != '')) {
+    //         document.querySelector('.stepseField').classList.add('ReqValueOk');
+    //         document.querySelector('.stepseField').classList.remove('noReqValue');
+    //     } else {
+    //         document.querySelector('.stepseField').classList.add('noReqValue');
+    //         document.querySelector('.stepseField').classList.remove('ReqValueOk');
+    //     }
+    // });
+    // // Коррозийная защита
+    // $('#corrosionProtection').on('change', function (e) {
+    //     if ($("input[name='corrosionProtection']:checked").val()) {
+    //         document.querySelector('.corrosionProtection').classList.add('ReqValueOk');
+    //         document.querySelector('.corrosionProtection').classList.remove('noReqValue');
+    //     } else {
+    //         document.querySelector('.corrosionProtection').classList.add('noReqValue');
+    //         document.querySelector('.corrosionProtection').classList.remove('ReqValueOk');
+    //     }
+    // });
+    // // концевые выключатели
+    // $('#endTogglers').on('change', function (e) {
+    //     if ($("input[name='endTogglers']:checked").val()) {
+    //         document.querySelector('.endTogglers').classList.add('ReqValueOk');
+    //         document.querySelector('.endTogglers').classList.remove('noReqValue');
+    //     } else {
+    //         document.querySelector('.endTogglers').classList.add('noReqValue');
+    //         document.querySelector('.endTogglers').classList.remove('ReqValueOk');
+    //     }
+    // });
+    // промеж выключатели
+    // $('#spaceTogglers').on('change', function (e) {
+    //     if ($("input[name='spaceTogglers']:checked").val()) {
+    //         document.querySelector('.spaceTogglers').classList.add('ReqValueOk');
+    //         document.querySelector('.spaceTogglers').classList.remove('noReqValue');
+    //     } else {
+    //         document.querySelector('.spaceTogglers').classList.add('noReqValue');
+    //         document.querySelector('.spaceTogglers').classList.remove('ReqValueOk');
+    //     }
+    // });
+    // // момент выключатели
+    // $('#momentTogglers').on('change', function (e) {
+    //     if ($("input[name='momentTogglers']:checked").val()) {
+    //         document.querySelector('.momentTogglers').classList.add('ReqValueOk');
+    //         document.querySelector('.momentTogglers').classList.remove('noReqValue');
+    //     } else {
+    //         document.querySelector('.momentTogglers').classList.add('noReqValue');
+    //         document.querySelector('.momentTogglers').classList.remove('ReqValueOk');
+    //     }
+    // });
+    // Сигнализация включения ручного маховика
+    // $('#handMach').on('change', function (e) {
+    //     if ($("input[name='handMach']:checked").val()) {
+    //         document.querySelector('.handMach').classList.add('ReqValueOk');
+    //         document.querySelector('.handMach').classList.remove('noReqValue');
+    //     } else {
+    //         document.querySelector('.handMach').classList.add('noReqValue');
+    //         document.querySelector('.handMach').classList.remove('ReqValueOk');
+    //     }
+    // });
+    // Питание
+    // $('#heating').on('change', function (e) {
+    //     if ($("input[name='heating']:checked").val()) {
+    //         document.querySelector('.heating').classList.add('ReqValueOk');
+    //         document.querySelector('.heating').classList.remove('noReqValue');
+    //     } else {
+    //         document.querySelector('.heating').classList.add('noReqValue');
+    //         document.querySelector('.heating').classList.remove('ReqValueOk');
+    //     }
+    // });
+    // Монтаж
+    // $('#montage').on('change', function (e) {
+    //     if ($("input[name='montage']:checked").val()) {
+    //         document.querySelector('.montage').classList.add('ReqValueOk');
+    //         document.querySelector('.montage').classList.remove('noReqValue');
+    //     } else {
+    //         document.querySelector('.montage').classList.add('noReqValue');
+    //         document.querySelector('.montage').classList.remove('ReqValueOk');
+    //     }
+    // });
+    // // Функция должна выполняться
+    // $('#functionGo').on('change', function (e) {
+    //     if ($("input[name='functionGo']:checked").val()) {
+    //         document.querySelector('.functionGo').classList.add('ReqValueOk');
+    //         document.querySelector('.functionGo').classList.remove('noReqValue');
+    //     } else {
+    //         document.querySelector('.functionGo').classList.add('noReqValue');
+    //         document.querySelector('.functionGo').classList.remove('ReqValueOk');
+    //     }
+    // });
+    // // Условие для запуска
+    // $('#functionStartIf').on('change', function (e) {
+    //     if ($("input[name='functionStartIf']:checked").val()) {
+    //         document.querySelector('.functionStartIf').classList.add('ReqValueOk');
+    //         document.querySelector('.functionStartIf').classList.remove('noReqValue');
+    //     } else {
+    //         document.querySelector('.functionStartIf').classList.add('noReqValue');
+    //         document.querySelector('.functionStartIf').classList.remove('ReqValueOk');
+    //     }
+    // });
+    // // SIL
+    // $('#SIL').on('change', function (e) {
+    //     if ($("input[name='SIL']:checked").val()) {
+    //         document.querySelector('.SIL').classList.add('ReqValueOk');
+    //         document.querySelector('.SIL').classList.remove('noReqValue');
+    //     } else {
+    //         document.querySelector('.SIL').classList.add('noReqValue');
+    //         document.querySelector('.SIL').classList.remove('ReqValueOk');
+    //     }
+    // });
+    // // esdType
+    // $('#esdType').on('change', function (e) {
+    //     if ($("input[name='esdType']:checked").val() == '1' || $("input[name='esdType']:checked").val() == '2') {
+    //         document.querySelector('.esdType').classList.add('ReqValueOk');
+    //         document.querySelector('.esdType').classList.remove('noReqValue');
+    //         {
+    //             document.querySelector('#inputForEsdType3').setAttribute('disabled', true);
+    //             document.querySelector('#inputForEsdType3').value = '';
+    //         }
+    //     }
+    //     if ($("input[name='esdType']:checked").val() == '3') {
+    //         document.querySelector('#inputForEsdType3').removeAttribute('disabled');
+    //         document.querySelector('.esdType').classList.remove('ReqValueOk');
+    //         document.querySelector('.esdType').classList.add('noReqValue');
+    //         if (document.querySelector('#inputForEsdType3').value !== '') {
+    //             document.querySelector('.esdType').classList.add('ReqValueOk');
+    //             document.querySelector('.esdType').classList.remove('noReqValue');
+    //         }
+    //     }
+    // });
+    // кол-во приводов
+    $('#numbersOfEp').on('change', function (e) {
+        if (document.querySelector('.numbersOfEp').value !== '') {
+            document.querySelector('.numbersOfEp').classList.add('ReqValueOk');
+            document.querySelector('.numbersOfEp').classList.remove('noReqValue');
+        } else {
+            document.querySelector('.numbersOfEp').classList.add('noReqValue');
+            document.querySelector('.numbersOfEp').classList.remove('ReqValueOk');
         }
     });
-    // Штепсельные разъемы
-    $('.stepseField').on('change', function (e) {
-        if(!document.querySelector("#stepse-1").checked || (document.querySelector("#inputStepse").value != '' && document.querySelector("#inputTypeStepse").value != '') ) 
-        {document.querySelector('.stepseField').classList.add('ReqValueOk');
-         document.querySelector('.stepseField').classList.remove('noReqValue');
+
+    // ОБРАБОТКА ОПРЕДЕЛЕНИЯ БЛОКА УПРАВЛЕНИЯ
+    function checkCommandBlock() {
+        let m1 = document.querySelector('#m1-1').checked ? 'Сигнализация о двух промежуточных положениях выходного вала посредством двух путевых промежуточных выключателей; ' : '';
+        let m2 = document.querySelector('#m1-2').checked ? 'Сигнализация о текущем положении выходного вала посредством изменения сопротивления потенциометра; ' : '';
+        let m3 = document.querySelector('#m1-3').checked ? 'Сигнализация о текущем положении выходного вала посредством токового сигнала, изменяющегося пропорционально пути, пройденному выходным валом привода; ' : '';
+        let m4 = document.querySelector('#m1-4').checked
+            ? 'Сигнализация факта вращения выходного вала привода посредством замыкания и размыкания сухих контактов выключателя (блинкера) при изменении положения входного путевого вала блока (1 импульс на 1 оборот выходного вала привода (оснащение блока управления блинкером — по отдельному заказу)); '
+            : '';
+        let m5 = document.querySelector('#m1-5').checked ? 'Сигнализация о достигаемых положениях и моментах посредством 4 контактных микровыключателей (код z5=0) или 3-контактных микровыключателей (код z5=1); ' : '';
+        let m6 = document.querySelector('#m1-6').checked
+            ? 'Блокировка сигнала превышения заданного при настройке блока значения крутящего момента привода (байпас сигнала превышения момента) в начальный период движения из состояния, соответствующего открытому и закрытому состоянию арматуры (с раздельной настройкой для движения на открытие и на закрытие арматуры), на протяжении заданного при настройке блока пути, проходимого выходным валом привода; '
+            : '';
+        let m7 = document.querySelector('#m1-7').checked
+            ? 'Блокировка возможности повторного включения двигателя привода по электрической цепи, содержащей нормально замкнутый контакт моментного выключателя, размыканием которого был выключен двигатель привода при достижении крутящего момента, заданного при настройке блока (фиксация моментных выключателей); '
+            : '';
+        let m8 = 'Верхний предел настройки путевых выключателей в оборотах выходного вала:' + ' ' + document.querySelector('#upper-limitForM1').value;
+
+        let base = document.querySelector('#controle-blocks').value;
+        switch (base) {
+            case 'Э11':
+                return 'Базовый набор функций';
+            case 'Э12':
+                return '1)Базовый набор функций 2)Передача информации о положении выходного звена привода посредством токового сигнала (4–20 мА)';
+            case 'Э13':
+                return '1)Базовый набор функций 2)Передача информации о положении выходного звена привода посредством токового сигнала (4–20 мА)  3)Передача текущего значения движущего момента на выходном звене привода посредством токового сигнала (4–20 мА).';
+            case 'Э14':
+                return '1)Базовый набор функций 2)Диагностирование отказов опциональных модулей.  3)Автоматический выбор активного интерфейса дистанционного управления.';
+            case 'Э15':
+                return '1)Базовый набор функций 2)Диагностирование отказов опциональных модулей.  3)Автоматический выбор активного интерфейса дистанционного управления.  4) Передача информации о положении выходного звена привода посредством токового сигнала (4–20 мА)  5)Передача текущего значения движущего момента на выходном звене привода посредством токового сигнала (4–20 мА).';
+            case 'Э16':
+                return '1)Базовый набор функций 2)Аналоговое управление приводом — прием от дистанционного пульта и отработка токового сигнала (4–20 мА) задания положения выходного звена привода с контролем наличия связи  3)Диагностирование отказов опциональных модулей.  4)Автоматический выбор активного интерфейса дистанционного управления.';
+            case 'Э17':
+                return '1)Базовый набор функций 2)Передача информации о положении выходного звена привода посредством токового сигнала (4–20 мА)  3)Передача текущего значения движущего момента на выходном звене привода посредством токового сигнала (4–20 мА).  4) Аналоговое управление приводом — прием от дистанционного пульта и отработка токового сигнала (4–20 мА) задания положения выходного звена привода с контролем наличия связи  5) Диагностирование отказов опциональных модулей.  6)Автоматический выбор активного интерфейса дистанционного управления.';
+            case 'Э18':
+                return '1)Базовый набор функций 2)Цифровое управление и настройка привода с дублированием каналов связи посредством цифрового канала связи, интерфейс RS485, протокол обмена — MODBUS RTU  3)Диагностирование отказов опциональных модулей.   4)Автоматический выбор активного интерфейса дистанционного управления.';
+            case 'Э19':
+                return '1)Базовый набор функций 2)Цифровое управление приводом посредством цифрового канала связи, интерфейс RS485, протокол обмена — PROFIBUS DP  3)Диагностирование отказов опциональных модулей.   4)Автоматический выбор активного интерфейса дистанционного управления.';
+            case 'Э110':
+                return '1)Базовый набор функций 2)Цифровое управление приводом с дублированием каналов связи посредством цифрового канала связи, интерфейс RS485, протокол обмена — PROFIBUS DP.  3)Диагностирование отказов опциональных модулей.   4)Автоматический выбор активного интерфейса дистанционного управления.';
+            case 'Э22':
+                return 'Передача информации о положении выходного вала привода посредством токового сигнала (4-20 мА или 0-5 мА)';
+            case 'Э23':
+                return 'Передача информации о состоянии и настройках привода, изменение настроек привода посредством цифрового канала связи, интерфейс RS485, протокол обмена - MODBUS RTU';
+            case 'Э24':
+                return 'Передача информации о состоянии и настройках привода, изменение настроек привода посредством дублированного цифрового канала связи, интерфейс RS485, протокол обмена - MODBUS RTU';
+            case 'Э25':
+                return 'Передача информации о состоянии привода посредством цифрового канала связи, интерфейс RS485, протокол обмена - PROFIBUS DP';
+            case 'Э26':
+                return 'Передача информации о состоянии привода посредством дублированного цифрового канала связи, интерфейс RS485, протокол обмена - PROFIBUS DP';
+            case '':
+                return 'Пропущен конфигуратор';
+            case 'Э1':
+                return 'Пропущен конфигуратор';
+            case 'М1':
+                return 'Пропущен конфигуратор';
+            case 'Э2':
+                return 'Пропущен конфигуратор';
+            case 'Э01':
+                return 'Электронный модуль датчиков';
+            case 'Э0':
+                return 'Электронный модуль датчиков';
+            case 'Э1S1':
+                return 'Базовый набор функций. Цифровое управление и настройка привода посредством цифрового канала связи, интерфейс RS485, протокол обмена - MODBUS';
+            case 'Э1S2':
+                return 'Базовый набор функций. Цифровое управление и приводом посредством цифрового канала связи, интерфейс RS485, протокол обмена - PROFIBUS';
+            default:
+                console.log(base);
+                return (g6 = m1 + m2 + m3 + m4 + m5 + m6 + m7 + m8);
         }
-        else 
-        {document.querySelector('.stepseField').classList.add('noReqValue');
-         document.querySelector('.stepseField').classList.remove('ReqValueOk');
+    }
+
+
+// СТИЛИ ДЛЯ РЕЖИМА РАБОТЫ
+        $('.timeMode').on('change', function (e) {
+            if ($("input[name='working-mode']:checked")) 
+        {
+            document.querySelector('.timeMode').classList.add('ReqValueOk');
+            document.querySelector('.timeMode').classList.remove('noReqValue');
+        } 
+        else {
+            document.querySelector('.timeMode').classList.add('noReqValue');
+            document.querySelector('.timeMode').classList.remove('ReqValueOk');
+
+        }});
+        
+// СТИЛИ ДЛЯ РЕЖИМА РАБОТЫ
+        $('#upperLimitInM').on('change', function (e) {
+            if (document.querySelector("#upper-limitForM1").value != '') 
+        {
+            document.querySelector('#upperLimitInM').classList.add('ReqValueOk');
+            document.querySelector('#upperLimitInM').classList.remove('noReqValue');
+        } 
+        else {
+            document.querySelector('#upperLimitInM').classList.add('noReqValue');
+            document.querySelector('#upperLimitInM').classList.remove('ReqValueOk');
+        }});
+        // Ограничение конфигуратора при пропуске верхнего предела
+        $('#m1-form').on('change', function (e) {
+            if (document.querySelector("#upper-limitForM1").value == '') 
+        {
+            document.querySelector("#m1-submit").disabled = true;
+        } 
+        else {            
+            document.querySelector("#m1-submit").disabled = false;
+        }});
+
+// Открытие пункта виму эиму для блока управления
+    $('#control-block-fieldset').on('change', function (e) {
+            if ($('#controle-blocks-series').val()=='Э1') 
+        {
+            document.querySelector('.commandBlockType').style.display = 'block';
+        } 
+        else {
+            document.querySelector('.commandBlockType').classList.remove('ReqValueOk');
+            document.querySelector('.commandBlockType').classList.add('noReqValue');
+            document.querySelector("#commandBlockType-2").checked = false;
+            document.querySelector("#commandBlockType-1").checked = false;
+            document.querySelector('.commandBlockType').style.display = 'none';
         }
     });
+// Открытие доп оснащения для блока управления при Э1
+    $('#control-block-fieldset').on('change', function (e) {
+            if ($('#controle-blocks-series').val()=='Э1') 
+        {
+            document.querySelector("#control-block-optionsset").style.display = 'block';
+            document.querySelector("#control-block-optionssetCheckBox").style.display = 'block';
+        } 
+        else {
+            $('#controle-blocks-options').val('noValue')
+            document.querySelector("#PanelOption").checked = false;
+            document.querySelector("#tOption").checked = false;
+            document.querySelector("#bluetoothOption").checked = false;
+            document.querySelector("#regOption").checked = false;
+            document.querySelector("#control-block-optionsset").style.display = 'none';
+            document.querySelector("#control-block-optionssetCheckBox").style.display = 'none';
+            document.querySelector("#control-block-optionsset").classList.remove('ReqValueOk');
+            document.querySelector("#control-block-optionsset").classList.add('noReqValue');
+        }
+    });
+
+// стили оснащения для блока управления при Э1
+    $('#control-block-optionsset').on('change', function (e) {
+            if ($('#controle-blocks-options option:selected').val() !=='noValue') 
+        {
+            document.querySelector("#control-block-optionsset").classList.add('ReqValueOk');
+            document.querySelector("#control-block-optionsset").classList.remove('noReqValue');
+        } 
+        else {
+            document.querySelector("#control-block-optionsset").classList.remove('ReqValueOk');
+            document.querySelector("#control-block-optionsset").classList.add('noReqValue');
+        }
+    });
+    // // Формула для требуемого времени закрытия
+    // $(document).on('change', function (e) {
+    //    x = document.querySelector("#closingTime");
+    //    closNumbers = document.querySelector("#closeNumbers").value;
+    //    rotAtMin = document.querySelector("#rotation-frequency").value;
+    //    if(closNumbers && rotAtMin ) {x.value = Math.round(closNumbers/(rotAtMin/60))}
+    // });
+
+    // // ОТОБРАЖЕНИЕ пункта защиты IP54
+    // $('#executionWrapLegend').on('change', function (e) {
+    //     if(document.querySelector("#execution-Н").checked){
+    //     document.querySelector("#hProtection").style.display = 'block';
+    // }
+    // else {document.querySelector("#hProtection").style.display = 'none'}
+    //  });
+    
+        function selectRemoteSignal() {
+
+        let BoMark = document.querySelector("#controle-blocks-series").value;
+        optForBu = $('#control-block-optionsset option:selected').val() != 'noValue' ? $('#control-block-optionsset option:selected').val() : '';
+
+        if(BoMark == 'Э0' || 'Э1S'){
+          return remoteSignal = 'Привод с шестью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 24 В';
+        }
+        else if (BoMark == 'Э1') {
+            if(optForBu == 'X'){
+                return remoteSignal = 'Привод с шестью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 220 В;'
+            }
+            if(optForBu == 'Y'){
+                return remoteSignal = 'Привод с восемью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 24 В;'
+            }
+            if(optForBu == 'Z'){
+                return remoteSignal = 'Привод с двенадцатью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 24 В;'
+            }
+            if(optForBu == 'V'){
+                return remoteSignal = 'Привод с восемью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 220 В;'
+            }
+            if(optForBu == 'W'){
+                return remoteSignal = 'Привод с двенадцатью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 220 В;'
+            }
+            else {
+                return remoteSignal = 'Привод с шестью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 24 В;'
+            }
+        }
+        else {
+            return remoteSignal = 'Пункт только для ЭИМУ или ВИМУ';
+        }
+     } 
+
+        function selectPositionSignal() {
+
+        let BoMark = document.querySelector("#controle-blocks").value;
+
+        if(BoMark == 'Э11'){
+          return positionSignal = 'отсутсвуют';
+        }
+        else if (BoMark == 'Э12' || BoMark == 'Э13'|| BoMark == 'Э16'|| BoMark == 'Э17') {
+            return positionSignal = '4–20 мА';
+            }
+        else if (BoMark == 'Э14' || BoMark == 'Э18' || BoMark == 'Э01'|| BoMark == 'Э1S1') {
+            return positionSignal = 'RS485 Modbus';
+            }
+        else if (BoMark == 'Э15') {
+            return positionSignal = '4–20 мА и RS485 Modbus';}
+        else if (BoMark == 'Э19' || BoMark == 'Э110' || BoMark == 'Э1S2') {
+            return positionSignal = 'Profibus DP';
+            }
+        else if (BoMark == 'Э22') {
+            return positionSignal = '4-20мА';
+            }
+        else if (BoMark == 'Э23' || BoMark == 'Э24') {
+            return positionSignal = 'RS485 Profibus';
+            }
+        else if (BoMark == 'Э25' || BoMark == 'Э26') {
+            return positionSignal = 'RS485 Profibus';
+        }
+        else if (document.querySelector("#m1-2").checked){
+            return positionSignal = 'Потенциометр 100 Ом';
+            }
+        else if(document.querySelector("#m1-3").checked){
+            return positionSignal = '4-20мА';
+            }
+            else {
+                return positionSignal ='отсутсвуют';
+            }
+        }
+// ОТКРЫТИЕ ПО ШАГАМ
+$('#step-1').on('change', function (e) {
+    if($("input[name='working-mode']:checked").val() != undefined && $("input[name='execution']:checked").val() != undefined){
+$('#step-2').show();}
+else { $('#step-2').hide();}
+});
+$('#step-2').on('change', function (e) {
+    if($("input[name='connection-type']:checked").val() != undefined && document.querySelector("#upper-limit") != '' && document.querySelector("#rotation-frequency").value != '')
+    {
+    $('#step-3').show();
+    }
+    else { $('#step-3').hide();}
+});
+$('#step-3').on('change', function (e) {
+    if($("input[name='constructive-scheme']:checked").val() != '1' && document.querySelector("#closeNumbers").value && document.querySelector("#flange").value)
+    {$('#step-4').show();}
+    else { $('#step-4').hide();}
+});
+$('#step-4').on('change', function (e) {
+if(document.querySelector("#control-block-fieldset").classList.contains('ReqValueOk') && document.querySelector("#climatic-modification").value != '')
+{$('#step-5').show();}
+else { $('#step-5').hide();}
+});
+$('#step-5').on('change', function (e) {
+    if($("input[name='rotating']:checked").val() != undefined && $("input[name='protection']:checked").val()!= undefined)
+    {$('#step-6').show();}
+    else { $('#step-6').hide();}
+});
+$('#step-6').on('change', function (e) {
+    if($("input[name='color']:checked").val() != undefined && $("input[name='connectionForEp4']:checked").val()!= undefined)
+    {$('#step-7').show();}
+});
+$(document).on('change', function (e) {
+    if($("input[name='special']:checked").val() != undefined){
+    $("input[name='special']").closest('fieldset').removeClass('noReqValue');
+    $("input[name='special']").closest('fieldset').addClass('ReqValueOk');
+    $('#step-8').show();}
+    else { $('#step-8').hide();}
+});
+$('#step-8').on('change', function (e) {
+    if($("input[name='placeForEnv']:checked").val() != undefined)
+    {$('#step-9').show();}
+    else { $('#step-9').hide();}
+});
+$('#step-9').on('change', function (e) {
+    if(document.querySelector("#organization").value != '' && document.querySelector("#fio").value != '' && document.querySelector("#phone").value != '' && document.querySelector("#email").value != '' && document.querySelector("#numbersOfEp").value != '')
+    {$('#step-10').show();}
+    else { $('#step-10').hide();}
+});
 
 });
