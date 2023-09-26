@@ -493,7 +493,6 @@ $('#flange').on('change', function (e) {
     let m2BlockModal = new bootstrap.Modal($('#block-configure-m2'));
     let vimuBlockModal = new bootstrap.Modal($('#block-configure-e1'));
     let e2BlockModal = new bootstrap.Modal($('#block-configure-e2'));
-    let e1SBlockModal = new bootstrap.Modal($('#e1SModal'));
 
     $('.ch-upper-limit').on('change', function (e) {
         let connectionType = $("input[name='connection-type']:checked").val();
@@ -662,30 +661,14 @@ $('#flange').on('change', function (e) {
                     document.querySelector("#eightCon").style.display = 'flow';
                 }
 
-         series = {
-            ep4: {
-                Э0: 'Электронный модуль датчиков Э0',
-                Э1: 'Встроенный интеллектуальный модуль управления  с пускателем Э1',
-                Э1S: 'Электронный интеллектуальный модуль управления для искробезопасных приводов Э1S',
-                Э2: 'Электронный блок концевых выключателей без пускателя Э2',
-                М1: 'Механический блок концевых выключателей без пускателя М1',
-            },
-        };
-        
-        if(cur_constructive_scheme !== '41' && cur_constructive_scheme !== '410'){
-            delete series['ep4']['Э1S'];
-        }
-        else {
-            series = {
+        series = {
                 ep4: {
-                    Э0: 'Электронный модуль датчиков Э0',
                     Э1: 'Встроенный интеллектуальный модуль управления  с пускателем Э1',
-                    Э1S: 'Электронный интеллектуальный модуль управления для искробезопасных приводов Э1S',
                     Э2: 'Электронный блок концевых выключателей без пускателя Э2',
                     М1: 'Механический блок концевых выключателей без пускателя М1',
                 },
             };
-        }
+
 
         if (!!cur_constructive_scheme) {
             // $("#controle-blocks").empty().append(new Option('Выберите значение', ''));
@@ -1131,7 +1114,7 @@ $('#flange').on('change', function (e) {
 
         //json6
         let j60 = '?'; //Номинальное давление
-        let j61 = $("input[name='connection-type']:checked").closest('.form-check').find('.form-check-label').text();//Тип присоединения выходного вала
+        let j61 = 'Кулачковое присоединение для фланцев из ряда МК, АК, Б, В, Г, Д';//Тип присоединения выходного вала
         let j62 = '?'; //Кабельные вводы
         let j63 = '?'; //Штепсельные разъемы
         let j64 = '?'; //Тип подводимых кабелей
@@ -1276,17 +1259,7 @@ $('#flange').on('change', function (e) {
         vimuBlockModal.hide();
     });
 
-    $('#e1s-submit').on('click', function (e) {
-        $('#controle-blocks').val($('input.cur-e1s-value').val()).trigger('change');
-        e1SBlockModal.hide();
-    });
 
-    $('#e1SModal').on('change', function (e) {
-        let mod = $("input[name='Э1Sopt']:checked").val();
-        $('.cur-e1s-value')
-            .text(mod)
-            .val(mod);
-    });
 
     $('#e2-form input').on('change', function (e) {
         let mod = $("input[name='e2']:checked").val();
@@ -1334,9 +1307,7 @@ $('#flange').on('change', function (e) {
         } else if (cbs === 'Э2') {
             e2BlockModal.show();
         }
-         else if (cbs === 'Э1S') {
-            e1SBlockModal.show();
-        }
+
     });
 
     $('#controle-blocks-series').on('change', function (e) {
@@ -1722,10 +1693,6 @@ $('#flange').on('change', function (e) {
                 return 'Электронный модуль датчиков';
             case 'Э0':
                 return 'Электронный модуль датчиков';
-            case 'Э1S1':
-                return 'Базовый набор функций. Цифровое управление и настройка привода посредством цифрового канала связи, интерфейс RS485, протокол обмена - MODBUS';
-            case 'Э1S2':
-                return 'Базовый набор функций. Цифровое управление и приводом посредством цифрового канала связи, интерфейс RS485, протокол обмена - PROFIBUS';
             default:
                 console.log(base);
                 return (g6 = m1 + m2 + m3 + m4 + m5 + m6 + m7 + m8);
@@ -1834,10 +1801,7 @@ $('#flange').on('change', function (e) {
         let BoMark = document.querySelector("#controle-blocks-series").value;
         optForBu = $('#control-block-optionsset option:selected').val() != 'noValue' ? $('#control-block-optionsset option:selected').val() : '';
 
-        if(BoMark == 'Э0' || 'Э1S'){
-          return remoteSignal = 'Привод с шестью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 24 В';
-        }
-        else if (BoMark == 'Э1') {
+         if (BoMark == 'Э1') {
             if(optForBu == 'X'){
                 return remoteSignal = 'Привод с шестью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 220 В;'
             }
