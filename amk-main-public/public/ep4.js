@@ -283,11 +283,11 @@ $(document).ready(function () {
             },
         },
     };
-    const control_blocks = {
-        М2Z: ['М20', 'М21', 'М22', 'М23', 'М24', 'М25'],
-        ВЭZ: ['ВЭ11', 'ВЭ12', 'ВЭ13', 'ВЭ14', 'ВЭ15', 'ВЭ16', 'ВЭ17', 'ВЭ18', 'ВЭ19', 'ВЭ110'],
-        ВЭ1: ['ВЭ1'],
-    };
+    // const control_blocks = {
+    //     М2Z: ['М20', 'М21', 'М22', 'М23', 'М24', 'М25'],
+    //     ВЭZ: ['ВЭ11', 'ВЭ12', 'ВЭ13', 'ВЭ14', 'ВЭ15', 'ВЭ16', 'ВЭ17', 'ВЭ18', 'ВЭ19', 'ВЭ110'],
+    //     ВЭ1: ['ВЭ1'],
+    // };
 
     const tuMp = {
         60: {
@@ -448,6 +448,7 @@ $(document).ready(function () {
     let m2BlockModal = new bootstrap.Modal($('#block-configure-m2'));
     let vimuBlockModal = new bootstrap.Modal($('#block-configure-e1'));
     let e2BlockModal = new bootstrap.Modal($('#block-configure-e2'));
+    let e1SBlockModal = new bootstrap.Modal($('#e1SModal'));
 
     $('.ch-upper-limit').on('change', function (e) {
         let connectionType = $("input[name='connection-type']:checked").val();
@@ -616,16 +617,30 @@ $(document).ready(function () {
                     document.querySelector("#connectionForEp4-8div").style.display = 'flow';
                 }
 
-
-        let series = {
+         series = {
             ep4: {
                 Э0: 'Электронный модуль датчиков Э0',
                 Э1: 'Встроенный интеллектуальный модуль управления  с пускателем Э1',
-                // 'Э1S': 'Серия Э1S',
+                Э1S: 'Электронный интеллектуальный модуль управления для искробезопасных приводов Э1S',
                 Э2: 'Электронный блок концевых выключателей без пускателя Э2',
                 М1: 'Механический блок концевых выключателей без пускателя М1',
             },
         };
+        
+        if(cur_constructive_scheme !== '41' && cur_constructive_scheme !== '410'){
+            delete series['ep4']['Э1S'];
+        }
+        else {
+            series = {
+                ep4: {
+                    Э0: 'Электронный модуль датчиков Э0',
+                    Э1: 'Встроенный интеллектуальный модуль управления  с пускателем Э1',
+                    Э1S: 'Электронный интеллектуальный модуль управления для искробезопасных приводов Э1S',
+                    Э2: 'Электронный блок концевых выключателей без пускателя Э2',
+                    М1: 'Механический блок концевых выключателей без пускателя М1',
+                },
+            };
+        }
 
         if (!!cur_constructive_scheme) {
             // $("#controle-blocks").empty().append(new Option('Выберите значение', ''));
@@ -1194,6 +1209,18 @@ $(document).ready(function () {
         vimuBlockModal.hide();
     });
 
+    $('#e1s-submit').on('click', function (e) {
+        $('#controle-blocks').val($('input.cur-e1s-value').val()).trigger('change');
+        e1SBlockModal.hide();
+    });
+
+    $('#e1SModal').on('change', function (e) {
+        let mod = $("input[name='Э1Sopt']:checked").val();
+        $('.cur-e1s-value')
+            .text(mod)
+            .val(mod);
+    });
+
     $('#e2-form input').on('change', function (e) {
         let mod = $("input[name='e2']:checked").val();
         $('.cur-e2-value').text(mod).val(mod);
@@ -1240,12 +1267,15 @@ $(document).ready(function () {
         } else if (cbs === 'Э2') {
             e2BlockModal.show();
         }
+         else if (cbs === 'Э1S') {
+            e1SBlockModal.show();
+        }
     });
 
     $('#controle-blocks-series').on('change', function (e) {
         let cbs = $('#controle-blocks-series').val();
         let cb = $('#controle-blocks');
-        if (cbs === 'Э1' || cbs === 'Э2' || cbs === 'ВЭ' || cbs === '' || cbs === 'М1') {
+        if (cbs === 'Э1' || cbs === 'Э2' || cbs === 'ВЭ' || cbs === '' || cbs === 'М1'|| cbs === 'Э1S') {
             $(cb).val('');
         } else {
             cb.val(cbs);
@@ -1287,24 +1317,24 @@ $(document).ready(function () {
             document.querySelector('.tuMpField ').classList.remove('ReqValueOk');
         }
     });
-    // // Стиль для модуля Наибольший ход, мм
-    // $('#maxStepMpField').on('change', function (e) {
-    //     if (document.querySelector('#maxStepMp').value != '') {
-    //         document.querySelector('.maxStepMp').classList.add('ReqValueOk');
-    //         document.querySelector('.maxStepMp').classList.remove('noReqValue');
-    //     } else {
-    //         document.querySelector('.maxStepMp').classList.add('noReqValue');
-    //         document.querySelector('.maxStepMp').classList.remove('ReqValueOk');
-    //     }
-    // });
-    // Стиль для модуля Номинальный крутящий момент
-    $('#maxRMomentFieldset').on('change', function (e) {
-        if (document.querySelector('#maxRMoment').value != undefined) {
-            document.querySelector('#maxRMomentFieldset').classList.add('ReqValueOk');
-            document.querySelector('#maxRMomentFieldset').classList.remove('noReqValue');
+    // Стиль для модуля Наибольший ход, мм
+    $('#maxStepMpField').on('change', function (e) {
+        if (document.querySelector('#maxStepMp').value != '') {
+            document.querySelector('.maxStepMp').classList.add('ReqValueOk');
+            document.querySelector('.maxStepMp').classList.remove('noReqValue');
         } else {
-            document.querySelector('#maxRMomentFieldset').classList.add('noReqValue');
-            document.querySelector('#maxRMomentFieldset').classList.remove('ReqValueOk');
+            document.querySelector('.maxStepMp').classList.add('noReqValue');
+            document.querySelector('.maxStepMp').classList.remove('ReqValueOk');
+        }
+    });
+    // Стиль для модуля Номинальный крутящий момент
+    $('#tuMpField').on('change', function (e) {
+        if (document.querySelector('#roundMomentMp').value != '') {
+            document.querySelector('#roundMomentMpField').classList.add('ReqValueOk');
+            document.querySelector('#roundMomentMpField').classList.remove('noReqValue');
+        } else {
+            document.querySelector('#roundMomentMpField').classList.add('noReqValue');
+            document.querySelector('#roundMomentMpField').classList.remove('ReqValueOk');
         }
     });
     // Стиль для модуля Крутящий момент привода
@@ -1703,6 +1733,10 @@ $(document).ready(function () {
                 return 'Электронный модуль датчиков';
             case 'Э0':
                 return 'Электронный модуль датчиков';
+            case 'Э1S1':
+                return 'Базовый набор функций. Цифровое управление и настройка привода посредством цифрового канала связи, интерфейс RS485, протокол обмена - MODBUS';
+            case 'Э1S2':
+                return 'Базовый набор функций. Цифровое управление и приводом посредством цифрового канала связи, интерфейс RS485, протокол обмена - PROFIBUS';
             default:
                 console.log(base);
                 return (g6 = m1 + m2 + m3 + m4 + m5 + m6 + m7 + m8);
@@ -1775,6 +1809,10 @@ $(document).ready(function () {
         } 
         else {
             $('#controle-blocks-options').val('noValue')
+            document.querySelector("#PanelOption").checked = false;
+            document.querySelector("#tOption").checked = false;
+            document.querySelector("#bluetoothOption").checked = false;
+            document.querySelector("#regOption").checked = false;
             document.querySelector("#control-block-optionsset").style.display = 'none';
             document.querySelector("#control-block-optionssetCheckBox").style.display = 'none';
             document.querySelector("#control-block-optionsset").classList.remove('ReqValueOk');
@@ -1815,7 +1853,7 @@ $(document).ready(function () {
         let BoMark = document.querySelector("#controle-blocks-series").value;
         optForBu = $('#control-block-optionsset option:selected').val() != 'noValue' ? $('#control-block-optionsset option:selected').val() : '';
 
-        if(BoMark == 'Э0'){
+        if(BoMark == 'Э0' || 'Э1S'){
           return remoteSignal = 'Привод с шестью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 24 В';
         }
         else if (BoMark == 'Э1') {
@@ -1853,12 +1891,12 @@ $(document).ready(function () {
         else if (BoMark == 'Э12' || BoMark == 'Э13'|| BoMark == 'Э16'|| BoMark == 'Э17') {
             return positionSignal = '4–20 мА';
             }
-        else if (BoMark == 'Э14' || BoMark == 'Э18' || BoMark == 'Э01') {
+        else if (BoMark == 'Э14' || BoMark == 'Э18' || BoMark == 'Э01'|| BoMark == 'Э1S1') {
             return positionSignal = 'RS485 Modbus';
             }
         else if (BoMark == 'Э15') {
             return positionSignal = '4–20 мА и RS485 Modbus';}
-        else if (BoMark == 'Э19' || BoMark == 'Э110') {
+        else if (BoMark == 'Э19' || BoMark == 'Э110' || BoMark == 'Э1S2') {
             return positionSignal = 'Profibus DP';
             }
         else if (BoMark == 'Э22') {
@@ -1925,7 +1963,7 @@ $('#step-8').on('change', function (e) {
     else { $('#step-9').hide();}
 });
 $('#step-9').on('change', function (e) {
-    if(document.querySelector("#organization").value != '' && document.querySelector("#fio").value != '' && document.querySelector("#phone").value != '' && document.querySelector("#email").value != '' && document.querySelector("#numbersOfEp") != '')
+    if(document.querySelector("#organization").value != '' && document.querySelector("#fio").value != '' && document.querySelector("#phone").value != '' && document.querySelector("#email").value != '' && document.querySelector("#numbersOfEp").value != '')
     {$('#step-10').show();}
     else { $('#step-10').hide();}
 });
