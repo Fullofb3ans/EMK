@@ -1037,6 +1037,33 @@
                     </div>
                 </div>
 
+                <div class = 'modal' id = 'e1SModal' tabindex="-1">
+                        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Дополнительные опции блока управления серии Э1S</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Закрыть</button>
+                                </div>
+                                <div class="modal-body">
+                                        <div class="form-check mb-3">
+                                            <input class="form-check-input" type="radio" name="Э1Sopt" value="Э1S1" id="Э1S1" data-position="0">
+                                            <label class="form-check-label" for="Э1S1">Сигнализация о двух промежуточных положениях выходного вала посредством двух путевых промежуточных выключателей</label>
+                                        </div>
+                                        <div class="form-check mb-3">
+                                            <input class="form-check-input" type="radio" name="Э1Sopt" value="Э1S2" id="Э1S2" data-position="1">
+                                            <label class="form-check-label" for="Э1S2">Сигнализация о текущем положении выходного вала посредством изменения сопротивления потенциометра</label>
+                                        </div>
+                                
+                                    </div>
+                                    <div class="modal-footer">
+                                <div class="modal-title m-auto">Код исполнения: <span class="cur-e1s-value"></span></div>
+                                <input type="hidden" class="cur-e1s-value" value="">
+                                <button type="button" class="btn btn-primary" id="e1s-submit">Применить</button>
+                            </div>
+                            </div>
+                        </div>
+                 </div>
+
                 <div class="modal" id="modalForRezhim" tabindex="-1">
                     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                         <div class="modal-content">
