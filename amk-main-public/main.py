@@ -22,6 +22,7 @@ import os
 import conf
 from conf import mk_DOCX
 from conf import mk_XL
+from conf import DB
 
 
 
@@ -83,16 +84,17 @@ def root():
     return RedirectResponse("https://emk.websto.pro/static/select.html")
 
 @app.get("/ep4")
-def root():
+def ep4():
     return RedirectResponse("https://emk.websto.pro/static/ep4.html")
 
 @app.get("/epn")
-def root():
+def epn():
     return RedirectResponse("https://emk.websto.pro/static/epn.html")
 
 @app.get("/ep4Reductor")
-def root():
+def ep4Reductor():
     return RedirectResponse("https://emk.websto.pro/static/ep4Reductor.html")
+
 
 
 @app.get("/Tula/{ID}", response_class = FileResponse)
@@ -104,6 +106,17 @@ def download_file(ID):
 def download_file(ID):
     return FileResponse(f'Tula{ID}.xlsx', filename=f'ТКП {ID}.xlsx', media_type='application/xlsx')#, headers=headers)
 
+
+
+@app.post("/DB")
+def get_param(jsn = Body()):
+    a = jsn["a"]
+    bd = DB(a[0])
+    for i in range(5-len(a)):
+        a.append("")
+    res = bd.get_params(a[0], a[1], a[2], a[3], a[4])
+    print(res)
+    return {"ans" : res}
 
 
 @app.post("/download")
@@ -119,7 +132,7 @@ def download_file(jsn = Body()):
     jsn6 = jsn["jsn6"]
     jsn7 = jsn["jsn7"]
 
-    ID = randint(0, 1000)
+    ID = randint(1000000, 10000000)
 
     dc = mk_DOCX(jsn0, jsn1, jsn2, jsn3, jsn4, jsn6)
     mark = jsn1[1]
