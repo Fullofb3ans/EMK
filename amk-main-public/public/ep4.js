@@ -426,6 +426,12 @@ $(document).ready(function () {
             };
         }
 
+
+        let control_block = $('#controle-blocks');
+        let cur_control_block = $('#controle-blocks').val();
+
+
+        let control_select = $('#controle-blocks-series').empty().append(new Option('Выберите значение', ''));
         if (!!cur_constructive_scheme) {
             // $("#controle-blocks").empty().append(new Option('Выберите значение', ''));
             control_select.empty().append(new Option('Выберите тип блока управления', ''));
