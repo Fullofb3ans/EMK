@@ -207,9 +207,9 @@ $(document).ready(function () {
     let e1SBlockModal = new bootstrap.Modal($('#e1SModal'));
 
     // ПРОГРУЗКА ДАННЫХ ПРЕДЕЛА С ТАБЛИЦЫ 
-    $('.connection-type').on('change', function (e) {
+    $('#connection-type-wrap').on('change', function (e) {
         function upLimSelectCreate() { 
-            const uplim = document.getElementById('upper-limit');
+            let uplim = document.getElementById('upper-limit');
             let connectionType = $("input[name='connection-type']:checked").val();
             $(uplim).empty();
             uplim.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
@@ -239,12 +239,12 @@ $(document).ready(function () {
     });
 
     // ПРОГРУЗКА ДАННЫХ ЧАСТОТЫ ВРАЩЕНИЯ С ТАБЛИЦЫ 
-    $('.upper-limit').on('change', function (e) {
+    $('#upper-limit').on('change', function (e) {
 
         function rotationFrequencySelectCreate() { 
-            const upLim = document.querySelector("#upper-limit").value;
+            let upLim = document.querySelector("#upper-limit").value;
             let connectionType = $("input[name='connection-type']:checked").val();
-            const rotationFrequency = document.getElementById('rotation-frequency');
+            let rotationFrequency = document.getElementById('rotation-frequency');
             $(rotationFrequency).empty();
             rotationFrequency.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
         
@@ -273,11 +273,11 @@ $(document).ready(function () {
     });
 
     // ПРОГРУЗКА ДАННЫХ КОНСТРУКТИВНЫХ СХЕМ С ТАБЛИЦЫ 
-    $('.rotationFrequency').on('change', function (e) {
+    $('#rotationFrequency').on('change', function (e) {
         function SchemeSelectCreate() {
-            const upLim = document.querySelector("#upper-limit").value;
+            let upLim = document.querySelector("#upper-limit").value;
             let connectionType = $("input[name='connection-type']:checked").val();
-            const rotationFrequency = document.getElementById('rotation-frequency').value;
+            let rotationFrequency = document.getElementById('rotation-frequency').value;
         
             let fetchResult = [];
             
@@ -338,7 +338,7 @@ $(document).ready(function () {
         });
         
 
-    $('.constructive-scheme-wrap').on('change', function (e) {
+    $('#constructive-scheme-wrap').on('change', function (e) {
 
         function flangeSelectCreate() { 
             const upLim = document.querySelector("#upper-limit").value;
