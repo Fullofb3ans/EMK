@@ -316,24 +316,19 @@ $(document).ready(function () {
                                             class: 'form-check-label',
                                         })
                                         .text(' Конструктивная схема ' + item)
+                                    )
                                 )
-
-                        )
-        } 
-
-                    );
-             }
-             );
+                            }
+                        );
+                    }
+                );
             }
-        
             SchemeSelectCreate();
         });
 
-        
-        
     $('#constructive-scheme-wrap').on('change', function (e) {
         let cur_constructive_scheme = $("input[name='constructive-scheme']:checked").val();
-
+        
         $('#constructive-scheme-img')
         .empty()
         .append(
