@@ -306,7 +306,7 @@ $(document).ready(function () {
                                         id: '/img/' + 'scheme-' + item,
                                         name: 'constructive-scheme',
                                         value: item,
-                                        class: 'form-check-input ch-mark',,
+                                        class: 'form-check-input ch-mark',
                                     })
                                 )
                                 .append(
