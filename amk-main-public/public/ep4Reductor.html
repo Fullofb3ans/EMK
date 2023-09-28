@@ -453,7 +453,7 @@
                     </fieldset>
 
                        <!-- ОСТАЛЬНОЕ ДЛЯ ЗАКАЗА -->
-                    <fieldset class="row mb-3 ReqValueOk placeForEnv" >
+                    <fieldset class="row mb-3 noReqValue placeForEnv" >
                         <legend class="blockNumber">20</legend>
                         <div class="col-sm-9" id="placeForEnv">
                             <legend class="col-form-label col-sm-3 pt-0">Установка</legend>
@@ -468,23 +468,8 @@
                         </div>
                     </fieldset>
 
-                    <fieldset class="row mb-3 commandBlockType ReqValueOk" >
-                        <legend class="blockNumber">21</legend>
-                        <div class="col-sm-9" id="commandBlockType">
-                            <legend class="col-form-label col-sm-3 pt-0">Тип блока управления привода</legend>
-                            <div class="form-check">
-                                <input class="form-check-input ch-mark" value="0" type="radio" name="commandBlockType" id="commandBlockType-1"/>
-                                <label class="form-check-label" for="commandBlockType-1">ЭИМУ</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input ch-mark" value="1" type="radio" name="commandBlockType" id="commandBlockType-2" />
-                                <label class="form-check-label" for="commandBlockType-2">ВИМУ (установка на стене, на стойке и т. п.)</label>
-                            </div>
-                        </div>
-                    </fieldset>
-
                     <fieldset class="row mb-3 signalMoment optionalField" >
-                        <legend class="blockNumber">22</legend>
+                        <legend class="blockNumber">21</legend>
                         <div class="col-sm-9" id="signalMoment">
                             <legend class="col-form-label col-sm-3 pt-0">Сигнал "Момент" 4-20 мА</legend>
                             <div class="form-check">
@@ -495,7 +480,7 @@
                     </fieldset>
 
                 <fieldset class="row mb-3 optionalField addRequirements" >
-                    <legend class="blockNumber">23</legend>
+                    <legend class="blockNumber">22</legend>
                     <div class="col-sm-9" id="addReq">
                         <legend class="col-form-label col-sm-3 pt-0">Дополнительные требования</legend>
                         <div class="form-check">
@@ -506,7 +491,7 @@
                 </fieldset>
 
                 <fieldset class="persInfo noReqValue">
-                    <legend class="blockNumber">24</legend>
+                    <legend class="blockNumber">23</legend>
 
                     <div class="persInfoFlex" style="display: flex; text-align: -webkit-center; flex-direction: row; flex-wrap: wrap; align-content: space-around; align-items: flex-end; gap: 5%; justify-content: center">
                         <div class="mb-3" id="persInfo-1">
@@ -543,7 +528,7 @@
                 </fieldset>
 
                 <fieldset class="row mb-3 numbersOfEp noReqValue"  id = 'executionWrapLegend'>
-                    <legend class ='blockNumber'>25</legend>
+                    <legend class ='blockNumber'>24</legend>
                     <div class="mb-3" id="numbers">
                     <legend class="col-form-label col-sm-3 pt-0">Кол-во приводов:</legend>
                     <input class="form-input form-element input" id="numbersOfEp" type="number" placeholder="Введите кол-во" min="0"/>

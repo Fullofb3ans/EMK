@@ -45,250 +45,6 @@ $(document).ready(function () {
 
     const execution_wrap = $('#execution-wrap');
 
-    const torques = {
-        ep4: {
-            1: [15, 30, 60, 120, 250, 500, 630, 1000, 1500, 2000, 4000, 8000, 12000, 16000, 20000, 24000],
-            2: [30, 60, 90, 120],
-            3: [15, 30, 60, 120, 250, 500, 630, 1000, 1500, 2000, 4000, 8000, 12000, 16000, 20000, 24000],
-        },
-    };
-
-    const time_limits = {
-        ep4: {
-            40: {
-                15: [4, 5.6, 8, 11, 16, 22, 32, 45, 63, 90, 125, 180],
-                30: [4, 5.6, 8, 11, 16, 22, 32, 45, 63, 90, 125, 180],
-                60: [4, 5.6, 8, 11, 16, 22, 32, 45, 63, 90, 125, 180],
-                120: [4, 5.6, 8, 11, 16, 22, 32, 45, 63, 90, 125, 180],
-            },
-            41: {
-                60: [4, 5.6, 8, 11, 16, 22, 32, 45, 63, 90, 125, 180],
-                90: [180],
-                120: [4, 5.6, 8, 11, 16, 22, 32, 45, 63, 90, 125, 180],
-                250: [4, 5.6, 8, 11, 16, 22, 32, 45, 63, 90, 125, 180],
-                400: [180],
-                500: [4, 5.6, 8, 11, 16, 22, 32, 45, 63, 90, 125],
-            },
-            410: {
-                630: [2, 4, 5.6, 8, 11, 16, 22, 32, 45, 63, 90],
-                1000: [2, 4, 5.6, 8, 11, 16, 22, 32, 45, 63],
-                1500: [2, 4, 5.6, 8, 11, 16, 22, 32, 45],
-                2000: [2, 4, 5.6, 8, 11, 16, 22, 32],
-                3000: [2, 4, 5.6, 8, 11, 16],
-            },
-            43: {
-                2000: [45, 63, 90, 125],
-                3000: [22, 32, 45, 63, 90],
-                4000: [4, 5.6, 8, 11, 16, 22, 32, 45, 63],
-                6000: [4, 5.6, 8, 11, 16, 22, 32, 40],
-                8000: [4, 5.6, 8, 11, 16, 22, 32],
-            },
-            430: {
-                8000: [22],
-                12000: [2, 2.8, 4, 5.6, 8, 11, 16, 22],
-                16000: [2, 4, 5.6, 8, 11, 16],
-                20000: [2, 4, 5.6, 8, 11],
-                24000: [2, 4, 5.6, 8],
-            },
-            44: {
-                16000: [22],
-            },
-        },
-    };
-
-    const flanges = {
-        ep4: {
-            40: {
-                15: {
-                    0: {
-                        1: ['МК'],
-                        3: ['F07'],
-                    },
-                },
-                30: {
-                    0: {
-                        1: ['МК', 'АК'],
-                        2: ['АЧ'],
-                        3: ['F07'],
-                    },
-                },
-                60: {
-                    0: {
-                        1: ['МК', 'АК'],
-                        2: ['АЧ'],
-                        3: ['F07', 'F10'],
-                    },
-                },
-                120: {
-                    0: {
-                        1: ['АК'],
-                        2: ['АЧ'],
-                        3: ['F10'],
-                    },
-                },
-            },
-            41: {
-                60: {
-                    0: {
-                        1: ['АК'],
-                        2: ['АЧ'],
-                        3: ['F07', 'F10'],
-                    },
-                },
-                90: {
-                    0: {
-                        1: ['АК'],
-                        2: ['АЧ'],
-                        3: ['F07', 'F10'],
-                    },
-                },
-                120: {
-                    0: {
-                        1: ['АК', 'Б'],
-                        2: ['АЧ'],
-                        3: ['F07', 'F10'],
-                    },
-                },
-                250: {
-                    0: {
-                        1: ['Б'],
-                        3: ['F14'],
-                    },
-                },
-                400: {
-                    0: {
-                        1: ['Б'],
-                        3: ['F14'],
-                    },
-                },
-                500: {
-                    0: {
-                        1: ['Б'],
-                        3: ['F14'],
-                    },
-                },
-            },
-            410: {
-                630: {
-                    0: {
-                        1: ['В'],
-                        3: ['F16'],
-                    },
-                },
-                1000: {
-                    0: {
-                        1: ['В'],
-                        3: ['F16'],
-                    },
-                },
-                1500: {
-                    0: {
-                        1: ['В', 'Г'],
-                        3: ['F25'],
-                    },
-                },
-                2000: {
-                    0: {
-                        1: ['Г'],
-                        3: ['F25'],
-                    },
-                },
-                3000: {
-                    0: {
-                        1: ['Г'],
-                        3: ['F25'],
-                    },
-                },
-            },
-            43: {
-                2000: {
-                    0: {
-                        1: ['Г'],
-                        3: ['F25'],
-                    },
-                },
-                3000: {
-                    0: {
-                        1: ['Г'],
-                        3: ['F25'],
-                    },
-                },
-                4000: {
-                    0: {
-                        1: ['Г', 'Д'],
-                        3: ['F30'],
-                    },
-                },
-                6000: {
-                    0: {
-                        1: ['Г', 'Д'],
-                        3: ['F30'],
-                    },
-                },
-                8000: {
-                    0: {
-                        1: ['Г', 'Д'],
-                        3: ['F30'],
-                    },
-                    4: { 1: ['Д'], 3: ['F30'] },
-                    5.6: { 1: ['Д'], 3: ['F30'] },
-                    8: { 1: ['Д'], 3: ['F30'] },
-                },
-            },
-            430: {
-                8000: {
-                    0: {
-                        1: ['Д'],
-                        3: ['F40'],
-                    },
-                },
-                12000: {
-                    0: {
-                        1: ['Д'],
-                        3: ['F40'],
-                    },
-                },
-                16000: {
-                    0: {
-                        1: ['Д'],
-                        3: ['F40'],
-                    },
-                },
-                20000: {
-                    0: {
-                        1: ['Д'],
-                        3: ['F40'],
-                    },
-                },
-                24000: {
-                    0: {
-                        1: ['Д'],
-                        3: ['F40'],
-                    },
-                },
-            },
-            44: {
-                8000: {
-                    0: {
-                        1: ['Д'],
-                        3: ['F35', 'F40'],
-                    },
-                },
-                16000: {
-                    0: {
-                        1: ['Д'],
-                        3: ['F35', 'F40'],
-                    },
-                },
-            },
-        },
-    };
-    // const control_blocks = {
-    //     М2Z: ['М20', 'М21', 'М22', 'М23', 'М24', 'М25'],
-    //     ВЭZ: ['ВЭ11', 'ВЭ12', 'ВЭ13', 'ВЭ14', 'ВЭ15', 'ВЭ16', 'ВЭ17', 'ВЭ18', 'ВЭ19', 'ВЭ110'],
-    //     ВЭ1: ['ВЭ1'],
-    // };
-
     const tuMp = {
         60: {
             '24...60': {
@@ -450,151 +206,174 @@ $(document).ready(function () {
     let e2BlockModal = new bootstrap.Modal($('#block-configure-e2'));
     let e1SBlockModal = new bootstrap.Modal($('#e1SModal'));
 
-    $('.ch-upper-limit').on('change', function (e) {
-        let connectionType = $("input[name='connection-type']:checked").val();
-        console.log(connectionType);
-
-        let execution = $("input[name='execution']:checked").val();
-        var cur_upper_limit = $('#upper-limit').val();
-        var upper_limit = $('#upper-limit').empty().append(new Option('Выберите значение', ''));
-
-        torques_arr = torques['ep4'][connectionType];
-
-        // $('#step-3').show();
-        $.each(
-            [
-                ...new Set(
-                    torques_arr.sort(function (a, b) {
-                        return a - b;
-                    })
-                ),
-            ],
-            function (index, item) {
-                upper_limit.append(new Option(item, item, false, item == cur_upper_limit));
+    // ПРОГРУЗКА ДАННЫХ ПРЕДЕЛА С ТАБЛИЦЫ 
+    $('.connection-type').on('change', function (e) {
+        function upLimSelectCreate() { 
+            const uplim = document.getElementById('upper-limit');
+            let connectionType = $("input[name='connection-type']:checked").val();
+            $(uplim).empty();
+            uplim.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
+        
+            let fetchResult = [];
+            
+            fetch('https://emk.websto.pro/DB', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json;charset=utf-8' },
+                body: JSON.stringify({
+                    a: ['ЭП4', connectionType],
+                }),
+            })
+              .then(res => res.json())
+              .then(res => {
+                console.log(res)
+                  for( i in res)
+                  fetchResult.push(res [i]);
+                // fetchResult[0].sort((a, b) => a - b);
+              $.each(fetchResult[0], function (key, item) {
+                  $(uplim).append(new Option(item, item))
+             }
+             );
+              })
             }
-        );
+            upLimSelectCreate();
     });
 
-    $('.ch-time-limit ').on('change', function (e) {
-        // $('#step-4').show();
-        var upper_limit = $('#upper-limit').val();
-        var cur_time_limit = $('#time-limit').val();
-        var times_options = [];
+    // ПРОГРУЗКА ДАННЫХ ЧАСТОТЫ ВРАЩЕНИЯ С ТАБЛИЦЫ 
+    $('.upper-limit').on('change', function (e) {
 
-        select_options = $('#rotation-frequency');
-        time_limits_arr = time_limits['ep4'];
-        console.log(time_limits_arr);
-
-        select_options.empty().append(new Option('Выберите значение', ''));
-
-        $.each(time_limits_arr, function (key, value) {
-            $.each(value, function (up_lim, item) {
-                if (upper_limit == up_lim) {
-                    times_options.push(...item);
-                }
-            });
-        });
-        $.each(
-            [
-                ...new Set(
-                    times_options.sort(function (a, b) {
-                        return a - b;
-                    })
-                ),
-            ],
-            function (key, item) {
-                select_options.append(new Option(item, item, false, item == cur_time_limit));
+        function rotationFrequencySelectCreate() { 
+            const upLim = document.querySelector("#upper-limit").value;
+            let connectionType = $("input[name='connection-type']:checked").val();
+            const rotationFrequency = document.getElementById('rotation-frequency');
+            $(rotationFrequency).empty();
+            rotationFrequency.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
+        
+            let fetchResult = [];
+            
+            fetch('https://emk.websto.pro/DB', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json;charset=utf-8' },
+                body: JSON.stringify({
+                    a: ['ЭП4', connectionType, upLim],
+                }),
+            })
+              .then(res => res.json())
+              .then(res => {
+                console.log(res)
+                  for( i in res)
+                  fetchResult.push(res [i]);
+                // fetchResult[0].sort((a, b) => a - b);
+              $.each(fetchResult[0], function (key, item) {
+                  $(rotationFrequency).append(new Option(item, item))
+             }
+             );
+              })
             }
-        );
+            rotationFrequencySelectCreate();
     });
 
-    $('.ch-cs').on('change', function (e) {
-        option_id = '#rotation-frequency';
-
-        execution = $("input[name='execution']:checked").val();
-        x4 = $('#upper-limit').val();
-        x5 = $(option_id).val();
-
-        constructive_scheme = [];
-        time_limits_arr = time_limits['ep4'];
-
-        $.each(time_limits_arr, function (key, item) {
-            $.each(item, function (index, arr) {
-                if (index == x4 && !!x5 && arr.includes(Number.parseFloat(x5))) {
-                    constructive_scheme.push(key);
-                }
-            });
-        });
-
-        $('#constructive-scheme-wrap').empty();
-
-        if (constructive_scheme.length > 0) {
-            $.each(constructive_scheme, function (key, item) {
-                $('#constructive-scheme-wrap').append(
-                    $('<div>')
-                        .prop({ class: 'form-check' })
-                        .append(
-                            $('<input>').prop({
-                                type: 'radio',
-                                id: '/img/' + 'scheme-' + item,
-                                name: 'constructive-scheme',
-                                value: item,
-                                class: 'form-check-input ch-mark',
-                                defaultChecked: constructive_scheme.length == 1,
-                            })
-                        )
-                        .append(
-                            $('<label>')
-                                .prop({
-                                    for:  'scheme-' + item,
-                                    class: 'form-check-label',
+    // ПРОГРУЗКА ДАННЫХ КОНСТРУКТИВНЫХ СХЕМ С ТАБЛИЦЫ 
+    $('.rotationFrequency').on('change', function (e) {
+        function SchemeSelectCreate() {
+            const upLim = document.querySelector("#upper-limit").value;
+            let connectionType = $("input[name='connection-type']:checked").val();
+            const rotationFrequency = document.getElementById('rotation-frequency').value;
+        
+            let fetchResult = [];
+            
+            fetch('https://emk.websto.pro/DB', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json;charset=utf-8' },
+                body: JSON.stringify({
+                    a: ['ЭП4', connectionType, upLim, rotationFrequency],
+                }),
+            })
+              .then(res => res.json())
+              .then(res => {
+                console.log(res)
+                  for( i in res)
+                  fetchResult.push(res [i]);
+                // fetchResult[0].sort((a, b) => a - b);
+              $.each(fetchResult[0], function (key, item) {
+                  $(rotationFrequency).append(new Option(item, item))
+             }
+             );
+              })
+            }
+        
+            $('#constructive-scheme-wrap').empty();
+    
+            if (constructive_scheme.length > 0) {
+                $.each(constructive_scheme, function (key, item) {
+                    $('#constructive-scheme-wrap').append(
+                        $('<div>')
+                            .prop({ class: 'form-check' })
+                            .append(
+                                $('<input>').prop({
+                                    type: 'radio',
+                                    id: '/img/' + 'scheme-' + item,
+                                    name: 'constructive-scheme',
+                                    value: item,
+                                    class: 'form-check-input ch-mark',
+                                    defaultChecked: constructive_scheme.length == 1,
                                 })
-                                .text(' Конструктивная схема ' + item)
-                        )
-                );
-            });
-
-            $("input[name='constructive-scheme']").trigger('change');
-        } else {
-            $('#constructive-scheme-img').empty();
-        }
-
-        // if (document.getElementsByName('constructive-scheme').length < 2) {
-        //     $('#schemeFieldSet').hide();
-        // } else {
-        //     $('#schemeFieldSet').show();
-        // }
-    });
-
-    $(document).on('change', "input[name='constructive-scheme']", function (e) {
-        // $('#step-5').show();
-        let execution = $("input[name='execution']:checked").val();
-        let cur_constructive_scheme = $("input[name='constructive-scheme']:checked").val();
-        let cur_flange_value = $('#flange').val();
-
-        let upper_limit = $('#upper-limit').val();
-        let rotation_frequency = $('#rotation-frequency').val();
-        let connectionType = $("input[name='connection-type']:checked").val();
-
-        let flanges_select = $('#flange').empty().append(new Option('Выберите значение', ''));
-        let control_block = $('#controle-blocks');
-        let cur_control_block = $('#controle-blocks').val();
-
-        let control_select = $('#controle-blocks-series').empty().append(new Option('Выберите значение', ''));
-
-        let flanges_arr = [];
-
-        if (!!cur_constructive_scheme) {
-            if (typeof flanges['ep4'][cur_constructive_scheme][upper_limit][rotation_frequency] !== 'undefined') {
-                flanges_arr = flanges['ep4'][cur_constructive_scheme][upper_limit][rotation_frequency][connectionType];
+                            )
+                            .append(
+                                $('<label>')
+                                    .prop({
+                                        for:  'scheme-' + item,
+                                        class: 'form-check-label',
+                                    })
+                                    .text(' Конструктивная схема ' + item)
+                            )
+                    );
+                });
+    
+                $("input[name='constructive-scheme']").trigger('change');
             } else {
-                flanges_arr = flanges['ep4'][cur_constructive_scheme][upper_limit][0][connectionType];
+                $('#constructive-scheme-img').empty();
             }
 
-            $.each(flanges_arr, function (key, item) {
-                flanges_select.append(new Option(item, item, false, cur_flange_value == item));
-            });
-        }
+            SchemeSelectCreate();
+        });
+        
+
+    $('.constructive-scheme-wrap').on('change', function (e) {
+
+        function flangeSelectCreate() { 
+            const upLim = document.querySelector("#upper-limit").value;
+            let connectionType = $("input[name='connection-type']:checked").val();
+            const rotationFrequency = document.getElementById('rotation-frequency').value;
+            $(rotationFrequency).empty();
+            let scheme = $("input[name='constructive-scheme']:checked").val();
+
+            let flange = document.querySelector("#flange");
+            $(flange).empty();
+            flange.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
+        
+            let fetchResult = [];
+            
+            fetch('https://emk.websto.pro/DB', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json;charset=utf-8' },
+                body: JSON.stringify({
+                    a: ['ЭП4', connectionType, upLim, rotationFrequency, scheme],
+                }),
+            })
+              .then(res => res.json())
+              .then(res => {
+                console.log(res)
+                  for( i in res)
+                  fetchResult.push(res [i]);
+                // fetchResult[0].sort((a, b) => a - b);
+              $.each(fetchResult[0], function (key, item) {
+                  $(flange).append(new Option(item, item))
+             }
+             );
+              })
+            }
+            flangeSelectCreate();
+    });
 
                 // СОКРЫТИЕ КАБЕЛЬНЫЙ ПОДКЛЮЧЕНИЙ ДЛЯ СХем 43/44/430
                 if (cur_constructive_scheme == '43' || cur_constructive_scheme == '430' || cur_constructive_scheme == '44'){
@@ -661,7 +440,6 @@ $(document).ready(function () {
                     })
                 );
         }
-    });
 
     // $(document).on("change", function(e){
     //     let flange = document.querySelector('#flange');
