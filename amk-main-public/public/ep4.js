@@ -196,7 +196,7 @@ $(document).ready(function () {
         });
     });
 
-    let cur_constructive_scheme = false;
+    let cur_constructive_scheme = $("input[name='constructive-scheme']:checked").val();
 
     let execution_id = '';
 
@@ -326,15 +326,19 @@ $(document).ready(function () {
                 } else {
                     $('#constructive-scheme-img').empty();
                 }
+                $('#constructive-scheme-img')
+                .empty()
+                .append(
+                    $('<img>').prop({
+                        src: './img/' + cheme_img['ep4'][$("input[name='constructive-scheme']").val()],
+                        class: 'img-fluid',
+                    })
+                );
              }
              );
               })
             }
         
-          
-    
-          
-
             SchemeSelectCreate();
             
         });
@@ -431,15 +435,6 @@ $(document).ready(function () {
             $.each(series['ep4'], function (key, item) {
                 control_select.append(new Option(item, key, false, cur_control_block == item));
             });
-
-            $('#constructive-scheme-img')
-                .empty()
-                .append(
-                    $('<img>').prop({
-                        src: './img/' + cheme_img['ep4'][cur_constructive_scheme],
-                        class: 'img-fluid',
-                    })
-                );
         }
 
     // $(document).on("change", function(e){
