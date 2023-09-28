@@ -295,9 +295,7 @@ $(document).ready(function () {
                   for( i in res)
                   fetchResult.push(res [i]);
                 // fetchResult[0].sort((a, b) => a - b);
-              $.each(fetchResult[0], function (key, item) {
-                if (fetchResult.length > 0) {
-                    $.each(fetchResult, function (key, item) {
+                    $.each(fetchResult[0], function (key, item) {
                         $('#constructive-scheme-wrap').append(
                             $('<div>')
                                 .prop({ class: 'form-check' })
@@ -319,24 +317,16 @@ $(document).ready(function () {
                                         })
                                         .text(' Конструктивная схема ' + item)
                                 )
+                                .append(
+                                    $('<img>').prop({
+                                        src: './img/' + cheme_img['ep4'][$("input[name='constructive-scheme']").val()],
+                                        class: 'img-fluid',
+                                    })
+                                )
                         );
                     });
-        
-                    $("input[name='constructive-scheme']").trigger('change');
-                } else {
-                    $('#constructive-scheme-img').empty();
-                }
-                $('#constructive-scheme-img')
-                .empty()
-                .append(
-                    $('<img>').prop({
-                        src: './img/' + cheme_img['ep4'][$("input[name='constructive-scheme']").val()],
-                        class: 'img-fluid',
-                    })
-                );
              }
              );
-              })
             }
         
             SchemeSelectCreate();
