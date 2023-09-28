@@ -115,6 +115,10 @@ def get_param(jsn = Body()):
     for i in range(5-len(a)):
         a.append("")
     res = bd.get_params(a[0], a[1], a[2], a[3], a[4])
+    try:
+        res.sort(key=int)
+    except:
+        res = [res]
     print(res)
     return {"ans" : res}
 

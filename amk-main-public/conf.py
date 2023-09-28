@@ -195,6 +195,6 @@ class DB():
                     if Sheet[f"C{i}"].value not in ans:
                         ans.append(Sheet[f"C{i}"].value)
         else:
-            ans = "Что-то не так"
+            ans = "Ошибка выбора параметров"
         return ans
         
