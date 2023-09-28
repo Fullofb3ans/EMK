@@ -306,8 +306,7 @@ $(document).ready(function () {
                                         id: '/img/' + 'scheme-' + item,
                                         name: 'constructive-scheme',
                                         value: item,
-                                        class: 'form-check-input ch-mark',
-                                        defaultChecked: fetchResult[0].length == 1,
+                                        class: 'form-check-input ch-mark',,
                                     })
                                 )
                                 .append(
@@ -370,8 +369,8 @@ $(document).ready(function () {
                   for( i in res)
                   fetchResult.push(res [i]);
                 // fetchResult[0].sort((a, b) => a - b);
-              $.each(fetchResult[0], function (key, item) {
-                  $(flange).append(new Option(item, item))
+              $.each(fetchResult[0][0], function (key, item) {
+                  $(flange).append(new Option(item))
              }
              );
               })
