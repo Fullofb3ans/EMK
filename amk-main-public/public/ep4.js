@@ -273,12 +273,13 @@ $(document).ready(function () {
     });
 
     // ПРОГРУЗКА ДАННЫХ КОНСТРУКТИВНЫХ СХЕМ С ТАБЛИЦЫ 
-    $('#rotationFrequency').on('change', function (e) {
+    $('#rotation-frequency-wrap').on('change', function (e) {
         function SchemeSelectCreate() {
             let upLim = document.querySelector("#upper-limit").value;
             let connectionType = $("input[name='connection-type']:checked").val();
             let rotationFrequency = document.getElementById('rotation-frequency').value;
-        
+            $('#constructive-scheme-wrap').empty();
+
             let fetchResult = [];
             
             fetch('https://emk.websto.pro/DB', {
@@ -295,46 +296,47 @@ $(document).ready(function () {
                   fetchResult.push(res [i]);
                 // fetchResult[0].sort((a, b) => a - b);
               $.each(fetchResult[0], function (key, item) {
-                  $(rotationFrequency).append(new Option(item, item))
+                if (fetchResult.length > 0) {
+                    $.each(fetchResult, function (key, item) {
+                        $('#constructive-scheme-wrap').append(
+                            $('<div>')
+                                .prop({ class: 'form-check' })
+                                .append(
+                                    $('<input>').prop({
+                                        type: 'radio',
+                                        id: '/img/' + 'scheme-' + item,
+                                        name: 'constructive-scheme',
+                                        value: item,
+                                        class: 'form-check-input ch-mark',
+                                        defaultChecked: fetchResult[0].length == 1,
+                                    })
+                                )
+                                .append(
+                                    $('<label>')
+                                        .prop({
+                                            for:  'scheme-' + item,
+                                            class: 'form-check-label',
+                                        })
+                                        .text(' Конструктивная схема ' + item)
+                                )
+                        );
+                    });
+        
+                    $("input[name='constructive-scheme']").trigger('change');
+                } else {
+                    $('#constructive-scheme-img').empty();
+                }
              }
              );
               })
             }
         
-            $('#constructive-scheme-wrap').empty();
+          
     
-            if (constructive_scheme.length > 0) {
-                $.each(constructive_scheme, function (key, item) {
-                    $('#constructive-scheme-wrap').append(
-                        $('<div>')
-                            .prop({ class: 'form-check' })
-                            .append(
-                                $('<input>').prop({
-                                    type: 'radio',
-                                    id: '/img/' + 'scheme-' + item,
-                                    name: 'constructive-scheme',
-                                    value: item,
-                                    class: 'form-check-input ch-mark',
-                                    defaultChecked: constructive_scheme.length == 1,
-                                })
-                            )
-                            .append(
-                                $('<label>')
-                                    .prop({
-                                        for:  'scheme-' + item,
-                                        class: 'form-check-label',
-                                    })
-                                    .text(' Конструктивная схема ' + item)
-                            )
-                    );
-                });
-    
-                $("input[name='constructive-scheme']").trigger('change');
-            } else {
-                $('#constructive-scheme-img').empty();
-            }
+          
 
             SchemeSelectCreate();
+            
         });
         
     $('#constructive-scheme-wrap').on('change', function (e) {
