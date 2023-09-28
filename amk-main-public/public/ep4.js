@@ -337,10 +337,9 @@ $(document).ready(function () {
             SchemeSelectCreate();
         });
         
-
     $('#constructive-scheme-wrap').on('change', function (e) {
 
-        function flangeSelectCreate() { 
+        function flangeSelectCreate() {
             const upLim = document.querySelector("#upper-limit").value;
             let connectionType = $("input[name='connection-type']:checked").val();
             const rotationFrequency = document.getElementById('rotation-frequency').value;
