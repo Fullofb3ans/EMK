@@ -295,10 +295,8 @@ $(document).ready(function () {
                   for( i in res)
                   fetchResult.push(res [i]);
                 // fetchResult[0].sort((a, b) => a - b);
-                $('#constructive-scheme-wrap').empty();
                     $.each(fetchResult[0], function (key, item) {
                         
-        if (constructive_scheme.length > 0) {
                         $('#constructive-scheme-wrap').append(
                             $('<div>')
                                 .prop({ class: 'form-check' })
@@ -320,27 +318,31 @@ $(document).ready(function () {
                                         })
                                         .text(' Конструктивная схема ' + item)
                                 )
-                                .append(
-                                    $('<img>').prop({
-                                        src: './img/' + cheme_img['ep4'][$("input[name='constructive-scheme']").val()],
-                                        class: 'img-fluid',
-                                    })
-                                )
+
                         )
-                        $("input[name='constructive-scheme']").trigger('change');
-        } else {
-            $('#constructive-scheme-img').empty();
-        }
-                    });
+        } 
+
+                    );
              }
              );
             }
         
             SchemeSelectCreate();
-            
         });
+
+        
         
     $('#constructive-scheme-wrap').on('change', function (e) {
+        let cur_constructive_scheme = $("input[name='constructive-scheme']:checked").val();
+
+        $('#constructive-scheme-img')
+        .empty()
+        .append(
+            $('<img>').prop({
+                src: './img/' + cheme_img['ep4'][cur_constructive_scheme],
+                class: 'img-fluid',
+            })
+        );
 
         function flangeSelectCreate() {
             const upLim = document.querySelector("#upper-limit").value;
