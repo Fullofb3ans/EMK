@@ -295,7 +295,10 @@ $(document).ready(function () {
                   for( i in res)
                   fetchResult.push(res [i]);
                 // fetchResult[0].sort((a, b) => a - b);
+                $('#constructive-scheme-wrap').empty();
                     $.each(fetchResult[0], function (key, item) {
+                        
+        if (constructive_scheme.length > 0) {
                         $('#constructive-scheme-wrap').append(
                             $('<div>')
                                 .prop({ class: 'form-check' })
@@ -323,7 +326,11 @@ $(document).ready(function () {
                                         class: 'img-fluid',
                                     })
                                 )
-                        );
+                        )
+                        $("input[name='constructive-scheme']").trigger('change');
+        } else {
+            $('#constructive-scheme-img').empty();
+        }
                     });
              }
              );
@@ -471,6 +478,7 @@ $(document).ready(function () {
     });
 
     $(document).on('change', function (e) {
+        
         let a = document.querySelector('.aVandalCap');
         let cbs = document.querySelector('#controle-blocks-series');
         if (cbs.value === 'Э1' || cbs.value === 'Э2') {
