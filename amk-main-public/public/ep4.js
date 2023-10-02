@@ -1599,10 +1599,16 @@ $(document).ready(function () {
     });
     // Формула для требуемого времени закрытия
     $(document).on('change', function (e) {
-       x = document.querySelector("#closingTime");
-       closNumbers = document.querySelector("#closeNumbers").value;
-       rotAtMin = document.querySelector("#rotation-frequency").value;
-       if(closNumbers && rotAtMin ) {x.value = Math.round(closNumbers/(rotAtMin/60))}
+        closingTime = document.querySelector("#closingTime").value;
+        closNumbers = document.querySelector("#closeNumbers").value;
+        rotAtMin = document.querySelector("#rotation-frequency").value;
+        if(closNumbers && rotAtMin ) {closingTime = Math.round(closNumbers/(rotAtMin/60))}
+        if(closingTime && rotAtMin ) {closNumbers = Math.round(closingTime*(rotAtMin/60))}
+        if(closingTime && closNumbers ) {
+            rotationSelect = document.querySelector("#rotation-frequency");
+            for (let i = 0; i < a.length; i++) {
+            if(a[i].value < 100){a.remove(i)}
+        }}
     });
 
     // // ОТОБРАЖЕНИЕ пункта защиты IP54

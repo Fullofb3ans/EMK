@@ -4,8 +4,10 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
+        <title>Конфигуратор</title>
+        <link rel="icon" href=".\favicon.ico">
     </head>
+
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js" integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -22,125 +24,36 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js" integrity="sha512-Eak/29OTpb36LLo2r47IpVzPBLXnAMPAVypbSZiZ4Qkf8p/7S/XRG5xp7OKWPPYfJT6metI+IORkR5G8F900+g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <script src="/local/templates/intranet/js/script.js" type="text/javascript"></script>
+    <script src="ep4.js"></script>
 
-    <script src="epn.js" type="text/javascript"></script>
-
-    <link href="konfiguratorStyle.css" rel="stylesheet">
-
+    <link href = 'konfiguratorStyle.css' rel="stylesheet">
     <body>
-        <main>
-            <style>
-                :root {
-                    --success-color: #198754;
-                    --empty-color: #f8931f;
-                }
 
-                #step-3 {
-                    display: none;
-                }
-
-                #step-4 {
-                    display: none;
-                }
-
-                #step-5 {
-                    display: none;
-                }
-
-                .ep4 .ep4-only,
-                .epn .epn-only {
-                    display: flex;
-                }
-
-                .ep4 .epn-only,
-                .epn .ep4-only {
-                    display: none;
-                }
-
-                #e1-table td:hover,
-                #e1-table th:hover {
-                    cursor: pointer;
-                }
-
-                fieldset.success legend {
-                    border-right: 4px solid var(--success-color);
-                }
-
-                fieldset.no-success legend {
-                    border-right: 4px solid var(--empty-color);
-                }
-                /* .noReqValue {
-                    border-radius: 16px;
-                    padding: 18px;
-                    margin-left: -2;
-                    margin-right: -1;
-                }
-                .ReqValueOk {
-                    border-radius: 16px;
-                    padding: 18px;
-                    margin-left: -2;
-                    margin-right: -1;
-                } */
-                .none {
-                    display: none;
-                }
-            </style>
-            <div>
-                <fieldset class="persInfo noReqValue">
-                    <div class="persInfoFlex" style="display: flex; text-align: -webkit-center; flex-direction: row; flex-wrap: wrap; align-content: space-around; align-items: flex-end; gap: 5%; justify-content: center">
-                        <div class="mb-3" id="persInfo-1">
-                            <label for="organization">Организация:</label>
-                            <br />
-                            <input class="form-input form-element input" id="organization" type="text" placeholder="Введите организацию" required />
-                        </div>
-                        <div class="mb-3" id="persInfo-2">
-                            <label for="fio">Контактное лицо: ФИО</label>
-                            <br />
-                            <input class="form-input form-element input" id="fio" type="text" placeholder="Введите ФИО" required />
-                        </div>
-                        <div class="mb-3" id="persInfo-3">
-                            <label for="phone">Телефон:</label>
-                            <br />
-                            <input class="form-input form-element input" id="phone" type="number" placeholder="Введите телефон" required />
-                            <style>
-                                input::-webkit-outer-spin-button,
-                                input::-webkit-inner-spin-button {
-                                    -webkit-appearance: none;
-                                    margin: 0;
-                                }
-                                input[type='number'] {
-                                    -moz-appearance: textfield;
-                                }
-                            </style>
-                        </div>
-                        <div class="mb-3" id="persInfo-4">
-                            <label for="email">Email:</label>
-                            <br />
-                            <input class="form-input form-element input" id="email" type="email" placeholder="Введите почту" required />
-                        </div>
-                        
-                    </div>
-                </fieldset>
-            </div>
-            <div id="step-2" style="">
+            <div class = 'fixedMark'>
                 <div class = 'marknnumbers'>
-                    <div class="mb-3 " id="numbers" style="margin-left: 2%; margin-right: 1%">
-                        <label for="numbersOfEp">Кол-во приводов:</label>
-                        <br />
-                        <input class="form-input form-element input" id="numbersOfEp" type="number" placeholder="Введите кол-во" />
-                    </div>
-    
-                    <div class="col-sm-4">
-                        <div id="mark-gen" class="lead mb-3 form-control is-invalid">ЭП4-X-X-X-X-X-X-XX</div>
-                    </div>
-                </div>
+                    <div id="mark-gen" class="lead mb-3 form-control ">ЭП4-X-X-X-X-X-X-XX</div>
+            </div>    
             </div>
-                <fieldset class="row mb-3 timeMode ReqValueOk">
-                    <legend class="col-form-label col-sm-3 pt-0">Режим работы</legend>
-                    <div class="col-sm-9">
+
+
+<div class="row">
+    <div id="step-1">
+        <div class = 'styleForHead'>
+            <h2>Общие характеристики автоматизируемой арматуры и электропривода</h2>
+        </div>
+        <fieldset class="row mb-3 timeMode noReqValue">
+            <legend class ='blockNumber'>1
+                <a href="#" class="" data-bs-toggle="modal" data-bs-target="#modalForRezhim">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                        <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
+                      </svg>
+                    </a>
+            </legend>
+            <div class="col-sm-9">
+                <legend class="col-form-label col-sm-3 pt-0">Режим работы</legend>
                         <div class="form-check">
-                            <input class="form-check-input ch-mark" value=" " type="radio" name="working-mode" id="working-mode-1" checked="" />
+                            <input class="form-check-input ch-mark" value="" type="radio" name="working-mode" id="working-mode-1" />
                             <label class="form-check-label" for="working-mode-1"> Запорная арматура </label>
                         </div>
                         <div class="form-check">
@@ -149,57 +62,39 @@
                         </div>
                     </div>
                 </fieldset>
-                <fieldset class="row mb-3 noReqValue" id="executionWrapLegend">
-                    <legend class="col-form-label col-sm-3 pt-0">
-                        Исполнение
-                        <a href="#" class="" data-bs-toggle="modal" data-bs-target="#help-modal"
-                            ><svg height="12px" id="Capa_1" style="enable-background: new 0 0 91.999 92" version="1.1" viewBox="0 0 91.999 92" width="91.999px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                <path
-                                    d="M45.385,0.004C19.982,0.344-0.334,21.215,0.004,46.619c0.34,25.393,21.209,45.715,46.611,45.377  c25.398-0.342,45.718-21.213,45.38-46.615C91.655,19.986,70.785-0.335,45.385,0.004z M45.249,74l-0.254-0.004  c-3.912-0.116-6.67-2.998-6.559-6.852c0.109-3.788,2.934-6.538,6.717-6.538l0.227,0.004c4.021,0.119,6.748,2.972,6.635,6.937  C51.903,71.346,49.122,74,45.249,74z M61.704,41.341c-0.92,1.307-2.943,2.93-5.492,4.916l-2.807,1.938  c-1.541,1.198-2.471,2.325-2.82,3.434c-0.275,0.873-0.41,1.104-0.434,2.88l-0.004,0.451H39.429l0.031-0.907  c0.131-3.728,0.223-5.921,1.768-7.733c2.424-2.846,7.771-6.289,7.998-6.435c0.766-0.577,1.412-1.234,1.893-1.936  c1.125-1.551,1.623-2.772,1.623-3.972c0-1.665-0.494-3.205-1.471-4.576c-0.939-1.323-2.723-1.993-5.303-1.993  c-2.559,0-4.311,0.812-5.359,2.478c-1.078,1.713-1.623,3.512-1.623,5.35v0.457H27.935l0.02-0.477  c0.285-6.769,2.701-11.643,7.178-14.487C37.946,18.918,41.446,18,45.53,18c5.346,0,9.859,1.299,13.412,3.861  c3.6,2.596,5.426,6.484,5.426,11.556C64.368,36.254,63.472,38.919,61.704,41.341z"></path>
-                                <g></g>
-                                <g></g>
-                                <g></g>
-                                <g></g>
-                                <g></g>
-                                <g></g>
-                                <g></g>
-                                <g></g>
-                                <g></g>
-                                <g></g>
-                                <g></g>
-                                <g></g>
-                                <g></g>
-                                <g></g>
-                                <g></g>
-                            </svg>
-                        </a>
-                    </legend>
+                
+                <fieldset class="row mb-3 noReqValue"  id = 'executionWrapLegend'>
+                    <legend class ='blockNumber'>2
+                    <!-- <legend class="col-form-label col-sm-3 pt-0"> -->
+                        <a href="#" class="" data-bs-toggle="modal" data-bs-target="#help-modal">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
+                              </svg>
+                            </a>
+                        </legend>
+                    <legend class="col-form-label col-sm-3 pt-0">Исполнение</legend>
                     <div class="col-sm-9" id="execution-wrap">
-                        <div class="form-check">
-                            <input class="form-check-input ch-mark" type="radio" name="execution" id="execution-Н" value="Н" />
-                            <label class="form-check-label" for="execution-Н">Общепромышленное исполнение</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input ch-mark" type="radio" name="execution" id="execution-В" value="В" />
-                            <label class="form-check-label" for="execution-В">Взрывозащитное исполнение</label>
-                        </div>
                     </div>
                 </fieldset>
 
+        </div>
+            <!-- <div id="step-2"> -->
                 <fieldset class="row mb-3 noReqValue" id="connection-type-wrap">
-                    <legend class="col-form-label col-sm-3 pt-0">Тип присоединения выходного вала привода к валу арматуры</legend>
+                    <legend class ='blockNumber'>3</legend>
                     <div class="col-sm-9">
+                        <legend class="col-form-label col-sm-3 pt-0">Тип присоединения выходного вала привода к валу арматуры</legend>
                         <div class="form-check">
                             <input class="form-check-input ch-upper-limit ch-time-limit ch-mark ch-cs" type="radio" value="1" name="connection-type" id="connection-type-1">
-                            <label class="form-check-label" for="connection-type-1">кулачковое присоединение для фланцев из ряда МК, АК, Б, В, Г, Д</label>
+                            <label class="form-check-label" for="connection-type-1">Кулачковое присоединение для фланцев из ряда МК, АК, Б, В, Г, Д</label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input ch-upper-limit ch-time-limit ch-mark ch-cs" type="radio" value="2" name="connection-type" id="connection-type-2">
-                            <label class="form-check-label" for="connection-type-2">присоединение под квадрат для фланцев АЧ</label>
+                            <label class="form-check-label" for="connection-type-2">Присоединение под квадрат для фланцев АЧ</label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input ch-upper-limit ch-time-limit ch-mark ch-cs" type="radio" value="3" name="connection-type" id="connection-type-3">
-                            <label class="form-check-label" for="connection-type-3">присоединение для фланцев из ряда F07...F40</label>
+                            <label class="form-check-label" for="connection-type-3">Присоединение для фланцев из ряда F07...F40</label>
                         </div>
                     </div>
                 </fieldset>
@@ -444,45 +339,6 @@
                 </fieldset>
                 <!-- ОСТАЛЬНОЕ ДЛЯ ЗАКАЗА -->
                 <div class = 'orderForm'>
-                    <fieldset class="row mb-3 pressure noReqValue" >
-                        <legend class="col-form-label col-sm-3 pt-0">Номинальное давление</legend>
-                        <div class="col-sm-9">
-                                <p>Ру <input type="number" class="form-input" name="pressure" id="pressure" placeholder="Укажите давление"> Мпа</p>
-                                </input>
-                            </div>
-                    </fieldset>
-
-                    <fieldset class="row mb-3 diameter noReqValue" >
-                        <legend class="col-form-label col-sm-3 pt-0">Диаметр</legend>
-                        <div class="col-sm-9">
-                                <p>Ду <input type="number" class="form-input" name="diameter" id="diameter" placeholder="Укажите диаметр"> мм</p>
-                                </input>
-                            </div>
-                    </fieldset>
-
-                    <fieldset class="row mb-3 closingTime noReqValue" >
-                        <legend class="col-form-label col-sm-3 pt-0">Требуемое время закрытия</legend>
-                        <div class="col-sm-9">
-                                <p>Не более <input type="number" class="form-input" name="closingTimeTo" id="closingTimeTo" placeholder="............"> сек., не менее <input type="number" class="form-input" name="closingTimeFrom" id="closingTimeFrom" placeholder="............"></p>
-                                </input>
-                            </div>
-                    </fieldset>
-
-                    <fieldset class="row mb-3 maxRMoment noReqValue" >
-                        <legend class="col-form-label col-sm-3 pt-0">Максимальный крутящий момент / (Усилие)</legend>
-                        <div class="col-sm-9">
-                                <p>На открывание <input placeholder="............" type="number" class="form-input" name="maxRMoment" id="maxRMoment"> Нм / (кН)</p>
-                                </input>
-                            </div>
-                    </fieldset>
-
-                    <fieldset class="row mb-3 maxRMoment2 noReqValue" >
-                        <legend class="col-form-label col-sm-3 pt-0">Максимальный крутящий момент / (Усилие)</legend>
-                        <div class="col-sm-9">
-                                <p>На закрывание <input placeholder="............" type="number" class="form-input" name="maxRMoment2" id="maxRMoment2"> Нм / (кН)</p>
-                                </input>
-                            </div>
-                    </fieldset>
                     <fieldset class="row mb-3 valType noReqValue" >
                         <legend class="col-form-label col-sm-3 pt-0">Тип вала</legend>
                         <div class="col-sm-9">
@@ -585,7 +441,7 @@
                             <legend class="col-form-label col-sm-3 pt-0">Сигнали дистанционного управления (только для Эиму и ВИМУ)</legend>
                             <select class="form-select" name="commandSignal" id="commandSignal">
                                 <option value="" selected disabled>Выберите значение</option>
-                                <option value="0"  >отсутствует</option>
+                                <option value="0">отсутствует</option>
                                 <option value="1">4-20 мА</option>
                                 <option value="2">RS485 Modbus</option>
                                 <option value="3">RS485 Profibus</option>
