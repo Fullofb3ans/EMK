@@ -62,12 +62,14 @@ $(document).ready(function () {
 
     const executions = {
         epn: {
-            Н: 'Общепромышленное исполнение',
+            Н: 'Общепромышленное исполнение1',
             В: 'Взрывозащитное исполнение',
         },
     };
 
-    const execution_wrap = $('#execution-wrap');
+
+
+
 
     const time_limits = {
         epn: {
@@ -270,6 +272,7 @@ $(document).ready(function () {
     let e2BlockModal = new bootstrap.Modal($('#block-configure-e2'));
 
     $(document).on('change', "input[name='constructive-scheme']", function (e) {
+
         $('#step-5').show();
         let execution = $("input[name='execution']:checked").val();
 

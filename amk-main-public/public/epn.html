@@ -24,7 +24,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js" integrity="sha512-Eak/29OTpb36LLo2r47IpVzPBLXnAMPAVypbSZiZ4Qkf8p/7S/XRG5xp7OKWPPYfJT6metI+IORkR5G8F900+g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <script src="ep4.js"></script>
+    <script src="epn.js"></script>
 
     <link href = 'konfiguratorStyle.css' rel="stylesheet">
     <body>
@@ -37,7 +37,7 @@
 
 
 <div class="row">
-    <div id="step-1">
+    <!-- <div id="step-1"> -->
         <div class = 'styleForHead'>
             <h2>Общие характеристики автоматизируемой арматуры и электропривода</h2>
         </div>
@@ -73,35 +73,26 @@
                               </svg>
                             </a>
                         </legend>
-                    <legend class="col-form-label col-sm-3 pt-0">Исполнение</legend>
+                    <legend class="col-form-label col-sm-3 pt-0">Исполнение по взрывозащите</legend>
                     <div class="col-sm-9" id="execution-wrap">
+                        <div class="form-check">
+                            <input class="form-check-input ch-mark" type="radio" value="В" name="execute" id="V-execute">
+                            <label class="form-check-label" for="V-execute">Взрывозащищенное исполнение
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input ch-mark" type="radio" value="Н" name="execute" id="Н-execute">
+                            <label class="form-check-label" for="Н-execute">Общепромышленное исполнение</label>
+                        </div>
                     </div>
                 </fieldset>
 
         </div>
             <!-- <div id="step-2"> -->
-                <fieldset class="row mb-3 noReqValue" id="connection-type-wrap">
-                    <legend class ='blockNumber'>3</legend>
-                    <div class="col-sm-9">
-                        <legend class="col-form-label col-sm-3 pt-0">Тип присоединения выходного вала привода к валу арматуры</legend>
-                        <div class="form-check">
-                            <input class="form-check-input ch-upper-limit ch-time-limit ch-mark ch-cs" type="radio" value="1" name="connection-type" id="connection-type-1">
-                            <label class="form-check-label" for="connection-type-1">Кулачковое присоединение для фланцев из ряда МК, АК, Б, В, Г, Д</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input ch-upper-limit ch-time-limit ch-mark ch-cs" type="radio" value="2" name="connection-type" id="connection-type-2">
-                            <label class="form-check-label" for="connection-type-2">Присоединение под квадрат для фланцев АЧ</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input ch-upper-limit ch-time-limit ch-mark ch-cs" type="radio" value="3" name="connection-type" id="connection-type-3">
-                            <label class="form-check-label" for="connection-type-3">Присоединение для фланцев из ряда F07...F40</label>
-                        </div>
-                    </div>
-                </fieldset>
+            <!-- </div> -->
 
-            </div>
-            <div id="step-3">
-                <fieldset class="row mb-3 upperLimitFieldset">
+            <!-- <div id="step-3"> -->
+                <fieldset class="row mb-3 upperLimitFieldset noReqValue">
                     <legend class="col-form-label col-sm-3 pt-0">Верхний предел ограничителя крутящего момента, Н*м</legend>
                     <div class="col-sm-9">
                         <select class="form-select form-element ch-time-limit ch-mark ch-cs" data-step="3" name="upper-limit" id="upper-limit">
@@ -120,8 +111,8 @@
                 </fieldset>
             </div>
 
-            <div id="step-4">
-                <fieldset class="row mb-3" id="time-limit-wrap">
+            <!-- <div id="step-4"> -->
+                <fieldset class="row mb-3 noReqValue" id="time-limit-wrap">
                     <legend class="col-form-label col-sm-3 pt-0">Время рабочего хода, с</legend>
                     <div class="col-sm-9">
                         <select class="form-select form-element ch-mark ch-cs" name="time-limit" id="time-limit">
@@ -133,7 +124,7 @@
                 </fieldset>
             </div>
 
-            <div id="step-5">
+            <!-- <div id="step-5"> -->
                 <fieldset class="row mb-3" id="rotation-frequency-wrap" style="display: none">
                     <legend class="col-form-label col-sm-3 pt-0">Частота вращения выходного вала, об/мин</legend>
                     <div class="col-sm-9">
@@ -141,7 +132,7 @@
                     </div>
                 </fieldset>
 
-                <fieldset class="row mb-3" id="schemeFieldSet">
+                <fieldset class="row mb-3 optionalField" id="schemeFieldSet">
                     <legend class="col-form-label col-sm-3 pt-0"></legend>
                     <div class="col-sm-9" id="constructive-scheme-wrap">
                         <div class="form-check">
@@ -151,7 +142,7 @@
                     </div>
                 </fieldset>
 
-                <fieldset class="row mb-3">
+                <fieldset class="row mb-3 noReqValue">
                     <legend class="col-form-label col-sm-3 pt-0">Присоединительный фланец</legend>
                     <div class="col-sm-9">
                         <select class="form-select form-element ch-mark" data-step="4" name="flange" id="flange">
@@ -160,6 +151,26 @@
                             <option value="F05">F05</option>
                             <option value="F07">F07</option>
                         </select>
+                    </div>
+                </fieldset>
+
+                <fieldset class="row mb-3 noReqValue" id = 'colorType'>
+                    <legend class ='blockNumber'>13</legend>
+                    <div class="col-sm-9">
+                        <legend class="col-form-label col-sm-3 pt-0">Цвет окраски</legend>
+                        <div class="form-check">
+                            <input class="form-check-input ch-mark" type="radio" value="1" name="color" id="color-1">
+                            <label class="form-check-label" for="color-1">Серый
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input ch-mark" type="radio" value="2" name="color" id="color-2">
+                            <label class="form-check-label" for="color-2">По спецификации заказа</label>
+                        </div>
+                    </div>
+                    <div class="none" id ='ralDiv'>
+                        <input class="form-input" type="text" name="ralColor" id="ralColor" placeholder="Укажите требования">
+                        <label class="form-check-label" for="ralColor"></label>
                     </div>
                 </fieldset>
 
@@ -182,7 +193,7 @@
                     </div>
                 </fieldset>
 
-                <fieldset class="row mb-3" id="control-block-fieldset">
+                <fieldset class="row mb-3 noReqValue" id="control-block-fieldset">
                     <legend class="col-form-label col-sm-3 pt-0">Тип блока управления</legend>
                     <div class="col-sm-9">
                         <div class="input-group">
@@ -198,7 +209,7 @@
                     </div>
                 </fieldset>
 
-                <fieldset class="row mb-3" id="temperature">
+                <fieldset class="row mb-3 noReqValue" id="temperature">
                     <legend class="col-form-label col-sm-3 pt-0">Вариант температурного исполнения</legend>
                     <div class="col-sm-9">
                         <select class="form-select form-element ch-mark" data-step="4" name="climatic-modification" id="climatic-modification">
@@ -213,7 +224,7 @@
                     </div>
                 </fieldset>
 
-                <fieldset class="row mb-3 epn-only">
+                <fieldset class="row mb-3 noReqValue">
                     <legend class="col-form-label col-sm-3 pt-0">Номинальный рабочий ход, град.</legend>
                     <div class="col-sm-9">
                         <div class="form-check">
@@ -227,7 +238,7 @@
                     </div>
                 </fieldset>
 
-                <fieldset class="row mb-3 epn-only">
+                <fieldset class="row mb-3 noReqValue">
                     <legend class="col-form-label col-sm-3 pt-0">Специальное исполнение</legend>
                     <div class="col-sm-9">
                         <div class="form-check">
@@ -241,7 +252,7 @@
                     </div>
                 </fieldset>
 
-                <fieldset class="row mb-3" id="waterProtection">
+                <fieldset class="row mb-3 noReqValue" id="waterProtection">
                     <legend class="col-form-label col-sm-3 pt-0">Степень защиты от проникновения пыли и воды</legend>
                     <div class="col-sm-9">
                         <div class="form-check">
@@ -255,67 +266,25 @@
                     </div>
                 </fieldset>
 
-                <fieldset class="row mb-3 drawingField optionalField" >
-                    <legend class="col-form-label col-sm-3 pt-0">Доработка втулки выходного вала</legend>
-                    <div class="col-sm-9">
-                        <label>Чертеж прилагается</label>
-                        <input type="checkbox" name="drawing" id="drawing" />
-                    </div>
-                </fieldset>
-
-                <fieldset class="row mb-3 drawingField optionalField none" id="upload" style="margin-left: 2%; margin-right: 1%">
-                    <div class="col-sm-9">
-                        <input type="file" />
-                    </div>
-                </fieldset>
-
-                <fieldset class = "row mb-3 ep4-only optionalField" >
+                <fieldset class = "row mb-3 optionalField " >
+                    <legend class ='blockNumber'>16</legend>
                     <div class = 'additional accessories'> 
-                        <legend>Дополнительные аксессуары</legend>
                         <label id = 'cap'>
-                            <input type = 'checkbox' value="Защитный колпак" name = 'cap'>Защитный колпак                           
+                            <legend class="col-form-label col-sm-3 pt-0">Дополнительные аксессуары</legend>
+                            <input type = 'checkbox' value="Защитный колпак" name = 'cap'> Защитный колпак                           
                             </input>
                         </label>
                             </br>
                         <label id = 'pointer'>
-                            <input type = 'checkbox'  value= 'Механический указатель' name= 'pointer'>Механический указатель
+                            <input type = 'checkbox'  value= 'Механический указатель' name= 'pointer'> Механический указатель
                         </input>
                         </label>
-                    </div>            
-                </fieldset>
-
-                <fieldset class = "row mb-3 ep4-only optionalField" >
-                    <div class = 'additional accessories'> 
-                        <legend>Дополнительные опции</legend>
-                        <label id = 'mechSelectorId'>
-                            <input type = 'checkbox' name = 'mechSelector'>Механический селектор переключения режима работы местн./дист.;                           
-                            </input>
-                        </label>
-                            </br>
+                    </br>
                         <label id = 'boardRegId'>
-                            <input type = 'checkbox' name= 'boardReg'>Плата регистратор
+                            <input type = 'checkbox' name= 'boardReg'> Плата регистратор
                         </input>
                         </label>
                     </div>            
-                </fieldset>
-            </div>
-
-                <fieldset class="row mb-3 noReqValue" id="colorType">
-                    <legend class="col-form-label col-sm-3 pt-0">Цвет окраски</legend>
-                    <div class="col-sm-9">
-                        <div class="form-check">
-                            <input class="form-check-input ch-mark" type="radio" value="1" name="color" id="color-1" />
-                            <label class="form-check-label" for="color-1">серый</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input ch-mark" type="radio" value="2" name="color" id="color-2" />
-                            <label class="form-check-label" for="color-2">по спецификации заказа</label>
-                        </div>
-                        <div class="none" id ='ralDiv'>
-                            <input class="form-input" type="text" name="ralColor" id="ralColor" placeholder="Укажите код цвета      ">
-                            <label class="form-check-label" for="ralColor">RAL</label>
-                        </div>
-                    </div>
                 </fieldset>
 
                 <fieldset class="row mb-3 epn-only noReqValue">
@@ -340,46 +309,6 @@
                     </div>
                 </fieldset>
                 <!-- ОСТАЛЬНОЕ ДЛЯ ЗАКАЗА -->
-                <div class = 'orderForm'>
-                    <fieldset class="row mb-3 valType noReqValue" >
-                        <legend class="col-form-label col-sm-3 pt-0">Тип вала</legend>
-                        <div class="col-sm-9">
-                            <select class="form-select" name="valType" id="valType">
-                                <option value="" selected disabled >Выберите значение</option>
-                                <option value="0">Квадрат</option>
-                                <option value="1">Шпонка</option>
-                                <option value="2">Лыски</option>
-                                <option value="3">Кулачек</option>
-                            </select> : 
-                            <input type="number" class="form-input" name="sVal" id="sVal" placeholder="............"> мм;</p>
-                            </input>
-                        </div>
-                        <p>
-                            <legend class="col-form-label col-sm-3 pt-0">Вылет штока</legend>
-                            <input placeholder="............" type="number" class="form-input" name="outStock" id="outStock"> мм.
-                        </input>
-                    </p>
-                        <legend class="col-form-label col-sm-3 pt-0">Диаметр штока</legend>
-                                <input placeholder="............" type="number" class="form-input" name="dStock" id="dStock"> мм.
-                                </input>
-                            </div>
-                    </fieldset>
-
-                    <fieldset class="row mb-3 closeNumbers ReqValueOk" >
-                        <legend class="col-form-label col-sm-3 pt-0">Кол-во оборотов для закрытия арматуры</legend>
-                        <div class="col-sm-9">
-                                <p><input disabled value="90" type="number" class="form-input" name="closeNumbers" id="closeNumbers"> градусов</p>
-                                </input>
-                            </div>
-                    </fieldset>
-
-                    <fieldset class="row mb-3 working-env noReqValue" >
-                        <legend class="col-form-label col-sm-3 pt-0">Рабочая среда</legend>
-                        <div class="col-sm-9">
-                                <input placeholder="............" class="form-input" name="working-env" id="working-env">
-                                </input>
-                            </div>
-                    </fieldset>
 
                     <fieldset class="row mb-3 placeForEnv ReqValueOk" >
                         <legend class="col-form-label col-sm-3 pt-0">Установка</legend>
@@ -422,35 +351,6 @@
                             </div>
                         </div>
                     </fieldset>
-                    
-                    <fieldset class="row mb-3 signal noReqValue" >
-                            <legend class="col-form-label col-sm-3 pt-0">Сигнализация положения</legend>
-                            <select class="form-select" name="signal" id="signal">
-                                <option value="" selected disabled>Выберите значение</option>
-                                <option value="0" >отсутствует</option>
-                                <option value="1">потенциометр 100 ом</option>
-                                <option value="2">4-20 мА</option>
-                                <option value="3">24 B DC</option>
-                                <option value="4">48 B DC</option>
-                                <option value="5">220 B DC</option>
-                                <option value="6">6 реле</option>
-                                <option value="7">8 реле</option>
-                                <option value="8">12 реле</option>
-                            </select>
-                    </fieldset>
-                    
-                    <fieldset class="row mb-3 commandSignal noReqValue" >
-                            <legend class="col-form-label col-sm-3 pt-0">Сигнали дистанционного управления (только для Эиму и ВИМУ)</legend>
-                            <select class="form-select" name="commandSignal" id="commandSignal">
-                                <option value="" selected disabled>Выберите значение</option>
-                                <option value="0">отсутствует</option>
-                                <option value="1">4-20 мА</option>
-                                <option value="2">RS485 Modbus</option>
-                                <option value="3">RS485 Profibus</option>
-                                <option value="4">24 B DC</option>
-                                <option value="5">220 B AC</option>
-                            </select>
-                    </fieldset>
 
                     <fieldset class="row mb-3 signalMoment optionalField" >
                         <legend class="col-form-label col-sm-3 pt-0">Сигнал "Момент" 4-20 мА</legend>
@@ -461,62 +361,26 @@
                             </div>
                         </div>
                     </fieldset>
-                    
-                    <fieldset class="row mb-3 tire optionalField" >
-                        <legend class="col-form-label col-sm-3 pt-0">Дублирование шины RS485</legend>
-                        <div class="col-sm-9" id="tire">
-                            <div class="form-check">
-                                <input class="form-check-input ch-mark" value="1" type="checkbox" name="tire" id="tire-1" />
-                                <label class="form-check-label" for="tire-1">Добавить</label>
-                            </div>
-                        </div>
-                    </fieldset>
-
-                    <fieldset class="row mb-3 cableField noReqValue" >
-                        <legend class="col-form-label col-sm-3 pt-0">Кабельные вводы</legend>
-                        <div class="col-sm-9" id="commandBlockType">
-                            <div class="form-check">
-                                <input class="form-check-input ch-mark" type="radio" name="cabels" id="cabels-1" checked="">
-                                <input placeholder="............" type = 'number' name="cabelsInput" id="cabelsInput-1"/> шт.
-                                <label class="form-check-label" for="cabels-1"></label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input ch-mark" value="0" type="radio" name="cabels" id="cabels-2" />
-                                <label class="form-check-label" for="cabels-2">Нет</label>
-                            </div>
-                        </div>
-                    </fieldset>
-
-                <fieldset class="row mb-3 stepseField noReqValue" >
-                    <legend class="col-form-label col-sm-3 pt-0">Штепсельные разъемы</legend>
-                    <div class="col-sm-9" id="stepse">
-                        <div class="form-check">
-                            <input class="form-check-input ch-mark" value="1" type="checkbox" name="stepse" id="stepse-1" checked />
-                            <label class="form-check-label" for="stepse-1">Добавить</label>
-                        </div>
-                        <input placeholder="............" type="number" id = 'inputStepse'/> шт. <br/>Тип:<br/>
-                        <input placeholder="............" type="text" id = 'inputTypeStepse'/>
-                    </div>
-                </fieldset>
 
                 <fieldset class="row mb-3 optionalField addRequirements" >
                     <legend class="col-form-label col-sm-3 pt-0">Дополнительные требования</legend>
                     <div class="col-sm-9" id="addReq">
                         <div class="form-check">
-                            <textarea placeholder="Пример: ЭП4Н-А-60-16-Э11-2-11111, документация в 4-х комплектах + CD" style="padding: 5px; resize: none;" name="addReqarea" id="addReqarea" rows="10" cols="100"></textarea>
+                            <textarea placeholder="" style="padding: 5px; resize: none; width: 100%; padding-bottom: 10%;" name="addReqarea" id="addReqarea"></textarea>
                         </div>
 
                     </div>
                 </fieldset>
             </div>
-<!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
-            <div class="col-sm-4">
-                <div id="modal-button" class="mb-3" style="display: none">
-                    <button type="button" class="btn btn-info">Технические характеристики</button>
-                </div>
-                <div id="certs-pdf"></div>
-                <div id="constructive-scheme-img"><img src="./img/epnn-scheme-1.png" class="img-fluid" /></div>
+            <div id="modal-button" class="mb-3">
+                <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modal-th">Скачать документацию</button>
             </div>
+            </div>
+            <div id="certs-pdf">
+                   <button class ='btn-info' > <a href="./pdf/certEp4.pdf" style="text-decoration: none; color: black; ">Сертификат</a></button>
+                   <button class ='btn-info' style="margin-left: 1%;"> <a href="./pdf/declarationEp4.pdf" style="text-decoration: none; color: black;">Декларация</a></button>
+            </div>
+<!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 
             <div class="modal" id="block-configure-m1" tabindex="-1">
                 <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">

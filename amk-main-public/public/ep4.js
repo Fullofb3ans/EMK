@@ -872,7 +872,7 @@ $(document).ready(function () {
                 headers: { 'Content-Type': 'application/json;charset=utf-8' },
                 body: JSON.stringify({
                     jsn0: [j00, j01, j02, j03, j04, j05],
-                    jsn1: [j10, j11, j12, j13, j14, j15, j16, j17, j18],
+                    jsn1: [j10, j11, j12, j13, j14, j15, j16, j17, j18, j19],
                     jsn2: [j20, j21, j22, j23, j24],
                     jsn3: [j30, j31, j32, j33, j34, j35, j36, j37, j38, j39, j310, j311],
                     jsn4: [j40, j41, j42, j43, j44, j45],
@@ -889,31 +889,6 @@ $(document).ready(function () {
                 });
         }
         sendToServer();
-    });
-
-    // сокрытия пункта кабельных вводов
-    $('.cableField').on('change', function (e) {
-        if (!document.querySelector('#cabels-1').checked) {
-            document.querySelector('#cabelsInput-1').disabled = true;
-            document.querySelector('#cabelsInput-1').value = '';
-        } else {
-            document.querySelector('#cabelsInput-1').disabled = false;
-        }
-        document.querySelector('#cabels-1').value = document.querySelector('#cabelsInput-1').value;
-    });
-
-    // сокрытия пункта штепсельных вводов
-    $('.stepseField').on('change', function (e) {
-        if (!document.querySelector('#stepse-1').checked) {
-            document.querySelector('#inputStepse').disabled = true;
-            document.querySelector('#inputTypeStepse').disabled = true;
-            document.querySelector('#inputStepse').value = '';
-            document.querySelector('#inputTypeStepse').value = '';
-        } else {
-            document.querySelector('#inputStepse').disabled = false;
-            document.querySelector('#inputTypeStepse').disabled = false;
-        }
-        document.querySelector('#inputStepse').value = document.querySelector('#inputStepse').value;
     });
 
     // сокрытия пункта Ral
