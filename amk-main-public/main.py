@@ -112,15 +112,19 @@ def download_file(ID):
 def get_param(jsn = Body()):
     a = jsn["a"]
     bd = DB(a[0])
-    for i in range(5-len(a)):
+    for i in range(7-len(a)):
         a.append("")
-    res = bd.get_params(a[0], a[1], a[2], a[3], a[4])
+    if a[0] == "ЭП4":
+        res = bd.get_params(a[0], a[1], a[2], a[3], a[4], "", "")
+    elif a[0] == "ЭПН":
+        res = bd.get_params(a[0], a[1], a[2], a[3], a[4], a[5], a[6])
     try:
         res.sort(key=int)
     except:
         res = [res]
     print(res)
     return {"ans" : res}
+
 
 
 @app.post("/download")
@@ -142,6 +146,8 @@ def download_file(jsn = Body()):
     mark = jsn1[1]
     if mark[:3] == "ЭП4": 
         tbls = dc.ep4()
+    elif mark[:3] == "ЭПН": 
+        tbls = dc.epn()
 
 
 
