@@ -1605,9 +1605,10 @@ $(document).ready(function () {
         if(closNumbers && rotAtMin ) {closingTime = Math.round(closNumbers/(rotAtMin/60))}
         if(closingTime && rotAtMin ) {closNumbers = Math.round(closingTime*(rotAtMin/60))}
         if(closingTime && closNumbers ) {
+            rotAtMin = Math.round(closNumbers/closingTime*60)
             rotationSelect = document.querySelector("#rotation-frequency");
-            for (let i = 0; i < a.length; i++) {
-            if(a[i].value < 100){a.remove(i)}
+            for (let i = 0; i < rotationSelect.length; i++) {
+            while(rotationSelect[i].value < rotAtMin){rotationSelect.remove(i)}
         }}
     });
 
