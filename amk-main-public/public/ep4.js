@@ -747,6 +747,7 @@ $(document).ready(function () {
         let j16 = $("input[name='placeForEnv']:checked").closest('.form-check').find('.form-check-label').text(); // установка
         let j17 = document.querySelector('#rotation-frequency').value; // частота вращения
         let j18 = schemeForSend; // конструктивная схема
+        let j19 = document.querySelector("#closeNumbers").value; // конструктивная схема
         // json1 = [j10, j11, j12, j13, j14, j15, j16, j17, j18];
 
         //json2

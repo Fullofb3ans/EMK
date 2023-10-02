@@ -99,23 +99,6 @@
                     </div>
                 </fieldset>
 
-                <fieldset class="row mb-3 noReqValue" id="power-type-wrap">
-                    <legend class="col-form-label col-sm-3 pt-0">Тип силового электропитания</legend>
-                    <div class="col-sm-9">
-                        <div class="form-check">
-                            <input class="form-check-input ch-upper-limit ch-time-limit ch-mark ch-cs" type="radio" value="1" name="power-type" id="power-type-1" />
-                            <label class="form-check-label" for="power-type-1"> Однофазная сеть переменного тока, 220 В, 50 Гц </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input ch-upper-limit ch-time-limit ch-mark ch-cs" type="radio" value="3" name="power-type" id="power-type-2" />
-                            <label class="form-check-label" for="power-type-2"> Трёхфазная сеть переменного тока </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input ch-upper-limit ch-time-limit ch-mark ch-cs" type="radio" value="6" name="power-type" id="power-type-3" />
-                            <label class="form-check-label" for="power-type-3"> Сеть постоянного тока, 24 В </label>
-                        </div>
-                    </div>
-                </fieldset>
             </div>
             <div id="step-3">
                 <fieldset class="row mb-3 upperLimitFieldset">
@@ -177,6 +160,25 @@
                             <option value="F05">F05</option>
                             <option value="F07">F07</option>
                         </select>
+                    </div>
+                </fieldset>
+
+                <fieldset class="row mb-3 noReqValue" id="power-type-wrap">
+                    <legend class ='blockNumber'>4</legend>
+                    <div class="col-sm-9">
+                        <legend class="col-form-label col-sm-3 pt-0">Тип силового электропитания</legend>
+                        <div class="form-check">
+                            <input class="form-check-input ch-upper-limit ch-time-limit ch-mark ch-cs" type="radio" value="1" name="power-type" id="power-type-1" />
+                            <label class="form-check-label" for="power-type-1"> Однофазная сеть переменного тока, 220 В, 50 Гц </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input ch-upper-limit ch-time-limit ch-mark ch-cs" type="radio" value="3" name="power-type" id="power-type-2" />
+                            <label class="form-check-label" for="power-type-2"> Трёхфазная сеть переменного тока </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input ch-upper-limit ch-time-limit ch-mark ch-cs" type="radio" value="6" name="power-type" id="power-type-3" />
+                            <label class="form-check-label" for="power-type-3"> Сеть постоянного тока, 24 В </label>
+                        </div>
                     </div>
                 </fieldset>
 
