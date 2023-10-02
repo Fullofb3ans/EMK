@@ -1573,19 +1573,22 @@ $(document).ready(function () {
             document.querySelector("#control-block-optionsset").classList.add('noReqValue');
         }
     });
-    // Формула для требуемого времени закрытия
-    $(document).on('change', function (e) {
+// Формула для требуемого времени закрытия по оборотам
+$('#closeNumbers').on('change', function (e) {
+        closeNumbers = document.querySelector("#closeNumbers").value;
+        rotAtMin = document.querySelector("#rotation-frequency").value;      
+        if(closeNumbers && rotAtMin ) {
+            document.querySelector("#closingTime").value = closingTime = Math.round(closeNumbers/(rotAtMin/60))
+        }
+    });
+// Формула для требуемого времени закрытия по времени
+    $('#closingTime').on('change', function (e) {
         closingTime = document.querySelector("#closingTime").value;
-        closNumbers = document.querySelector("#closeNumbers").value;
         rotAtMin = document.querySelector("#rotation-frequency").value;
-        if(closNumbers && rotAtMin ) {closingTime = Math.round(closNumbers/(rotAtMin/60))}
-        if(closingTime && rotAtMin ) {closNumbers = Math.round(closingTime*(rotAtMin/60))}
-        if(closingTime && closNumbers ) {
-            rotAtMin = Math.round(closNumbers/closingTime*60)
-            rotationSelect = document.querySelector("#rotation-frequency");
-            for (let i = 0; i < rotationSelect.length; i++) {
-            while(rotationSelect[i].value < rotAtMin){rotationSelect.remove(i)}
-        }}
+
+        if(closingTime && rotAtMin ) {
+            document.querySelector("#closeNumbers").value = closNumbers = Math.round(closingTime*(rotAtMin/60))
+        }
     });
 
     // // ОТОБРАЖЕНИЕ пункта защиты IP54
