@@ -1574,7 +1574,7 @@ $(document).ready(function () {
         }
     });
 // Формула для требуемого времени закрытия по оборотам
-$('#closeNumbers').on('change', function (e) {
+$('#closeNumbers').on('keyup', function (e) {
         closeNumbers = document.querySelector("#closeNumbers").value;
         rotAtMin = document.querySelector("#rotation-frequency").value;      
         if(closeNumbers && rotAtMin ) {
@@ -1582,7 +1582,7 @@ $('#closeNumbers').on('change', function (e) {
         }
     });
 // Формула для требуемого времени закрытия по времени
-    $('#closingTime').on('change', function (e) {
+    $('#closingTime').on('keyup', function (e) {
         closingTime = document.querySelector("#closingTime").value;
         rotAtMin = document.querySelector("#rotation-frequency").value;
 
@@ -1591,14 +1591,6 @@ $('#closeNumbers').on('change', function (e) {
         }
     });
 
-    // // ОТОБРАЖЕНИЕ пункта защиты IP54
-    // $('#executionWrapLegend').on('change', function (e) {
-    //     if(document.querySelector("#execution-Н").checked){
-    //     document.querySelector("#hProtection").style.display = 'block';
-    // }
-    // else {document.querySelector("#hProtection").style.display = 'none'}
-    //  });
-    
         function selectRemoteSignal() {
 
         let BoMark = document.querySelector("#controle-blocks-series").value;
