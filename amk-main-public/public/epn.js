@@ -8,22 +8,6 @@ $(document).ready(function () {
         $(el).toggleClass('table-success');
     });
 
-    // КОНСТАНТЫ ДЛЯ ПДФ
-    const torques = {
-        epn: {
-            Н: {
-                1: [20, 40, 75, 80, 100, 150, 300, 600, 1200],
-                3: [20, 40, 75, 80, 150, 300, 420, 600, 1200],
-                6: [20, 40, 75, 80, 150, 300, 420, 600, 840, 1200],
-            },
-            В: {
-                1: [20, 40, 75, 80, 150, 200, 300, 600, 1200],
-                3: [20, 40, 75, 80, 150, 200, 300, 420, 600, 1200],
-                6: [20, 40, 75, 80, 150, 200, 300, 600, 1200],
-            },
-        },
-    };
-
     const certs_pdf = {
         epn: {
             Н: {
@@ -57,206 +41,6 @@ $(document).ready(function () {
                 31: 'epnv-scheme-3.png',
                 32: 'epnv-scheme-32.png',
             },
-        },
-    };
-
-    const executions = {
-        epn: {
-            Н: 'Общепромышленное исполнение1',
-            В: 'Взрывозащитное исполнение',
-        },
-    };
-
-
-
-
-
-    const time_limits = {
-        epn: {
-            Н: {
-                // Общепромышленное исполнение
-                1: {
-                    // Однофазная 220
-                    0: {
-                        20: [5.6, 8, 11, 16, 22, 32, 45, 63],
-                        40: [16, 22, 32, 45, 63],
-                        80: [32, 45, 63],
-                    },
-                    11: {
-                        75: [4, 5.6, 8, 11, 16, 22, 32],
-                    },
-                    1: {
-                        100: [4],
-                        150: [5.6, 8, 11, 16, 22, 32],
-                    },
-                    31: {
-                        300: [8, 11, 16, 22, 32, 45],
-                    },
-                    12: {
-                        300: [63, 90],
-                    },
-                    3: {
-                        600: [8, 11, 16, 22, 32, 45, 63],
-                    },
-                    32: {
-                        1200: [22, 32, 45, 63, 90, 125, 180],
-                    },
-                },
-                3: {
-                    0: {
-                        20: [5.6, 8, 11, 16, 22, 32, 45, 63],
-                        40: [16, 22, 32, 45, 63],
-                        80: [32, 45, 63],
-                    },
-                    11: {
-                        75: [16, 22, 32],
-                    },
-                    1: {
-                        150: [22, 32],
-                    },
-                    31: {
-                        300: [8, 11, 16, 22, 32, 45],
-                    },
-                    12: {
-                        300: [63, 90],
-                    },
-                    3: {
-                        420: [8],
-                        600: [11, 16, 22, 32, 45, 63],
-                    },
-                    32: {
-                        1200: [22, 32, 45, 63, 90, 125, 180],
-                    },
-                },
-                6: {
-                    0: {
-                        20: [4, 5.6, 8, 11, 16, 22, 32, 45, 63],
-                        40: [4, 5.6, 8, 11, 16, 22, 32, 45, 63],
-                        80: [8, 11, 16, 22, 32, 45, 63],
-                    },
-                    11: {
-                        75: [4, 5.6, 8, 11, 16],
-                    },
-                    1: {
-                        150: [4, 5.6, 8, 11, 16],
-                    },
-                    31: {
-                        300: [8, 11, 16, 22],
-                    },
-                    3: {
-                        420: [8],
-                        600: [11, 16, 22],
-                    },
-                    32: {
-                        840: [22],
-                        1200: [32, 45, 63],
-                    },
-                },
-            },
-            В: {
-                // взрывозащищённое исполнение
-                1: {
-                    // однофазная сеть 220
-                    0: {
-                        20: [5.6, 8, 11, 16, 22, 32, 45, 63],
-                        40: [16, 22, 32, 45, 63],
-                        80: [32, 45, 63],
-                    },
-                    11: {
-                        75: [16, 22, 32],
-                    },
-                    1: {
-                        100: [4],
-                        150: [5.6, 8, 11, 16, 22, 32],
-                    },
-                    2: {
-                        200: [4],
-                        300: [5.6, 8, 11, 16, 22, 32, 45, 63],
-                    },
-                    31: {
-                        300: [3, 4, 5.6, 8, 11],
-                    },
-                    12: {
-                        300: [16, 22, 32, 45, 63, 90],
-                    },
-                    3: {
-                        600: [5.6, 8, 11, 16, 22, 32, 45, 63],
-                    },
-                    32: {
-                        1200: [16, 22, 32, 45, 63, 90, 125, 180],
-                    },
-                },
-                3: {
-                    0: {
-                        20: [5.6, 8, 11, 16, 22, 32, 45, 63],
-                        40: [16, 22, 32, 45, 63],
-                        80: [32, 45, 63],
-                    },
-                    11: {
-                        75: [4, 5.6, 8, 11, 16, 22, 32],
-                    },
-                    1: {
-                        150: [22, 32],
-                    },
-                    2: {
-                        150: [4],
-                        200: [5.6],
-                        300: [8, 11, 16, 22, 32, 45, 63],
-                    },
-                    31: {
-                        300: [8, 11, 16, 22, 32, 45],
-                    },
-                    12: {
-                        300: [63, 90],
-                    },
-                    3: {
-                        420: [8],
-                        600: [11, 16, 22, 32, 45, 63],
-                    },
-                    32: {
-                        1200: [22, 32, 45, 63, 90, 125, 180],
-                    },
-                },
-                6: {
-                    0: {
-                        20: [4, 5.6, 8, 11, 16, 22, 32, 45, 63],
-                        40: [4, 5.6, 8, 11, 16, 22, 32, 45, 63],
-                        80: [8, 11, 16, 22, 32, 45, 63],
-                    },
-                    11: {
-                        75: [4, 5.6, 8, 11, 16],
-                    },
-                    1: {
-                        150: [4, 5.6, 8, 11, 16],
-                    },
-                    2: {
-                        200: [4],
-                        300: [5.6, 8, 11],
-                    },
-                    31: {
-                        300: [8, 11, 16, 22],
-                    },
-                    3: {
-                        600: [8, 11, 16, 22],
-                    },
-                    32: {
-                        1200: [22, 32, 45, 63],
-                    },
-                },
-            },
-        },
-    };
-
-    const flanges = {
-        epn: {
-            0: ['F03', 'F04', 'F05'],
-            11: ['F04', 'F05'],
-            1: ['F04', 'F05', 'F07'],
-            2: ['F07', 'F10'],
-            31: ['F07', 'F10'],
-            12: ['F07', 'F10'],
-            3: ['F10', 'F12'],
-            32: ['F12', 'F14'],
         },
     };
 
@@ -502,26 +286,18 @@ $(document).ready(function () {
         let modal_button = $('#modal-button');
 
         let x0 = 'ЭПНВ';
-        let x1 = $("input[name='working-mode']:checked").val() ? $("input[name='working-mode']:checked").val() : 'X';
-        switch (x1) {
-            case 'X':
-                ($("input[name='working-mode']")).closest('fieldset').removeClass('ReqValueOk');
-                ($("input[name='working-mode']")).closest('fieldset').addClass('noReqValue');
-                break;
-            default:
-                ($("input[name='working-mode']")).closest('fieldset').removeClass('noReqValue');
-                ($("input[name='working-mode']")).closest('fieldset').addClass('ReqValueOk');
-        }
+        let x1 = $("input[name='working-mode']:checked").val() ? $("input[name='working-mode']:checked").val() : '';
+
 
         let x2 = $("input[name='execution']:checked").val() ? $("input[name='execution']:checked").val() : 'X';
         switch (x2) {
             case 'X':
-                ($("input[name='execution']")).closest('fieldset').removeClass('ReqValueOk');
-                ($("input[name='execution']")).closest('fieldset').addClass('noReqValue');
+                $("input[name='execution']").closest('fieldset').removeClass('ReqValueOk');
+                $("input[name='execution']").closest('fieldset').addClass('noReqValue');
                 break;
             default:
-                ($("input[name='execution']")).closest('fieldset').removeClass('noReqValue');
-                ($("input[name='execution']")).closest('fieldset').addClass('ReqValueOk');
+                $("input[name='execution']").closest('fieldset').removeClass('noReqValue');
+                $("input[name='execution']").closest('fieldset').addClass('ReqValueOk');
         }
         
         let x3 = $('#flange').val() ? $('#flange').val() : 'X';
@@ -668,21 +444,7 @@ $(document).ready(function () {
 
         mark_gen.text(x0 + x1 + x2 + '-' + x3 + '-' + x4 + '-' + x5 + '-' + x6 + '/' + x7 + '-' + x8 + '-' + x9 + '-' + x10 + x11 + x12 + x13);
 
-        $('#certs-pdf').empty();
-        if (!is_true && certs_pdf['epn'][x2] !== undefined) {
-            $('#certs-pdf').append(
-                $('<a>')
-                    .attr({ href: 'pdf/' + certs_pdf['epn'][x2]['cert'], target: '_blank' })
-                    .text('Сертификат')
-                    .css('padding', '1.5%'),
-                $('<a>')
-                    .attr({ href: 'pdf/' + certs_pdf['epn'][x2]['decl'], target: '_blank' })
-                    .text('Декларация')
-                    .css('padding', '1.5%')
-            );
-        }
-
-        modal_button.toggle(!is_true);
+        // modal_button.toggle(!is_true);
         mark_gen.toggleClass('is-invalid', is_true).toggleClass('is-valid', !is_true);
     });
 
@@ -694,79 +456,165 @@ $(document).ready(function () {
         let addOptBoard = document.querySelector("#boardRegId > input[type=checkbox]").checked ? 2 : 0;
         let allOpt = addOptSel + addOptBoard;
 
-        let color = $("input[name='color']:checked").val();
-        if (color == '1') {
-            color = '0';
-        } else if (color == '2') {
-            color = '1';
-        }
-
         //создание jsona
-        j1 = 'ЭПН';
-        j2 = document.querySelector('#mark-gen').innerText;
-        j3 = 'АО Тулаэлектропривод';
-        j4 = document.querySelector('#pressure').value;
-        j5 = document.querySelector('#diameter').value;
-        j6 = document.querySelector('#closingTimeTo').value;
-        j7 = document.querySelector('#closingTimeFrom').value;
-        j8 = document.querySelector('#maxRMoment').value;
-        j9 = document.querySelector('#maxRMoment2').value;
-        j10 = document.querySelector("#flange").value;
-        j11 = document.querySelector('#closeNumbers').value;
-        j12 = document.querySelector('#working-env').value;
-        j13 = $("input[name='placeForEnv']:checked").val() ? $("input[name='placeForEnv']:checked").val() : 2;
-
-        // Вторая часть jsona
-        h1 = $("input[name='execution']:checked").closest('.form-check').find('.form-check-label').text();
-        h2 = $("input[name='working-mode']:checked").closest('.form-check').find('.form-check-label').text();
-        h3 = $("input[name='protection']:checked").closest('.form-check').find('.form-check-label').text();
-        h4 = 'закрывание по часовой стрелке';
-        h5 = $('#climatic-modification option:selected').text();
-        h6 = $("input[name='typeEndSwich']:checked").val() ? $("input[nameypeEndSwic='th']:checked").val() : 2;
-        h7 = $("input[name='commandBlockType']:checked").val() ? $("input[name='commandBlockType']:checked").val() : 2;
-        h8 = PointerText;
-        h9 = document.querySelector('#signal').value ? document.querySelector('#signal').value : '0';
-        h10 = document.querySelector('#commandSignal').value ? document.querySelector('#commandSignal').value : 0;
-        h11 = $("input[name='signalMoment']:checked").val() ? $("input[name='signalMoment']:checked").val() : '0';
-        h12 = $("input[name='tire']:checked").val() ? $("input[name='tire']:checked").val() : '0';
-        h13 = document.querySelector('#cabels-1').checked ? '1' : '0';
-        h14 = document.querySelector('#cabels-1').checked ? document.querySelector('#cabels-1').value : '0';
-        h15 = document.querySelector('#stepse-1').checked ? '1' : '0';
-        h16 = document.querySelector('#stepse-1').checked ? document.querySelector('#inputStepse').value : '-';
-        h17 = document.querySelector('#stepse-1').checked ? document.querySelector('#inputTypeStepse').value : '___';
-        h18 = color;
-        h19 = document.querySelector('#ralColor').value ? document.querySelector('#ralColor').value : '0';
-        h20 = CapText;
-        h21 = document.querySelector('#numbersOfEp').value;
-        h22 = allOpt;
-        h23 = document.querySelector('#addReqarea').value ? document.querySelector('#addReqarea').value : '';
-
-        // ДОБАВИТЬ ARMTEXT
-        // третья часть
-        p1 = day = '';
-        p2 = month = '';
-        p3 = document.querySelector('#organization').value;
-        p4 = document.querySelector('#fio').value;
-        p5 = document.querySelector('#phone').value;
-        p6 = document.querySelector('#email').value;
-
-        sendToServer();
-
-        function sendToServer() {
-            timer = 0;
-           let post =  fetch('/download', {
-               method: 'POST',
-                headers: { 'Content-Type': 'application/json;charset=utf-8' },
-               body: JSON.stringify({
-                   jsn1: [j1, j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12, j13],
-                   jsn2: [h1, h2, h3, h4, h5, h6, h7, h8, h9, h10, h11, h12, h13, h14, h15, h16, h17, h18, h19, h20, h21, h22, h23],
-                   jsn3: [p1, p2, p3, p4, p5, p6],
-                }),
-            })
-            .then ((response) => response.json())
-            .then ((response) => window.open(`/Tula/${response.id}`));
-        }
-    });
+         // json0
+         let j00 = document.querySelector('#organization').value; //Фирма
+         let j01 = document.querySelector('#fio').value; // Фио
+         let j02 = document.querySelector('#phone').value; // Телефон
+         let j03 = document.querySelector('#email').value; // email
+         let j04 = document.querySelector('#numbersOfEp').value; // кол-во
+         let j05 = ''; //цена
+         // json0 = [j00, j01, j02, j03, j04, j05];
+ 
+         //json1
+         let j10 = 'Электроприводы многообортные ЭП4'; //тип арматуры
+         let j11 = TuMp ? document.querySelector('#mark-gen').innerText + '/' + TuMp : document.querySelector('#mark-gen').innerText; //маркировка
+         let j12 = 'АО Тулаэлектропривод'; //завод
+         let j13 = document.querySelector("#closingTime").value; //время закрытия
+         let j14 = document.querySelector("#upper-limit").value; //Максимальный крутящий момент
+         let j15 = document.querySelector('#flange').value; //присоединение к приводу
+         let j16 = $("input[name='placeForEnv']:checked").closest('.form-check').find('.form-check-label').text(); // установка
+         let j17 = document.querySelector('#rotation-frequency').value; // частота вращения
+         let j18 = schemeForSend; // конструктивная схема
+         let j19 = document.querySelector("#closeNumbers").value; // конструктивная схема
+         // json1 = [j10, j11, j12, j13, j14, j15, j16, j17, j18];
+ 
+         //json2
+         let j20 = $("input[name='execution']:checked").closest('.form-check').find('.form-check-label').text(); //исполнение по назначению
+         let j21 = $("input[name='working-mode']:checked").closest('.form-check').find('.form-check-label').text(); //режим работы
+         let j22 = $("input[name='protection']:checked").closest('.form-check').find('.form-check-label').text(); //Влагозащита
+         let j23 = $("input[name='rotating']:checked").closest('.form-check').find('.form-check-label').text(); //Вращение вых вала
+         let j24 = $('#climatic-modification option:selected').text(); //Температура
+         // json2 = [j20, j21, j22, j23, j24];
+ 
+         //json3
+         let BoMark = document.querySelector("#controle-blocks-series").value; 
+ 
+         let j30 = document.querySelector("#controle-blocks").value; // тип бу 
+         let j31 = checkCommandBlock(); // Тип управления
+         let j32 =  selectRemoteSignal();// сигналы дист управления
+ 
+         let j33 = ''; //Тип БКВ
+         if(BoMark == ''){
+             j33 = 'конфигуратор пропущен';
+         } 
+         else if (BoMark == 'ВЭ' || BoMark == 'ВЭ1'){
+             j33 = 'ВИМУ';
+         }
+          else if (BoMark == 'М2'){
+             j33 = 'МБКВ';
+         }
+ 
+         let j34 = ''; //Механический указатель
+         if (document.querySelector("#pointer > input[type=checkbox]").checked) {j34 = 'Есть'}
+          else {j34 = 'Отсутствует'};
+ 
+         let j35 =  selectPositionSignal();// Сигнализация положения
+ 
+         let j36 = ''; // Сигнал момэнт
+         if (document.querySelector("#signalMoment-1").checked) {j36 = 'Есть'}
+          else {j36 = 'Отсутствует'};
+ 
+         let j37 = ''; // Дублирование RS485
+         if(j30 == 'Э18' || j30 == 'Э110'|| j30 == 'Э24' || j30 == 'Э26') {j37 = 'Есть'}
+         else {j37 = 'Отсутствует'};
+         
+         let j38 = 'Одиночные';
+         if (optForBu == 'Z' || optForBu =='W') {j38 = 'Сдвоенные'}; // Промежуточные выключатели
+         
+         let j39 = 'Одиночные'; // Моментные выключатели
+         if (optForBu == 'Z' || optForBu =='W') {j39 = 'Сдвоенные'}; // Моментные выключатели
+         
+         let j310 = 'Одиночные'; // Концевые выключатели
+         if (optForBu == 'Z' || optForBu =='W') {j310 = 'Сдвоенные'}; // Концевые выключатели
+ 
+         let j311 = ''; // Монтаж БУ
+         if(BoMark == 'Э1'){
+             j311 = 'Выносной';
+         } else {
+             j311 = 'На приводе';
+         };
+ 
+         // json3 = [j30, j31, j32, j33, j34, j35, j36, j37, j38, j39, j310, j311];
+ 
+         //json4
+         let j40 = $("input[name='connectionForEp4']:checked").val(); //Электрическое подключение (обозначение)
+         let j41 = document.querySelector("#cap > input[type=checkbox]").checked ? 'Есть' : 'Отсутствует'; //Защитный колпак
+         let j42 = document.querySelector("#color-1").checked ? 'Серый' : document.querySelector("#ralColor").value; //Цвет
+         let j43 = document.querySelector("#mechSelectorId > input[type=checkbox]") ? 'Есть' : 'Отсутствует'; //Механический селектор
+         let j44 = addOptions;//Доп опции 
+         let j45 = document.querySelector('#addReqarea').value ? document.querySelector('#addReqarea').value : '' + TuMp; //Дополнительные требования
+         // json4 = [j40, j41, j42, j43, j44, j45];
+ 
+         //json5
+         let j50 = $("input[name='working-mode']:checked").closest('.form-check').find('.form-check-label').text(); //Назначение по режиму работы
+         let j51 = $("input[name='connectionForEp4']:checked").closest('.form-check').find('.form-check-label').text(); //Электрическое подключение (расшифровка)
+         let j52 = 'SIL-3'; // SIL
+         let j53 = $("input[name='special']:checked").closest('.form-check').find('.form-check-label').text(); //Специальное исполнение
+         let j54 = ''; //Масса
+         // json5 = [j50, j51, j52, j53, j54];
+ 
+         //json6
+         let j60 = '?'; //Номинальное давление
+         let j61 = $("input[name='connection-type']:checked").closest('.form-check').find('.form-check-label').text();//Тип присоединения выходного вала
+         let j62 = '?'; //Кабельные вводы
+         let j63 = '?'; //Штепсельные разъемы
+         let j64 = '?'; //Тип подводимых кабелей
+         let j65 = '380';
+         if (document.querySelector("#special-4").checked){
+             j65 = '660';
+         }
+         // json6 = [j60, j61, j62, j63];
+         
+         //json7
+         let j70 = '';//Защита от коррозии
+         let j71 = '';//Ручной маховик
+         let j72 = '';//Наличие обогрев
+         let j73 = '';//Наличие типа функции
+         let j74 = '';//Функция при питании
+         let j75 = ''; //Условие для запуска функции
+         // json7 = [j70, j71, j72, j73, j74, j75];
+ 
+         console.log([j00, j01, j02, j03, j04, j05],
+             [j10, j11, j12, j13, j14, j15, j16, j17, j18],
+             [j20, j21, j22, j23, j24],
+             [j30, j31, j32, j33, j34, j35, j36, j37, j38, j39, j310, j311],
+             [j40, j41, j42, j43, j44, j45],
+             [j50, j51, j52, j53, j54],
+             [j60, j61, j62, j63, j64, j65],
+             [j70, j71, j72, j73, j74, j75]);
+ 
+ 
+         function DOCX(id) {
+             window.open(`https://emk.websto.pro/Tula/${id}`);
+         }
+         function EXEL(id) {
+             window.open(`https://emk.websto.pro/TulaEXEL/${id}`);
+         }
+         function sendToServer() {
+             let post = fetch('/download', {
+                 method: 'POST',
+                 headers: { 'Content-Type': 'application/json;charset=utf-8' },
+                 body: JSON.stringify({
+                     jsn0: [j00, j01, j02, j03, j04, j05],
+                     jsn1: [j10, j11, j12, j13, j14, j15, j16, j17, j18, j19],
+                     jsn2: [j20, j21, j22, j23, j24],
+                     jsn3: [j30, j31, j32, j33, j34, j35, j36, j37, j38, j39, j310, j311],
+                     jsn4: [j40, j41, j42, j43, j44, j45],
+                     jsn5: [j50, j51, j52, j53, j54],
+                     jsn6: [j60, j61, j62, j63, j64, j65],
+                     jsn7: [j70, j71, j72, j73, j74, j75],
+                 }),
+             })
+                 .then((response) => response.json())
+                 .then((data) => {
+                     let id = data.id;
+                     DOCX(id);
+                     EXEL(id);
+                 });
+         }
+         sendToServer();
+     });
 
      //  кабельных вводов подмена значений 
      $('.cableField').on('change', function (e) {
@@ -890,10 +738,28 @@ $(document).ready(function () {
             cb.val(cbs);
         }
     });
-    // Открытия поля с чертежом
-    $('#drawing').on('change', function (e) {
-        if (document.querySelector('#drawing').value != 3) {
-            document.querySelector('#upload').classList.toggle('none');
+
+
+    // стиль для режима работы
+    $('.timeMode').on('change', function (e) {
+        if ($("input[name='working-mode']:checked")) 
+    {
+        document.querySelector('.timeMode').classList.add('ReqValueOk');
+        document.querySelector('.timeMode').classList.remove('noReqValue');
+    } 
+    else {
+        document.querySelector('.timeMode').classList.add('noReqValue');
+        document.querySelector('.timeMode').classList.remove('ReqValueOk');
+
+    }});
+    // стиль для кол-ва
+    $('#numbersOfEp').on('change', function (e) {
+        if (document.querySelector('.numbersOfEp').value !== '') {
+            document.querySelector('.numbersOfEp').classList.add('ReqValueOk');
+            document.querySelector('.numbersOfEp').classList.remove('noReqValue');
+        } else {
+            document.querySelector('.numbersOfEp').classList.add('noReqValue');
+            document.querySelector('.numbersOfEp').classList.remove('ReqValueOk');
         }
     });
     // СТИЛЬ ДЛЯ ПОЛЯ С ДАННЫМИ
@@ -1120,48 +986,6 @@ $(document).ready(function () {
          document.querySelector('.commandSignal').classList.remove('ReqValueOk');
         }
     });
-    // Сигнал момент 4-20 
-    // $('.signalMoment').on('change', function (e) {
-    //     if(document.querySelector("#signalMoment-1").checked) 
-    //     {document.querySelector('.signalMoment').classList.add('ReqValueOk');
-    //      document.querySelector('.signalMoment').classList.remove('noReqValue');
-    //     }
-    //     else 
-    //     {document.querySelector('.signalMoment').classList.add('noReqValue');
-    //      document.querySelector('.signalMoment').classList.remove('ReqValueOk');
-    //     }
-    // });
-    // Дублирование шины
-    // $('.tire').on('change', function (e) {
-    //     if(document.querySelector("#tire-1").checked) 
-    //     {document.querySelector('.tire').classList.add('ReqValueOk');
-    //      document.querySelector('.tire').classList.remove('noReqValue');
-    //     }
-    //     else 
-    //     {document.querySelector('.tire').classList.add('noReqValue');
-    //      document.querySelector('.tire').classList.remove('ReqValueOk');
-    //     }
-    // });
-    // Кабельные вводы
-    $('.cableField').on('change', function (e) {
-        if(document.querySelector("#cabels-2").checked || document.querySelector("#cabelsInput-1").value != '') 
-        {document.querySelector('.cableField').classList.add('ReqValueOk');
-         document.querySelector('.cableField').classList.remove('noReqValue');
-        }
-        else 
-        {document.querySelector('.cableField').classList.add('noReqValue');
-         document.querySelector('.cableField').classList.remove('ReqValueOk');
-        }
-    });
-    // Штепсельные разъемы
-    $('.stepseField').on('change', function (e) {
-        if(!document.querySelector("#stepse-1").checked || (document.querySelector("#inputStepse").value != '' && document.querySelector("#inputTypeStepse").value != '') ) 
-        {document.querySelector('.stepseField').classList.add('ReqValueOk');
-         document.querySelector('.stepseField').classList.remove('noReqValue');
-        }
-        else 
-        {document.querySelector('.stepseField').classList.add('noReqValue');
-         document.querySelector('.stepseField').classList.remove('ReqValueOk');
-        }
-    });
+
+
 });

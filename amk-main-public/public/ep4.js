@@ -747,7 +747,7 @@ $(document).ready(function () {
         let j16 = $("input[name='placeForEnv']:checked").closest('.form-check').find('.form-check-label').text(); // установка
         let j17 = document.querySelector('#rotation-frequency').value; // частота вращения
         let j18 = schemeForSend; // конструктивная схема
-        let j19 = document.querySelector("#closeNumbers").value; // конструктивная схема
+        let j19 = document.querySelector("#closeNumbers").value; // оборотов на закрытие
         // json1 = [j10, j11, j12, j13, j14, j15, j16, j17, j18];
 
         //json2
@@ -834,9 +834,9 @@ $(document).ready(function () {
         let j62 = '?'; //Кабельные вводы
         let j63 = '?'; //Штепсельные разъемы
         let j64 = '?'; //Тип подводимых кабелей
-        let j65 = '380';
+        let j65 = '380В';
         if (document.querySelector("#special-4").checked){
-            j65 = '660';
+            j65 = '660В';
         }
     
         // json6 = [j60, j61, j62, j63];
