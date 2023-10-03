@@ -56,7 +56,7 @@ $(document).ready(function () {
     let e2BlockModal = new bootstrap.Modal($('#block-configure-e2'));
 
     // ЗАПОЛНЕНИЕ КрутяЩИХ МОМЕНТОВ ЧЕРЕЗ БД
-    $(document).on('change', function (e) {
+    $('#testStep1').on('change', function (e) {
         function rMomentSelectCreate() { 
             let uplim = document.getElementById('upper-limit');
             $(uplim).empty();
@@ -87,7 +87,7 @@ $(document).ready(function () {
     });
 
     // ЗАПОЛНЕНИЕ Времени Хода ЧЕРЕЗ БД
-    $(document).on('change', function (e) {
+    $('#testStep-2').on('change', function (e) {
         function stepTimeSelectCreate() { 
             let uplim = document.querySelector("#upper-limit").value;
             let select = document.querySelector("#time-limit");
@@ -119,7 +119,7 @@ $(document).ready(function () {
     });
 
         // ПРОГРУЗКА ДАННЫХ КОНСТРУКТИВНЫХ СХЕМ С ТАБЛИЦЫ 
-        $('#rotation-frequency-wrap').on('change', function (e) {
+        $('#testStep-3').on('change', function (e) {
             function SchemeSelectCreate() {
                 let upLim = document.querySelector("#upper-limit").value;
                 let timeLim = document.querySelector("#time-limit").value;
@@ -172,7 +172,7 @@ $(document).ready(function () {
         });
     
             // ПРОГРУЗКА ФЛАНЦЕВ С БД
-        $('#constructive-scheme-wrap').on('change', function (e) {
+        $('#testStep-4').on('change', function (e) {
             let cur_constructive_scheme = $("input[name='constructive-scheme']:checked").val();
             
             $('#constructive-scheme-img')
@@ -219,7 +219,7 @@ $(document).ready(function () {
 
 
                  // ПРОГРУЗКА ТИПА СИЛОВОГО ПИТАНИЯ 
-            $(document).on('change', function (e) {
+            $('#testStep-5').on('change', function (e) {
                 function PowerTypeSelectCreate() { 
                     let upLim = document.querySelector("#upper-limit").value;
                     let select = document.querySelector("#powerType");
