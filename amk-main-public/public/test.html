@@ -1,0 +1,25 @@
+<div id='preloader'>
+    <img src="./239.gif" alt="preloader">
+</div>
+<style>
+    #preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+}
+</style>
+<script>
+    window.onload = function() {
+    let preloader = document.getElementById('preloader');
+    preloader.classList.add('hide-preloader');
+    setInterval(function() {
+          preloader.classList.add('preloader-hidden');
+    }, 990);
+}
+</script>
