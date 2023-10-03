@@ -849,7 +849,7 @@ $(document).ready(function () {
         // json7 = [j70, j71, j72, j73, j74, j75];
 
         console.log([j00, j01, j02, j03, j04, j05],
-            [j10, j11, j12, j13, j14, j15, j16, j17, j18],
+            [j10, j11, j12, j13, j14, j15, j16, j17, j18, j19],
             [j20, j21, j22, j23, j24],
             [j30, j31, j32, j33, j34, j35, j36, j37, j38, j39, j310, j311],
             [j40, j41, j42, j43, j44, j45],
@@ -1627,7 +1627,7 @@ $('#closeNumbers').on('keyup', function (e) {
         let BoMark = document.querySelector("#controle-blocks").value;
 
         if(BoMark == 'Э11'){
-          return positionSignal = 'отсутсвуют';
+          return positionSignal = 'Отсутствуют';
         }
         else if (BoMark == 'Э12' || BoMark == 'Э13'|| BoMark == 'Э16'|| BoMark == 'Э17') {
             return positionSignal = '4–20 мА';
@@ -1656,7 +1656,7 @@ $('#closeNumbers').on('keyup', function (e) {
             return positionSignal = '4-20мА';
             }
             else {
-                return positionSignal ='отсутсвуют';
+                return positionSignal ='Отсутствуют';
             }
         }
 // ОТКРЫТИЕ ПО ШАГАМ
