@@ -438,18 +438,14 @@ $(document).ready(function () {
        function rebuildX7() {
        let x7check = document.querySelector("#powerType").value;
         switch (x7check) {
-            case '220B 1 фаз(ы)':
-                  x7check = '1';
-                break;
-            case '220B 3 фаз(ы)':
-                  x7check = '3';
-                break;
-            case '380B 3 фаз(ы)':
-                  x7check = '3';
-                break;
-            case '24В 6 фаз(ы)':
-                 x7check = '6';
-                break;
+            case '220B 1 фаз(ы) ':
+                return   '1';
+            case '220B 3 фаз(ы) ':
+                return '3';
+            case '380B 3 фаз(ы) ':
+                return   '3';
+            case '24В 6 фаз(ы) ':
+                return  '6';
             }
         }
         
