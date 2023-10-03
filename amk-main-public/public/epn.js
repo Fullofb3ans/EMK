@@ -175,14 +175,14 @@ $(document).ready(function () {
         $('#testStep-4').on('change', function (e) {
             let cur_constructive_scheme = $("input[name='constructive-scheme']:checked").val();
             
-            $('#constructive-scheme-img')
-            .empty()
-            .append(
-                $('<img>').prop({
-                    src: './img/' + cheme_img['epn'][cur_constructive_scheme],
-                    class: 'img-fluid',
-                })
-            );
+            // $('#constructive-scheme-img')
+            // .empty()
+            // .append(
+            //     $('<img>').prop({
+            //         src: './img/' + cheme_img['epn'][cur_constructive_scheme],
+            //         class: 'img-fluid',
+            //     })
+            // );
 
             function flangeSelectCreate() {
                 let upLim = document.querySelector("#upper-limit").value;
