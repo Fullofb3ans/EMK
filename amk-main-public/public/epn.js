@@ -593,7 +593,7 @@ $(document).ready(function () {
         let j10 = 'Электроприводы неполноповоротные ЭПН'; //тип арматуры
         let j11 = document.querySelector('#mark-gen').innerText; //маркировка
         let j12 = 'АО Тулаэлектропривод'; //завод
-        let j13 = document.querySelector("#time-limit").value; // частота вращения
+        let j13 = 'частота вращения'; // частота вращения
         let j14 = document.querySelector("#upper-limit").value; //Максимальный крутящий момент
         let j15 = document.querySelector('#flange').value; //присоединение к приводу
         let j16 = $("input[name='placeForEnv']:checked").closest('.form-check').find('.form-check-label').text(); // установка
@@ -675,7 +675,7 @@ $(document).ready(function () {
 
         //json5
         let j50 = $("input[name='working-mode']:checked").closest('.form-check').find('.form-check-label').text(); //Назначение по режиму работы
-        let j51 = $("input[name='connectionForEp4']:checked").closest('.form-check').find('.form-check-label').text(); //Электрическое подключение (расшифровка)
+        let j51 = $("input[name='connection']:checked").closest('.form-check').find('.form-check-label').text(); //Электрическое подключение (расшифровка)
         let j52 = 'SIL-3'; // SIL
         let j53 = $("input[name='special']:checked").closest('.form-check').find('.form-check-label').text(); //Специальное исполнение
         let j54 = ''; //Масса
@@ -683,7 +683,7 @@ $(document).ready(function () {
 
         //json6
         let j60 = '?'; //Номинальное давление
-        let j61 = $("input[name='connection-type']:checked").closest('.form-check').find('.form-check-label').text();//Тип присоединения выходного вала
+        let j61 = 'Присоединение для фланцев из ряда F07...F40';//Тип присоединения выходного вала
         let j62 = '?'; //Кабельные вводы
         let j63 = '?'; //Штепсельные разъемы
         let j64 = '?'; //Тип подводимых кабелей
