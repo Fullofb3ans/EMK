@@ -154,7 +154,7 @@
                     <legend class="col-form-label col-sm-3 pt-0"></legend>
                     <div class="col-sm-9" id="constructive-scheme-wrap">
                         <div class="form-check">
-                            <input type="radio" id="scheme-1" name="constructive-scheme" value="1" class="form-check-input ch-mark" checked="" />
+                            <input type="radio" id="scheme-1" name="constructive-scheme" value="1" class="form-check-input ch-mark"/>
                             <label for="scheme-1" class="form-check-label">Конструктивная схема 1</label>
                         </div>
                     </div>
@@ -173,8 +173,69 @@
                     </div>
                 </fieldset>
 
-                <fieldset class="row mb-3 noReqValue" id = 'colorType'>
+                <fieldset class="row mb-3 noReqValue" id="power-type-wrap">
                     <legend class ='blockNumber'>7</legend>
+                    <div class="col-sm-9">
+                        <legend class="col-form-label col-sm-3 pt-0">Тип силового электропитания</legend>
+                        <select class="form-select form-element ch-mark" name="powerType" id="powerType">
+                            <option value="" disabled selected>Выберите значение</option>
+                            <option value="1">Однофазная сеть переменного тока, 220 В, 50 Гц</option>
+                            <option value="3">Трёхфазная сеть переменного тока</option>
+                            <option value="6">Сеть постоянного тока, 24 </option>
+                        </select>
+                    </div>
+                </fieldset>
+
+                <fieldset class="row mb-3 noReqValue" id="control-block-fieldset">
+                    <legend class ='blockNumber'>8</legend>
+                    <div class="col-sm-9">
+                        <legend class="col-form-label col-sm-3 pt-0">Тип блока управления</legend>
+                        <div class="input-group">
+                            <select class="form-select form-element ch-mark" data-step="4" name="controle-blocks-series" id="controle-blocks-series">
+                                <option value="">Выберите тип блока управления</option>
+                                <option value="М2">(М2) Механический блок концевых выключателей</option>
+                                <option value="ВЭ">(ВЭ) С электронным внешним интеллектуальным модулем управления, закрепленным на корпусе привода</option>
+                                <option value="ВЭ">(ВЭ1) С блоком управления, специально адаптированным для электрического подключения ВИМУ (ВИМУ в состав привода не входит)</option>
+                            </select>
+                            <input type="text" class="form-control ch-mark" name="controle-blocks" id="controle-blocks" value="" disabled="" />
+                            <button class="btn btn-outline-secondary none" type="button" id="control-block-config">Конфигуратор</button>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset class="row mb-3 noReqValue" id="temperature">
+                    <legend class ='blockNumber'>9</legend>
+                    <div class="col-sm-9">
+                        <legend class="col-form-label col-sm-3 pt-0">Вариант температурного исполнения</legend>
+                        <select class="form-select form-element ch-mark" data-step="4" name="climatic-modification" id="climatic-modification">
+                            <option value="">Выберите значение</option>
+                            <option value="1">-25°C/+60°C - 100% при 25°C - (У1)</option>
+                            <option value="2">-40°C/+60°C - 100% при 25°C - (У1)</option>
+                            <option value="3">-60°C/+60°C - 100% при 25°C - (УХЛ1)</option>
+                            <option value="4">-10°C/+60°C - 100% при 45°C - (Т1)</option>
+                            <option value="5">-40°C/+40°C - 100% при 25°C - (М1)</option>
+                            <option value="6">-40°C/+40°C - 98% при 25°C - (М5.1)</option>
+                        </select>
+                    </div>
+                </fieldset>
+
+                <fieldset class="row mb-3 noReqValue" id="waterProtection">
+                    <legend class ='blockNumber'>10</legend>
+                    <div class="col-sm-9">
+                        <legend class="col-form-label col-sm-3 pt-0">Степень защиты от проникновения пыли и воды</legend>
+                        <div class="form-check">
+                            <input class="form-check-input ch-mark" type="radio" value="1" name="protection" id="protection-1" />
+                            <label class="form-check-label" for="protection-1">IP67</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input ch-mark" type="radio" value="2" name="protection" id="protection-2" />
+                            <label class="form-check-label" for="protection-2">IP68</label>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset class="row mb-3 noReqValue" id = 'colorType'>
+                    <legend class ='blockNumber'>11</legend>
                     <div class="col-sm-9">
                         <legend class="col-form-label col-sm-3 pt-0">Цвет окраски</legend>
                         <div class="form-check">
@@ -192,91 +253,9 @@
                         <label class="form-check-label" for="ralColor"></label>
                     </div>
                 </fieldset>
-
-                <fieldset class="row mb-3 noReqValue" id="power-type-wrap">
-                    <legend class ='blockNumber'>8</legend>
-                    <div class="col-sm-9">
-                        <legend class="col-form-label col-sm-3 pt-0">Тип силового электропитания</legend>
-                        <div class="form-check">
-                            <input class="form-check-input ch-upper-limit ch-time-limit ch-mark ch-cs" type="radio" value="1" name="power-type" id="power-type-1" />
-                            <label class="form-check-label" for="power-type-1"> Однофазная сеть переменного тока, 220 В, 50 Гц </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input ch-upper-limit ch-time-limit ch-mark ch-cs" type="radio" value="3" name="power-type" id="power-type-2" />
-                            <label class="form-check-label" for="power-type-2"> Трёхфазная сеть переменного тока </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input ch-upper-limit ch-time-limit ch-mark ch-cs" type="radio" value="6" name="power-type" id="power-type-3" />
-                            <label class="form-check-label" for="power-type-3"> Сеть постоянного тока, 24 В </label>
-                        </div>
-                    </div>
-                </fieldset>
-
-                <fieldset class="row mb-3 noReqValue" id="control-block-fieldset">
-                    <legend class ='blockNumber'>9</legend>
-                    <div class="col-sm-9">
-                        <legend class="col-form-label col-sm-3 pt-0">Тип блока управления</legend>
-                        <div class="input-group">
-                            <select class="form-select form-element ch-mark" data-step="4" name="controle-blocks-series" id="controle-blocks-series">
-                                <option value="">Выберите тип блока управления</option>
-                                <option value="М2">(М2) Механический блок концевых выключателей</option>
-                                <option value="ВЭ">(ВЭ) С электронным внешним интеллектуальным модулем управления, закрепленным на корпусе привода</option>
-                                <option value="ВЭ">(ВЭ1) С блоком управления, специально адаптированным для электрического подключения ВИМУ (ВИМУ в состав привода не входит)</option>
-                            </select>
-                            <input type="text" class="form-control ch-mark" name="controle-blocks" id="controle-blocks" value="" disabled="" />
-                            <button class="btn btn-outline-secondary none" type="button" id="control-block-config">Конфигуратор</button>
-                        </div>
-                    </div>
-                </fieldset>
-
-                <fieldset class="row mb-3 noReqValue" id="temperature">
-                    <legend class ='blockNumber'>10</legend>
-                    <div class="col-sm-9">
-                        <legend class="col-form-label col-sm-3 pt-0">Вариант температурного исполнения</legend>
-                        <select class="form-select form-element ch-mark" data-step="4" name="climatic-modification" id="climatic-modification">
-                            <option value="">Выберите значение</option>
-                            <option value="1">-25°C/+60°C - 100% при 25°C - (У1)</option>
-                            <option value="2">-40°C/+60°C - 100% при 25°C - (У1)</option>
-                            <option value="3">-60°C/+60°C - 100% при 25°C - (УХЛ1)</option>
-                            <option value="4">-10°C/+60°C - 100% при 45°C - (Т1)</option>
-                            <option value="5">-40°C/+40°C - 100% при 25°C - (М1)</option>
-                            <option value="6">-40°C/+40°C - 98% при 25°C - (М5.1)</option>
-                        </select>
-                    </div>
-                </fieldset>
-
-                <fieldset class="row mb-3 noReqValue" id="waterProtection">
-                    <legend class ='blockNumber'>11</legend>
-                    <div class="col-sm-9">
-                        <legend class="col-form-label col-sm-3 pt-0">Степень защиты от проникновения пыли и воды</legend>
-                        <div class="form-check">
-                            <input class="form-check-input ch-mark" type="radio" value="1" name="protection" id="protection-1" />
-                            <label class="form-check-label" for="protection-1">IP67</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input ch-mark" type="radio" value="2" name="protection" id="protection-2" />
-                            <label class="form-check-label" for="protection-2">IP68</label>
-                        </div>
-                    </div>
-                </fieldset>
-
-                <fieldset class="row mb-3 noReqValue">
-                    <legend class ='blockNumber'>12</legend>
-                    <div class="col-sm-9">
-                        <legend class="col-form-label col-sm-3 pt-0">Специальное исполнение</legend>
-                        <div class="form-check">
-                            <input class="form-check-input ch-mark" type="radio" value=" " name="specialForEpn" id="specialForEpn-1" />
-                            <label class="form-check-label" for="specialForEpn-1">Нет специального исполнения</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input ch-mark" type="radio" value="1" name="specialForEpn" id="specialForEpn-2" />
-                            <label class="form-check-label" for="specialForEpn-2">Панель управления ВИМУ расположена фронтально (в плоскости параллельной оси вращения вала привода);</label>
-                        </div>
-                    </div>
-                </fieldset>
-
+                
                 <fieldset class="row mb-3 epn-only noReqValue">
-                    <legend class ='blockNumber'>13</legend>
+                    <legend class ='blockNumber'>12</legend>
                     <div class="col-sm-9">
                         <legend class="col-form-label col-sm-3 pt-0">Электрическое подключение</legend>
                         <div class="form-check">
@@ -295,6 +274,21 @@
                             <input class="form-check-input ch-mark" type="radio" value="6" name="connection" id="connection-4">
                             <label class="form-check-label" for="connection-4">3 кабельных ввода</label>
                         </div> -->
+                    </div>
+                </fieldset>
+                
+                <fieldset class="row mb-3 noReqValue">
+                    <legend class ='blockNumber'>13</legend>
+                    <div class="col-sm-9">
+                        <legend class="col-form-label col-sm-3 pt-0">Специальное исполнение</legend>
+                        <div class="form-check">
+                            <input class="form-check-input ch-mark" type="radio" value=" " name="specialForEpn" id="specialForEpn-1" />
+                            <label class="form-check-label" for="specialForEpn-1">Нет специального исполнения</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input ch-mark" type="radio" value="1" name="specialForEpn" id="specialForEpn-2" />
+                            <label class="form-check-label" for="specialForEpn-2">Панель управления ВИМУ расположена фронтально (в плоскости параллельной оси вращения вала привода);</label>
+                        </div>
                     </div>
                 </fieldset>
 
@@ -415,7 +409,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title">Дополнительные опции блока управления серии М1</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Закрыть</button>
                         </div>
                         <div class="modal-body">
                             <form id="m1-form">
@@ -473,7 +467,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title">Дополнительные опции блока управления серии М2</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Закрыть</button>
                         </div>
                         <div class="modal-body">
                             <form id="m2-form">
@@ -506,7 +500,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title">Дополнительные опции блока управления серии Э2</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Закрыть</button>
                         </div>
                         <div class="modal-body">
                             <form id="e2-form">
@@ -547,7 +541,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title">Опциональный набор функций ВИМУ и коды исполнения</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Закрыть</button>
                         </div>
                         <div class="modal-body">
                             <table id="e1-table" class="table table-bordered">
@@ -716,7 +710,7 @@
                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Закрыть</button>
                         </div>
                         <div class="modal-body">
                             <p>"Общепромышленное исполнение" - это тип исполнения электропривода, который обеспечивает защиту от попадания инородных тел размером более 12 мм. Обычно такие электроприводы используются в помещениях, где нет особых требований к степени защиты.</p>

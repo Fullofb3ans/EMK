@@ -55,33 +55,204 @@ $(document).ready(function () {
     let vimuBlockModal = new bootstrap.Modal($('#block-configure-e1'));
     let e2BlockModal = new bootstrap.Modal($('#block-configure-e2'));
 
-    $(document).on('change', "input[name='constructive-scheme']", function (e) {
+    // ЗАПОЛНЕНИЕ КрутяЩИХ МОМЕНТОВ ЧЕРЕЗ БД
+    $(document).on('change', function (e) {
+        function rMomentSelectCreate() { 
+            let uplim = document.getElementById('upper-limit');
+            $(uplim).empty();
+            uplim.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
+        
+            let fetchResult = [];
+            
+            fetch('https://emk.websto.pro/DB', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json;charset=utf-8' },
+                body: JSON.stringify({
+                    a: ['ЭПН', '3'],
+                }),
+            })
+              .then(res => res.json())
+              .then(res => {
+                console.log(res)
+                  for( i in res)
+                  fetchResult.push(res [i]);
+                // fetchResult[0].sort((a, b) => a - b);
+              $.each(fetchResult[0], function (key, item) {
+                  $(uplim).append(new Option(item, item))
+             }
+             );
+              })
+            }
+            rMomentSelectCreate();
+    });
 
-        $('#step-5').show();
-        let execution = $("input[name='execution']:checked").val();
+    // ЗАПОЛНЕНИЕ Времени Хода ЧЕРЕЗ БД
+    $(document).on('change', function (e) {
+        function stepTimeSelectCreate() { 
+            let uplim = document.querySelector("#upper-limit").value;
+            let select = document.querySelector("#time-limit");
+            $(select).empty();
+            select.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
+        
+            let fetchResult = [];
+            
+            fetch('https://emk.websto.pro/DB', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json;charset=utf-8' },
+                body: JSON.stringify({
+                    a: ['ЭПН', '3', uplim],
+                }),
+            })
+              .then(res => res.json())
+              .then(res => {
+                console.log(res)
+                  for( i in res)
+                  fetchResult.push(res [i]);
+                // fetchResult[0].sort((a, b) => a - b);
+              $.each(fetchResult[0], function (key, item) {
+                  $(select).append(new Option(item, item))
+             }
+             );
+              })
+            }
+            stepTimeSelectCreate();
+    });
 
-        let cur_constructive_scheme = $("input[name='constructive-scheme']:checked").val();
-        let cur_flange_value = $('#flange').val();
-
-        let upper_limit = $('#upper-limit').val();
-        let rotation_frequency = $('#rotation-frequency').val();
-        let connection_type = $("input[name='connection-type']:checked").val();
-
-        let flanges_select = $('#flange').empty().append(new Option('Выберите значение', ''));
-        let control_block = $('#controle-blocks');
-        let cur_control_block = $('#controle-blocks').val();
-
-        let control_select = $('#controle-blocks-series').empty().append(new Option('Выберите значение', ''));
-
-        let flanges_arr = [];
-
-        if (!!cur_constructive_scheme) {
-            flanges_arr = flanges['epn'][cur_constructive_scheme];
-
-        $.each(flanges_arr, function (key, item) {
-            flanges_select.append(new Option(item, item, false, cur_flange_value == item));
+        // ПРОГРУЗКА ДАННЫХ КОНСТРУКТИВНЫХ СХЕМ С ТАБЛИЦЫ 
+        $('#rotation-frequency-wrap').on('change', function (e) {
+            function SchemeSelectCreate() {
+                let upLim = document.querySelector("#upper-limit").value;
+                let timeLim = document.querySelector("#time-limit").value;
+                $('#constructive-scheme-wrap').empty();
+    
+                let fetchResult = [];
+                
+                fetch('https://emk.websto.pro/DB', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json;charset=utf-8' },
+                    body: JSON.stringify({
+                        a: ['ЭПН', '3', upLim, timeLim],
+                    }),
+                })
+                  .then(res => res.json())
+                  .then(res => {
+                    console.log(res)
+                      for( i in res)
+                      fetchResult.push(res [i]);
+                    // fetchResult[0].sort((a, b) => a - b);
+                        $.each(fetchResult[0], function (key, item) {
+                            
+                            $('#constructive-scheme-wrap').append(
+                                $('<div>')
+                                    .prop({ class: 'form-check' })
+                                    .append(
+                                        $('<input>').prop({
+                                            type: 'radio',
+                                            id: '/img/' + 'scheme-' + item,
+                                            name: 'constructive-scheme',
+                                            value: item,
+                                            class: 'form-check-input ch-mark',
+                                        })
+                                    )
+                                    .append(
+                                        $('<label>')
+                                            .prop({
+                                                for:  'scheme-' + item,
+                                                class: 'form-check-label',
+                                            })
+                                            .text(' Конструктивная схема ' + item)
+                                        )
+                                    )
+                                }
+                            );
+                        }
+                    );
+                }
+                SchemeSelectCreate();
         });
-    }
+    
+            // ПРОГРУЗКА ФЛАНЦЕВ С БД
+        $('#constructive-scheme-wrap').on('change', function (e) {
+            let cur_constructive_scheme = $("input[name='constructive-scheme']:checked").val();
+            
+            $('#constructive-scheme-img')
+            .empty()
+            .append(
+                $('<img>').prop({
+                    src: './img/' + cheme_img['ep4'][cur_constructive_scheme],
+                    class: 'img-fluid',
+                })
+            );
+
+            function flangeSelectCreate() {
+                let upLim = document.querySelector("#upper-limit").value;
+                let timeLim = document.querySelector("#time-limit").value;
+                let scheme = $("input[name='constructive-scheme']:checked").val();
+    
+                let flange = document.querySelector("#flange");
+                $(flange).empty();
+                flange.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
+            
+                let fetchResult = [];
+                
+                fetch('https://emk.websto.pro/DB', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json;charset=utf-8' },
+                    body: JSON.stringify({
+                        a: ['ЭПН', "3", upLim, timeLim, scheme],
+                    }),
+                })
+                  .then(res => res.json())
+                  .then(res => {
+                    console.log(res)
+                      for( i in res)
+                      fetchResult.push(res [i]);
+                    // fetchResult[0].sort((a, b) => a - b);
+                  $.each(fetchResult[0][0], function (key, item) {
+                      $(flange).append(new Option(item))
+                 }
+                 );
+                  })
+                }
+                flangeSelectCreate();
+            });
+
+
+                 // ПРОГРУЗКА ТИПА СИЛОВОГО ПИТАНИЯ 
+            $(document).on('change', function (e) {
+                function PowerTypeSelectCreate() { 
+                    let upLim = document.querySelector("#upper-limit").value;
+                    let select = document.querySelector("#powerType");
+                    $(select).empty();
+                    select.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
+                
+                    let fetchResult = [];
+                    
+                    fetch('https://emk.websto.pro/DB', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json;charset=utf-8' },
+                        body: JSON.stringify({
+                            a: ['ЭПН', '3', upLim, timeLim, scheme, flange],
+                        }),
+                    })
+                      .then(res => res.json())
+                      .then(res => {
+                        console.log(res)
+                          for( i in res)
+                          fetchResult.push(res [i]);
+                        // fetchResult[0].sort((a, b) => a - b);
+                      $.each(fetchResult[0], function (key, item) {
+                          $(select).append(new Option(item, item))
+                     }
+                     );
+                      })
+                }
+                    PowerTypeSelectCreate();
+            });
+
+
+
+    $(document).on('change', "input[name='constructive-scheme']", function (e) {
 
         let series = {
             epn: {
@@ -120,95 +291,11 @@ $(document).ready(function () {
         }
     });
 
-    $('.ch-upper-limit').on('change', function (e) {
-        let power_type = $("input[name='power-type']:checked").val();
-        let execution = $("input[name='execution']:checked").val();
-        let connection_type = $("input[name='connection-type']:checked").val();
-        let cur_upper_limit = $('#upper-limit').val();
-        let upper_limit = $('#upper-limit').empty().append(new Option('Выберите значение', ''));
-        $('#step-3').show();
-        torques_arr = torques['epn'][execution][power_type];
-
-        console.log(time_limits['epn'][execution][power_type]);
-
-        if(typeof execution !== 'undefined' && typeof power_type !== 'undefined') {
-            console.log(execution);
-            console.log(power_type);
-            let keys = [];
-            $.each(time_limits['epn'][execution][power_type], function (key, item){
-                // console.log(Object.keys(item));
-                keys.push(...Object.keys(item));
-            });
-
-            console.log(keys);
-
-            $.each(
-                [
-                    ...new Set(
-                        keys.sort(function (a, b) {
-                            return a - b;
-                        })
-                    ),
-                ],
-                function (index, item) {
-                    upper_limit.append(new Option(item, item, false, item == cur_upper_limit));
-                }
-            );
-        }
-    });
-
-    $('.ch-time-limit ').on('change', function (e) {
-        $('#step-4').show();
-        var execution = $("input[name='execution']:checked").val();
-        var power_type = $("input[name='power-type']:checked").val();
-        var upper_limit = $('#upper-limit').val();
-        var cur_time_limit = $('#time-limit').val();
-        var times_options = [];
-
-        select_options = $('#time-limit');
-        time_limits_arr = time_limits['epn'][execution][power_type];
-        select_options.empty().append(new Option('Выберите значение', ''));
-
-        $.each(time_limits_arr, function (key, value) {
-            $.each(value, function (up_lim, item) {
-                if (upper_limit == up_lim) {
-                    times_options.push(...item);
-                }
-            });
-        });
-
-        $.each(
-            [
-                ...new Set(
-                    times_options.sort(function (a, b) {
-                        return a - b;
-                    })
-                ),
-            ],
-            function (key, item) {
-                select_options.append(new Option(item, item, false, item == cur_time_limit));
-            }
-        );
-    });
+   
 
     $('.ch-cs').on('change', function (e) {
-        option_id = '#time-limit';
-
-        execution = $("input[name='execution']:checked").val();
-        x4 = $('#upper-limit').val();
-        x5 = $(option_id).val();
-        power_type = $("input[name='power-type']:checked").val();
-
         constructive_scheme = [];
-        time_limits_arr = time_limits['epn'][execution][power_type];
 
-        $.each(time_limits_arr, function (key, item) {
-            $.each(item, function (index, arr) {
-                if (index == x4 && !!x5 && arr.includes(Number.parseFloat(x5))) {
-                    constructive_scheme.push(key);
-                }
-            });
-        });
 
         $('#constructive-scheme-wrap').empty();
 
@@ -269,15 +356,15 @@ $(document).ready(function () {
             $(document.querySelector('#controle-blocks')).hide();
         }
 
-        let flange = document.querySelector('#flange');
-        let a = document.querySelector('#rotation-frequency');
-        let b = document.querySelector('#time-limit');
-        if (a.value === '' && b.value === '') {
-            flange.value = '';
-            $(flange).attr('disabled', true);
-        } else {
-            $(flange).attr('disabled', false);
-        }
+        // let flange = document.querySelector('#flange');
+        // let a = document.querySelector('#rotation-frequency');
+        // let b = document.querySelector('#time-limit');
+        // if (a.value === '' && b.value === '') {
+        //     flange.value = '';
+        //     $(flange).attr('disabled', true);
+        // } else {
+        //     $(flange).attr('disabled', false);
+        // }
     });
 
     // МАРКИРОВКА
@@ -285,7 +372,7 @@ $(document).ready(function () {
         let mark_gen = $('#mark-gen');
         let modal_button = $('#modal-button');
 
-        let x0 = 'ЭПНВ';
+        let x0 = 'ЭПН';
         let x1 = $("input[name='working-mode']:checked").val() ? $("input[name='working-mode']:checked").val() : '';
 
 
@@ -986,6 +1073,4 @@ $(document).ready(function () {
          document.querySelector('.commandSignal').classList.remove('ReqValueOk');
         }
     });
-
-
 });
