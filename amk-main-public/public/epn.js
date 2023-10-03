@@ -255,6 +255,7 @@ $(document).ready(function () {
             });
 
     $('#schemeFieldSet').on('change', function (e) {
+        cur_constructive_scheme = $("input[name='constructive-scheme']:checked").val();
         let series = {
             epn: {
                 М2: 'Серия М2',
@@ -267,7 +268,6 @@ $(document).ready(function () {
             let control_select = $('#controle-blocks-series');
             let control_block = $('#controle-blocks');
             let cur_control_block = $('#controle-blocks').val();
-            cur_constructive_scheme = $("input[name='constructive-scheme']:checked").val();
             execution = $("input[name='execution']:checked").val();
 
             $("#controle-blocks").empty().append(new Option('Выберите значение', ''));
