@@ -119,7 +119,7 @@ $(document).ready(function () {
     });
 
         // ПРОГРУЗКА ДАННЫХ КОНСТРУКТИВНЫХ СХЕМ С ТАБЛИЦЫ 
-        $('#testStep-3').on('change', function (e) {
+        $('#workStep').on('change', function (e) {
             function SchemeSelectCreate() {
                 let upLim = document.querySelector("#upper-limit").value;
                 let timeLim = document.querySelector("#time-limit").value;
@@ -172,7 +172,7 @@ $(document).ready(function () {
         });
     
             // ПРОГРУЗКА ФЛАНЦЕВ С БД
-        $('#testStep-4').on('change', function (e) {
+        $('#schemeFieldSet').on('change', function (e) {
             let cur_constructive_scheme = $("input[name='constructive-scheme']:checked").val();
             
             // $('#constructive-scheme-img')
