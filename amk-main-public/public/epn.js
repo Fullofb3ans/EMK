@@ -223,6 +223,10 @@ $(document).ready(function () {
                 function PowerTypeSelectCreate() { 
                     let upLim = document.querySelector("#upper-limit").value;
                     let select = document.querySelector("#powerType");
+                    let timeLim = document.querySelector("#time-limit").value;  
+                    let scheme = $("input[name='constructive-scheme']:checked").val();
+                    let flange = document.querySelector("#flange").value;
+                    
                     $(select).empty();
                     select.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
                 
@@ -312,7 +316,6 @@ $(document).ready(function () {
                                 name: 'constructive-scheme',
                                 value: item,
                                 class: 'form-check-input ch-mark',
-                                defaultChecked: constructive_scheme.length == 1,
                             })
                         )
                         .append(
@@ -330,12 +333,6 @@ $(document).ready(function () {
         } else {
             $('#constructive-scheme-img').empty();
         }
-
-        if (document.getElementsByName('constructive-scheme').length < 2) {
-            $('#schemeFieldSet').hide();
-        } else {
-            $('#schemeFieldSet').show();
-    }
     });
 
     $('#control-block-fieldset').on('change', function (e) {
@@ -562,10 +559,10 @@ $(document).ready(function () {
          let j15 = document.querySelector('#flange').value; //присоединение к приводу
          let j16 = $("input[name='placeForEnv']:checked").closest('.form-check').find('.form-check-label').text(); // установка
          let j17 = document.querySelector('#rotation-frequency').value; // частота вращения
-         let j18 = schemeForSend; // конструктивная схема
+         let j18 = $("input[name='constructive-scheme']:checked").val(); // конструктивная схема
          let j19 = document.querySelector("#closeNumbers").value; // конструктивная схема
          // json1 = [j10, j11, j12, j13, j14, j15, j16, j17, j18];
- 
+
          //json2
          let j20 = $("input[name='execution']:checked").closest('.form-check').find('.form-check-label').text(); //исполнение по назначению
          let j21 = $("input[name='working-mode']:checked").closest('.form-check').find('.form-check-label').text(); //режим работы
