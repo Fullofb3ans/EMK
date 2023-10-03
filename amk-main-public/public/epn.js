@@ -245,7 +245,7 @@ $(document).ready(function () {
                           for( i in res)
                           fetchResult.push(res [i]);
                         // fetchResult[0].sort((a, b) => a - b);
-                      $.each(fetchResult[0], function (key, item) {
+                      $.each(fetchResult[0][0], function (key, item) {
                           $(select).append(new Option(item, item))
                      }
                      );
@@ -431,15 +431,36 @@ $(document).ready(function () {
                 ($('#controle-blocks')).closest('fieldset').addClass('ReqValueOk');
         }
 
-        let x7 = $("input[name='power-type']:checked").val() ? $("input[name='power-type']:checked").val() : 'X';
+
+    // ПЕРЕНАЗНАЧЕНИЕ ЗНАЧЕНИЯ В МАРКИРОВКУ
+        let x7 = rebuildX7() ? rebuildX7() : 'X';
+
+       function rebuildX7() {
+       let x7check = document.querySelector("#powerType").value;
+        switch (x7check) {
+            case '220B 1 фаз(ы)':
+                  x7check = '1';
+                break;
+            case '220B 3 фаз(ы)':
+                  x7check = '3';
+                break;
+            case '380B 3 фаз(ы)':
+                  x7check = '3';
+                break;
+            case '24В 6 фаз(ы)':
+                 x7check = '6';
+                break;
+            }
+        }
+        
         switch (x7) {
             case 'X':
-                ($("input[name='power-type']")).closest('fieldset').removeClass('ReqValueOk');
-                ($("input[name='power-type']")).closest('fieldset').addClass('noReqValue');
+                ($(document.querySelector("#powerType"))).closest('fieldset').removeClass('ReqValueOk');
+                ($(document.querySelector("#powerType"))).closest('fieldset').addClass('noReqValue');
                 break;
             default:
-                ($("input[name='power-type']")).closest('fieldset').removeClass('noReqValue');
-                ($("input[name='power-type']")).closest('fieldset').addClass('ReqValueOk');
+                ($(document.querySelector("#powerType"))).closest('fieldset').removeClass('noReqValue');
+                ($(document.querySelector("#powerType"))).closest('fieldset').addClass('ReqValueOk');
         }
         
         let x8 = $('#climatic-modification').val() ? $('#climatic-modification').val() : 'X';
@@ -830,6 +851,18 @@ $(document).ready(function () {
     // стиль для режима работы
     $('.timeMode').on('change', function (e) {
         if ($("input[name='working-mode']:checked")) 
+    {
+        document.querySelector('.timeMode').classList.add('ReqValueOk');
+        document.querySelector('.timeMode').classList.remove('noReqValue');
+    } 
+    else {
+        document.querySelector('.timeMode').classList.add('noReqValue');
+        document.querySelector('.timeMode').classList.remove('ReqValueOk');
+
+    }});
+    // стиль для силового электропитания
+    $('.power-type-wrap').on('change', function (e) {
+        if (document.querySelector("#powerType").value !== '') 
     {
         document.querySelector('.timeMode').classList.add('ReqValueOk');
         document.querySelector('.timeMode').classList.remove('noReqValue');
