@@ -593,11 +593,11 @@ $(document).ready(function () {
         let j10 = 'Электроприводы неполноповоротные ЭПН'; //тип арматуры
         let j11 = document.querySelector('#mark-gen').innerText; //маркировка
         let j12 = 'АО Тулаэлектропривод'; //завод
-        let j13 = document.querySelector("#time-limit").value; //время закрытия
+        let j13 = document.querySelector("#time-limit").value; // частота вращения
         let j14 = document.querySelector("#upper-limit").value; //Максимальный крутящий момент
         let j15 = document.querySelector('#flange').value; //присоединение к приводу
         let j16 = $("input[name='placeForEnv']:checked").closest('.form-check').find('.form-check-label').text(); // установка
-        let j17 = 'частота вращения'; // частота вращения
+        let j17 = document.querySelector("#time-limit").value; //время закрытия
         let j18 = $("input[name='constructive-scheme']:checked").val(); // конструктивная схема
 
         let j19 = $("input[name='stroke']:checked").closest('.form-check').find('.form-check-label').text(); // оборотов на закрытие
