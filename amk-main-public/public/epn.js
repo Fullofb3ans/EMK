@@ -433,7 +433,7 @@ $(document).ready(function () {
 
 
     // ПЕРЕНАЗНАЧЕНИЕ ЗНАЧЕНИЯ В МАРКИРОВКУ
-        let x7 = rebuildX7() ? rebuildX7() : 'X';
+        let x7 = rebuildX7();
 
        function rebuildX7() {
        let x7check = document.querySelector("#powerType").value;
@@ -446,6 +446,8 @@ $(document).ready(function () {
                 return   '3';
             case '24В 6 фаз(ы) ':
                 return  '6';
+                default:
+                return 'X';
             }
         }
         
