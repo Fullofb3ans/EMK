@@ -615,7 +615,7 @@ $(document).ready(function () {
         let BoMark = document.querySelector("#controle-blocks-series").value; 
 
         let j30 = document.querySelector("#controle-blocks").value; // тип бу 
-        let j31 = checkCommandBlock(); // Тип управления
+        let j31 = checkCommandBlock() ? checkCommandBlock() : ''; // Тип управления
         let j32 =  selectRemoteSignal();// сигналы дист управления
 
         let j33 = ''; //Тип БКВ
@@ -665,7 +665,7 @@ $(document).ready(function () {
         // json3 = [j30, j31, j32, j33, j34, j35, j36, j37, j38, j39, j310, j311];
 
         //json4
-        let j40 = $("input[name='connectionForEp4']:checked").val(); //Электрическое подключение (обозначение)
+        let j40 = $("input[name='connection']:checked").val(); //Электрическое подключение (обозначение)
         let j41 = document.querySelector("#cap > input[type=checkbox]").checked ? 'Есть' : 'Отсутствует'; //Защитный колпак
         let j42 = document.querySelector("#color-1").checked ? 'Серый' : document.querySelector("#ralColor").value; //Цвет
         let j43 = document.querySelector("#mechSelectorId > input[type=checkbox]") ? 'Есть' : 'Отсутствует'; //Механический селектор
