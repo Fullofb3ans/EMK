@@ -254,8 +254,6 @@ $(document).ready(function () {
                     PowerTypeSelectCreate();
             });
 
-
-
     $('#schemeFieldSet').on('change', function (e) {
         let series = {
             epn: {
