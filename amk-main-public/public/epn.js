@@ -300,43 +300,43 @@ $(document).ready(function () {
 
    
 
-    $('.ch-cs').on('change', function (e) {
-        constructive_scheme = [];
+    // $('.ch-cs').on('change', function (e) {
+    //     constructive_scheme = [];
 
 
-        $('#constructive-scheme-wrap').empty();
+    //     $('#constructive-scheme-wrap').empty();
 
-        if (constructive_scheme.length > 0) {
-            $.each(constructive_scheme, function (key, item) {
-                console.log(item);
-                $('#constructive-scheme-wrap').append(
-                    $('<div>')
-                        .prop({ class: 'form-check' })
-                        .append(
-                            $('<input>').prop({
-                                type: 'radio',
-                                id: 'scheme-' + item,
-                                name: 'constructive-scheme',
-                                value: item,
-                                class: 'form-check-input ch-mark',
-                            })
-                        )
-                        .append(
-                            $('<label>')
-                                .prop({
-                                    for: 'scheme-' + item,
-                                    class: 'form-check-label',
-                                })
-                                .text('Конструктивная схема ' + item)
-                        )
-                );
-            });
+    //     if (constructive_scheme.length > 0) {
+    //         $.each(constructive_scheme, function (key, item) {
+    //             console.log(item);
+    //             $('#constructive-scheme-wrap').append(
+    //                 $('<div>')
+    //                     .prop({ class: 'form-check' })
+    //                     .append(
+    //                         $('<input>').prop({
+    //                             type: 'radio',
+    //                             id: 'scheme-' + item,
+    //                             name: 'constructive-scheme',
+    //                             value: item,
+    //                             class: 'form-check-input ch-mark',
+    //                         })
+    //                     )
+    //                     .append(
+    //                         $('<label>')
+    //                             .prop({
+    //                                 for: 'scheme-' + item,
+    //                                 class: 'form-check-label',
+    //                             })
+    //                             .text('Конструктивная схема ' + item)
+    //                     )
+    //             );
+    //         });
 
-            $("input[name='constructive-scheme']").trigger('change');
-        } else {
-            $('#constructive-scheme-img').empty();
-        }
-    });
+    //         $("input[name='constructive-scheme']").trigger('change');
+    //     } else {
+    //         $('#constructive-scheme-img').empty();
+    //     }
+    // });
 
     $('#control-block-fieldset').on('change', function (e) {
         let x6 = $('#controle-blocks-series').val();
