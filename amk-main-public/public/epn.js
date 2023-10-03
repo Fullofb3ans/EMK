@@ -599,8 +599,7 @@ $(document).ready(function () {
         let j16 = $("input[name='placeForEnv']:checked").closest('.form-check').find('.form-check-label').text(); // установка
         let j17 = document.querySelector("#time-limit").value; //время закрытия
         let j18 = $("input[name='constructive-scheme']:checked").val(); // конструктивная схема
-
-        let j19 = $("input[name='stroke']:checked").closest('.form-check').find('.form-check-label').text(); // оборотов на закрытие
+        let j19 = $("input[name='stroke']:checked").closest('.form-check').find('.form-check-label').text() + ' ' + 'градусов'; // оборотов на закрытие
         // json1 = [j10, j11, j12, j13, j14, j15, j16, j17, j18];
 
         //json2
@@ -701,7 +700,7 @@ $(document).ready(function () {
         // json7 = [j70, j71, j72, j73, j74, j75];
 
         console.log([j00, j01, j02, j03, j04, j05],
-            [j10, j11, j12, j13, j14, j15, j16, j17, j18],
+            [j10, j11, j12, j13, j14, j15, j16, j17, j18, j19],
             [j20, j21, j22, j23, j24],
             [j30, j31, j32, j33, j34, j35, j36, j37, j38, j39, j310, j311],
             [j40, j41, j42, j43, j44, j45],
