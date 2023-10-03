@@ -23,23 +23,23 @@ $(document).ready(function () {
     const cheme_img = {
         epn: {
             Н: {
-                0: 'epnn-scheme-0.png',
-                1: 'epnn-scheme-1.png',
-                11: 'epnn-scheme-1.png',
-                12: 'epnn-scheme-12.png',
-                3: 'epnn-scheme-3.png',
-                31: 'epnn-scheme-3.png',
-                32: 'epnn-scheme-32.png',
+                0: '239.gif',
+                1: '239.gif',
+                11: '239.gif',
+                12: '239.gif',
+                3: '239.gif',
+                31: '239.gif',
+                32: '239.gif',
             },
             В: {
-                0: 'epnv-scheme-0.png',
-                1: 'epnv-scheme-1.png',
-                11: 'epnv-scheme-1.png',
-                12: 'epnv-scheme-12.png',
-                2: 'epnv-scheme-2.png',
-                3: 'epnv-scheme-3.png',
-                31: 'epnv-scheme-3.png',
-                32: 'epnv-scheme-32.png',
+                0: '239.gif',
+                1: '239.gif',
+                11: '239.gif',
+                12: '239.gif',
+                2: '239.gif',
+                3: '239.gif',
+                31: '239.gif',
+                32: '239.gif',
             },
         },
     };
@@ -179,7 +179,7 @@ $(document).ready(function () {
             .empty()
             .append(
                 $('<img>').prop({
-                    src: './img/' + cheme_img['ep4'][cur_constructive_scheme],
+                    src: './img/' + cheme_img['epn'][cur_constructive_scheme],
                     class: 'img-fluid',
                 })
             );
@@ -226,7 +226,7 @@ $(document).ready(function () {
                     let timeLim = document.querySelector("#time-limit").value;  
                     let scheme = $("input[name='constructive-scheme']:checked").val();
                     let flange = document.querySelector("#flange").value;
-                    
+
                     $(select).empty();
                     select.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
                 
@@ -256,8 +256,7 @@ $(document).ready(function () {
 
 
 
-    $(document).on('change', "input[name='constructive-scheme']", function (e) {
-
+    $('#schemeFieldSet').on('change', function (e) {
         let series = {
             epn: {
                 М2: 'Серия М2',
@@ -267,7 +266,13 @@ $(document).ready(function () {
         };
 
         if (!!cur_constructive_scheme) {
-            // $("#controle-blocks").empty().append(new Option('Выберите значение', ''));
+            let control_select = $('#controle-blocks-series');
+            let control_block = $('#controle-blocks');
+            let cur_control_block = $('#controle-blocks').val();
+            cur_constructive_scheme = $("input[name='constructive-scheme']:checked").val();
+            execution = $("input[name='execution']:checked").val();
+
+            $("#controle-blocks").empty().append(new Option('Выберите значение', ''));
             control_select.empty().append(new Option('Выберите тип блока управления', ''));
             control_block.val('');
 
