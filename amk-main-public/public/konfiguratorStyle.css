@@ -30,8 +30,8 @@
 
 #constructive-scheme-img > img{
   border: 1px solid rgb(249 84 0 / 41%);
-  min-width: 51%;
-  max-width: 95%;
+  min-width: 450px;
+  max-width: 450px;
   border-radius: 17px;
   max-height: 545px;
   min-height: 545px;
@@ -39,9 +39,8 @@
 #constructive-schemeFull-img > img{
   max-height: 545px;
   min-height: 545px;
-  min-width: 51%;
-  max-width: 98%;
-  padding-right: 28px;
+  min-width: 450px;
+  max-width: 450px;
   background-color: white;
   border: 1px solid rgb(249 84 0 / 41%);
   border-radius: 17px;
