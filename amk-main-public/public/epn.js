@@ -265,7 +265,7 @@ $(document).ready(function () {
                 });
             }
             // Загрузка изображений
-            $('#constructive-scheme-img')
+            $('#constructive-scheme-Epnimg')
                 .empty()
                 .append(
                     $('<img>').prop({
