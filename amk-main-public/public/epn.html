@@ -169,24 +169,25 @@
         </fieldset>
     </div>
     <!-- <div id="step-5"> -->
-    <!-- <fieldset class="row mb-3 noReqValue" id="rotation-frequency-wrap" style="">
-                    <legend class ='blockNumber'>6</legend>
-                    <legend class="col-form-label col-sm-3 pt-0">Частота вращения выходного вала, об/мин</legend>
-                    <div class="col-sm-9">
-                        <select class="form-select form-element ch-mark ch-cs" name="rotation-frequency" id="rotation-frequency"></select>
-                    </div>
-                </fieldset> -->
 
-    <fieldset class="row mb-3 optionalField" id="schemeFieldSet">
-        <legend class="col-form-label col-sm-3 pt-0"></legend>
-        <div class="col-sm-9" id="constructive-scheme-wrap">
-            <div class="form-check">
-                <input type="radio" id="scheme-1" name="constructive-scheme" value="1"
-                    class="form-check-input ch-mark" />
-                <label for="scheme-1" class="form-check-label">Конструктивная схема 1</label>
-            </div>
+    <div class='flexForImg'>
+        <div class="flexImg">
+            <fieldset class="row mb-3 optionalField" id='schemeFieldSet'>
+                <div class="col-sm-9" id="constructive-scheme-wrap">
+                    <legend class="col-form-label col-sm-3 pt-0"></legend>
+                    <div class="form-check">
+                        <input type="radio" id="scheme-1" name="constructive-scheme" value="1"
+                            class="form-check-input ch-mark"/>
+                        <label for="scheme-1" class="form-check-label">Конструктивная схема</label>
+                    </div>
+                </div>
         </div>
-    </fieldset>
+        <div class="flexImg">
+            <div id="constructive-scheme-img"></div>
+            </fieldset>
+        </div>
+    </div>
+
     <div id="testStep-5">
         <fieldset class="row mb-3 noReqValue">
             <legend class='blockNumber'>6</legend>

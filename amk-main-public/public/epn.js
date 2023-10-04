@@ -298,45 +298,18 @@ $(document).ready(function () {
         }
     });
 
+    // Прогрузка изображения схемы
+    $('#constructive-scheme-wrap').on('change', function (e) {
 
-
-    // $('.ch-cs').on('change', function (e) {
-    //     constructive_scheme = [];
-
-
-    //     $('#constructive-scheme-wrap').empty();
-
-    //     if (constructive_scheme.length > 0) {
-    //         $.each(constructive_scheme, function (key, item) {
-    //             console.log(item);
-    //             $('#constructive-scheme-wrap').append(
-    //                 $('<div>')
-    //                     .prop({ class: 'form-check' })
-    //                     .append(
-    //                         $('<input>').prop({
-    //                             type: 'radio',
-    //                             id: 'scheme-' + item,
-    //                             name: 'constructive-scheme',
-    //                             value: item,
-    //                             class: 'form-check-input ch-mark',
-    //                         })
-    //                     )
-    //                     .append(
-    //                         $('<label>')
-    //                             .prop({
-    //                                 for: 'scheme-' + item,
-    //                                 class: 'form-check-label',
-    //                             })
-    //                             .text('Конструктивная схема ' + item)
-    //                     )
-    //             );
-    //         });
-
-    //         $("input[name='constructive-scheme']").trigger('change');
-    //     } else {
-    //         $('#constructive-scheme-img').empty();
-    //     }
-    // });
+        $('#constructive-scheme-img')
+            .empty()
+            .append(
+                $('<img>').prop({
+                    src: './img/' + cheme_img['ep4'][cur_constructive_scheme],
+                    class: 'img-fluid',
+                })
+            );
+    });
 
     $('#control-block-fieldset').on('change', function (e) {
         let x6 = $('#controle-blocks-series').val();
@@ -355,16 +328,6 @@ $(document).ready(function () {
             $(document.querySelector('#control-block-config')).show();
             $(document.querySelector('#controle-blocks')).hide();
         }
-
-        // let flange = document.querySelector('#flange');
-        // let a = document.querySelector('#rotation-frequency');
-        // let b = document.querySelector('#time-limit');
-        // if (a.value === '' && b.value === '') {
-        //     flange.value = '';
-        //     $(flange).attr('disabled', true);
-        // } else {
-        //     $(flange).attr('disabled', false);
-        // }
     });
 
     // МАРКИРОВКА
@@ -894,160 +857,7 @@ $(document).ready(function () {
             document.querySelector('.persInfo ').classList.add('noReqValue');
         }
     });
-    // Стиль для модуля Модуль прямоходный
-    $('.tuMpField').on('change', function (e) {
-        if (document.querySelector("#tuMpCheck > input[type=checkbox]").checked) {
-            document.querySelector('.tuMpField ').classList.add('ReqValueOk');
-            document.querySelector('.tuMpField ').classList.remove('noReqValue');
-        }
-        else {
-            document.querySelector('.tuMpField ').classList.add('noReqValue');
-            document.querySelector('.tuMpField ').classList.remove('ReqValueOk');
-        }
-    });
-    // Стиль для модуля Наибольший ход, мм
-    $('#maxStepMp').on('change', function (e) {
-        if (document.querySelector("#maxStepMp").value != '') {
-            document.querySelector('#maxStepMp ').classList.add('ReqValueOk');
-            document.querySelector('#maxStepMp ').classList.remove('noReqValue');
-        }
-        else {
-            document.querySelector('#maxStepMp').classList.add('noReqValue');
-            document.querySelector('#maxStepMp').classList.remove('ReqValueOk');
-        }
-    });
-    // Стиль для модуля Номинальный крутящий момент
-    $('#roundMomentMp').on('change', function (e) {
-        if (document.querySelector("#roundMomentMp").value != undefined) {
-            document.querySelector('.roundMomentMp').classList.add('ReqValueOk');
-            document.querySelector('.roundMomentMp').classList.remove('noReqValue');
-        }
-        else {
-            document.querySelector('.roundMomentMp').classList.add('noReqValue');
-            document.querySelector('.roundMomentMp').classList.remove('ReqValueOk');
-        }
-    });
-    // Стиль для модуля Крутящий момент привода
-    $('#tuMpField').on('change', function (e) {
-        if (document.querySelector("#roundMomentEngine").value != '') {
-            document.querySelector('.roundMomentEngine').classList.add('ReqValueOk');
-            document.querySelector('.roundMomentEngine').classList.remove('noReqValue');
-        }
-        else {
-            document.querySelector('.roundMomentEngine').classList.add('noReqValue');
-            document.querySelector('.roundMomentEngine').classList.remove('ReqValueOk');
-        }
-    });
-    // Стиль для модуля Диапазон усилий на штоке модуля при настройке привода на крутящий момент
-    $('#tuMpField').on('change', function (e) {
-        if (document.querySelector("#roundMomentInterval").value != '') {
-            document.querySelector('.roundMomentInterval').classList.add('ReqValueOk');
-            document.querySelector('.roundMomentInterval').classList.remove('noReqValue');
-        }
-        else {
-            document.querySelector('.roundMomentInterval').classList.add('noReqValue');
-            document.querySelector('.roundMomentInterval').classList.remove('ReqValueOk');
-        }
-    });
-    // Стиль для модуля Ход штока модуля за один оборот
-    $('#tuMpField').on('change', function (e) {
-        if (document.querySelector("#stepForOne").value != '') {
-            document.querySelector('.stepForOne').classList.add('ReqValueOk');
-            document.querySelector('.stepForOne').classList.remove('noReqValue');
-        }
-        else {
-            document.querySelector('.stepForOne').classList.add('noReqValue');
-            document.querySelector('.stepForOne').classList.remove('ReqValueOk');
-        }
-    });
-    // Стиль для модуля номинальное давление
-    $('#pressure').on('change', function (e) {
-        if (document.querySelector("#pressure").value != '') {
-            document.querySelector('.pressure').classList.add('ReqValueOk');
-            document.querySelector('.pressure').classList.remove('noReqValue');
-        }
-        else {
-            document.querySelector('.pressure').classList.add('noReqValue');
-            document.querySelector('.pressure').classList.remove('ReqValueOk');
-        }
-    });
-    // Стиль для модуля диаметр
-    $('#diameter').on('change', function (e) {
-        if (document.querySelector("#diameter").value != '') {
-            document.querySelector('.diameter').classList.add('ReqValueOk');
-            document.querySelector('.diameter').classList.remove('noReqValue');
-        }
-        else {
-            document.querySelector('.diameter').classList.add('noReqValue');
-            document.querySelector('.diameter').classList.remove('ReqValueOk');
-        }
-    });
-    // Стиль для модуля Время закрытия
-    $('.closingTime').on('change', function (e) {
-        if (document.querySelector("#closingTimeFrom").value != '' && document.querySelector("#closingTimeTo").value != '') {
-            document.querySelector('.closingTime').classList.add('ReqValueOk');
-            document.querySelector('.closingTime').classList.remove('noReqValue');
-        }
-        else {
-            document.querySelector('.closingTime').classList.add('noReqValue');
-            document.querySelector('.closingTime').classList.remove('ReqValueOk');
-        }
-    });
-    // Стиль для модуля макс крут момент
-    $('.maxRMoment').on('change', function (e) {
-        if (document.querySelector("#maxRMoment").value != '') {
-            document.querySelector('.maxRMoment').classList.add('ReqValueOk');
-            document.querySelector('.maxRMoment').classList.remove('noReqValue');
-        }
-        else {
-            document.querySelector('.maxRMoment').classList.add('noReqValue');
-            document.querySelector('.maxRMoment').classList.remove('ReqValueOk');
-        }
-    });
-    // Стиль для модуля макс крут момент на закрывание
-    $('.maxRMoment2').on('change', function (e) {
-        if (document.querySelector("#maxRMoment2").value != '') {
-            document.querySelector('.maxRMoment2').classList.add('ReqValueOk');
-            document.querySelector('.maxRMoment2').classList.remove('noReqValue');
-        }
-        else {
-            document.querySelector('.maxRMoment2').classList.add('noReqValue');
-            document.querySelector('.maxRMoment2').classList.remove('ReqValueOk');
-        }
-    });
-    // Стиль для блока типа вала
-    $('.valType').on('change', function (e) {
-        if (document.querySelector("#valType").value != '' && document.querySelector("#outStock").value != '' && document.querySelector("#dStock").value != '') {
-            document.querySelector('.valType').classList.add('ReqValueOk');
-            document.querySelector('.valType').classList.remove('noReqValue');
-        }
-        else {
-            document.querySelector('.valType').classList.add('noReqValue');
-            document.querySelector('.valType').classList.remove('ReqValueOk');
-        }
-    });
-    // Стиль для блока обороты для закрытия
-    $('.closeNumbers').on('change', function (e) {
-        if (document.querySelector("#closeNumbers").value != '') {
-            document.querySelector('.closeNumbers').classList.add('ReqValueOk');
-            document.querySelector('.closeNumbers').classList.remove('noReqValue');
-        }
-        else {
-            document.querySelector('.closeNumbers').classList.add('noReqValue');
-            document.querySelector('.closeNumbers').classList.remove('ReqValueOk');
-        }
-    });
-    // Стиль для блока рабочей среды
-    $('.working-env').on('change', function (e) {
-        if (document.querySelector("#working-env").value != '') {
-            document.querySelector('.working-env').classList.add('ReqValueOk');
-            document.querySelector('.working-env').classList.remove('noReqValue');
-        }
-        else {
-            document.querySelector('.working-env').classList.add('noReqValue');
-            document.querySelector('.working-env').classList.remove('ReqValueOk');
-        }
-    });
+
     // Стиль для блока установки
     $('.placeForEnv').on('change', function (e) {
         if (document.querySelector("#placeForEnv-1").checked || document.querySelector("#placeForEnv-2").checked) {
