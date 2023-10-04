@@ -3,7 +3,7 @@ $(document).ready(function () {
     $(document).on('click', '#e1-table th, #e1-table td', function (e) {
         let target = $(this).data('target');
         let el = document.getElementById(target);
-        $('.cur-execution-value').text(target).val(target);
+        $('.cur-execution-value').text('В' + target).val('В' + target);
         $('#e1-table th').removeClass('table-success');
         $(el).toggleClass('table-success');
     });
@@ -22,25 +22,13 @@ $(document).ready(function () {
     };
     const cheme_img = {
         epn: {
-            Н: {
-                0: '239.gif',
-                1: '239.gif',
-                11: '239.gif',
-                12: '239.gif',
-                3: '239.gif',
-                31: '239.gif',
-                32: '239.gif',
-            },
-            В: {
-                0: '239.gif',
-                1: '239.gif',
-                11: '239.gif',
-                12: '239.gif',
-                2: '239.gif',
-                3: '239.gif',
-                31: '239.gif',
-                32: '239.gif',
-            },
+            0: 'epn0.png',
+            1: 'epn1_11.png',
+            11: 'epn1_11.png',
+            12: 'epn2.png',
+            3: 'epn3_31.png',
+            31: 'epn3_31.png',
+            32: 'epn32.png',
         },
     };
 
@@ -173,17 +161,6 @@ $(document).ready(function () {
 
     // ПРОГРУЗКА ФЛАНЦЕВ С БД
     $('#schemeFieldSet').on('change', function (e) {
-        let cur_constructive_scheme = $("input[name='constructive-scheme']:checked").val();
-
-        // $('#constructive-scheme-img')
-        // .empty()
-        // .append(
-        //     $('<img>').prop({
-        //         src: './img/' + cheme_img['epn'][cur_constructive_scheme],
-        //         class: 'img-fluid',
-        //     })
-        // );
-
         function flangeSelectCreate() {
             let upLim = document.querySelector("#upper-limit").value;
             let timeLim = document.querySelector("#time-limit").value;
@@ -287,28 +264,25 @@ $(document).ready(function () {
                     control_select.append(new Option(item, key, false, cur_control_block == item));
                 });
             }
+            // Загрузка изображений
             $('#constructive-scheme-img')
                 .empty()
                 .append(
                     $('<img>').prop({
-                        src: './img/' + cheme_img['epn'][execution][cur_constructive_scheme],
+                        src: './img/' + cheme_img['epn'][cur_constructive_scheme],
+                        class: 'img-fluid',
+                    })
+                );
+
+            $('#constructive-schemeFull-img')
+                .empty()
+                .append(
+                    $('<img>').prop({
+                        src: './img/' + 'fullepn0.png',
                         class: 'img-fluid',
                     })
                 );
         }
-    });
-
-    // Прогрузка изображения схемы
-    $('#constructive-scheme-wrap').on('change', function (e) {
-
-        $('#constructive-scheme-img')
-            .empty()
-            .append(
-                $('<img>').prop({
-                    src: './img/' + cheme_img['ep4'][cur_constructive_scheme],
-                    class: 'img-fluid',
-                })
-            );
     });
 
     $('#control-block-fieldset').on('change', function (e) {
