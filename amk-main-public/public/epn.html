@@ -1,109 +1,131 @@
 <!-- https://www.tulaprivod.ru/dokument/shema/%D0%BA%D0%B0%D1%82%D0%B0%D0%BB%D0%BE%D0%B3%20%D0%AD%D0%9F%D0%9D.pdf -->
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Конфигуратор</title>
-        <link rel="icon" href=".\favicon.ico">
-    </head>
 
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Конфигуратор</title>
+    <link rel="icon" href=".\favicon.ico">
+</head>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js" integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.1/js/bootstrap.min.js" integrity="sha512-fHY2UiQlipUq0dEabSM4s+phmn+bcxSYzXP4vAXItBvBHU7zAM/mkhCZjtBEIJexhOMzZbgFlPLuErlJF2b+0g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"
+    integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.1/js/bootstrap.min.js"
+    integrity="sha512-fHY2UiQlipUq0dEabSM4s+phmn+bcxSYzXP4vAXItBvBHU7zAM/mkhCZjtBEIJexhOMzZbgFlPLuErlJF2b+0g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js" integrity="sha512-IsNh5E3eYy3tr/JiX2Yx4vsCujtkhwl7SLqgnwLNgf04Hrt9BT9SXlLlZlWx+OK4ndzAoALhsMNcCmkggjZB1w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+    integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js" integrity="sha512-XtmMtDEcNz2j7ekrtHvOVR4iwwaD6o/FUJe6+Zq+HgcCsk3kj4uSQQR8weQ2QVj1o0Pk6PwYLohm206ZzNfubg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"
+    integrity="sha512-IsNh5E3eYy3tr/JiX2Yx4vsCujtkhwl7SLqgnwLNgf04Hrt9BT9SXlLlZlWx+OK4ndzAoALhsMNcCmkggjZB1w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.js" integrity="sha512-9CWGXFSJ+/X0LWzSRCZFsOPhSfm6jbnL+Mpqo0o8Ke2SYr8rCTqb4/wGm+9n13HtDE1NQpAEOrMecDZw4FXQGg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"
+    integrity="sha512-XtmMtDEcNz2j7ekrtHvOVR4iwwaD6o/FUJe6+Zq+HgcCsk3kj4uSQQR8weQ2QVj1o0Pk6PwYLohm206ZzNfubg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js" integrity="sha512-Eak/29OTpb36LLo2r47IpVzPBLXnAMPAVypbSZiZ4Qkf8p/7S/XRG5xp7OKWPPYfJT6metI+IORkR5G8F900+g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.js"
+    integrity="sha512-9CWGXFSJ+/X0LWzSRCZFsOPhSfm6jbnL+Mpqo0o8Ke2SYr8rCTqb4/wGm+9n13HtDE1NQpAEOrMecDZw4FXQGg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <script src="epn.js"></script>
-    <script src ="preloaderScript.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"
+    integrity="sha512-Eak/29OTpb36LLo2r47IpVzPBLXnAMPAVypbSZiZ4Qkf8p/7S/XRG5xp7OKWPPYfJT6metI+IORkR5G8F900+g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <link href = 'konfiguratorStyle.css' rel="stylesheet">
-    <link href = 'preloader.css' rel="stylesheet">
-    <body>
+<script src="epn.js"></script>
+<script src="preloaderScript.js"></script>
 
-        <div id='preloader'>
-            <img src="./preloader.gif" alt="preloader">
-        </div>
+<link href='konfiguratorStyle.css' rel="stylesheet">
+<link href='preloader.css' rel="stylesheet">
 
-        <div class = 'fixedMark'>
-            <div class = 'marknnumbers'>
-                <div id="mark-gen" class="lead mb-3 form-control ">ЭПН-X-X-X-X-X-X-XX</div>
-        </div>    
-        </div>
+<body>
 
-
-<div class="row">
-    <div id="testStep1">
-        <div class = 'styleForHead'>
-            <h2>Общие характеристики автоматизируемой арматуры и электропривода</h2>
-        </div>
-        <fieldset class="row mb-3 timeMode noReqValue">
-            <legend class ='blockNumber'>1
-                <a href="#" class="" data-bs-toggle="modal" data-bs-target="#modalForRezhim">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
-                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                        <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
-                      </svg>
-                    </a>
-            </legend>
-            <div class="col-sm-9">
-                <legend class="col-form-label col-sm-3 pt-0">Режим работы</legend>
-                        <div class="form-check">
-                            <input class="form-check-input ch-mark" value="" type="radio" name="working-mode" id="working-mode-1" />
-                            <label class="form-check-label" for="working-mode-1"> Запорная арматура </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input ch-mark" value="Р" type="radio" name="working-mode" id="working-mode-2" />
-                            <label class="form-check-label" for="working-mode-2"> Запорно-регулирующая арматура </label>
-                        </div>
-                    </div>
-                </fieldset>
-                
-                <fieldset class="row mb-3 noReqValue"  id = 'executionWrapLegend'>
-                    <legend class ='blockNumber'>2
-                    <!-- <legend class="col-form-label col-sm-3 pt-0"> -->
-                        <a href="#" class="" data-bs-toggle="modal" data-bs-target="#help-modal">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
-                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                                <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
-                              </svg>
-                            </a>
-                        </legend>
-                    <legend class="col-form-label col-sm-3 pt-0">Исполнение по взрывозащите</legend>
-                    <div class="col-sm-9" id="execution-wrap">
-                        <div class="form-check">
-                            <input class="form-check-input ch-mark" type="radio" value="В" name="execution" id="V-execute">
-                            <label class="form-check-label" for="V-execute">Взрывозащищенное исполнение</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input ch-mark" type="radio" value="Н" name="execution" id="Н-execute">
-                            <label class="form-check-label" for="Н-execute">Общепромышленное исполнение</label>
-                        </div>
-                    </div>
-                </fieldset>
+    <div id='preloader'>
+        <img src="./preloader.gif" alt="preloader">
     </div>
-        </div>
-            <!-- <div id="step-2"> -->
-            <!-- </div> -->
 
-            <div id="testStep-2">
-                <fieldset class="row mb-3 upperLimitFieldset noReqValue">
-                    <legend class ='blockNumber'>3</legend>
-                    <div class="col-sm-9">
-                        <legend class="col-form-label col-sm-3 pt-0">Верхний предел ограничителя крутящего момента, Н*м</legend>
-                        <select class="form-select form-element ch-time-limit ch-mark ch-cs" data-step="3" name="upper-limit" id="upper-limit">
-                            <option value="">Выберите значение</option>
-                            <!-- <option value="20">20</option>
+    <div class='fixedMark'>
+        <div class='marknnumbers'>
+            <div id="mark-gen" class="lead mb-3 form-control ">ЭПН-X-X-X-X-X-X-XX</div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div id="testStep1">
+            <div class='styleForHead'>
+                <h2>Общие характеристики автоматизируемой арматуры и электропривода</h2>
+            </div>
+            <fieldset class="row mb-3 timeMode noReqValue">
+                <legend class='blockNumber'>1
+                    <a href="#" class="" data-bs-toggle="modal" data-bs-target="#modalForRezhim">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-question-circle" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                            <path
+                                d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z" />
+                        </svg>
+                    </a>
+                </legend>
+                <div class="col-sm-9">
+                    <legend class="col-form-label col-sm-3 pt-0">Режим работы</legend>
+                    <div class="form-check">
+                        <input class="form-check-input ch-mark" value="" type="radio" name="working-mode"
+                            id="working-mode-1" />
+                        <label class="form-check-label" for="working-mode-1"> Запорная арматура </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input ch-mark" value="Р" type="radio" name="working-mode"
+                            id="working-mode-2" />
+                        <label class="form-check-label" for="working-mode-2"> Запорно-регулирующая арматура </label>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="row mb-3 noReqValue" id='executionWrapLegend'>
+                <legend class='blockNumber'>2
+                    <!-- <legend class="col-form-label col-sm-3 pt-0"> -->
+                    <a href="#" class="" data-bs-toggle="modal" data-bs-target="#help-modal">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-question-circle" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                            <path
+                                d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z" />
+                        </svg>
+                    </a>
+                </legend>
+                <legend class="col-form-label col-sm-3 pt-0">Исполнение по взрывозащите</legend>
+                <div class="col-sm-9" id="execution-wrap">
+                    <div class="form-check">
+                        <input class="form-check-input ch-mark" type="radio" value="В" name="execution" id="V-execute">
+                        <label class="form-check-label" for="V-execute">Взрывозащищенное исполнение</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input ch-mark" type="radio" value="Н" name="execution" id="Н-execute">
+                        <label class="form-check-label" for="Н-execute">Общепромышленное исполнение</label>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+    <!-- <div id="step-2"> -->
+    <!-- </div> -->
+
+    <div id="testStep-2">
+        <fieldset class="row mb-3 upperLimitFieldset noReqValue">
+            <legend class='blockNumber'>3</legend>
+            <div class="col-sm-9">
+                <legend class="col-form-label col-sm-3 pt-0">Верхний предел ограничителя крутящего момента, Н*м</legend>
+                <select class="form-select form-element ch-time-limit ch-mark ch-cs" data-step="3" name="upper-limit"
+                    id="upper-limit">
+                    <option value="">Выберите значение</option>
+                    <!-- <option value="20">20</option>
                             <option value="40">40</option>
                             <option value="75">75</option>
                             <option value="80">80</option>
@@ -112,42 +134,42 @@
                             <option value="420">420</option>
                             <option value="600">600</option>
                             <option value="1200">1200</option> -->
-                        </select>
-                    </div>
-                </fieldset>
+                </select>
             </div>
+        </fieldset>
+    </div>
 
-            <div id="testStep-3">
-                <fieldset class="row mb-3 noReqValue" id="time-limit-wrap">
-                    <legend class ='blockNumber'>4</legend>
-                    <div class="col-sm-9">
-                        <legend class="col-form-label col-sm-3 pt-0">Время рабочего хода, с</legend>
-                        <select class="form-select form-element ch-mark ch-cs" name="time-limit" id="time-limit">
-                            <option value="">Выберите значение</option>
-                            <!-- <option value="22">22</option>
+    <div id="testStep-3">
+        <fieldset class="row mb-3 noReqValue" id="time-limit-wrap">
+            <legend class='blockNumber'>4</legend>
+            <div class="col-sm-9">
+                <legend class="col-form-label col-sm-3 pt-0">Время рабочего хода, с</legend>
+                <select class="form-select form-element ch-mark ch-cs" name="time-limit" id="time-limit">
+                    <option value="">Выберите значение</option>
+                    <!-- <option value="22">22</option>
                             <option value="32">32</option> -->
-                        </select>
-                    </div>
-                </fieldset>
+                </select>
             </div>
-        <div id="testStep-4">
-            <fieldset class="row mb-3 noReqValue" id="workStep">
-                <legend class ='blockNumber'>5</legend>
-                <div class="col-sm-9">
-                    <legend class="col-form-label col-sm-3 pt-0">Номинальный рабочий ход, град.</legend>
-                    <div class="form-check">
-                        <input class="form-check-input ch-mark" type="radio" value="1" name="stroke" id="stroke-1" />
-                        <label class="form-check-label" for="stroke-1">90</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input ch-mark" type="radio" value="2" name="stroke" id="stroke-2" />
-                        <label class="form-check-label" for="stroke-2">По спецификации заказа от 60 до 120</label>
-                    </div>
+        </fieldset>
+    </div>
+    <div id="testStep-4">
+        <fieldset class="row mb-3 noReqValue" id="workStep">
+            <legend class='blockNumber'>5</legend>
+            <div class="col-sm-9">
+                <legend class="col-form-label col-sm-3 pt-0">Номинальный рабочий ход, град.</legend>
+                <div class="form-check">
+                    <input class="form-check-input ch-mark" type="radio" value="1" name="stroke" id="stroke-1" />
+                    <label class="form-check-label" for="stroke-1">90</label>
                 </div>
-            </fieldset>
-        </div>
-            <!-- <div id="step-5"> -->
-                <!-- <fieldset class="row mb-3 noReqValue" id="rotation-frequency-wrap" style="">
+                <div class="form-check">
+                    <input class="form-check-input ch-mark" type="radio" value="2" name="stroke" id="stroke-2" />
+                    <label class="form-check-label" for="stroke-2">По спецификации заказа от 60 до 120</label>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    <!-- <div id="step-5"> -->
+    <!-- <fieldset class="row mb-3 noReqValue" id="rotation-frequency-wrap" style="">
                     <legend class ='blockNumber'>6</legend>
                     <legend class="col-form-label col-sm-3 pt-0">Частота вращения выходного вала, об/мин</legend>
                     <div class="col-sm-9">
@@ -155,580 +177,652 @@
                     </div>
                 </fieldset> -->
 
-                <fieldset class="row mb-3 optionalField" id="schemeFieldSet">
-                    <legend class="col-form-label col-sm-3 pt-0"></legend>
-                    <div class="col-sm-9" id="constructive-scheme-wrap">
-                        <div class="form-check">
-                            <input type="radio" id="scheme-1" name="constructive-scheme" value="1" class="form-check-input ch-mark"/>
-                            <label for="scheme-1" class="form-check-label">Конструктивная схема 1</label>
-                        </div>
-                    </div>
-                </fieldset>
-<div id = "testStep-5">
-                <fieldset class="row mb-3 noReqValue">
-                    <legend class ='blockNumber'>6</legend>
-                    <div class="col-sm-9">
-                        <legend class="col-form-label col-sm-3 pt-0">Присоединительный фланец</legend>
-                        <select class="form-select form-element ch-mark" data-step="4" name="flange" id="flange">
-                            <option value="">Выберите значение</option>
-                            <!-- <option value="F04">F04</option>
+    <fieldset class="row mb-3 optionalField" id="schemeFieldSet">
+        <legend class="col-form-label col-sm-3 pt-0"></legend>
+        <div class="col-sm-9" id="constructive-scheme-wrap">
+            <div class="form-check">
+                <input type="radio" id="scheme-1" name="constructive-scheme" value="1"
+                    class="form-check-input ch-mark" />
+                <label for="scheme-1" class="form-check-label">Конструктивная схема 1</label>
+            </div>
+        </div>
+    </fieldset>
+    <div id="testStep-5">
+        <fieldset class="row mb-3 noReqValue">
+            <legend class='blockNumber'>6</legend>
+            <div class="col-sm-9">
+                <legend class="col-form-label col-sm-3 pt-0">Присоединительный фланец</legend>
+                <select class="form-select form-element ch-mark" data-step="4" name="flange" id="flange">
+                    <option value="">Выберите значение</option>
+                    <!-- <option value="F04">F04</option>
                             <option value="F05">F05</option>
                             <option value="F07">F07</option> -->
-                        </select>
-                    </div>
-                </fieldset>
+                </select>
             </div>
-            <div id = "testStep-5">
-                <fieldset class="row mb-3 noReqValue" id="power-type-wrap">
-                    <legend class ='blockNumber'>7</legend>
-                    <div class="col-sm-9">
-                        <legend class="col-form-label col-sm-3 pt-0">Тип силового электропитания</legend>
-                        <select class="form-select form-element ch-mark" name="powerType" id="powerType">
-                            <!-- <option value="" disabled selected>Выберите значение</option>
+        </fieldset>
+    </div>
+    <div id="testStep-5">
+        <fieldset class="row mb-3 noReqValue" id="power-type-wrap">
+            <legend class='blockNumber'>7</legend>
+            <div class="col-sm-9">
+                <legend class="col-form-label col-sm-3 pt-0">Тип силового электропитания</legend>
+                <select class="form-select form-element ch-mark" name="powerType" id="powerType">
+                    <!-- <option value="" disabled selected>Выберите значение</option>
                             <option value="1">Однофазная сеть переменного тока, 220 В, 50 Гц</option>
                             <option value="3">Трёхфазная сеть переменного тока</option>
                             <option value="6">Сеть постоянного тока, 24 </option> -->
-                        </select>
-                    </div>
-                </fieldset>
+                </select>
             </div>
+        </fieldset>
+    </div>
 
-                <fieldset class="row mb-3 noReqValue" id="control-block-fieldset">
-                    <legend class ='blockNumber'>8</legend>
-                    <div class="col-sm-9">
-                        <legend class="col-form-label col-sm-3 pt-0">Тип блока управления</legend>
-                        <div class="input-group">
-                            <select class="form-select form-element ch-mark" data-step="4" name="controle-blocks-series" id="controle-blocks-series">
-                                <option value="">Выберите тип блока управления</option>
-                                <option value="М2">(М2) Механический блок концевых выключателей</option>
-                                <option value="ВЭ">(ВЭ) С электронным внешним интеллектуальным модулем управления, закрепленным на корпусе привода</option>
-                                <option value="ВЭ">(ВЭ1) С блоком управления, специально адаптированным для электрического подключения ВИМУ (ВИМУ в состав привода не входит)</option>
-                            </select>
-                            <input type="text" class="form-control ch-mark" name="controle-blocks" id="controle-blocks" value="" disabled="" />
-                            <button class="btn btn-outline-secondary none" type="button" id="control-block-config">Конфигуратор</button>
-                        </div>
-                    </div>
-                </fieldset>
+    <fieldset class="row mb-3 noReqValue" id="control-block-fieldset">
+        <legend class='blockNumber'>8</legend>
+        <div class="col-sm-9">
+            <legend class="col-form-label col-sm-3 pt-0">Тип блока управления</legend>
+            <div class="input-group">
+                <select class="form-select form-element ch-mark" data-step="4" name="controle-blocks-series"
+                    id="controle-blocks-series">
+                    <option value="">Выберите тип блока управления</option>
+                    <option value="М2">(М2) Механический блок концевых выключателей</option>
+                    <option value="ВЭ">(ВЭ) С электронным внешним интеллектуальным модулем управления, закрепленным на
+                        корпусе привода</option>
+                    <option value="ВЭ">(ВЭ1) С блоком управления, специально адаптированным для электрического
+                        подключения ВИМУ (ВИМУ в состав привода не входит)</option>
+                </select>
+                <input type="text" class="form-control ch-mark" name="controle-blocks" id="controle-blocks" value=""
+                    disabled="" />
+                <button class="btn btn-outline-secondary none" type="button"
+                    id="control-block-config">Конфигуратор</button>
+            </div>
+        </div>
+    </fieldset>
 
-                <fieldset class="row mb-3 noReqValue" id="temperature">
-                    <legend class ='blockNumber'>9</legend>
-                    <div class="col-sm-9">
-                        <legend class="col-form-label col-sm-3 pt-0">Вариант температурного исполнения</legend>
-                        <select class="form-select form-element ch-mark" data-step="4" name="climatic-modification" id="climatic-modification">
-                            <option value="">Выберите значение</option>
-                            <option value="1">-25°C/+60°C - 100% при 25°C - (У1)</option>
-                            <option value="2">-40°C/+60°C - 100% при 25°C - (У1)</option>
-                            <option value="3">-60°C/+60°C - 100% при 25°C - (УХЛ1)</option>
-                            <option value="4">-10°C/+60°C - 100% при 45°C - (Т1)</option>
-                            <option value="5">-40°C/+40°C - 100% при 25°C - (М1)</option>
-                            <option value="6">-40°C/+40°C - 98% при 25°C - (М5.1)</option>
-                        </select>
-                    </div>
-                </fieldset>
+    <fieldset class="row mb-3 noReqValue" id="temperature">
+        <legend class='blockNumber'>9</legend>
+        <div class="col-sm-9">
+            <legend class="col-form-label col-sm-3 pt-0">Вариант температурного исполнения</legend>
+            <select class="form-select form-element ch-mark" data-step="4" name="climatic-modification"
+                id="climatic-modification">
+                <option value="">Выберите значение</option>
+                <option value="1">-25°C/+60°C - 100% при 25°C - (У1)</option>
+                <option value="2">-40°C/+60°C - 100% при 25°C - (У1)</option>
+                <option value="3">-60°C/+60°C - 100% при 25°C - (УХЛ1)</option>
+                <option value="4">-10°C/+60°C - 100% при 45°C - (Т1)</option>
+                <option value="5">-40°C/+40°C - 100% при 25°C - (М1)</option>
+                <option value="6">-40°C/+40°C - 98% при 25°C - (М5.1)</option>
+            </select>
+        </div>
+    </fieldset>
 
-                <fieldset class="row mb-3 noReqValue" id="waterProtection">
-                    <legend class ='blockNumber'>10</legend>
-                    <div class="col-sm-9">
-                        <legend class="col-form-label col-sm-3 pt-0">Степень защиты от проникновения пыли и воды</legend>
-                        <div class="form-check">
-                            <input class="form-check-input ch-mark" type="radio" value="1" name="protection" id="protection-1" />
-                            <label class="form-check-label" for="protection-1">IP67</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input ch-mark" type="radio" value="2" name="protection" id="protection-2" />
-                            <label class="form-check-label" for="protection-2">IP68</label>
-                        </div>
-                    </div>
-                </fieldset>
+    <fieldset class="row mb-3 noReqValue" id="waterProtection">
+        <legend class='blockNumber'>10</legend>
+        <div class="col-sm-9">
+            <legend class="col-form-label col-sm-3 pt-0">Степень защиты от проникновения пыли и воды</legend>
+            <div class="form-check">
+                <input class="form-check-input ch-mark" type="radio" value="1" name="protection" id="protection-1" />
+                <label class="form-check-label" for="protection-1">IP67</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input ch-mark" type="radio" value="2" name="protection" id="protection-2" />
+                <label class="form-check-label" for="protection-2">IP68</label>
+            </div>
+        </div>
+    </fieldset>
 
-                <fieldset class="row mb-3 noReqValue" id = 'colorType'>
-                    <legend class ='blockNumber'>11</legend>
-                    <div class="col-sm-9">
-                        <legend class="col-form-label col-sm-3 pt-0">Цвет окраски</legend>
-                        <div class="form-check">
-                            <input class="form-check-input ch-mark" type="radio" value="1" name="color" id="color-1">
-                            <label class="form-check-label" for="color-1">Серый
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input ch-mark" type="radio" value="2" name="color" id="color-2">
-                            <label class="form-check-label" for="color-2">По спецификации заказа</label>
-                        </div>
-                    </div>
-                    <div class="none" id ='ralDiv'>
-                        <input class="form-input" type="text" name="ralColor" id="ralColor" placeholder="Укажите требования">
-                        <label class="form-check-label" for="ralColor"></label>
-                    </div>
-                </fieldset>
-                
-                <fieldset class="row mb-3 epn-only noReqValue">
-                    <legend class ='blockNumber'>12</legend>
-                    <div class="col-sm-9">
-                        <legend class="col-form-label col-sm-3 pt-0">Электрическое подключение</legend>
-                        <div class="form-check">
-                            <input class="form-check-input ch-mark" type="radio" value="0" name="connection" id="connection-1" />
-                            <label class="form-check-label" for="connection-1">заглушки на местах двух кабельных вводов</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input ch-mark" type="radio" value="1" name="connection" id="connection-2" />
-                            <label class="form-check-label" for="connection-2">два кабельных ввода</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input ch-mark" type="radio" value="6" name="connection" id="connection-3" />
-                            <label class="form-check-label" for="connection-3">4-7 кабельных ввода по спецификации заказа, клемное подключение внутри ВИМУ</label>
-                        </div>
-                        <!-- <div class="form-check">
+    <fieldset class="row mb-3 noReqValue" id='colorType'>
+        <legend class='blockNumber'>11</legend>
+        <div class="col-sm-9">
+            <legend class="col-form-label col-sm-3 pt-0">Цвет окраски</legend>
+            <div class="form-check">
+                <input class="form-check-input ch-mark" type="radio" value="1" name="color" id="color-1">
+                <label class="form-check-label" for="color-1">Серый
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input ch-mark" type="radio" value="2" name="color" id="color-2">
+                <label class="form-check-label" for="color-2">По спецификации заказа</label>
+            </div>
+        </div>
+        <div class="none" id='ralDiv'>
+            <input class="form-input" type="text" name="ralColor" id="ralColor" placeholder="Укажите требования">
+            <label class="form-check-label" for="ralColor"></label>
+        </div>
+    </fieldset>
+
+    <fieldset class="row mb-3 epn-only noReqValue">
+        <legend class='blockNumber'>12</legend>
+        <div class="col-sm-9">
+            <legend class="col-form-label col-sm-3 pt-0">Электрическое подключение</legend>
+            <div class="form-check">
+                <input class="form-check-input ch-mark" type="radio" value="0" name="connection" id="connection-1" />
+                <label class="form-check-label" for="connection-1">заглушки на местах двух кабельных вводов</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input ch-mark" type="radio" value="1" name="connection" id="connection-2" />
+                <label class="form-check-label" for="connection-2">два кабельных ввода</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input ch-mark" type="radio" value="6" name="connection" id="connection-3" />
+                <label class="form-check-label" for="connection-3">4-7 кабельных ввода по спецификации заказа, клемное
+                    подключение внутри ВИМУ</label>
+            </div>
+            <!-- <div class="form-check">
                             <input class="form-check-input ch-mark" type="radio" value="6" name="connection" id="connection-4">
                             <label class="form-check-label" for="connection-4">3 кабельных ввода</label>
                         </div> -->
-                    </div>
-                </fieldset>
-                
-                <fieldset class="row mb-3 noReqValue">
-                    <legend class ='blockNumber'>13</legend>
-                    <div class="col-sm-9">
-                        <legend class="col-form-label col-sm-3 pt-0">Специальное исполнение</legend>
-                        <div class="form-check">
-                            <input class="form-check-input ch-mark" type="radio" value=" " name="specialForEpn" id="specialForEpn-1" />
-                            <label class="form-check-label" for="specialForEpn-1">Нет специального исполнения</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input ch-mark" type="radio" value="1" name="specialForEpn" id="specialForEpn-2" />
-                            <label class="form-check-label" for="specialForEpn-2">Панель управления ВИМУ расположена фронтально (в плоскости параллельной оси вращения вала привода);</label>
-                        </div>
-                    </div>
-                </fieldset>
+        </div>
+    </fieldset>
 
-                <fieldset class = "row mb-3 optionalField " >
-                    <legend class ='blockNumber'>14</legend>
-                    <div class = 'additional accessories'> 
-                        <label id = 'cap'>
-                            <legend class="col-form-label col-sm-3 pt-0">Дополнительные аксессуары</legend>
-                            <input type = 'checkbox' value="Защитный колпак" name = 'cap'> Защитный колпак                           
-                            </input>
-                        </label>
-                            </br>
-                        <label id = 'pointer'>
-                            <input type = 'checkbox'  value= 'Механический указатель' name= 'pointer'> Механический указатель
-                        </input>
-                        </label>
-                    </br>
-                        <label id = 'boardRegId'>
-                            <input type = 'checkbox' name= 'boardReg'> Плата регистратор
-                        </input>
-                        </label>
-                    </div>            
-                </fieldset>
-                <!-- ОСТАЛЬНОЕ ДЛЯ ЗАКАЗА -->
-
-                    <fieldset class="row mb-3 placeForEnv noReqValue" >
-                        <div class="col-sm-9" id="placeForEnv"><legend class ='blockNumber'>15</legend>
-                            <legend class="col-form-label col-sm-3 pt-0">Установка</legend>
-                            <div class="form-check">
-                                <input class="form-check-input ch-mark" value="0" type="radio" name="placeForEnv" id="placeForEnv-1" />
-                                <label class="form-check-label" for="placeForEnv-1">В помещении (под навесом)</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input ch-mark" value="1" type="radio" name="placeForEnv" id="placeForEnv-2" />
-                                <label class="form-check-label" for="placeForEnv-2">Под открытым небом</label>
-                            </div>
-                        </div>
-                    </fieldset>
-
-                    <fieldset class="row mb-3 signalMoment optionalField" >
-                        <legend class ='blockNumber'>16</legend>
-                        <div class="col-sm-9" id="signalMoment">
-                            <legend class="col-form-label col-sm-3 pt-0">Сигнал "Момент" 4-20 мА</legend>
-                            <div class="form-check">
-                                <input class="form-check-input ch-mark" value="1" type="checkbox" name="signalMoment" id="signalMoment-1" />
-                                <label class="form-check-label" for="signalMoment-1">Добавить</label>
-                            </div>
-                        </div>
-                    </fieldset>
-
-                <fieldset class="row mb-3 optionalField addRequirements" >
-                    <legend class ='blockNumber'>17</legend>
-                    <div class="col-sm-9" id="addReq">
-                        <legend class="col-form-label col-sm-3 pt-0">Дополнительные требования</legend>
-                        <div class="form-check">
-                            <textarea placeholder="" style="padding: 5px; resize: none; width: 100%; padding-bottom: 10%;" name="addReqarea" id="addReqarea"></textarea>
-                        </div>
-                    </div>
-                </fieldset>
-
-                <fieldset class="persInfo noReqValue">
-                    <legend class ='blockNumber'>18</legend>
-                    <div class="persInfoFlex" style="display: flex; text-align: -webkit-center; flex-direction: row; flex-wrap: wrap; align-content: space-around; align-items: flex-end; gap: 5%; justify-content: center">
-                        <div class="mb-3" id="persInfo-1">
-                            <label for="organization"><b>Организация:</b></label>
-                            <br />
-                            <input class="form-input form-element input" id="organization" style="margin-top: 2.5%;" type="text" placeholder="Введите организацию" required />
-                        </div>
-                        <div class="mb-3" id="persInfo-2">
-                            <label for="fio"><b>Контактное лицо: ФИО</b></label>
-                            <br />
-                            <input class="form-input form-element input" id="fio" type="text" style="margin-top: 2.5%;" placeholder="Введите ФИО" required/>
-                        </div>
-                        <div class="mb-3" id="persInfo-3">
-                            <label for="phone"><b>Телефон:</b></label>
-                            <br />
-                            <input class="form-input form-element input" id="phone" type="number" style="margin-top: 2.5%;" placeholder="Введите телефон" required/>
-                            <style>
-                                input::-webkit-outer-spin-button,
-                                input::-webkit-inner-spin-button {
-                                    -webkit-appearance: none;
-                                    margin: 0;
-                                }
-                                input[type='number'] {
-                                    -moz-appearance: textfield;
-                                }
-                            </style>
-                        </div>
-                        <div class="mb-3" id="persInfo-4">
-                            <label for="email"><b>Email:</b></label>
-                            <br />
-                            <input class="form-input form-element input" id="email" type="email" placeholder="Введите почту" style="margin-top: 2.5%;" required/>
-                        </div>
-                    </div>
-            </fieldset>
-
-                <fieldset class="row mb-3 numbersOfEp noReqValue"  id = 'executionWrapLegend'>
-                    <legend class ='blockNumber'>19</legend>
-                    <div class="mb-3" id="numbers">
-                    <legend class="col-form-label col-sm-3 pt-0">Кол-во приводов:</legend>
-                    <input class="form-input form-element input" id="numbersOfEp" type="number" placeholder="Введите кол-во" min="0"/>
-                </div>
-            </fieldset>
-
-            <div id="modal-button" class="mb-3">
-                <button type="button" id="download" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modal-th">Скачать документацию</button>
+    <fieldset class="row mb-3 noReqValue">
+        <legend class='blockNumber'>13</legend>
+        <div class="col-sm-9">
+            <legend class="col-form-label col-sm-3 pt-0">Специальное исполнение</legend>
+            <div class="form-check">
+                <input class="form-check-input ch-mark" type="radio" value=" " name="specialForEpn"
+                    id="specialForEpn-1" />
+                <label class="form-check-label" for="specialForEpn-1">Нет специального исполнения</label>
             </div>
-   
-            <div id="certs-pdf">
-                   <button class ='btn-info' > <a href="./pdf/certEp4.pdf" style="text-decoration: none; color: black; ">Сертификат</a></button>
-                   <button class ='btn-info' style="margin-left: 1%;"> <a href="./pdf/declarationEp4.pdf" style="text-decoration: none; color: black;">Декларация</a></button>
+            <div class="form-check">
+                <input class="form-check-input ch-mark" type="radio" value="1" name="specialForEpn"
+                    id="specialForEpn-2" />
+                <label class="form-check-label" for="specialForEpn-2">Панель управления ВИМУ расположена фронтально (в
+                    плоскости параллельной оси вращения вала привода);</label>
             </div>
         </div>
-<!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+    </fieldset>
 
-            <div class="modal" id="block-configure-m1" tabindex="-1">
-                <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Дополнительные опции блока управления серии М1</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Закрыть</button>
+    <fieldset class="row mb-3 optionalField ">
+        <legend class='blockNumber'>14</legend>
+        <div class='additional accessories'>
+            <label id='cap'>
+                <legend class="col-form-label col-sm-3 pt-0">Дополнительные аксессуары</legend>
+                <input type='checkbox' value="Защитный колпак" name='cap'> Защитный колпак
+                </input>
+            </label>
+            </br>
+            <label id='pointer'>
+                <input type='checkbox' value='Механический указатель' name='pointer'> Механический указатель
+                </input>
+            </label>
+            </br>
+            <label id='boardRegId'>
+                <input type='checkbox' name='boardReg'> Плата регистратор
+                </input>
+            </label>
+        </div>
+    </fieldset>
+    <!-- ОСТАЛЬНОЕ ДЛЯ ЗАКАЗА -->
+
+    <fieldset class="row mb-3 placeForEnv noReqValue">
+        <div class="col-sm-9" id="placeForEnv">
+            <legend class='blockNumber'>15</legend>
+            <legend class="col-form-label col-sm-3 pt-0">Установка</legend>
+            <div class="form-check">
+                <input class="form-check-input ch-mark" value="0" type="radio" name="placeForEnv" id="placeForEnv-1" />
+                <label class="form-check-label" for="placeForEnv-1">В помещении (под навесом)</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input ch-mark" value="1" type="radio" name="placeForEnv" id="placeForEnv-2" />
+                <label class="form-check-label" for="placeForEnv-2">Под открытым небом</label>
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset class="row mb-3 signalMoment optionalField">
+        <legend class='blockNumber'>16</legend>
+        <div class="col-sm-9" id="signalMoment">
+            <legend class="col-form-label col-sm-3 pt-0">Сигнал "Момент" 4-20 мА</legend>
+            <div class="form-check">
+                <input class="form-check-input ch-mark" value="1" type="checkbox" name="signalMoment"
+                    id="signalMoment-1" />
+                <label class="form-check-label" for="signalMoment-1">Добавить</label>
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset class="row mb-3 optionalField addRequirements">
+        <legend class='blockNumber'>17</legend>
+        <div class="col-sm-9" id="addReq">
+            <legend class="col-form-label col-sm-3 pt-0">Дополнительные требования</legend>
+            <div class="form-check">
+                <textarea placeholder="" style="padding: 5px; resize: none; width: 100%; padding-bottom: 10%;"
+                    name="addReqarea" id="addReqarea"></textarea>
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset class="persInfo noReqValue">
+        <legend class='blockNumber'>18</legend>
+        <div class="persInfoFlex"
+            style="display: flex; text-align: -webkit-center; flex-direction: row; flex-wrap: wrap; align-content: space-around; align-items: flex-end; gap: 5%; justify-content: center">
+            <div class="mb-3" id="persInfo-1">
+                <label for="organization"><b>Организация:</b></label>
+                <br />
+                <input class="form-input form-element input" id="organization" style="margin-top: 2.5%;" type="text"
+                    placeholder="Введите организацию" required />
+            </div>
+            <div class="mb-3" id="persInfo-2">
+                <label for="fio"><b>Контактное лицо: ФИО</b></label>
+                <br />
+                <input class="form-input form-element input" id="fio" type="text" style="margin-top: 2.5%;"
+                    placeholder="Введите ФИО" required />
+            </div>
+            <div class="mb-3" id="persInfo-3">
+                <label for="phone"><b>Телефон:</b></label>
+                <br />
+                <input class="form-input form-element input" id="phone" type="number" style="margin-top: 2.5%;"
+                    placeholder="Введите телефон" required />
+                <style>
+                    input::-webkit-outer-spin-button,
+                    input::-webkit-inner-spin-button {
+                        -webkit-appearance: none;
+                        margin: 0;
+                    }
+
+                    input[type='number'] {
+                        -moz-appearance: textfield;
+                    }
+                </style>
+            </div>
+            <div class="mb-3" id="persInfo-4">
+                <label for="email"><b>Email:</b></label>
+                <br />
+                <input class="form-input form-element input" id="email" type="email" placeholder="Введите почту"
+                    style="margin-top: 2.5%;" required />
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset class="row mb-3 numbersOfEp noReqValue" id='executionWrapLegend'>
+        <legend class='blockNumber'>19</legend>
+        <div class="mb-3" id="numbers">
+            <legend class="col-form-label col-sm-3 pt-0">Кол-во приводов:</legend>
+            <input class="form-input form-element input" id="numbersOfEp" type="number" placeholder="Введите кол-во"
+                min="0" />
+        </div>
+    </fieldset>
+
+    <div id="modal-button" class="mb-3">
+        <button type="button" id="download" class="btn btn-info" data-bs-toggle="modal"
+            data-bs-target="#modal-th">Скачать документацию</button>
+    </div>
+
+    <div id="certs-pdf">
+        <button class='btn-info'> <a href="./pdf/certEp4.pdf"
+                style="text-decoration: none; color: black; ">Сертификат</a></button>
+        <button class='btn-info' style="margin-left: 1%;"> <a href="./pdf/declarationEp4.pdf"
+                style="text-decoration: none; color: black;">Декларация</a></button>
+    </div>
+    </div>
+    <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+    <div class="modal" id="block-configure-m1" tabindex="-1">
+        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Дополнительные опции блока управления серии М1</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Закрыть</button>
+                </div>
+                <div class="modal-body">
+                    <form id="m1-form">
+                        <input type="hidden" class="cur-m1-value" value="М10" />
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" name="" value="1" id="m1-1"
+                                data-position="0" />
+                            <label class="form-check-label" for="m1-1">Сигнализация о двух промежуточных положениях
+                                выходного вала посредством двух путевых промежуточных выключателей</label>
                         </div>
-                        <div class="modal-body">
-                            <form id="m1-form">
-                                <input type="hidden" class="cur-m1-value" value="М10" />
-                                <div class="form-check mb-3">
-                                    <input class="form-check-input" type="checkbox" name="" value="1" id="m1-1" data-position="0" />
-                                    <label class="form-check-label" for="m1-1">Сигнализация о двух промежуточных положениях выходного вала посредством двух путевых промежуточных выключателей</label>
-                                </div>
-                                <div class="form-check mb-3">
-                                    <input class="form-check-input" type="radio" name="m1-signal" value="2" id="m1-2" data-position="1" />
-                                    <label class="form-check-label" for="m1-2">Сигнализация о текущем положении выходного вала посредством изменения сопротивления потенциометра</label>
-                                </div>
-                                <div class="form-check mb-3">
-                                    <input class="form-check-input" type="radio" name="m1-signal" value="1" id="m1-3" data-position="2" />
-                                    <label class="form-check-label" for="m1-3">Сигнализация о текущем положении выходного вала посредством токового сигнала, изменяющегося пропорционально пути, пройденному выходным валом привода</label>
-                                </div>
-                                <div class="form-check mb-3">
-                                    <input class="form-check-input" type="checkbox" name="m1-signal" value="1" id="m1-4" data-position="3" />
-                                    <label class="form-check-label" for="m1-4"
-                                        >Сигнализация факта вращения выходного вала привода посредством замыкания и размыкания сухих контактов выключателя (блинкера) при изменении положения входного путевого вала блока (1 импульс на 1 оборот выходного вала привода (оснащение блока управления
-                                        блинкером — по отдельному заказу))</label
-                                    >
-                                </div>
-                                <div class="form-check mb-3">
-                                    <input class="form-check-input" type="checkbox" name="m1-signal" value="1" id="m1-5" data-position="4" />
-                                    <label class="form-check-label" for="m1-5">Сигнализация о достигаемых положениях и моментах посредством 4 контактных микровыключателей (код z5=0) или 3-контактных микровыключателей (код z5=1)</label>
-                                </div>
-                                <div class="form-check mb-3">
-                                    <input class="form-check-input" type="checkbox" name="m1-signal" value="1" id="m1-6" data-position="5" />
-                                    <label class="form-check-label" for="m1-6"
-                                        >Блокировка сигнала превышения заданного при настройке блока значения крутящего момента привода (байпас сигнала превышения момента) в начальный период движения из состояния, соответствующего открытому и закрытому состоянию арматуры (с раздельной настройкой для
-                                        движения на открытие и на закрытие арматуры), на протяжении заданного при настройке блока пути, проходимого выходным валом привода</label
-                                    >
-                                </div>
-                                <div class="form-check mb-3">
-                                    <input class="form-check-input" type="checkbox" name="m1-signal" value="1" id="m1-7" data-position="6" />
-                                    <label class="form-check-label" for="m1-7"
-                                        >Блокировка возможности повторного включения двигателя привода по электрической цепи, содержащей нормально замкнутый контакт моментного выключателя, размыканием которого был выключен двигатель привода при достижении крутящего момента, заданного при настройке
-                                        блока (фиксация моментных выключателей)</label
-                                    >
-                                </div>
-                            </form>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="radio" name="m1-signal" value="2" id="m1-2"
+                                data-position="1" />
+                            <label class="form-check-label" for="m1-2">Сигнализация о текущем положении выходного вала
+                                посредством изменения сопротивления потенциометра</label>
                         </div>
-                        <div class="modal-footer">
-                            <div class="modal-title m-auto">Код исполнения: <span class="cur-m1-value">М10</span></div>
-                            <button type="button" class="btn btn-secondary" id="clear-m1">Сбросить</button>
-                            <button type="button" class="btn btn-primary" id="m1-submit">Применить</button>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="radio" name="m1-signal" value="1" id="m1-3"
+                                data-position="2" />
+                            <label class="form-check-label" for="m1-3">Сигнализация о текущем положении выходного вала
+                                посредством токового сигнала, изменяющегося пропорционально пути, пройденному выходным
+                                валом привода</label>
                         </div>
-                    </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" name="m1-signal" value="1" id="m1-4"
+                                data-position="3" />
+                            <label class="form-check-label" for="m1-4">Сигнализация факта вращения выходного вала
+                                привода посредством замыкания и размыкания сухих контактов выключателя (блинкера) при
+                                изменении положения входного путевого вала блока (1 импульс на 1 оборот выходного вала
+                                привода (оснащение блока управления
+                                блинкером — по отдельному заказу))</label>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" name="m1-signal" value="1" id="m1-5"
+                                data-position="4" />
+                            <label class="form-check-label" for="m1-5">Сигнализация о достигаемых положениях и моментах
+                                посредством 4 контактных микровыключателей (код z5=0) или 3-контактных микровыключателей
+                                (код z5=1)</label>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" name="m1-signal" value="1" id="m1-6"
+                                data-position="5" />
+                            <label class="form-check-label" for="m1-6">Блокировка сигнала превышения заданного при
+                                настройке блока значения крутящего момента привода (байпас сигнала превышения момента) в
+                                начальный период движения из состояния, соответствующего открытому и закрытому состоянию
+                                арматуры (с раздельной настройкой для
+                                движения на открытие и на закрытие арматуры), на протяжении заданного при настройке
+                                блока пути, проходимого выходным валом привода</label>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" name="m1-signal" value="1" id="m1-7"
+                                data-position="6" />
+                            <label class="form-check-label" for="m1-7">Блокировка возможности повторного включения
+                                двигателя привода по электрической цепи, содержащей нормально замкнутый контакт
+                                моментного выключателя, размыканием которого был выключен двигатель привода при
+                                достижении крутящего момента, заданного при настройке
+                                блока (фиксация моментных выключателей)</label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div class="modal-title m-auto">Код исполнения: <span class="cur-m1-value">М10</span></div>
+                    <button type="button" class="btn btn-secondary" id="clear-m1">Сбросить</button>
+                    <button type="button" class="btn btn-primary" id="m1-submit">Применить</button>
                 </div>
             </div>
+        </div>
+    </div>
 
-            <div class="modal" id="block-configure-m2" tabindex="-1">
-                <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Дополнительные опции блока управления серии М2</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Закрыть</button>
+    <div class="modal" id="block-configure-m2" tabindex="-1">
+        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Дополнительные опции блока управления серии М2</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Закрыть</button>
+                </div>
+                <div class="modal-body">
+                    <form id="m2-form">
+                        <input type="hidden" class="cur-m2-value" value="М20" />
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="" value="1" id="m2-1"
+                                data-position="0" />
+                            <label class="form-check-label" for="m2-1">Сигнализация о двух промежуточных положениях
+                                выходного вала посредством двух путевых (промежуточных) выключателей.</label>
                         </div>
-                        <div class="modal-body">
-                            <form id="m2-form">
-                                <input type="hidden" class="cur-m2-value" value="М20" />
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="" value="1" id="m2-1" data-position="0" />
-                                    <label class="form-check-label" for="m2-1">Сигнализация о двух промежуточных положениях выходного вала посредством двух путевых (промежуточных) выключателей.</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="m2-signal" value="2" id="m2-2" data-position="1" />
-                                    <label class="form-check-label" for="m2-2">Сигнализация о текущем положении выходного вала посредством изменения сопротивления потенциометра. Настройка на ноль сопротивления потенциометра обратной связи.</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="m2-signal" value="1" id="m2-3" data-position="2" />
-                                    <label class="form-check-label" for="m2-3">Сигнализация о текущем положении выходного вала посредством токового сигнала (4–20 мА), изменяющегося пропорционально пути, пройденному выходным валом привода. Настройка токового сигнализатора положения.</label>
-                                </div>
-                            </form>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="m2-signal" value="2" id="m2-2"
+                                data-position="1" />
+                            <label class="form-check-label" for="m2-2">Сигнализация о текущем положении выходного вала
+                                посредством изменения сопротивления потенциометра. Настройка на ноль сопротивления
+                                потенциометра обратной связи.</label>
                         </div>
-                        <div class="modal-footer">
-                            <div class="modal-title m-auto">Код исполнения: <span class="cur-m2-value">М20</span></div>
-                            <button type="button" class="btn btn-secondary" id="clear-m2">Сбросить</button>
-                            <button type="button" class="btn btn-primary" id="m2-submit">Применить</button>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="m2-signal" value="1" id="m2-3"
+                                data-position="2" />
+                            <label class="form-check-label" for="m2-3">Сигнализация о текущем положении выходного вала
+                                посредством токового сигнала (4–20 мА), изменяющегося пропорционально пути, пройденному
+                                выходным валом привода. Настройка токового сигнализатора положения.</label>
                         </div>
-                    </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div class="modal-title m-auto">Код исполнения: <span class="cur-m2-value">М20</span></div>
+                    <button type="button" class="btn btn-secondary" id="clear-m2">Сбросить</button>
+                    <button type="button" class="btn btn-primary" id="m2-submit">Применить</button>
                 </div>
             </div>
+        </div>
+    </div>
 
-            <div class="modal" id="block-configure-e2" tabindex="-1">
-                <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Дополнительные опции блока управления серии Э2</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Закрыть</button>
+    <div class="modal" id="block-configure-e2" tabindex="-1">
+        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Дополнительные опции блока управления серии Э2</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Закрыть</button>
+                </div>
+                <div class="modal-body">
+                    <form id="e2-form">
+                        <input type="hidden" class="cur-e2-value" value="Э21" />
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="e2" value="Э22" id="e2-1" />
+                            <label class="form-check-label" for="e2-1">Передача информации о положении выходного вала
+                                привода посредством токового сигнала (4-20 мА или 0-5 мА</label>
                         </div>
-                        <div class="modal-body">
-                            <form id="e2-form">
-                                <input type="hidden" class="cur-e2-value" value="Э21" />
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="e2" value="Э22" id="e2-1" />
-                                    <label class="form-check-label" for="e2-1">Передача информации о положении выходного вала привода посредством токового сигнала (4-20 мА или 0-5 мА</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="e2" value="Э23" id="e2-2" />
-                                    <label class="form-check-label" for="e2-2">Передача информации о состоянии и настройках привода, изменение настроек привода посредством цифрового канала связи, интерфейс RS485, протокол обмена - MODBUS RTU</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="e2" value="Э24" id="e2-3" />
-                                    <label class="form-check-label" for="e2-3">Передача информации о состоянии и настройках привода, изменение настроек привода посредством дублированного цифрового канала связи, интерфейс RS485, протокол обмена - MODBUS RTU</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="e2" value="Э25" id="e2-4" />
-                                    <label class="form-check-label" for="e2-4">Передача информации о состоянии привода посредством цифрового канала связи, интерфейс RS485, протокол обмена - PROFIBUS DP</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="e2" value="Э26" id="e2-5" />
-                                    <label class="form-check-label" for="e2-5">Передача информации о состоянии привода посредством дублированного цифрового канала связи, интерфейс RS485, протокол обмена - PROFIBUS DP</label>
-                                </div>
-                            </form>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="e2" value="Э23" id="e2-2" />
+                            <label class="form-check-label" for="e2-2">Передача информации о состоянии и настройках
+                                привода, изменение настроек привода посредством цифрового канала связи, интерфейс RS485,
+                                протокол обмена - MODBUS RTU</label>
                         </div>
-                        <div class="modal-footer">
-                            <div class="modal-title m-auto">Код исполнения: <span class="cur-e2-value">Э21</span></div>
-                            <button type="button" class="btn btn-secondary" id="clear-e2">Сбросить</button>
-                            <button type="button" class="btn btn-primary" id="e2-submit">Применить</button>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="e2" value="Э24" id="e2-3" />
+                            <label class="form-check-label" for="e2-3">Передача информации о состоянии и настройках
+                                привода, изменение настроек привода посредством дублированного цифрового канала связи,
+                                интерфейс RS485, протокол обмена - MODBUS RTU</label>
                         </div>
-                    </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="e2" value="Э25" id="e2-4" />
+                            <label class="form-check-label" for="e2-4">Передача информации о состоянии привода
+                                посредством цифрового канала связи, интерфейс RS485, протокол обмена - PROFIBUS
+                                DP</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="e2" value="Э26" id="e2-5" />
+                            <label class="form-check-label" for="e2-5">Передача информации о состоянии привода
+                                посредством дублированного цифрового канала связи, интерфейс RS485, протокол обмена -
+                                PROFIBUS DP</label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div class="modal-title m-auto">Код исполнения: <span class="cur-e2-value">Э21</span></div>
+                    <button type="button" class="btn btn-secondary" id="clear-e2">Сбросить</button>
+                    <button type="button" class="btn btn-primary" id="e2-submit">Применить</button>
                 </div>
             </div>
+        </div>
+    </div>
 
-            <div class="modal" id="block-configure-e1" tabindex="-1">
-                <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Опциональный набор функций ВИМУ и коды исполнения</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Закрыть</button>
-                        </div>
-                        <div class="modal-body">
-                            <table id="e1-table" class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th rowspan="2">Функции</th>
-                                        <th colspan="10">Код исполнения</th>
-                                    </tr>
-                                    <tr>
-                                        <th data-target="Э11" id="Э11">Э11</th>
-                                        <th data-target="Э12" id="Э12">Э12</th>
-                                        <th data-target="Э13" id="Э13">Э13</th>
-                                        <th data-target="Э14" id="Э14">Э14</th>
-                                        <th data-target="Э15" id="Э15">Э15</th>
-                                        <th data-target="Э16" id="Э16">Э16</th>
-                                        <th data-target="Э17" id="Э17">Э17</th>
-                                        <th data-target="Э18" id="Э18">Э18</th>
-                                        <th data-target="Э19" id="Э19">Э19</th>
-                                        <th data-target="Э110" id="Э110">Э110</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Базовый набор функций ВИМУ</td>
-                                        <td data-target="Э11" class="table-success"></td>
-                                        <td data-target="Э12" class="table-success"></td>
-                                        <td data-target="Э13" class="table-success"></td>
-                                        <td data-target="Э14" class="table-success"></td>
-                                        <td data-target="Э15" class="table-success"></td>
-                                        <td data-target="Э16" class="table-success"></td>
-                                        <td data-target="Э17" class="table-success"></td>
-                                        <td data-target="Э18" class="table-success"></td>
-                                        <td data-target="Э19" class="table-success"></td>
-                                        <td data-target="Э110" class="table-success"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Передача информации о положении выходного звена привода посредством токового сигнала (4–20 мА)</td>
-                                        <td data-target="Э11"></td>
-                                        <td data-target="Э12" class="table-success"></td>
-                                        <td data-target="Э13" class="table-success"></td>
-                                        <td data-target="Э14"></td>
-                                        <td data-target="Э15" class="table-success"></td>
-                                        <td data-target="Э16"></td>
-                                        <td data-target="Э17" class="table-success"></td>
-                                        <td data-target="Э18"></td>
-                                        <td data-target="Э19"></td>
-                                        <td data-target="Э110"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Передача текущего значения движущего момента на выходном звене привода посредством токового сигнала (4–20 мА).</td>
-                                        <td data-target="Э11"></td>
-                                        <td data-target="Э12"></td>
-                                        <td data-target="Э13" class="table-success"></td>
-                                        <td data-target="Э14"></td>
-                                        <td data-target="Э15" class="table-success"></td>
-                                        <td data-target="Э16"></td>
-                                        <td data-target="Э17" class="table-success"></td>
-                                        <td data-target="Э18"></td>
-                                        <td data-target="Э19"></td>
-                                        <td data-target="Э110"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Аналоговое управление приводом — прием от дистанционного пульта и отработка токового сигнала (4–20 мА) задания положения выходного звена привода с контролем наличия связи</td>
-                                        <td data-target="Э11"></td>
-                                        <td data-target="Э12"></td>
-                                        <td data-target="Э13"></td>
-                                        <td data-target="Э14"></td>
-                                        <td data-target="Э15"></td>
-                                        <td data-target="Э16" class="table-success"></td>
-                                        <td data-target="Э17" class="table-success"></td>
-                                        <td data-target="Э18"></td>
-                                        <td data-target="Э19"></td>
-                                        <td data-target="Э110"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Цифровое управление и настройка привода посредством цифрового канала связи, интерфейс RS485, протокол обмена — MODBUS RTU.</td>
-                                        <td data-target="Э11"></td>
-                                        <td data-target="Э12"></td>
-                                        <td data-target="Э13"></td>
-                                        <td data-target="Э14" class="table-success"></td>
-                                        <td data-target="Э15" class="table-success"></td>
-                                        <td data-target="Э16"></td>
-                                        <td data-target="Э17"></td>
-                                        <td data-target="Э18"></td>
-                                        <td data-target="Э19"></td>
-                                        <td data-target="Э110"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Цифровое управление и настройка привода с дублированием каналов связи посредством цифрового канала связи, интерфейс RS485, протокол обмена — MODBUS RTU</td>
-                                        <td data-target="Э11"></td>
-                                        <td data-target="Э12"></td>
-                                        <td data-target="Э13"></td>
-                                        <td data-target="Э14"></td>
-                                        <td data-target="Э15"></td>
-                                        <td data-target="Э16"></td>
-                                        <td data-target="Э17"></td>
-                                        <td data-target="Э18" class="table-success"></td>
-                                        <td data-target="Э19"></td>
-                                        <td data-target="Э110"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Цифровое управление приводом посредством цифрового канала связи, интерфейс RS485, протокол обмена — PROFIBUS DP</td>
-                                        <td data-target="Э11"></td>
-                                        <td data-target="Э12"></td>
-                                        <td data-target="Э13"></td>
-                                        <td data-target="Э14"></td>
-                                        <td data-target="Э15"></td>
-                                        <td data-target="Э16"></td>
-                                        <td data-target="Э17"></td>
-                                        <td data-target="Э18"></td>
-                                        <td data-target="Э19" class="table-success"></td>
-                                        <td data-target="Э110"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Цифровое управление приводом с дублированием каналов связи посредством цифрового канала связи, интерфейс RS485, протокол обмена — PROFIBUS DP.</td>
-                                        <td data-target="Э11"></td>
-                                        <td data-target="Э12"></td>
-                                        <td data-target="Э13"></td>
-                                        <td data-target="Э14"></td>
-                                        <td data-target="Э15"></td>
-                                        <td data-target="Э16"></td>
-                                        <td data-target="Э17"></td>
-                                        <td data-target="Э18"></td>
-                                        <td data-target="Э19"></td>
-                                        <td data-target="Э110" class="table-success"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Диагностирование отказов опциональных модулей.</td>
-                                        <td data-target="Э11"></td>
-                                        <td data-target="Э12" class="table-success"></td>
-                                        <td data-target="Э13" class="table-success"></td>
-                                        <td data-target="Э14" class="table-success"></td>
-                                        <td data-target="Э15" class="table-success"></td>
-                                        <td data-target="Э16" class="table-success"></td>
-                                        <td data-target="Э17" class="table-success"></td>
-                                        <td data-target="Э18" class="table-success"></td>
-                                        <td data-target="Э19" class="table-success"></td>
-                                        <td data-target="Э110" class="table-success"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Автоматический выбор активного интерфейса дистанционного управления.</td>
-                                        <td data-target="Э11"></td>
-                                        <td data-target="Э12"></td>
-                                        <td data-target="Э13"></td>
-                                        <td data-target="Э14" class="table-success"></td>
-                                        <td data-target="Э15" class="table-success"></td>
-                                        <td data-target="Э16" class="table-success"></td>
-                                        <td data-target="Э17" class="table-success"></td>
-                                        <td data-target="Э18" class="table-success"></td>
-                                        <td data-target="Э19" class="table-success"></td>
-                                        <td data-target="Э110" class="table-success"></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="modal-footer">
-                            <div class="modal-title m-auto">Код исполнения: <span class="cur-execution-value">Э11</span></div>
-                            <input type="hidden" class="cur-execution-value" value="Э11" />
-                            <button type="button" class="btn btn-primary" id="e1-submit">Применить</button>
-                        </div>
-                    </div>
+    <div class="modal" id="block-configure-e1" tabindex="-1">
+        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Опциональный набор функций ВИМУ и коды исполнения</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Закрыть</button>
+                </div>
+                <div class="modal-body">
+                    <table id="e1-table" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th rowspan="2">Функции</th>
+                                <th colspan="10">Код исполнения</th>
+                            </tr>
+                            <tr>
+                                <th data-target="Э11" id="Э11">Э11</th>
+                                <th data-target="Э12" id="Э12">Э12</th>
+                                <th data-target="Э13" id="Э13">Э13</th>
+                                <th data-target="Э14" id="Э14">Э14</th>
+                                <th data-target="Э15" id="Э15">Э15</th>
+                                <th data-target="Э16" id="Э16">Э16</th>
+                                <th data-target="Э17" id="Э17">Э17</th>
+                                <th data-target="Э18" id="Э18">Э18</th>
+                                <th data-target="Э19" id="Э19">Э19</th>
+                                <th data-target="Э110" id="Э110">Э110</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Базовый набор функций ВИМУ</td>
+                                <td data-target="Э11" class="table-success"></td>
+                                <td data-target="Э12" class="table-success"></td>
+                                <td data-target="Э13" class="table-success"></td>
+                                <td data-target="Э14" class="table-success"></td>
+                                <td data-target="Э15" class="table-success"></td>
+                                <td data-target="Э16" class="table-success"></td>
+                                <td data-target="Э17" class="table-success"></td>
+                                <td data-target="Э18" class="table-success"></td>
+                                <td data-target="Э19" class="table-success"></td>
+                                <td data-target="Э110" class="table-success"></td>
+                            </tr>
+                            <tr>
+                                <td>Передача информации о положении выходного звена привода посредством токового сигнала
+                                    (4–20 мА)</td>
+                                <td data-target="Э11"></td>
+                                <td data-target="Э12" class="table-success"></td>
+                                <td data-target="Э13" class="table-success"></td>
+                                <td data-target="Э14"></td>
+                                <td data-target="Э15" class="table-success"></td>
+                                <td data-target="Э16"></td>
+                                <td data-target="Э17" class="table-success"></td>
+                                <td data-target="Э18"></td>
+                                <td data-target="Э19"></td>
+                                <td data-target="Э110"></td>
+                            </tr>
+                            <tr>
+                                <td>Передача текущего значения движущего момента на выходном звене привода посредством
+                                    токового сигнала (4–20 мА).</td>
+                                <td data-target="Э11"></td>
+                                <td data-target="Э12"></td>
+                                <td data-target="Э13" class="table-success"></td>
+                                <td data-target="Э14"></td>
+                                <td data-target="Э15" class="table-success"></td>
+                                <td data-target="Э16"></td>
+                                <td data-target="Э17" class="table-success"></td>
+                                <td data-target="Э18"></td>
+                                <td data-target="Э19"></td>
+                                <td data-target="Э110"></td>
+                            </tr>
+                            <tr>
+                                <td>Аналоговое управление приводом — прием от дистанционного пульта и отработка токового
+                                    сигнала (4–20 мА) задания положения выходного звена привода с контролем наличия
+                                    связи</td>
+                                <td data-target="Э11"></td>
+                                <td data-target="Э12"></td>
+                                <td data-target="Э13"></td>
+                                <td data-target="Э14"></td>
+                                <td data-target="Э15"></td>
+                                <td data-target="Э16" class="table-success"></td>
+                                <td data-target="Э17" class="table-success"></td>
+                                <td data-target="Э18"></td>
+                                <td data-target="Э19"></td>
+                                <td data-target="Э110"></td>
+                            </tr>
+                            <tr>
+                                <td>Цифровое управление и настройка привода посредством цифрового канала связи,
+                                    интерфейс RS485, протокол обмена — MODBUS RTU.</td>
+                                <td data-target="Э11"></td>
+                                <td data-target="Э12"></td>
+                                <td data-target="Э13"></td>
+                                <td data-target="Э14" class="table-success"></td>
+                                <td data-target="Э15" class="table-success"></td>
+                                <td data-target="Э16"></td>
+                                <td data-target="Э17"></td>
+                                <td data-target="Э18"></td>
+                                <td data-target="Э19"></td>
+                                <td data-target="Э110"></td>
+                            </tr>
+                            <tr>
+                                <td>Цифровое управление и настройка привода с дублированием каналов связи посредством
+                                    цифрового канала связи, интерфейс RS485, протокол обмена — MODBUS RTU</td>
+                                <td data-target="Э11"></td>
+                                <td data-target="Э12"></td>
+                                <td data-target="Э13"></td>
+                                <td data-target="Э14"></td>
+                                <td data-target="Э15"></td>
+                                <td data-target="Э16"></td>
+                                <td data-target="Э17"></td>
+                                <td data-target="Э18" class="table-success"></td>
+                                <td data-target="Э19"></td>
+                                <td data-target="Э110"></td>
+                            </tr>
+                            <tr>
+                                <td>Цифровое управление приводом посредством цифрового канала связи, интерфейс RS485,
+                                    протокол обмена — PROFIBUS DP</td>
+                                <td data-target="Э11"></td>
+                                <td data-target="Э12"></td>
+                                <td data-target="Э13"></td>
+                                <td data-target="Э14"></td>
+                                <td data-target="Э15"></td>
+                                <td data-target="Э16"></td>
+                                <td data-target="Э17"></td>
+                                <td data-target="Э18"></td>
+                                <td data-target="Э19" class="table-success"></td>
+                                <td data-target="Э110"></td>
+                            </tr>
+                            <tr>
+                                <td>Цифровое управление приводом с дублированием каналов связи посредством цифрового
+                                    канала связи, интерфейс RS485, протокол обмена — PROFIBUS DP.</td>
+                                <td data-target="Э11"></td>
+                                <td data-target="Э12"></td>
+                                <td data-target="Э13"></td>
+                                <td data-target="Э14"></td>
+                                <td data-target="Э15"></td>
+                                <td data-target="Э16"></td>
+                                <td data-target="Э17"></td>
+                                <td data-target="Э18"></td>
+                                <td data-target="Э19"></td>
+                                <td data-target="Э110" class="table-success"></td>
+                            </tr>
+                            <tr>
+                                <td>Диагностирование отказов опциональных модулей.</td>
+                                <td data-target="Э11"></td>
+                                <td data-target="Э12" class="table-success"></td>
+                                <td data-target="Э13" class="table-success"></td>
+                                <td data-target="Э14" class="table-success"></td>
+                                <td data-target="Э15" class="table-success"></td>
+                                <td data-target="Э16" class="table-success"></td>
+                                <td data-target="Э17" class="table-success"></td>
+                                <td data-target="Э18" class="table-success"></td>
+                                <td data-target="Э19" class="table-success"></td>
+                                <td data-target="Э110" class="table-success"></td>
+                            </tr>
+                            <tr>
+                                <td>Автоматический выбор активного интерфейса дистанционного управления.</td>
+                                <td data-target="Э11"></td>
+                                <td data-target="Э12"></td>
+                                <td data-target="Э13"></td>
+                                <td data-target="Э14" class="table-success"></td>
+                                <td data-target="Э15" class="table-success"></td>
+                                <td data-target="Э16" class="table-success"></td>
+                                <td data-target="Э17" class="table-success"></td>
+                                <td data-target="Э18" class="table-success"></td>
+                                <td data-target="Э19" class="table-success"></td>
+                                <td data-target="Э110" class="table-success"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <div class="modal-title m-auto">Код исполнения: <span class="cur-execution-value">Э11</span></div>
+                    <input type="hidden" class="cur-execution-value" value="Э11" />
+                    <button type="button" class="btn btn-primary" id="e1-submit">Применить</button>
                 </div>
             </div>
+        </div>
+    </div>
 
-            <div class="modal" id="help-modal" tabindex="-1">
-                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Закрыть</button>
-                        </div>
-                        <div class="modal-body">
-                            <p>"Общепромышленное исполнение" - это тип исполнения электропривода, который обеспечивает защиту от попадания инородных тел размером более 12 мм. Обычно такие электроприводы используются в помещениях, где нет особых требований к степени защиты.</p>
-                            <p>
-                                "Взрывозащищенное исполнение" - это тип исполнения электропривода, предназначенного для работы в условиях повышенной опасности взрывающейся среды. Это могут быть, например, помещения, где происходит производство нефти, газа или химических веществ. Взрывозащищенные
-                                электроприводы соответствуют определенным стандартам, обеспечивающим защиту от искрообразующих элементов и контролирующих термические параметры.
-                            </p>
-                        </div>
-                    </div>
+    <div class="modal" id="help-modal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Закрыть</button>
+                </div>
+                <div class="modal-body">
+                    <p>"Общепромышленное исполнение" - это тип исполнения электропривода, который обеспечивает защиту от
+                        попадания инородных тел размером более 12 мм. Обычно такие электроприводы используются в
+                        помещениях, где нет особых требований к степени защиты.</p>
+                    <p>
+                        "Взрывозащищенное исполнение" - это тип исполнения электропривода, предназначенного для работы в
+                        условиях повышенной опасности взрывающейся среды. Это могут быть, например, помещения, где
+                        происходит производство нефти, газа или химических веществ. Взрывозащищенные
+                        электроприводы соответствуют определенным стандартам, обеспечивающим защиту от искрообразующих
+                        элементов и контролирующих термические параметры.
+                    </p>
                 </div>
             </div>
-        </main>
-    </body>
+        </div>
+    </div>
+    </main>
+</body>
+
 </html>
