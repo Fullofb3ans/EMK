@@ -107,6 +107,18 @@
             </fieldset>
 
         </div>
+        
+        <style> #step-2, #step-3, #step-4, #step-5, #step-6, #step-7, #step-8, #step-9, #step-10 {
+            transform: translateY(-8%);
+            animation: ani 1.4s forwards;
+          }
+          
+          @keyframes ani {
+            0% {transform: translateY(-8%);}
+            100% {transform: translateY(0);}
+          }
+          </style>
+
         <div id="step-2">
             <fieldset class="row mb-3 noReqValue" id="connection-type-wrap">
                 <legend class='blockNumber'>3</legend>
@@ -165,7 +177,7 @@
             </fieldset>
         </div>
 
-        <div id="step-3">
+        <div id="step-3" style="">
             <div class='stepClose' id='stepClose'>
                 <fieldset class="row mb-3 noReqValue closeNumbers">
                     <legend class='blockNumber'>6</legend>
