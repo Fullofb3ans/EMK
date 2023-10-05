@@ -107,17 +107,6 @@
             </fieldset>
 
         </div>
-        
-        <style> #step-2, #step-3, #step-4, #step-5, #step-6, #step-7, #step-8, #step-9, #step-10 {
-            transform: translateY(-8%);
-            animation: ani 1.4s forwards;
-          }
-          
-          @keyframes ani {
-            0% {transform: translateY(-8%);}
-            100% {transform: translateY(0);}
-          }
-          </style>
 
         <div id="step-2">
             <fieldset class="row mb-3 noReqValue" id="connection-type-wrap">
@@ -242,8 +231,12 @@
                         <select class="form-select form-element ch-mark" data-step="4" name="controle-blocks-series"
                             id="controle-blocks-series">
                             <option value="">Выберите тип блока управления</option>
-                            <option value="Э1S" id='E1SinSelect'>Электронный интеллектуальный модуль управления для
-                                искробезопасных приводов Э1S</option>
+                                <option value="Э0" id='E0SinSelect'>Электронный модуль датчиков Э0</option>
+                                <option value="Э1" id='E1inSelect'>Встроенный интеллектуальный модуль управления  с пускателем Э1</option>
+                                <option value="Э1S" id='E1SinSelect'>Электронный интеллектуальный модуль управления для искробезопасных приводов Э1S</option>
+                                <option value="Э2" id='E2SinSelect'>Электронный блок концевых выключателей без пускателя Э2</option>
+                                <option value="М1" id='M1SinSelect'>Механический блок концевых выключателей без пускателя М1</option>
+
                         </select>
                         <input type="text" class="form-control ch-mark" name="controle-blocks" id="controle-blocks"
                             value="" disabled="" style="display: none;" />
@@ -566,10 +559,6 @@
                         </input>
                     </label>
                     </br>
-                    <label id='boardRegId'>
-                        <input type='checkbox' name='boardReg'> Плата регистратор
-                        </input>
-                    </label>
                 </div>
             </fieldset>
 
@@ -728,18 +717,6 @@
                         </div>
                     </fieldset> -->
 
-            <fieldset class="row mb-3  signalMoment optionalField">
-                <legend class='blockNumber'>18</legend>
-                <div class="col-sm-9" id="signalMoment">
-                    <legend class="col-form-label col-sm-3 pt-0">Сигнал "Момент" 4-20 мА</legend>
-                    <div class="form-check">
-                        <input class="form-check-input ch-mark" value="1" type="checkbox" name="signalMoment"
-                            id="signalMoment-1" />
-                        <label class="form-check-label" for="signalMoment-1">Добавить</label>
-                    </div>
-                </div>
-            </fieldset>
-
             <!-- <fieldset class="row mb-3  tire optionalField" style="">
                         <legend class ='blockNumber'>26</legend>
                         <div class="col-sm-9" id="tire">
@@ -752,7 +729,7 @@
                     </fieldset> -->
 
             <fieldset class="row mb-3 optionalField addRequirements">
-                <legend class='blockNumber'>19</legend>
+                <legend class='blockNumber'>18</legend>
                 <div class="col-sm-9" id="addReq">
                     <legend class="col-form-label col-sm-3 pt-0">Дополнительные требования</legend>
                     <div class="form-check">
@@ -765,7 +742,7 @@
         </div>
         <div id="step-9">
             <fieldset class="persInfo noReqValue">
-                <legend class='blockNumber'>20</legend>
+                <legend class='blockNumber'>19</legend>
                 <div class="persInfoFlex"
                     style="display: flex; text-align: -webkit-center; flex-direction: row; flex-wrap: wrap; align-content: space-around; align-items: flex-end; gap: 5%; justify-content: center">
                     <div class="mb-3" id="persInfo-1">
@@ -807,7 +784,7 @@
             </fieldset>
 
             <fieldset class="row mb-3 numbersOfEp noReqValue" id='executionWrapLegend'>
-                <legend class='blockNumber'>21</legend>
+                <legend class='blockNumber'>20</legend>
                 <div class="mb-3" id="numbers">
                     <legend class="col-form-label col-sm-3 pt-0">Кол-во приводов:</legend>
                     <input class="form-input form-element input" id="numbersOfEp" type="number"

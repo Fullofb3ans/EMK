@@ -229,7 +229,7 @@
                     <option value="М2">(М2) Механический блок концевых выключателей</option>
                     <option value="ВЭ">(ВЭ) С электронным внешним интеллектуальным модулем управления, закрепленным на
                         корпусе привода</option>
-                    <option value="ВЭ">(ВЭ1) С блоком управления, специально адаптированным для электрического
+                    <option value="ВЭ1">(ВЭ1) С блоком управления, специально адаптированным для электрического
                         подключения ВИМУ (ВИМУ в состав привода не входит)</option>
                 </select>
                 <input type="text" class="form-control ch-mark" name="controle-blocks" id="controle-blocks" value=""
@@ -237,6 +237,43 @@
                 <button class="btn btn-outline-secondary none" type="button"
                     id="control-block-config">Конфигуратор</button>
             </div>
+        </div>
+    </fieldset>
+
+    <fieldset class="row mb-3 noReqValue" id="control-block-optionsset" style="display: none;">
+        <legend class='blockNumber'>9.2</legend>
+        <div class="col-sm-9">
+            <legend class="col-form-label col-sm-3 pt-0">Оснащение привода</legend>
+            <select class="form-select form-element ch-mark" data-step="4" name="controle-blocks-options"
+                id="controle-blocks-options">
+                <option value="noValue" selected>Выберите значение</option>
+                <option value="">Стандартное оснащение</option>
+                <option value="X">Шесть сигнальных реле и дискретное управление с использованием пятиканальной
+                    линии связи 220 В</option>
+                <option value="Y">Восемь сигнальных реле и дискретное управление с использованием пятиканальной
+                    линии связи 24 В</option>
+                <option value="Z">Двенадцать сигнальных реле и дискретное управление с использованием
+                    пятиканальной линии связи 24 В</option>
+                <option value="V">Восемь сигнальных реле и дискретное управление с использованием пятиканальной
+                    линии связи 220 В </option>
+                <option value="W">Двенадцать сигнальных реле и дискретное управлением с использованием
+                    пятиканальной линии связи 220 В</option>
+            </select>
+        </div>
+    </fieldset>
+
+    <fieldset class="row mb-3 optionalField" id="control-block-optionssetCheckBox" style="display: none;">
+        <legend class='blockNumber'>9.3</legend>
+        <div class="col-sm-9">
+            <legend class="col-form-label col-sm-3 pt-0">Оснащение привода (дополнительные опции)</legend>
+            <label><input type="checkbox" name='blockOption' value="T" id="tOption"> Твердотелый
+                пускатель</input></label><br />
+            <label><input type="checkbox" name='blockOption' value="S" id="PanelOption"> Переключатель режимов
+                работы на панели управления</input></label><br />
+            <label><input type="checkbox" name='blockOption' value="B" id="bluetoothOption"> Канал связи
+                "Bluetooth</input></label><br />
+            <label><input type="checkbox" name='blockOption' value="R" id="regOption"> Регистратор параметров
+                состояния и конфигурации привода</input></label><br />
         </div>
     </fieldset>
 
@@ -348,10 +385,6 @@
                 </input>
             </label>
             </br>
-            <label id='boardRegId'>
-                <input type='checkbox' name='boardReg'> Плата регистратор
-                </input>
-            </label>
         </div>
     </fieldset>
     <!-- ОСТАЛЬНОЕ ДЛЯ ЗАКАЗА -->
@@ -371,20 +404,8 @@
         </div>
     </fieldset>
 
-    <fieldset class="row mb-3 signalMoment optionalField">
-        <legend class='blockNumber'>16</legend>
-        <div class="col-sm-9" id="signalMoment">
-            <legend class="col-form-label col-sm-3 pt-0">Сигнал "Момент" 4-20 мА</legend>
-            <div class="form-check">
-                <input class="form-check-input ch-mark" value="1" type="checkbox" name="signalMoment"
-                    id="signalMoment-1" />
-                <label class="form-check-label" for="signalMoment-1">Добавить</label>
-            </div>
-        </div>
-    </fieldset>
-
     <fieldset class="row mb-3 optionalField addRequirements">
-        <legend class='blockNumber'>17</legend>
+        <legend class='blockNumber'>16</legend>
         <div class="col-sm-9" id="addReq">
             <legend class="col-form-label col-sm-3 pt-0">Дополнительные требования</legend>
             <div class="form-check">
@@ -395,7 +416,7 @@
     </fieldset>
 
     <fieldset class="persInfo noReqValue">
-        <legend class='blockNumber'>18</legend>
+        <legend class='blockNumber'>17</legend>
         <div class="persInfoFlex"
             style="display: flex; text-align: -webkit-center; flex-direction: row; flex-wrap: wrap; align-content: space-around; align-items: flex-end; gap: 5%; justify-content: center">
             <div class="mb-3" id="persInfo-1">

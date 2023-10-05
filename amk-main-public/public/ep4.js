@@ -320,6 +320,12 @@ $(document).ready(function () {
     $('#constructive-scheme-wrap').on('change', function (e) {
         let cur_constructive_scheme = $("input[name='constructive-scheme']:checked").val();
 
+        if (cur_constructive_scheme !== '41' && cur_constructive_scheme !== '410') {
+            $('#E1SinSelect').hide();
+        } else {
+            $('#E1SinSelect').show();
+        }
+
         $('#constructive-scheme-img')
             .empty()
             .append(
@@ -382,35 +388,20 @@ $(document).ready(function () {
         document.querySelector('#connectionForEp4-8div').style.display = 'flow';
     }
 
-    series = {
-        ep4: {
-            Э0: 'Электронный модуль датчиков Э0',
-            Э1: 'Встроенный интеллектуальный модуль управления  с пускателем Э1',
-            Э2: 'Электронный блок концевых выключателей без пускателя Э2',
-            М1: 'Механический блок концевых выключателей без пускателя М1',
-        },
-    };
+    // let control_block = $('#controle-blocks');
+    // let cur_control_block = $('#controle-blocks').val();
 
-    if (cur_constructive_scheme !== '41' && cur_constructive_scheme !== '410') {
-        $('#E1SinSelect').hide();
-    } else {
-        $('#E1SinSelect').show();
-    }
+    // let control_select = $('#controle-blocks-series').empty().append(new Option('Выберите значение', ''));
+    // if (!!cur_constructive_scheme) {
+    //     // $("#controle-blocks").empty().append(new Option('Выберите значение', ''));
+    //     control_select.empty().append(new Option('Выберите тип блока управления', ''));
+    //     control_block.val('');
 
-    let control_block = $('#controle-blocks');
-    let cur_control_block = $('#controle-blocks').val();
-
-    let control_select = $('#controle-blocks-series').empty().append(new Option('Выберите значение', ''));
-    if (!!cur_constructive_scheme) {
-        // $("#controle-blocks").empty().append(new Option('Выберите значение', ''));
-        control_select.empty().append(new Option('Выберите тип блока управления', ''));
-        control_block.val('');
-
-        $('#control-block-fieldset').attr('disabled', false);
-        $.each(series['ep4'], function (key, item) {
-            control_select.append(new Option(item, key, false, cur_control_block == item));
-        });
-    }
+    //     $('#control-block-fieldset').attr('disabled', false);
+    //     $.each(series['ep4'], function (key, item) {
+    //         control_select.append(new Option(item, key, false, cur_control_block == item));
+    //     });
+    // }
 
     // ЗАПОЛНЕНИЕ ИСПОЛНЕНИЯ ДЛЯ ЕП4
     $.each(executions['ep4'], function (key, item) {
@@ -666,30 +657,23 @@ $(document).ready(function () {
     });
 
     $(document.querySelector('#download')).on('click', function () {
+        let BoMark = document.querySelector('#controle-blocks-series').value;
+
         let tuMpX1 = document.querySelector('#maxStepMp').value ? 'МП40-' + document.querySelector('#maxStepMp').value : '';
         let tuMpX2 = document.querySelector('#stepForOne').value;
         let TuMp = tuMpX1 ? tuMpX1 + '-' + tuMpX2 : '';
         let optForBu = $('#control-block-optionsset option:selected').val() != 'noValue' ? $('#control-block-optionsset option:selected').val() : '';
 
         // CХЕМА
-        let schemeForSend = '';
-        if (document.querySelector('#\\/img\\/scheme-40') && document.querySelector('#\\/img\\/scheme-40').checked) {
-            schemeForSend = '40';
-        } else if (document.querySelector('#\\/img\\/scheme-41') && document.querySelector('#\\/img\\/scheme-41').checked) {
-            schemeForSend = '41';
-        } else if (document.querySelector('#\\/img\\/scheme-410') && document.querySelector('#\\/img\\/scheme-410').checked) {
-            schemeForSend = '410';
-        } else if (document.querySelector('#\\/img\\/scheme-43') && document.querySelector('#\\/img\\/scheme-43').checked) {
-            schemeForSend = '43';
-        } else if (document.querySelector('#\\/img\\/scheme-430') && document.querySelector('#\\/img\\/scheme-430').checked) {
-            schemeForSend = '430';
-        } else if (document.querySelector('#\\/img\\/scheme-44') && document.querySelector('#\\/img\\/scheme-44').checked) {
-            schemeForSend = '44';
-        }
+        let schemeForSend = $("input[name='constructive-scheme']:checked").val();
 
         // ДОП ОПЦИИ
         let addOption1 = document.querySelector('#PanelOption').checked ? 'Механический селектор переключения режима работы местн./дист.' : '';
-        let addOption2 = document.querySelector('#boardRegId > input[type=checkbox]').checked ? 'Плата регистратор' : '';
+        let addOption2 = '';
+        if (BoMark == 'Э1' || BoMark == 'ВЭ1' || BoMark == 'Э1S' || BoMark == 'ВЭ') {
+            addOption2 = 'Плата регистратор';
+        } else { addOption2 = '' };
+
         let addOptions = addOption1 ? addOption1 + ' ' + '' + ' ' + addOption2 : addOption2;
         // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -724,8 +708,6 @@ $(document).ready(function () {
         // json2 = [j20, j21, j22, j23, j24];
 
         //json3
-        let BoMark = document.querySelector('#controle-blocks-series').value;
-
         let j30 = document.querySelector('#controle-blocks').value; // тип бу
         let j31 = checkCommandBlock(); // Тип управления
         let j32 = selectRemoteSignal(); // сигналы дист управления
@@ -751,9 +733,10 @@ $(document).ready(function () {
         let j35 = selectPositionSignal(); // Сигнализация положения
 
         let j36 = ''; // Сигнал момэнт
-        if (document.querySelector('#signalMoment-1').checked) {
+        if (BoMark == 'Э13' || BoMark == 'Э15' || BoMark == 'Э17' || BoMark == 'ВЭ13' || BoMark == 'ВЭ15' || BoMark == 'ВЭ17') {
             j36 = 'Есть';
-        } else {
+        }
+        else {
             j36 = 'Отсутствует';
         }
 

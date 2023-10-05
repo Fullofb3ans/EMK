@@ -24,8 +24,9 @@ $(document).ready(function () {
         epn: {
             0: 'epn0.png',
             1: 'epn1_11.png',
+            2: 'epn2.png',
             11: 'epn1_11.png',
-            12: 'epn2.png',
+            12: 'epn12.png',
             3: 'epn3_31.png',
             31: 'epn3_31.png',
             32: 'epn32.png',
@@ -44,7 +45,7 @@ $(document).ready(function () {
     let e2BlockModal = new bootstrap.Modal($('#block-configure-e2'));
 
     // ЗАПОЛНЕНИЕ КрутяЩИХ МОМЕНТОВ ЧЕРЕЗ БД
-    $('#testStep1').on('change', function (e) {
+    $('#executionWrapLegend').on('change', function (e) {
         function rMomentSelectCreate() {
             let uplim = document.getElementById('upper-limit');
             $(uplim).empty();
@@ -75,7 +76,7 @@ $(document).ready(function () {
     });
 
     // ЗАПОЛНЕНИЕ Времени Хода ЧЕРЕЗ БД
-    $('#testStep-2').on('change', function (e) {
+    $('#upper-limit').on('change', function (e) {
         function stepTimeSelectCreate() {
             let uplim = document.querySelector("#upper-limit").value;
             let select = document.querySelector("#time-limit");
@@ -432,14 +433,12 @@ $(document).ready(function () {
         }
 
         let x11 = $("input[name='color']:checked").val() ? $("input[name='color']:checked").val() : 'X';
-        switch (x11) {
-            case 'X':
-                ($("input[name='color']")).closest('fieldset').removeClass('ReqValueOk');
-                ($("input[name='color']")).closest('fieldset').addClass('noReqValue');
-                break;
-            default:
-                ($("input[name='color']")).closest('fieldset').removeClass('noReqValue');
-                ($("input[name='color']")).closest('fieldset').addClass('ReqValueOk');
+        if ($("input[name='color']:checked").val() == '1' || document.querySelector('#ralColor').value != '') {
+            $("input[name='color']").closest('fieldset').removeClass('noReqValue');
+            $("input[name='color']").closest('fieldset').addClass('ReqValueOk');
+        } else {
+            $("input[name='color']").closest('fieldset').removeClass('ReqValueOk');
+            $("input[name='color']").closest('fieldset').addClass('noReqValue');
         }
 
         let x12 = $("input[name='connection']:checked").val() ? $("input[name='connection']:checked").val() : 'X';
@@ -495,26 +494,13 @@ $(document).ready(function () {
         console.log('hea');
         let optForBu = $('#control-block-optionsset option:selected').val() != 'noValue' ? $('#control-block-optionsset option:selected').val() : '';
 
-        // CХЕМА
-        let schemeForSend = ''
-        if (document.querySelector("#\\/img\\/scheme-40") && document.querySelector("#\\/img\\/scheme-40").checked) {
-            schemeForSend = '40';
-        } else if (document.querySelector("#\\/img\\/scheme-41") && document.querySelector("#\\/img\\/scheme-41").checked) {
-            schemeForSend = '41';
-        } else if (document.querySelector("#\\/img\\/scheme-410") && document.querySelector("#\\/img\\/scheme-410").checked) {
-            schemeForSend = '410';
-        } else if (document.querySelector("#\\/img\\/scheme-43") && document.querySelector("#\\/img\\/scheme-43").checked) {
-            schemeForSend = '43';
-        } else if (document.querySelector("#\\/img\\/scheme-430") && document.querySelector("#\\/img\\/scheme-430").checked) {
-            schemeForSend = '430';
-        } else if (document.querySelector("#\\/img\\/scheme-44") && document.querySelector("#\\/img\\/scheme-44").checked) {
-            schemeForSend = '44';
-        }
-
         // ДОП ОПЦИИ
-        // let addOption1 = document.querySelector("#PanelOption").checked ? 'Механический селектор переключения режима работы местн./дист.' : ''; 
-        let addOption2 = document.querySelector("#boardRegId > input[type=checkbox]").checked ? 'Плата регистратор' : '';
-        // let addOptions = addOption1 ? addOption1 + ' ' + '' + ' ' +  addOption2 : addOption2;
+        let addOption1 = document.querySelector("#PanelOption").checked ? 'Механический селектор переключения режима работы местн./дист.' : '';
+        let addOption2 = '';
+        if (BoMark == 'Э1' || BoMark == 'ВЭ1' || BoMark == 'Э1S' || BoMark == 'ВЭ') {
+            addOption2 = 'Плата регистратор';
+        } else { addOption2 = '' };
+        let addOptions = addOption1 ? addOption1 + ' ' + '' + ' ' + addOption2 : addOption2;
         // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         // json0
@@ -543,7 +529,7 @@ $(document).ready(function () {
         let j20 = $("input[name='execution']:checked").closest('.form-check').find('.form-check-label').text(); //исполнение по назначению
         let j21 = $("input[name='working-mode']:checked").closest('.form-check').find('.form-check-label').text(); //режим работы
         let j22 = $("input[name='protection']:checked").closest('.form-check').find('.form-check-label').text(); //Влагозащита
-        let j23 = $("input[name='rotating']:checked").closest('.form-check').find('.form-check-label').text(); //Вращение вых вала
+        let j23 = 'Закрывание по часовой стрелке'; //Вращение вых вала
         let j24 = $('#climatic-modification option:selected').text(); //Температура
         // json2 = [j20, j21, j22, j23, j24];
 
@@ -555,31 +541,30 @@ $(document).ready(function () {
         let j32 = selectRemoteSignal();// сигналы дист управления
 
         let j33 = ''; //Тип БКВ
-        if (BoMark == 'Э0') {
-            j33 = 'ЭИМУ';
-        }
-        else if (BoMark == 'Э2') {
-            j33 = 'ЭБКВ';
-        }
-        else if (BoMark == 'М1') {
+        if (BoMark == 'М2') {
             j33 = 'МБКВ';
         }
-        else if (BoMark == 'Э1') {
-            document.querySelector("#commandBlockType-1").checked ? j33 = 'ЭИМУ' : document.querySelector("#commandBlockType-2").checked ? j33 = 'ВИМУ' : 'Конфигуратор пропущен';
+        else if (BoMark == 'ВЭ1' || BoMark == 'ВЭ') {
+            j33 = 'ВИМУ';
         }
 
         let j34 = ''; //Механический указатель
         if (document.querySelector("#pointer > input[type=checkbox]").checked) { j34 = 'Есть' }
         else { j34 = 'Отсутствует' };
 
-        let j35 = selectPositionSignal();// Сигнализация положения
+        let j35 = selectPositionSignal(); // Сигнализация положения
 
         let j36 = ''; // Сигнал момэнт
-        if (document.querySelector("#signalMoment-1").checked) { j36 = 'Есть' }
-        else { j36 = 'Отсутствует' };
+        if (BoMark == 'ВЭ13' || BoMark == 'ВЭ15' || BoMark == 'ВЭ17') {
+            j36 = 'Есть';
+        }
+        else {
+            j36 = 'Отсутствует';
+        }
+
 
         let j37 = ''; // Дублирование RS485
-        if (j30 == 'Э18' || j30 == 'Э110' || j30 == 'Э24' || j30 == 'Э26') { j37 = 'Есть' }
+        if (j30 == 'ВЭ18' || j30 == 'ВЭ110' || j30 == 'ВЭ24' || j30 == 'ВЭ26') { j37 = 'Есть' }
         else { j37 = 'Отсутствует' };
 
         let j38 = 'Одиночные';
@@ -592,7 +577,7 @@ $(document).ready(function () {
         if (optForBu == 'Z' || optForBu == 'W') { j310 = 'Сдвоенные' }; // Концевые выключатели
 
         let j311 = ''; // Монтаж БУ
-        if (BoMark == 'Э1') {
+        if (BoMark == 'ВЭ1') {
             j311 = 'Выносной';
         } else {
             j311 = 'На приводе';
@@ -605,7 +590,7 @@ $(document).ready(function () {
         let j41 = document.querySelector("#cap > input[type=checkbox]").checked ? 'Есть' : 'Отсутствует'; //Защитный колпак
         let j42 = document.querySelector("#color-1").checked ? 'Серый' : document.querySelector("#ralColor").value; //Цвет
         let j43 = document.querySelector("#mechSelectorId > input[type=checkbox]") ? 'Есть' : 'Отсутствует'; //Механический селектор
-        let j44 = addOption2;//Доп опции 
+        let j44 = addOptions;//Доп опции 
         let j45 = document.querySelector('#addReqarea').value; //Дополнительные требования
         // json4 = [j40, j41, j42, j43, j44, j45];
 
@@ -769,7 +754,7 @@ $(document).ready(function () {
     $('#controle-blocks-series').on('change', function (e) {
         let cbs = $('#controle-blocks-series').val();
         let cb = $('#controle-blocks');
-        if (cbs === 'Э1' || cbs === 'Э2' || cbs === 'ВЭ' || cbs === '' || cbs === 'М1' || cbs === 'М2') {
+        if (cbs === 'Э1' || cbs === 'Э2' || cbs === 'ВЭ1' || cbs === 'ВЭ' || cbs === '' || cbs === 'М1' || cbs === 'М2') {
             $(cb).val('');
         } else {
             cb.val(cbs);
@@ -887,29 +872,59 @@ $(document).ready(function () {
             document.querySelector('.commandSignal').classList.remove('ReqValueOk');
         }
     });
+
+    // Открытие доп оснащения для блока управления при Э1
+    $('#control-block-fieldset').on('change', function (e) {
+        if ($('#controle-blocks-series').val() == 'ВЭ') {
+            document.querySelector('#control-block-optionsset').style.display = 'block';
+            document.querySelector('#control-block-optionssetCheckBox').style.display = 'block';
+        } else {
+            $('#controle-blocks-options').val('noValue');
+            document.querySelector('#PanelOption').checked = false;
+            document.querySelector('#tOption').checked = false;
+            document.querySelector('#bluetoothOption').checked = false;
+            document.querySelector('#regOption').checked = false;
+            document.querySelector('#control-block-optionsset').style.display = 'none';
+            document.querySelector('#control-block-optionssetCheckBox').style.display = 'none';
+            document.querySelector('#control-block-optionsset').classList.remove('ReqValueOk');
+            document.querySelector('#control-block-optionsset').classList.add('noReqValue');
+        }
+    });
+
+    // стили оснащения для блока управления при Э1
+    $('#control-block-optionsset').on('change', function (e) {
+        if ($('#controle-blocks-options option:selected').val() !== 'noValue') {
+            document.querySelector('#control-block-optionsset').classList.add('ReqValueOk');
+            document.querySelector('#control-block-optionsset').classList.remove('noReqValue');
+        } else {
+            document.querySelector('#control-block-optionsset').classList.remove('ReqValueOk');
+            document.querySelector('#control-block-optionsset').classList.add('noReqValue');
+        }
+    });
+
     // Обработка конфигуратура БУ
     function checkCommandBlock() {
         let base = document.querySelector('#controle-blocks').value;
         switch (base) {
-            case 'Э11':
+            case 'ВЭ11':
                 return 'Базовый набор функций';
-            case 'Э12':
+            case 'ВЭ12':
                 return '1)Базовый набор функций 2)Передача информации о положении выходного звена привода посредством токового сигнала (4–20 мА)';
-            case 'Э13':
+            case 'ВЭ13':
                 return '1)Базовый набор функций 2)Передача информации о положении выходного звена привода посредством токового сигнала (4–20 мА)  3)Передача текущего значения движущего момента на выходном звене привода посредством токового сигнала (4–20 мА).';
-            case 'Э14':
+            case 'ВЭ14':
                 return '1)Базовый набор функций 2)Диагностирование отказов опциональных модулей.  3)Автоматический выбор активного интерфейса дистанционного управления.';
-            case 'Э15':
+            case 'ВЭ15':
                 return '1)Базовый набор функций 2)Диагностирование отказов опциональных модулей.  3)Автоматический выбор активного интерфейса дистанционного управления.  4) Передача информации о положении выходного звена привода посредством токового сигнала (4–20 мА)  5)Передача текущего значения движущего момента на выходном звене привода посредством токового сигнала (4–20 мА).';
-            case 'Э16':
+            case 'ВЭ16':
                 return '1)Базовый набор функций 2)Аналоговое управление приводом — прием от дистанционного пульта и отработка токового сигнала (4–20 мА) задания положения выходного звена привода с контролем наличия связи  3)Диагностирование отказов опциональных модулей.  4)Автоматический выбор активного интерфейса дистанционного управления.';
-            case 'Э17':
+            case 'ВЭ17':
                 return '1)Базовый набор функций 2)Передача информации о положении выходного звена привода посредством токового сигнала (4–20 мА)  3)Передача текущего значения движущего момента на выходном звене привода посредством токового сигнала (4–20 мА).  4) Аналоговое управление приводом — прием от дистанционного пульта и отработка токового сигнала (4–20 мА) задания положения выходного звена привода с контролем наличия связи  5) Диагностирование отказов опциональных модулей.  6)Автоматический выбор активного интерфейса дистанционного управления.';
-            case 'Э18':
+            case 'ВЭ18':
                 return '1)Базовый набор функций 2)Цифровое управление и настройка привода с дублированием каналов связи посредством цифрового канала связи, интерфейс RS485, протокол обмена — MODBUS RTU  3)Диагностирование отказов опциональных модулей.   4)Автоматический выбор активного интерфейса дистанционного управления.';
-            case 'Э19':
+            case 'ВЭ19':
                 return '1)Базовый набор функций 2)Цифровое управление приводом посредством цифрового канала связи, интерфейс RS485, протокол обмена — PROFIBUS DP  3)Диагностирование отказов опциональных модулей.   4)Автоматический выбор активного интерфейса дистанционного управления.';
-            case 'Э110':
+            case 'ВЭ110':
                 return '1)Базовый набор функций 2)Цифровое управление приводом с дублированием каналов связи посредством цифрового канала связи, интерфейс RS485, протокол обмена — PROFIBUS DP.  3)Диагностирование отказов опциональных модулей.   4)Автоматический выбор активного интерфейса дистанционного управления.';
             default:
                 console.log(base);
@@ -921,10 +936,7 @@ $(document).ready(function () {
         let BoMark = document.querySelector("#controle-blocks-series").value;
         optForBu = $('#control-block-optionsset option:selected').val() != 'noValue' ? $('#control-block-optionsset option:selected').val() : '';
 
-        if (BoMark == 'Э0' || 'Э1S') {
-            return remoteSignal = 'Привод с шестью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 24 В';
-        }
-        else if (BoMark == 'Э1') {
+        if (BoMark == 'ВЭ' || BoMark == 'ВЭ1') {
             if (optForBu == 'X') {
                 return remoteSignal = 'Привод с шестью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 220 В;'
             }
@@ -953,29 +965,20 @@ $(document).ready(function () {
 
         let BoMark = document.querySelector("#controle-blocks").value;
 
-        if (BoMark == 'Э11') {
+        if (BoMark == 'ВЭ11') {
             return positionSignal = 'отсутсвуют';
         }
-        else if (BoMark == 'Э12' || BoMark == 'Э13' || BoMark == 'Э16' || BoMark == 'Э17') {
+        else if (BoMark == 'ВЭ12' || BoMark == 'ВЭ13' || BoMark == 'ВЭ16' || BoMark == 'ВЭ17') {
             return positionSignal = '4–20 мА';
         }
-        else if (BoMark == 'Э14' || BoMark == 'Э18' || BoMark == 'Э01' || BoMark == 'Э1S1') {
+        else if (BoMark == 'ВЭ14' || BoMark == 'ВЭ18') {
             return positionSignal = 'RS485 Modbus';
         }
-        else if (BoMark == 'Э15') {
+        else if (BoMark == 'ВЭ15') {
             return positionSignal = '4–20 мА и RS485 Modbus';
         }
-        else if (BoMark == 'Э19' || BoMark == 'Э110' || BoMark == 'Э1S2') {
+        else if (BoMark == 'ВЭ19' || BoMark == 'ВЭ110') {
             return positionSignal = 'Profibus DP';
-        }
-        else if (BoMark == 'Э22') {
-            return positionSignal = '4-20мА';
-        }
-        else if (BoMark == 'Э23' || BoMark == 'Э24') {
-            return positionSignal = 'RS485 Profibus';
-        }
-        else if (BoMark == 'Э25' || BoMark == 'Э26') {
-            return positionSignal = 'RS485 Profibus';
         }
         else if (document.querySelector("#m1-2").checked) {
             return positionSignal = 'Потенциометр 100 Ом';
