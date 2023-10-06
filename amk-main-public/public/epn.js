@@ -491,6 +491,7 @@ $(document).ready(function () {
     });
 
     $('#download').on('click', function () {
+        let BoMark = document.querySelector("#controle-blocks-series").value;
         console.log('hea');
         let optForBu = $('#control-block-optionsset option:selected').val() != 'noValue' ? $('#control-block-optionsset option:selected').val() : '';
 
@@ -534,7 +535,6 @@ $(document).ready(function () {
         // json2 = [j20, j21, j22, j23, j24];
 
         //json3
-        let BoMark = document.querySelector("#controle-blocks-series").value;
 
         let j30 = document.querySelector("#controle-blocks").value; // тип бу 
         let j31 = checkCommandBlock() ? checkCommandBlock() : ''; // Тип управления
@@ -568,13 +568,13 @@ $(document).ready(function () {
         else { j37 = 'Отсутствует' };
 
         let j38 = 'Одиночные';
-        if (optForBu == 'Z' || optForBu == 'W') { j38 = 'Сдвоенные' }; // Промежуточные выключатели
+        if (optForBu == 'Z' || optForBu == 'W' || document.querySelector("#controle-blocks") == 'М21') { j38 = 'Сдвоенные' }; // Промежуточные выключатели
 
         let j39 = 'Одиночные'; // Моментные выключатели
         if (optForBu == 'Z' || optForBu == 'W') { j39 = 'Сдвоенные' }; // Моментные выключатели
 
         let j310 = 'Одиночные'; // Концевые выключатели
-        if (optForBu == 'Z' || optForBu == 'W') { j310 = 'Сдвоенные' }; // Концевые выключатели
+        if (optForBu == 'Z' || optForBu == 'W' || document.querySelector("#controle-blocks") == 'М25') { j310 = 'Сдвоенные' }; // Концевые выключатели
 
         let j311 = ''; // Монтаж БУ
         if (BoMark == 'ВЭ1') {
@@ -589,7 +589,7 @@ $(document).ready(function () {
         let j40 = $("input[name='connection']:checked").val(); //Электрическое подключение (обозначение)
         let j41 = document.querySelector("#cap > input[type=checkbox]").checked ? 'Есть' : 'Отсутствует'; //Защитный колпак
         let j42 = document.querySelector("#color-1").checked ? 'Серый' : document.querySelector("#ralColor").value; //Цвет
-        let j43 = document.querySelector("#mechSelectorId > input[type=checkbox]") ? 'Есть' : 'Отсутствует'; //Механический селектор
+        let j43 = document.querySelector("#mechSelectorId > input[type=checkbox]") ? 'Есть' : 'Отсутствует'; //Механический указатель
         let j44 = addOptions;//Доп опции 
         let j45 = document.querySelector('#addReqarea').value; //Дополнительные требования
         // json4 = [j40, j41, j42, j43, j44, j45];
@@ -638,7 +638,7 @@ $(document).ready(function () {
             window.open(`https://emk.websto.pro/TulaEXEL/${id}`);
         }
         function sendToServer() {
-            let post = fetch('/download', {
+            let post = fetch('https://emk.websto.pro/download', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json;charset=utf-8' },
                 body: JSON.stringify({
@@ -670,6 +670,20 @@ $(document).ready(function () {
         } else {
             document.querySelector('#ralDiv').classList.add('none');
             document.querySelector('#ralColor').value = '';
+        }
+    });
+
+    // Сертификаты и декларации
+    $('#execution-wrap').on('change', function (e) {
+        if (document.querySelector("#Н-execute").checked) {
+            $('#declarationEpn').show();
+            $('#declarationEpnV').hide();
+            $('#certEpnV').hide();
+        }
+        else {
+            $('#declarationEpn').hide();
+            $('#declarationEpnV').show();
+            $('#certEpnV').show();
         }
     });
 
@@ -904,6 +918,10 @@ $(document).ready(function () {
 
     // Обработка конфигуратура БУ
     function checkCommandBlock() {
+        let m1 = document.querySelector('#m2-1').checked ? 'Сигнализация о двух промежуточных положениях выходного вала посредством двух путевых (промежуточных) выключателей.; ' : '';
+        let m2 = document.querySelector('#m2-2').checked ? 'Сигнализация о текущем положении выходного вала посредством изменения сопротивления потенциометра. Настройка на ноль сопротивления потенциометра обратной связи.; ' : '';
+        let m3 = document.querySelector('#m2-3').checked ? ' Сигнализация о текущем положении выходного вала посредством токового сигнала (4–20 мА), изменяющегося пропорционально пути, пройденному выходным валом привода. Настройка токового сигнализатора положения.; ' : '';
+
         let base = document.querySelector('#controle-blocks').value;
         switch (base) {
             case 'ВЭ11':
@@ -928,6 +946,7 @@ $(document).ready(function () {
                 return '1)Базовый набор функций 2)Цифровое управление приводом с дублированием каналов связи посредством цифрового канала связи, интерфейс RS485, протокол обмена — PROFIBUS DP.  3)Диагностирование отказов опциональных модулей.   4)Автоматический выбор активного интерфейса дистанционного управления.';
             default:
                 console.log(base);
+                return (g6 = m1 + m2 + m3);
         }
     }
     // МЕСТНЫЕ И ДИСТ СИГНАЛЫ
@@ -966,7 +985,7 @@ $(document).ready(function () {
         let BoMark = document.querySelector("#controle-blocks").value;
 
         if (BoMark == 'ВЭ11') {
-            return positionSignal = 'отсутсвуют';
+            return positionSignal = 'Отсутсвуют';
         }
         else if (BoMark == 'ВЭ12' || BoMark == 'ВЭ13' || BoMark == 'ВЭ16' || BoMark == 'ВЭ17') {
             return positionSignal = '4–20 мА';
@@ -980,14 +999,14 @@ $(document).ready(function () {
         else if (BoMark == 'ВЭ19' || BoMark == 'ВЭ110') {
             return positionSignal = 'Profibus DP';
         }
-        else if (document.querySelector("#m1-2").checked) {
+        else if (document.querySelector("#m2-2").checked) {
             return positionSignal = 'Потенциометр 100 Ом';
         }
-        else if (document.querySelector("#m1-3").checked) {
+        else if (document.querySelector("#m2-3").checked) {
             return positionSignal = '4-20мА';
         }
         else {
-            return positionSignal = 'отсутсвуют';
+            return positionSignal = 'Отсутствуют';
         }
     }
 });

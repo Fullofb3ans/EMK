@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Конфигуратор</title>
     <link rel="icon" href=".\favicon.ico">
-</head>
+
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -44,9 +44,10 @@
 
 <link href='konfiguratorStyle.css' rel="stylesheet">
 <link href='preloader.css' rel="stylesheet">
+</head>
 
 <body>
-
+    
     <div id='preloader'>
         <img src="./preloader.gif" alt="preloader">
     </div>
@@ -103,12 +104,12 @@
                 <legend class="col-form-label col-sm-3 pt-0">Исполнение по взрывозащите</legend>
                 <div class="col-sm-9" id="execution-wrap">
                     <div class="form-check">
-                        <input class="form-check-input ch-mark" type="radio" value="В" name="execution" id="V-execute">
-                        <label class="form-check-label" for="V-execute">Взрывозащищенное исполнение</label>
-                    </div>
-                    <div class="form-check">
                         <input class="form-check-input ch-mark" type="radio" value="Н" name="execution" id="Н-execute">
                         <label class="form-check-label" for="Н-execute">Общепромышленное исполнение</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input ch-mark" type="radio" value="В" name="execution" id="V-execute">
+                        <label class="form-check-label" for="V-execute">Взрывозащищенное исполнение</label>
                     </div>
                 </div>
             </fieldset>
@@ -181,12 +182,13 @@
                         <label for="scheme-1" class="form-check-label">Конструктивная схема</label>
                     </div>
                 </div>
-        </div>
+        <!-- </div> -->
+
         <div class="flexImg" style="display: flex; justify-content: center; gap: 2%; flex-wrap: wrap;">
             <div id="constructive-scheme-Epnimg"></div>
             <div id="constructive-schemeFull-img"></div>
-            </fieldset>
         </div>
+    </fieldset>
     </div>
 
     <div id="testStep-5">
@@ -343,8 +345,7 @@
             </div>
             <div class="form-check">
                 <input class="form-check-input ch-mark" type="radio" value="6" name="connection" id="connection-3" />
-                <label class="form-check-label" for="connection-3">4-7 кабельных ввода по спецификации заказа, клемное
-                    подключение внутри ВИМУ</label>
+                <label class="form-check-label" for="connection-3">4-7 кабельных ввода по спецификации заказа, клемное подключение внутри ВИМУ</label>
             </div>
             <!-- <div class="form-check">
                             <input class="form-check-input ch-mark" type="radio" value="6" name="connection" id="connection-4">
@@ -472,11 +473,17 @@
     </div>
 
     <div id="certs-pdf">
-        <button class='btn-info'> <a href="./pdf/certEp4.pdf"
-                style="text-decoration: none; color: black; ">Сертификат</a></button>
-        <button class='btn-info' style="margin-left: 1%;"> <a href="./pdf/declarationEp4.pdf"
-                style="text-decoration: none; color: black;">Декларация</a></button>
-    </div>
+        <button class='btn-info' id="certEpnV" style="display: none;"> <a href="./pdf/certEpnV.pdf"
+                style="text-decoration: none; color: black; " target=”_blank”>Сертификат</a></button>
+
+        <button class='btn-info' id="certnSil" style="margin-left: 1%;"> <a href="./pdf/certnSil.pdf"
+                style="text-decoration: none; color: black;" target=”_blank”>Сертификат Sil</a></button>
+
+        <button class='btn-info' id="declarationEpn" style="margin-left: 1%; display: none;"> <a href="./pdf/declarationEpn.pdf"
+                style="text-decoration: none; color: black;" target=”_blank”>Декларация</a></button>
+
+        <button class='btn-info' id="declarationEpnV" style="margin-left: 1%; display: none;"> <a href="./pdf/declarationEpnV.pdf"
+                style="text-decoration: none; color: black;" target=”_blank”>Декларация</a></button>
     </div>
     <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 

@@ -828,7 +828,7 @@ $(document).ready(function () {
             window.open(`https://emk.websto.pro/TulaEXEL/${id}`);
         }
         function sendToServer() {
-            let post = fetch('/download', {
+            let post = fetch('https://emk.websto.pro/download', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json;charset=utf-8' },
                 body: JSON.stringify({
@@ -1081,7 +1081,7 @@ $(document).ready(function () {
         }
     });
 
-    $('.closeNumbers').on('change', function (e) {
+    $('#stepClose').on('change', function (e) {
         if (document.querySelector('#closeNumbers').value != '') {
             document.querySelector('.closeNumbers').classList.add('ReqValueOk');
             document.querySelector('.closeNumbers').classList.remove('noReqValue');
@@ -1153,8 +1153,25 @@ $(document).ready(function () {
         }
     });
 
+    $('#block-configure-e2').on('change', function (e) {
+        if (document.querySelector("#e2-1").checked) {
+            $('#e22signalDiv').show();
+        }
+        else {
+            $('#e22signalDiv').hide();
+        }
+    });
+
     // ОБРАБОТКА ОПРЕДЕЛЕНИЯ БЛОКА УПРАВЛЕНИЯ
     function checkCommandBlock() {
+        let e22signal = '';
+        if (document.querySelector("#e22signal4").checked) {
+            e22signal = '4-20Ма'
+        }
+        else {
+            e22signal = '0-5мА'
+        };
+
         let m1 = document.querySelector('#m1-1').checked ? 'Сигнализация о двух промежуточных положениях выходного вала посредством двух путевых промежуточных выключателей; ' : '';
         let m2 = document.querySelector('#m1-2').checked ? 'Сигнализация о текущем положении выходного вала посредством изменения сопротивления потенциометра; ' : '';
         let m3 = document.querySelector('#m1-3').checked
@@ -1197,7 +1214,7 @@ $(document).ready(function () {
             case 'Э110':
                 return '1)Базовый набор функций 2)Цифровое управление приводом с дублированием каналов связи посредством цифрового канала связи, интерфейс RS485, протокол обмена — PROFIBUS DP.  3)Диагностирование отказов опциональных модулей.   4)Автоматический выбор активного интерфейса дистанционного управления.';
             case 'Э22':
-                return 'Передача информации о положении выходного вала привода посредством токового сигнала (4-20 мА или 0-5 мА)';
+                return 'Передача информации о положении выходного вала привода посредством токового сигнала ' + e22signal;
             case 'Э23':
                 return 'Передача информации о состоянии и настройках привода, изменение настроек привода посредством цифрового канала связи, интерфейс RS485, протокол обмена - MODBUS RTU';
             case 'Э24':
@@ -1209,6 +1226,8 @@ $(document).ready(function () {
             case '':
                 return 'Пропущен конфигуратор';
             case 'Э1':
+                return 'Пропущен конфигуратор';
+            case 'Э1S':
                 return 'Пропущен конфигуратор';
             case 'М1':
                 return 'Пропущен конфигуратор';
@@ -1227,6 +1246,20 @@ $(document).ready(function () {
                 return (g6 = m1 + m2 + m3 + m4 + m5 + m6 + m7 + m8);
         }
     }
+
+    // открытие сертификатов и деклараций под общепром и взрыв
+    $('#execution-wrap').on('change', function (e) {
+        if (document.querySelector("#execution-Н").checked) {
+            $('#declaration').show();
+            $('#declarationV').hide();
+            $('#certV').hide();
+        }
+        else {
+            $('#declaration').hide();
+            $('#declarationV').show();
+            $('#certV').show();
+        }
+    });
 
     // Проверка на запорно-регулирующую арматуру для пм модуля
     $('.timeMode').on('change', function (e) {
