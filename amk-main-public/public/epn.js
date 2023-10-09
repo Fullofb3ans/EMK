@@ -294,18 +294,25 @@ $(document).ready(function () {
         console.log(x6);
 
         if (x6 === 'ВЭ1') {
+            $('#frameDiv').show();
             $(document.querySelector('#control-block-config')).hide();
             $('#controle-blocks').val('ВЭ1');
             $(document.querySelector('#controle-blocks')).show();
         } else if (x6 === 'М2') {
+            $('#frameDiv').hide();
             // $('#controle-blocks').val('');
             $(document.querySelector('#control-block-config')).show();
             $(document.querySelector('#controle-blocks')).hide();
         } else if (x6 === 'ВЭ') {
+            $('#frameDiv').hide();
             // $('#controle-blocks').val('');
             $(document.querySelector('#control-block-config')).show();
             $(document.querySelector('#controle-blocks')).hide();
         }
+    });
+    $('.markForVimu').on('change', function (e) {
+
+        $('#vimuMarkForVE1').val($('.markForVimu').text());
     });
 
     // МАРКИРОВКА
@@ -466,28 +473,29 @@ $(document).ready(function () {
                 ($("input[name='specialForEpn']")).closest('fieldset').addClass('ReqValueOk');
         }
 
-        let x14 = $("input[name='connection-type']:checked").val() ? 1 : 0;
-        switch (x14) {
-            case 1:
-                ($("input[name='connection-type']")).closest('fieldset').removeClass('noReqValue');
-                ($("input[name='connection-type']")).closest('fieldset').addClass('ReqValueOk');
-                break;
-            case 2:
-                ($("input[name='connection-type']")).closest('fieldset').removeClass('noReqValue');
-                ($("input[name='connection-type']")).closest('fieldset').addClass('ReqValueOk');
-                break;
-            case 3:
-                ($("input[name='connection-type']")).closest('fieldset').removeClass('noReqValue');
-                ($("input[name='connection-type']")).closest('fieldset').addClass('ReqValueOk');
-                break;
-            default:
-                ($("input[name='connection-type']")).closest('fieldset').removeClass('ReqValueOk');
-                ($("input[name='connection-type']")).closest('fieldset').addClass('noReqValue');
-        }
+        // let x14 = $("input[name='connection-type']:checked").val() ? 1 : 0;
+        // switch (x14) {
+        //     case 1:
+        //         ($("input[name='connection-type']")).closest('fieldset').removeClass('noReqValue');
+        //         ($("input[name='connection-type']")).closest('fieldset').addClass('ReqValueOk');
+        //         break;
+        //     case 2:
+        //         ($("input[name='connection-type']")).closest('fieldset').removeClass('noReqValue');
+        //         ($("input[name='connection-type']")).closest('fieldset').addClass('ReqValueOk');
+        //         break;
+        //     case 3:
+        //         ($("input[name='connection-type']")).closest('fieldset').removeClass('noReqValue');
+        //         ($("input[name='connection-type']")).closest('fieldset').addClass('ReqValueOk');
+        //         break;
+        //     default:
+        //         ($("input[name='connection-type']")).closest('fieldset').removeClass('ReqValueOk');
+        //         ($("input[name='connection-type']")).closest('fieldset').addClass('noReqValue');
+        // }
+        let x15 = document.querySelector("#vimuMarkForVE1").value ? '/' + document.querySelector("#vimuMarkForVE1").value : '';
 
         is_true = [x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13].includes('X');
 
-        mark_gen.text(x0 + x1 + x2 + '-' + x3 + '-' + x4 + '-' + x5 + '-' + x6 + '/' + x7 + '-' + x8 + '-' + x9 + '-' + x10 + x11 + x12 + x13);
+        mark_gen.text(x0 + x1 + x2 + '-' + x3 + '-' + x4 + '-' + x5 + '-' + x6 + '/' + x7 + '-' + x8 + '-' + x9 + '-' + x10 + x11 + x12 + x13 + x15);
 
         // modal_button.toggle(!is_true);
         mark_gen.toggleClass('is-invalid', is_true).toggleClass('is-valid', !is_true);
