@@ -26,7 +26,7 @@ $(document).ready(function () {
     // МАРКИРОВКА
     $(document).on('change', function (e) {
         let mark_gen = $('#mark-gen');
-        let modal_button = $('#modal-button');
+        let modal_button = $('#download');
 
 
         let x0 = 'ВИМУ';
@@ -132,14 +132,6 @@ $(document).ready(function () {
         is_true = [x1, x2, x3, x4, x5, x6, x7, x8, x9].includes('X');
 
         mark_gen.text(x0 + x1 + '-' + x2 + x3 + '-' + x4 + '-' + x5 + '-' + x6 + x7 + x8 + x9);
-
-        $("#certs-pdf").empty();
-        if (!is_true && certs_pdf['vimu'][x2] !== undefined) {
-            $("#certs-pdf").append(
-                $("<a>").attr({ 'href': 'pdf/' + certs_pdf['vimu'][x2]['cert'], target: '_blank' }).text('Сертификат').css('padding', '1.5%'),
-                $("<a>").attr({ 'href': 'pdf/' + certs_pdf['vimu'][x2]['decl'], target: '_blank' }).text('Декларация').css('padding', '1.5%')
-            );
-        }
 
         modal_button.toggle(!is_true);
         mark_gen.toggleClass("is-invalid", is_true).toggleClass('is-valid', !is_true);
@@ -338,17 +330,40 @@ $(document).ready(function () {
         vimuBlockModal.show();
     });
 
+    $('.persInfo').on('change', function (e) {
+        if (
+            document.querySelector('#organization').value != '' &&
+            document.querySelector('#fio').value != '' &&
+            document.querySelector('#phone').value != '' &&
+            document.querySelector('#email').value != ''
+        ) {
+            document.querySelector('.persInfo ').classList.remove('noReqValue');
+            document.querySelector('.persInfo ').classList.add('ReqValueOk');
+        } else {
+            document.querySelector('.persInfo ').classList.remove('ReqValueOk');
+            document.querySelector('.persInfo ').classList.add('noReqValue');
+        }
+    });
+
+    $('#numbersOfEp').on('change', function (e) {
+        if (document.querySelector('.numbersOfEp').value !== '') {
+            document.querySelector('.numbersOfEp').classList.add('ReqValueOk');
+            document.querySelector('.numbersOfEp').classList.remove('noReqValue');
+        } else {
+            document.querySelector('.numbersOfEp').classList.add('noReqValue');
+            document.querySelector('.numbersOfEp').classList.remove('ReqValueOk');
+        }
+    });
+
     // Сертификаты и декларации
     $('#execution-wrap').on('change', function (e) {
-        if (document.querySelector("#Н-execute").checked) {
-            $('#declarationEpn').show();
-            $('#declarationEpnV').hide();
-            $('#certEpnV').hide();
+        if (document.querySelector("#execution-1").checked) {
+            $('#vimuV').show();
+            $('#vimuO').hide();
         }
         else {
-            $('#declarationEpn').hide();
-            $('#declarationEpnV').show();
-            $('#certEpnV').show();
+            $('#vimuV').hide();
+            $('#vimuO').show();
         }
     });
 

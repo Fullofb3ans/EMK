@@ -2,6 +2,10 @@
 <head>
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+	<!--Import materialize.css-->
+	<link rel="stylesheet" href="./mat.css" />
+
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"
 		integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g=="
@@ -44,9 +48,21 @@
 	<link href="konfiguratorStyle.css" rel="stylesheet" />
 </head>
 <body>
+	<!-- <nav>
+		<div class="nav-wrapper #ff8a65 deep-orange lighten-2">
+			<a href="" class="brand-logo center" style="text-shadow: 0px 1px black; position: relative">Конфигуратор ВИМУ</a>
+			<ul id="nav-mobile" class="right hide-on-med-and-down">
+				<li><a href="">ЭП4</a></li>
+				<li><a href="">ЭП4(РН)</a></li>
+				<li><a href="">ЭПН</a></li>
+				<li><a href="">ВИМУ</a></li>
+			</ul>
+		</div>
+	</nav> -->
+	<!-- 
 	<div class="styleForHead">
 		<h2>Общие характеристики ВИМУ</h2>
-	</div>
+	</div> -->
 
 	<div id="preloader">
 		<img src="./preloader.gif" alt="preloader" />
@@ -86,7 +102,7 @@
 	<!-- <div id="step-2"> -->
 	<fieldset class="row mb-3 noReqValue" id="executionWrapLegend">
 		<legend class="blockNumber">
-			2
+			1
 			<!-- <legend class="col-form-label col-sm-3 pt-0"> -->
 			<a href="#" class="" data-bs-toggle="modal" data-bs-target="#help-modal">
 				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
@@ -114,7 +130,7 @@
 	</fieldset>
 
 	<fieldset class="row mb-3 vimu-only noReqValue" id="roundControl" style="">
-		<legend class="blockNumber">1</legend>
+		<legend class="blockNumber">2</legend>
 		<div class="col-sm-9">
 			<legend class="col-form-label col-sm-3 pt-0">Контроль положения и крутящего момента (усилия) на выходном звене привода:</legend>
 			<div class="form-check">
@@ -131,7 +147,7 @@
 
 	<!-- <div id="step-3"> -->
 	<fieldset class="row mb-3 vimu-only noReqValue" id="engineStartType" style="">
-		<legend class="blockNumber">1</legend>
+		<legend class="blockNumber">3</legend>
 		<div class="col-sm-9">
 			<legend class="col-form-label col-sm-3 pt-0">Способ включения двигателя привода:</legend>
 			<div class="form-check">
@@ -154,7 +170,7 @@
 	</fieldset>
 
 	<fieldset class="row mb-3 noReqValue" id="control-block-fieldset">
-		<legend class="blockNumber">1</legend>
+		<legend class="blockNumber">4</legend>
 		<div class="col-sm-9">
 			<legend class="col-form-label col-sm-3 pt-0">набор функциональных возможностей</legend>
 			<div class="input-group">
@@ -167,7 +183,7 @@
 
 	<!-- <div id="step-4"> -->
 	<fieldset class="row mb-3 noReqValue" id="temperature">
-		<legend class="blockNumber">1</legend>
+		<legend class="blockNumber">5</legend>
 		<div class="col-sm-9">
 			<legend class="col-form-label col-sm-3 pt-0">Вариант температурного исполнения</legend>
 			<select class="form-select form-element ch-mark" data-step="4" name="climatic-modification" id="climatic-modification">
@@ -183,7 +199,7 @@
 	</fieldset>
 
 	<fieldset class="row mb-3 noReqValue" id="waterProtection">
-		<legend class="blockNumber">1</legend>
+		<legend class="blockNumber">6</legend>
 		<div class="col-sm-9">
 			<legend class="col-form-label col-sm-3 pt-0">Степень защиты от проникновения пыли и воды</legend>
 			<div class="form-check">
@@ -200,7 +216,7 @@
 
 	<!-- <div id="step-5"> -->
 	<fieldset class="row mb-3 noReqValue" id="colorType">
-		<legend class="blockNumber">1</legend>
+		<legend class="blockNumber">7</legend>
 		<div class="col-sm-9">
 			<legend class="col-form-label col-sm-3 pt-0">Цвет окраски</legend>
 			<div class="form-check">
@@ -215,7 +231,7 @@
 	</fieldset>
 
 	<fieldset class="row mb-3 vimu-only noReqValue">
-		<legend class="blockNumber">1</legend>
+		<legend class="blockNumber">8</legend>
 		<div class="col-sm-9">
 			<legend class="col-form-label col-sm-3 pt-0">Электрическое подключение</legend>
 			<div class="form-check">
@@ -254,7 +270,7 @@
 	</fieldset>
 
 	<fieldset class="row mb-3 vimu-only noReqValue">
-		<legend class="blockNumber">1</legend>
+		<legend class="blockNumber">9</legend>
 		<div class="col-sm-9">
 			<legend class="col-form-label col-sm-3 pt-0">Специальное исполнение</legend>
 			<div class="form-check">
@@ -271,16 +287,65 @@
 			</div>
 		</div>
 	</fieldset>
+
+	<fieldset class="persInfo noReqValue">
+		<legend class="blockNumber">10</legend>
+		<div class="persInfoFlex" style="display: flex; text-align: -webkit-center; flex-direction: row; flex-wrap: wrap; align-content: space-around; align-items: flex-end; gap: 5%; justify-content: center">
+			<div class="mb-3" id="persInfo-1">
+				<label for="organization"><b>Организация:</b></label>
+				<br />
+				<input class="form-input form-element input" id="organization" style="margin-top: 2.5%" type="text" placeholder="Введите организацию" required />
+			</div>
+			<div class="mb-3" id="persInfo-2">
+				<label for="fio"><b>Контактное лицо: ФИО</b></label>
+				<br />
+				<input class="form-input form-element input" id="fio" type="text" style="margin-top: 2.5%" placeholder="Введите ФИО" required />
+			</div>
+			<div class="mb-3" id="persInfo-3">
+				<label for="phone"><b>Телефон:</b></label>
+				<br />
+				<input class="form-input form-element input" id="phone" type="number" style="margin-top: 2.5%" placeholder="Введите телефон" required />
+				<style>
+					input::-webkit-outer-spin-button,
+					input::-webkit-inner-spin-button {
+						-webkit-appearance: none;
+						margin: 0;
+					}
+
+					input[type='number'] {
+						-moz-appearance: textfield;
+					}
+				</style>
+			</div>
+			<div class="mb-3" id="persInfo-4">
+				<label for="email"><b>Email:</b></label>
+				<br />
+				<input class="form-input form-element input" id="email" type="email" placeholder="Введите почту" style="margin-top: 2.5%" required />
+			</div>
+		</div>
+	</fieldset>
+
+	<fieldset class="row mb-3 numbersOfEp noReqValue" id="executionWrapLegend">
+		<legend class="blockNumber">11</legend>
+		<div class="mb-3" id="numbers">
+			<legend class="col-form-label col-sm-3 pt-0">Кол-во:</legend>
+			<input class="form-input form-element input" id="numbersOfEp" type="number" placeholder="Введите кол-во" min="0" />
+		</div>
+	</fieldset>
+
+	<div id="modal-button" class="mb-3">
+		<button style="display: none" id="download" type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modal-th">Скачать документацию</button>
+	</div>
+
 	<!-- </div> -->
 	<div id="certs-pdf">
-		<button class="btn-info" id="certEpnV" style="display: none"><a href="./pdf/certEpnV.pdf" style="text-decoration: none; color: black" target="”_blank”">Сертификат</a></button>
+		<button class="btn-info" id="vimuV" style="display: none"><a href="./pdf/vimuV.pdf" style="text-decoration: none; color: black" target="”_blank”">Сертификат</a></button>
 
-		<button class="btn-info" id="certnSil" style="margin-left: 1%"><a href="./pdf/certnSil.pdf" style="text-decoration: none; color: black" target="”_blank”">Сертификат Sil</a></button>
+		<button class="btn-info" id="vimuO" style="display: none"><a href="./pdf/vimuO.pdf" style="text-decoration: none; color: black" target="”_blank”">Сертификат</a></button>
 
-		<button class="btn-info" id="declarationEpn" style="margin-left: 1%; display: none"><a href="./pdf/declarationEpn.pdf" style="text-decoration: none; color: black" target="”_blank”">Декларация</a></button>
-
-		<button class="btn-info" id="declarationEpnV" style="margin-left: 1%; display: none"><a href="./pdf/declarationEpnV.pdf" style="text-decoration: none; color: black" target="”_blank”">Декларация</a></button>
+		<button class="btn-info" id="declVimu" style="margin-left: 1%"><a href="./pdf/declVimu.pdf" style="text-decoration: none; color: black" target="”_blank”">Декларация</a></button>
 	</div>
+
 	<!-- таблица -->
 
 	<div class="modal" id="block-configure-e1" tabindex="-1">
