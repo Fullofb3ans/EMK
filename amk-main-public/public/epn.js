@@ -113,6 +113,9 @@ $(document).ready(function () {
             let upLim = document.querySelector("#upper-limit").value;
             let timeLim = document.querySelector("#time-limit").value;
             $('#constructive-scheme-wrap').empty();
+            $('#constructive-scheme-img').empty();
+            $('#constructive-scheme-Epnimg').empty();
+            $('#constructive-schemeFull-img').empty();
 
             let fetchResult = [];
 

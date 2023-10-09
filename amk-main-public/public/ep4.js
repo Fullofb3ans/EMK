@@ -274,6 +274,7 @@ $(document).ready(function () {
             let connectionType = $("input[name='connection-type']:checked").val();
             let rotationFrequency = document.getElementById('rotation-frequency').value;
             $('#constructive-scheme-wrap').empty();
+            $('#constructive-scheme-img').empty();
 
             let fetchResult = [];
 

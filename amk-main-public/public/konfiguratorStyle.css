@@ -63,8 +63,16 @@
   100% {transform: translateY(0);}
 }
 
-#constructive-scheme-img{
-  /* margin-top: -3.61%; */
+#constructive-scheme-wrap{
+  padding-bottom: 0.5%;
+  padding-top: 0.5%;
+}
+
+.flexImg{
+  display: flex;
+  justify-content: center;
+  gap: 2%;
+  flex-wrap: wrap;
 }
 
 .flexForImg{
@@ -81,11 +89,11 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  align-content: space-around;
+  align-content: center;
   align-items: stretch;
   text-align: center;
-  justify-content: space-evenly;
-  gap: 51px;
+  justify-content: center;
+  gap: 41px;
 }
 
 .optionalField{
@@ -109,7 +117,8 @@ margin: 2%;
 
 body{background-color: #ffffff63;
 background-image: url(https://www.transparenttextures.com/patterns/binding-light.png);
-line-height: 150%;}
+line-height: 150%;
+}
 
 .ReqValueOk {
   background: rgb(249 84 0 / 41%);
@@ -680,7 +689,7 @@ border-radius: 10px;
 
 @media (max-width: 851px) {
   .flexCont {
-    width: 80%;
+    width: 100%;
   }
   .selectFlex {
     flex-direction: column;

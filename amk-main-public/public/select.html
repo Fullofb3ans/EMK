@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 		<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -18,17 +20,40 @@
 			transition: 0.2s linear;
 		}
 
+		img {
+			max-width: 362px;
+			min-width: 310px;
+			/* width: 100%; */
+			min-height: 256px;
+			max-height: 256px;
+			/* border: 1px solid black; */
+		}
+
 		a:hover {
 			color: #f2722c;
 		}
 	</style>
 
-	<body style="padding: 1%">
+	<body>
+		<header>
+			<nav>
+				<div class="nav-wrapper #ff8a65 deep-orange lighten-2">
+					<a href="" class="brand-logo center" style="text-shadow: 0px 1px black; position: relative">Подбор электроприводов</a>
+					<ul id="nav-mobile" class="right hide-on-med-and-down">
+						<li><a href="">ЭП4</a></li>
+						<li><a href="">ЭП4(РН)</a></li>
+						<li><a href="">ЭПН</a></li>
+						<li><a href="">ВИМУ</a></li>
+					</ul>
+				</div>
+			</nav>
+		</header>
+
 		<div id="preloader">
 			<img src="./preloader.gif" alt="preloader" />
 		</div>
-		<h2 class="page__title" style="padding-bottom: 2%">Подбор электроприводов (Тулаэлектропривод)</h2>
-		<div class="row">
+		<!-- <h3 class="page__title" style="text-align: center">(Тулаэлектропривод)</h3> -->
+		<div class="row" style="padding: 3%">
 			<div class="col-sm-8">
 				<div class="selectFlex">
 					<div class="flexCont">
@@ -36,14 +61,16 @@
 							<a href="ep4.html">
 								<figcaption style="padding-bottom: 2%">
 									<b>
-										Электроприводы многообортные серии
+										Электроприводы многообортные
+										<br />
+										серии
 										<br />
 										ЭП4
 									</b>
 								</figcaption>
-								<img style="width: 100%" src="./img/ep4.jpg" />
+								<img style="width: 100%" src="./img/ep4.png" />
 							</a>
-							<p>Применяются для автоматизации задвижек и клапанов</p>
+							<p>Применяются для автоматизации задвижек и клапанов.</p>
 						</figure>
 					</div>
 
@@ -52,12 +79,14 @@
 							<a href="epn.html">
 								<figcaption style="padding-bottom: 2%">
 									<b
-										>Электроприводы неполноповоротные серии
+										>Электроприводы неполноповоротные
+										<br />
+										серии
 										<br />
 										ЭПН</b
 									>
 								</figcaption>
-								<img src="./img/epn.jpg" style="width: 100%" />
+								<img src="./img/epn.png" style="width: 100%" />
 							</a>
 							<p>Используются для автоматизации дископоворотых затворов и шаровых кранов.</p>
 						</figure>
@@ -86,12 +115,32 @@
 							<a href="./vimu.html">
 								<figcaption style="padding-bottom: 2%">
 									<b>
-										Внешний интеллектуальный модуль управления
+										Внешний
+										<br />
+										интеллектуальный модуль управления
 										<br />
 										ВИМУ
 									</b>
 								</figcaption>
-								<img src="./img/vimu.jpg" style="width: 100%" />
+								<img src="./img/vimu.png" style="width: 100%" />
+							</a>
+							<p>Предназначен для настройки и управления приводами.</p>
+						</figure>
+					</div>
+
+					<div class="flexCont">
+						<figure>
+							<a href="./vimu.html">
+								<figcaption style="padding-bottom: 2%">
+									<b>
+										Последний
+										<br />
+										при
+										<br />
+										вод
+									</b>
+								</figcaption>
+								<img src="./img/vimu.png" style="width: 100%" />
 							</a>
 							<p>Предназначен для настройки и управления приводами.</p>
 						</figure>
@@ -100,4 +149,12 @@
 			</div>
 		</div>
 	</body>
+	<footer class="page-footer #ff8a65 deep-orange lighten-2">
+		<div className="footer-copyright">
+			<div class="container">
+				© 2023 Copyright
+				<a class="grey-text text-lighten-4 right" href="#!">ЕМК</a>
+			</div>
+		</div>
+	</footer>
 </html>
