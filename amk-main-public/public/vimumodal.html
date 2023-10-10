@@ -47,20 +47,6 @@
 	<link href="konfiguratorStyle.css" rel="stylesheet" />
 </head>
 <body>
-	<header>
-		<nav>
-			<div class="nav-wrapper #ff8a65 deep-orange lighten-2">
-				<a href="" class="brand-logo center" style="text-shadow: 1px 1px black; position: relative">Подбор ВИМУ</a>
-				<ul id="nav-mobile" class="right hide-on-med-and-down">
-					<li><a href="">ЭП4</a></li>
-					<li><a href="">ЭП4(РН)</a></li>
-					<li><a href="">ЭПН</a></li>
-					<li><a href="">ВИМУ</a></li>
-				</ul>
-			</div>
-		</nav>
-	</header>
-
 	<div id="preloader">
 		<img src="./preloader.gif" alt="preloader" />
 	</div>
@@ -322,51 +308,6 @@
 		</div>
 	</fieldset>
 
-	<fieldset class="persInfo noReqValue">
-		<legend class="blockNumber">10</legend>
-		<div class="persInfoFlex" style="display: flex; text-align: -webkit-center; flex-direction: row; flex-wrap: wrap; align-content: space-around; align-items: flex-end; gap: 5%; justify-content: center">
-			<div class="mb-3" id="persInfo-1">
-				<label for="organization"><b>Организация:</b></label>
-				<br />
-				<input class="form-input form-element input" id="organization" style="margin-top: 2.5%" type="text" placeholder="Введите организацию" required />
-			</div>
-			<div class="mb-3" id="persInfo-2">
-				<label for="fio"><b>Контактное лицо: ФИО</b></label>
-				<br />
-				<input class="form-input form-element input" id="fio" type="text" style="margin-top: 2.5%" placeholder="Введите ФИО" required />
-			</div>
-			<div class="mb-3" id="persInfo-3">
-				<label for="phone"><b>Телефон:</b></label>
-				<br />
-				<input class="form-input form-element input" id="phone" type="number" style="margin-top: 2.5%" placeholder="Введите телефон" required />
-				<style>
-					input::-webkit-outer-spin-button,
-					input::-webkit-inner-spin-button {
-						-webkit-appearance: none;
-						margin: 0;
-					}
-
-					input[type='number'] {
-						-moz-appearance: textfield;
-					}
-				</style>
-			</div>
-			<div class="mb-3" id="persInfo-4">
-				<label for="email"><b>Email:</b></label>
-				<br />
-				<input class="form-input form-element input" id="email" type="email" placeholder="Введите почту" style="margin-top: 2.5%" required />
-			</div>
-		</div>
-	</fieldset>
-
-	<fieldset class="row mb-3 numbersOfEp noReqValue" id="executionWrapLegend">
-		<legend class="blockNumber">11</legend>
-		<div class="mb-3" id="numbers">
-			<legend class="col-form-label col-sm-3 pt-0">Кол-во:</legend>
-			<input class="form-input form-element input" id="numbersOfEp" type="number" placeholder="Введите кол-во" min="0" />
-		</div>
-	</fieldset>
-
 	<div id="modal-button" class="mb-3">
 		<button style="" id="copyButton" type="button" class="btn btn-info">Скопировать маркировку</button>
 	</div>
@@ -376,13 +317,6 @@
 	</div> -->
 
 	<!-- </div> -->
-	<div id="certs-pdf">
-		<button class="btn-info" id="vimuV" style="display: none"><a href="./pdf/vimuV.pdf" style="text-decoration: none; color: black" target="”_blank”">Сертификат</a></button>
-
-		<button class="btn-info" id="vimuO" style="display: none"><a href="./pdf/vimuO.pdf" style="text-decoration: none; color: black" target="”_blank”">Сертификат</a></button>
-
-		<button class="btn-info" id="declVimu" style=""><a href="./pdf/declVimu.pdf" style="text-decoration: none; color: black" target="”_blank”">Декларация</a></button>
-	</div>
 
 	<!-- таблица -->
 
@@ -576,48 +510,4 @@
 		</div>
 	</div>
 	<!-- sdfgsdfgsdfg -->
-	<div class="modal" id="modal-th" tabindex="-1">
-		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-fullscreen">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title">Технические характеристики</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<table class="table" id="result-table">
-						<thead>
-							<tr>
-								<th>Параметр</th>
-								<th>Значение</th>
-								<th>Расшифровка</th>
-							</tr>
-						</thead>
-						<tbody></tbody>
-					</table>
-					<h5>Параметры электродвигателя</h5>
-					<table class="table" id="result-engine">
-						<thead>
-							<tr>
-								<th>Параметр</th>
-								<th>Значение</th>
-							</tr>
-						</thead>
-						<tbody></tbody>
-					</table>
-				</div>
-				<div class="modal-footer">
-					<button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal">Сохранить в PDF</button>
-				</div>
-			</div>
-		</div>
-	</div>
 </body>
-<footer class="page-footer #ff8a65 deep-orange lighten-2">
-	
-	<div className="footer-copyright">
-		<div class="container">
-			© 2023
-			<!-- <a class="grey-text text-lighten-4 right" href="#!">ЕМК</a> -->
-		</div>
-	</div>
-</footer>

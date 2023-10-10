@@ -42,11 +42,27 @@
 <script src="epn.js"></script>
 <script src="preloaderScript.js"></script>
 
+
+<link href='materialize.css' rel="stylesheet">
 <link href='konfiguratorStyle.css' rel="stylesheet">
 <link href='preloader.css' rel="stylesheet">
 </head>
 
 <body>
+
+    <header>
+        <nav>
+            <div class="nav-wrapper #ff8a65 deep-orange lighten-2">
+                <a href="" class="brand-logo center" style="text-shadow: 1px 1px black; position: relative">Подбор привода ЭПН</a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="">ЭП4</a></li>
+                    <li><a href="">ЭП4(РН)</a></li>
+                    <li><a href="">ЭПН</a></li>
+                    <li><a href="">ВИМУ</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
     
     <div id='preloader'>
         <img src="./preloader.gif" alt="preloader">
@@ -61,7 +77,7 @@
     <div class="row">
         <div id="testStep1">
             <div class='styleForHead'>
-                <h2>Общие характеристики автоматизируемой арматуры и электропривода</h2>
+                <!-- <h2>Общие характеристики автоматизируемой арматуры и электропривода</h2> -->
             </div>
             <fieldset class="row mb-3 timeMode noReqValue">
                 <legend class='blockNumber'>1
@@ -249,13 +265,13 @@
         <iframe style="display: block;
         border-style:none;
         margin: 0 auto;"
-        src="./vimu.html"
+        src="./vimumodal.html"
         title=""
         width="60%"
         height="500px">
       </iframe>
       <div style="text-align: center;">
-        <input id="vimuMarkForVE1" type="text" style="margin: 1%;"/>
+        <input id="vimuMarkForVE1" type="text" style="margin: 1%;" placeholder="Поле для маркировки"/>
     </div>
     </div>
 
@@ -493,13 +509,13 @@
         <button class='btn-info' id="certEpnV" style="display: none;"> <a href="./pdf/certEpnV.pdf"
                 style="text-decoration: none; color: black; " target=”_blank”>Сертификат</a></button>
 
-        <button class='btn-info' id="certnSil" style="margin-left: 1%;"> <a href="./pdf/certnSil.pdf"
+        <button class='btn-info' id="certnSil" style=""> <a href="./pdf/certnSil.pdf"
                 style="text-decoration: none; color: black;" target=”_blank”>Сертификат Sil</a></button>
 
-        <button class='btn-info' id="declarationEpn" style="margin-left: 1%; display: none;"> <a href="./pdf/declarationEpn.pdf"
+        <button class='btn-info' id="declarationEpn" style=" display: none;"> <a href="./pdf/declarationEpn.pdf"
                 style="text-decoration: none; color: black;" target=”_blank”>Декларация</a></button>
 
-        <button class='btn-info' id="declarationEpnV" style="margin-left: 1%; display: none;"> <a href="./pdf/declarationEpnV.pdf"
+        <button class='btn-info' id="declarationEpnV" style=" display: none;"> <a href="./pdf/declarationEpnV.pdf"
                 style="text-decoration: none; color: black;" target=”_blank”>Декларация</a></button>
     </div>
     <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
@@ -871,5 +887,13 @@
     </div>
     </main>
 </body>
+<footer class="page-footer #ff8a65 deep-orange lighten-2">
+    <div className="footer-copyright">
+        <div class="container">
+            © 2023
+            <!-- <a class="grey-text text-lighten-4 right" href="#!">ЕМК</a> -->
+        </div>
+    </div>
+</footer>
 
 </html>

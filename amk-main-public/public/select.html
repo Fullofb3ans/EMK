@@ -29,7 +29,11 @@
 			/* border: 1px solid black; */
 		}
 
-		a:hover {
+		body > div.row > div > div > div:nth-child(5) > figure > a:hover,
+		body > div.row > div > div > div:nth-child(4) > figure > a:hover,
+		body > div.row > div > div > div:nth-child(3) > figure > a:hover,
+		body > div.row > div > div > div:nth-child(2) > figure > a:hover,
+		body > div.row > div > div > div:nth-child(1) > figure > a:hover {
 			color: #f2722c;
 		}
 	</style>
@@ -38,12 +42,13 @@
 		<header>
 			<nav>
 				<div class="nav-wrapper #ff8a65 deep-orange lighten-2">
-					<a href="" class="brand-logo center" style="text-shadow: 0px 1px black; position: relative">Подбор электроприводов</a>
+					<a href="" class="brand-logo center" style="text-shadow: 1px 1px black; position: relative; cursor: default">Подбор электроприводов</a>
 					<ul id="nav-mobile" class="right hide-on-med-and-down">
-						<li><a href="">ЭП4</a></li>
-						<li><a href="">ЭП4(РН)</a></li>
-						<li><a href="">ЭПН</a></li>
-						<li><a href="">ВИМУ</a></li>
+						<li><a href="./ep4.html">ЭП4</a></li>
+						<li><a href="./ep4Reductor.html">ЭП4(РН)</a></li>
+						<li><a href="./epn.html">ЭПН</a></li>
+						<li><a href="./vimu.html">ВИМУ</a></li>
+						<li><a href="">с 2х муфтой</a></li>
 					</ul>
 				</div>
 			</nav>
@@ -92,9 +97,9 @@
 						</figure>
 					</div>
 
-					<!-- <div class="flexCont">
+					<div class="flexCont">
 						<figure>
-							<a href="/ep4.html">
+							<a href="./ep4Reductor.html">
 								<figcaption style="padding-bottom: 2%">
 									<b>
 										Электроприводы ЭП4 в комбинации
@@ -108,7 +113,7 @@
 							</a>
 							<p>Комбинация с редуктором позволяет повысить крутящий момент привода до необходимых значений.</p>
 						</figure>
-					</div> -->
+					</div>
 
 					<div class="flexCont">
 						<figure>
@@ -128,23 +133,23 @@
 						</figure>
 					</div>
 
-					<!-- <div class="flexCont">
+					<div class="flexCont">
 						<figure>
-							<a href="./vimu.html">
+							<a href="./.html">
 								<figcaption style="padding-bottom: 2%">
 									<b>
-										Последний
+										Электроприводы традиционной
 										<br />
-										при
+										линейки
 										<br />
-										вод
+										с двусторонней муфтой
 									</b>
 								</figcaption>
-								<img src="./img/vimu.png" style="width: 100%" />
+								<img src="./img/classicEp.png" style="width: 100%" />
 							</a>
-							<p>Предназначен для настройки и управления приводами.</p>
+							<p>Используются для комплектации запорной промышленной трубопроводной арматуры.</p>
 						</figure>
-					</div> -->
+					</div>
 				</div>
 			</div>
 		</div>
@@ -152,8 +157,8 @@
 	<footer class="page-footer #ff8a65 deep-orange lighten-2">
 		<div className="footer-copyright">
 			<div class="container">
-				© 2023 Copyright
-				<a class="grey-text text-lighten-4 right" href="#!">ЕМК</a>
+				© 2023
+				<!-- <a class="grey-text text-lighten-4 right" href="#!">ЕМК</a> -->
 			</div>
 		</div>
 	</footer>
