@@ -265,8 +265,7 @@ overflow-x: hidden;
 overflow-y: auto;
 outline: 0;
 padding-top: 100px;
-background-color: rgb(0,0,0); 
-background-color: rgba(0,0,0,0.4);
+background-color: rgba(0,0,0,0);
 }
 
 
@@ -388,7 +387,20 @@ fieldset.no-success legend {
 .modal.show .modal-dialog {
 transform: none;
 font-size: large;
-
+position: fixed;
+top: 0;
+bottom: 0;
+right: 0;
+left: 0;
+overflow: hidden;
+overflow-y: auto;
+-webkit-overflow-scrolling: touch;
+display: flex;
+flex-flow: column nowrap;
+justify-content: center;
+align-items: center;
+z-index: 99;
+padding:30px 0;
 }
 
 .modal-dialog-scrollable {

@@ -315,8 +315,35 @@ $(document).ready(function () {
         $('#vimuMarkForVE1').val($('.markForVimu').text());
     });
 
+    // ЗАБИРАЮ МАРКИРОВКУ С ФРЕЙМА
+    let iframe = document.getElementsByTagName('iframe')[0];
+    let iframeDoc = iframe.contentWindow.document;
+    let marker = document.querySelector("#vimuMarkForVE1");
+
+    $(iframe).contents().on('change', function (e) {
+        a = iframeDoc.querySelector('#mark-gen').innerText;
+        console.log(a);
+        marker.value = a;
+    });
+
     // МАРКИРОВКА
     $(document).on('change', function (e) {
+
+        // ДОП ОПЦИИ ДЛЯ БЛОКА
+        let tOption = '';
+        document.querySelector('#tOption').checked ? (tOption = document.querySelector('#tOption').value) : '';
+
+        let PanelOption = '';
+        document.querySelector('#PanelOption').checked ? (PanelOption = document.querySelector('#PanelOption').value) : '';
+
+        let bluetoothOption = '';
+        document.querySelector('#bluetoothOption').checked ? (bluetoothOption = document.querySelector('#bluetoothOption').value) : '';
+
+        let regOption = '';
+        document.querySelector('#regOption').checked ? (regOption = document.querySelector('#regOption').value) : '';
+
+        let optionssetCheckBox = tOption + PanelOption + bluetoothOption + regOption;
+
         let mark_gen = $('#mark-gen');
         let modal_button = $('#modal-button');
 
@@ -493,9 +520,12 @@ $(document).ready(function () {
         // }
         let x15 = document.querySelector("#vimuMarkForVE1").value ? '/' + document.querySelector("#vimuMarkForVE1").value : '';
 
+        let optForBu = $('#control-block-optionsset option:selected').val() != 'noValue' ? $('#control-block-optionsset option:selected').val() : '';
+
+
         is_true = [x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13].includes('X');
 
-        mark_gen.text(x0 + x1 + x2 + '-' + x3 + '-' + x4 + '-' + x5 + '-' + x6 + '/' + x7 + '-' + x8 + '-' + x9 + '-' + x10 + x11 + x12 + x13 + x15);
+        mark_gen.text(x0 + x1 + x2 + '-' + x3 + '-' + x4 + '-' + x5 + '-' + x6 + optionssetCheckBox + optForBu + '/' + x7 + '-' + x8 + '-' + x9 + '-' + x10 + x11 + x12 + x13 + x15);
 
         // modal_button.toggle(!is_true);
         mark_gen.toggleClass('is-invalid', is_true).toggleClass('is-valid', !is_true);
@@ -898,7 +928,7 @@ $(document).ready(function () {
         }
     });
 
-    // Открытие доп оснащения для блока управления при Э1
+    // Открытие доп оснащения для блока управления при ВЭ
     $('#control-block-fieldset').on('change', function (e) {
         if ($('#controle-blocks-series').val() == 'ВЭ') {
             document.querySelector('#control-block-optionsset').style.display = 'block';
@@ -916,7 +946,7 @@ $(document).ready(function () {
         }
     });
 
-    // стили оснащения для блока управления при Э1
+    // стили оснащения для блока управления при ВЭ
     $('#control-block-optionsset').on('change', function (e) {
         if ($('#controle-blocks-options option:selected').val() !== 'noValue') {
             document.querySelector('#control-block-optionsset').classList.add('ReqValueOk');

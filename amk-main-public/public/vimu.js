@@ -129,9 +129,27 @@ $(document).ready(function () {
                 ($("input[name='specialForVimu']")).closest('fieldset').addClass('ReqValueOk');
         }
 
+        // ДОП ОПЦИИ ДЛЯ БЛОКА
+        let tOption = '';
+        document.querySelector('#tOption').checked ? (tOption = document.querySelector('#tOption').value) : '';
+
+        let PanelOption = '';
+        document.querySelector('#PanelOption').checked ? (PanelOption = document.querySelector('#PanelOption').value) : '';
+
+        let bluetoothOption = '';
+        document.querySelector('#bluetoothOption').checked ? (bluetoothOption = document.querySelector('#bluetoothOption').value) : '';
+
+        let regOption = '';
+        document.querySelector('#regOption').checked ? (regOption = document.querySelector('#regOption').value) : '';
+
+        let optionssetCheckBox = tOption + PanelOption + bluetoothOption + regOption;
+
+        let optForBu = $('#control-block-optionsset option:selected').val() != 'noValue' ? $('#control-block-optionsset option:selected').val() : '';
+
+
         is_true = [x1, x2, x3, x4, x5, x6, x7, x8, x9].includes('X');
 
-        mark_gen.text(x0 + x1 + '-' + x2 + x3 + '-' + x4 + '-' + x5 + '-' + x6 + x7 + x8 + x9);
+        mark_gen.text(x0 + x1 + '-' + x2 + x3 + '-' + x4 + optionssetCheckBox + optForBu + '-' + x5 + '-' + x6 + x7 + x8 + x9);
 
         modal_button.toggle(!is_true);
         mark_gen.toggleClass("is-invalid", is_true).toggleClass('is-valid', !is_true);
