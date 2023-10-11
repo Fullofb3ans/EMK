@@ -97,14 +97,12 @@ $(document).ready(function () {
         }
 
         let x7 = $("input[name='color']:checked").val() ? $("input[name='color']:checked").val() : 'X'; //color
-        switch (x7) {
-            case 'X':
-                ($("input[name='color']")).closest('fieldset').removeClass('ReqValueOk');
-                ($("input[name='color']")).closest('fieldset').addClass('noReqValue');
-                break;
-            default:
-                ($("input[name='color']")).closest('fieldset').removeClass('noReqValue');
-                ($("input[name='color']")).closest('fieldset').addClass('ReqValueOk');
+        if ($("input[name='color']:checked").val() == '1' || document.querySelector('#ralColor').value != '') {
+            $("input[name='color']").closest('fieldset').removeClass('noReqValue');
+            $("input[name='color']").closest('fieldset').addClass('ReqValueOk');
+        } else {
+            $("input[name='color']").closest('fieldset').removeClass('ReqValueOk');
+            $("input[name='color']").closest('fieldset').addClass('noReqValue');
         }
 
         let x8 = $("input[name='connectionForVimu']:checked").val() ? $("input[name='connectionForVimu']:checked").val() : 'X'; //электрическое подключение
@@ -385,4 +383,24 @@ $(document).ready(function () {
         }
     });
 
+    // стили доп опций для бу 
+    $('#control-block-optionsset').on('change', function (e) {
+        if ($('#controle-blocks-options option:selected').val() !== 'noValue') {
+            document.querySelector('#control-block-optionsset').classList.add('ReqValueOk');
+            document.querySelector('#control-block-optionsset').classList.remove('noReqValue');
+        } else {
+            document.querySelector('#control-block-optionsset').classList.remove('ReqValueOk');
+            document.querySelector('#control-block-optionsset').classList.add('noReqValue');
+        }
+    });
+
+    // сокрытия пункта Ral
+    $('#colorType').on('change', function (e) {
+        if (document.querySelector('#color-2').checked) {
+            document.querySelector('#ralDiv').classList.remove('none');
+        } else {
+            document.querySelector('#ralDiv').classList.add('none');
+            document.querySelector('#ralColor').value = '';
+        }
+    });
 });
