@@ -4348,6 +4348,7 @@
     display: block;
     padding: 0 15px;
     cursor: pointer;
+    text-shadow: 1px 1px black;
   }
   
   nav ul a.btn, nav ul a.btn-large, nav ul a.btn-small, nav ul a.btn-large, nav ul a.btn-flat, nav ul a.btn-floating {
