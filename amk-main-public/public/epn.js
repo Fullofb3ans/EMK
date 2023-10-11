@@ -33,12 +33,6 @@ $(document).ready(function () {
         },
     };
 
-    const control_blocks = {
-        М2Z: ['М20', 'М21', 'М22', 'М23', 'М24', 'М25'],
-        ВЭZ: ['ВЭ11', 'ВЭ12', 'ВЭ13', 'ВЭ14', 'ВЭ15', 'ВЭ16', 'ВЭ17', 'ВЭ18', 'ВЭ19', 'ВЭ110'],
-        ВЭ1: ['ВЭ1'],
-    };
-
     let m1BlockModal = new bootstrap.Modal($('#block-configure-m1'));
     let m2BlockModal = new bootstrap.Modal($('#block-configure-m2'));
     let vimuBlockModal = new bootstrap.Modal($('#block-configure-e1'));
@@ -237,23 +231,12 @@ $(document).ready(function () {
 
     $('#schemeFieldSet').on('change', function (e) {
         cur_constructive_scheme = $("input[name='constructive-scheme']:checked").val();
-        let series = {
-            epn: {
-                М2: 'Серия М2',
-                ВЭ: 'Серия ВЭ',
-                ВЭ1: 'Серия ВЭ1',
-            },
-        };
 
         if (!!cur_constructive_scheme) {
             let control_select = $('#controle-blocks-series');
             let control_block = $('#controle-blocks');
             let cur_control_block = $('#controle-blocks').val();
             execution = $("input[name='execution']:checked").val();
-
-            $("#controle-blocks").empty().append(new Option('Выберите значение', ''));
-            control_select.empty().append(new Option('Выберите тип блока управления', ''));
-            control_block.val('');
 
             if (cur_constructive_scheme == 0) {
                 // При конструктивной схеме №0 ...
@@ -262,11 +245,6 @@ $(document).ready(function () {
                 });
                 $('#controle-blocks').val('М21');
                 $('#control-block-fieldset').attr('disabled', true);
-            } else {
-                $('#control-block-fieldset').attr('disabled', false);
-                $.each(series['epn'], function (key, item) {
-                    control_select.append(new Option(item, key, false, cur_control_block == item));
-                });
             }
             // Загрузка изображений
             $('#constructive-scheme-Epnimg')
@@ -294,36 +272,26 @@ $(document).ready(function () {
         console.log(x6);
 
         if (x6 === 'ВЭ1') {
-            $('#frameDiv').show();
-            $(document.querySelector('#control-block-config')).hide();
             $('#controle-blocks').val('ВЭ1');
-            $(document.querySelector('#controle-blocks')).show();
+            $(document.querySelector('#control-block-config')).show();
+            $(document.querySelector('#controle-blocks')).hide();
+            $("#vimuMark").show();
         } else if (x6 === 'М2') {
-            $('#frameDiv').hide();
             // $('#controle-blocks').val('');
             $(document.querySelector('#control-block-config')).show();
             $(document.querySelector('#controle-blocks')).hide();
+            $("#vimuMark").hide();
+            $("#vimuMark").val('');
         } else if (x6 === 'ВЭ') {
-            $('#frameDiv').hide();
             // $('#controle-blocks').val('');
             $(document.querySelector('#control-block-config')).show();
             $(document.querySelector('#controle-blocks')).hide();
+            $("#vimuMark").val('');
+            $("#vimuMark").hide();
         }
     });
     $('.markForVimu').on('change', function (e) {
-
         $('#vimuMarkForVE1').val($('.markForVimu').text());
-    });
-
-    // ЗАБИРАЮ МАРКИРОВКУ С ФРЕЙМА
-    let iframe = document.getElementsByTagName('iframe')[0];
-    let iframeDoc = iframe.contentWindow.document;
-    let marker = document.querySelector("#vimuMarkForVE1");
-
-    $(iframe).contents().on('change', function (e) {
-        a = iframeDoc.querySelector('#mark-gen').innerText;
-        console.log(a);
-        marker.value = a;
     });
 
     // МАРКИРОВКА
@@ -401,6 +369,12 @@ $(document).ready(function () {
                 ($('#controle-blocks')).closest('fieldset').removeClass('ReqValueOk');
                 ($('#controle-blocks')).closest('fieldset').addClass('noReqValue');
                 break;
+            case 'ВЭ1':
+                if (document.querySelector("#vimuMark").value == '') {
+                    ($('#controle-blocks')).closest('fieldset').removeClass('ReqValueOk');
+                    ($('#controle-blocks')).closest('fieldset').addClass('noReqValue');
+                    break;
+                }
             default:
                 ($('#controle-blocks')).closest('fieldset').removeClass('noReqValue');
                 ($('#controle-blocks')).closest('fieldset').addClass('ReqValueOk');
@@ -518,7 +492,7 @@ $(document).ready(function () {
         //         ($("input[name='connection-type']")).closest('fieldset').removeClass('ReqValueOk');
         //         ($("input[name='connection-type']")).closest('fieldset').addClass('noReqValue');
         // }
-        let x15 = document.querySelector("#vimuMarkForVE1").value ? '/' + document.querySelector("#vimuMarkForVE1").value : '';
+        let x15 = document.querySelector("#vimuMark").value ? '/' + document.querySelector("#vimuMark").value : '';
 
         let optForBu = $('#control-block-optionsset option:selected').val() != 'noValue' ? $('#control-block-optionsset option:selected').val() : '';
 
@@ -529,6 +503,13 @@ $(document).ready(function () {
 
         // modal_button.toggle(!is_true);
         mark_gen.toggleClass('is-invalid', is_true).toggleClass('is-valid', !is_true);
+
+        if (!mark_gen.text().includes('X')) {
+            $('#download').show();
+        }
+        else {
+            $('#download').hide();
+        }
     });
 
     $('#download').on('click', function () {
@@ -795,14 +776,12 @@ $(document).ready(function () {
 
     $('#control-block-config').on('click', function (e) {
         let cbs = $('#controle-blocks-series').val();
-        if (cbs === 'М1') {
-            m1BlockModal.show();
-        } else if (cbs === 'М2') {
+        if (cbs === 'М2') {
             m2BlockModal.show();
-        } else if (cbs === 'ВЭ' || cbs === 'Э0' || cbs === 'Э1') {
+        } else if (cbs === 'ВЭ') {
             vimuBlockModal.show();
-        } else if (cbs === 'Э2') {
-            e2BlockModal.show();
+        } else if (cbs === 'ВЭ1') {
+            $('#vimuModal').show();
         }
     });
 
@@ -1050,4 +1029,15 @@ $(document).ready(function () {
             return positionSignal = 'Отсутствуют';
         }
     }
+
+    // Обработка окна ВИМУ
+    $('#closeVimuModal').on('click', function () {
+        $('#vimuModal').hide();
+    });
+
+    $('#vimucontrol-block-config').on('click', function () {
+        $('#ve1Config').show();
+    });
+
+
 });

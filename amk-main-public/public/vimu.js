@@ -385,15 +385,4 @@ $(document).ready(function () {
         }
     });
 
-
-    function copytext() {
-        var $tmp = $("<textarea>");
-        $("body").append($tmp);
-        $tmp.val($("#mark-gen").text()).select();
-        document.execCommand("copy");
-        $tmp.remove();
-    }
-
-    $("#copyButton").on('click', copytext);
-
 });

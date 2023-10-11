@@ -1072,7 +1072,7 @@ $(document).ready(function () {
 
     // Стиль для модуля требуемого время закрытия
     $('#stepClose').on('change', function (e) {
-        if (document.querySelector('#closeNumbers').value != '' && document.querySelector('#rotation-frequency').value != '') {
+        if (document.querySelector('#closeNumbers').value !== '' && document.querySelector('#rotation-frequency').value !== '') {
             console.log('uslovue');
             document.querySelector('.closingTime').classList.remove('noReqValue');
             document.querySelector('.closingTime').classList.add('ReqValueOk');
