@@ -487,7 +487,7 @@
 
     <div id="modal-button" class="mb-3">
         <button type="button" id="download" class="btn btn-info" data-bs-toggle="modal"
-            data-bs-target="#modal-th">Скачать документацию</button>
+            data-bs-target="#modal-th" style="display: none;">Скачать документацию</button>
     </div>
 
     <div id="certs-pdf">
@@ -505,84 +505,9 @@
     </div>
     <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 
-    <div class="modal" id="block-configure-m1" tabindex="-1">
-        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Дополнительные опции блока управления серии М1</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Закрыть</button>
-                </div>
-                <div class="modal-body">
-                    <form id="m1-form">
-                        <input type="hidden" class="cur-m1-value" value="М10" />
-                        <div class="form-check mb-3">
-                            <input class="form-check-input" type="checkbox" name="" value="1" id="m1-1"
-                                data-position="0" />
-                            <label class="form-check-label" for="m1-1">Сигнализация о двух промежуточных положениях
-                                выходного вала посредством двух путевых промежуточных выключателей</label>
-                        </div>
-                        <div class="form-check mb-3">
-                            <input class="form-check-input" type="radio" name="m1-signal" value="2" id="m1-2"
-                                data-position="1" />
-                            <label class="form-check-label" for="m1-2">Сигнализация о текущем положении выходного вала
-                                посредством изменения сопротивления потенциометра</label>
-                        </div>
-                        <div class="form-check mb-3">
-                            <input class="form-check-input" type="radio" name="m1-signal" value="1" id="m1-3"
-                                data-position="2" />
-                            <label class="form-check-label" for="m1-3">Сигнализация о текущем положении выходного вала
-                                посредством токового сигнала, изменяющегося пропорционально пути, пройденному выходным
-                                валом привода</label>
-                        </div>
-                        <div class="form-check mb-3">
-                            <input class="form-check-input" type="checkbox" name="m1-signal" value="1" id="m1-4"
-                                data-position="3" />
-                            <label class="form-check-label" for="m1-4">Сигнализация факта вращения выходного вала
-                                привода посредством замыкания и размыкания сухих контактов выключателя (блинкера) при
-                                изменении положения входного путевого вала блока (1 импульс на 1 оборот выходного вала
-                                привода (оснащение блока управления
-                                блинкером — по отдельному заказу))</label>
-                        </div>
-                        <div class="form-check mb-3">
-                            <input class="form-check-input" type="checkbox" name="m1-signal" value="1" id="m1-5"
-                                data-position="4" />
-                            <label class="form-check-label" for="m1-5">Сигнализация о достигаемых положениях и моментах
-                                посредством 4 контактных микровыключателей (код z5=0) или 3-контактных микровыключателей
-                                (код z5=1)</label>
-                        </div>
-                        <div class="form-check mb-3">
-                            <input class="form-check-input" type="checkbox" name="m1-signal" value="1" id="m1-6"
-                                data-position="5" />
-                            <label class="form-check-label" for="m1-6">Блокировка сигнала превышения заданного при
-                                настройке блока значения крутящего момента привода (байпас сигнала превышения момента) в
-                                начальный период движения из состояния, соответствующего открытому и закрытому состоянию
-                                арматуры (с раздельной настройкой для
-                                движения на открытие и на закрытие арматуры), на протяжении заданного при настройке
-                                блока пути, проходимого выходным валом привода</label>
-                        </div>
-                        <div class="form-check mb-3">
-                            <input class="form-check-input" type="checkbox" name="m1-signal" value="1" id="m1-7"
-                                data-position="6" />
-                            <label class="form-check-label" for="m1-7">Блокировка возможности повторного включения
-                                двигателя привода по электрической цепи, содержащей нормально замкнутый контакт
-                                моментного выключателя, размыканием которого был выключен двигатель привода при
-                                достижении крутящего момента, заданного при настройке
-                                блока (фиксация моментных выключателей)</label>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <div class="modal-title m-auto">Код исполнения: <span class="cur-m1-value">М10</span></div>
-                    <button type="button" class="btn btn-secondary" id="clear-m1">Сбросить</button>
-                    <button type="button" class="btn btn-primary" id="m1-submit">Применить</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="modal" id="block-configure-m2" tabindex="-1">
         <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
+            <div class="modal-content" style="width: 90%;">
                 <div class="modal-header">
                     <h5 class="modal-title">Дополнительные опции блока управления серии М2</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Закрыть</button>
@@ -874,7 +799,7 @@
  <!-- МОДАЛЬНОЕ ВИМУ ОКНО -->
  <div class="modal" id="vimuModal" tabindex="-1">
 	<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-		<div class="modal-content">
+		<div class="modal-content" style="width: 100%;">
 			<div class="modal-header">
 				<button type="button" id="closeVimuModal" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Закрыть</button>
 			</div>
@@ -1110,7 +1035,7 @@
 <!-- таблица -->
 <div class="modal" id="ve1Config" tabindex="-1">
 	<div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
-		<div class="modal-content">
+		<div class="modal-content" style="width: 100%; font-size: smaller;">
 			<div class="modal-header">
 				<h5 class="modal-title">Опциональный набор функций ВИМУ и коды исполнения</h5>
 				<button type="button" id="closeve1modal" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Закрыть</button>

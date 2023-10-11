@@ -33,7 +33,6 @@ $(document).ready(function () {
         },
     };
 
-    let m1BlockModal = new bootstrap.Modal($('#block-configure-m1'));
     let m2BlockModal = new bootstrap.Modal($('#block-configure-m2'));
     let vimuBlockModal = new bootstrap.Modal($('#block-configure-e1'));
     let e2BlockModal = new bootstrap.Modal($('#block-configure-e2'));
@@ -504,7 +503,7 @@ $(document).ready(function () {
         // modal_button.toggle(!is_true);
         mark_gen.toggleClass('is-invalid', is_true).toggleClass('is-valid', !is_true);
 
-        if (!mark_gen.text().includes('X')) {
+        if (!is_true) {
             $('#download').show();
         }
         else {

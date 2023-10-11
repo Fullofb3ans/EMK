@@ -390,6 +390,8 @@ fieldset.no-success legend {
 }}
 
 .modal.show .modal-dialog {
+  background: rgb(0 0 0 / 58%);
+  height: 100%;
 transform: none;
 font-size: large;
 position: fixed;
@@ -422,7 +424,7 @@ overflow: hidden;
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 60%;
   /* max-height: 100%; */
   pointer-events: auto;
   background-color: #fff;
