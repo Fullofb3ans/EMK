@@ -178,41 +178,31 @@
 	</fieldset>
 
 	<fieldset class="row mb-3 noReqValue" id="control-block-optionsset">
-        <legend class='blockNumber'>4.1</legend>
-        <div class="col-sm-9">
-            <legend class="col-form-label col-sm-3 pt-0">Дополнительное оснащение</legend>
-            <select class="form-select form-element ch-mark" data-step="4" name="controle-blocks-options"
-                id="controle-blocks-options">
-                <option value="noValue" selected>Выберите значение</option>
-                <option value="">Стандартное оснащение</option>
-                <option value="X">Шесть сигнальных реле и дискретное управление с использованием пятиканальной
-                    линии связи 220 В</option>
-                <option value="Y">Восемь сигнальных реле и дискретное управление с использованием пятиканальной
-                    линии связи 24 В</option>
-                <option value="Z">Двенадцать сигнальных реле и дискретное управление с использованием
-                    пятиканальной линии связи 24 В</option>
-                <option value="V">Восемь сигнальных реле и дискретное управление с использованием пятиканальной
-                    линии связи 220 В </option>
-                <option value="W">Двенадцать сигнальных реле и дискретное управлением с использованием
-                    пятиканальной линии связи 220 В</option>
-            </select>
-        </div>
-    </fieldset>
+		<legend class="blockNumber">4.1</legend>
+		<div class="col-sm-9">
+			<legend class="col-form-label col-sm-3 pt-0">Дополнительное оснащение</legend>
+			<select class="form-select form-element ch-mark" data-step="4" name="controle-blocks-options" id="controle-blocks-options">
+				<option value="noValue" selected>Выберите значение</option>
+				<option value="">Стандартное оснащение</option>
+				<option value="X">Шесть сигнальных реле и дискретное управление с использованием пятиканальной линии связи 220 В</option>
+				<option value="Y">Восемь сигнальных реле и дискретное управление с использованием пятиканальной линии связи 24 В</option>
+				<option value="Z">Двенадцать сигнальных реле и дискретное управление с использованием пятиканальной линии связи 24 В</option>
+				<option value="V">Восемь сигнальных реле и дискретное управление с использованием пятиканальной линии связи 220 В</option>
+				<option value="W">Двенадцать сигнальных реле и дискретное управлением с использованием пятиканальной линии связи 220 В</option>
+			</select>
+		</div>
+	</fieldset>
 
-    <fieldset class="row mb-3 optionalField" id="control-block-optionssetCheckBox">
-        <legend class='blockNumber'>4.2</legend>
-        <div class="col-sm-9">
-            <legend class="col-form-label col-sm-3 pt-0">Дополнительное оснащение</legend>
-            <label><input type="checkbox" name='blockOption' value="T" id="tOption"> Твердотелый
-                пускатель</input></label><br />
-            <label><input type="checkbox" name='blockOption' value="S" id="PanelOption"> Переключатель режимов
-                работы на панели управления</input></label><br />
-            <label><input type="checkbox" name='blockOption' value="B" id="bluetoothOption"> Канал связи
-                "Bluetooth</input></label><br />
-            <label><input type="checkbox" name='blockOption' value="R" id="regOption"> Регистратор параметров
-                состояния и конфигурации привода</input></label><br />
-        </div>
-    </fieldset>
+	<fieldset class="row mb-3 optionalField" id="control-block-optionssetCheckBox">
+		<legend class="blockNumber">4.2</legend>
+		<div class="col-sm-9">
+			<legend class="col-form-label col-sm-3 pt-0">Дополнительное оснащение</legend>
+			<label><input type="checkbox" name="blockOption" value="T" id="tOption" /> Твердотелый пускатель</label><br />
+			<label><input type="checkbox" name="blockOption" value="S" id="PanelOption" /> Переключатель режимов работы на панели управления</label><br />
+			<label><input type="checkbox" name="blockOption" value="B" id="bluetoothOption" /> Канал связи "Bluetooth</label><br />
+			<label><input type="checkbox" name="blockOption" value="R" id="regOption" /> Регистратор параметров состояния и конфигурации привода</label><br />
+		</div>
+	</fieldset>
 	<!-- </div> -->
 
 	<!-- <div id="step-4"> -->
@@ -260,8 +250,8 @@
 			<div class="form-check">
 				<input class="form-check-input ch-mark" type="radio" value="2" name="color" id="color-2" />
 				<label class="form-check-label" for="color-2">По спецификации заказа</label>
-				<div class="none" id='ralDiv'>
-					<input class="form-input" type="text" name="ralColor" id="ralColor" placeholder="Укажите требования">
+				<div class="none" id="ralDiv">
+					<input class="form-input" type="text" name="ralColor" id="ralColor" placeholder="Укажите требования" />
 					<label class="form-check-label" for="ralColor"></label>
 				</div>
 			</div>
@@ -613,7 +603,6 @@
 	</div>
 </body>
 <footer class="page-footer #ff8a65 deep-orange lighten-2">
-	
 	<div className="footer-copyright">
 		<div class="container">
 			© 2023

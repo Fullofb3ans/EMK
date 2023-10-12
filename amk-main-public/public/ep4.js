@@ -1159,6 +1159,8 @@ $(document).ready(function () {
             $('#e22signalDiv').show();
         }
         else {
+            document.querySelector("#e22signal4").checked = false;
+            document.querySelector("#e22signal0").checked = false;
             $('#e22signalDiv').hide();
         }
     });
@@ -1281,7 +1283,7 @@ $(document).ready(function () {
         }
     });
 
-    // СТИЛИ ДЛЯ РЕЖИМА РАБОТЫ
+    // СТИЛИ ДЛЯ M1 МОДАЛЬНОГО
     $('#upperLimitInM').on('change', function (e) {
         if (document.querySelector('#upper-limitForM1').value != '') {
             document.querySelector('#upperLimitInM').classList.add('ReqValueOk');
