@@ -38,15 +38,18 @@
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js" integrity="sha512-Eak/29OTpb36LLo2r47IpVzPBLXnAMPAVypbSZiZ4Qkf8p/7S/XRG5xp7OKWPPYfJT6metI+IORkR5G8F900+g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-	<script src="preloaderScript.js"></script>
+	<script src="./scripts/preloaderScript.js"></script>
 
-	<script src="vimu.js" type="text/javascript"></script>
+	<script src="./scripts/vimu.js" type="text/javascript"></script>
 
-	<link href="materialize.css" rel="stylesheet" />
-	<link href="preloader.css" rel="stylesheet" />
-	<link href="konfiguratorStyle.css" rel="stylesheet" />
+	<link rel="stylesheet" href="./styles/materialize.css" />
+	<link href="./styles/konfiguratorStyle.css" rel="stylesheet" />
+	<link href="./styles/preloader.css" rel="stylesheet" />
 </head>
 <body>
+	<div id="preloader">
+		<img src="./img/preloader.gif" alt="preloader" />
+	</div>
 	<header>
 		<nav>
 			<div class="nav-wrapper #ff8a65 deep-orange lighten-2">
@@ -60,10 +63,6 @@
 			</div>
 		</nav>
 	</header>
-
-	<div id="preloader">
-		<img src="./preloader.gif" alt="preloader" />
-	</div>
 
 	<div class="fixedMark">
 		<div class="marknnumbers">

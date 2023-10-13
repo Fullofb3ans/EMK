@@ -7,11 +7,11 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Подбор электроприводов</title>
-		<link rel="stylesheet" href="konfiguratorStyle.css" />
-		<link rel="icon" href=".\favicon.ico" />
-		<script src="preloaderScript.js"></script>
-		<link href="konfiguratorStyle.css" rel="stylesheet" />
-		<link href="preloader.css" rel="stylesheet" />
+		<link rel="stylesheet" href="./styles/materialize.css" />
+		<link rel="icon" href="./img/favicon.ico" />
+		<script src="./scripts/preloaderScript.js"></script>
+		<link href="./styles/konfiguratorStyle.css" rel="stylesheet" />
+		<link href="./styles/preloader.css" rel="stylesheet" />
 	</head>
 	<style>
 		a {
@@ -30,6 +30,10 @@
 	</style>
 
 	<body>
+		<div id="preloader">
+			<img src="./img/preloader.gif" alt="preloader" />
+		</div>
+
 		<header>
 			<nav>
 				<div class="nav-wrapper #ff8a65 deep-orange lighten-2">
@@ -45,9 +49,6 @@
 			</nav>
 		</header>
 
-		<div id="preloader">
-			<img src="./preloader.gif" alt="preloader" />
-		</div>
 		<!-- <h3 class="page__title" style="text-align: center">(Тулаэлектропривод)</h3> -->
 		<div class="row" style="padding: 3%">
 			<div class="col-sm-8">
@@ -72,7 +73,7 @@
 
 					<div class="flexCont">
 						<figure>
-							<a href="epn.html">
+							<a href="./epn.html">
 								<figcaption style="padding-bottom: 2%">
 									<b
 										>Электроприводы неполноповоротные

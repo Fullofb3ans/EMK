@@ -42,11 +42,16 @@
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js" integrity="sha512-Eak/29OTpb36LLo2r47IpVzPBLXnAMPAVypbSZiZ4Qkf8p/7S/XRG5xp7OKWPPYfJT6metI+IORkR5G8F900+g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-	<script src="ep4Reductor.js" type="text/javascript"></script>
+	<script src="./scripts/ep4Reductor.js" type="text/javascript"></script>
 
-	<link href="materialize.css" rel="stylesheet" />
-	<link href="konfiguratorStyle.css" rel="stylesheet" />
+	<link href="./styles/materialize.css" rel="stylesheet" />
+	<link href="./styles/konfiguratorStyle.css" rel="stylesheet" />
+	<link href="./styles/preloader.css" rel="stylesheet" />
 	<body>
+		<div id="preloader">
+			<img src="./img/preloader.gif" alt="preloader" />
+		</div>
+
 		<header>
 			<nav>
 				<div class="nav-wrapper #ff8a65 deep-orange lighten-2">
@@ -62,6 +67,54 @@
 		</header>
 
 		<div id="stepzaglox2">
+			<fieldset class="row mb-3 reductor noReqValue">
+				<legend class="blockNumber">2</legend>
+				<div class="col-sm-9">
+					<legend class="col-form-label col-sm-3 pt-0">Неполноповоротный редуктор РН</legend>
+					<select class="form-select form-element ch-mark" name="rn" id="rn">
+						<option value="">Выберите значение</option>
+						<option value="РН2">РН2</option>
+						<option value="РН4">РН4</option>
+						<option value="РН8">РН8</option>
+						<option value="РН16">РН16</option>
+						<option value="РН32">РН32</option>
+					</select>
+				</div>
+			</fieldset>
+
+			<fieldset class="row mb-3 noReqValue" id="roundOutMomentField">
+				<legend class="blockNumber">8</legend>
+				<div class="col-sm-9">
+					<legend class="col-form-label col-sm-3 pt-0">Номинальный крутящий момент на выходном валу редуктора, Н·м</legend>
+					<input class="form-select form-element ch-mark ch-cs" name="roundOutMoment" id="roundOutMoment" style="color: black; background-color: #e4e4e48c" disabled />
+				</div>
+			</fieldset>
+
+			<fieldset class="row mb-3 noReqValue" id="roundOutFieldset">
+				<legend class="blockNumber">9</legend>
+
+				<div class="col-sm-9">
+					<legend class="col-form-label col-sm-3 pt-0">Диапазон крутящих моментов на выходном валу редуктора (при настройке привода от 40 до 100 % от номинала), Н·м</legend>
+					<input class="form-select form-element ch-mark ch-cs" name="roundOut" id="roundOut" style="color: black; background-color: #e4e4e48c" disabled />
+				</div>
+			</fieldset>
+
+			<fieldset class="row mb-3 noReqValue" id="armFlangeField">
+				<legend class="blockNumber">10</legend>
+				<div class="col-sm-9">
+					<legend class="col-form-label col-sm-3 pt-0">Тип фланца по ISO 5211 для присоединения к арматуре</legend>
+					<input class="form-select form-element ch-mark ch-cs" name="armFlange" id="armFlange" style="color: black; background-color: #e4e4e48c" disabled />
+				</div>
+			</fieldset>
+
+			<fieldset class="row mb-3 noReqValue">
+				<legend class="blockNumber">3</legend>
+				<div class="col-sm-9">
+					<legend class="col-form-label col-sm-3 pt-0">Присоединительный фланец</legend>
+					<input class="form-select form-element ch-mark ch-cs" name="flange" id="flange" style="color: black; background-color: #e4e4e48c" disabled />
+				</div>
+			</fieldset>
+
 			<fieldset class="row mb-3 timeMode noReqValue">
 				<legend class="blockNumber">1</legend>
 				<div class="col-sm-9">
@@ -74,24 +127,6 @@
 						<input class="form-check-input ch-mark" value="Р" type="radio" name="working-mode" id="working-mode-2" />
 						<label class="form-check-label" for="working-mode-2"> Запорно-регулирующая арматура </label>
 					</div>
-				</div>
-			</fieldset>
-
-			<fieldset class="row mb-3 reductor noReqValue">
-				<legend class="blockNumber">2</legend>
-				<div class="col-sm-9">
-					<legend class="col-form-label col-sm-3 pt-0">Неполноповоротный редуктор РН</legend>
-					<select class="form-select form-element ch-mark" name="rn" id="rn">
-						<option value="">Выберите значение</option>
-					</select>
-				</div>
-			</fieldset>
-
-			<fieldset class="row mb-3 noReqValue">
-				<legend class="blockNumber">3</legend>
-				<div class="col-sm-9">
-					<legend class="col-form-label col-sm-3 pt-0">Присоединительный фланец</legend>
-					<input class="form-select form-element ch-mark ch-cs" name="flange" id="flange" style="color: black; background-color: #e4e4e48c" disabled />
 				</div>
 			</fieldset>
 
@@ -148,31 +183,6 @@
 				<div class="col-sm-9">
 					<legend class="col-form-label col-sm-3 pt-0">Частота вращения выходного вала, об/мин</legend>
 					<select class="form-select form-element ch-mark ch-cs" name="rotation-frequency" id="rotation-frequency"></select>
-				</div>
-			</fieldset>
-
-			<fieldset class="row mb-3 noReqValue" id="roundOutMomentField">
-				<legend class="blockNumber">8</legend>
-				<div class="col-sm-9">
-					<legend class="col-form-label col-sm-3 pt-0">Номинальный крутящий момент на выходном валу редуктора, Н·м</legend>
-					<input class="form-select form-element ch-mark ch-cs" name="roundOutMoment" id="roundOutMoment" style="color: black; background-color: #e4e4e48c" disabled />
-				</div>
-			</fieldset>
-
-			<fieldset class="row mb-3 noReqValue" id="roundOutFieldset">
-				<legend class="blockNumber">9</legend>
-
-				<div class="col-sm-9">
-					<legend class="col-form-label col-sm-3 pt-0">Диапазон крутящих моментов на выходном валу редуктора (при настройке привода от 40 до 100 % от номинала), Н·м</legend>
-					<input class="form-select form-element ch-mark ch-cs" name="roundOut" id="roundOut" style="color: black; background-color: #e4e4e48c" disabled />
-				</div>
-			</fieldset>
-
-			<fieldset class="row mb-3 noReqValue" id="armFlangeField">
-				<legend class="blockNumber">10</legend>
-				<div class="col-sm-9">
-					<legend class="col-form-label col-sm-3 pt-0">Тип фланца по ISO 5211 для присоединения к арматуре</legend>
-					<input class="form-select form-element ch-mark ch-cs" name="armFlange" id="armFlange" style="color: black; background-color: #e4e4e48c" disabled />
 				</div>
 			</fieldset>
 

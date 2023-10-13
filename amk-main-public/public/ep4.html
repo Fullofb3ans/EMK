@@ -5,7 +5,7 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Конфигуратор</title>
-		<link rel="icon" href=".\favicon.ico" />
+		<link rel="icon" href="./img/favicon.ico" />
 
 		<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
@@ -43,16 +43,19 @@
 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js" integrity="sha512-Eak/29OTpb36LLo2r47IpVzPBLXnAMPAVypbSZiZ4Qkf8p/7S/XRG5xp7OKWPPYfJT6metI+IORkR5G8F900+g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-		<script src="ep4.js"></script>
+		<script src="./scripts/ep4.js"></script>
 
-		<script src="preloaderScript.js"></script>
+		<script src="./scripts/preloaderScript.js"></script>
 
-		<link href="materialize.css" rel="stylesheet" />
-		<link href="konfiguratorStyle.css" rel="stylesheet" />
-		<link href="preloader.css" rel="stylesheet" />
+		<link href="./styles/materialize.css" rel="stylesheet" />
+		<link href="./styles/konfiguratorStyle.css" rel="stylesheet" />
+		<link href="./styles/preloader.css" rel="stylesheet" />
 	</head>
 
 	<body>
+		<div id="preloader">
+			<img src="./img/preloader.gif" alt="preloader" />
+		</div>
 		<header>
 			<nav>
 				<div class="nav-wrapper #ff8a65 deep-orange lighten-2">
@@ -66,10 +69,6 @@
 				</div>
 			</nav>
 		</header>
-
-		<div id="preloader">
-			<img src="./preloader.gif" alt="preloader" />
-		</div>
 
 		<div class="fixedMark">
 			<div class="marknnumbers">
