@@ -747,9 +747,9 @@
 						<button type="button" id="closeVimuModal" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Закрыть</button>
 					</div>
 					<div class="modal-body">
-						<div class="fixedMark">
-							<div class="marknnumbers">
-								<div id="vimumark-gen" style="opacity: 0" class="lead mb-3 form-control markForVimu">ВИМУ-X-X-X-X-X-X-XX</div>
+						<div class="fixedvimuMark" style="display: none">
+							<div class="vimumarknnumbers">
+								<div id="vimumark-gen" class="lead mb-3 form-control markForVimu">ВИМУ-X-X-X-X-X-X-XX</div>
 							</div>
 						</div>
 
@@ -824,42 +824,32 @@
 							</div>
 						</fieldset>
 
-						<!-- <fieldset class="row mb-3 noReqValue" id="control-block-optionsset">
-	<legend class='blockNumber'>4.1</legend>
-	<div class="col-sm-9">
-		<legend class="col-form-label col-sm-3 pt-0">Дополнительное оснащение</legend>
-		<select class="form-select form-element ch-mark" data-step="4" name="vimucontrole-blocks-options"
-			id="vimucontrole-blocks-options">
-			<option value="noValue" selected>Выберите значение</option>
-			<option value="">Стандартное оснащение</option>
-			<option value="X">Шесть сигнальных реле и дискретное управление с использованием пятиканальной
-				линии связи 220 В</option>
-			<option value="Y">Восемь сигнальных реле и дискретное управление с использованием пятиканальной
-				линии связи 24 В</option>
-			<option value="Z">Двенадцать сигнальных реле и дискретное управление с использованием
-				пятиканальной линии связи 24 В</option>
-			<option value="V">Восемь сигнальных реле и дискретное управление с использованием пятиканальной
-				линии связи 220 В </option>
-			<option value="W">Двенадцать сигнальных реле и дискретное управлением с использованием
-				пятиканальной линии связи 220 В</option>
-		</select>
-	</div>
-</fieldset>
+						<fieldset class="row mb-3 noReqValue" id="vimucontrol-block-optionsset">
+							<legend class="blockNumber">4.1</legend>
+							<div class="col-sm-9">
+								<legend class="col-form-label col-sm-3 pt-0">Дополнительное оснащение</legend>
+								<select class="form-select form-element ch-mark" data-step="4" name="vimucontrole-blocks-options" id="vimucontrole-blocks-options">
+									<option value="noValue" selected>Выберите значение</option>
+									<option value="">Стандартное оснащение</option>
+									<option value="X">Шесть сигнальных реле и дискретное управление с использованием пятиканальной линии связи 220 В</option>
+									<option value="Y">Восемь сигнальных реле и дискретное управление с использованием пятиканальной линии связи 24 В</option>
+									<option value="Z">Двенадцать сигнальных реле и дискретное управление с использованием пятиканальной линии связи 24 В</option>
+									<option value="V">Восемь сигнальных реле и дискретное управление с использованием пятиканальной линии связи 220 В</option>
+									<option value="W">Двенадцать сигнальных реле и дискретное управлением с использованием пятиканальной линии связи 220 В</option>
+								</select>
+							</div>
+						</fieldset>
 
-<fieldset class="row mb-3 optionalField" id="control-block-optionssetCheckBox">
-	<legend class='blockNumber'>4.2</legend>
-	<div class="col-sm-9">
-		<legend class="col-form-label col-sm-3 pt-0">Дополнительное оснащение</legend>
-		<label><input type="checkbox" name='blockOption' value="T" id="tOption"> Твердотелый
-			пускатель</input></label><br />
-		<label><input type="checkbox" name='blockOption' value="S" id="PanelOption"> Переключатель режимов
-			работы на панели управления</input></label><br />
-		<label><input type="checkbox" name='blockOption' value="B" id="bluetoothOption"> Канал связи
-			"Bluetooth</input></label><br />
-		<label><input type="checkbox" name='blockOption' value="R" id="regOption"> Регистратор параметров
-			состояния и конфигурации привода</input></label><br />
-	</div>
-</fieldset> -->
+						<fieldset class="row mb-3 optionalField" id="control-block-optionssetCheckBox">
+							<legend class="blockNumber">4.2</legend>
+							<div class="col-sm-9">
+								<legend class="col-form-label col-sm-3 pt-0">Дополнительное оснащение</legend>
+								<label><input type="checkbox" name="blockOption" value="T" id="tOptionv" /> Твердотелый пускатель</label><br />
+								<label><input type="checkbox" name="blockOption" value="S" id="PanelOptionv" /> Переключатель режимов работы на панели управления</label><br />
+								<label><input type="checkbox" name="blockOption" value="B" id="bluetoothOptionv" /> Канал связи "Bluetooth</label><br />
+								<label><input type="checkbox" name="blockOption" value="R" id="regOptionv" /> Регистратор параметров состояния и конфигурации привода</label><br />
+							</div>
+						</fieldset>
 						<!-- </div> -->
 
 						<!-- <div id="step-4"> -->

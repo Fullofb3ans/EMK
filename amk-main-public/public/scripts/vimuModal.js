@@ -131,20 +131,20 @@ $(document).ready(function () {
 
         // ДОП ОПЦИИ ДЛЯ БЛОКА
         let tOption = '';
-        document.querySelector('#tOption').checked ? (tOption = document.querySelector('#tOption').value) : '';
+        document.querySelector('#tOptionv').checked ? (tOption = document.querySelector('#tOptionv').value) : '';
 
         let PanelOption = '';
-        document.querySelector('#PanelOption').checked ? (PanelOption = document.querySelector('#PanelOption').value) : '';
+        document.querySelector('#PanelOptionv').checked ? (PanelOption = document.querySelector('#PanelOptionv').value) : '';
 
         let bluetoothOption = '';
-        document.querySelector('#bluetoothOption').checked ? (bluetoothOption = document.querySelector('#bluetoothOption').value) : '';
+        document.querySelector('#bluetoothOptionv').checked ? (bluetoothOption = document.querySelector('#bluetoothOptionv').value) : '';
 
         let regOption = '';
-        document.querySelector('#regOption').checked ? (regOption = document.querySelector('#regOption').value) : '';
+        document.querySelector('#regOptionv').checked ? (regOption = document.querySelector('#regOptionv').value) : '';
 
         let optionssetCheckBox = tOption + PanelOption + bluetoothOption + regOption;
 
-        let optForBu = $('#control-block-optionsset option:selected').val() != 'noValue' ? $('#control-block-optionsset option:selected').val() : '';
+        let optForBu = $('#vimucontrole-blocks-options option:selected').val() != 'noValue' ? $('#vimucontrole-blocks-options option:selected').val() : '';
 
 
         is_true = [x1, x2, x3, x4, x5, x6, x7, x8, x9].includes('X');
@@ -183,6 +183,16 @@ $(document).ready(function () {
         $('#vimuModal').hide();
         ($('#controle-blocks')).closest('fieldset').removeClass('noReqValue');
         ($('#controle-blocks')).closest('fieldset').addClass('ReqValueOk');
+    });
+
+    $('#vimucontrol-block-optionsset').on('change', function (e) {
+        if ($('#vimucontrole-blocks-options option:selected').val() !== 'noValue') {
+            document.querySelector('#vimucontrol-block-optionsset').classList.add('ReqValueOk');
+            document.querySelector('#vimucontrol-block-optionsset').classList.remove('noReqValue');
+        } else {
+            document.querySelector('#vimucontrol-block-optionsset').classList.remove('ReqValueOk');
+            document.querySelector('#vimucontrol-block-optionsset').classList.add('noReqValue');
+        }
     });
 
 });

@@ -666,7 +666,7 @@ $(document).ready(function () {
         let j20 = $("input[name='execution']:checked").closest('.form-check').find('.form-check-label').text(); //исполнение по назначению
         let j21 = $("input[name='working-mode']:checked").closest('.form-check').find('.form-check-label').text(); //режим работы
         let j22 = $("input[name='protection']:checked").closest('.form-check').find('.form-check-label').text(); //Влагозащита
-        let j23 = 'Закрывание по часовой стрелке'; //Вращение вых вала
+        let j23 = 'Закрывание против часовой стрелки'; //Вращение вых вала
         let j24 = $('#climatic-modification option:selected').text(); //Температура
         // json2 = [j20, j21, j22, j23, j24];
 

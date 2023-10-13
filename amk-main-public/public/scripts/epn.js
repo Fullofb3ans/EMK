@@ -513,8 +513,10 @@ $(document).ready(function () {
 
     $('#download').on('click', function () {
         let BoMark = document.querySelector("#controle-blocks-series").value;
-        console.log('hea');
+        let vbu = document.querySelector("#vimucontrole-blocks").value;
+
         let optForBu = $('#control-block-optionsset option:selected').val() != 'noValue' ? $('#control-block-optionsset option:selected').val() : '';
+        let voptForBu = $('#vimucontrol-block-optionsset option:selected').val() != 'noValue' ? $('#control-block-optionsset option:selected').val() : '';
 
         // ДОП ОПЦИИ
         let addOption1 = document.querySelector("#PanelOption").checked ? 'Механический селектор переключения режима работы местн./дист.' : '';
@@ -576,7 +578,7 @@ $(document).ready(function () {
         let j35 = selectPositionSignal(); // Сигнализация положения
 
         let j36 = ''; // Сигнал момэнт
-        if (BoMark == 'ВЭ13' || BoMark == 'ВЭ15' || BoMark == 'ВЭ17') {
+        if ((BoMark == 'ВЭ13' || BoMark == 'ВЭ15' || BoMark == 'ВЭ17') || (vbu == 'ВЭ13' || vbu == 'ВЭ15' || vbu == 'ВЭ17')) {
             j36 = 'Есть';
         }
         else {
@@ -584,18 +586,19 @@ $(document).ready(function () {
         }
 
 
+
         let j37 = ''; // Дублирование RS485
-        if (j30 == 'ВЭ18' || j30 == 'ВЭ110' || j30 == 'ВЭ24' || j30 == 'ВЭ26') { j37 = 'Есть' }
+        if ((j30 == 'ВЭ18' || j30 == 'ВЭ110' || j30 == 'ВЭ24' || j30 == 'ВЭ26') || (vbu == 'ВЭ18' || vbu == 'ВЭ110' || vbu == 'ВЭ24' || vbu == 'ВЭ26')) { j37 = 'Есть' }
         else { j37 = 'Отсутствует' };
 
         let j38 = 'Одиночные';
-        if (optForBu == 'Z' || optForBu == 'W' || document.querySelector("#controle-blocks") == 'М21') { j38 = 'Сдвоенные' }; // Промежуточные выключатели
+        if (optForBu == 'Z' || optForBu == 'W' || voptForBu == 'Z' || voptForBu == 'W' || document.querySelector("#controle-blocks") == 'М21') { j38 = 'Сдвоенные' }; // Промежуточные выключатели
 
         let j39 = 'Одиночные'; // Моментные выключатели
-        if (optForBu == 'Z' || optForBu == 'W') { j39 = 'Сдвоенные' }; // Моментные выключатели
+        if (optForBu == 'Z' || optForBu == 'W' || voptForBu == 'Z' || voptForBu == 'W') { j39 = 'Сдвоенные' }; // Моментные выключатели
 
         let j310 = 'Одиночные'; // Концевые выключатели
-        if (optForBu == 'Z' || optForBu == 'W' || document.querySelector("#controle-blocks") == 'М25') { j310 = 'Сдвоенные' }; // Концевые выключатели
+        if (optForBu == 'Z' || optForBu == 'W' || voptForBu == 'Z' || voptForBu == 'W' || document.querySelector("#controle-blocks") == 'М25') { j310 = 'Сдвоенные' }; // Концевые выключатели
 
         let j311 = ''; // Монтаж БУ
         if (BoMark == 'ВЭ1') {
@@ -1003,8 +1006,9 @@ $(document).ready(function () {
 
         let BoMark = document.querySelector("#controle-blocks-series").value;
         optForBu = $('#control-block-optionsset option:selected').val() != 'noValue' ? $('#control-block-optionsset option:selected').val() : '';
+        voptForBu = $('#vimucontrol-block-optionsset option:selected').val();
 
-        if (BoMark == 'ВЭ' || BoMark == 'ВЭ1') {
+        if (BoMark == 'ВЭ') {
             if (optForBu == 'X') {
                 return remoteSignal = 'Привод с шестью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 220 В;'
             }
@@ -1024,6 +1028,26 @@ $(document).ready(function () {
                 return remoteSignal = 'Привод с шестью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 24 В;'
             }
         }
+        else if (BoMark == 'ВЭ1') {
+            if (voptForBu == 'X') {
+                return remoteSignal = 'Привод с шестью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 220 В;'
+            }
+            if (voptForBu == 'Y') {
+                return remoteSignal = 'Привод с восемью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 24 В;'
+            }
+            if (voptForBu == 'Z') {
+                return remoteSignal = 'Привод с двенадцатью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 24 В;'
+            }
+            if (voptForBu == 'V') {
+                return remoteSignal = 'Привод с восемью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 220 В;'
+            }
+            if (voptForBu == 'W') {
+                return remoteSignal = 'Привод с двенадцатью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 220 В;'
+            }
+            else {
+                return remoteSignal = 'Привод с шестью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 24 В;'
+            }
+        }
         else {
             return remoteSignal = 'Пункт только для ЭИМУ или ВИМУ';
         }
@@ -1032,8 +1056,25 @@ $(document).ready(function () {
     function selectPositionSignal() {
 
         let BoMark = document.querySelector("#controle-blocks").value;
-
-        if (BoMark == 'ВЭ11') {
+        if (BoMark == 'ВЭ1') {
+            vimublock = document.querySelector("#vimucontrole-blocks").value;
+            if (vimublock == 'ВЭ11') {
+                return positionSignal = 'Отсутсвуют';
+            }
+            else if (vimublock == 'ВЭ12' || vimublock == 'ВЭ13' || vimublock == 'ВЭ16' || vimublock == 'ВЭ17') {
+                return positionSignal = '4–20 мА';
+            }
+            else if (vimublock == 'ВЭ14' || vimublock == 'ВЭ18') {
+                return positionSignal = 'RS485 Modbus';
+            }
+            else if (vimublock == 'ВЭ15') {
+                return positionSignal = '4–20 мА и RS485 Modbus';
+            }
+            else if (vimublock == 'ВЭ19' || vimublock == 'ВЭ110') {
+                return positionSignal = 'Profibus DP';
+            }
+        }
+        else if (BoMark == 'ВЭ11') {
             return positionSignal = 'Отсутсвуют';
         }
         else if (BoMark == 'ВЭ12' || BoMark == 'ВЭ13' || BoMark == 'ВЭ16' || BoMark == 'ВЭ17') {
