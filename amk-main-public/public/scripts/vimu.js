@@ -190,9 +190,9 @@ $(document).ready(function () {
 
         //json2
         let j20 = $("input[name='execution']:checked").closest('.form-check').find('.form-check-label').text(); //исполнение по назначению
-        let j21 = $("input[name='engineStartType']:checked").closest('.form-check').find('.form-check-label').text(); //способ включения двигателя
+        let j21 = ''; //режим работы
         let j22 = $("input[name='protection']:checked").closest('.form-check').find('.form-check-label').text(); //Влагозащита
-        let j23 = ''; //Вращение вых вала
+        let j23 = $("input[name='engineStartType']:checked").closest('.form-check').find('.form-check-label').text(); //способ включения двигателя
         let j24 = $('#climatic-modification option:selected').text(); //Температура
         // json2 = [j20, j21, j22, j23, j24];
 
