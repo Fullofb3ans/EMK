@@ -4,11 +4,7 @@
 
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"
-		integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g=="
-		crossorigin="anonymous"
-		referrerpolicy="no-referrer"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js" integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.1/js/bootstrap.min.js"
@@ -24,11 +20,7 @@
 		crossorigin="anonymous"
 		referrerpolicy="no-referrer"></script>
 
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"
-		integrity="sha512-XtmMtDEcNz2j7ekrtHvOVR4iwwaD6o/FUJe6+Zq+HgcCsk3kj4uSQQR8weQ2QVj1o0Pk6PwYLohm206ZzNfubg=="
-		crossorigin="anonymous"
-		referrerpolicy="no-referrer"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js" integrity="sha512-XtmMtDEcNz2j7ekrtHvOVR4iwwaD6o/FUJe6+Zq+HgcCsk3kj4uSQQR8weQ2QVj1o0Pk6PwYLohm206ZzNfubg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.js"
@@ -70,31 +62,6 @@
 		</div>
 	</div>
 
-	<style>
-		/* #step-3 {
-		display: none;
-	}
-	#step-4 {
-		display: none;
-	}
-	#step-5 {
-		display: none;
-	}
-	.noReqValue {
-		border: 1px solid red;
-		border-radius: 16px;
-		padding: 18px;
-		margin-left: -1;
-		margin-right: -1;
-	}
-	.ReqValueOk {
-		border: 1px solid green;
-		border-radius: 16px;
-		padding: 18px;
-		margin-left: -1;
-		margin-right: -1;
-	} */
-	</style>
 	<!-- <div id="step-2"> -->
 	<fieldset class="row mb-3 noReqValue" id="executionWrapLegend">
 		<legend class="blockNumber">
@@ -315,8 +282,18 @@
 		</div>
 	</fieldset>
 
-	<fieldset class="persInfo noReqValue">
+	<fieldset class="row mb-3 optionalField addRequirements">
 		<legend class="blockNumber">10</legend>
+		<div class="col-sm-9" id="addReq">
+			<legend class="col-form-label col-sm-3 pt-0">Дополнительные требования</legend>
+			<div class="form-check">
+				<textarea style="padding: 5px; resize: none; width: 100%; padding-bottom: 10%" name="addReqarea" id="addReqarea"></textarea>
+			</div>
+		</div>
+	</fieldset>
+
+	<fieldset class="persInfo noReqValue">
+		<legend class="blockNumber">11</legend>
 		<div class="persInfoFlex" style="display: flex; text-align: -webkit-center; flex-direction: row; flex-wrap: wrap; align-content: space-around; align-items: flex-end; gap: 5%; justify-content: center">
 			<div class="mb-3" id="persInfo-1">
 				<label for="organization"><b>Организация:</b></label>
@@ -353,7 +330,7 @@
 	</fieldset>
 
 	<fieldset class="row mb-3 numbersOfEp noReqValue" id="executionWrapLegend">
-		<legend class="blockNumber">11</legend>
+		<legend class="blockNumber">12</legend>
 		<div class="mb-3" id="numbers">
 			<legend class="col-form-label col-sm-3 pt-0">Кол-во:</legend>
 			<input class="form-input form-element input" id="numbersOfEp" type="number" placeholder="Введите кол-во" min="0" />
@@ -361,7 +338,7 @@
 	</fieldset>
 
 	<div id="modal-button" class="mb-3">
-		<button style="display: none" id="download" type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modal-th">Скачать документацию</button>
+		<button style="" id="download" type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modal-th">Скачать документацию</button>
 	</div>
 
 	<!-- </div> -->
@@ -552,50 +529,11 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
+					<p>"Общепромышленное исполнение" - это тип исполнения электропривода, который обеспечивает защиту от попадания инородных тел размером более 12 мм. Обычно такие электроприводы используются в помещениях, где нет особых требований к степени защиты.</p>
 					<p>
-						"Общепромышленное исполнение" - это тип исполнения электропривода, который обеспечивает защиту от попадания инородных тел размером более 12 мм. Обычно такие электроприводы используются в помещениях, где нет особых требований к степени
-						защиты.
+						"Взрывозащищенное исполнение" - это тип исполнения электропривода, предназначенного для работы в условиях повышенной опасности взрывающейся среды. Это могут быть, например, помещения, где происходит производство нефти, газа или химических веществ.
+						Взрывозащищенные электроприводы соответствуют определенным стандартам, обеспечивающим защиту от искрообразующих элементов и контролирующих термические параметры.
 					</p>
-					<p>
-						"Взрывозащищенное исполнение" - это тип исполнения электропривода, предназначенного для работы в условиях повышенной опасности взрывающейся среды. Это могут быть, например, помещения, где происходит производство нефти, газа или химических
-						веществ. Взрывозащищенные электроприводы соответствуют определенным стандартам, обеспечивающим защиту от искрообразующих элементов и контролирующих термические параметры.
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- sdfgsdfgsdfg -->
-	<div class="modal" id="modal-th" tabindex="-1">
-		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-fullscreen">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title">Технические характеристики</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<table class="table" id="result-table">
-						<thead>
-							<tr>
-								<th>Параметр</th>
-								<th>Значение</th>
-								<th>Расшифровка</th>
-							</tr>
-						</thead>
-						<tbody></tbody>
-					</table>
-					<h5>Параметры электродвигателя</h5>
-					<table class="table" id="result-engine">
-						<thead>
-							<tr>
-								<th>Параметр</th>
-								<th>Значение</th>
-							</tr>
-						</thead>
-						<tbody></tbody>
-					</table>
-				</div>
-				<div class="modal-footer">
-					<button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal">Сохранить в PDF</button>
 				</div>
 			</div>
 		</div>

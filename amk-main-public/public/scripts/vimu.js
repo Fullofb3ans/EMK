@@ -149,13 +149,11 @@ $(document).ready(function () {
 
         mark_gen.text(x0 + x1 + '-' + x2 + x3 + '-' + x4 + optionssetCheckBox + optForBu + '-' + x5 + '-' + x6 + x7 + x8 + x9);
 
-        modal_button.toggle(!is_true);
-        mark_gen.toggleClass("is-invalid", is_true).toggleClass('is-valid', !is_true);
     });
 
     // ФЕТЧ НА ДОКУМЕНТАЦИЮ
     $('#download').on('click', function () {
-        let BoMark = document.querySelector("#controle-blocks-series").value;
+        let BoMark = 'ВЭ1';
         console.log('hea');
         let optForBu = $('#control-block-optionsset option:selected').val() != 'noValue' ? $('#control-block-optionsset option:selected').val() : '';
 
@@ -178,23 +176,23 @@ $(document).ready(function () {
         // json0 = [j00, j01, j02, j03, j04, j05];
 
         //json1
-        let j10 = 'Электроприводы неполноповоротные ЭПН'; //тип арматуры
+        let j10 = 'Внешний интеллектуальный модуль управления ВИМУ'; //тип арматуры
         let j11 = document.querySelector('#mark-gen').innerText; //маркировка
         let j12 = 'АО Тулаэлектропривод'; //завод
-        let j13 = 'частота вращения'; // частота вращения
-        let j14 = document.querySelector("#upper-limit").value; //Максимальный крутящий момент
-        let j15 = document.querySelector('#flange').value; //присоединение к приводу
-        let j16 = $("input[name='placeForEnv']:checked").closest('.form-check').find('.form-check-label').text(); // установка
-        let j17 = document.querySelector("#time-limit").value; //время закрытия
-        let j18 = $("input[name='constructive-scheme']:checked").val(); // конструктивная схема
-        let j19 = $("input[name='stroke']:checked").closest('.form-check').find('.form-check-label').text() + ' ' + 'градусов'; // оборотов на закрытие
+        let j13 = ''; // частота вращения
+        let j14 = $("input[name='roundControl']:checked").closest('.form-check').find('.form-check-label').text(); //Крут момент
+        let j15 = ''; //присоединение к приводу
+        let j16 = ''; // установка
+        let j17 = ''; //время закрытия
+        let j18 = ''; // конструктивная схема
+        let j19 = ''; // оборотов на закрытие
         // json1 = [j10, j11, j12, j13, j14, j15, j16, j17, j18];
 
         //json2
         let j20 = $("input[name='execution']:checked").closest('.form-check').find('.form-check-label').text(); //исполнение по назначению
-        let j21 = $("input[name='working-mode']:checked").closest('.form-check').find('.form-check-label').text(); //режим работы
+        let j21 = $("input[name='engineStartType']:checked").closest('.form-check').find('.form-check-label').text(); //способ включения двигателя
         let j22 = $("input[name='protection']:checked").closest('.form-check').find('.form-check-label').text(); //Влагозащита
-        let j23 = 'Закрывание по часовой стрелке'; //Вращение вых вала
+        let j23 = ''; //Вращение вых вала
         let j24 = $('#climatic-modification option:selected').text(); //Температура
         // json2 = [j20, j21, j22, j23, j24];
 
@@ -204,22 +202,14 @@ $(document).ready(function () {
         let j31 = checkCommandBlock() ? checkCommandBlock() : ''; // Тип управления
         let j32 = selectRemoteSignal();// сигналы дист управления
 
-        let j33 = ''; //Тип БКВ
-        if (BoMark == 'М2') {
-            j33 = 'МБКВ';
-        }
-        else if (BoMark == 'ВЭ1' || BoMark == 'ВЭ') {
-            j33 = 'ВИМУ';
-        }
+        let j33 = 'ВИМУ'; //Тип БКВ
 
         let j34 = ''; //Механический указатель
-        if (document.querySelector("#pointer > input[type=checkbox]").checked) { j34 = 'Есть' }
-        else { j34 = 'Отсутствует' };
 
         let j35 = selectPositionSignal(); // Сигнализация положения
 
         let j36 = ''; // Сигнал момэнт
-        if (BoMark == 'ВЭ13' || BoMark == 'ВЭ15' || BoMark == 'ВЭ17') {
+        if (j30 == 'ВЭ13' || j30 == 'ВЭ15' || j30 == 'ВЭ17') {
             j36 = 'Есть';
         }
         else {
@@ -250,29 +240,29 @@ $(document).ready(function () {
         // json3 = [j30, j31, j32, j33, j34, j35, j36, j37, j38, j39, j310, j311];
 
         //json4
-        let j40 = $("input[name='connection']:checked").val(); //Электрическое подключение (обозначение)
-        let j41 = document.querySelector("#cap > input[type=checkbox]").checked ? 'Есть' : 'Отсутствует'; //Защитный колпак
+        let j40 = $("input[name='connectionForVimu']:checked").val(); //Электрическое подключение (обозначение)
+        let j41 = ''; //Защитный колпак
         let j42 = document.querySelector("#color-1").checked ? 'Серый' : document.querySelector("#ralColor").value; //Цвет
-        let j43 = document.querySelector("#mechSelectorId > input[type=checkbox]") ? 'Есть' : 'Отсутствует'; //Механический указатель
+        let j43 = ''; //Механический указатель
         let j44 = addOptions;//Доп опции 
         let j45 = document.querySelector('#addReqarea').value; //Дополнительные требования
         // json4 = [j40, j41, j42, j43, j44, j45];
 
         //json5
-        let j50 = $("input[name='working-mode']:checked").closest('.form-check').find('.form-check-label').text(); //Назначение по режиму работы
-        let j51 = $("input[name='connection']:checked").closest('.form-check').find('.form-check-label').text(); //Электрическое подключение (расшифровка)
+        let j50 = $("input[name='engineStartType']:checked").closest('.form-check').find('.form-check-label').text(); //Назначение по режиму работы
+        let j51 = $("input[name='connectionForVimu']:checked").closest('.form-check').find('.form-check-label').text(); //Электрическое подключение (расшифровка)
         let j52 = 'SIL-3'; // SIL
-        let j53 = $("input[name='specialForEpn']:checked").closest('.form-check').find('.form-check-label').text(); //Специальное исполнение
+        let j53 = $("input[name='specialForVimu']:checked").closest('.form-check').find('.form-check-label').text(); //Специальное исполнение
         let j54 = ''; //Масса
         // json5 = [j50, j51, j52, j53, j54];
 
         //json6
         let j60 = '?'; //Номинальное давление
-        let j61 = 'Присоединение для фланцев из ряда F07...F40';//Тип присоединения выходного вала
+        let j61 = '?';//Тип присоединения выходного вала
         let j62 = '?'; //Кабельные вводы
         let j63 = '?'; //Штепсельные разъемы
         let j64 = '?'; //Тип подводимых кабелей
-        let j65 = document.querySelector("#powerType").value;
+        let j65 = '';
 
         // json6 = [j60, j61, j62, j63];
 
@@ -333,14 +323,80 @@ $(document).ready(function () {
     });
 
     // КНОПКА КОНФИГУРАТОРА
-    $("#controle-blocks-series").on("click", function (e) {
-        console.log($(this).val());
-        $("#controle-blocks").val('');
+    function checkCommandBlock() {
 
-        if ($(this).val() === 'Э0') {
-            $("#controle-blocks").val('Э01');
+        let base = document.querySelector('#controle-blocks').value;
+        switch (base) {
+            case 'ВЭ11':
+                return 'Базовый набор функций';
+            case 'ВЭ12':
+                return '1)Базовый набор функций 2)Передача информации о положении выходного звена привода посредством токового сигнала (4–20 мА)';
+            case 'ВЭ13':
+                return '1)Базовый набор функций 2)Передача информации о положении выходного звена привода посредством токового сигнала (4–20 мА)  3)Передача текущего значения движущего момента на выходном звене привода посредством токового сигнала (4–20 мА).';
+            case 'ВЭ14':
+                return '1)Базовый набор функций 2)Диагностирование отказов опциональных модулей.  3)Автоматический выбор активного интерфейса дистанционного управления.';
+            case 'ВЭ15':
+                return '1)Базовый набор функций 2)Диагностирование отказов опциональных модулей.  3)Автоматический выбор активного интерфейса дистанционного управления.  4) Передача информации о положении выходного звена привода посредством токового сигнала (4–20 мА)  5)Передача текущего значения движущего момента на выходном звене привода посредством токового сигнала (4–20 мА).';
+            case 'ВЭ16':
+                return '1)Базовый набор функций 2)Аналоговое управление приводом — прием от дистанционного пульта и отработка токового сигнала (4–20 мА) задания положения выходного звена привода с контролем наличия связи  3)Диагностирование отказов опциональных модулей.  4)Автоматический выбор активного интерфейса дистанционного управления.';
+            case 'ВЭ17':
+                return '1)Базовый набор функций 2)Передача информации о положении выходного звена привода посредством токового сигнала (4–20 мА)  3)Передача текущего значения движущего момента на выходном звене привода посредством токового сигнала (4–20 мА).  4) Аналоговое управление приводом — прием от дистанционного пульта и отработка токового сигнала (4–20 мА) задания положения выходного звена привода с контролем наличия связи  5) Диагностирование отказов опциональных модулей.  6)Автоматический выбор активного интерфейса дистанционного управления.';
+            case 'ВЭ18':
+                return '1)Базовый набор функций 2)Цифровое управление и настройка привода с дублированием каналов связи посредством цифрового канала связи, интерфейс RS485, протокол обмена — MODBUS RTU  3)Диагностирование отказов опциональных модулей.   4)Автоматический выбор активного интерфейса дистанционного управления.';
+            case 'ВЭ19':
+                return '1)Базовый набор функций 2)Цифровое управление приводом посредством цифрового канала связи, интерфейс RS485, протокол обмена — PROFIBUS DP  3)Диагностирование отказов опциональных модулей.   4)Автоматический выбор активного интерфейса дистанционного управления.';
+            case 'ВЭ110':
+                return '1)Базовый набор функций 2)Цифровое управление приводом с дублированием каналов связи посредством цифрового канала связи, интерфейс RS485, протокол обмена — PROFIBUS DP.  3)Диагностирование отказов опциональных модулей.   4)Автоматический выбор активного интерфейса дистанционного управления.';
         }
-    });
+    }
+    // МЕСТНЫЕ И ДИСТ СИГНАЛЫ
+    function selectRemoteSignal() {
+
+        optForBu = $('#control-block-optionsset option:selected').val() != 'noValue' ? $('#control-block-optionsset option:selected').val() : '';
+
+        if (optForBu == 'X') {
+            return remoteSignal = 'Привод с шестью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 220 В;'
+        }
+        if (optForBu == 'Y') {
+            return remoteSignal = 'Привод с восемью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 24 В;'
+        }
+        if (optForBu == 'Z') {
+            return remoteSignal = 'Привод с двенадцатью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 24 В;'
+        }
+        if (optForBu == 'V') {
+            return remoteSignal = 'Привод с восемью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 220 В;'
+        }
+        if (optForBu == 'W') {
+            return remoteSignal = 'Привод с двенадцатью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 220 В;'
+        }
+        else {
+            return remoteSignal = 'Привод с шестью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 24 В;'
+        }
+    }
+
+
+    function selectPositionSignal() {
+        let BoMark = document.querySelector;
+
+        if (BoMark == 'ВЭ11') {
+            return positionSignal = 'Отсутсвуют';
+        }
+        else if (BoMark == 'ВЭ12' || BoMark == 'ВЭ13' || BoMark == 'ВЭ16' || BoMark == 'ВЭ17') {
+            return positionSignal = '4–20 мА';
+        }
+        else if (BoMark == 'ВЭ14' || BoMark == 'ВЭ18') {
+            return positionSignal = 'RS485 Modbus';
+        }
+        else if (BoMark == 'ВЭ15') {
+            return positionSignal = '4–20 мА и RS485 Modbus';
+        }
+        else if (BoMark == 'ВЭ19' || BoMark == 'ВЭ110') {
+            return positionSignal = 'Profibus DP';
+        }
+        else {
+            return positionSignal = 'Отсутствуют';
+        }
+    }
 
     $("#control-block-config").on("click", function (e) {
         vimuBlockModal.show();
