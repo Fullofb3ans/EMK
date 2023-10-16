@@ -56,6 +56,7 @@ def get_para_data(output_doc_name, paragraph):
     output_para.paragraph_format.alignment = paragraph.paragraph_format.alignment
    
 
+
 app = FastAPI()
 
 app.mount("/static", StaticFiles(directory="public", html=True))
@@ -127,6 +128,26 @@ def get_param(jsn = Body()):
 
 
 
+@app.post("/DBrn")
+def get_param(jsn = Body()):
+    a = jsn["a"]
+    bd = DB("ЭП4")
+    for i in range(6-len(a)):
+        a.append("")
+    ans = bd.get_RN(a[0], a[1], a[2], a[3], a[4], "")
+    res=[]
+    for x in ans:
+        if (x != " ") and (x != "null") and (x != None):
+            res.append(x)
+    try:
+        res.sort(key=int)
+    except:
+        pass
+    print(res)
+    return {"ans" : res}
+
+
+
 @app.post("/download")
 def download_file(jsn = Body()):
 
@@ -141,13 +162,29 @@ def download_file(jsn = Body()):
     jsn7 = jsn["jsn7"]
 
     ID = randint(1000000, 10000000)
-
-    dc = mk_DOCX(jsn0, jsn1, jsn2, jsn3, jsn4, jsn6)
+    
+    
+    
     mark = jsn1[1]
-    if mark[:3] == "ЭП4": 
+
+    if mark[:3] == "ЭП4":
+        dc = mk_DOCX(jsn0, jsn1, jsn2, jsn3, jsn4, jsn6) 
         tbls = dc.ep4()
-    elif mark[:3] == "ЭПН": 
+
+        xl = mk_XL(ID, [jsn0, jsn1, jsn2, jsn3, jsn4, jsn5, jsn6, jsn7])
+        wb = xl.ep()
+    elif mark[:3] == "ЭПН":
+        dc = mk_DOCX(jsn0, jsn1, jsn2, jsn3, jsn4, jsn6) 
         tbls = dc.epn()
+
+        xl = mk_XL(ID, [jsn0, jsn1, jsn2, jsn3, jsn4, jsn5, jsn6, jsn7])
+        wb = xl.ep()
+    elif mark[:4] == 'ВИМУ':
+        dc = mk_DOCX(jsn0, jsn1, jsn2, jsn3, jsn4, [jsn5[1], jsn5[3]])
+        tbls = dc.vimu()
+
+        xl = mk_XL(ID, [jsn0, jsn2, jsn3, [jsn4[0], jsn4[2], jsn4[4], jsn4[5], jsn5[1], jsn5[3]] ])
+        wb = xl.vimu()
 
 
 
@@ -164,37 +201,48 @@ def download_file(jsn = Body()):
             para.text = f'Ф.И.О. \t  {tbls["ans3"][1]} \n Тел.: \t  {tbls["ans3"][2]} \n E-mail:  {tbls["ans3"][3]} \n \t\t\t \t\t\t \t\t Дата: «   » ____________________ 202__ г'
         
         get_para_data(doc_new, para)
+        if mark[:4] != 'ВИМУ':
+            if para.text == 'Характеристика и параметры арматуры:':
+                tbl1 = doc_new.add_table(rows=0, cols=2)
+                tbl1.style = 'Table Grid'
+                ks=list(tbls["names1"])
+                vs=list(tbls["ans1"])
+                for i in range(len(ks)):
+                    row_cells = tbl1.add_row().cells
+                    row_cells[0].text = ks[i]
+                    cell = tbl1.cell(i, 1)
+                    cell.text = vs[i]
+                doc_new.add_paragraph()
+                
+            if para.text == 'Характеристика и параметры электропривода:':
+                tbl1 = doc_new.add_table(rows=0, cols=2)
+                tbl1.style = 'Table Grid'
+                ks=list(tbls["names2"])
+                vs=list(tbls["ans2"])
+                for i in range(len(ks)):
+                    row_cells = tbl1.add_row().cells
+                    row_cells[0].text = ks[i]
+                    cell = tbl1.cell(i, 1)
+                    cell.text = vs[i]
 
-        if para.text == 'Характеристика и параметры арматуры:':
-            tbl1 = doc_new.add_table(rows=0, cols=2)
-            tbl1.style = 'Table Grid'
-            ks=list(tbls["names1"])
-            vs=list(tbls["ans1"])
-            for i in range(len(ks)):
-                row_cells = tbl1.add_row().cells
-                row_cells[0].text = ks[i]
-                cell = tbl1.cell(i, 1)
-                cell.text = vs[i]
-            doc_new.add_paragraph()
+        elif mark[:4] == 'ВИМУ':
+            if para.text == 'Характеристика и параметры арматуры:':
+                para.text = 'Характеристика и параметры внешнего интеллектуального модуля управления'
+
+                tbl1 = doc_new.add_table(rows=0, cols=2)
+                tbl1.style = 'Table Grid'
+
+
+                ks=list(tbls["names2"])
+                vs=list(tbls["ans2"])
+                for i in range(len(ks)):
+                    row_cells = tbl1.add_row().cells
+                    row_cells[0].text = ks[i]
+                    cell = tbl1.cell(i, 1)
+                    cell.text = vs[i]
             
-        if para.text == 'Характеристика и параметры электропривода:':
-
-            tbl1 = doc_new.add_table(rows=0, cols=2)
-            tbl1.style = 'Table Grid'
-            ks=list(tbls["names2"])
-            vs=list(tbls["ans2"])
-            for i in range(len(ks)):
-                row_cells = tbl1.add_row().cells
-                row_cells[0].text = ks[i]
-                cell = tbl1.cell(i, 1)
-                cell.text = vs[i]
-
-    
-    
-    '''Работа с .xlsx'''
-    xl = mk_XL(ID, [jsn0, jsn1, jsn2, jsn3, jsn4, jsn5, jsn6, jsn7])
-    wb = xl.ep4()
-
+            if para.text == 'Характеристика и параметры электропривода:':
+                para.text = ""
 
     
     '''Работа с файлами'''
