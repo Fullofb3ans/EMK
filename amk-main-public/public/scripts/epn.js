@@ -193,7 +193,7 @@ $(document).ready(function () {
 
 
     // ПРОГРУЗКА ТИПА СИЛОВОГО ПИТАНИЯ 
-    $('#testStep-5').on('change', function (e) {
+    $('#flange').on('change', function (e) {
         function PowerTypeSelectCreate() {
             let upLim = document.querySelector("#upper-limit").value;
             let select = document.querySelector("#powerType");
@@ -1109,5 +1109,73 @@ $(document).ready(function () {
         $('#ve1Config').show();
     });
 
+    // Открытие по шагам
+    $('#step-1').on('change', function (e) {
+        if ($("input[name='working-mode']:checked").val() != undefined && $("input[name='execution']:checked").val() != undefined) {
+            $('#step-2').show();
+        } else {
+            $('#step-2').hide();
+        }
+    });
+    $('#step-2').on('change', function (e) {
+        if ($("input[name='stroke']:checked").val() != undefined && document.querySelector('#upper-limit') != '' && document.querySelector('#time-limit').value != '') {
+            $('#step-3').show();
+        } else {
+            $('#step-3').hide();
+        }
+    });
+    $('#step-3').on('change', function (e) {
+        if ($("input[name='constructive-scheme']:checked").val() != '') {
+            $('#step-4').show();
+        } else {
+            $('#step-4').hide();
+        }
+    });
+    $('#step-4').on('change', function (e) {
+        if (document.querySelector('#flange').value && document.querySelector('#powerType').value != '') {
+            $('#step-5').show();
+        } else {
+            $('#step-5').hide();
+        }
+    });
+    $('#step-5').on('change', function (e) {
+        if (document.querySelector("#controle-blocks-series").value && document.querySelector("#climatic-modification").value) {
+            $('#step-6').show();
+        } else {
+            $('#step-6').hide();
+        }
+    });
+    $('#step-6').on('change', function (e) {
+        if ($("input[name='protection']:checked").val() != undefined && $("input[name='color']:checked").val() != undefined) {
+            $('#step-7').show();
+        }
+    });
+    $('#step-7').on('change', function (e) {
+        if ($("input[name='specialForEpn']:checked").val() != undefined && $("input[name='connection']:checked").val() != undefined) {
+            $('#step-8').show();
+        } else {
+            $('#step-8').hide();
+        }
+    });
+    $('#step-8').on('change', function (e) {
+        if ($("input[name='placeForEnv']:checked").val() != undefined) {
+            $('#step-9').show();
+        } else {
+            $('#step-9').hide();
+        }
+    });
+    $('#step-9').on('change', function (e) {
+        if (
+            document.querySelector('#organization').value != '' &&
+            document.querySelector('#fio').value != '' &&
+            document.querySelector('#phone').value != '' &&
+            document.querySelector('#email').value != '' &&
+            document.querySelector('#numbersOfEp').value != ''
+        ) {
+            $('#step-10').show();
+        } else {
+            $('#step-10').hide();
+        }
+    });
 
 });
