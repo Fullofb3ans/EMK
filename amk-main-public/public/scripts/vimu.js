@@ -180,7 +180,7 @@ $(document).ready(function () {
         let j11 = document.querySelector('#mark-gen').innerText; //маркировка
         let j12 = 'АО Тулаэлектропривод'; //завод
         let j13 = ''; // частота вращения
-        let j14 = $("input[name='roundControl']:checked").closest('.form-check').find('.form-check-label').text(); //Крут момент
+        let j14 = ''; //Крут момент
         let j15 = ''; //присоединение к приводу
         let j16 = ''; // установка
         let j17 = ''; //время закрытия
@@ -190,7 +190,7 @@ $(document).ready(function () {
 
         //json2
         let j20 = $("input[name='execution']:checked").closest('.form-check').find('.form-check-label').text(); //исполнение по назначению
-        let j21 = ''; //режим работы
+        let j21 = $("input[name='roundControl']:checked").closest('.form-check').find('.form-check-label').text(); //режим работы
         let j22 = $("input[name='protection']:checked").closest('.form-check').find('.form-check-label').text(); //Влагозащита
         let j23 = $("input[name='engineStartType']:checked").closest('.form-check').find('.form-check-label').text(); //способ включения двигателя
         let j24 = $('#climatic-modification option:selected').text(); //Температура
