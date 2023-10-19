@@ -5,4 +5,4 @@ window.onload = function () {
 
 $(document).ready(function () {
     $('#preloader').fadeOut(400);
-}); 
+});
