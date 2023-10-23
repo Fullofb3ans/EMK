@@ -321,7 +321,16 @@ $(document).ready(function () {
         }
     });
 
-    // Стиль для блока установки
+    // сокрытие модификации
+    $('#connectionTypeForclassicEpa').on('change', function (e) {
+        if (document.querySelector("#connectionTypeForclassicEpa").value == 'А' || document.querySelector("#connectionTypeForclassicEpa").value == 'М') {
+            $('#engineUpgrade').show();
+        } else {
+            $('#engineUpgrade').hide();
+        }
+    });
+
+    //  Стиль для блока установки
     $('.placeForEnv').on('change', function (e) {
         if (document.querySelector('#placeForEnv-1').checked || document.querySelector('#placeForEnv-2').checked) {
             document.querySelector('.placeForEnv').classList.add('ReqValueOk');
@@ -330,7 +339,7 @@ $(document).ready(function () {
             document.querySelector('.placeForEnv').classList.add('noReqValue');
             document.querySelector('.placeForEnv').classList.remove('ReqValueOk');
         }
-    })
+    });
 
     // заполнение маркировки
     $(document).on('change', function (e) {
@@ -475,7 +484,7 @@ $(document).ready(function () {
 
         //json2
         let j20 = $("input[name='epPlace']:checked").closest('.form-check').find('.form-check-label').text(); //исполнение по назначению
-        let j21 = ''; //режим работы
+        let j21 = 'Запорная'; //режим работы
         let j22 = 'IP54'; //Влагозащита
         let j23 = document.querySelector("#additional-3").checked ? 'Закрывание против часовой стрелке' : 'Закрывание по часовой стрелке'; //Вращение вых вала
         let j24 = document.querySelector("#climate").value; //Температура
@@ -487,7 +496,7 @@ $(document).ready(function () {
         let j31 = ''; // Тип управления
         let j32 = '';// сигналы дист управления
 
-        let j33 = 'ЭБКВ'; //Тип БКВ
+        let j33 = 'БКВ'; //Тип БКВ
 
         let j34 = ''; //Механический указатель
 
@@ -520,7 +529,7 @@ $(document).ready(function () {
         //json5
         let j50 = ''; //Назначение по режиму работы
         let j51 = ''; //Электрическое подключение (расшифровка)
-        let j52 = 'SIL-3'; // SIL
+        let j52 = ''; // SIL
         let j53 = ''; //Специальное исполнение
         let j54 = document.querySelector("#executionclassicEpaNumber").value; //номер исполнения электропривода
         // json5 = [j50, j51, j52, j53, j54];

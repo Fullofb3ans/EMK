@@ -245,6 +245,10 @@ $(document).ready(function () {
                 $('#controle-blocks').val('М21');
                 $('#control-block-fieldset').attr('disabled', true);
             }
+            else {
+                $('#controle-blocks').val('');
+                $('#control-block-fieldset').attr('disabled', false);
+            }
             // Загрузка изображений
             $('#constructive-scheme-Epnimg')
                 .empty()
@@ -266,7 +270,9 @@ $(document).ready(function () {
         }
     });
 
-    $('#control-block-fieldset').on('change', function (e) {
+
+
+    $(document).on('change', function (e) {
         let x6 = $('#controle-blocks-series').val();
         console.log(x6);
 
