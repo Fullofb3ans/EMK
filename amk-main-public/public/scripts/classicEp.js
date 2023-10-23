@@ -1,16 +1,253 @@
 // https://www.tulaprivod.ru/dokument/rukovodstva/BLTU_89_2022_v2.pdf
 $(document).ready(function () {
-    //КОНСТАНТЫ ДЛЯ JSON 
-    const certs_pdf = {
-        'classicEpaTu': {
-            'cert': '2-ep4-cert.pdf',
-            'decl': '2-ep4-decl.pdf',
+
+    //картинки типов 
+    const cheme_img = {
+        epc: {
+            'М': 'epcTypeM.png',
+            'А': 'epcTypeA.jpg',
+            'Б': 'epcTypeB.jpg',
+            'В': 'epcTypeV.jpg',
+            'Г': 'epcTypeG.jpg',
+            'Д': 'epcTypeD.jpg',
         },
-        // 'В': {
-        //     'cert': 'ep4v-cert.pdf',
-        //     'decl': 'ep4v-decl.pdf',
-        // }
-    }
+    };
+
+    // ПРОГРУЗКА буквы привода С ТАБЛИЦЫ
+    $('#epPlace').on('change', function (e) {
+        function epTypeSelectCreate() {
+            let execution = $("input[name='epPlace']:checked").val();
+            let select = document.getElementById('connectionTypeForclassicEpa');
+            $(select).empty();
+            select.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
+
+            let fetchResult = [];
+
+            fetch('https://emk.websto.pro/classicDB', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json;charset=utf-8' },
+                body: JSON.stringify({
+                    a: [execution],
+                }),
+            })
+                .then((res) => res.json())
+                .then((res) => {
+                    console.log(res);
+                    for (i in res) fetchResult.push(res[i]);
+                    // fetchResult[0].sort((a, b) => a - b);
+                    $.each(fetchResult[0], function (key, item) {
+                        $(select).append(new Option(item, item));
+                    });
+                });
+        }
+        epTypeSelectCreate();
+    });
+
+    // Вставка картинок по типа
+    $('#connectionTypeForclassicEpa').on('change', function (e) {
+        $('#constructive-scheme-img')
+            .empty()
+            .append(
+                $('<img>').prop({
+                    src: './img/' + cheme_img['epc'][document.querySelector("#connectionTypeForclassicEpa").value],
+                    class: 'optionalField',
+                })
+            );
+    });
+
+    // ПРОГРУЗКА номера модернизации С ТАБЛИЦЫ
+    $('#connectionTypeForclassicEpa').on('change', function (e) {
+        function upgradeNumberSelect() {
+            let execution = $("input[name='epPlace']:checked").val();
+            let connection = document.querySelector("#connectionTypeForclassicEpa").value;
+            let select = document.querySelector('#upgradeField');
+            $('#select').empty();
+
+
+            let fetchResult = [];
+
+            fetch('https://emk.websto.pro/classicDB', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json;charset=utf-8' },
+                body: JSON.stringify({
+                    a: [execution, connection],
+                }),
+            })
+                .then((res) => res.json())
+                .then((res) => {
+                    console.log(res);
+                    for (i in res) fetchResult.push(res[i]);
+                    $(select).empty();
+                    // fetchResult[0].sort((a, b) => a - b);
+                    $.each(fetchResult[0], function (key, item) {
+                        console.log(item);
+                        $(select).append(
+                            $('<div>')
+                                .prop({ class: 'form-check' })
+                                .append(
+                                    $('<input>').prop({
+                                        type: 'radio',
+                                        value: item == 'Отсутствует' ? 0 : item,
+                                        name: 'upgradeNumber',
+                                        id: item == 'Отсутствует' ? 'upEmpty' : 'up' + item,
+                                    })
+                                )
+                                .append(
+                                    $('<label>')
+                                        .prop({
+                                            for: 'upgradeNumber' + item,
+                                            class: 'form-check-label',
+                                        })
+                                        .text(' ' + item)
+                                )
+                        );
+                        $('#upОтсутствует') ? $('#upОтсутствует').val('') : '';
+                    });
+                });
+        }
+        upgradeNumberSelect();
+    });
+
+    // ПРОГРУЗКА номера исполнения С ТАБЛИЦЫ
+    $('#upgradeField').on('change', function (e) {
+        function exNumSelectCreate() {
+            let execution = $("input[name='epPlace']:checked").val();
+            let connect = document.getElementById('connectionTypeForclassicEpa').value;
+            let upgrade = $("input[name='upgradeNumber']:checked").val();
+            let select = document.querySelector("#executionclassicEpaNumber");
+            $(select).empty();
+            select.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
+
+            let fetchResult = [];
+
+            fetch('https://emk.websto.pro/classicDB', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json;charset=utf-8' },
+                body: JSON.stringify({
+                    a: [execution, connect, upgrade],
+                }),
+            })
+                .then((res) => res.json())
+                .then((res) => {
+                    console.log(res);
+                    for (i in res) fetchResult.push(res[i]);
+                    // fetchResult[0].sort((a, b) => a - b);
+                    $.each(fetchResult[0], function (key, item) {
+                        if (item < 10) {
+                            item = '0' + item;
+                        };
+                        $(select).append(new Option(item, item));
+                    });
+                });
+        }
+        exNumSelectCreate();
+    });
+
+    // ПРОГРУЗКА числа оборотов С ТАБЛИЦЫ
+    $('#executionclassicEpaNumber').on('change', function (e) {
+        function exNumSelectCreate() {
+            let execution = $("input[name='epPlace']:checked").val();
+            let connect = document.getElementById('connectionTypeForclassicEpa').value;
+            let upgrade = $("input[name='upgradeNumber']:checked").val() == '' ? $("input[name='upgradeNumber']:checked").val(0) : $("input[name='upgradeNumber']:checked").val();
+            let number = document.querySelector("#executionclassicEpaNumber").value;
+            let select = document.querySelector("#roundNumbers");
+            $(select).empty();
+            select.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
+
+            let fetchResult = [];
+
+            fetch('https://emk.websto.pro/classicDB', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json;charset=utf-8' },
+                body: JSON.stringify({
+                    a: [execution, connect, upgrade, number],
+                }),
+            })
+                .then((res) => res.json())
+                .then((res) => {
+                    console.log(res);
+                    for (i in res) fetchResult.push(res[i]);
+                    // fetchResult[0].sort((a, b) => a - b);
+                    $.each(fetchResult[0], function (key, item) {
+                        $(select).append(new Option(item, item));
+                    });
+                });
+        }
+        exNumSelectCreate();
+    });
+
+    // ПРОГРУЗКА частоты вращения С ТАБЛИЦЫ
+    $('#roundNumbers').on('change', function (e) {
+        function exNumSelectCreate() {
+            let execution = $("input[name='epPlace']:checked").val();
+            let connect = document.getElementById('connectionTypeForclassicEpa').value;
+            let upgrade = $("input[name='upgradeNumber']:checked").val() == '' ? $("input[name='upgradeNumber']:checked").val(0) : $("input[name='upgradeNumber']:checked").val();
+            let number = document.querySelector("#executionclassicEpaNumber").value;
+            let roundNumbers = document.querySelector("#roundNumbers").value;
+            let select = document.querySelector("#outVal");
+            $(select).empty();
+            select.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
+
+            let fetchResult = [];
+
+            fetch('https://emk.websto.pro/classicDB', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json;charset=utf-8' },
+                body: JSON.stringify({
+                    a: [execution, connect, upgrade, number, roundNumbers],
+                }),
+            })
+                .then((res) => res.json())
+                .then((res) => {
+                    console.log(res);
+                    for (i in res) fetchResult.push(res[i]);
+                    // fetchResult[0].sort((a, b) => a - b);
+                    $.each(fetchResult[0], function (key, item) {
+                        $(select).append(new Option(item, item));
+                    });
+                });
+        }
+        exNumSelectCreate();
+    });
+
+    // ПРОГРУЗКА крутящего момента С ТАБЛИЦЫ
+    $('#outVal').on('change', function (e) {
+        function exNumSelectCreate() {
+            let execution = $("input[name='epPlace']:checked").val();
+            let connect = document.getElementById('connectionTypeForclassicEpa').value;
+            let upgrade = $("input[name='upgradeNumber']:checked").val() == '' ? $("input[name='upgradeNumber']:checked").val(0) : $("input[name='upgradeNumber']:checked").val();
+            let number = document.querySelector("#executionclassicEpaNumber").value;
+            let roundNumbers = document.querySelector("#roundNumbers").value;
+            let outval = document.querySelector("#outVal").value;
+            let select = document.querySelector("#roundMoment");
+            $(select).empty();
+            select.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
+
+            let fetchResult = [];
+
+            fetch('https://emk.websto.pro/classicDB', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json;charset=utf-8' },
+                body: JSON.stringify({
+                    a: [execution, connect, upgrade, number, roundNumbers, outval],
+                }),
+            })
+                .then((res) => res.json())
+                .then((res) => {
+                    console.log(res);
+                    for (i in res) fetchResult.push(res[i]);
+                    // fetchResult[0].sort((a, b) => a - b);
+                    $.each(fetchResult[0], function (key, item) {
+                        $(select).append(new Option(item, item));
+                    });
+                });
+        }
+        exNumSelectCreate();
+    });
+
+
+
+
 
     // ДЛЯ ОТКРЫТИЯ ШАГОВ
     $(document).on('change', '#connectionTypeForclassicEpa', function (e) {
@@ -25,836 +262,79 @@ $(document).ready(function () {
         $('#step-5').show();
     });
 
-    const selectValues = {
-        'Н': {
-            'Д': {
-                '10': {
-                    '5000-8500': {
-                        '01': ['1-6'],
-                        '02': ['6-36'],
-                        '03': ['36-200'],
-                        '04': ['1-6'],
-                        '05': ['6-36'],
-                        '06': ['36-200'],
-                    },
-                    '2500-5000': {
-                        '13': ['1-6'],
-                        '14': ['6-36'],
-                        '15': ['36-200'],
-                        '16': ['1-6'],
-                        '17': ['6-36'],
-                        '18': ['36-200'],
-                    },
-                },
-                '9.3': {
-                    '6300-10000': {
-                        '07': ['1-6'],
-                        '08': ['6-36'],
-                        '09': ['36-200'],
-                        '10': ['1-6'],
-                        '11': ['6-36'],
-                        '12': ['36-200'],
-                    }
-                }
-            },
-
-            'М': {
-                '9.5': {
-                    '5-10': {
-                        '01': ['1-6'],
-                        '02': ['4-24']
-                    },
-                    '10-25': {
-                        '03': ['1-6'],
-                        '04': ['4-24']
-                    }
-                }
-            },
-
-            'В': {
-                '24': {
-                    '250 - 630': {
-                        '01': ['1-6'],
-                        '02': ['6-36'],
-                        '03': ['36-200'],
-                        '07': ['1-6'],
-                        '08': ['6-36'],
-                        '09': ['36-200'],
-                        '38': ['144-800'],
-                        '59': ['18-100'],
-                        '61': ['18-100'],
-                    },
-
-                    '630-1000': {
-                        '14': ['1-6'],
-                        '15': ['6-36'],
-                        '16': ['36-200'],
-                        '20': ['1-6'],
-                        '21': ['6-36'],
-                        '22': ['36-200'],
-                        '39': ['144-800'],
-                        '42': ['18-100'],
-                        '57': ['18-100'],
-                    },
-                },
-                '48': {
-                    '250 - 630': {
-                        '04': ['1-6'],
-                        '05': ['6-36'],
-                        '06': ['36-200'],
-                        '10': ['1-6'],
-                        '11': ['6-36'],
-                        '12': ['36-200'],
-                        '40': ['144-800'],
-                        '60': ['18-100'],
-                        '62': ['18-100'],
-                    },
-
-                    '630-1000': {
-                        '17': ['1-6'],
-                        '18': ['6-36'],
-                        '19': ['36-200'],
-                        '23': ['1-6'],
-                        '24': ['6-36'],
-                        '25': ['36-200'],
-                        '41': ['144-800'],
-                        '43': ['18-100'],
-                        '58': ['18-100'],
-                    },
-                },
-                '6': {
-                    '250 - 630': {
-                        '26': ['1-6'],
-                        '27': ['6-36'],
-                        '28': ['36-200'],
-                        '29': ['1-6'],
-                        '30': ['6-36'],
-                        '31': ['36-200'],
-                    },
-
-                    '630-1000': {
-                        '32': ['1-6'],
-                        '33': ['6-36'],
-                        '34': ['36-200'],
-                        '35': ['1-6'],
-                        '36': ['6-36'],
-                        '37': ['36-200'],
-                    },
-                }
-            },
-
-            'Г': {
-                '20': {
-                    '1000 - 2500': {
-                        '01': ['1-6'],
-                        '02': ['6-36'],
-                        '03': ['36-200'],
-                        '10': ['1-6'],
-                        '11': ['6-36'],
-                        '12': ['36-200'],
-                        '41': ['18-100'],
-                        '42': ['18-100'],
-                    }
-                },
-                '40': {
-                    '1000 - 2500': {
-                        '04': ['1-6'],
-                        '05': ['6-36'],
-                        '06': ['36-200'],
-                        '07': ['4-24'],
-                        '08': ['24-144'],
-                        '09': ['144-800'],
-                        '13': ['1-6'],
-                        '14': ['6-36'],
-                        '15': ['36-200'],
-                        '16': ['4-24'],
-                        '17': ['24-144'],
-                        '18': ['144-800'],
-                        '31': ['18-100'],
-                        '32': ['18-100'],
-                        '43': ['72-400'],
-                        '44': ['72-400'],
-                    },
-
-                    '600-1400': {
-                        '25': ['4-24'],
-                        '26': ['24-144'],
-                        '27': ['144-800'],
-                        '28': ['4-24'],
-                        '29': ['24-144'],
-                        '30': ['144-800'],
-                        '45': ['72-400'],
-                        '46': ['72-400'],
-                    }
-                },
-
-                '5': {
-                    '1000 - 2500': {
-                        '19': ['1-6'],
-                        '20': ['6-36'],
-                        '21': ['36-200'],
-                        '22': ['1-6'],
-                        '23': ['6-36'],
-                        '24': ['36-200'],
-                    },
-                },
-            },
-            'Б1': {
-                '25': {
-                    '100 - 300': {
-                        '01': ['1-6'],
-                        '02': ['6-36'],
-                        '03': ['36-200'],
-                        '07': ['1-6'],
-                        '08': ['6-36'],
-                        '09': ['36-200'],
-                        '19': ['18-100'],
-                        '29': ['18-100'],
-                    }
-                },
-                '50': {
-                    '100 - 300': {
-                        '04': ['1-6'],
-                        '05': ['6-36'],
-                        '06': ['36-200'],
-                        '10': ['1-6'],
-                        '11': ['6-36'],
-                        '12': ['36-200'],
-                        '20': ['18-100'],
-                        '30': ['18-100'],
-                    }
-                },
-                '6': {
-                    '100 - 300': {
-                        '13': ['1-6'],
-                        '14': ['6-36'],
-                        '15': ['36-200'],
-                        '16': ['1-6'],
-                        '17': ['6-36'],
-                        '18': ['36-200'],
-                        '27': ['0.2-1'],
-                        '28': ['0.2-1'],
-                    }
-                }
-            },
-
-
-            'А2': {
-                '12': {
-                    '25-60': {
-                        '01': ['1-10'],
-                        '04': ['10-45'],
-                        '12': ['1']
-                    },
-                    '60-100': {
-                        '07': ['1-10'],
-                        '10': ['10-45'],
-                        '13': ['1']
-                    },
-                    '10-35': {
-                        '15': ['1-10']
-                    }
-                },
-                '24': {
-                    '25-60': {
-                        '02': ['1-10'],
-                        '05': ['10-45'],
-                    },
-                    '60-100': {
-                        '08': ['1-10'],
-                        '11': ['10-45'],
-                    },
-                    '10-35': {
-                        '16': ['1-10']
-                    }
-                },
-                '48': {
-                    '60-100': {
-                        '14': ['10-45'],
-                    }
-                }
-            },
-        },
-
-
-        'В': {
-            'Д': {
-                '10': {
-                    '5000-8500': {
-                        '01': ['1-6'],
-                        '02': ['6-36'],
-                        '03': ['36-200'],
-                    },
-                    '2500-5000': {
-                        '07': ['1-6'],
-                        '08': ['6-36'],
-                        '09': ['36-200'],
-                    },
-                },
-                '9.3': {
-                    '6300-10000': {
-                        '04': ['1-6'],
-                        '05': ['6-36'],
-                        '06': ['36-200'],
-                    }
-                }
-            },
-
-            'Г': {
-                '20': {
-                    '1000 - 2500': {
-                        '01': ['1-6'],
-                        '02': ['6-36'],
-                        '03': ['36-200'],
-                        '21': ['18-100'],
-                    }
-                },
-                '40': {
-                    '1000 - 2500': {
-                        '04': ['1-6'],
-                        '05': ['6-36'],
-                        '06': ['36-200'],
-                        '07': ['4-24'],
-                        '08': ['24-144'],
-                        '09': ['144-800'],
-                        '16': ['18-100'],
-                    },
-                    '600-1400': {
-                        '13': ['4-24'],
-                        '14': ['24-144'],
-                        '15': ['144-800'],
-                        '22': ['72-400'],
-                    }
-                },
-                '5': {
-                    '1000 - 2500': {
-                        '10': ['1-6'],
-                        '11': ['6-36'],
-                        '12': ['36-200'],
-                    },
-                },
-            },
-
-            'А2': {
-                '12': {
-                    '25-60': {
-                        '01': ['1-10'],
-                        '04': ['10-45'],
-                    },
-                    '60-100': {
-                        '07': ['1-10'],
-                        '10': ['10-45'],
-                    },
-                    '10-35': {
-                        '12': ['1-10']
-                    },
-                },
-                '24': {
-                    '25-60': {
-                        '02': ['1-10'],
-                        '05': ['10-45'],
-                    },
-                    '60-100': {
-                        '08': ['1-10'],
-                        '11': ['10-45'],
-                    },
-                },
-                '48': {
-                    '60-100': {
-                        '13': ['10-45'],
-                    },
-                },
-                '1.8': {
-                    '60-100': {
-                        '14': ['1-4'],
-                    },
-                }
-            },
-
-            'Б1': {
-                '25': {
-                    '100 - 300': {
-                        '01': ['1-6'],
-                        '02': ['6-36'],
-                        '03': ['36-200'],
-                        '10': ['18-100'],
-                    }
-                },
-                '50': {
-                    '100 - 300': {
-                        '04': ['1-6'],
-                        '05': ['6-36'],
-                        '06': ['36-200'],
-                        '11': ['18-100'],
-                    }
-                },
-                '6': {
-                    '100 - 300': {
-                        '7': ['1-6'],
-                        '8': ['6-36'],
-                        '9': ['36-200'],
-                        '15': ['0.2-1'],
-                    }
-                }
-            },
-
-            'В': {
-                '24': {
-                    '250 - 630': {
-                        '01': ['1-6'],
-                        '02': ['6-36'],
-                        '03': ['36-200'],
-                        '29': ['18-100'],
-                    },
-
-                    '630-1000': {
-                        '10': ['1-6'],
-                        '11': ['6-36'],
-                        '12': ['36-200'],
-                        '21': ['18-100'],
-                    },
-                },
-                '48': {
-                    '250 - 630': {
-                        '04': ['1-6'],
-                        '05': ['6-36'],
-                        '06': ['36-200'],
-                        '19': ['144-800'],
-                        '30': ['18-100'],
-                        '31': ['72-400'],
-                        '40': ['144-800'],
-                        '60': ['18-100'],
-                        '62': ['18-100'],
-                    },
-
-                    '630-1000': {
-                        '10': ['1-6'],
-                        '11': ['6-36'],
-                        '12': ['36-200'],
-                        '20': ['144-800'],
-                        '22': ['18-100'],
-                        '32': ['72-400'],
-                    },
-                },
-                '6': {
-                    '250 - 630': {
-                        '13': ['1-6'],
-                        '14': ['6-36'],
-                        '15': ['36-200'],
-                    },
-
-                    '630-1000': {
-                        '16': ['1-6'],
-                        '17': ['6-36'],
-                        '18': ['36-200'],
-                    },
-                }
-            },
-        },
-
-        'С': {
-            'Д1': {
-                '10': {
-                    '5000-8500': {
-                        '01': ['1-6'],
-                        '02': ['6-36'],
-                        '03': ['36-200'],
-                    },
-                    '2500-5000': {
-                        '04': ['1-6'],
-                        '05': ['6-36'],
-                        '06': ['36-200'],
-                    },
-                },
-                '9.3': {
-                    '6300-10000': {
-                        '07': ['1-6'],
-                        '08': ['6-36'],
-                        '09': ['36-200'],
-                    }
-                }
-            },
-
-            'Г1': {
-                '20': {
-                    '1000 - 2500': {
-                        '01': ['1-6'],
-                        '02': ['6-36'],
-                        '03': ['36-200'],
-                        '21': ['18-100'],
-                    }
-                },
-                '40': {
-                    '1000 - 2500': {
-                        '04': ['1-6'],
-                        '05': ['6-36'],
-                        '06': ['36-200'],
-                        '07': ['4-24'],
-                        '08': ['24-144'],
-                        '09': ['144-800'],
-                        '16': ['18-100'],
-                    },
-
-                    '600-1400': {
-                        '13': ['4-24'],
-                        '14': ['24-144'],
-                        '15': ['144-800'],
-                        '22': ['72-400'],
-                    }
-                },
-
-                '5': {
-                    '1000 - 2500': {
-                        '10': ['1-6'],
-                        '11': ['6-36'],
-                        '12': ['36-200'],
-                    },
-                },
-            },
-
-            'А1': {
-                '12': {
-                    '25-60': {
-                        '01': ['1-10'],
-                        '04': ['10-45'],
-                    },
-                    '60-100': {
-                        '07': ['1-10'],
-                        '10': ['10-45'],
-                    },
-                    '10-35': {
-                        '12': ['1-10']
-                    },
-                },
-                '24': {
-                    '25-60': {
-                        '02': ['1-10'],
-                        '05': ['10-45'],
-                    },
-                    '60-100': {
-                        '08': ['1-10'],
-                        '11': ['10-45'],
-                    },
-                },
-                '10-35': {
-                    '12': ['1-10']
-                },
-                '48': {
-                    '60-100': {
-                        '13': ['10-45'],
-                    },
-                },
-            },
-
-            'В1': {
-                '24': {
-                    '250 - 630': {
-                        '01': ['1-6'],
-                        '02': ['6-36'],
-                        '03': ['36-200'],
-                        '31': ['18-100'],
-                    },
-
-                    '125-500': {
-                        '07': ['4-24'],
-                        '08': ['24-144'],
-                        '09': ['144-800'],
-                    },
-
-                    '630-1000': {
-                        '10': ['1-6'],
-                        '11': ['6-36'],
-                        '12': ['36-200'],
-                        '22': ['18-100'],
-                    },
-                },
-                '48': {
-                    '250 - 630': {
-                        '04': ['1-6'],
-                        '05': ['6-36'],
-                        '06': ['36-200'],
-                        '32': ['18-100'],
-                    },
-
-                    '630-1000': {
-                        '13': ['1-6'],
-                        '14': ['6-36'],
-                        '23': ['18-100'],
-                    },
-                },
-                '6': {
-                    '250 - 630': {
-                        '16': ['1-6'],
-                        '17': ['6-36'],
-                        '18': ['36-200'],
-                    },
-
-                    '630-1000': {
-                        '19': ['1-6'],
-                        '20': ['6-36'],
-                        '21': ['36-200'],
-                    },
-                }
-            },
-
-            'Б1': {
-                '25': {
-                    '100 - 300': {
-                        '01': ['1-6'],
-                        '02': ['6-36'],
-                        '03': ['36-200'],
-                        '10': ['18-100'],
-                    }
-                },
-                '50': {
-                    '100 - 300': {
-                        '04': ['1-6'],
-                        '05': ['6-36'],
-                        '06': ['36-200'],
-                        '11': ['18-100'],
-                    }
-                },
-                '6': {
-                    '100 - 300': {
-                        '7': ['1-6'],
-                        '8': ['6-36'],
-                        '9': ['36-200'],
-                        '15': ['0.2-1'],
-                    }
-                }
-            },
-        },
-    };
-
-    // заполнение селекта буквы, означающей тип электропривода по присоединению: -по ГОСТ 32487:
-    $('#epPlace').on('change', function (e) {
-        $('#step-3').show();
-
-        let execVal = $("input[name='epPlace']:checked").val();
-        // console.log(execVal);
-
-        let select = $(document.querySelector("#connectionTypeForclassicEpa"));
-        $(select).empty().append(new Option('Укажите значение', ''));
-
-        ValuesArr = selectValues[execVal];
-        // console.log(ValuesArr);
-        let selectArr = [];
-
-        $.each(ValuesArr, function (key, item) {
-            $.each(item, function (index, arr) {
-                {
-                    if (!selectArr.includes(key)) {
-                        selectArr.push(key);
-                        // console.log(selectArr);
-                    }
-                }
-            })
-        });
-        selectArr.sort();
-        $.each(selectArr, function (key, item) {
-            $(select).append(new Option(item, item));
-        });
+    // стиль для числа оборотов
+    $(document).on('change', '#engineUpgrade', function (e) {
+        $('#step-5').show();
     });
 
-    // заполнение селекта частоты вращения выходного вала
-    $('#connectionTypeForclassicEpa').on('change', function (e) {
-
-        let execVal = $("input[name='epPlace']:checked").val();
-        conType = $('#connectionTypeForclassicEpa').val();
-        // console.log(execVal);
-
-        let select = document.querySelector("#outVal");
-        $(select).empty().append(new Option('Укажите значение', ''));
-
-        ValuesArr = selectValues[execVal][conType];
-        // console.log(ValuesArr);
-        let selectArr = [];
-
-        $.each(ValuesArr, function (key, item) {
-            $.each(item, function (index, arr) {
-                {
-                    if (!selectArr.includes(key)) {
-                        selectArr.push(key);
-                        // console.log(selectArr);
-                    }
-                }
-            })
-        });
-        selectArr.sort();
-        $.each(selectArr, function (key, item) {
-            $(select).append(new Option(item, item));
-        });
-    });
-
-    // заполнение селекта крутящего момента выходного вала
-    $('#outVal').on('change', function (e) {
-        let execVal = $("input[name='epPlace']:checked").val();
-        let conType = $('#connectionTypeForclassicEpa').val();
-        let outVal = $("#outVal").val();
-        // console.log(execVal);
-
-        let select = document.querySelector("#roundMoment");
-        $(select).empty().append(new Option('Укажите значение', ''));
-
-        ValuesArr = selectValues[execVal][conType][outVal];
-        // console.log(ValuesArr);
-        let selectArr = [];
-
-        $.each(ValuesArr, function (key, item) {
-            $.each(item, function (index, arr) {
-                {
-                    if (!selectArr.includes(key)) {
-                        selectArr.push(key);
-                        // console.log(selectArr);
-                    }
-                }
-            })
-        });
-        selectArr.sort();
-        $.each(selectArr, function (key, item) {
-            $(select).append(new Option(item, item));
-        });
-    });
-
-    // заполнение селекта двузначного числа, означающего номер исполнения электропривода
-    $('#roundMoment').on('change', function (e) {
-        let execVal = $("input[name='epPlace']:checked").val();
-        let conType = $('#connectionTypeForclassicEpa').val();
-        let outVal = $("#outVal").val();
-        let roundMoment = $('#roundMoment').val();
-        // console.log(execVal);
-
-        let select = $(document.querySelector("#executionclassicEpaNumber"));
-        $(select).empty().append(new Option('Укажите значение', ''));
-
-        ValuesArr = selectValues[execVal][conType][outVal][roundMoment];
-        // console.log(ValuesArr);
-        let selectArr = [];
-
-        $.each(ValuesArr, function (key, item) {
-            $.each(item, function (index, arr) {
-                {
-                    if (!selectArr.includes(key)) {
-                        selectArr.push(key);
-                        // console.log(selectArr);
-                    }
-                }
-            })
-        });
-        selectArr.sort();
-        $.each(selectArr, function (key, item) {
-            $(select).append(new Option(item, item));
-        });
-    });
-
-    // заполнение селекта оборотов выходного вала
-    $('#executionclassicEpaNumber').on('change', function (e) {
-        let execVal = $("input[name='epPlace']:checked").val();
-        let conType = $('#connectionTypeForclassicEpa').val();
-        let outVal = $("#outVal").val();
-        let roundMoment = $('#roundMoment').val();
-        let epaNumber = $('#executionclassicEpaNumber').val();
-
-        let select = $(document.querySelector("#roundNumbers"));
-        $(select).empty().append(new Option('Укажите значение', ''));
-
-        ValuesArr = selectValues[execVal][conType][outVal][roundMoment][epaNumber];
-        let selectArr = [];
-
-        $.each([...new Set(ValuesArr.sort(function (a, b) { return a - b }))], function (index, item) {
-            select.append(new Option(item, item, false, (!selectArr.includes(item))));
-        });
-
-        selectArr.sort();
-        $.each(selectArr, function (key, item) {
-            $(select).append(new Option(item, item));
-        });
-    });
-    // Заполнение номера модификации
-    $(document).on('change', '#connectionTypeForclassicEpa', function () {
-        switch ($(document.querySelector("#connectionTypeForclassicEpa")).val()) {
-            case 'М':
-                $(document.querySelector("#upgradeNumber-1")).show();
-                $(document.querySelector("#upgradeNumber-2")).hide();
-                $(document.querySelector("#upgradeNumber-3")).hide();
-                document.querySelector("#upgradeNumber-1 > input").checked = true;
-                break;
-
-            case 'А1':
-                $(document.querySelector("#upgradeNumber-1")).hide();
-                $(document.querySelector("#upgradeNumber-2")).show();
-                $(document.querySelector("#upgradeNumber-3")).show();
-                document.querySelector("#upgradeNumber-1 > input").checked = false;
-                document.querySelector("#upgradeNumber-2 > input").checked = false;
-                break;
-
-            case 'А2':
-                $(document.querySelector("#upgradeNumber-1")).hide();
-                $(document.querySelector("#upgradeNumber-2")).show();
-                $(document.querySelector("#upgradeNumber-3")).show();
-                document.querySelector("#upgradeNumber-1 > input").checked = false;
-                document.querySelector("#upgradeNumber-2 > input").checked = false;
-                break;
-
-            case 'Б1':
-                $(document.querySelector("#upgradeNumber-1")).hide();
-                $(document.querySelector("#upgradeNumber-2")).show();
-                $(document.querySelector("#upgradeNumber-3")).hide();
-                document.querySelector("#upgradeNumber-2 > input").checked = true;
-                break;
-
-            case 'В':
-                $(document.querySelector("#upgradeNumber-1")).show();
-                $(document.querySelector("#upgradeNumber-2")).show();
-                $(document.querySelector("#upgradeNumber-3")).hide();
-                document.querySelector("#upgradeNumber-1 > input").checked = false;
-                document.querySelector("#upgradeNumber-2 > input").checked = false;
-                break;
-
-            case 'Г':
-                $(document.querySelector("#upgradeNumber-1")).show();
-                $(document.querySelector("#upgradeNumber-2")).show();
-                $(document.querySelector("#upgradeNumber-3")).hide();
-                document.querySelector("#upgradeNumber-1 > input").checked = false;
-                document.querySelector("#upgradeNumber-2 > input").checked = false;
-                break;
-
-            case 'Д':
-                $(document.querySelector("#upgradeNumber-1")).show();
-                $(document.querySelector("#upgradeNumber-2")).show();
-                $(document.querySelector("#upgradeNumber-3")).hide();
-                document.querySelector("#upgradeNumber-1 > input").checked = false;
-                document.querySelector("#upgradeNumber-2 > input").checked = false;
-                break;
-
-            case 'В1':
-                $(document.querySelector("#upgradeNumber-1")).show();
-                $(document.querySelector("#upgradeNumber-2")).show();
-                $(document.querySelector("#upgradeNumber-3")).hide();
-                document.querySelector("#upgradeNumber-1 > input").checked = false;
-                document.querySelector("#upgradeNumber-2 > input").checked = false;
-                break;
-
-            case 'Г1':
-                $(document.querySelector("#upgradeNumber-1")).show();
-                $(document.querySelector("#upgradeNumber-2")).show();
-                $(document.querySelector("#upgradeNumber-3")).hide();
-                document.querySelector("#upgradeNumber-1 > input").checked = false;
-                document.querySelector("#upgradeNumber-2 > input").checked = false;
-                break;
-
-            case 'Д1':
-                $(document.querySelector("#upgradeNumber-1")).show();
-                $(document.querySelector("#upgradeNumber-2")).show();
-                $(document.querySelector("#upgradeNumber-3")).hide();
-                document.querySelector("#upgradeNumber-1 > input").checked = false;
-                document.querySelector("#upgradeNumber-2 > input").checked = false;
-                break;
+    // Заполнение стилей для перс инфо 
+    $('.persInfo').on('change', function (e) {
+        if (
+            document.querySelector('#organization').value != '' &&
+            document.querySelector('#fio').value != '' &&
+            document.querySelector('#phone').value != '' &&
+            document.querySelector('#email').value != ''
+        ) {
+            document.querySelector('.persInfo ').classList.remove('noReqValue');
+            document.querySelector('.persInfo ').classList.add('ReqValueOk');
+        } else {
+            document.querySelector('.persInfo ').classList.remove('ReqValueOk');
+            document.querySelector('.persInfo ').classList.add('noReqValue');
         }
     });
 
-    // заполнение маркировки и визуальное отображение обязательных полей
+    // Стиль для кол-ва
+    $('#numbersOfEp').on('change', function (e) {
+        if (document.querySelector('.numbersOfEp').value !== '') {
+            document.querySelector('.numbersOfEp').classList.add('ReqValueOk');
+            document.querySelector('.numbersOfEp').classList.remove('noReqValue');
+        } else {
+            document.querySelector('.numbersOfEp').classList.add('noReqValue');
+            document.querySelector('.numbersOfEp').classList.remove('ReqValueOk');
+        }
+    });
+
+    //  стили для крутящего момента
+    $('#roundNumbers').on('change', function (e) {
+        if (document.querySelector("#roundNumbers").value != '') {
+            document.querySelector("#roundNumbersFieldSet").classList.add('ReqValueOk');
+            document.querySelector("#roundNumbersFieldSet").classList.remove('noReqValue');
+        }
+        else {
+            document.querySelector("#roundNumbersFieldSet").classList.remove('ReqValueOk');
+            document.querySelector("#roundNumbersFieldSet").classList.add('noReqValue');
+        }
+    });
+
+    // Вывод сертификата и декларации
+    $('#epPlace').on('change', function (e) {
+        if (document.querySelector("#epPlace-1").checked) {
+            $('#declarationEpc').show();
+            $('#declarationEpcV').hide();
+            $('#certEpcV').hide();
+        }
+        else {
+            $('#declarationEpc').hide();
+            $('#declarationEpcV').show();
+            $('#certEpcV').show();
+        }
+    });
+
+    // Стиль для блока установки
+    $('.placeForEnv').on('change', function (e) {
+        if (document.querySelector('#placeForEnv-1').checked || document.querySelector('#placeForEnv-2').checked) {
+            document.querySelector('.placeForEnv').classList.add('ReqValueOk');
+            document.querySelector('.placeForEnv').classList.remove('noReqValue');
+        } else {
+            document.querySelector('.placeForEnv').classList.add('noReqValue');
+            document.querySelector('.placeForEnv').classList.remove('ReqValueOk');
+        }
+    })
+
+    // заполнение маркировки
     $(document).on('change', function (e) {
+
+
         let mark_gen = $('#mark-gen');
         let modal_button = $('#modal-button');
 
@@ -960,58 +440,148 @@ $(document).ready(function () {
         is_true = [x1, x2, x3, x4, x5, x6, x7].includes('X');
 
         mark_gen.text(x1 + '-' + x2 + x3 + '-' + x4 + x5 + x6 + x7 + x8 + x9);
-
-        // Вывод сертификата и декларации
-        $('#certs-pdf').empty();
-        // if (!is_true && certs_pdf['classicEpa'][x2] !== undefined) {
-        //     $('#certs-pdf').append(
-        //         $('<a>')
-        //             .attr({ href: 'pdf/' + certs_pdf['classicEpa'][x2]['cert'], target: '_blank' })
-        //             .text('Сертификат')
-        //             .css('padding', '1.5%'),
-        //         $('<a>')
-        //             .attr({ href: 'pdf/' + certs_pdf['classicEpa'][x2]['decl'], target: '_blank' })
-        //             .text('Декларация')
-        //             .css('padding', '1.5%')
-        //     );
-        // }
-
     });
 
-    // информация для таблицы
-    $("#modal-th").on('shown.bs.modal', function () {
-        // constructive_scheme = Number.parseInt($('input[name="constructive-scheme"]:checked').val());
-        let resistor = document.querySelector("#additional-1").checked ? document.querySelector("#additionalFieldset > div > div:nth-child(1)").innerText + ',' : '';
-        let resistorValue = document.querySelector("#additional-1").checked ? document.querySelector("#additional-1").value : '';
-        let switcher = document.querySelector("#additional-2").checked ? document.querySelector("#additionalFieldset > div > div:nth-child(2)").innerText + ',' : '';
-        let switcherValue = document.querySelector("#additional-2").checked ? document.querySelector("#additional-2").value : '';
-        let clockwise = document.querySelector("#additional-3").checked ? document.querySelector("#additionalFieldset > div > div:nth-child(3)").innerText + ' ' : '';
-        let clockwiseValue = document.querySelector("#additional-3").checked ? document.querySelector("#additional-3").value : '';
-        let listToAdd = resistor + switcher + clockwise;
-        let listToAddValue = resistorValue + switcherValue + clockwiseValue;
+    // Скачать документацию
+    $('#download').on('click', function () {
+        console.log('hea');
+        Option1 = document.querySelector("#additional-1").checked ? 'Резистор' : '';
+        Option2 = document.querySelector("#additional-2").checked ? 'Микровыключатели Д3031' : '';
+        addOptions = Option1 + ' ' + Option2;
+        // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        params = [
-            { title: 'Исполнение электропривода по взрывозащите', value: $("input[name='epPlace']:checked").val(), description: $("input[name='epPlace']:checked").closest('.form-check').find('.form-check-label').text() },
-            { title: 'Тип электропривода по присоединению:', value: $(document.querySelector("#connectionTypeForclassicEpa")).val() },
-            { title: 'Порядковый номер модернизации', value: $("input[name='upgradeNumber']:checked").val() ? $("input[name='upgradeNumber']:checked").val() : 'Отсутствует' },
-            { title: 'Частота вращения выходного вала', value: $('#outVal').val() },
-            { title: 'Крутящий момент на выходном валу, Н*м', value: $('#roundMoment').val() },
-            { title: 'Номер исполнения электропривода', value: $("select[name='executionclassicEpaNumber']").val() },
-            { title: 'Число оборотов выходного вала, Н*м', value: $('#roundNumbers').val() },
-            { title: 'Модификация электропривода:', value: $("input[name='engineUpgrade']:checked").val(), description: $("input[name='engineUpgrade']:checked").closest('.form-check').find('.form-check-label').text() },
-            { title: 'Наличие дополнительных опций', value: listToAddValue, description: listToAdd ? listToAdd : '' },
-            { title: 'Климатическое исполнение и категория размещения привода:', value: $("select[name='climate']").val() },
-        ];
+        // json0
+        let j00 = document.querySelector('#organization').value; //Фирма
+        let j01 = document.querySelector('#fio').value; // Фио
+        let j02 = document.querySelector('#phone').value; // Телефон
+        let j03 = document.querySelector('#email').value; // email
+        let j04 = document.querySelector('#numbersOfEp').value; // кол-во
+        let j05 = ''; //цена
+        // json0 = [j00, j01, j02, j03, j04, j05];
 
-        // вывод таблицы
-        resut_table = $("#result-table tbody").empty();
-        $.each(params, function (key, item) {
-            resut_table
-                .append($("<tr>")
-                    .append($("<td>").text(item.title))
-                    .append($("<td>").text(item.value))
-                    .append($("<td>").text(item.description))
-                );
-        });
+        //json1
+        let j10 = 'C двухсторонней муфтой типа М, А. Б, В, Г, Д'; //тип арматуры
+        let j11 = document.querySelector('#mark-gen').innerText; //маркировка
+        let j12 = 'АО Тулаэлектропривод'; //завод
+        let j13 = document.querySelector("#outVal").value; // частота вращения
+        let j14 = document.querySelector("#roundMoment").value; //Крут момент
+        let j15 = document.querySelector("#connectionTypeForclassicEpa").value; //присоединение к приводу
+        let j16 = $("input[name='placeForEnv']:checked").closest('.form-check').find('.form-check-label').text(); // установка
+        let j17 = ''; //время закрытия
+        let j18 = ''; // конструктивная схема
+        let j19 = document.querySelector("#roundNumbers").value; // оборотов на закрытие
+        // json1 = [j10, j11, j12, j13, j14, j15, j16, j17, j18];
+
+        //json2
+        let j20 = $("input[name='epPlace']:checked").closest('.form-check').find('.form-check-label').text(); //исполнение по назначению
+        let j21 = ''; //режим работы
+        let j22 = 'IP54'; //Влагозащита
+        let j23 = document.querySelector("#additional-3").checked ? 'Закрывание против часовой стрелке' : 'Закрывание по часовой стрелке'; //Вращение вых вала
+        let j24 = document.querySelector("#climate").value; //Температура
+        // json2 = [j20, j21, j22, j23, j24];
+
+        //json3
+
+        let j30 = ''; // тип бу 
+        let j31 = ''; // Тип управления
+        let j32 = '';// сигналы дист управления
+
+        let j33 = 'ЭБКВ'; //Тип БКВ
+
+        let j34 = ''; //Механический указатель
+
+        let j35 = ''; // Сигнализация положения
+
+        let j36 = ''; // Сигнал момэнт
+
+        let j37 = ''; // Дублирование RS485;
+
+        let j38 = 'Одиночные'; // Промежуточные выключатели
+
+        let j39 = 'Одиночные'; // Моментные выключатели
+
+        let j310 = 'Одиночные'; // Концевые выключатели
+
+        let j311 = ''; // Монтаж БУ
+
+
+        // json3 = [j30, j31, j32, j33, j34, j35, j36, j37, j38, j39, j310, j311];
+
+        //json4
+        let j40 = ''; //Электрическое подключение (обозначение)
+        let j41 = ''; //Защитный колпак
+        let j42 = ''; //Цвет
+        let j43 = ''; //Механический указатель
+        let j44 = addOptions;//Доп опции 
+        let j45 = document.querySelector('#addReqarea').value; //Дополнительные требования
+        // json4 = [j40, j41, j42, j43, j44, j45];
+
+        //json5
+        let j50 = ''; //Назначение по режиму работы
+        let j51 = ''; //Электрическое подключение (расшифровка)
+        let j52 = 'SIL-3'; // SIL
+        let j53 = ''; //Специальное исполнение
+        let j54 = document.querySelector("#executionclassicEpaNumber").value; //номер исполнения электропривода
+        // json5 = [j50, j51, j52, j53, j54];
+
+        //json6
+        let j60 = '?'; //Номинальное давление
+        let j61 = '?';//Тип присоединения выходного вала
+        let j62 = '?'; //Кабельные вводы
+        let j63 = '?'; //Штепсельные разъемы
+        let j64 = '?'; //Тип подводимых кабелей
+        let j65 = '';
+
+        // json6 = [j60, j61, j62, j63];
+
+        //json7
+        let j70 = '';//Защита от коррозии
+        let j71 = '';//Ручной маховик
+        let j72 = '';//Наличие обогрев
+        let j73 = '';//Наличие типа функции
+        let j74 = '';//Функция при питании
+        let j75 = ''; //Условие для запуска функции
+        // json7 = [j70, j71, j72, j73, j74, j75];
+
+        console.log([j00, j01, j02, j03, j04, j05],
+            [j10, j11, j12, j13, j14, j15, j16, j17, j18, j19],
+            [j20, j21, j22, j23, j24],
+            [j30, j31, j32, j33, j34, j35, j36, j37, j38, j39, j310, j311],
+            [j40, j41, j42, j43, j44, j45],
+            [j50, j51, j52, j53, j54],
+            [j60, j61, j62, j63, j64, j65],
+            [j70, j71, j72, j73, j74, j75]);
+
+
+        function DOCX(id) {
+            window.open(`https://emk.websto.pro/Tula/${id}`);
+        }
+        function EXEL(id) {
+            window.open(`https://emk.websto.pro/TulaEXEL/${id}`);
+        }
+        function sendToServer() {
+            let post = fetch('https://emk.websto.pro/download', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json;charset=utf-8' },
+                body: JSON.stringify({
+                    jsn0: [j00, j01, j02, j03, j04, j05],
+                    jsn1: [j10, j11, j12, j13, j14, j15, j16, j17, j18, j19],
+                    jsn2: [j20, j21, j22, j23, j24],
+                    jsn3: [j30, j31, j32, j33, j34, j35, j36, j37, j38, j39, j310, j311],
+                    jsn4: [j40, j41, j42, j43, j44, j45],
+                    jsn5: [j50, j51, j52, j53, j54],
+                    jsn6: [j60, j61, j62, j63, j64, j65],
+                    jsn7: [j70, j71, j72, j73, j74, j75],
+                }),
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    let id = data.id;
+                    DOCX(id);
+                    EXEL(id);
+                });
+        }
+        sendToServer();
     });
+
 });            
