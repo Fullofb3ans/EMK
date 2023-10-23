@@ -146,6 +146,26 @@ def get_param(jsn = Body()):
     print(res)
     return {"ans" : res}
 
+@app.post("/classicDB")
+def get_param(jsn = Body()):
+    a = jsn["a"]
+    bd = DB("ЭП4")
+    for i in range(7-len(a)):
+        a.append("")
+    ans = bd.get_classic(a[0], a[1], a[2], a[3], a[4], a[5], "")
+    res=[]
+    for x in ans:
+        if (x != " ") and (x != "null") and (x != None):
+            res.append(x)
+    try:
+        res.sort(key=int)
+    except:
+        pass
+
+    print(res)
+    return {"ans" : res}
+
+
 
 
 @app.post("/download")
@@ -166,42 +186,49 @@ def download_file(jsn = Body()):
     
     
     mark = jsn1[1]
+    print(jsn2[1])
 
     if mark[:3] == "ЭП4":
         dc = mk_DOCX(jsn0, jsn1, jsn2, jsn3, jsn4, jsn6) 
         tbls = dc.ep4()
 
-        xl = mk_XL(ID, [jsn0, jsn1, jsn2, jsn3, jsn4, jsn5, jsn6, jsn7])
+        xl = mk_XL(ID, mark, [jsn0, jsn1, jsn2, jsn3, jsn4, jsn5, jsn6, jsn7])
         wb = xl.ep()
+
     elif mark[:3] == "ЭПН":
         dc = mk_DOCX(jsn0, jsn1, jsn2, jsn3, jsn4, jsn6) 
         tbls = dc.epn()
 
-        xl = mk_XL(ID, [jsn0, jsn1, jsn2, jsn3, jsn4, jsn5, jsn6, jsn7])
+        xl = mk_XL(ID, mark, [jsn0, jsn1, jsn2, jsn3, jsn4, jsn5, jsn6, jsn7])
         wb = xl.ep()
+
     elif mark[:4] == 'ВИМУ':
         dc = mk_DOCX(jsn0, jsn1, jsn2, jsn3, jsn4, [jsn5[1], jsn5[3]])
         tbls = dc.vimu()
 
-        xl = mk_XL(ID, [jsn0, jsn2, jsn3, [jsn4[0], jsn4[2], jsn4[4], jsn4[5], jsn5[1], jsn5[3]] ])
+        xl = mk_XL(ID, mark, [jsn0, jsn2, jsn3, [jsn4[0], jsn4[2], jsn4[4], jsn4[5], jsn5[1], jsn5[3]] ])
         wb = xl.vimu()
 
+    else:
+        dc = mk_DOCX(jsn0, jsn1, jsn2, jsn3, jsn4, [jsn5[1], jsn5[3]])
+        tbls = dc.classic()
 
+        xl = mk_XL(ID, mark, [jsn0, jsn2, jsn3, [jsn4[0], jsn4[2], jsn4[4], jsn4[5], jsn5[1], jsn5[3]] ])
+        wb = xl.classic()
 
     '''Работа с .docx'''
     doc = docx.Document('Опросный_лист_ТЭП.docx')
     doc_new = docx.Document()
     
     doc_new.add_picture('img.png', width=Cm(1.76), height=Cm(1.67))
-
-    for para in doc.paragraphs:
-        if para.text == 'ОРГАНИЗАЦИЯ - заказчик: ______________________________________________________':
-            para.text = f'ОРГАНИЗАЦИЯ - заказчик: \t {tbls["ans3"][0]}'
-        if para.text == 'Ф.И.О. ____________________ Тел: ____________________ E-mail:_____________________':
-            para.text = f'Ф.И.О. \t  {tbls["ans3"][1]} \n Тел.: \t  {tbls["ans3"][2]} \n E-mail:  {tbls["ans3"][3]} \n \t\t\t \t\t\t \t\t Дата: «   » ____________________ 202__ г'
-        
-        get_para_data(doc_new, para)
-        if mark[:4] != 'ВИМУ':
+    if mark[:4] != "ВИМУ":
+        for para in doc.paragraphs:
+            if para.text == 'ОРГАНИЗАЦИЯ - заказчик: ______________________________________________________':
+                para.text = f'ОРГАНИЗАЦИЯ - заказчик: \t {tbls["ans3"][0]}'
+            if para.text == 'Ф.И.О. ____________________ Тел: ____________________ E-mail:_____________________':
+                para.text = f'Ф.И.О. \t  {tbls["ans3"][1]} \n Тел.: \t  {tbls["ans3"][2]} \n E-mail:  {tbls["ans3"][3]} \n			 			                   Дата: «   » ____________________ 202__ г'
+            
+            get_para_data(doc_new, para)
             if para.text == 'Характеристика и параметры арматуры:':
                 tbl1 = doc_new.add_table(rows=0, cols=2)
                 tbl1.style = 'Table Grid'
@@ -212,7 +239,7 @@ def download_file(jsn = Body()):
                     row_cells[0].text = ks[i]
                     cell = tbl1.cell(i, 1)
                     cell.text = vs[i]
-                doc_new.add_paragraph()
+                #doc_new.add_paragraph()
                 
             if para.text == 'Характеристика и параметры электропривода:':
                 tbl1 = doc_new.add_table(rows=0, cols=2)
@@ -224,14 +251,32 @@ def download_file(jsn = Body()):
                     row_cells[0].text = ks[i]
                     cell = tbl1.cell(i, 1)
                     cell.text = vs[i]
+    
+    elif mark[:4] == 'ВИМУ':
+        for para in doc.paragraphs:
+            if para.text == 'ОРГАНИЗАЦИЯ - заказчик: ______________________________________________________':
+                txt = f'ОРГАНИЗАЦИЯ - заказчик: \t {tbls["ans3"][0]}'
+                p = doc_new.add_paragraph('')
+                run = p.add_run(txt)
+                run.font.bold = True
 
-        elif mark[:4] == 'ВИМУ':
-            if para.text == 'Характеристика и параметры арматуры:':
-                para.text = 'Характеристика и параметры внешнего интеллектуального модуля управления'
+            elif para.text == 'Ф.И.О. ____________________ Тел: ____________________ E-mail:_____________________':
+                txt = f'Ф.И.О. \t  {tbls["ans3"][1]} \n Тел.: \t  {tbls["ans3"][2]} \n E-mail:  {tbls["ans3"][3]} \n			 			                  Дата: «   » ____________________ 202__ г'
+                p = doc_new.add_paragraph('')
+                run = p.add_run(txt)
+                run.font.bold = True
 
+            elif para.text == 'Характеристика и параметры электропривода:':
+                para.text = ""
+
+            elif para.text == 'Характеристика и параметры арматуры:':
+                txt = 'Характеристика и параметры внешнего интеллектуального модуля управления'
+                p = doc_new.add_paragraph('')
+                run = p.add_run(txt)
+                run.font.bold = True
+                
                 tbl1 = doc_new.add_table(rows=0, cols=2)
                 tbl1.style = 'Table Grid'
-
 
                 ks=list(tbls["names2"])
                 vs=list(tbls["ans2"])
@@ -240,10 +285,12 @@ def download_file(jsn = Body()):
                     row_cells[0].text = ks[i]
                     cell = tbl1.cell(i, 1)
                     cell.text = vs[i]
+                tbl1 = doc_new.add_paragraph('')
             
-            if para.text == 'Характеристика и параметры электропривода:':
-                para.text = ""
+            else:
+                get_para_data(doc_new, para)
 
+    
     
     '''Работа с файлами'''
     #сборщик мусора
