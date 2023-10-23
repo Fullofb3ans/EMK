@@ -38,7 +38,7 @@ class mk_DOCX():
         return {"names1" : names1, "names2" : names2, "ans1" : ans1, "ans2" : ans2, "ans3" : ans3}
     
     def epn(self):
-        print(self.list1)
+        #print(self.list1)
         names1 = ["Тип арматуры", "Маркировка", "Завод-изготовитель",  "Требуемое время закрытия", "Максимальный крутящий момент", "Присоединение к приводу", "Установка"]
         ans1 = self.list1[:-3]
         names1.append("Количество оборотов (угол поворота) для закрытия арматуры")
@@ -53,6 +53,8 @@ class mk_DOCX():
         names2 += ['Тип блока управления ', 'Сигнал дистанционного момента', 'Тип блока концевых выключателей (без встроенного пускателя)', 'Механический указатель сигнализации положения', 'Сигнализация положения', 'Сигнал «Момент» 4-20 мА', 'Дублирование шины RS485'] 
         names2 += ["Электрическое подключение", 'Защитный колпак', 'Цвет окраски', 'Напряжение питания электродвигателя', 'Количество эл./приводов', 'Дополнительные опции', 'Дополнительные требования']
         ans2 = self.list2 + [self.list3[0]] + self.list3[2:-4] + self.list4[:3] + [self.list5[5], self.list0[-2]] + self.list4[-2:]
+        #u=DB()
+        #ans2[-4] = str(u.get_engin(self, self.list1[1], self.list1[8], self.list1[4], self.list1[7], self.list1[5])[3]) + str(u.get_engin(self, self.list1[1], self.list1[8], self.list1[4], self.list1[7], self.list1[5])[4] фазы) 
 
         '''for i in range(len(names2)):
             names2[i] = str(names2[i])
@@ -69,29 +71,47 @@ class mk_DOCX():
         names2 += ['Тип блока управления ', 'Сигнал дистанционного момента', 'Сигнализация положения', 'Сигнал «Момент» 4-20 мА', 'Дублирование шины RS485', 'Промежуточные выключатели', 'Моментные выключатели', 'Концевые выключатели'] 
         ans2 += [self.list3[0], self.list3[2]] + self.list3[5:-1]
         names2 += ["Электрическое подключение", 'Цвет окраски', 'Специальное исполнение', 'Количество', 'Дополнительные опции', 'Дополнительные требования']
-        ans2 = [self.list5[0], self.list4[2], self.list5[1], self.list0[4], self.list4[4], self.list4[5]]
+        ans2 += [self.list5[0], self.list4[2], self.list5[1], self.list0[4], self.list4[4], self.list4[5]]
+
+        ans3 = self.list0[:-2]
+        '''for i in range(len(min(names2, ans2))):
+            print(names2[i], ans2[i])'''
+        return {"names1" : [], "names2" : names2, "ans1" : [], "ans2" : ans2, "ans3" : ans3}
+    
+    def classic(self):
+        names1 = ["Тип арматуры", "Маркировка", "Завод-изготовитель",  "Количество оборотов на закрытие", "Максимальный крутящий момент", "Присоединение к приводу", "Установка"]
+        ans1 = self.list1[:-3]
+        ans1[3] = self.list1[-1]
+
+        names2 = ['Исполнение по назначению', 'Режим работы', 'Степень защиты от проникновения пыли и влаги', 'Вращение выходного вала при закрывании', 'Температура окружающей среды (Климат)']
+        ans2 = self.list2
+        names2 += ['Сигнал дистанционного момента', 'Тип блока концевых выключателей (без встроенного пускателя)', 'Механический указатель сигнализации положения', 'Сигнализация положения', 'Сигнал «Момент» 4-20 мА', 'Дублирование шины RS485'] 
+        ans2 += self.list3[2:-4]
+        names2 += ["Электрическое подключение", 'Защитный колпак', 'Цвет окраски', 'Напряжение питания электродвигателя', 'Количество эл./приводов', 'Дополнительные опции', 'Дополнительные требования']
+        ans2 += self.list4[:3] + [self.list5[5], self.list0[-2]] + self.list4[-2:]
+
+        u=DB()
+        U = u.get_class_engin(self, self.list2[0], self.list1[5], self.list1[8], self.list6[5], self.list1[9], self.list1[7], self.list1[4])
+        ans2[-4] = U[4] + U[5] + "фазы"
 
         ans3 = self.list0[:-2]
 
-        for i in range(len(names2)):
-            names2[i] = str(names2[i])
-            ans2[i] = str(ans2[i])
-            print(ans2[i], names2[i])
-
-        return {"names1" : [], "names2" : names2, "ans1" : [], "ans2" : ans2, "ans3" : ans3}
+        return {"names1" : names1, "names2" : names2, "ans1" : ans1, "ans2" : ans2, "ans3" : ans3}
         
 
     
 class mk_XL():
-    def __init__(self, ID, jsn = [[], [], [], [], [], [], [], []]):
+    def __init__(self, ID, mark, jsn = [[], [], [], [], [], [], [], []]):
         self.jsn = jsn
         self.ID = ID
+        self.mark = mark
     
     def ep(self):
         a = self.jsn
         ID =  self.ID
 
-        mark = a[1][1]
+        mark = self.mark
+        print(mark)
         if mark[:3] == "ЭП4": 
             wb = load_workbook('ep4TKP.xlsx')
         elif mark[:3] == "ЭПН":
@@ -172,15 +192,16 @@ class mk_XL():
         a = self.jsn
 
         wb = load_workbook('vimuTKP.xlsx')
+        sheet = wb['Формат ТКП']
 
         #Лицевая часть
         current_date = date.today()
         keys = ["I7", "C9", "C10", "C12", "I12", "C31"]
         mark = a[1][1]
-        ans = [self.ID, f"Организация: {a[0][0]}   ФИО представителя: {a[0][1]}   Тел.: {a[0][2]}   email: {a[0][3]}", "", mark, str(a[0][-2]), str(current_date)]
+        ans = [self.ID, f"Организация: {a[0][0]}   ФИО представителя: {a[0][1]}   Тел.: {a[0][2]}   email: {a[0][3]}", "", self.mark, str(a[0][-2]), str(current_date)]
 
         #Техническая часть
-        for i in range(16, 32):
+        for i in range(17, 30):
             k = 'G' + str(i)
             keys.append(k)
 
@@ -205,6 +226,88 @@ class mk_XL():
             f'{a[3][5]}', #16 "Специальное исполнение",
         ]
 
+        for i in range(len(keys)):
+            if ans[i] != None:
+                sheet[keys[i]].value = ans[i]
+
+        return wb
+    
+    def classic(self):
+        a = self.jsn
+        ID =  self.ID
+
+        mark = self.mark
+        print(mark)
+        wb = load_workbook('classicTKP.xlsx')
+        sheet = wb['Формат ТКП']
+
+        #Лицевая часть
+        current_date = date.today()
+        keys = ["I7", "C9", "C10", "C12", "I12", "C48"]
+        ans = [ID, f"Организация: {a[0][0]}   ФИО представителя: {a[0][1]}   Тел.: {a[0][2]}   email: {a[0][3]}", "", mark, str(a[0][-2]), str(current_date)]
+
+        #Техническая часть
+        for i in range(16, 39):
+            k = 'G' + str(i)
+            keys.append(k)
+
+        ans = ans + [
+            f'{a[1][0]}', #4 "Поворотный/многооборотный",
+            
+            f'{a[2][1]}', #5 "Запорный/ регулирующий",
+            f'{a[2][0]}', #6 "взрывозащита/Рудничное/АЭС и тд",
+            f'{a[6][5]}', #7 "Модернизация",
+            f'{a[1][5]}', #8 "Тип присоединительного фланца ",
+            f'{a[1][4]}', #9 "Верхний предел настройки крутящего момента",
+            f'{a[1][7]}', #10 "Частота вращения выходного вала"
+            f'{a[1][9]}', #11 "Количество оборотов на закрытие",
+
+            f'{a[2][4]}', #12 "Температурное исполнение: температурный режим, климат,  в укрытии или под навесом",
+            f'{a[6][1]}', #13 "Тип присоединения выходного вала привода с валом арматуры",
+
+            f'{a[2][3]}', #14 "Вращение выходного вала при закрывании",
+            f'{a[2][2]}', #15 "Уровень пылевлагозащиты",
+            f'{a[4][2]}', #16 "Цвет окраски",
+
+            f'«{a[4][0]}» - {a[5][1]}', #17 "Электрическое подключение",
+            f'{a[3][10]}', #18 "Концевые выключатели (реле)",
+            f'{a[3][8]}', #19 "Промежуточные выключатели (опция)",
+            f'{a[3][9]}', #20 "Моментные выключатели"
+            f'{a[3][4]}', #21 "Механический указатель положения",
+            f'{a[3][2]} / {a[3][5]}', #22 "Дистанционный указатель положения /датчики обратной связи)",
+            f'{a[4][3]}', #23 "Ручной селектор/переключение местного дистанционного управления",
+            f'{a[3][11]}', #24 "Монтаж блока управления ",
+
+            f'{a[5][2]}', #25 "Требования по функциональной безопасности SIL",
+            f'{a[5][3]}', #26 "Специальное исполнение",
+        ]
+
+        #Характеристики двигателя
+        for i in range(42, 48):
+            k = 'G' + str(i)
+            keys.append(k)
+
+        #Маркировка
+        mark = a[1][1]
+        #конструктивная схема
+        sh = a[1][8]
+        #крутящий момент
+        Mom = a[1][4]
+        #частота вращения
+        V = a[1][7]
+        #фланец
+        flc = a[1][5]
+        bd = DB("ЭП4")
+        aaa = bd.get_engin(mark, sh, Mom, V, flc)
+        aaa[4] = f"{a[6][5]}"
+        ans = ans + aaa
+
+        for i in range(len(keys)):
+            if ans[i] != None:
+                sheet[keys[i]].value = ans[i]
+
+        sheet["G40"].value = f"Не более {ans[-1]} кг"
+
         return wb
 
 
@@ -221,7 +324,7 @@ class DB():
         for i in range(2, 998):
             if ((mark[:3] == str(Sheet[f"A{i}"].value)) and str(int(Sheet[f"B{i}"].value)) == str(int(sh))) and (str(float(Sheet[f"D{i}"].value)) == str(float(Mom))) and (str(float(Sheet[f"E{i}"].value)) == str(float(V))) and (str(Sheet[f"C{i}"].value) == str(flc)):
                 ansi.append(i)
-                print(i)
+                #print(i)
                     
             if ansi != []:
                 for i in ansi:
@@ -239,7 +342,7 @@ class DB():
 
         elif Hm == "" or Hm ==None:
             ans = []
-            print("Крутящий момент не задан")
+            #print("Крутящий момент не задан")
             for i in range(2, 998):
                 if (str(Sheet[f"A{i}"].value) == mark) and (str(Sheet[f"G{i}"].value) == str(flc_type)):
                     if Sheet[f"D{i}"].value not in ans:
@@ -247,7 +350,7 @@ class DB():
 
         elif V == "" or V ==None:
             ans = []
-            print("Частота не задана")
+            #print("Частота не задана")
             for i in range(2, 998):
                 if (Sheet[f"A{i}"].value == mark) and (str(Sheet[f"G{i}"].value) == str(flc_type)) and (str(Sheet[f"D{i}"].value) == str(Hm)):
                     if  Sheet[f"E{i}"].value not in ans:
@@ -255,7 +358,7 @@ class DB():
 
         elif sh == "" or sh == None:
             ans = []
-            print("Конструктивная схема не задана")
+            #print("Конструктивная схема не задана")
             for i in range(2, 998):
                 if (Sheet[f"A{i}"].value == mark) and (str(Sheet[f"G{i}"].value) == str(flc_type)) and (str(Sheet[f"D{i}"].value) == str(Hm)) and (str(Sheet[f"E{i}"].value) == str(V)):
                     if Sheet[f"B{i}"].value not in ans:
@@ -263,7 +366,7 @@ class DB():
             
         elif flc == "" or flc == None:
             ans = []
-            print("Все парметры указаны верно")
+            #print("Все парметры указаны верно")
             for i in range(2, 998):
                 if (Sheet[f"A{i}"].value == mark) and (str(Sheet[f"G{i}"].value) == str(flc_type)) and (str(Sheet[f"D{i}"].value) == str(Hm)) and (str(Sheet[f"E{i}"].value) == str(V)) and (str(Sheet[f"B{i}"].value) == str(sh)):
                     if Sheet[f"C{i}"].value not in ans:
@@ -331,4 +434,100 @@ class DB():
                 sh = Sheet[f"B{i}"].value
                 if (sh != "") and (sh not in ans) and (str(V) == str(v)) and (str(Hm) == str(HM)) and (flc == Flc) and (t == T) and (rn == RN):
                     ans.append(sh)
+        return ans
+    
+    def get_classic(self, isp = "", flc = "", mod = "", nom = "", ob = "", V = "", Hm = ""):
+        ans = []
+        isp = str(isp)
+        flc = str(flc)
+        mod = str(mod)
+        nom = str(nom) 
+        ob = str(ob)
+        V = str(V)
+        Hm = str(Hm)
+        WB = load_workbook('BD.xlsx')
+        Sheet = WB['Классика']
+        if isp == "":
+            for i in range(2, 417):
+                isp = Sheet[f"B{i}"].value
+                if (isp != "") and (isp not in isp):
+                    ans.append(isp)
+        elif flc == "":
+            for i in range(2, 417):
+                ISP = Sheet[f"B{i}"].value
+                flc = Sheet[f"C{i}"].value
+                if (flc != "") and (flc not in ans)  and (isp == ISP):
+                    ans.append(flc)
+        elif mod == "":
+            for i in range(2, 417):
+                ISP = Sheet[f"B{i}"].value
+                FLC = Sheet[f"C{i}"].value
+                mod = Sheet[f"D{i}"].value
+                if (mod == 0) or (mod == '0'):
+                        mod = 'Отсутствует'
+                if (mod != "") and (mod not in ans)  and (isp == ISP) and (flc == FLC):
+                    ans.append(mod)
+        elif nom == "":
+            for i in range(2, 417):
+                ISP = Sheet[f"B{i}"].value
+                FLC = Sheet[f"C{i}"].value
+                MOD = Sheet[f"D{i}"].value
+                nom = Sheet[f"E{i}"].value
+                if (nom != "") and (nom not in ans)  and (isp == ISP) and (flc == FLC) and (int(mod) == int(MOD)):
+                    ans.append(nom)
+        elif ob == "":
+            for i in range(2, 417):
+                ISP = Sheet[f"B{i}"].value
+                FLC = Sheet[f"C{i}"].value
+                MOD = Sheet[f"D{i}"].value
+                NOM = Sheet[f"E{i}"].value
+                ob = Sheet[f"H{i}"].value
+                if (ob != "") and (ob not in ans)  and (isp == ISP) and (flc == FLC) and (int(mod) == int(MOD)) and (int(nom) == int(NOM)):
+                    ans.append(ob)
+        elif V == "":
+            for i in range(2, 417):
+                ISP = Sheet[f"B{i}"].value
+                FLC = Sheet[f"C{i}"].value
+                MOD = Sheet[f"D{i}"].value
+                NOM = Sheet[f"E{i}"].value
+                OB = Sheet[f"H{i}"].value
+                V = Sheet[f"G{i}"].value
+                if (V != "") and (V not in ans)  and (isp == ISP) and (flc == FLC) and (int(mod) == int(MOD)) and (int(nom) == int(NOM)) and (int(ob) == int(OB)):
+                    ans.append(V)
+        elif Hm == "":
+            for i in range(2, 417):
+                ISP = Sheet[f"B{i}"].value
+                FLC = Sheet[f"C{i}"].value
+                MOD = Sheet[f"D{i}"].value
+                NOM = Sheet[f"E{i}"].value
+                OB = Sheet[f"H{i}"].value
+                v = Sheet[f"G{i}"].value
+                Hm = Sheet[f"F{i}"].value
+                if (Hm != "") and (Hm not in ans)  and (isp == ISP) and (flc == FLC) and (int(mod) == int(MOD)) and (int(nom) == int(NOM)) and (int(ob) == int(OB)) and (float(v) == float(V)):
+                    ans.append(Hm)
+        return ans
+    
+    def get_class_engin(self, isp = "", flc = "", mod = "", nom = "", ob = "", V = "", Hm = ""):
+        WB = load_workbook('BD.xlsx')
+        Sheet = WB['Классика']
+
+        ISP = Sheet[f"B{i}"].value
+        FLC = Sheet[f"C{i}"].value
+        MOD = Sheet[f"D{i}"].value
+        NOM = Sheet[f"E{i}"].value
+        OB = Sheet[f"H{i}"].value
+        v = Sheet[f"G{i}"].value
+        hm = Sheet[f"F{i}"].value
+            
+        ansi = []
+        for i in range(2, 417):
+            if ( (str(isp) == str(ISP)) and (str(flc) == str(FLC)) and (int(mod) == int(MOD)) and (int(nom) == int(NOM)) and (int(ob) == int(OB)) and (str(v) ==str(V)) and (str(Hm) == str(hm) ) ):
+                ansi.append(i)
+                #print(i)
+                    
+            if ansi != []:
+                for i in ansi:
+                    ans = [str(Sheet[f"J{i}"].value) + " кВт", str(Sheet[f"K{i}"].value) + " кВт", str(Sheet[f"L{i}"].value) + " А", str(Sheet[f"M{i}"].value) + " А", str(Sheet[f"N{i}"].value) + " В", str(Sheet[f"O{i}"].value), str(Sheet[f"I{i}"].value)]
+            else:
+                ans = "Не удалось подобрать"
         return ans
