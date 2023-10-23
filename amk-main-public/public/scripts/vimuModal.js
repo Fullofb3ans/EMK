@@ -178,11 +178,8 @@ $(document).ready(function () {
         $("#ve1Config").hide();
     });
 
-    $("#vimumodal-submit").on("click", function (e) {
+    $("#vimuSet").on("change", function (e) {
         $('#vimuMark').val($('#vimumark-gen').text());
-        $('#vimuModal').hide();
-        ($('#controle-blocks')).closest('fieldset').removeClass('noReqValue');
-        ($('#controle-blocks')).closest('fieldset').addClass('ReqValueOk');
     });
 
     $('#vimucontrol-block-optionsset').on('change', function (e) {

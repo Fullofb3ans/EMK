@@ -270,29 +270,30 @@ $(document).ready(function () {
         }
     });
 
-
-
     $(document).on('change', function (e) {
         let x6 = $('#controle-blocks-series').val();
         console.log(x6);
 
         if (x6 === 'ВЭ1') {
             $('#controle-blocks').val('ВЭ1');
-            $(document.querySelector('#control-block-config')).show();
+            $('#control-block-config').hide();
             $(document.querySelector('#controle-blocks')).hide();
             $("#vimuMark").show();
+            $("#vimuSet").show();
         } else if (x6 === 'М2') {
             // $('#controle-blocks').val('');
             $(document.querySelector('#control-block-config')).show();
             $(document.querySelector('#controle-blocks')).hide();
             $("#vimuMark").hide();
             $("#vimuMark").val('');
+            $("#vimuSet").hide();
         } else if (x6 === 'ВЭ') {
             // $('#controle-blocks').val('');
             $(document.querySelector('#control-block-config')).show();
             $(document.querySelector('#controle-blocks')).hide();
             $("#vimuMark").val('');
             $("#vimuMark").hide();
+            $("#vimuSet").hide();
         }
     });
     $('.markForVimu').on('change', function (e) {
