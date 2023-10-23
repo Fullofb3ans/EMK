@@ -45,6 +45,7 @@ $(document).ready(function () {
 
     // Вставка картинок по типа
     $('#connectionTypeForclassicEpa').on('change', function (e) {
+        $('#constructive-scheme-img').show();
         $('#constructive-scheme-img')
             .empty()
             .append(
