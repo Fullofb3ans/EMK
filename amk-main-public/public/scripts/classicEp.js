@@ -246,26 +246,15 @@ $(document).ready(function () {
         exNumSelectCreate();
     });
 
-
-
-
-
-    // ДЛЯ ОТКРЫТИЯ ШАГОВ
-    $(document).on('change', '#connectionTypeForclassicEpa', function (e) {
-        $('#step-3').show();
-    });
-
-    $(document).on('change', '#executionclassicEpaNumber', function (e) {
-        $('#step-4').show();
-    });
-
-    $(document).on('change', '#engineUpgrade', function (e) {
-        $('#step-5').show();
-    });
-
-    // стиль для числа оборотов
-    $(document).on('change', '#engineUpgrade', function (e) {
-        $('#step-5').show();
+    //Открытие блока выбора вводов
+    $('#checkStepse').on('change', function (e) {
+        if ((document.querySelector("#epPlace-1").checked && document.querySelector("#connectionTypeForclassicEpa").value == 'М' && document.querySelector("#executionclassicEpaNumber").value < 5)
+            || (document.querySelector("#epPlace-1").checked && document.querySelector("#connectionTypeForclassicEpa").value == 'А' && document.querySelector("#up2").checked && document.querySelector("#executionclassicEpaNumber").value < 17)) {
+            $('#salOrStepseField').show();
+        }
+        else {
+            $('#salOrStepseField').hide();
+        };
     });
 
     // Заполнение стилей для перс инфо 
@@ -292,6 +281,18 @@ $(document).ready(function () {
         } else {
             document.querySelector('.numbersOfEp').classList.add('noReqValue');
             document.querySelector('.numbersOfEp').classList.remove('ReqValueOk');
+        }
+    });
+
+    //  стили для вводов
+    $('#salOrStepseField').on('change', function (e) {
+        if ($("input[name='salOrStepse']:checked").val() != undefined) {
+            document.querySelector("#salOrStepseField").classList.add('ReqValueOk');
+            document.querySelector("#salOrStepseField").classList.remove('noReqValue');
+        }
+        else {
+            document.querySelector("#salOrStepseField").classList.remove('ReqValueOk');
+            document.querySelector("#salOrStepseField").classList.add('noReqValue');
         }
     });
 
@@ -327,6 +328,8 @@ $(document).ready(function () {
             $('#engineUpgrade').show();
         } else {
             $('#engineUpgrade').hide();
+            document.querySelector("#engineUpgrade-1").checked = false;
+            document.querySelector("#engineUpgrade-2").checked = false;
         }
     });
 
@@ -376,6 +379,10 @@ $(document).ready(function () {
                 ($("input[name='upgradeNumber']")).closest('fieldset').removeClass('ReqValueOk');
                 ($("input[name='upgradeNumber']")).closest('fieldset').addClass('noReqValue');
                 break;
+            case '0':
+                ($("input[name='upgradeNumber']")).closest('fieldset').removeClass('noReqValue');
+                ($("input[name='upgradeNumber']")).closest('fieldset').addClass('ReqValueOk');
+                x3 = '';
             default:
                 ($("input[name='upgradeNumber']")).closest('fieldset').removeClass('noReqValue');
                 ($("input[name='upgradeNumber']")).closest('fieldset').addClass('ReqValueOk');
@@ -526,14 +533,14 @@ $(document).ready(function () {
 
         //json5
         let j50 = ''; //Назначение по режиму работы
-        let j51 = 'САЛЬНИКОВОЕ ИЛИ КАБЕЛЬНОЕ'; //Электрическое подключение (расшифровка)
+        let j51 = $("input[name='salOrStepse']:checked").val() ? $("input[name='salOrStepse']:checked").val() : ''; //Электрическое подключение (расшифровка)
         let j52 = ''; // SIL
         let j53 = ''; //Специальное исполнение
         let j54 = document.querySelector("#executionclassicEpaNumber").value; //номер исполнения электропривода
         // json5 = [j50, j51, j52, j53, j54];
 
         //json6
-        let j60 = ''; //Номинальное давление
+        let j60 = $("input[name='epPlace']:checked").val(); //буква исполнения классики
         let j61 = document.querySelector("#engineUpgrade-2").checked ? 'Под квадрат' : 'Под кулачки';//Тип присоединения выходного вала
         let j62 = ''; //Кабельные вводы
         let j63 = ''; //Штепсельные разъемы

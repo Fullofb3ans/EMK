@@ -74,67 +74,79 @@
 		</div>
 
 		<div class="row">
-			<fieldset class="row mb-3 classicEpa-only noReqValue">
-				<legend class="blockNumber">1</legend>
-				<div class="col-sm-9" id="epPlace">
-					<legend class="col-form-label col-sm-3 pt-0">Исполнение электропривода по взрывозащите</legend>
-					<div class="form-check">
-						<input class="form-check-input ch-mark" type="radio" name="epPlace" id="epPlace-1" required value="Н" />
-						<label class="form-check-label" for="epPlace-1">Общего назначения</label>
+			<div id="checkStepse">
+				<fieldset class="row mb-3 classicEpa-only noReqValue">
+					<legend class="blockNumber">1</legend>
+					<div class="col-sm-9" id="epPlace">
+						<legend class="col-form-label col-sm-3 pt-0">Исполнение электропривода по взрывозащите</legend>
+						<div class="form-check">
+							<input class="form-check-input ch-mark" type="radio" name="epPlace" id="epPlace-1" required value="Н" />
+							<label class="form-check-label" for="epPlace-1">Общего назначения</label>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input ch-mark" type="radio" name="epPlace" id="epPlace-2" value="В" />
+							<label class="form-check-label" for="epPlace-2">Взрывозащищенное 1ExdbIIBT4Gb;</label>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input ch-mark" type="radio" name="epPlace" id="epPlace-3" value="С" />
+							<label class="form-check-label" for="epPlace-3">Взрывозащищенное 1ExdbeIICT4Gb;</label>
+						</div>
 					</div>
-					<div class="form-check">
-						<input class="form-check-input ch-mark" type="radio" name="epPlace" id="epPlace-2" value="В" />
-						<label class="form-check-label" for="epPlace-2">Взрывозащищенное 1ExdbIIBT4Gb;</label>
-					</div>
-					<div class="form-check">
-						<input class="form-check-input ch-mark" type="radio" name="epPlace" id="epPlace-3" value="С" />
-						<label class="form-check-label" for="epPlace-3">Взрывозащищенное 1ExdbeIICT4Gb;</label>
-					</div>
-				</div>
-			</fieldset>
+				</fieldset>
 
-			<fieldset class="row mb-3 classicEpa-only noReqValue" id="connectionTypeForclassicEpaFieldset">
-				<legend class="blockNumber">2</legend>
-				<div class="col-sm-9">
-					<legend class="col-form-label col-sm-3 pt-0">Буква, означающая тип электропривода по присоединению: -по ГОСТ 32487:</legend>
-					<select class="form-select" name="connectionTypeForclassicEpa" id="connectionTypeForclassicEpa">
-						<option value="" selected disabled>Выберите значение</option>
-					</select>
+				<fieldset class="row mb-3 classicEpa-only noReqValue" id="connectionTypeForclassicEpaFieldset">
+					<legend class="blockNumber">2</legend>
+					<div class="col-sm-9">
+						<legend class="col-form-label col-sm-3 pt-0">Буква, означающая тип электропривода по присоединению: -по ГОСТ 32487:</legend>
+						<select class="form-select" name="connectionTypeForclassicEpa" id="connectionTypeForclassicEpa">
+							<option value="" selected disabled>Выберите значение</option>
+						</select>
+					</div>
+				</fieldset>
+				<div class="flexImg">
+					<div id="constructive-scheme-img" class="optionalField" style="text-align: center; display: none"></div>
 				</div>
-			</fieldset>
-			<div class="flexImg">
-				<div id="constructive-scheme-img" class="optionalField" style="text-align: center; display: none"></div>
+
+				<fieldset class="row mb-3 classicEpa-only noReqValue" style="display: none" name="engineUpgradeFieldset" id="engineUpgrade">
+					<legend class="blockNumber">2.1</legend>
+					<div class="col-sm-9">
+						<legend class="col-form-label col-sm-3 pt-0">Модификация электропривода</legend>
+						<div class="form-check">
+							<input class="form-check-input ch-mark" type="radio" value="К" name="engineUpgrade" id="engineUpgrade-1" />
+							<label class="form-check-label" for="engineUpgrade-1">"Под кулачки"</label>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input ch-mark" type="radio" value="Ч" name="engineUpgrade" id="engineUpgrade-2" />
+							<label class="form-check-label" for="engineUpgrade-2">"Под квадрат"</label>
+						</div>
+					</div>
+				</fieldset>
+
+				<!-- <div id="step-3"> -->
+				<fieldset class="row mb-3 classicEpa-only noReqValue">
+					<legend class="blockNumber">3</legend>
+					<legend class="col-form-label col-sm-3 pt-0">Порядковый номер модернизации</legend>
+					<div class="col-sm-9" id="upgradeField"></div>
+				</fieldset>
+
+				<fieldset class="row mb-3 classicEpa-only noReqValue">
+					<legend class="blockNumber">4</legend>
+					<div class="col-sm-9">
+						<legend class="col-form-label col-sm-3 pt-0">Двузначное число, означающее номер исполнения электропривода</legend>
+						<select class="form-select" name="executionclassicEpaNumber" id="executionclassicEpaNumber">
+							<option value="" selected>Выберите значение</option>
+						</select>
+					</div>
+				</fieldset>
 			</div>
 
-			<fieldset class="row mb-3 classicEpa-only noReqValue" style="display: none" name="engineUpgradeFieldset" id="engineUpgrade">
-				<legend class="blockNumber">2.1</legend>
+			<fieldset class="row mb-3 classicEpa-only noReqValue" id="salOrStepseField">
+				<legend class="blockNumber">4.1</legend>
 				<div class="col-sm-9">
-					<legend class="col-form-label col-sm-3 pt-0">Модификация электропривода</legend>
-					<div class="form-check">
-						<input class="form-check-input ch-mark" type="radio" value="К" name="engineUpgrade" id="engineUpgrade-1" />
-						<label class="form-check-label" for="engineUpgrade-1">"Под кулачки"</label>
-					</div>
-					<div class="form-check">
-						<input class="form-check-input ch-mark" type="radio" value="Ч" name="engineUpgrade" id="engineUpgrade-2" />
-						<label class="form-check-label" for="engineUpgrade-2">"Под квадрат"</label>
-					</div>
-				</div>
-			</fieldset>
-
-			<!-- <div id="step-3"> -->
-			<fieldset class="row mb-3 classicEpa-only noReqValue">
-				<legend class="blockNumber">3</legend>
-				<legend class="col-form-label col-sm-3 pt-0">Порядковый номер модернизации</legend>
-				<div class="col-sm-9" id="upgradeField"></div>
-			</fieldset>
-
-			<fieldset class="row mb-3 classicEpa-only noReqValue">
-				<legend class="blockNumber">4</legend>
-				<div class="col-sm-9">
-					<legend class="col-form-label col-sm-3 pt-0">Двузначное число, означающее номер исполнения электропривода</legend>
-					<select class="form-select" name="executionclassicEpaNumber" id="executionclassicEpaNumber">
-						<option value="" selected>Выберите значение</option>
-					</select>
+					<legend class="col-form-label col-sm-3 pt-0">Ввод кабельного кабеля</legend>
+					<label for="stepse"><input type="radio" id="stepse" name="salOrStepse" value="Штепсельный разъем" /> Штепсельный разъем</label>
+					<br />
+					<label for="sal"><input type="radio" id="sal" name="salOrStepse" value="Сальниковый ввод" /> Сальниковый ввод</label>
 				</div>
 			</fieldset>
 
@@ -237,14 +249,14 @@
 
 			<fieldset class="persInfo noReqValue">
 				<legend class="blockNumber">13</legend>
-				<div class="persInfoFlex" style="display: flex; text-align: -webkit-center; flex-direction: row; flex-wrap: wrap; align-content: space-around; align-items: flex-end; gap: 5%; justify-content: center">
+				<div class="persInfoFlex" style="display: flex; text-align: justify; flex-direction: row; flex-wrap: wrap; align-content: space-around; align-items: flex-end; gap: 5%; justify-content: center">
 					<div class="mb-3" id="persInfo-1">
 						<label for="organization"><b>Организация:</b></label>
 						<br />
 						<input class="form-input form-element input" id="organization" style="margin-top: 2.5%" type="text" placeholder="Введите организацию" required />
 					</div>
 					<div class="mb-3" id="persInfo-2">
-						<label for="fio"><b>Контактное лицо: ФИО</b></label>
+						<label for="fio"><b>Контактное лицо:</b></label>
 						<br />
 						<input class="form-input form-element input" id="fio" type="text" style="margin-top: 2.5%" placeholder="Введите ФИО" required />
 					</div>
