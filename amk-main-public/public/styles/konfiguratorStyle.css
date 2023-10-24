@@ -408,6 +408,11 @@ fieldset.no-success legend {
     min-height: calc(100% - 3.5rem);
 }}
 
+@media ((min-width: 1492px) and (max-width: 1664px)){
+  body > div.row > div > div > div:nth-child(2) > figure > a > img {
+    padding-top: 7%;
+}}
+
 .modal.show .modal-dialog {
   background: rgb(0 0 0 / 58%);
   height: 100%;

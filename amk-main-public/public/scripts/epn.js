@@ -191,6 +191,16 @@ $(document).ready(function () {
         flangeSelectCreate();
     });
 
+    // // ОГРАНИЧЕНИЕ КОНФИГУРАТОРА ВИМУ ИСХОДЯ ИЗ ПАРАМЕТРОВ ЕПН
+    // $('#power-type-wrap').on('change', function (e) {
+    //     if (document.querySelector("#powerType").value == '220B 1 фаз(ы) ') {
+    //         $('#tv380').hide();
+    //         $('#em380').hide();
+    //         $('#tv220').show();
+    //         $('#em220').show();
+    //     }
+    // });
+
 
     // ПРОГРУЗКА ТИПА СИЛОВОГО ПИТАНИЯ 
     $('#flange').on('change', function (e) {

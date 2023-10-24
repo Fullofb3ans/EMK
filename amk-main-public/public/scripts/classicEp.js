@@ -470,15 +470,15 @@ $(document).ready(function () {
         // json0 = [j00, j01, j02, j03, j04, j05];
 
         //json1
-        let j10 = 'C двухсторонней муфтой типа М, А. Б, В, Г, Д'; //тип арматуры
+        let j10 = 'Многооборотные с двухсторонней муфтой'; //тип арматуры
         let j11 = document.querySelector('#mark-gen').innerText; //маркировка
         let j12 = 'АО Тулаэлектропривод'; //завод
-        let j13 = document.querySelector("#outVal").value; // частота вращения
+        let j13 = ''; // оборотов на закрытие
         let j14 = document.querySelector("#roundMoment").value; //Крут момент
         let j15 = document.querySelector("#connectionTypeForclassicEpa").value; //присоединение к приводу
         let j16 = $("input[name='placeForEnv']:checked").closest('.form-check').find('.form-check-label').text(); // установка
-        let j17 = ''; //время закрытия
-        let j18 = ''; // конструктивная схема
+        let j17 = document.querySelector("#outVal").value; // частота вращения
+        let j18 = $("input[name='upgradeNumber']:checked").val(); // номер модернизации
         let j19 = document.querySelector("#roundNumbers").value; // оборотов на закрытие
         // json1 = [j10, j11, j12, j13, j14, j15, j16, j17, j18];
 
@@ -494,7 +494,7 @@ $(document).ready(function () {
 
         let j30 = ''; // тип бу 
         let j31 = ''; // Тип управления
-        let j32 = '';// сигналы дист управления
+        let j32 = '6 реле';// сигналы дист управления
 
         let j33 = 'БКВ'; //Тип БКВ
 
@@ -512,36 +512,33 @@ $(document).ready(function () {
 
         let j310 = 'Одиночные'; // Концевые выключатели
 
-        let j311 = ''; // Монтаж БУ
-
-
+        let j311 = 'На приводе'; // Монтаж БУ
         // json3 = [j30, j31, j32, j33, j34, j35, j36, j37, j38, j39, j310, j311];
 
         //json4
-        let j40 = ''; //Электрическое подключение (обозначение)
+        let j40 = ''; //Электрическое подключение (цифра)
         let j41 = ''; //Защитный колпак
         let j42 = ''; //Цвет
-        let j43 = ''; //Механический указатель
+        let j43 = '380В 6 фаз'; //механический селектор
         let j44 = addOptions;//Доп опции 
         let j45 = document.querySelector('#addReqarea').value; //Дополнительные требования
         // json4 = [j40, j41, j42, j43, j44, j45];
 
         //json5
         let j50 = ''; //Назначение по режиму работы
-        let j51 = ''; //Электрическое подключение (расшифровка)
+        let j51 = 'САЛЬНИКОВОЕ ИЛИ КАБЕЛЬНОЕ'; //Электрическое подключение (расшифровка)
         let j52 = ''; // SIL
         let j53 = ''; //Специальное исполнение
         let j54 = document.querySelector("#executionclassicEpaNumber").value; //номер исполнения электропривода
         // json5 = [j50, j51, j52, j53, j54];
 
         //json6
-        let j60 = '?'; //Номинальное давление
-        let j61 = '?';//Тип присоединения выходного вала
-        let j62 = '?'; //Кабельные вводы
-        let j63 = '?'; //Штепсельные разъемы
-        let j64 = '?'; //Тип подводимых кабелей
+        let j60 = ''; //Номинальное давление
+        let j61 = document.querySelector("#engineUpgrade-2").checked ? 'Под квадрат' : 'Под кулачки';//Тип присоединения выходного вала
+        let j62 = ''; //Кабельные вводы
+        let j63 = ''; //Штепсельные разъемы
+        let j64 = ''; //Тип подводимых кабелей
         let j65 = '';
-
         // json6 = [j60, j61, j62, j63];
 
         //json7
