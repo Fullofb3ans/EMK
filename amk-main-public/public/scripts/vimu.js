@@ -10,17 +10,83 @@ $(document).ready(function () {
 
     let vimuBlockModal = new bootstrap.Modal($("#block-configure-e1"));
 
-    // Открытие шагов
-    $(document).on('change', "input[name='roundControl']", function (e) {
-        $("#step-3").show();
+    // Открытие потенциометра и микровыкл
+    $('#roundControl').on('change', function (e) {
+        if (document.querySelector("#roundControl-1").checked) {
+            $(".microOrPotField").show();
+        }
+        else {
+            $("#microOrPot").val('');
+            $(".microOrPotField").hide();
+        }
     });
 
-    $(document).on('change', "input[name='engineStartType']", function (e) {
-        $("#step-4").show();
+    // стиль потенциометра и микровыкл
+    $('#roundControl').on('change', function (e) {
+        if ((document.querySelector("#roundControl-2").checked) || (document.querySelector("#microOrPot").value != '')) {
+            document.querySelector("#roundControl").classList.add('ReqValueOk');
+        }
+        else {
+            document.querySelector("#roundControl").classList.add('noReqValue');
+            document.querySelector("#roundControl").classList.remove('ReqValueOk');
+        }
     });
 
-    $(document).on('change', "input[name='protection']", function (e) {
-        $("#step-5").show();
+    // Открытие по шагам
+    $('#step-1').on('change', function (e) {
+        if (document.querySelector("#executionWrapLegend").classList.contains('ReqValueOk') && document.querySelector("#roundControl").classList.contains('ReqValueOk')) {
+            $('#step-2').show();
+        }
+        else {
+            $('#step-2').hide();
+        }
+    });
+
+    $('#step-2').on('change', function (e) {
+        if (document.querySelector("#engineStartType").classList.contains('ReqValueOk') && document.querySelector("#control-block-fieldset").classList.contains('ReqValueOk') && document.querySelector("#control-block-optionsset").classList.contains('ReqValueOk')) {
+            $('#step-3').show();
+        }
+        else {
+            $('#step-3').hide();
+        }
+    });
+
+    $('#step-3').on('change', function (e) {
+        if (document.querySelector("#climatic-modification").value !== ''
+            && (document.querySelector("#protection-1").checked || document.querySelector("#protection-2").checked)) {
+            $('#step-4').show();
+        }
+        else {
+            $('#step-4').hide();
+        }
+    });
+
+
+    $('#step-4').on('change', function (e) {
+        if ($("input[name='connectionForVimu']:checked").val() && (document.querySelector("#color-1").checked || document.querySelector("#ralColor").value !== '')) {
+            $('#step-5').show();
+        }
+        else {
+            $('#step-5').hide();
+        }
+    });
+
+    $('#step-5').on('change', function (e) {
+        if ($("input[name='specialForVimu']:checked").val() || document.querySelector("#specialForVimu-1").checked) {
+            $('#step-6').show();
+        }
+        else {
+            $('#step-6').hide();
+        }
+    });
+
+    $('#step-6').on('change', function (e) {
+        if (document.querySelector("#organization").value !== '' && document.querySelector("#fio").value !== '' && document.querySelector("#phone").value !== '' && document.querySelector("#email").value !== '' && document.querySelector("#numbersOfEp").value !== '') {
+            $('#step-7').show();
+        }
+        else {
+            $('#step-7').hide();
+        }
     });
 
     // МАРКИРОВКА
@@ -42,15 +108,6 @@ $(document).ready(function () {
         }
 
         let x2 = $("input[name='roundControl']:checked").val() ? $("input[name='roundControl']:checked").val() : 'X'; //контроль положения и крутящего момента
-        switch (x2) {
-            case 'X':
-                ($("input[name='roundControl']")).closest('fieldset').removeClass('ReqValueOk');
-                ($("input[name='roundControl']")).closest('fieldset').addClass('noReqValue');
-                break;
-            default:
-                ($("input[name='roundControl']")).closest('fieldset').removeClass('noReqValue');
-                ($("input[name='roundControl']")).closest('fieldset').addClass('ReqValueOk');
-        }
 
         let x3 = $("input[name='engineStartType']:checked").val() ? $("input[name='engineStartType']:checked").val() : 'X'; //способ включения двигателя привода
         switch (x3) {
@@ -200,7 +257,9 @@ $(document).ready(function () {
 
         let j30 = document.querySelector("#controle-blocks").value; // тип бу 
         let j31 = checkCommandBlock() ? checkCommandBlock() : ''; // Тип управления
-        let j32 = selectRemoteSignal();// сигналы дист управления
+
+        let microOrPot = document.querySelector("#roundControl-1").checked ? ' + ' + document.querySelector("#microOrPot").value : '';
+        let j32 = selectRemoteSignal() + microOrPot;// сигналы дист управления
 
         let j33 = 'ВИМУ'; //Тип БКВ
 
@@ -376,10 +435,10 @@ $(document).ready(function () {
 
 
     function selectPositionSignal() {
-        let BoMark = document.querySelector;
+        let BoMark = document.querySelector("#controle-blocks");
 
         if (BoMark == 'ВЭ11') {
-            return positionSignal = 'Отсутсвуют';
+            return positionSignal = 'Отсутствуют';
         }
         else if (BoMark == 'ВЭ12' || BoMark == 'ВЭ13' || BoMark == 'ВЭ16' || BoMark == 'ВЭ17') {
             return positionSignal = '4–20 мА';
