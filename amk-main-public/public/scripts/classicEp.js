@@ -43,7 +43,7 @@ $(document).ready(function () {
         epTypeSelectCreate();
     });
 
-    // Вставка картинок по типа
+    // Вставка картинок по типу
     $('#connectionTypeForclassicEpa').on('change', function (e) {
         $('#constructive-scheme-img').show();
         $('#constructive-scheme-img')
@@ -56,102 +56,11 @@ $(document).ready(function () {
             );
     });
 
-    // ПРОГРУЗКА номера модернизации С ТАБЛИЦЫ
-    $('#connectionTypeForclassicEpa').on('change', function (e) {
-        $("input[name='upgradeNumber']").prop('checked', false);
-        function upgradeNumberSelect() {
-            let execution = $("input[name='epPlace']:checked").val();
-            let connection = document.querySelector("#connectionTypeForclassicEpa").value;
-            let select = document.querySelector('#upgradeField');
-            $('#select').empty();
-
-
-            let fetchResult = [];
-
-            fetch('https://emk.websto.pro/classicDB', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json;charset=utf-8' },
-                body: JSON.stringify({
-                    a: [execution, connection],
-                }),
-            })
-                .then((res) => res.json())
-                .then((res) => {
-                    console.log(res);
-                    for (i in res) fetchResult.push(res[i]);
-                    $(select).empty();
-                    // fetchResult[0].sort((a, b) => a - b);
-                    $.each(fetchResult[0], function (key, item) {
-                        console.log(item);
-                        $(select).append(
-                            $('<div>')
-                                .prop({ class: 'form-check' })
-                                .append(
-                                    $('<input>').prop({
-                                        type: 'radio',
-                                        value: item == 'Отсутствует' ? 0 : item,
-                                        name: 'upgradeNumber',
-                                        id: item == 'Отсутствует' ? 'upEmpty' : 'up' + item,
-                                    })
-                                )
-                                .append(
-                                    $('<label>')
-                                        .prop({
-                                            for: 'upgradeNumber' + item,
-                                            class: 'form-check-label',
-                                        })
-                                        .text(' ' + item)
-                                )
-                        );
-                        $('#upОтсутствует') ? $('#upОтсутствует').val('') : '';
-                    });
-                });
-        }
-        upgradeNumberSelect();
-    });
-
-    // ПРОГРУЗКА номера исполнения С ТАБЛИЦЫ
-    $('#upgradeField').on('change', function (e) {
-        function exNumSelectCreate() {
-            let execution = $("input[name='epPlace']:checked").val();
-            let connect = document.getElementById('connectionTypeForclassicEpa').value;
-            let upgrade = $("input[name='upgradeNumber']:checked").val();
-            let select = document.querySelector("#executionclassicEpaNumber");
-            $(select).empty();
-            select.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
-
-            let fetchResult = [];
-
-            fetch('https://emk.websto.pro/classicDB', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json;charset=utf-8' },
-                body: JSON.stringify({
-                    a: [execution, connect, upgrade],
-                }),
-            })
-                .then((res) => res.json())
-                .then((res) => {
-                    console.log(res);
-                    for (i in res) fetchResult.push(res[i]);
-                    // fetchResult[0].sort((a, b) => a - b);
-                    $.each(fetchResult[0], function (key, item) {
-                        if (item < 10) {
-                            item = '0' + item;
-                        };
-                        $(select).append(new Option(item, item));
-                    });
-                });
-        }
-        exNumSelectCreate();
-    });
-
     // ПРОГРУЗКА числа оборотов С ТАБЛИЦЫ
-    $('#executionclassicEpaNumber').on('change', function (e) {
+    $('#connectionTypeForclassicEpa').on('change', function (e) {
         function exNumSelectCreate() {
             let execution = $("input[name='epPlace']:checked").val();
             let connect = document.getElementById('connectionTypeForclassicEpa').value;
-            let upgrade = $("input[name='upgradeNumber']:checked").val() == '' ? $("input[name='upgradeNumber']:checked").val(0) : $("input[name='upgradeNumber']:checked").val();
-            let number = document.querySelector("#executionclassicEpaNumber").value;
             let select = document.querySelector("#roundNumbers");
             $(select).empty();
             select.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
@@ -162,7 +71,7 @@ $(document).ready(function () {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json;charset=utf-8' },
                 body: JSON.stringify({
-                    a: [execution, connect, upgrade, number],
+                    a: [execution, connect],
                 }),
             })
                 .then((res) => res.json())
@@ -178,14 +87,12 @@ $(document).ready(function () {
         exNumSelectCreate();
     });
 
-    // ПРОГРУЗКА частоты вращения С ТАБЛИЦЫ
+    // Прогруз частоты вращения с таблицы
     $('#roundNumbers').on('change', function (e) {
         function exNumSelectCreate() {
             let execution = $("input[name='epPlace']:checked").val();
             let connect = document.getElementById('connectionTypeForclassicEpa').value;
-            let upgrade = $("input[name='upgradeNumber']:checked").val() == '' ? $("input[name='upgradeNumber']:checked").val(0) : $("input[name='upgradeNumber']:checked").val();
-            let number = document.querySelector("#executionclassicEpaNumber").value;
-            let roundNumbers = document.querySelector("#roundNumbers").value;
+            let rNumber = document.querySelector("#roundNumbers").value;
             let select = document.querySelector("#outVal");
             $(select).empty();
             select.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
@@ -196,7 +103,7 @@ $(document).ready(function () {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json;charset=utf-8' },
                 body: JSON.stringify({
-                    a: [execution, connect, upgrade, number, roundNumbers],
+                    a: [execution, connect, rNumber],
                 }),
             })
                 .then((res) => res.json())
@@ -212,16 +119,14 @@ $(document).ready(function () {
         exNumSelectCreate();
     });
 
-    // ПРОГРУЗКА крутящего момента С ТАБЛИЦЫ
+    // Прогрузка крутящего момента на выходном валу с таблицы
     $('#outVal').on('change', function (e) {
         function exNumSelectCreate() {
             let execution = $("input[name='epPlace']:checked").val();
             let connect = document.getElementById('connectionTypeForclassicEpa').value;
-            let upgrade = $("input[name='upgradeNumber']:checked").val() == '' ? $("input[name='upgradeNumber']:checked").val(0) : $("input[name='upgradeNumber']:checked").val();
-            let number = document.querySelector("#executionclassicEpaNumber").value;
-            let roundNumbers = document.querySelector("#roundNumbers").value;
-            let outval = document.querySelector("#outVal").value;
-            let select = document.querySelector("#roundMoment");
+            let rNumber = document.querySelector("#roundNumbers").value;
+            let outVal = document.querySelector("#outVal").value;
+            select = document.querySelector("#roundMoment");
             $(select).empty();
             select.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
 
@@ -231,7 +136,7 @@ $(document).ready(function () {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json;charset=utf-8' },
                 body: JSON.stringify({
-                    a: [execution, connect, upgrade, number, roundNumbers, outval],
+                    a: [execution, connect, rNumber, outVal],
                 }),
             })
                 .then((res) => res.json())
@@ -247,15 +152,128 @@ $(document).ready(function () {
         exNumSelectCreate();
     });
 
-    //Открытие блока выбора вводов
-    $('#checkStepse').on('change', function (e) {
-        if ((document.querySelector("#epPlace-1").checked && document.querySelector("#connectionTypeForclassicEpa").value == 'М' && document.querySelector("#executionclassicEpaNumber").value < 5)
-            || (document.querySelector("#epPlace-1").checked && document.querySelector("#connectionTypeForclassicEpa").value == 'А' && document.querySelector("#up2").checked && document.querySelector("#executionclassicEpaNumber").value < 17)) {
-            $('#salOrStepseField').show();
+    // Прогрузка типа бкв с таблицы
+    $('#roundMoment').on('change', function (e) {
+        function exNumSelectCreate() {
+            let execution = $("input[name='epPlace']:checked").val();
+            let connect = document.getElementById('connectionTypeForclassicEpa').value;
+            let rNumber = document.querySelector("#roundNumbers").value;
+            let outVal = document.querySelector("#outVal").value;
+            let rMoment = document.querySelector("#roundMoment").value;
+            let select = document.querySelector("#bkvType");
+            $(select).empty();
+            select.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
+
+            let fetchResult = [];
+
+            fetch('https://emk.websto.pro/classicDB', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json;charset=utf-8' },
+                body: JSON.stringify({
+                    a: [execution, connect, rNumber, outVal, rMoment],
+                }),
+            })
+                .then((res) => res.json())
+                .then((res) => {
+                    console.log(res);
+                    for (i in res) fetchResult.push(res[i]);
+                    // fetchResult[0].sort((a, b) => a - b);
+                    $.each(fetchResult[0], function (key, item) {
+                        $(select).append(new Option(item, item));
+                    });
+                });
         }
-        else {
-            $('#salOrStepseField').hide();
-        };
+        exNumSelectCreate();
+    });
+
+    // Прогрузка кабелей с таблицы
+    $('#bkvType').on('change', function (e) {
+        function exNumSelectCreate() {
+            let execution = $("input[name='epPlace']:checked").val();
+            let connect = document.getElementById('connectionTypeForclassicEpa').value;
+            let rNumber = document.querySelector("#roundNumbers").value;
+            let outVal = document.querySelector("#outVal").value;
+            let rMoment = document.querySelector("#roundMoment").value;
+            let bkv = document.querySelector("#bkvType").value;
+            let select = document.querySelector("#salOrStepse");
+            $(select).empty();
+            select.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
+
+            let fetchResult = [];
+
+            fetch('https://emk.websto.pro/classicDB', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json;charset=utf-8' },
+                body: JSON.stringify({
+                    a: [execution, connect, rNumber, outVal, rMoment, bkv],
+                }),
+            })
+                .then((res) => res.json())
+                .then((res) => {
+                    console.log(res);
+                    for (i in res) fetchResult.push(res[i]);
+                    // fetchResult[0].sort((a, b) => a - b);
+                    $.each(fetchResult[0], function (key, item) {
+                        if (item == 'Штепсельный разъем или сальниковый ввод') {
+                            $(select).append(new Option('Штепсельный разъем', 'Штепсельный разъем или сальниковый ввод'));
+                            $(select).append(new Option('Cальниковый ввод', 'Штепсельный разъем или сальниковый ввод'));
+                        }
+                        else {
+                            $(select).append(new Option(item, item));
+                        }
+                    });
+                });
+        }
+        exNumSelectCreate();
+    });
+
+    // Получение модернизации и номера исполнения
+    $('#salOrStepse').on('change', function (e) {
+        function exNumSelectCreate() {
+            let execution = $("input[name='epPlace']:checked").val();
+            let connect = document.getElementById('connectionTypeForclassicEpa').value;
+            let rNumber = document.querySelector("#roundNumbers").value;
+            let outVal = document.querySelector("#outVal").value;
+            let rMoment = document.querySelector("#roundMoment").value;
+            let bkv = document.querySelector("#bkvType").value;
+            let salOrStepse = document.querySelector("#salOrStepse").value;
+            selectModern = document.querySelector("#upgradeNumber");
+            selectExec = document.querySelector("#executionclassicEpaNumber");
+
+            $(selectModern).empty();
+            $(selectExec).empty();
+            // selectModern.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
+            // selectExec.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
+
+            let fetchResult = [];
+
+            fetch('https://emk.websto.pro/classicDB', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json;charset=utf-8' },
+                body: JSON.stringify({
+                    a: [execution, connect, rNumber, outVal, rMoment, bkv, salOrStepse],
+                }),
+            })
+                .then((res) => res.json())
+                .then((res) => {
+                    console.log(res);
+                    for (i in res) fetchResult.push(res[i]);
+                    console.log(fetchResult);
+                    console.log(fetchResult[0][0][0]);
+                    // fetchResult[0].sort((a, b) => a - b);
+                    a = [fetchResult[0][0][0]];
+                    b = [fetchResult[0][0][1]];
+                    $.each(a, function (key, item) {
+                        $(selectModern).append(new Option(item, item));
+                    });
+                    $.each(b, function (key, item) {
+                        if (item < 10) { item = '0' + item }
+                        $(selectExec).append(new Option(item, item));
+                    });
+                    $(document).trigger('change');
+                });
+        }
+        exNumSelectCreate();
     });
 
     // Заполнение стилей для перс инфо 
@@ -297,8 +315,19 @@ $(document).ready(function () {
         }
     });
 
-    //  стили для крутящего момента
-    $('#roundNumbers').on('change', function (e) {
+    //  стили для оборотов на закрытие
+    $('.row').on('change', function (e) {
+        if (document.querySelector("#bkvType").value != '') {
+            document.querySelector("#bkvTypeField").classList.add('ReqValueOk');
+            document.querySelector("#bkvTypeField").classList.remove('noReqValue');
+        }
+        else {
+            document.querySelector("#bkvTypeField").classList.remove('ReqValueOk');
+            document.querySelector("#bkvTypeField").classList.add('noReqValue');
+        }
+    });
+    //  стили для оборотов на закрытие
+    $('.row').on('change', function (e) {
         if (document.querySelector("#roundNumbers").value != '') {
             document.querySelector("#roundNumbersFieldSet").classList.add('ReqValueOk');
             document.querySelector("#roundNumbersFieldSet").classList.remove('noReqValue');
@@ -306,6 +335,17 @@ $(document).ready(function () {
         else {
             document.querySelector("#roundNumbersFieldSet").classList.remove('ReqValueOk');
             document.querySelector("#roundNumbersFieldSet").classList.add('noReqValue');
+        }
+    });
+
+    $('.row').on('change', function (e) {
+        if (document.querySelector("#salOrStepse").value != '') {
+            document.querySelector("#salOrStepseField").classList.add('ReqValueOk');
+            document.querySelector("#salOrStepseField").classList.remove('noReqValue');
+        }
+        else {
+            document.querySelector("#salOrStepseField").classList.remove('ReqValueOk');
+            document.querySelector("#salOrStepseField").classList.add('noReqValue');
         }
     });
 
@@ -374,19 +414,19 @@ $(document).ready(function () {
                 ($('#connectionTypeForclassicEpa')).closest('fieldset').addClass('ReqValueOk');
         }
 
-        let x3 = $("input[name='upgradeNumber']:checked").val() ? $("input[name='upgradeNumber']:checked").val() : 'X';
+        let x3 = $('#upgradeNumber').val() ? $('#upgradeNumber').val() : 'X';
         switch (x3) {
             case 'X':
-                ($("input[name='upgradeNumber']")).closest('fieldset').removeClass('ReqValueOk');
-                ($("input[name='upgradeNumber']")).closest('fieldset').addClass('noReqValue');
+                $('#upgradeNumber').closest('fieldset').removeClass('ReqValueOk');
+                $('#upgradeNumber').closest('fieldset').addClass('noReqValue');
                 break;
             case '0':
-                ($("input[name='upgradeNumber']")).closest('fieldset').removeClass('noReqValue');
-                ($("input[name='upgradeNumber']")).closest('fieldset').addClass('ReqValueOk');
+                $('#upgradeNumber').closest('fieldset').removeClass('noReqValue');
+                $('#upgradeNumber').closest('fieldset').addClass('ReqValueOk');
                 x3 = '';
             default:
-                ($("input[name='upgradeNumber']")).closest('fieldset').removeClass('noReqValue');
-                ($("input[name='upgradeNumber']")).closest('fieldset').addClass('ReqValueOk');
+                $('#upgradeNumber').closest('fieldset').removeClass('noReqValue');
+                $('#upgradeNumber').closest('fieldset').addClass('ReqValueOk');
         }
 
         let x4 = $('#executionclassicEpaNumber').val() ? $('#executionclassicEpaNumber').val() : 'X';
@@ -400,9 +440,9 @@ $(document).ready(function () {
                 ($('#executionclassicEpaNumber')).closest('fieldset').addClass('ReqValueOk');
         }
 
-        let x5 = $("input[name='engineUpgrade']:checked").val() ? $("input[name='engineUpgrade']:checked").val() : 'X';
+        let x5 = $("input[name='engineUpgrade']:checked").val() ? $("input[name='engineUpgrade']:checked").val() : '';
         switch (x5) {
-            case 'X':
+            case '':
                 ($('#engineUpgrade')).closest('fieldset').removeClass('ReqValueOk');
                 ($('#engineUpgrade')).closest('fieldset').addClass('noReqValue');
                 break;
@@ -486,7 +526,7 @@ $(document).ready(function () {
         let j15 = document.querySelector("#connectionTypeForclassicEpa").value; //присоединение к приводу
         let j16 = $("input[name='placeForEnv']:checked").closest('.form-check').find('.form-check-label').text(); // установка
         let j17 = document.querySelector("#outVal").value; // частота вращения
-        let j18 = $("input[name='upgradeNumber']:checked").val(); // номер модернизации
+        let j18 = document.querySelector("#upgradeNumber").value; // номер модернизации
         let j19 = document.querySelector("#roundNumbers").value; // оборотов на закрытие
         // json1 = [j10, j11, j12, j13, j14, j15, j16, j17, j18];
 
@@ -499,12 +539,11 @@ $(document).ready(function () {
         // json2 = [j20, j21, j22, j23, j24];
 
         //json3
-
         let j30 = ''; // тип бу 
         let j31 = ''; // Тип управления
         let j32 = '6 реле';// сигналы дист управления
 
-        let j33 = 'БКВ'; //Тип БКВ
+        let j33 = document.querySelector("#bkvType").value; //Тип БКВ
 
         let j34 = ''; //Механический указатель
 
@@ -534,7 +573,7 @@ $(document).ready(function () {
 
         //json5
         let j50 = ''; //Назначение по режиму работы
-        let j51 = $("input[name='salOrStepse']:checked").val() ? $("input[name='salOrStepse']:checked").val() : ''; //Электрическое подключение (расшифровка)
+        let j51 = $("select[name='salOrStepse'] option:selected").text(); //Электрическое подключение (расшифровка)
         let j52 = ''; // SIL
         let j53 = ''; //Специальное исполнение
         let j54 = document.querySelector("#executionclassicEpaNumber").value; //номер исполнения электропривода
@@ -598,5 +637,4 @@ $(document).ready(function () {
         }
         sendToServer();
     });
-
 });            
