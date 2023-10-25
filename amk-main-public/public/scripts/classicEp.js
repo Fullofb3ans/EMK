@@ -58,6 +58,7 @@ $(document).ready(function () {
 
     // ПРОГРУЗКА номера модернизации С ТАБЛИЦЫ
     $('#connectionTypeForclassicEpa').on('change', function (e) {
+        $("input[name='upgradeNumber']").prop('checked', false);
         function upgradeNumberSelect() {
             let execution = $("input[name='epPlace']:checked").val();
             let connection = document.querySelector("#connectionTypeForclassicEpa").value;

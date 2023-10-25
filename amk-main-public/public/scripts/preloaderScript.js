@@ -1,8 +1,3 @@
-window.onload = function () {
-    let preloader = document.getElementById('preloader');
-    preloader.classList.add('hide-preloader');
-}
-
-$(document).ready(function () {
+$(window).on("load", function () {
     $('#preloader').fadeOut(400);
 });

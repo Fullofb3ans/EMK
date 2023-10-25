@@ -94,7 +94,6 @@ $(document).ready(function () {
         let mark_gen = $('#mark-gen');
         let modal_button = $('#download');
 
-
         let x0 = 'ВИМУ';
         let x1 = $("input[name='execution']:checked").val() ? $("input[name='execution']:checked").val() : ''; //взрывозащита
         switch ($("input[name='execution']:checked").val()) {
