@@ -867,3 +867,7 @@ body > header > nav > div > a{
 }
 
 a.brand-logo.center{    font-size: inherit;}
+
+main {
+  min-height: calc(100vh - 50px);
+}
