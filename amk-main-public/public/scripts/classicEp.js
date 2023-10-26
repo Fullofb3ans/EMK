@@ -541,7 +541,7 @@ $(document).ready(function () {
         //json3
         let j30 = ''; // тип бу 
         let j31 = ''; // Тип управления
-        let j32 = '6 реле';// сигналы дист управления
+        let j32 = '';// сигналы дист управления
 
         let j33 = document.querySelector("#bkvType").value; //Тип БКВ
 

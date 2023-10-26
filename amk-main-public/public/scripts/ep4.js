@@ -1072,7 +1072,7 @@ $(document).ready(function () {
 
     // Стиль для модуля требуемого время закрытия
     $('#stepClose').on('change', function (e) {
-        if (document.querySelector('#closeNumbers').value !== '' && document.querySelector('#rotation-frequency').value !== '') {
+        if (document.querySelector('#closingTime').value !== '') {
             console.log('uslovue');
             document.querySelector('.closingTime').classList.remove('noReqValue');
             document.querySelector('.closingTime').classList.add('ReqValueOk');
@@ -1344,6 +1344,7 @@ $(document).ready(function () {
     });
     // Формула для требуемого времени закрытия по оборотам
     $('#closeNumbers').on('keyup', function (e) {
+        $('#stepClose').trigger('change');
         closeNumbers = document.querySelector('#closeNumbers').value;
         rotAtMin = document.querySelector('#rotation-frequency').value;
         if (closeNumbers && rotAtMin) {
@@ -1352,6 +1353,7 @@ $(document).ready(function () {
     });
     // Формула для требуемого времени закрытия по времени
     $('#closingTime').on('keyup', function (e) {
+        $('#stepClose').trigger('change');
         closingTime = document.querySelector('#closingTime').value;
         rotAtMin = document.querySelector('#rotation-frequency').value;
 
