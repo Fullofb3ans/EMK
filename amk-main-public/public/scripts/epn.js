@@ -101,7 +101,7 @@ $(document).ready(function () {
     });
 
     // ПРОГРУЗКА ДАННЫХ КОНСТРУКТИВНЫХ СХЕМ С ТАБЛИЦЫ 
-    $('#workStep').on('change', function (e) {
+    $('#step-2').on('change', function (e) {
         function SchemeSelectCreate() {
             let upLim = document.querySelector("#upper-limit").value;
             let timeLim = document.querySelector("#time-limit").value;
@@ -111,7 +111,6 @@ $(document).ready(function () {
             $('#constructive-schemeFull-img').empty();
 
             let fetchResult = [];
-
             fetch('https://emk.websto.pro/DB', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json;charset=utf-8' },
@@ -153,7 +152,11 @@ $(document).ready(function () {
                 }
                 );
         }
-        SchemeSelectCreate();
+        let upLim = document.querySelector("#upper-limit").value;
+        let timeLim = document.querySelector("#time-limit").value;
+        if (upLim && timeLim) {
+            SchemeSelectCreate();
+        }
     });
 
     // ПРОГРУЗКА ФЛАНЦЕВ С БД
@@ -191,17 +194,6 @@ $(document).ready(function () {
         flangeSelectCreate();
     });
 
-    // // ОГРАНИЧЕНИЕ КОНФИГУРАТОРА ВИМУ ИСХОДЯ ИЗ ПАРАМЕТРОВ ЕПН
-    // $('#power-type-wrap').on('change', function (e) {
-    //     if (document.querySelector("#powerType").value == '220B 1 фаз(ы) ') {
-    //         $('#tv380').hide();
-    //         $('#em380').hide();
-    //         $('#tv220').show();
-    //         $('#em220').show();
-    //     }
-    // });
-
-
     // ПРОГРУЗКА ТИПА СИЛОВОГО ПИТАНИЯ 
     $('#flange').on('change', function (e) {
         function PowerTypeSelectCreate() {
@@ -238,6 +230,17 @@ $(document).ready(function () {
         PowerTypeSelectCreate();
     });
 
+    $('#powerType').on('change', function (e) {
+        if (document.querySelector("#powerType").value == '24B 6 фаз(ы) ') {
+            $('#buVe').hide();
+            $('#buVe1').hide();
+        }
+        else {
+            $('#buVe').show();
+            $('#buVe1').show();
+        }
+    })
+
     $('#schemeFieldSet').on('change', function (e) {
         cur_constructive_scheme = $("input[name='constructive-scheme']:checked").val();
 
@@ -247,18 +250,18 @@ $(document).ready(function () {
             let cur_control_block = $('#controle-blocks').val();
             execution = $("input[name='execution']:checked").val();
 
-            if (cur_constructive_scheme == 0) {
-                // При конструктивной схеме №0 ...
-                $.each({ М2: 'Серия М2' }, function (key, item) {
-                    control_select.append(new Option(item, key, false, true));
-                });
+            if (cur_constructive_scheme == '0') {
+
+                $('#controle-blocks-series').val('М2');
                 $('#controle-blocks').val('М21');
                 $('#control-block-fieldset').attr('disabled', true);
             }
             else {
+                $('#controle-blocks-series').val('');
                 $('#controle-blocks').val('');
                 $('#control-block-fieldset').attr('disabled', false);
             }
+
             // Загрузка изображений
             $('#constructive-scheme-Epnimg')
                 .empty()

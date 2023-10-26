@@ -135,30 +135,38 @@
 						</div>
 					</fieldset>
 
-					<fieldset class="row mb-3 classicEpa-only noReqValue" id="roundNumbersFieldSet">
-						<legend class="blockNumber">3</legend>
+					<div id="changeTime">
+						<fieldset class="row mb-3 classicEpa-only noReqValue" id="roundNumbersFieldSet">
+							<legend class="blockNumber">3</legend>
+							<div class="col-sm-9">
+								<legend class="col-form-label col-sm-3 pt-0">Число оборотов выходного выла, необх. для закрывания арматуры</legend>
+								<select class="form-select" name="roundNumbers" id="roundNumbers">
+									<option value="" selected disabled>Выберите значение</option>
+								</select>
+							</div>
+						</fieldset>
+
+						<fieldset class="row mb-3 classicEpa-only noReqValue" id="outValFieldSet">
+							<legend class="blockNumber">4</legend>
+							<div class="col-sm-9">
+								<legend class="col-form-label col-sm-3 pt-0">Частота вращения выходного вала</legend>
+								<select class="form-select" name="outVal" id="outVal">
+									<option value="" selected disabled>Выберите значение</option>
+								</select>
+							</div>
+						</fieldset>
+					</div>
+
+					<fieldset class="row mb-3 noReqValue closingTime">
+						<legend class="blockNumber">5</legend>
 						<div class="col-sm-9">
-							<legend class="col-form-label col-sm-3 pt-0">Число оборотов выходного выла, необх. для закрывания арматуры</legend>
-							<select class="form-select" name="roundNumbers" id="roundNumbers">
-								<option value="" selected disabled>Выберите значение</option>
-							</select>
+							<legend class="col-form-label col-sm-3 pt-0">Требуемое время закрытия</legend>
+							<input type="number" class="form-input" name="closingTime" id="closingTime" placeholder="" style="margin-top: 0.5%; background: rgb(255 255 255 / 68%)" disabled /> сек
 						</div>
 					</fieldset>
-
-					<fieldset class="row mb-3 classicEpa-only noReqValue" id="outValFieldSet">
-						<legend class="blockNumber">4</legend>
-						<div class="col-sm-9">
-							<legend class="col-form-label col-sm-3 pt-0">Частота вращения выходного вала</legend>
-							<select class="form-select" name="outVal" id="outVal">
-								<option value="" selected disabled>Выберите значение</option>
-							</select>
-						</div>
-					</fieldset>
-
-					<!-- </div> -->
 
 					<fieldset class="row mb-3 classicEpa-only noReqValue" id="roundMomentFieldSet">
-						<legend class="blockNumber">5</legend>
+						<legend class="blockNumber">6</legend>
 
 						<div class="col-sm-9">
 							<legend class="col-form-label col-sm-3 pt-0">Крутящий момент на выходном валу</legend>
@@ -169,7 +177,7 @@
 					</fieldset>
 
 					<fieldset class="row mb-3 classicEpa-only noReqValue" id="bkvTypeField">
-						<legend class="blockNumber">6</legend>
+						<legend class="blockNumber">7</legend>
 						<div class="col-sm-9">
 							<legend class="col-form-label col-sm-3 pt-0">Тип БКВ</legend>
 							<select class="form-select" name="bkvType" id="bkvType">
@@ -180,7 +188,7 @@
 
 					<fieldset class="row mb-3 classicEpa-only noReqValue" id="salOrStepseField">
 						<legend class="blockNumber">
-							7
+							8
 							<a href="#" class="" data-bs-toggle="modal" data-bs-target="#cabelModal">
 								<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
 									<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
@@ -199,14 +207,14 @@
 
 					<!-- <div id="step-3"> -->
 					<fieldset class="row mb-3 classicEpa-only noReqValue">
-						<legend class="blockNumber">8</legend>
+						<legend class="blockNumber">9</legend>
 						<div class="col-sm-9" id="upgradeField"></div>
 						<legend class="col-form-label col-sm-3 pt-0">Порядковый номер модернизации</legend>
 						<select class="form-select" name="upgradeNumber" id="upgradeNumber" disabled style="color: black; -webkit-appearance: none; -moz-appearance: none; appearance: none"></select>
 					</fieldset>
 
 					<fieldset class="row mb-3 classicEpa-only noReqValue">
-						<legend class="blockNumber">9</legend>
+						<legend class="blockNumber">10</legend>
 						<div class="col-sm-9">
 							<legend class="col-form-label col-sm-3 pt-0">Двузначное число, означающее номер исполнения электропривода</legend>
 							<select class="form-select" name="executionclassicEpaNumber" id="executionclassicEpaNumber" disabled style="color: black; -webkit-appearance: none; -moz-appearance: none; appearance: none"></select>
@@ -217,7 +225,7 @@
 				<!-- <div id="step-4"> -->
 				<fieldset class="row mb-3 noReqValue">
 					<legend class="blockNumber">
-						10
+						11
 						<a href="#" class="" data-bs-toggle="modal" data-bs-target="#tempModal">
 							<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
 								<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
@@ -241,7 +249,7 @@
 				</fieldset>
 
 				<fieldset class="row mb-3 classicEpa-only optionalField" name="additional" id="additionalFieldset">
-					<legend class="blockNumber">11</legend>
+					<legend class="blockNumber">12</legend>
 					<div class="col-sm-9">
 						<legend class="col-form-label col-sm-3 pt-0">Наличие дополнительных опций</legend>
 						<div class="form-check">
@@ -263,7 +271,7 @@
 				<!-- <div id="step-5"> -->
 				<!-- </div> -->
 				<fieldset class="row mb-3 noReqValue placeForEnv">
-					<legend class="blockNumber">12</legend>
+					<legend class="blockNumber">13</legend>
 					<div class="col-sm-9" id="placeForEnv">
 						<legend class="col-form-label col-sm-3 pt-0">Установка</legend>
 						<div class="form-check">
@@ -278,7 +286,7 @@
 				</fieldset>
 				<!-- <div id="step-10"> -->
 				<fieldset class="row mb-3 optionalField addRequirements">
-					<legend class="blockNumber">13</legend>
+					<legend class="blockNumber">14</legend>
 					<div class="col-sm-9" id="addReq">
 						<legend class="col-form-label col-sm-3 pt-0">Дополнительные требования</legend>
 						<div class="form-check">
@@ -288,7 +296,7 @@
 				</fieldset>
 
 				<fieldset class="persInfo noReqValue">
-					<legend class="blockNumber">14</legend>
+					<legend class="blockNumber">15</legend>
 					<div class="persInfoFlex" style="display: flex; text-align: justify; flex-direction: row; flex-wrap: wrap; align-content: space-around; align-items: flex-end; gap: 5%; justify-content: center">
 						<div class="mb-3" id="persInfo-1">
 							<label for="organization"><b>Организация:</b></label>
@@ -325,7 +333,7 @@
 				</fieldset>
 
 				<fieldset class="row mb-3 numbersOfEp noReqValue" id="executionWrapLegend">
-					<legend class="blockNumber">15</legend>
+					<legend class="blockNumber">16</legend>
 					<div class="mb-3" id="numbers">
 						<legend class="col-form-label col-sm-3 pt-0">Кол-во:</legend>
 						<input class="form-input form-element input" id="numbersOfEp" type="number" placeholder="Введите кол-во" min="0" />

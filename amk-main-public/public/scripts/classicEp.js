@@ -500,6 +500,27 @@ $(document).ready(function () {
         mark_gen.text(x1 + '-' + x2 + x3 + '-' + x4 + x5 + x6 + x7 + x8 + x9);
     });
 
+    // Формула для требуемого времени закрытия по оборотам
+    $('#changeTime').on('change', function (e) {
+        closeNumbers = document.querySelector('#roundNumbers').value;
+        rotAtMin = document.querySelector('#outVal').value;
+        if (closeNumbers && rotAtMin) {
+            document.querySelector('#closingTime').value = closingTime = Math.round(closeNumbers / (rotAtMin / 60));
+            $('#closingTime').trigger('change');
+        }
+    });
+
+    // Стиль для времени закрытия
+    $('.closingTime').on('change', function (e) {
+        if (document.querySelector('#closingTime').value != '') {
+            document.querySelector('.closingTime').classList.add('ReqValueOk');
+            document.querySelector('.closingTime').classList.remove('noReqValue');
+        } else {
+            document.querySelector('.closingTime').classList.add('noReqValue');
+            document.querySelector('.closingTime').classList.remove('ReqValueOk');
+        }
+    });
+
     // Скачать документацию
     $('#download').on('click', function () {
         console.log('hea');
@@ -535,7 +556,7 @@ $(document).ready(function () {
         let j21 = 'Запорная'; //режим работы
         let j22 = 'IP54'; //Влагозащита
         let j23 = document.querySelector("#additional-3").checked ? 'Закрывание против часовой стрелке' : 'Закрывание по часовой стрелке'; //Вращение вых вала
-        let j24 = document.querySelector("#climate").value; //Температура
+        let j24 = $("select[name='climate'] option:selected").text(); //Температура
         // json2 = [j20, j21, j22, j23, j24];
 
         //json3
@@ -559,7 +580,7 @@ $(document).ready(function () {
 
         let j310 = 'Одиночные'; // Концевые выключатели
 
-        let j311 = 'На приводе'; // Монтаж БУ
+        let j311 = ''; // Монтаж БУ
         // json3 = [j30, j31, j32, j33, j34, j35, j36, j37, j38, j39, j310, j311];
 
         //json4
