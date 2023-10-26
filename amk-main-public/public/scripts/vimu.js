@@ -475,8 +475,9 @@ $(document).ready(function () {
         }
     });
 
-    $('#numbersOfEp').on('change', function (e) {
-        if (document.querySelector('.numbersOfEp').value !== '') {
+    $('#numbersOfEp').on('keyup', function (e) {
+        if (document.querySelector('#numbersOfEp').value !== '') {
+            $('#step-6').trigger('change');
             document.querySelector('.numbersOfEp').classList.add('ReqValueOk');
             document.querySelector('.numbersOfEp').classList.remove('noReqValue');
         } else {

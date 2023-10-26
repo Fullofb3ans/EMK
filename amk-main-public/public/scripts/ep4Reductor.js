@@ -550,15 +550,6 @@ $(document).ready(function () {
         }
 
         let x13 = $("input[name='special']:checked").val() ? $("input[name='special']:checked").val() : ''; // Специальное исполнение
-        switch (x13) {
-            case '':
-                $("input[name='special']").closest('fieldset').removeClass('ReqValueOk');
-                $("input[name='special']").closest('fieldset').addClass('noReqValue');
-                break;
-            default:
-                $("input[name='special']").closest('fieldset').removeClass('noReqValue');
-                $("input[name='special']").closest('fieldset').addClass('ReqValueOk');
-        }
 
         let x14 = $("select[name='rn']").val() ? $("input[name='rn']").val() : ''; // Специальное исполнение
         switch (x14) {
@@ -968,17 +959,18 @@ $(document).ready(function () {
             document.querySelector('.persInfo ').classList.add('noReqValue');
         }
     });
-    // СТИЛЬ ДЛЯ ПОЛЯ Со схемами
-    $('№schemeFieldSet').on('change', function (e) {
-        if (document.querySelector('#organization').value != '' && document.querySelector('#fio').value != '' && document.querySelector('#phone').value != '' && document.querySelector('#email').value != '') {
-            document.querySelector('.persInfo ').classList.remove('noReqValue');
-            document.querySelector('.persInfo ').classList.add('ReqValueOk');
-        } else {
-            document.querySelector('.persInfo ').classList.remove('ReqValueOk');
-            document.querySelector('.persInfo ').classList.add('noReqValue');
+
+    // СТИЛЬ ДЛЯ ПОЛЯ с исполнением 
+    $('#specialSet').on('change', function (e) {
+        if ($("input[name='special']:checked").val() !== undefined) {
+            document.querySelector('#specialSet').classList.add('ReqValueOk');
+            document.querySelector('#specialSet').classList.remove('noReqValue');
+        }
+        else {
+            document.querySelector('#specialSet').classList.remove('ReqValueOk');
+            document.querySelector('#specialSet').classList.add('noReqValue');
         }
     });
-
 
     // Стиль для модуля требуемого время закрытия
     $('#stepClose').on('change', function (e) {
@@ -1093,8 +1085,9 @@ $(document).ready(function () {
     });
 
     // кол-во приводов
-    $('#numbersOfEp').on('change', function (e) {
-        if (document.querySelector('.numbersOfEp').value !== '') {
+    $('#numbersOfEp').on('keyup', function (e) {
+        if (document.querySelector('#numbersOfEp').value !== '') {
+            $('#step-9').trigger('change');
             document.querySelector('.numbersOfEp').classList.add('ReqValueOk');
             document.querySelector('.numbersOfEp').classList.remove('noReqValue');
         } else {

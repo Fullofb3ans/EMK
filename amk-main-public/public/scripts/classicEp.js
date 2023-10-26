@@ -294,7 +294,7 @@ $(document).ready(function () {
 
     // Стиль для кол-ва
     $('#numbersOfEp').on('change', function (e) {
-        if (document.querySelector('.numbersOfEp').value !== '') {
+        if (document.querySelector('#numbersOfEp').value !== '') {
             document.querySelector('.numbersOfEp').classList.add('ReqValueOk');
             document.querySelector('.numbersOfEp').classList.remove('noReqValue');
         } else {

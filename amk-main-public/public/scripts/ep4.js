@@ -1144,8 +1144,9 @@ $(document).ready(function () {
     });
 
     // кол-во приводов
-    $('#numbersOfEp').on('change', function (e) {
-        if (document.querySelector('.numbersOfEp').value !== '') {
+    $('#numbersOfEp').on('keyup', function (e) {
+        if (document.querySelector('#numbersOfEp').value !== '') {
+            $('#step-9').trigger('change');
             document.querySelector('.numbersOfEp').classList.add('ReqValueOk');
             document.querySelector('.numbersOfEp').classList.remove('noReqValue');
         } else {
@@ -1349,6 +1350,7 @@ $(document).ready(function () {
         rotAtMin = document.querySelector('#rotation-frequency').value;
         if (closeNumbers && rotAtMin) {
             document.querySelector('#closingTime').value = closingTime = Math.round(closeNumbers / (rotAtMin / 60));
+            $('#stepClose').trigger('change');
         }
     });
     // Формула для требуемого времени закрытия по времени
@@ -1359,6 +1361,7 @@ $(document).ready(function () {
 
         if (closingTime && rotAtMin) {
             document.querySelector('#closeNumbers').value = closNumbers = Math.round(closingTime * (rotAtMin / 60));
+            $('#stepClose').trigger('change');
         }
     });
 
