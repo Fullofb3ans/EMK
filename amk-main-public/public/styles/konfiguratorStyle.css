@@ -55,18 +55,18 @@ input[type="email"]:focus, input[type="number"]:focus, input[type="text"]:focus{
 }
 
 #constructive-scheme-Epnimg > img{
+  width: 100%; 
+  height: 410px; 
+  object-fit: cover; 
+  object-position: bottom; 
   border: 1px solid rgb(249 84 0 / 41%);
-  min-width: 450px;
-  max-width: 450px;
   border-radius: 17px;
-  max-height: 545px;
-  min-height: 545px;
 }
 #constructive-schemeFull-img > img{
-  max-height: 545px;
-  min-height: 545px;
-  min-width: 450px;
-  max-width: 450px;
+  width: 100%; 
+  height: 410px; 
+  object-fit: cover; 
+  object-position: bottom; 
   background-color: white;
   border: 1px solid rgb(249 84 0 / 41%);
   border-radius: 17px;
