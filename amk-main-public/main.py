@@ -150,9 +150,9 @@ def get_param(jsn = Body()):
 def get_param(jsn = Body()):
     a = jsn["a"]
     bd = DB("ЭП4")
-    for i in range(7-len(a)):
+    for i in range(8-len(a)):
         a.append("")
-    ans = bd.get_classic(a[0], a[1], a[2], a[3], a[4], a[5], "")
+    ans = bd.get_classic(a[0], a[1], a[2], a[3], a[4], a[5], a[6], a[7])
     res=[]
     for x in ans:
         if (x != " ") and (x != "null") and (x != None):
@@ -210,10 +210,10 @@ def download_file(jsn = Body()):
         wb = xl.vimu()
 
     else:
-        dc = mk_DOCX(jsn0, jsn1, jsn2, jsn3, jsn4, [jsn5[1], jsn5[3]])
-        tbls = dc.classic()
+        dc = mk_DOCX(jsn0, jsn1, jsn2, jsn3, jsn4,  jsn5)
+        tbls = dc.classic(jsn6[0])
 
-        xl = mk_XL(ID, mark, [jsn0, jsn2, jsn3, [jsn4[0], jsn4[2], jsn4[4], jsn4[5], jsn5[1], jsn5[3]] ])
+        xl = mk_XL(ID, mark, [jsn0, jsn1, jsn2, jsn3, jsn4, jsn5, jsn6])
         wb = xl.classic()
 
     '''Работа с .docx'''
