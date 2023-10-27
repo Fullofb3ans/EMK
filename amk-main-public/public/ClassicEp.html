@@ -79,113 +79,120 @@
 
 			<div class="row">
 				<div id="checkStepse">
-					<fieldset class="row mb-3 classicEpa-only noReqValue">
-						<legend class="blockNumber">
-							1
-							<a href="#" class="" data-bs-toggle="modal" data-bs-target="#help-modal">
-								<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
-									<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-									<path
-										d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z" />
-								</svg>
-							</a>
-						</legend>
-						<div class="col-sm-9" id="epPlace">
-							<legend class="col-form-label col-sm-3 pt-0">Исполнение электропривода по взрывозащите</legend>
-							<div class="form-check">
-								<input class="form-check-input ch-mark" type="radio" name="epPlace" id="epPlace-1" required value="Н" />
-								<label class="form-check-label" for="epPlace-1">Общего назначения</label>
+					<div id="step-1">
+						<fieldset class="row mb-3 classicEpa-only noReqValue">
+							<legend class="blockNumber">
+								1
+								<a href="#" class="" data-bs-toggle="modal" data-bs-target="#help-modal">
+									<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
+										<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+										<path
+											d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z" />
+									</svg>
+								</a>
+							</legend>
+							<div class="col-sm-9" id="epPlace">
+								<legend class="col-form-label col-sm-3 pt-0">Исполнение электропривода по взрывозащите</legend>
+								<div class="form-check">
+									<input class="form-check-input ch-mark" type="radio" name="epPlace" id="epPlace-1" required value="Н" />
+									<label class="form-check-label" for="epPlace-1">Общего назначения</label>
+								</div>
+								<div class="form-check">
+									<input class="form-check-input ch-mark" type="radio" name="epPlace" id="epPlace-2" value="В" />
+									<label class="form-check-label" for="epPlace-2">Взрывозащищенное 1ExdbIIBT4Gb</label>
+								</div>
+								<div class="form-check">
+									<input class="form-check-input ch-mark" type="radio" name="epPlace" id="epPlace-3" value="С" />
+									<label class="form-check-label" for="epPlace-3">Взрывозащищенное 1ExdbeIICT4Gb</label>
+								</div>
 							</div>
-							<div class="form-check">
-								<input class="form-check-input ch-mark" type="radio" name="epPlace" id="epPlace-2" value="В" />
-								<label class="form-check-label" for="epPlace-2">Взрывозащищенное 1ExdbIIBT4Gb</label>
-							</div>
-							<div class="form-check">
-								<input class="form-check-input ch-mark" type="radio" name="epPlace" id="epPlace-3" value="С" />
-								<label class="form-check-label" for="epPlace-3">Взрывозащищенное 1ExdbeIICT4Gb</label>
-							</div>
-						</div>
-					</fieldset>
+						</fieldset>
 
-					<fieldset class="row mb-3 classicEpa-only noReqValue" id="connectionTypeForclassicEpaFieldset">
-						<legend class="blockNumber">2</legend>
-						<div class="col-sm-9">
-							<legend class="col-form-label col-sm-3 pt-0">Буква, означающая тип электропривода по присоединению: -по ГОСТ 32487:</legend>
-							<select class="form-select" name="connectionTypeForclassicEpa" id="connectionTypeForclassicEpa">
-								<option value="" selected disabled>Выберите значение</option>
-							</select>
+						<fieldset class="row mb-3 classicEpa-only noReqValue" id="connectionTypeForclassicEpaFieldset">
+							<legend class="blockNumber">2</legend>
+							<div class="col-sm-9">
+								<legend class="col-form-label col-sm-3 pt-0">Буква, означающая тип электропривода по присоединению: -по ГОСТ 32487:</legend>
+								<select class="form-select" name="connectionTypeForclassicEpa" id="connectionTypeForclassicEpa">
+									<option value="" selected disabled>Выберите значение</option>
+								</select>
+							</div>
+						</fieldset>
+						<div class="flexImg">
+							<div id="constructive-scheme-img" class="optionalField" style="text-align: center; display: none"></div>
 						</div>
-					</fieldset>
-					<div class="flexImg">
-						<div id="constructive-scheme-img" class="optionalField" style="text-align: center; display: none"></div>
+
+						<fieldset class="row mb-3 classicEpa-only noReqValue" style="display: none" name="engineUpgradeFieldset" id="engineUpgrade">
+							<legend class="blockNumber">2.1</legend>
+							<div class="col-sm-9">
+								<legend class="col-form-label col-sm-3 pt-0">Модификация электропривода</legend>
+								<div class="form-check">
+									<input class="form-check-input ch-mark" type="radio" value="К" name="engineUpgrade" id="engineUpgrade-1" />
+									<label class="form-check-label" for="engineUpgrade-1">"Под кулачки"</label>
+								</div>
+								<div class="form-check">
+									<input class="form-check-input ch-mark" type="radio" value="Ч" name="engineUpgrade" id="engineUpgrade-2" />
+									<label class="form-check-label" for="engineUpgrade-2">"Под квадрат"</label>
+								</div>
+							</div>
+						</fieldset>
+					</div>
+					<div id="step-2">
+						<div id="changeTime">
+							<fieldset class="row mb-3 classicEpa-only noReqValue" id="roundNumbersFieldSet">
+								<legend class="blockNumber">3</legend>
+								<div class="col-sm-9">
+									<legend class="col-form-label col-sm-3 pt-0">Число оборотов выходного выла, необх. для закрывания арматуры</legend>
+									<select class="form-select" name="roundNumbers" id="roundNumbers">
+										<option value="" selected disabled>Выберите значение</option>
+									</select>
+								</div>
+							</fieldset>
+
+							<fieldset class="row mb-3 classicEpa-only noReqValue" id="outValFieldSet">
+								<legend class="blockNumber">4</legend>
+								<div class="col-sm-9">
+									<legend class="col-form-label col-sm-3 pt-0">Частота вращения выходного вала</legend>
+									<select class="form-select" name="outVal" id="outVal">
+										<option value="" selected disabled>Выберите значение</option>
+									</select>
+								</div>
+							</fieldset>
+						</div>
+
+						<fieldset class="row mb-3 noReqValue closingTime">
+							<legend class="blockNumber">5</legend>
+							<div class="col-sm-9">
+								<legend class="col-form-label col-sm-3 pt-0">Требуемое время закрытия</legend>
+								<input type="number" class="form-input" name="closingTime" id="closingTime" placeholder="" style="margin-top: 0.5%; background: rgb(255 255 255 / 68%)" disabled /> сек
+							</div>
+						</fieldset>
 					</div>
 
-					<fieldset class="row mb-3 classicEpa-only noReqValue" style="display: none" name="engineUpgradeFieldset" id="engineUpgrade">
-						<legend class="blockNumber">2.1</legend>
-						<div class="col-sm-9">
-							<legend class="col-form-label col-sm-3 pt-0">Модификация электропривода</legend>
-							<div class="form-check">
-								<input class="form-check-input ch-mark" type="radio" value="К" name="engineUpgrade" id="engineUpgrade-1" />
-								<label class="form-check-label" for="engineUpgrade-1">"Под кулачки"</label>
-							</div>
-							<div class="form-check">
-								<input class="form-check-input ch-mark" type="radio" value="Ч" name="engineUpgrade" id="engineUpgrade-2" />
-								<label class="form-check-label" for="engineUpgrade-2">"Под квадрат"</label>
-							</div>
-						</div>
-					</fieldset>
+					<div id="step-3">
+						<fieldset class="row mb-3 classicEpa-only noReqValue" id="roundMomentFieldSet">
+							<legend class="blockNumber">6</legend>
 
-					<div id="changeTime">
-						<fieldset class="row mb-3 classicEpa-only noReqValue" id="roundNumbersFieldSet">
-							<legend class="blockNumber">3</legend>
 							<div class="col-sm-9">
-								<legend class="col-form-label col-sm-3 pt-0">Число оборотов выходного выла, необх. для закрывания арматуры</legend>
-								<select class="form-select" name="roundNumbers" id="roundNumbers">
+								<legend class="col-form-label col-sm-3 pt-0">Крутящий момент на выходном валу</legend>
+								<select class="form-select" name="roundMoment" id="roundMoment">
 									<option value="" selected disabled>Выберите значение</option>
 								</select>
 							</div>
 						</fieldset>
 
-						<fieldset class="row mb-3 classicEpa-only noReqValue" id="outValFieldSet">
-							<legend class="blockNumber">4</legend>
+						<fieldset class="row mb-3 classicEpa-only noReqValue" id="bkvTypeField">
+							<legend class="blockNumber">7</legend>
 							<div class="col-sm-9">
-								<legend class="col-form-label col-sm-3 pt-0">Частота вращения выходного вала</legend>
-								<select class="form-select" name="outVal" id="outVal">
+								<legend class="col-form-label col-sm-3 pt-0">Тип БКВ</legend>
+								<select class="form-select" name="bkvType" id="bkvType">
 									<option value="" selected disabled>Выберите значение</option>
 								</select>
 							</div>
 						</fieldset>
 					</div>
+				</div>
 
-					<fieldset class="row mb-3 noReqValue closingTime">
-						<legend class="blockNumber">5</legend>
-						<div class="col-sm-9">
-							<legend class="col-form-label col-sm-3 pt-0">Требуемое время закрытия</legend>
-							<input type="number" class="form-input" name="closingTime" id="closingTime" placeholder="" style="margin-top: 0.5%; background: rgb(255 255 255 / 68%)" disabled /> сек
-						</div>
-					</fieldset>
-
-					<fieldset class="row mb-3 classicEpa-only noReqValue" id="roundMomentFieldSet">
-						<legend class="blockNumber">6</legend>
-
-						<div class="col-sm-9">
-							<legend class="col-form-label col-sm-3 pt-0">Крутящий момент на выходном валу</legend>
-							<select class="form-select" name="roundMoment" id="roundMoment">
-								<option value="" selected disabled>Выберите значение</option>
-							</select>
-						</div>
-					</fieldset>
-
-					<fieldset class="row mb-3 classicEpa-only noReqValue" id="bkvTypeField">
-						<legend class="blockNumber">7</legend>
-						<div class="col-sm-9">
-							<legend class="col-form-label col-sm-3 pt-0">Тип БКВ</legend>
-							<select class="form-select" name="bkvType" id="bkvType">
-								<option value="" selected disabled>Выберите значение</option>
-							</select>
-						</div>
-					</fieldset>
-
+				<div id="step-4">
 					<fieldset class="row mb-3 classicEpa-only noReqValue" id="salOrStepseField">
 						<legend class="blockNumber">
 							8
@@ -205,7 +212,6 @@
 						</div>
 					</fieldset>
 
-					<!-- <div id="step-3"> -->
 					<fieldset class="row mb-3 classicEpa-only noReqValue">
 						<legend class="blockNumber">9</legend>
 						<div class="col-sm-9" id="upgradeField"></div>
@@ -222,129 +228,132 @@
 					</fieldset>
 				</div>
 
-				<!-- <div id="step-4"> -->
-				<fieldset class="row mb-3 noReqValue">
-					<legend class="blockNumber">
-						11
-						<a href="#" class="" data-bs-toggle="modal" data-bs-target="#tempModal">
-							<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
-								<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-								<path
-									d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z" />
-							</svg>
-						</a>
-					</legend>
-					<div class="col-sm-9">
-						<legend class="col-form-label col-sm-3 pt-0">Климатическое исполнение и категория размещения привода</legend>
-						<select class="form-select form-element ch-mark" data-step="4" name="climate" id="climate">
-							<option selected disabled>Выберите значение</option>
-							<option id="u1" value="У1">-45°C/+40°C - 100% при 25°C - (У1)</option>
-							<option id="t1" value="Т1">-10°C/+50°C - 100% при 35°C - (Т1)</option>
-							<option id="uxl1" value="УХЛ1">-60°C/+40°C - 100% при 25°C - (УХЛ1)</option>
-							<option id="u2" value="У2">-45°C/+40°C - 100% при 25°C - (У2)</option>
-							<option id="t2" value="Т2">-10°C/+50°C - 100% при 35°C - (Т2)</option>
-							<option id="uxl2" value="УХЛ2">-60°C/+40°C - 100% при 25°C - (УХЛ2)</option>
-						</select>
-					</div>
-				</fieldset>
+				<div id="step-5">
+					<fieldset class="row mb-3 noReqValue">
+						<legend class="blockNumber">
+							11
+							<a href="#" class="" data-bs-toggle="modal" data-bs-target="#tempModal">
+								<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
+									<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+									<path
+										d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z" />
+								</svg>
+							</a>
+						</legend>
+						<div class="col-sm-9">
+							<legend class="col-form-label col-sm-3 pt-0">Климатическое исполнение и категория размещения привода</legend>
+							<select class="form-select form-element ch-mark" data-step="4" name="climate" id="climate">
+								<option selected disabled>Выберите значение</option>
+								<option id="u1" value="У1">-45°C/+40°C - 100% при 25°C - (У1)</option>
+								<option id="t1" value="Т1">-10°C/+50°C - 100% при 35°C - (Т1)</option>
+								<option id="uxl1" value="УХЛ1">-60°C/+40°C - 100% при 25°C - (УХЛ1)</option>
+								<option id="u2" value="У2">-45°C/+40°C - 100% при 25°C - (У2)</option>
+								<option id="t2" value="Т2">-10°C/+50°C - 100% при 35°C - (Т2)</option>
+								<option id="uxl2" value="УХЛ2">-60°C/+40°C - 100% при 25°C - (УХЛ2)</option>
+							</select>
+						</div>
+					</fieldset>
 
-				<fieldset class="row mb-3 classicEpa-only optionalField" name="additional" id="additionalFieldset">
-					<legend class="blockNumber">12</legend>
-					<div class="col-sm-9">
-						<legend class="col-form-label col-sm-3 pt-0">Наличие дополнительных опций</legend>
-						<div class="form-check">
-							<input class="form-check-input ch-mark" type="checkbox" value="Р" name="additional-1" id="additional-1" />
-							<label class="form-check-label" for="additional-1">Резистор</label>
+					<fieldset class="row mb-3 classicEpa-only optionalField" name="additional" id="additionalFieldset">
+						<legend class="blockNumber">12</legend>
+						<div class="col-sm-9">
+							<legend class="col-form-label col-sm-3 pt-0">Наличие дополнительных опций</legend>
+							<div class="form-check">
+								<input class="form-check-input ch-mark" type="checkbox" value="Р" name="additional-1" id="additional-1" />
+								<label class="form-check-label" for="additional-1">Резистор</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input ch-mark" type="checkbox" value="24DC" name="additional-2" id="additional-2" />
+								<label class="form-check-label" for="additional-2">Микровыключатели Д3031</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input ch-mark" type="checkbox" value="Л" name="additional-3" id="additional-3" />
+								<label class="form-check-label" for="additional-3">Закрывание против часовой стрелке</label>
+							</div>
 						</div>
-						<div class="form-check">
-							<input class="form-check-input ch-mark" type="checkbox" value="24DC" name="additional-2" id="additional-2" />
-							<label class="form-check-label" for="additional-2">Микровыключатели Д3031</label>
-						</div>
-						<div class="form-check">
-							<input class="form-check-input ch-mark" type="checkbox" value="Л" name="additional-3" id="additional-3" />
-							<label class="form-check-label" for="additional-3">Закрывание против часовой стрелке</label>
-						</div>
-					</div>
-				</fieldset>
-				<!-- </div> -->
+					</fieldset>
+					<!-- </div> -->
 
-				<!-- <div id="step-5"> -->
-				<!-- </div> -->
-				<fieldset class="row mb-3 noReqValue placeForEnv">
-					<legend class="blockNumber">13</legend>
-					<div class="col-sm-9" id="placeForEnv">
-						<legend class="col-form-label col-sm-3 pt-0">Установка</legend>
-						<div class="form-check">
-							<input class="form-check-input ch-mark" value="0" type="radio" name="placeForEnv" id="placeForEnv-1" />
-							<label class="form-check-label" for="placeForEnv-1">В помещении (под навесом)</label>
+					<!-- <div id="step-5"> -->
+					<!-- </div> -->
+					<fieldset class="row mb-3 noReqValue placeForEnv">
+						<legend class="blockNumber">13</legend>
+						<div class="col-sm-9" id="placeForEnv">
+							<legend class="col-form-label col-sm-3 pt-0">Установка</legend>
+							<div class="form-check">
+								<input class="form-check-input ch-mark" value="0" type="radio" name="placeForEnv" id="placeForEnv-1" />
+								<label class="form-check-label" for="placeForEnv-1">В помещении (под навесом)</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input ch-mark" value="1" type="radio" name="placeForEnv" id="placeForEnv-2" />
+								<label class="form-check-label" for="placeForEnv-2">Под открытым небом</label>
+							</div>
 						</div>
-						<div class="form-check">
-							<input class="form-check-input ch-mark" value="1" type="radio" name="placeForEnv" id="placeForEnv-2" />
-							<label class="form-check-label" for="placeForEnv-2">Под открытым небом</label>
-						</div>
-					</div>
-				</fieldset>
-				<!-- <div id="step-10"> -->
-				<fieldset class="row mb-3 optionalField addRequirements">
-					<legend class="blockNumber">14</legend>
-					<div class="col-sm-9" id="addReq">
-						<legend class="col-form-label col-sm-3 pt-0">Дополнительные требования</legend>
-						<div class="form-check">
-							<textarea style="padding: 5px; resize: none; width: 100%; padding-bottom: 10%" name="addReqarea" id="addReqarea"></textarea>
-						</div>
-					</div>
-				</fieldset>
+					</fieldset>
+				</div>
 
-				<fieldset class="persInfo noReqValue">
-					<legend class="blockNumber">15</legend>
-					<div class="persInfoFlex" style="display: flex; text-align: justify; flex-direction: row; flex-wrap: wrap; align-content: space-around; align-items: flex-end; gap: 5%; justify-content: center">
-						<div class="mb-3" id="persInfo-1">
-							<label for="organization"><b>Организация:</b></label>
-							<br />
-							<input class="form-input form-element input" id="organization" style="margin-top: 2.5%" type="text" placeholder="Введите организацию" required />
+				<div id="step-6">
+					<fieldset class="row mb-3 optionalField addRequirements">
+						<legend class="blockNumber">14</legend>
+						<div class="col-sm-9" id="addReq">
+							<legend class="col-form-label col-sm-3 pt-0">Дополнительные требования</legend>
+							<div class="form-check">
+								<textarea style="padding: 5px; resize: none; width: 100%; padding-bottom: 10%" name="addReqarea" id="addReqarea"></textarea>
+							</div>
 						</div>
-						<div class="mb-3" id="persInfo-2">
-							<label for="fio"><b>Контактное лицо:</b></label>
-							<br />
-							<input class="form-input form-element input" id="fio" type="text" style="margin-top: 2.5%" placeholder="Введите ФИО" required />
-						</div>
-						<div class="mb-3" id="persInfo-3">
-							<label for="phone"><b>Телефон:</b></label>
-							<br />
-							<input class="form-input form-element input" id="phone" type="number" style="margin-top: 2.5%" placeholder="Введите телефон" required />
-							<style>
-								input::-webkit-outer-spin-button,
-								input::-webkit-inner-spin-button {
-									-webkit-appearance: none;
-									margin: 0;
-								}
+					</fieldset>
 
-								input[type='number'] {
-									-moz-appearance: textfield;
-								}
-							</style>
-						</div>
-						<div class="mb-3" id="persInfo-4">
-							<label for="email"><b>Email:</b></label>
-							<br />
-							<input class="form-input form-element input" id="email" type="email" placeholder="Введите почту" style="margin-top: 2.5%" required />
-						</div>
-					</div>
-				</fieldset>
+					<fieldset class="persInfo noReqValue">
+						<legend class="blockNumber">15</legend>
+						<div class="persInfoFlex" style="display: flex; text-align: justify; flex-direction: row; flex-wrap: wrap; align-content: space-around; align-items: flex-end; gap: 5%; justify-content: center">
+							<div class="mb-3" id="persInfo-1">
+								<label for="organization"><b>Организация:</b></label>
+								<br />
+								<input class="form-input form-element input" id="organization" style="margin-top: 2.5%" type="text" placeholder="Введите организацию" required />
+							</div>
+							<div class="mb-3" id="persInfo-2">
+								<label for="fio"><b>Контактное лицо:</b></label>
+								<br />
+								<input class="form-input form-element input" id="fio" type="text" style="margin-top: 2.5%" placeholder="Введите ФИО" required />
+							</div>
+							<div class="mb-3" id="persInfo-3">
+								<label for="phone"><b>Телефон:</b></label>
+								<br />
+								<input class="form-input form-element input" id="phone" type="number" style="margin-top: 2.5%" placeholder="Введите телефон" required />
+								<style>
+									input::-webkit-outer-spin-button,
+									input::-webkit-inner-spin-button {
+										-webkit-appearance: none;
+										margin: 0;
+									}
 
-				<fieldset class="row mb-3 numbersOfEp noReqValue" id="executionWrapLegend">
-					<legend class="blockNumber">16</legend>
-					<div class="mb-3" id="numbers">
-						<legend class="col-form-label col-sm-3 pt-0">Кол-во:</legend>
-						<input class="form-input form-element input" id="numbersOfEp" type="number" placeholder="Введите кол-во" min="0" />
-					</div>
-				</fieldset>
+									input[type='number'] {
+										-moz-appearance: textfield;
+									}
+								</style>
+							</div>
+							<div class="mb-3" id="persInfo-4">
+								<label for="email"><b>Email:</b></label>
+								<br />
+								<input class="form-input form-element input" id="email" type="email" placeholder="Введите почту" style="margin-top: 2.5%" required />
+							</div>
+						</div>
+					</fieldset>
+
+					<fieldset class="row mb-3 numbersOfEp noReqValue" id="executionWrapLegend">
+						<legend class="blockNumber">16</legend>
+						<div class="mb-3" id="numbers">
+							<legend class="col-form-label col-sm-3 pt-0">Кол-во:</legend>
+							<input class="form-input form-element input" id="numbersOfEp" type="number" placeholder="Введите кол-во" min="0" />
+						</div>
+					</fieldset>
+				</div>
 			</div>
-
-			<div id="modal-button" class="mb-3">
-				<button style="" id="download" type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modal-th">Скачать документацию</button>
+			<div id="step-7">
+				<div id="modal-button" class="mb-3">
+					<button style="" id="download" type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modal-th">Скачать документацию</button>
+				</div>
 			</div>
-			<!-- </div> -->
 
 			<div id="certs-pdf">
 				<button class="btn-info" id="certEpcV" style="display: none"><a href="./pdf/certEpcV.pdf" style="text-decoration: none; color: black" target="”_blank”">Сертификат</a></button>
