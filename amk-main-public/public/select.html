@@ -5,9 +5,9 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Подбор электроприводов</title>
 
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 		<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
 		<link rel="stylesheet" href="./styles/materialize.css" />
 		<link rel="icon" href="./img/favicon.ico" />
 		<script src="./scripts/preloaderScript.js"></script>
@@ -29,6 +29,11 @@
 			color: #f2722c;
 		}
 	</style>
+	<script>
+		$(document).ready(function () {
+			$('.sidenav').sidenav();
+		});
+	</script>
 
 	<body>
 		<div id="preloader">
@@ -37,6 +42,7 @@
 
 		<header>
 			<nav style="overflow-y: clip">
+				<a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 				<div class="nav-wrapper #ff8a65 deep-orange lighten-2">
 					<a href="" class="brand-logo center" style="text-shadow: 1px 1px black; position: absolute; cursor: default; pointer-events: none">Подбор электроприводов</a>
 					<ul id="nav-mobile" class="right hide-on-med-and-down">
@@ -48,6 +54,13 @@
 					</ul>
 				</div>
 			</nav>
+			<ul class="sidenav" id="mobile-demo">
+				<li><a href="./epn.html">ЭПН</a></li>
+				<li><a href="./ep4.html">ЭП4</a></li>
+				<li><a href="./ep4Reductor.html">ЭП4(РН)</a></li>
+				<li><a href="./ClassicEp.html">Эп по ТУ ...-89</a></li>
+				<li><a href="./vimu.html">ВИМУ</a></li>
+			</ul>
 		</header>
 
 		<div class="row" style="padding: 3%">
@@ -153,5 +166,6 @@
 				</div>
 			</div>
 		</footer>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 	</body>
 </html>

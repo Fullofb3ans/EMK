@@ -8,6 +8,8 @@
 		<link rel="icon" href="./img/favicon.ico" />
 		<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
 		<script
 			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"
 			integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g=="
@@ -50,6 +52,11 @@
 		<link href="./styles/preloader.css" rel="stylesheet" />
 	</head>
 	<body>
+		<script>
+			$(document).ready(function () {
+				$('.sidenav').sidenav();
+			});
+		</script>
 		<main>
 			<div id="preloader">
 				<img src="./img/preloader.gif" alt="preloader" />
@@ -57,6 +64,7 @@
 
 			<header>
 				<nav style="overflow-y: clip">
+					<a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 					<div class="nav-wrapper #ff8a65 deep-orange lighten-2">
 						<ul id="nav" class="left hide-on-med-and-down">
 							<li><a href="./select.html">Главная</a></li>
@@ -70,6 +78,13 @@
 						</ul>
 					</div>
 				</nav>
+				<ul class="sidenav" id="mobile-demo">
+					<li><a href="./epn.html">ЭПН</a></li>
+					<li><a href="./ep4.html">ЭП4</a></li>
+					<li><a href="./ep4Reductor.html">ЭП4(РН)</a></li>
+					<li><a href="./ClassicEp.html">Эп по ТУ ...-89</a></li>
+					<li><a href="./vimu.html">ВИМУ</a></li>
+				</ul>
 			</header>
 
 			<div class="fixedMark">
@@ -1001,5 +1016,6 @@
 				</div>
 			</div>
 		</footer>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 	</body>
 </html>

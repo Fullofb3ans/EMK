@@ -4349,7 +4349,7 @@
     display: block;
     padding: 0 15px;
     cursor: pointer;
-    text-shadow: 1px 1px black;
+    /* text-shadow: 1px 1px black; */
   }
   
   nav ul a.btn, nav ul a.btn-large, nav ul a.btn-small, nav ul a.btn-large, nav ul a.btn-flat, nav ul a.btn-floating {
@@ -6307,7 +6307,7 @@
     height: -moz-calc(100%);
     padding-bottom: 60px;
     background-color: #fff;
-    z-index: 999;
+    z-index: 999999999;
     overflow-y: auto;
     will-change: transform;
     -webkit-backface-visibility: hidden;
