@@ -968,6 +968,9 @@ $(document).ready(function () {
 
         let base = document.querySelector('#controle-blocks').value;
         switch (base) {
+
+            case 'М21':
+                return 'Сигнализация о двух промежуточных положениях выходного вала посредством двух путевых (промежуточных) выключателей.';
             case 'ВЭ11':
                 return 'Базовый набор функций';
             case 'ВЭ12':
