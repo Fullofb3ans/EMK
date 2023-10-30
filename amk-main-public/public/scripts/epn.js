@@ -231,13 +231,23 @@ $(document).ready(function () {
     });
 
     $('#powerType').on('change', function (e) {
-        if (document.querySelector("#powerType").value == '24B 6 фаз(ы) ') {
+        if (document.querySelector("#powerType").value == '24B ') {
             $('#buVe').hide();
             $('#buVe1').hide();
         }
         else {
             $('#buVe').show();
             $('#buVe1').show();
+        }
+    })
+    $('#controle-blocks-series').on('change', function (e) {
+        if (document.querySelector("#controle-blocks-series").value.includes('ВЭ')) {
+            document.querySelector("#connectLabel2").innerText = 'Три кабельных ввода';
+            $('#connection3div').show();
+        }
+        else {
+            document.querySelector("#connectLabel2").innerText = 'Два кабельных ввода'
+            $('#connection3div').hide();
         }
     })
 
@@ -251,15 +261,12 @@ $(document).ready(function () {
             execution = $("input[name='execution']:checked").val();
 
             if (cur_constructive_scheme == '0') {
-
-                $('#controle-blocks-series').val('М2');
-                $('#controle-blocks').val('М21');
-                $('#control-block-fieldset').attr('disabled', true);
+                $("#buVe").hide();
             }
             else {
                 $('#controle-blocks-series').val('');
                 $('#controle-blocks').val('');
-                $('#control-block-fieldset').attr('disabled', false);
+                $("#buVe").show();
             }
 
             // Загрузка изображений
