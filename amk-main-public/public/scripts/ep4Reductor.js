@@ -1360,13 +1360,14 @@ $(document).ready(function () {
     $('#step-7').on('change', function (e) {
         if ($("input[name='color']:checked").val() != undefined && $("input[name='connectionForEp4']:checked").val() != undefined) {
             $('#step-8').show();
+            $('#step-9').show();
         }
-        else { $('#step-8').hide(); }
+        else {
+            $('#step-8').hide();
+            $('#step-9').hide();
+        }
     });
-    $('#step-8').on('change', function (e) {
-        if ($("input[name='placeForEnv']:checked").val() != undefined) { $('#step-9').show(); }
-        else { $('#step-9').hide(); }
-    });
+
     $('#step-9').on('change', function (e) {
         if (document.querySelector("#organization").value != '' && document.querySelector("#fio").value != '' && document.querySelector("#phone").value != '' && document.querySelector("#email").value != '' && document.querySelector("#numbersOfEp").value != '') { $('#step-10').show(); }
         else { $('#step-10').hide(); }
