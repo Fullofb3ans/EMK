@@ -823,13 +823,13 @@ $(document).ready(function () {
         );
 
         function DOCX(id, name) {
-            window.open(`https://emk.websto.pro/Tula/${id + name}`);
+            window.open(`https://emk.websto.pro/Tula/${id + '/' + name}`);
         }
         function EXEL(id, name) {
-            window.open(`https://emk.websto.pro/TulaEXEL/${id + name}`);
+            window.open(`https://emk.websto.pro/TulaEXEL/${id + '/' + name}`);
         }
         function allInPdf(id, name) {
-            window.open(`https://emk.websto.pro/TulaPDF/${id + name}`);
+            window.open(`https://emk.websto.pro/TulaPDF/${id + '/' + name}`);
         }
         function sendToServer() {
             let post = fetch('https://emk.websto.pro/download', {
