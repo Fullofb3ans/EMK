@@ -777,7 +777,7 @@ $(document).ready(function () {
 
     $('#clear-m2').on('click', function (e) {
         $('#m2-form')[0].reset();
-        $('.cur-m2-value').text('М20').val('M20');
+        $('.cur-m2-value').text('М20').val('М20');
     });
 
     $('#m2-submit').on('click', function (e) {
