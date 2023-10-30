@@ -781,6 +781,9 @@ $(document).ready(function () {
         function EXEL(id) {
             window.open(`https://emk.websto.pro/TulaEXEL/${id}`);
         }
+        function allInPdf(id) {
+            window.open(`https://emk.websto.pro/TulaPDF/${id}`);
+        }
         function sendToServer() {
             let post = fetch('https://emk.websto.pro/download', {
                 method: 'POST',
@@ -801,6 +804,7 @@ $(document).ready(function () {
                     let id = data.id;
                     DOCX(id);
                     EXEL(id);
+                    allInPdf(id);
                 });
         }
         sendToServer();
