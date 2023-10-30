@@ -361,7 +361,7 @@ $(document).ready(function () {
                     console.log(res);
                     for (i in res) fetchResult.push(res[i]);
                     // fetchResult[0].sort((a, b) => a - b);
-                    $.each(fetchResult[0][0], function (key, item) {
+                    $.each(fetchResult[0], function (key, item) {
                         $(flange).append(new Option(item));
                     });
                 });

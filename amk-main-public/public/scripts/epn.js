@@ -185,7 +185,7 @@ $(document).ready(function () {
                     for (i in res)
                         fetchResult.push(res[i]);
                     // fetchResult[0].sort((a, b) => a - b);
-                    $.each(fetchResult[0][0], function (key, item) {
+                    $.each(fetchResult[0], function (key, item) {
                         $(flange).append(new Option(item))
                     }
                     );
@@ -221,7 +221,7 @@ $(document).ready(function () {
                     for (i in res)
                         fetchResult.push(res[i]);
                     // fetchResult[0].sort((a, b) => a - b);
-                    $.each(fetchResult[0][0], function (key, item) {
+                    $.each(fetchResult[0], function (key, item) {
                         $(select).append(new Option(item, item))
                     }
                     );
@@ -412,7 +412,7 @@ $(document).ready(function () {
                     return '3';
                 case ('380B 3 фаз(ы) '):
                     return '3';
-                case ('24B 6 фаз(ы) '):
+                case ('24B 1 фаз(ы) '):
                     return '6';
                 default:
                     return 'X';
