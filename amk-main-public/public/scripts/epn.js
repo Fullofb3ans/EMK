@@ -1172,17 +1172,13 @@ $(document).ready(function () {
     $('#step-7').on('change', function (e) {
         if ($("input[name='specialForEpn']:checked").val() != undefined && $("input[name='connection']:checked").val() != undefined) {
             $('#step-8').show();
-        } else {
-            $('#step-8').hide();
-        }
-    });
-    $('#step-8').on('change', function (e) {
-        if ($("input[name='placeForEnv']:checked").val() != undefined) {
             $('#step-9').show();
         } else {
+            $('#step-8').hide();
             $('#step-9').hide();
         }
     });
+
     $('#step-9').on('change', function (e) {
         if (
             document.querySelector('#organization').value != '' &&

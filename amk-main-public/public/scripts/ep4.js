@@ -1466,22 +1466,18 @@ $(document).ready(function () {
             $('#step-7').show();
         }
     });
-    $('#step-6').on('change', function (e) {
+    $('#step-7').on('change', function (e) {
         if ($("input[name='special']:checked").val() != undefined) {
             $("input[name='special']").closest('fieldset').removeClass('noReqValue');
             $("input[name='special']").closest('fieldset').addClass('ReqValueOk');
             $('#step-8').show();
-        } else {
-            $('#step-8').hide();
-        }
-    });
-    $('#step-8').on('change', function (e) {
-        if ($("input[name='placeForEnv']:checked").val() != undefined) {
             $('#step-9').show();
         } else {
+            $('#step-8').hide();
             $('#step-9').hide();
         }
     });
+
     $('#step-9').on('change', function (e) {
         if (
             document.querySelector('#organization').value != '' &&
