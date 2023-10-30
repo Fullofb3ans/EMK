@@ -1282,7 +1282,10 @@ $(document).ready(function () {
         let BoMark = document.querySelector('#controle-blocks-series').value;
         optForBu = $('#control-block-optionsset option:selected').val() != 'noValue' ? $('#control-block-optionsset option:selected').val() : '';
 
-        if (BoMark == 'Э0' || 'Э1S') {
+        if (BoMark == 'Э2') {
+            return (remoteSignal = 'Привод с шестью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 24 В/220 В;');
+        }
+        else if (BoMark == 'Э0' || BoMark == 'Э1S') {
             return (remoteSignal = 'Привод с шестью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 24 В');
         } else if (BoMark == 'Э1') {
             if (optForBu == 'X') {
@@ -1302,7 +1305,8 @@ $(document).ready(function () {
             } else {
                 return (remoteSignal = 'Привод с шестью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 24 В;');
             }
-        } else {
+        }
+        else {
             return (remoteSignal = 'Пункт только для ЭИМУ или ВИМУ');
         }
     }
