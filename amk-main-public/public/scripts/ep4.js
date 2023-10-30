@@ -694,7 +694,7 @@ $(document).ready(function () {
         let j13 = document.querySelector('#closingTime').value; //время закрытия
         let j14 = document.querySelector('#upper-limit').value; //Максимальный крутящий момент
         let j15 = document.querySelector('#flange').value; //присоединение к приводу
-        let j16 = $("input[name='placeForEnv']:checked").closest('.form-check').find('.form-check-label').text(); // установка
+        let j16 = ''; // установка
         let j17 = document.querySelector('#rotation-frequency').value; // частота вращения
         let j18 = schemeForSend; // конструктивная схема
         let j19 = document.querySelector('#closeNumbers').value; // оборотов на закрытие
@@ -822,14 +822,14 @@ $(document).ready(function () {
             [j70, j71, j72, j73, j74, j75]
         );
 
-        function DOCX(id) {
-            window.open(`https://emk.websto.pro/Tula/${id}`);
+        function DOCX(id, name) {
+            window.open(`https://emk.websto.pro/Tula/${id + name}`);
         }
-        function EXEL(id) {
-            window.open(`https://emk.websto.pro/TulaEXEL/${id}`);
+        function EXEL(id, name) {
+            window.open(`https://emk.websto.pro/TulaEXEL/${id + name}`);
         }
-        function allInPdf(id) {
-            window.open(`https://emk.websto.pro/TulaPDF/${id}`);
+        function allInPdf(id, name) {
+            window.open(`https://emk.websto.pro/TulaPDF/${id + name}`);
         }
         function sendToServer() {
             let post = fetch('https://emk.websto.pro/download', {
@@ -849,9 +849,10 @@ $(document).ready(function () {
                 .then((response) => response.json())
                 .then((data) => {
                     let id = data.id;
-                    DOCX(id);
-                    EXEL(id);
-                    allInPdf(id);
+                    let name = data.name;
+                    DOCX(id, name);
+                    EXEL(id, name);
+                    allInPdf(id, name);
                 });
         }
         sendToServer();
@@ -1096,16 +1097,6 @@ $(document).ready(function () {
         }
     });
 
-    // Стиль для блока установки
-    $('.placeForEnv').on('change', function (e) {
-        if (document.querySelector('#placeForEnv-1').checked || document.querySelector('#placeForEnv-2').checked) {
-            document.querySelector('.placeForEnv').classList.add('ReqValueOk');
-            document.querySelector('.placeForEnv').classList.remove('noReqValue');
-        } else {
-            document.querySelector('.placeForEnv').classList.add('noReqValue');
-            document.querySelector('.placeForEnv').classList.remove('ReqValueOk');
-        }
-    });
     // Тип блока концевых выключателей
     $('.typeEndSwich').on('change', function (e) {
         if (document.querySelector('#typeEndSwich-1').checked || document.querySelector('#typeEndSwich-2').checked) {

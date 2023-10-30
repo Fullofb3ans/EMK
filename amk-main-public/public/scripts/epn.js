@@ -563,7 +563,7 @@ $(document).ready(function () {
         let j13 = 'частота вращения'; // частота вращения
         let j14 = document.querySelector("#upper-limit").value; //Максимальный крутящий момент
         let j15 = document.querySelector('#flange').value; //присоединение к приводу
-        let j16 = $("input[name='placeForEnv']:checked").closest('.form-check').find('.form-check-label').text(); // установка
+        let j16 = ''; // установка
         let j17 = document.querySelector("#time-limit").value; //время закрытия
         let j18 = $("input[name='constructive-scheme']:checked").val(); // конструктивная схема
         let j19 = $("input[name='stroke']:checked").closest('.form-check').find('.form-check-label').text() + ' ' + 'градусов'; // оборотов на закрытие
@@ -879,17 +879,6 @@ $(document).ready(function () {
         }
     });
 
-    // Стиль для блока установки
-    $('.placeForEnv').on('change', function (e) {
-        if (document.querySelector("#placeForEnv-1").checked || document.querySelector("#placeForEnv-2").checked) {
-            document.querySelector('.placeForEnv').classList.add('ReqValueOk');
-            document.querySelector('.placeForEnv').classList.remove('noReqValue');
-        }
-        else {
-            document.querySelector('.placeForEnv').classList.add('noReqValue');
-            document.querySelector('.placeForEnv').classList.remove('ReqValueOk');
-        }
-    });
     // Тип блока концевых выключателей
     $('.typeEndSwich').on('change', function (e) {
         if (document.querySelector("#typeEndSwich-1").checked || document.querySelector("#typeEndSwich-2").checked) {
