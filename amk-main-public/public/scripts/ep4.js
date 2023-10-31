@@ -237,9 +237,40 @@ $(document).ready(function () {
     });
 
     // ПРОГРУЗКА ДАННЫХ ЧАСТОТЫ ВРАЩЕНИЯ С ТАБЛИЦЫ
-    // $('#upper-limit').on('change', function (e) {
-    //     rotationFrequencySelectCreate();
-    // });
+    $('#upper-limit').on('change', function (e) {
+        $('#closeNumbers').val('');
+        $('#closingTime').val('');
+        allRotationFrequencySelectCreate();
+        $('#stepClose').trigger('change');
+    });
+
+    function allRotationFrequencySelectCreate() {
+        let upLim = document.querySelector('#upper-limit').value;
+        let connectionType = $("input[name='connection-type']:checked").val();
+        let rotationFrequency = document.getElementById('rotation-frequency');
+        $(rotationFrequency).empty();
+        rotationFrequency.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
+
+        let fetchResult = [];
+
+        fetch('https://emk.websto.pro/DB', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json;charset=utf-8' },
+            body: JSON.stringify({
+                a: ['ЭП4', connectionType, upLim],
+            }),
+        })
+            .then((res) => res.json())
+            .then((res) => {
+                console.log(res);
+                for (i in res) fetchResult.push(res[i]);
+                // fetchResult[0].sort((a, b) => a - b);
+                $.each(fetchResult[0], function (key, item) {
+                    $(rotationFrequency).append(new Option(item, item));
+                });
+            });
+    }
+
     function rotationFrequencySelectCreate() {
         let upLim = document.querySelector('#upper-limit').value;
         let connectionType = $("input[name='connection-type']:checked").val();
@@ -696,13 +727,13 @@ $(document).ready(function () {
         let j10 = 'Электроприводы многообортные ЭП4'; //тип арматуры
         let j11 = TuMp ? document.querySelector('#mark-gen').innerText + '/' + TuMp : document.querySelector('#mark-gen').innerText; //маркировка
         let j12 = 'АО Тулаэлектропривод'; //завод
-        let j13 = document.querySelector('#closingTime').value; //время закрытия
+        let j13 = document.querySelector('#closingTime').value ? document.querySelector('#closingTime').value : ' '; //время закрытия
         let j14 = document.querySelector('#upper-limit').value; //Максимальный крутящий момент
         let j15 = document.querySelector('#flange').value; //присоединение к приводу
         let j16 = ''; // установка
         let j17 = document.querySelector('#rotation-frequency').value; // частота вращения
-        let j18 = schemeForSend; // конструктивная схема
-        let j19 = document.querySelector('#closeNumbers').value; // оборотов на закрытие
+        let j18 = schemeForSend; // конструктивная схема 
+        let j19 = document.querySelector('#closeNumbers').value ? document.querySelector('#closeNumbers').value : ' '; // оборотов на закрытие
         // json1 = [j10, j11, j12, j13, j14, j15, j16, j17, j18];
 
         //json2
@@ -1343,27 +1374,6 @@ $(document).ready(function () {
             document.querySelector('#control-block-optionsset').classList.add('noReqValue');
         }
     });
-    // // Формула для требуемого времени закрытия по оборотам
-    // $('#closeNumbers').on('keyup', function (e) {
-    //     $('#stepClose').trigger('change');
-    //     closeNumbers = document.querySelector('#closeNumbers').value;
-    //     rotAtMin = document.querySelector('#rotation-frequency').value;
-    //     if (closeNumbers && rotAtMin) {
-    //         document.querySelector('#closingTime').value = closingTime = Math.round(closeNumbers / (rotAtMin / 60));
-    //         $('#stepClose').trigger('change');
-    //     }
-    // });
-    // // Формула для требуемого времени закрытия по времени
-    // $('#closingTime').on('keyup', function (e) {
-    //     $('#stepClose').trigger('change');
-    //     closingTime = document.querySelector('#closingTime').value;
-    //     rotAtMin = document.querySelector('#rotation-frequency').value;
-
-    //     if (closingTime && rotAtMin) {
-    //         document.querySelector('#closeNumbers').value = closNumbers = Math.round(closingTime * (rotAtMin / 60));
-    //         $('#stepClose').trigger('change');
-    //     }
-    // });
 
     // Формула от частоты вращения
     $('#stepClose').on('change', function (e) {
@@ -1450,43 +1460,50 @@ $(document).ready(function () {
         }
     });
     $('#step-2').on('change', function (e) {
-        if ($("input[name='connection-type']:checked").val() != undefined && document.querySelector('#upper-limit') != '' && document.querySelector('#rotation-frequency').value != '') {
+        if ($("input[name='connection-type']:checked").val() != undefined && document.querySelector('#upper-limit') != '') {
             $('#step-3').show();
         } else {
             $('#step-3').hide();
         }
     });
     $('#step-3').on('change', function (e) {
-        if ($("input[name='constructive-scheme']:checked").val() != '1' && document.querySelector('#closeNumbers').value && document.querySelector('#flange').value) {
+        if (document.querySelector('#rotation-frequency').value != '') {
             $('#step-4').show();
         } else {
             $('#step-4').hide();
         }
     });
     $('#step-4').on('change', function (e) {
-        if (document.querySelector('#control-block-fieldset').classList.contains('ReqValueOk') && document.querySelector('#climatic-modification').value != '') {
+        if ($("input[name='constructive-scheme']:checked").val() != '1' && document.querySelector('#flange').value) {
             $('#step-5').show();
         } else {
             $('#step-5').hide();
         }
     });
     $('#step-5').on('change', function (e) {
-        if ($("input[name='rotating']:checked").val() != undefined && $("input[name='protection']:checked").val() != undefined) {
+        if (document.querySelector('#control-block-fieldset').classList.contains('ReqValueOk') && document.querySelector('#climatic-modification').value != '') {
             $('#step-6').show();
         } else {
             $('#step-6').hide();
         }
     });
     $('#step-6').on('change', function (e) {
-        if ($("input[name='color']:checked").val() != undefined && $("input[name='connectionForEp4']:checked").val() != undefined) {
+        if ($("input[name='rotating']:checked").val() != undefined && $("input[name='protection']:checked").val() != undefined) {
             $('#step-7').show();
+        } else {
+            $('#step-7').hide();
         }
     });
-    $('#step-6').on('change', function (e) {
+    $('#step-7').on('change', function (e) {
+        if ($("input[name='color']:checked").val() != undefined && $("input[name='connectionForEp4']:checked").val() != undefined) {
+            $('#step-8').show();
+        }
+    });
+    $('#step-8').on('change', function (e) {
         if ($("input[name='special']:checked").val() != undefined) {
             $("input[name='special']").closest('fieldset').removeClass('noReqValue');
             $("input[name='special']").closest('fieldset').addClass('ReqValueOk');
-            $('#step-8').show();
+            $('#step-9').show();
             $('#step-9').show();
         } else {
             $('#step-8').hide();
