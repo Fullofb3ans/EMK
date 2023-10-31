@@ -1466,7 +1466,7 @@ $(document).ready(function () {
             $('#step-7').show();
         }
     });
-    $('#step-7').on('change', function (e) {
+    $('#step-6').on('change', function (e) {
         if ($("input[name='special']:checked").val() != undefined) {
             $("input[name='special']").closest('fieldset').removeClass('noReqValue');
             $("input[name='special']").closest('fieldset').addClass('ReqValueOk');
