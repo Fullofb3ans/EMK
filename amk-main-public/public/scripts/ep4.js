@@ -237,35 +237,40 @@ $(document).ready(function () {
     });
 
     // ПРОГРУЗКА ДАННЫХ ЧАСТОТЫ ВРАЩЕНИЯ С ТАБЛИЦЫ
-    $('#upper-limit').on('change', function (e) {
-        function rotationFrequencySelectCreate() {
-            let upLim = document.querySelector('#upper-limit').value;
-            let connectionType = $("input[name='connection-type']:checked").val();
-            let rotationFrequency = document.getElementById('rotation-frequency');
-            $(rotationFrequency).empty();
-            rotationFrequency.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
+    // $('#upper-limit').on('change', function (e) {
+    //     rotationFrequencySelectCreate();
+    // });
+    function rotationFrequencySelectCreate() {
+        let upLim = document.querySelector('#upper-limit').value;
+        let connectionType = $("input[name='connection-type']:checked").val();
+        let rotationFrequency = document.getElementById('rotation-frequency');
+        $(rotationFrequency).empty();
 
-            let fetchResult = [];
+        let fetchResult = [];
 
-            fetch('https://emk.websto.pro/DB', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json;charset=utf-8' },
-                body: JSON.stringify({
-                    a: ['ЭП4', connectionType, upLim],
-                }),
-            })
-                .then((res) => res.json())
-                .then((res) => {
-                    console.log(res);
-                    for (i in res) fetchResult.push(res[i]);
-                    // fetchResult[0].sort((a, b) => a - b);
-                    $.each(fetchResult[0], function (key, item) {
+        fetch('https://emk.websto.pro/DB', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json;charset=utf-8' },
+            body: JSON.stringify({
+                a: ['ЭП4', connectionType, upLim],
+            }),
+        })
+            .then((res) => res.json())
+            .then((res) => {
+                console.log(res);
+                for (i in res) fetchResult.push(res[i]);
+                // fetchResult[0].sort((a, b) => a - b);
+                $.each(fetchResult[0], function (key, item) {
+                    if (item > Math.round(60 * (document.querySelector('#closeNumbers').value / document.querySelector('#closingTime').value))) {
                         $(rotationFrequency).append(new Option(item, item));
-                    });
+
+                    }
+                    $('#step-2').trigger('change');
+                    $(document).trigger('change');
                 });
-        }
-        rotationFrequencySelectCreate();
-    });
+                $('#rotation-frequency-wrap').trigger('change');
+            });
+    }
 
     // ПРОГРУЗКА ДАННЫХ КОНСТРУКТИВНЫХ СХЕМ С ТАБЛИЦЫ
     $('#rotation-frequency-wrap').on('change', function (e) {
@@ -1338,27 +1343,38 @@ $(document).ready(function () {
             document.querySelector('#control-block-optionsset').classList.add('noReqValue');
         }
     });
-    // Формула для требуемого времени закрытия по оборотам
-    $('#closeNumbers').on('keyup', function (e) {
-        $('#stepClose').trigger('change');
-        closeNumbers = document.querySelector('#closeNumbers').value;
-        rotAtMin = document.querySelector('#rotation-frequency').value;
-        if (closeNumbers && rotAtMin) {
-            document.querySelector('#closingTime').value = closingTime = Math.round(closeNumbers / (rotAtMin / 60));
-            $('#stepClose').trigger('change');
-        }
-    });
-    // Формула для требуемого времени закрытия по времени
-    $('#closingTime').on('keyup', function (e) {
-        $('#stepClose').trigger('change');
-        closingTime = document.querySelector('#closingTime').value;
-        rotAtMin = document.querySelector('#rotation-frequency').value;
+    // // Формула для требуемого времени закрытия по оборотам
+    // $('#closeNumbers').on('keyup', function (e) {
+    //     $('#stepClose').trigger('change');
+    //     closeNumbers = document.querySelector('#closeNumbers').value;
+    //     rotAtMin = document.querySelector('#rotation-frequency').value;
+    //     if (closeNumbers && rotAtMin) {
+    //         document.querySelector('#closingTime').value = closingTime = Math.round(closeNumbers / (rotAtMin / 60));
+    //         $('#stepClose').trigger('change');
+    //     }
+    // });
+    // // Формула для требуемого времени закрытия по времени
+    // $('#closingTime').on('keyup', function (e) {
+    //     $('#stepClose').trigger('change');
+    //     closingTime = document.querySelector('#closingTime').value;
+    //     rotAtMin = document.querySelector('#rotation-frequency').value;
 
-        if (closingTime && rotAtMin) {
-            document.querySelector('#closeNumbers').value = closNumbers = Math.round(closingTime * (rotAtMin / 60));
-            $('#stepClose').trigger('change');
+    //     if (closingTime && rotAtMin) {
+    //         document.querySelector('#closeNumbers').value = closNumbers = Math.round(closingTime * (rotAtMin / 60));
+    //         $('#stepClose').trigger('change');
+    //     }
+    // });
+
+    // Формула от частоты вращения
+    $('#stepClose').on('change', function (e) {
+        closingTime = document.querySelector('#closingTime').value;
+        rotAtMin = document.querySelector('#rotation-frequency');
+        closeNumbers = document.querySelector('#closeNumbers').value;
+        if (closingTime !== '' && closeNumbers !== '') {
+            rotationFrequencySelectCreate();
         }
-    });
+    })
+
 
     function selectRemoteSignal() {
         let BoMark = document.querySelector('#controle-blocks-series').value;

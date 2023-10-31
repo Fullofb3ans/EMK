@@ -44,7 +44,7 @@
 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js" integrity="sha512-Eak/29OTpb36LLo2r47IpVzPBLXnAMPAVypbSZiZ4Qkf8p/7S/XRG5xp7OKWPPYfJT6metI+IORkR5G8F900+g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-		<script src="./scripts/ep4.js"></script>
+		<script src="./ep4test.js"></script>
 
 		<script src="./scripts/preloaderScript.js"></script>
 
@@ -158,7 +158,6 @@
 							</div>
 						</div>
 					</fieldset>
-
 					<fieldset class="row mb-3 upperLimitFieldset noReqValue">
 						<legend class="blockNumber">4</legend>
 						<div class="col-sm-9">
@@ -169,16 +168,6 @@
 						</div>
 					</fieldset>
 
-					<fieldset class="row mb-3 noReqValue" id="rotation-frequency-wrap">
-						<legend class="blockNumber">5</legend>
-						<div class="col-sm-9">
-							<legend class="col-form-label col-sm-3 pt-0">Частота вращения выходного вала, об/мин</legend>
-							<select class="form-select form-element ch-mark ch-cs" name="rotation-frequency" id="rotation-frequency"></select>
-						</div>
-					</fieldset>
-				</div>
-
-				<div id="step-3">
 					<div class="stepClose optionalField" id="stepClose">
 						<a style="position: absolute; left: 50%; top: -4%" href="#" class="" data-bs-toggle="modal" data-bs-target="#helpWithClose-modal">
 							<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
@@ -188,7 +177,7 @@
 							</svg>
 						</a>
 						<fieldset class="row mb-3 noReqValue closeNumbers">
-							<legend class="blockNumber">6</legend>
+							<legend class="blockNumber">5</legend>
 							<div class="col-sm-9">
 								<legend class="col-form-label col-sm-3 pt-0">Кол-во оборотов для закрытия арматуры</legend>
 								<input placeholder="............" type="number" class="form-input" name="closeNumbers" id="closeNumbers" min="0" /> об.
@@ -196,7 +185,7 @@
 						</fieldset>
 
 						<fieldset class="row mb-3 noReqValue closingTime">
-							<legend class="blockNumber">7</legend>
+							<legend class="blockNumber">6</legend>
 							<div class="col-sm-9">
 								<legend class="col-form-label col-sm-3 pt-0">Требуемое время закрытия</legend>
 								<input type="number" class="form-input" name="closingTime" id="closingTime" placeholder="" style="margin-top: 0.5%" /> сек
@@ -204,6 +193,16 @@
 						</fieldset>
 					</div>
 
+					<fieldset class="row mb-3 noReqValue" id="rotation-frequency-wrap">
+						<legend class="blockNumber">7</legend>
+						<div class="col-sm-9">
+							<legend class="col-form-label col-sm-3 pt-0">Частота вращения выходного вала, об/мин</legend>
+							<select class="form-select form-element ch-mark ch-cs" name="rotation-frequency" id="rotation-frequency"></select>
+						</div>
+					</fieldset>
+				</div>
+
+				<div id="step-3">
 					<div class="flexForImg">
 						<div class="flexImg">
 							<fieldset class="row mb-3 optionalField" id="schemeFieldSet" style="width: 100%">
