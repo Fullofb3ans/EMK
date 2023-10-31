@@ -1135,6 +1135,21 @@ $(document).ready(function () {
         $('#ve1Config').show();
     });
 
+    $("#controle-blocks-series").on('change', function () {
+        ($("input[name='connection']:checked").val(''));
+        // Открытие подключения ЕПН под ВИМУ
+        let BoMark = document.querySelector("#controle-blocks-series").value;
+        if (BoMark == 'ВЭ') {
+
+            $('#classicConnect').hide();
+            $('#classForVimuEpn').show();
+        }
+        else {
+            $('#classicConnect').show();
+            $('#classForVimuEpn').hide();
+        }
+    })
+
     // Открытие по шагам
     $('#step-1').on('change', function (e) {
         if ($("input[name='working-mode']:checked").val() != undefined && $("input[name='execution']:checked").val() != undefined) {
