@@ -24,7 +24,7 @@ $(document).ready(function () {
     });
 
     // МАРКИРОВКА
-    $(document).on('change', function (e) {
+    $('#vimuSet').on('change', function (e) {
         let vimuMark_gen = $('#vimumark-gen');
         let modal_button = $('#download');
 
