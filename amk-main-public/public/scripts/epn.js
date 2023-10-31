@@ -317,7 +317,10 @@ $(document).ready(function () {
         }
     });
     $(document).on('change', function (e) {
-        $('#vimuMark').val($('#vimumark-gen').text());
+        let x6 = $('#controle-blocks-series').val();
+        if (x6 == 'ВЭ1') {
+            $('#vimuMark').val($('#vimumark-gen').text());
+        }
     });
 
 
