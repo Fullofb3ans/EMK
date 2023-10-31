@@ -25,7 +25,7 @@ $(document).ready(function () {
 
     // МАРКИРОВКА
     $(document).on('change', function (e) {
-        let mark_gen = $('#vimumark-gen');
+        let vimuMark_gen = $('#vimumark-gen');
         let modal_button = $('#download');
 
 
@@ -149,10 +149,8 @@ $(document).ready(function () {
 
         is_true = [x1, x2, x3, x4, x5, x6, x7, x8, x9].includes('X');
 
-        mark_gen.text(x0 + x1 + '-' + x2 + x3 + '-' + x4 + optionssetCheckBox + optForBu + '-' + x5 + '-' + x6 + x7 + x8 + x9);
+        vimuMark_gen.text(x0 + x1 + '-' + x2 + x3 + '-' + x4 + optionssetCheckBox + optForBu + '-' + x5 + '-' + x6 + x7 + x8 + x9);
 
-        modal_button.toggle(!is_true);
-        mark_gen.toggleClass("is-invalid", is_true).toggleClass('is-valid', !is_true);
     });
 
 

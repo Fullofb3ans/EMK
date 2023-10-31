@@ -316,9 +316,10 @@ $(document).ready(function () {
             $("#vimuSet").hide();
         }
     });
-    $('.markForVimu').on('change', function (e) {
-        $('#vimuMarkForVE1').val($('.markForVimu').text());
+    $(document).on('change', function (e) {
+        $('#vimuMark').val($('#vimumark-gen').text());
     });
+
 
     // МАРКИРОВКА
     $(document).on('change', function (e) {
