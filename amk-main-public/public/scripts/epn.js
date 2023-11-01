@@ -297,10 +297,9 @@ $(document).ready(function () {
             $('#control-block2-config').val('');
             $(document.querySelector('#control-block-config')).show();
             $(document.querySelector('#controle-blocks')).hide();
-            $("#vimuMark").hide();
             $("#vimuMark").val('');
+            $("#vimuMark").hide();
             $("#vimuSet").hide();
-            $("#vimuSet").trigger('change');
         } else if (x6 === 'ВЭ') {
             $('#vimusumBlocks').val('');
             $('#vimucontrole-blocks').val('');
