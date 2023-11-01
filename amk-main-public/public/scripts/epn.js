@@ -292,6 +292,7 @@ $(document).ready(function () {
             $("#vimuMark").show();
             $("#vimuSet").show();
         } else if (x6 === 'М2') {
+            $('#vimucontrole-blocks2').val('')
             $('#vimusumBlocks').val('');
             $('#control-block2-config').val('');
             $(document.querySelector('#control-block-config')).show();
@@ -301,7 +302,7 @@ $(document).ready(function () {
             $("#vimuSet").hide();
         } else if (x6 === 'ВЭ') {
             $('#vimusumBlocks').val('');
-            // $('#controle-blocks').val('');
+            $('#vimucontrole-blocks2').val('')
             $(document.querySelector('#control-block-config')).show();
             $(document.querySelector('#control-block2-config')).show();
             $(document.querySelector('#controle-blocks')).hide();
