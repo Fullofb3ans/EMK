@@ -334,6 +334,10 @@ background-color: rgba(0,0,0,0);
 #e1-table th:hover {
   cursor: pointer;
 }
+#e2-table td:hover,
+#e2-table th:hover {
+  cursor: pointer;
+}
 
 fieldset.success legend {
   border-right: 4px solid var(--success-color);
@@ -361,8 +365,19 @@ fieldset.no-success legend {
   /* margin-top: -4%; */
   font-size: smaller;
 }
+#block-configure-e12 > div > div{
+  /* margin-top: -4%; */
+  font-size: smaller;
+}
+
+#ve2-table{
+  cursor: pointer;
+}
 
 #ve1Config{
+  width: 100%;
+}
+#ve2Config{
   width: 100%;
 }
 
@@ -471,6 +486,18 @@ overflow: hidden;
 }
 
 .btn-close:hover {
+  background-color: #a1a1a1;
+  color: black;
+}
+#closeve2modal {
+  padding: 7px;
+  background: rgb(249 84 0 / 41%);
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+#closeve2modal:hover {
   background-color: #a1a1a1;
   color: black;
 }
@@ -594,12 +621,23 @@ transition-duration: 0.4s;
 cursor: pointer;
 border-radius: 10px;
 }
+#vimumodal2-submit {
+padding: 7px;
+background: #d1e7dd;
+transition-duration: 0.4s;
+cursor: pointer;
+border-radius: 10px;
+}
 
 #e1-submit:hover {
 background-color: rgb(198 198 197 / 19%);
 color: black;
 }
 #vimumodal-submit:hover {
+background-color: rgb(198 198 197 / 19%);
+color: black;
+}
+#vimumodal2-submit:hover {
 background-color: rgb(198 198 197 / 19%);
 color: black;
 }
@@ -625,6 +663,11 @@ color: black;
   border-radius: 10px;
 }
 
+#e2-submit:hover {
+  background-color: rgb(198 198 197 / 19%);
+  color: black;
+}
+
 #ve1c-submit{
   padding: 7px;
   background: #d1e7dd;
@@ -632,11 +675,29 @@ color: black;
   cursor: pointer;
   border-radius: 10px;
 }
-#e2-submit:hover {
+#ve1c-submit:hover {
   background-color: rgb(198 198 197 / 19%);
   color: black;
 }
-#ve1c-submit:hover {
+#ve2c-submit{
+  padding: 7px;
+  background: #d1e7dd;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 10px;
+}
+#ve2c-submit:hover {
+  background-color: rgb(198 198 197 / 19%);
+  color: black;
+}
+#AddNewsubmit{
+  padding: 7px;
+  background: #d1e7dd;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 10px;
+}
+#AddNewsubmit:hover {
   background-color: rgb(198 198 197 / 19%);
   color: black;
 }
@@ -651,6 +712,19 @@ color: black;
 }
 
 #control-block-config:hover{
+  background-color: rgb(198, 198, 197);
+  color: black;
+}
+#control-block2-config{
+  padding: 7px;
+  margin-top: 1%;
+  background: rgb(229 229 229 / 97%);
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+#control-block2-config:hover{
   background-color: rgb(198, 198, 197);
   color: black;
 }
@@ -669,7 +743,35 @@ color: black;
   color: black;
 }
 
+#vimucontrol-block2-config{
+  padding: 7px;
+  margin-top: 1%;
+  background: rgb(229 229 229 / 97%);
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+#vimucontrol-block2-config:hover{
+  background-color: rgb(198, 198, 197);
+  color: black;
+}
+
 #clear-e2{
+  padding: 7px;
+  background: rgb(249 84 0 / 41%);
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 10px;
+}
+#AddNewClear{
+  padding: 7px;
+  background: rgb(249 84 0 / 41%);
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 10px;
+}
+#ve2Clear{
   padding: 7px;
   background: rgb(249 84 0 / 41%);
   transition-duration: 0.4s;
@@ -694,6 +796,14 @@ color: black;
 }
 
 #clear-e2:hover{
+  background-color: #a1a1a1;
+  color: black;
+}
+#AddNewClear:hover{
+  background-color: #a1a1a1;
+  color: black;
+}
+#ve2Clear:hover{
   background-color: #a1a1a1;
   color: black;
 }

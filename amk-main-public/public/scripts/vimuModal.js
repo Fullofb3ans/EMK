@@ -7,27 +7,17 @@ $(document).ready(function () {
         $('#e1-table th').removeClass('table-success');
         $(el).toggleClass('table-success');
     });
-
-    let vimuBlockModal = new bootstrap.Modal($("#ve1Config"));
-
-    // Открытие шагов
-    $(document).on('change', "input[name='vimuroundControl']", function (e) {
-        $("#step-3").show();
-    });
-
-    $(document).on('change', "input[name='vimuengineStartType']", function (e) {
-        $("#step-4").show();
-    });
-
-    $(document).on('change', "input[name='vimuprotection']", function (e) {
-        $("#step-5").show();
+    $(document).on('click', '#ve2-table th, #ve2-table td', function (e) {
+        let target = $(this).data('target');
+        let el = document.getElementById(target);
+        $('.cur-vexecution2-value').text(target).val(target);
+        $('#ve2-table th').removeClass('table-success');
+        $(el).toggleClass('table-success');
     });
 
     // МАРКИРОВКА
     $('#vimuSet').on('change', function (e) {
         let vimuMark_gen = $('#vimumark-gen');
-        let modal_button = $('#download');
-
 
         let x0 = 'ВИМУ';
         let x1 = $("input[name='vimuexecution']:checked").val() ? $("input[name='vimuexecution']:checked").val() : ''; //взрывозащита
@@ -64,7 +54,7 @@ $(document).ready(function () {
         }
 
         let x4 = $('#vimucontrole-blocks').val() ? $('#vimucontrole-blocks').val() : 'X'; //функциональные возможности
-        switch (x4) {
+        switch ($('#vimucontrole-blocks').val()) {
             case 'X':
                 ($('#vimucontrole-blocks')).closest('fieldset').removeClass('ReqValueOk');
                 ($('#vimucontrole-blocks')).closest('fieldset').addClass('noReqValue');
@@ -73,6 +63,8 @@ $(document).ready(function () {
                 ($('#vimucontrole-blocks')).closest('fieldset').removeClass('noReqValue');
                 ($('#vimucontrole-blocks')).closest('fieldset').addClass('ReqValueOk');
         }
+
+        let secondVimuBlock = $('#vimucontrole-blocks2').val() ? '/' + $('#vimucontrole-blocks2').val() : '';
 
         let x5 = $('#vimuclimatic-modification').val() ? $('#vimuclimatic-modification').val() : 'X'; //температурное исполнение
         switch (x5) {
@@ -146,35 +138,59 @@ $(document).ready(function () {
 
         let optForBu = $('#vimucontrole-blocks-options option:selected').val() != 'noValue' ? $('#vimucontrole-blocks-options option:selected').val() : '';
 
-
         is_true = [x1, x2, x3, x4, x5, x6, x7, x8, x9].includes('X');
 
-        vimuMark_gen.text(x0 + x1 + '-' + x2 + x3 + '-' + x4 + optionssetCheckBox + optForBu + '-' + x5 + '-' + x6 + x7 + x8 + x9);
+        vimuMark_gen.text(x0 + x1 + '-' + x2 + x3 + '-' + x4 + secondVimuBlock + optionssetCheckBox + optForBu + '-' + x5 + '-' + x6 + x7 + x8 + x9);
 
     });
 
+    // Обработка модальных
+    let vimuBlockModal = new bootstrap.Modal($("#ve1Config"));
+    let vimuBlock2Modal = new bootstrap.Modal($("#ve2Config"));
 
+    $('#vimucontrol-block-config').on('click', function () {
+        vimuBlockModal.show();
+    });
 
-    // КНОПКИ В ТАБЛИЦЕ
-    $("#e1-submit").on("click", function (e) {
-        $("#vimucontrole-blocks").val($("input.cur-execution-value").val()).trigger("change");
+    $('#vimucontrol-block2-config').on('click', function (e) {
+        vimuBlock2Modal.show();
+    });
+
+    $("#closeve1modal").on("click", function (e) {
         vimuBlockModal.hide();
     });
 
-    // КНОПКА КОНФИГУРАТОРА
-    $("#vimucontrole-blocks-series").on("click", function (e) {
-        console.log($(this).val());
-        $("#vimucontrole-blocks").val('');
+    $("#closeve2modal").on("click", function (e) {
+        vimuBlock2Modal.hide();
+    });
 
+    // Обработка доп платы
+    $('#vimuSet').on('change', function (e) {
+        $('#vimucontrole-blocks2').val() ? $('#vimusumBlocks').val($('#vimucontrole-blocks').val() + '/' + $('#vimucontrole-blocks2').val()) : $('#vimusumBlocks').val($('#vimucontrole-blocks').val());
     });
-    $("#closeve1modal").on("click", function (e) {
-        $("#ve1Config").hide();
-    });
+
+    // КНОПКИ В ТАБЛИЦЕ
 
     $("#ve1c-submit").on("click", function (e) {
         $('#vimucontrole-blocks').val($('.cur-vexecution-value').val()).trigger('change');
-        $("#ve1Config").hide();
+        vimuBlockModal.hide();
+        $('#vimuSet').trigger('change')
     });
+
+    $("#ve2c-submit").on("click", function (e) {
+        $("#vimucontrole-blocks2").val($("input.cur-vexecution2-value").text()).trigger("change");
+        vimuBlock2Modal.hide();
+        $("#vimuSet").trigger('change');
+    });
+
+    $('#ve2Clear').on('click', function (e) {
+        $('#vimucontrole-blocks2').val('');
+        $('#vimuSet').trigger('change');
+        $('#vimuSet').trigger('change');
+        vimuBlock2Modal.hide();
+    });
+
+    // КНОПКА КОНФИГУРАТОРА
 
     $("#vimuSet").on("change", function (e) {
         $('#vimuMark').val($('#vimumark-gen').text());

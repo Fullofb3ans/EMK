@@ -7,19 +7,14 @@ $(document).ready(function () {
         $('#e1-table th').removeClass('table-success');
         $(el).toggleClass('table-success');
     });
+    $(document).on('click', '#e2-table th, #e2-table td', function (e) {
+        let target = $(this).data('target');
+        let el = document.getElementById(target);
+        $('.cur-execution2-value').text('В' + target).val('В' + target);
+        $('#e2-table th').removeClass('table-success');
+        $(el).toggleClass('table-success');
+    });
 
-    const certs_pdf = {
-        epn: {
-            Н: {
-                cert: 'epnn-cert.pdf',
-                decl: 'epnn-decl.pdf',
-            },
-            В: {
-                cert: 'epnv-cert.pdf',
-                decl: 'epnv-decl.pdf',
-            },
-        },
-    };
     const cheme_img = {
         epn: {
             0: 'epn0.png',
@@ -32,10 +27,6 @@ $(document).ready(function () {
             32: 'epn32.png',
         },
     };
-
-    let m2BlockModal = new bootstrap.Modal($('#block-configure-m2'));
-    let vimuBlockModal = new bootstrap.Modal($('#block-configure-e1'));
-    let e2BlockModal = new bootstrap.Modal($('#block-configure-e2'));
 
     // ЗАПОЛНЕНИЕ КрутяЩИХ МОМЕНТОВ ЧЕРЕЗ БД
     $('#executionWrapLegend').on('change', function (e) {
@@ -255,9 +246,6 @@ $(document).ready(function () {
         cur_constructive_scheme = $("input[name='constructive-scheme']:checked").val();
 
         if (!!cur_constructive_scheme) {
-            let control_select = $('#controle-blocks-series');
-            let control_block = $('#controle-blocks');
-            let cur_control_block = $('#controle-blocks').val();
             execution = $("input[name='execution']:checked").val();
 
             if (cur_constructive_scheme == '0') {
@@ -297,26 +285,49 @@ $(document).ready(function () {
         if (x6 === 'ВЭ1') {
             $('#controle-blocks').val('ВЭ1');
             $('#control-block-config').hide();
+            $('#control-block2-config').hide();
+            $('#control-block2-config').val('');
+            $('#control-block2-config').val('');
             $(document.querySelector('#controle-blocks')).hide();
             $("#vimuMark").show();
             $("#vimuSet").show();
         } else if (x6 === 'М2') {
-            // $('#controle-blocks').val('');
+            $('#vimusumBlocks').val('');
+            $('#control-block2-config').val('');
             $(document.querySelector('#control-block-config')).show();
             $(document.querySelector('#controle-blocks')).hide();
             $("#vimuMark").hide();
             $("#vimuMark").val('');
             $("#vimuSet").hide();
         } else if (x6 === 'ВЭ') {
+            $('#vimusumBlocks').val('');
             // $('#controle-blocks').val('');
             $(document.querySelector('#control-block-config')).show();
+            $(document.querySelector('#control-block2-config')).show();
             $(document.querySelector('#controle-blocks')).hide();
             $("#vimuMark").val('');
             $("#vimuMark").hide();
             $("#vimuSet").hide();
         }
     });
-    $(document).on('change', function (e) {
+    $('#control-block-fieldset').on('change', function (e) {
+        let x6 = $('#controle-blocks-series').val();
+        if (x6 == 'М2') {
+            $('#controle-blocks2').val('');
+            $('#sumBlocks').val($('#controle-blocks').val());
+            $('#sumBlocks').show();
+        }
+        else if (x6 == 'ВЭ1') {
+            $('#controle-blocks2').val('');
+
+            $('#sumBlocks').val($('#controle-blocks').val());
+            $('#sumBlocks').hide();
+        }
+        else $('#sumBlocks').show();
+
+    });
+
+    $('#control-block-fieldset').on('change', function (e) {
         let x6 = $('#controle-blocks-series').val();
         if (x6 == 'ВЭ1') {
             $('#vimuMark').val($('#vimumark-gen').text());
@@ -504,24 +515,10 @@ $(document).ready(function () {
                 ($("input[name='specialForEpn']")).closest('fieldset').addClass('ReqValueOk');
         }
 
-        // let x14 = $("input[name='connection-type']:checked").val() ? 1 : 0;
-        // switch (x14) {
-        //     case 1:
-        //         ($("input[name='connection-type']")).closest('fieldset').removeClass('noReqValue');
-        //         ($("input[name='connection-type']")).closest('fieldset').addClass('ReqValueOk');
-        //         break;
-        //     case 2:
-        //         ($("input[name='connection-type']")).closest('fieldset').removeClass('noReqValue');
-        //         ($("input[name='connection-type']")).closest('fieldset').addClass('ReqValueOk');
-        //         break;
-        //     case 3:
-        //         ($("input[name='connection-type']")).closest('fieldset').removeClass('noReqValue');
-        //         ($("input[name='connection-type']")).closest('fieldset').addClass('ReqValueOk');
-        //         break;
-        //     default:
-        //         ($("input[name='connection-type']")).closest('fieldset').removeClass('ReqValueOk');
-        //         ($("input[name='connection-type']")).closest('fieldset').addClass('noReqValue');
-        // }
+        let secondBlock = document.querySelector("#controle-blocks2").value ? '/' + document.querySelector("#controle-blocks2").value : '';
+
+        document.querySelector("#sumBlocks").value = x6 + secondBlock;
+
         let x15 = document.querySelector("#vimuMark").value ? '/' + document.querySelector("#vimuMark").value : '';
 
         let optForBu = $('#control-block-optionsset option:selected').val() != 'noValue' ? $('#control-block-optionsset option:selected').val() : '';
@@ -529,7 +526,7 @@ $(document).ready(function () {
 
         is_true = [x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13].includes('X');
 
-        mark_gen.text(x0 + x1 + x2 + '-' + x3 + '-' + x4 + '-' + x5 + '-' + x6 + optionssetCheckBox + optForBu + '/' + x7 + '-' + x8 + '-' + x9 + '-' + x10 + x11 + x12 + x13 + x15);
+        mark_gen.text(x0 + x1 + x2 + '-' + x3 + '-' + x4 + '-' + x5 + '-' + x6 + secondBlock + optionssetCheckBox + optForBu + '/' + x7 + '-' + x8 + '-' + x9 + '-' + x10 + x11 + x12 + x13 + x15);
 
         // modal_button.toggle(!is_true);
         mark_gen.toggleClass('is-invalid', is_true).toggleClass('is-valid', !is_true);
@@ -543,6 +540,8 @@ $(document).ready(function () {
     });
 
     $('#download').on('click', function () {
+        let firstBuMark = document.querySelector("#controle-blocks2").value;
+        let secondBuMark = document.querySelector("#controle-blocks2").value;
         let BoMark = document.querySelector("#controle-blocks-series").value;
         let vbu = document.querySelector("#vimucontrole-blocks").value;
 
@@ -590,8 +589,8 @@ $(document).ready(function () {
 
         //json3
 
-        let j30 = document.querySelector("#controle-blocks").value; // тип бу 
-        let j31 = checkCommandBlock() ? checkCommandBlock() : ''; // Тип управления
+        let j30 = $('#vimusumBlocks').val() ? document.querySelector("#sumBlocks").value + ' ' + '(' + $('#vimusumBlocks').val() + ')' : document.querySelector("#sumBlocks").value; // тип бу 
+        let j31 = checkCommandBlock() + ' ' + checkSecondCommandBlock(); // Тип управления
         let j32 = selectRemoteSignal();// сигналы дист управления
 
         let j33 = ''; //Тип БКВ
@@ -606,10 +605,11 @@ $(document).ready(function () {
         if (document.querySelector("#pointer > input[type=checkbox]").checked) { j34 = 'Есть' }
         else { j34 = 'Отсутствует' };
 
-        let j35 = selectPositionSignal(); // Сигнализация положения
+        let j35 = selectPositionSignal() + ' ' + selectPositionSignalSecondCommandBlock(); // Сигнализация положения
 
         let j36 = ''; // Сигнал момэнт
-        if ((BoMark == 'ВЭ13' || BoMark == 'ВЭ15' || BoMark == 'ВЭ17') || (vbu == 'ВЭ13' || vbu == 'ВЭ15' || vbu == 'ВЭ17')) {
+        if ((firstBuMark == 'ВЭ13' || firstBuMark == 'ВЭ15' || firstBuMark == 'ВЭ17') || (vbu == 'ВЭ13' || vbu == 'ВЭ15' || vbu == 'ВЭ17')
+            || (secondBuMark == 'ВЭ13' || secondBuMark == 'ВЭ15' || secondBuMark == 'ВЭ17')) {
             j36 = 'Есть';
         }
         else {
@@ -617,7 +617,7 @@ $(document).ready(function () {
         }
 
         let j37 = ''; // Дублирование RS485
-        if ((j30 == 'ВЭ18' || j30 == 'ВЭ110' || j30 == 'ВЭ24' || j30 == 'ВЭ26') || (vbu == 'ВЭ18' || vbu == 'ВЭ110' || vbu == 'ВЭ24' || vbu == 'ВЭ26')) { j37 = 'Есть' }
+        if ((firstBuMark == 'ВЭ18' || firstBuMark == 'ВЭ110' || firstBuMark == 'ВЭ24' || firstBuMark == 'ВЭ26') || (vbu == 'ВЭ18' || vbu == 'ВЭ110' || vbu == 'ВЭ24' || vbu == 'ВЭ26') || (secondBuMark == 'ВЭ18' || secondBuMark == 'ВЭ110' || secondBuMark == 'ВЭ24' || secondBuMark == 'ВЭ26')) { j37 = 'Есть' }
         else { j37 = 'Отсутствует' };
 
         let j38 = 'Одиночные';
@@ -745,6 +745,11 @@ $(document).ready(function () {
         }
     });
 
+    let m2BlockModal = new bootstrap.Modal($('#block-configure-m2'));
+    let vimuBlockModal = new bootstrap.Modal($('#block-configure-e1'));
+    let e2BlockModal = new bootstrap.Modal($('#block-configure-e2'));
+    let addBlockModal = new bootstrap.Modal($('#addNewBlock'));
+
     // Кнопки в таблицу
     $('#m1-form').on('change', function (e) {
         let mod = 0;
@@ -793,6 +798,16 @@ $(document).ready(function () {
         $('#controle-blocks').val($('input.cur-execution-value').val()).trigger('change');
         vimuBlockModal.hide();
     });
+    $('#AddNewsubmit').on('click', function (e) {
+        console.log('privet');
+        $('#controle-blocks2').val($('input.cur-execution2-value').val()).trigger('change');
+        addBlockModal.hide();
+    });
+    $('#AddNewClear').on('click', function (e) {
+        addBlockModal.hide();
+        $('#controle-blocks2').val('');
+        $(document).trigger('change')
+    });
 
     $('#e2-form input').on('change', function (e) {
         let mod = $("input[name='e2']:checked").val();
@@ -820,6 +835,10 @@ $(document).ready(function () {
             $('#vimuModal').show();
         }
     });
+    $('#control-block2-config').on('click', function (e) {
+        addBlockModal.show();
+    });
+
 
     $('#controle-blocks-series').on('change', function (e) {
         let cbs = $('#controle-blocks-series').val();
@@ -1031,6 +1050,67 @@ $(document).ready(function () {
                 return (g6 = m1 + m2 + m3);
         }
     }
+
+    // Обработка типа второго блока
+    function checkSecondCommandBlock() {
+        if (document.querySelector('#controle-blocks').value == 'ВЭ1') {
+            let secondBlock = document.querySelector("#vimucontrole-blocks2").value;
+            switch (secondBlock) {
+                case 'ВЭ11':
+                    return ' /Дополнительная плата: Базовый набор функций';
+                case 'ВЭ12':
+                    return ' /Дополнительная плата: 1)Базовый набор функций 2)Передача информации о положении выходного звена привода посредством токового сигнала (4–20 мА)';
+                case 'ВЭ13':
+                    return ' /Дополнительная плата: 1)Базовый набор функций 2)Передача информации о положении выходного звена привода посредством токового сигнала (4–20 мА)  3)Передача текущего значения движущего момента на выходном звене привода посредством токового сигнала (4–20 мА).';
+                case 'ВЭ14':
+                    return ' /Дополнительная плата: 1)Базовый набор функций 2)Диагностирование отказов опциональных модулей.  3)Автоматический выбор активного интерфейса дистанционного управления.';
+                case 'ВЭ15':
+                    return ' /Дополнительная плата: 1)Базовый набор функций 2)Диагностирование отказов опциональных модулей.  3)Автоматический выбор активного интерфейса дистанционного управления.  4) Передача информации о положении выходного звена привода посредством токового сигнала (4–20 мА)  5)Передача текущего значения движущего момента на выходном звене привода посредством токового сигнала (4–20 мА).';
+                case 'ВЭ16':
+                    return ' /Дополнительная плата: 1)Базовый набор функций 2)Аналоговое управление приводом — прием от дистанционного пульта и отработка токового сигнала (4–20 мА) задания положения выходного звена привода с контролем наличия связи  3)Диагностирование отказов опциональных модулей.  4)Автоматический выбор активного интерфейса дистанционного управления.';
+                case 'ВЭ17':
+                    return ' /Дополнительная плата: 1)Базовый набор функций 2)Передача информации о положении выходного звена привода посредством токового сигнала (4–20 мА)  3)Передача текущего значения движущего момента на выходном звене привода посредством токового сигнала (4–20 мА).  4) Аналоговое управление приводом — прием от дистанционного пульта и отработка токового сигнала (4–20 мА) задания положения выходного звена привода с контролем наличия связи  5) Диагностирование отказов опциональных модулей.  6)Автоматический выбор активного интерфейса дистанционного управления.';
+                case 'ВЭ18':
+                    return ' /Дополнительная плата: 1)Базовый набор функций 2)Цифровое управление и настройка привода с дублированием каналов связи посредством цифрового канала связи, интерфейс RS485, протокол обмена — MODBUS RTU  3)Диагностирование отказов опциональных модулей.   4)Автоматический выбор активного интерфейса дистанционного управления.';
+                case 'ВЭ19':
+                    return ' /Дополнительная плата: 1)Базовый набор функций 2)Цифровое управление приводом посредством цифрового канала связи, интерфейс RS485, протокол обмена — PROFIBUS DP  3)Диагностирование отказов опциональных модулей.   4)Автоматический выбор активного интерфейса дистанционного управления.';
+                case 'ВЭ110':
+                    return ' /Дополнительная плата: 1)Базовый набор функций 2)Цифровое управление приводом с дублированием каналов связи посредством цифрового канала связи, интерфейс RS485, протокол обмена — PROFIBUS DP.  3)Диагностирование отказов опциональных модулей.   4)Автоматический выбор активного интерфейса дистанционного управления.';
+                default:
+                    return '';
+            }
+        }
+
+        else {
+            let base = document.querySelector('#controle-blocks2').value;
+            switch (base) {
+                case 'ВЭ11':
+                    return ' /Дополнительная плата: Базовый набор функций';
+                case 'ВЭ12':
+                    return ' /Дополнительная плата: 1)Базовый набор функций 2)Передача информации о положении выходного звена привода посредством токового сигнала (4–20 мА)';
+                case 'ВЭ13':
+                    return ' /Дополнительная плата: 1)Базовый набор функций 2)Передача информации о положении выходного звена привода посредством токового сигнала (4–20 мА)  3)Передача текущего значения движущего момента на выходном звене привода посредством токового сигнала (4–20 мА).';
+                case 'ВЭ14':
+                    return ' /Дополнительная плата: 1)Базовый набор функций 2)Диагностирование отказов опциональных модулей.  3)Автоматический выбор активного интерфейса дистанционного управления.';
+                case 'ВЭ15':
+                    return ' /Дополнительная плата: 1)Базовый набор функций 2)Диагностирование отказов опциональных модулей.  3)Автоматический выбор активного интерфейса дистанционного управления.  4) Передача информации о положении выходного звена привода посредством токового сигнала (4–20 мА)  5)Передача текущего значения движущего момента на выходном звене привода посредством токового сигнала (4–20 мА).';
+                case 'ВЭ16':
+                    return ' /Дополнительная плата: 1)Базовый набор функций 2)Аналоговое управление приводом — прием от дистанционного пульта и отработка токового сигнала (4–20 мА) задания положения выходного звена привода с контролем наличия связи  3)Диагностирование отказов опциональных модулей.  4)Автоматический выбор активного интерфейса дистанционного управления.';
+                case 'ВЭ17':
+                    return ' /Дополнительная плата: 1)Базовый набор функций 2)Передача информации о положении выходного звена привода посредством токового сигнала (4–20 мА)  3)Передача текущего значения движущего момента на выходном звене привода посредством токового сигнала (4–20 мА).  4) Аналоговое управление приводом — прием от дистанционного пульта и отработка токового сигнала (4–20 мА) задания положения выходного звена привода с контролем наличия связи  5) Диагностирование отказов опциональных модулей.  6)Автоматический выбор активного интерфейса дистанционного управления.';
+                case 'ВЭ18':
+                    return ' /Дополнительная плата: 1)Базовый набор функций 2)Цифровое управление и настройка привода с дублированием каналов связи посредством цифрового канала связи, интерфейс RS485, протокол обмена — MODBUS RTU  3)Диагностирование отказов опциональных модулей.   4)Автоматический выбор активного интерфейса дистанционного управления.';
+                case 'ВЭ19':
+                    return ' /Дополнительная плата: 1)Базовый набор функций 2)Цифровое управление приводом посредством цифрового канала связи, интерфейс RS485, протокол обмена — PROFIBUS DP  3)Диагностирование отказов опциональных модулей.   4)Автоматический выбор активного интерфейса дистанционного управления.';
+                case 'ВЭ110':
+                    return ' /Дополнительная плата: 1)Базовый набор функций 2)Цифровое управление приводом с дублированием каналов связи посредством цифрового канала связи, интерфейс RS485, протокол обмена — PROFIBUS DP.  3)Диагностирование отказов опциональных модулей.   4)Автоматический выбор активного интерфейса дистанционного управления.';
+                default:
+                    return '';
+            }
+        }
+    }
+
+
     // МЕСТНЫЕ И ДИСТ СИГНАЛЫ
     function selectRemoteSignal() {
 
@@ -1084,7 +1164,6 @@ $(document).ready(function () {
     }
 
     function selectPositionSignal() {
-
         let BoMark = document.querySelector("#controle-blocks").value;
         if (BoMark == 'ВЭ1') {
             vimublock = document.querySelector("#vimucontrole-blocks").value;
@@ -1105,7 +1184,7 @@ $(document).ready(function () {
             }
         }
         else if (BoMark == 'ВЭ11') {
-            return positionSignal = 'Отсутсвуют';
+            return positionSignal = 'Отсутствуют';
         }
         else if (BoMark == 'ВЭ12' || BoMark == 'ВЭ13' || BoMark == 'ВЭ16' || BoMark == 'ВЭ17') {
             return positionSignal = '4–20 мА';
@@ -1129,14 +1208,54 @@ $(document).ready(function () {
             return positionSignal = 'Отсутствуют';
         }
     }
-
+    // Обработка сигналов второго блока
+    function selectPositionSignalSecondCommandBlock() {
+        if (document.querySelector('#controle-blocks').value == 'ВЭ1') {
+            let secondBlock = document.querySelector("#vimucontrole-blocks2").value;
+            if (secondBlock == 'ВЭ11') {
+                return positionSignal = ' /Дополнительная плата: Отсутствуют';
+            }
+            else if (secondBlock == 'ВЭ12' || secondBlock == 'ВЭ13' || secondBlock == 'ВЭ16' || secondBlock == 'ВЭ17') {
+                return positionSignal = ' /Дополнительная плата: 4–20 мА';
+            }
+            else if (secondBlock == 'ВЭ14' || secondBlock == 'ВЭ18') {
+                return positionSignal = ' /Дополнительная плата: RS485 Modbus';
+            }
+            else if (secondBlock == 'ВЭ15') {
+                return positionSignal = ' /Дополнительная плата: 4–20 мА и RS485 Modbus';
+            }
+            else if (secondBlock == 'ВЭ19' || secondBlock == 'ВЭ110') {
+                return positionSignal = ' /Дополнительная плата: Profibus DP';
+            }
+            else {
+                return positionSignal = '';
+            }
+        }
+        else {
+            let BoMark = document.querySelector("#controle-blocks2").value;
+            if (BoMark == 'ВЭ11') {
+                return positionSignal = ' /Дополнительная плата: Отсутствуют';
+            }
+            else if (BoMark == 'ВЭ12' || BoMark == 'ВЭ13' || BoMark == 'ВЭ16' || BoMark == 'ВЭ17') {
+                return positionSignal = ' /Дополнительная плата: 4–20 мА';
+            }
+            else if (BoMark == 'ВЭ14' || BoMark == 'ВЭ18') {
+                return positionSignal = ' /Дополнительная плата: RS485 Modbus';
+            }
+            else if (BoMark == 'ВЭ15') {
+                return positionSignal = ' /Дополнительная плата: 4–20 мА и RS485 Modbus';
+            }
+            else if (BoMark == 'ВЭ19' || BoMark == 'ВЭ110') {
+                return positionSignal = ' /Дополнительная плата: Profibus DP';
+            }
+            else {
+                return positionSignal = '';
+            }
+        }
+    }
     // Обработка окна ВИМУ
     $('#closeVimuModal').on('click', function () {
         $('#vimuModal').hide();
-    });
-
-    $('#vimucontrol-block-config').on('click', function () {
-        $('#ve1Config').show();
     });
 
     $("#controle-blocks-series").on('change', function () {
