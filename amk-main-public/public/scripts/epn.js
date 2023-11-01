@@ -334,6 +334,16 @@ $(document).ready(function () {
         }
     });
 
+    $(document).on('change', function (e) {
+        if ($('#controle-blocks2').val() || $('#vimucontrole-blocks2').val()) {
+            $('#vimuPanelOptionlabel').hide();
+            $('#PanelOptionlabel').hide();
+        }
+        else {
+            $('#vimuPanelOptionlabel').show();
+            $('#PanelOptionlabel').show();
+        }
+    });
 
     // МАРКИРОВКА
     $(document).on('change', function (e) {
