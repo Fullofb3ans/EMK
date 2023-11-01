@@ -278,31 +278,35 @@ $(document).ready(function () {
         }
     });
 
-    $(document).on('change', function (e) {
+    $('#controle-blocks-series').on('change', function (e) {
         let x6 = $('#controle-blocks-series').val();
         console.log(x6);
-
         if (x6 === 'ВЭ1') {
             $('#controle-blocks').val('ВЭ1');
             $('#control-block-config').hide();
             $('#control-block2-config').hide();
-            $('#control-block2-config').val('');
+            $('#control-block-config').val('');
             $('#control-block2-config').val('');
             $(document.querySelector('#controle-blocks')).hide();
             $("#vimuMark").show();
             $("#vimuSet").show();
+            $("#vimuSet").trigger('change');
         } else if (x6 === 'М2') {
-            $('#vimucontrole-blocks2').val('')
             $('#vimusumBlocks').val('');
+            $('#vimucontrole-blocks').val('');
+            $('#vimucontrole-blocks2').val('');
+            $('#control-block-config').val('');
             $('#control-block2-config').val('');
             $(document.querySelector('#control-block-config')).show();
             $(document.querySelector('#controle-blocks')).hide();
             $("#vimuMark").hide();
             $("#vimuMark").val('');
             $("#vimuSet").hide();
+            $("#vimuSet").trigger('change');
         } else if (x6 === 'ВЭ') {
             $('#vimusumBlocks').val('');
-            $('#vimucontrole-blocks2').val('')
+            $('#vimucontrole-blocks').val('');
+            $('#vimucontrole-blocks2').val('');
             $(document.querySelector('#control-block-config')).show();
             $(document.querySelector('#control-block2-config')).show();
             $(document.querySelector('#controle-blocks')).hide();
@@ -311,7 +315,7 @@ $(document).ready(function () {
             $("#vimuSet").hide();
         }
     });
-    $('#control-block-fieldset').on('change', function (e) {
+    $('#controle-blocks-series').on('change', function (e) {
         let x6 = $('#controle-blocks-series').val();
         if (x6 == 'М2') {
             $('#controle-blocks2').val('');
@@ -1270,7 +1274,7 @@ $(document).ready(function () {
     });
 
     $("#controle-blocks-series").on('change', function () {
-        ($("input[name='connection']:checked").val(''));
+        $("input[name='connection']:checked").prop('checked', false);
         // Открытие подключения ЕПН под ВИМУ
         let BoMark = document.querySelector("#controle-blocks-series").value;
         if (BoMark == 'ВЭ') {

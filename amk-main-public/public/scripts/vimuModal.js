@@ -54,14 +54,14 @@ $(document).ready(function () {
         }
 
         let x4 = $('#vimucontrole-blocks').val() ? $('#vimucontrole-blocks').val() : 'X'; //функциональные возможности
-        switch ($('#vimucontrole-blocks').val()) {
+        switch (x4) {
             case 'X':
-                ($('#vimucontrole-blocks')).closest('fieldset').removeClass('ReqValueOk');
-                ($('#vimucontrole-blocks')).closest('fieldset').addClass('noReqValue');
+                ($('#vimucontrol-block-fieldset')).closest('fieldset').removeClass('ReqValueOk');
+                ($('#vimucontrol-block-fieldset')).closest('fieldset').addClass('noReqValue');
                 break;
             default:
-                ($('#vimucontrole-blocks')).closest('fieldset').removeClass('noReqValue');
-                ($('#vimucontrole-blocks')).closest('fieldset').addClass('ReqValueOk');
+                ($('#vimucontrol-block-fieldset')).closest('fieldset').removeClass('noReqValue');
+                ($('#vimucontrol-block-fieldset')).closest('fieldset').addClass('ReqValueOk');
         }
 
         let secondVimuBlock = $('#vimucontrole-blocks2').val() ? '/' + $('#vimucontrole-blocks2').val() : '';
