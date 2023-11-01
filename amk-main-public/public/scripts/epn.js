@@ -252,8 +252,6 @@ $(document).ready(function () {
                 $("#buVe").hide();
             }
             else {
-                $('#controle-blocks-series').val('');
-                $('#controle-blocks').val('');
                 $("#buVe").show();
             }
 
@@ -278,7 +276,7 @@ $(document).ready(function () {
         }
     });
 
-    $('#controle-blocks-series').on('change', function (e) {
+    $('#control-block-fieldset').on('change', function (e) {
         let x6 = $('#controle-blocks-series').val();
         console.log(x6);
         if (x6 === 'ВЭ1') {
