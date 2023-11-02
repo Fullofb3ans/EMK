@@ -1428,7 +1428,7 @@ $(document).ready(function () {
         let BoMark = document.querySelector('#controle-blocks').value;
 
         if (BoMark == 'Э11') {
-            return (positionSignal = 'Отсутствуют');
+            return (positionSignal = '');
         } else if (BoMark == 'Э12' || BoMark == 'Э13' || BoMark == 'Э16' || BoMark == 'Э17') {
             return (positionSignal = '4–20 мА');
         } else if (BoMark == 'Э14' || BoMark == 'Э18' || BoMark == 'Э01' || BoMark == 'Э1S1') {
@@ -1448,7 +1448,7 @@ $(document).ready(function () {
         } else if (document.querySelector('#m1-3').checked) {
             return (positionSignal = '4-20мА');
         } else {
-            return (positionSignal = 'Отсутствуют');
+            return (positionSignal = '');
         }
     }
     // ОТКРЫТИЕ ПО ШАГАМ

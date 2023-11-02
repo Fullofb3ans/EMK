@@ -338,6 +338,14 @@ background-color: rgba(0,0,0,0);
 #e2-table th:hover {
   cursor: pointer;
 }
+#ve1-table td:hover,
+#ve1-table th:hover {
+  cursor: pointer;
+}
+#ve2-table td:hover,
+#ve2-table th:hover {
+  cursor: pointer;
+}
 
 fieldset.success legend {
   border-right: 4px solid var(--success-color);

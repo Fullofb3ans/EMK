@@ -9,9 +9,23 @@ $(document).ready(function () {
     });
     $(document).on('click', '#e2-table th, #e2-table td', function (e) {
         let target = $(this).data('target');
-        let el = document.getElementById(target);
+        let el = document.getElementById('e2' + target);
         $('.cur-execution2-value').text('В' + target).val('В' + target);
         $('#e2-table th').removeClass('table-success');
+        $(el).toggleClass('table-success');
+    });
+    $(document).on('click', '#ve2-table th, #ve2-table td', function (e) {
+        let target = $(this).data('target');
+        let el = document.getElementById('ve2' + target);
+        $('.cur-vexecution2-value').text(target).val(+ target);
+        $('#ve2-table th').removeClass('table-success');
+        $(el).toggleClass('table-success');
+    });
+    $(document).on('click', '#ve1-table th, #ve1-table td', function (e) {
+        let target = $(this).data('target');
+        let el = document.getElementById('ve1' + target);
+        $('.cur-vexecution-value').text(target).val(target);
+        $('#ve1-table th').removeClass('table-success');
         $(el).toggleClass('table-success');
     });
 
@@ -1180,7 +1194,7 @@ $(document).ready(function () {
         if (BoMark == 'ВЭ1') {
             vimublock = document.querySelector("#vimucontrole-blocks").value;
             if (vimublock == 'ВЭ11') {
-                return positionSignal = 'Отсутсвуют';
+                return positionSignal = '';
             }
             else if (vimublock == 'ВЭ12' || vimublock == 'ВЭ13' || vimublock == 'ВЭ16' || vimublock == 'ВЭ17') {
                 return positionSignal = '4–20 мА';
@@ -1196,7 +1210,7 @@ $(document).ready(function () {
             }
         }
         else if (BoMark == 'ВЭ11') {
-            return positionSignal = 'Отсутствуют';
+            return positionSignal = '';
         }
         else if (BoMark == 'ВЭ12' || BoMark == 'ВЭ13' || BoMark == 'ВЭ16' || BoMark == 'ВЭ17') {
             return positionSignal = '4–20 мА';
@@ -1217,7 +1231,7 @@ $(document).ready(function () {
             return positionSignal = '4-20мА';
         }
         else {
-            return positionSignal = 'Отсутствуют';
+            return positionSignal = '';
         }
     }
     // Обработка сигналов второго блока
@@ -1225,7 +1239,7 @@ $(document).ready(function () {
         if (document.querySelector('#controle-blocks').value == 'ВЭ1') {
             let secondBlock = document.querySelector("#vimucontrole-blocks2").value;
             if (secondBlock == 'ВЭ11') {
-                return positionSignal = ' /Дополнительная плата: Отсутствуют';
+                return positionSignal = '';
             }
             else if (secondBlock == 'ВЭ12' || secondBlock == 'ВЭ13' || secondBlock == 'ВЭ16' || secondBlock == 'ВЭ17') {
                 return positionSignal = ' /Дополнительная плата: 4–20 мА';
@@ -1246,7 +1260,7 @@ $(document).ready(function () {
         else {
             let BoMark = document.querySelector("#controle-blocks2").value;
             if (BoMark == 'ВЭ11') {
-                return positionSignal = ' /Дополнительная плата: Отсутствуют';
+                return positionSignal = '';
             }
             else if (BoMark == 'ВЭ12' || BoMark == 'ВЭ13' || BoMark == 'ВЭ16' || BoMark == 'ВЭ17') {
                 return positionSignal = ' /Дополнительная плата: 4–20 мА';

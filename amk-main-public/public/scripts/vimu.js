@@ -453,7 +453,7 @@ $(document).ready(function () {
         let BoMark = document.querySelector("#controle-blocks");
 
         if (BoMark == 'ВЭ11') {
-            return positionSignal = 'Отсутствуют';
+            return positionSignal = '';
         }
         else if (BoMark == 'ВЭ12' || BoMark == 'ВЭ13' || BoMark == 'ВЭ16' || BoMark == 'ВЭ17') {
             return positionSignal = '4–20 мА';
@@ -468,7 +468,7 @@ $(document).ready(function () {
             return positionSignal = 'Profibus DP';
         }
         else {
-            return positionSignal = 'Отсутствуют';
+            return positionSignal = '';
         }
     }
 
