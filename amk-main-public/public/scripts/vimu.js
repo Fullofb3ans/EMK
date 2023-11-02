@@ -9,10 +9,20 @@ $(document).ready(function () {
     });
     $(document).on('click', '#ve2-table th, #ve2-table td', function (e) {
         let target = $(this).data('target');
-        let el = document.getElementById(target);
+        let el = document.getElementById('v2' + target);
         $('.cur-vexecution2-value').text(target).val(target);
         $('#ve2-table th').removeClass('table-success');
         $(el).toggleClass('table-success');
+    });
+
+    $(document).on('change', function (e) {
+        if ($('#controle-blocks2').val()) {
+            document.querySelector("#PanelOptionLabel").checked = false;
+            $('#PanelOptionLabel').hide();
+        }
+        else {
+            $('#PanelOptionLabel').show();
+        }
     });
 
     let vimuBlockModal = new bootstrap.Modal($("#block-configure-e1"));
@@ -264,9 +274,8 @@ $(document).ready(function () {
         // json2 = [j20, j21, j22, j23, j24];
 
         //json3
-
-        let j30 = document.querySelector("#controle-blocks").value; // тип бу 
-        let j31 = checkCommandBlock() ? checkCommandBlock() : ''; // Тип управления
+        let j30 = document.querySelector("#sumBlocks").value; // тип бу 
+        let j31 = checkSecondCommandBlock() ? 'Основная плата:' + '' + checkCommandBlock() + '' + checkSecondCommandBlock() : checkCommandBlock(); // Тип управления
 
         let microOrPot = document.querySelector("#roundControl-1").checked ? ' + ' + document.querySelector("#microOrPot").value : '';
         let j32 = selectRemoteSignal() + microOrPot;// сигналы дист управления
@@ -275,7 +284,7 @@ $(document).ready(function () {
 
         let j34 = ''; //Механический указатель
 
-        let j35 = selectPositionSignal(); // Сигнализация положения
+        let j35 = selectPositionSignalSecondCommandBlock() ? selectPositionSignal() + ' ' + selectPositionSignalSecondCommandBlock() : selectPositionSignal(); // Сигнализация положения
 
         let j36 = ''; // Сигнал момэнт
         if ((j30 == 'ВЭ13' || j30 == 'ВЭ15' || j30 == 'ВЭ17') || (secondBlock == 'ВЭ13' || secondBlock == 'ВЭ15' || secondBlock == 'ВЭ17')) {
@@ -284,7 +293,6 @@ $(document).ready(function () {
         else {
             j36 = 'Отсутствует';
         }
-
 
         let j37 = ''; // Дублирование RS485
         if ((j30 == 'ВЭ18' || j30 == 'ВЭ110' || j30 == 'ВЭ24' || j30 == 'ВЭ26') || (secondBlock == 'ВЭ18' || secondBlock == 'ВЭ110' || secondBlock == 'ВЭ24' || secondBlock == 'ВЭ26')) { j37 = 'Есть' }
@@ -305,7 +313,6 @@ $(document).ready(function () {
         } else {
             j311 = 'На приводе';
         };
-
         // json3 = [j30, j31, j32, j33, j34, j35, j36, j37, j38, j39, j310, j311];
 
         //json4
@@ -332,7 +339,6 @@ $(document).ready(function () {
         let j63 = '?'; //Штепсельные разъемы
         let j64 = '?'; //Тип подводимых кабелей
         let j65 = '';
-
         // json6 = [j60, j61, j62, j63];
 
         //json7
@@ -352,7 +358,6 @@ $(document).ready(function () {
             [j50, j51, j52, j53, j54],
             [j60, j61, j62, j63, j64, j65],
             [j70, j71, j72, j73, j74, j75]);
-
 
         function DOCX(id, name) {
             window.open(`https://emk.websto.pro/Tula/${id + '/' + name}`);
@@ -423,6 +428,34 @@ $(document).ready(function () {
                 return '1)Базовый набор функций 2)Цифровое управление приводом с дублированием каналов связи посредством цифрового канала связи, интерфейс RS485, протокол обмена — PROFIBUS DP.  3)Диагностирование отказов опциональных модулей.   4)Автоматический выбор активного интерфейса дистанционного управления.';
         }
     }
+
+    function checkSecondCommandBlock() {
+        let secondBlock = document.querySelector("#controle-blocks2").value;
+        switch (secondBlock) {
+            case 'ВЭ11':
+                return ' /Дополнительная плата: Базовый набор функций';
+            case 'ВЭ12':
+                return ' /Дополнительная плата: 1)Базовый набор функций 2)Передача информации о положении выходного звена привода посредством токового сигнала (4–20 мА)';
+            case 'ВЭ13':
+                return ' /Дополнительная плата: 1)Базовый набор функций 2)Передача информации о положении выходного звена привода посредством токового сигнала (4–20 мА)  3)Передача текущего значения движущего момента на выходном звене привода посредством токового сигнала (4–20 мА).';
+            case 'ВЭ14':
+                return ' /Дополнительная плата: 1)Базовый набор функций 2)Диагностирование отказов опциональных модулей.  3)Автоматический выбор активного интерфейса дистанционного управления.';
+            case 'ВЭ15':
+                return ' /Дополнительная плата: 1)Базовый набор функций 2)Диагностирование отказов опциональных модулей.  3)Автоматический выбор активного интерфейса дистанционного управления.  4) Передача информации о положении выходного звена привода посредством токового сигнала (4–20 мА)  5)Передача текущего значения движущего момента на выходном звене привода посредством токового сигнала (4–20 мА).';
+            case 'ВЭ16':
+                return ' /Дополнительная плата: 1)Базовый набор функций 2)Аналоговое управление приводом — прием от дистанционного пульта и отработка токового сигнала (4–20 мА) задания положения выходного звена привода с контролем наличия связи  3)Диагностирование отказов опциональных модулей.  4)Автоматический выбор активного интерфейса дистанционного управления.';
+            case 'ВЭ17':
+                return ' /Дополнительная плата: 1)Базовый набор функций 2)Передача информации о положении выходного звена привода посредством токового сигнала (4–20 мА)  3)Передача текущего значения движущего момента на выходном звене привода посредством токового сигнала (4–20 мА).  4) Аналоговое управление приводом — прием от дистанционного пульта и отработка токового сигнала (4–20 мА) задания положения выходного звена привода с контролем наличия связи  5) Диагностирование отказов опциональных модулей.  6)Автоматический выбор активного интерфейса дистанционного управления.';
+            case 'ВЭ18':
+                return ' /Дополнительная плата: 1)Базовый набор функций 2)Цифровое управление и настройка привода с дублированием каналов связи посредством цифрового канала связи, интерфейс RS485, протокол обмена — MODBUS RTU  3)Диагностирование отказов опциональных модулей.   4)Автоматический выбор активного интерфейса дистанционного управления.';
+            case 'ВЭ19':
+                return ' /Дополнительная плата: 1)Базовый набор функций 2)Цифровое управление приводом посредством цифрового канала связи, интерфейс RS485, протокол обмена — PROFIBUS DP  3)Диагностирование отказов опциональных модулей.   4)Автоматический выбор активного интерфейса дистанционного управления.';
+            case 'ВЭ110':
+                return ' /Дополнительная плата: 1)Базовый набор функций 2)Цифровое управление приводом с дублированием каналов связи посредством цифрового канала связи, интерфейс RS485, протокол обмена — PROFIBUS DP.  3)Диагностирование отказов опциональных модулей.   4)Автоматический выбор активного интерфейса дистанционного управления.';
+            default:
+                return '';
+        }
+    }
     // МЕСТНЫЕ И ДИСТ СИГНАЛЫ
     function selectRemoteSignal() {
 
@@ -471,6 +504,30 @@ $(document).ready(function () {
             return positionSignal = '';
         }
     }
+
+    // Обработка сигналов второго блока
+    function selectPositionSignalSecondCommandBlock() {
+        let BoMark = document.querySelector("#controle-blocks2").value;
+        if (BoMark == 'ВЭ11') {
+            return positionSignal = '';
+        }
+        else if (BoMark == 'ВЭ12' || BoMark == 'ВЭ13' || BoMark == 'ВЭ16' || BoMark == 'ВЭ17') {
+            return positionSignal = ' /Дополнительная плата: 4–20 мА';
+        }
+        else if (BoMark == 'ВЭ14' || BoMark == 'ВЭ18') {
+            return positionSignal = ' /Дополнительная плата: RS485 Modbus';
+        }
+        else if (BoMark == 'ВЭ15') {
+            return positionSignal = ' /Дополнительная плата: 4–20 мА и RS485 Modbus';
+        }
+        else if (BoMark == 'ВЭ19' || BoMark == 'ВЭ110') {
+            return positionSignal = ' /Дополнительная плата: Profibus DP';
+        }
+        else {
+            return positionSignal = '';
+        }
+    }
+
 
     $("#control-block-config").on("click", function (e) {
         vimuBlockModal.show();
@@ -554,6 +611,7 @@ $(document).ready(function () {
     $('#ve2Clear').on('click', function (e) {
         $('#controle-blocks2').val('');
         vimuBlock2Modal.hide();
+        $('#control-block-fieldset').trigger('change');
     });
 
     $('#control-block-fieldset').on('change', function (e) {
