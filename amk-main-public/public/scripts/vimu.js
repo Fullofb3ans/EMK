@@ -7,6 +7,13 @@ $(document).ready(function () {
         $('#e1-table th').removeClass('table-success');
         $(el).toggleClass('table-success');
     });
+    $(document).on('click', '#ve2-table th, #ve2-table td', function (e) {
+        let target = $(this).data('target');
+        let el = document.getElementById(target);
+        $('.cur-vexecution2-value').text(target).val(target);
+        $('#ve2-table th').removeClass('table-success');
+        $(el).toggleClass('table-success');
+    });
 
     let vimuBlockModal = new bootstrap.Modal($("#block-configure-e1"));
 
@@ -183,6 +190,8 @@ $(document).ready(function () {
                 ($("input[name='specialForVimu']")).closest('fieldset').addClass('ReqValueOk');
         }
 
+        secondVimuBlock = $('#controle-blocks2').val() ? '/' + $('#controle-blocks2').val() : '';
+
         // ДОП ОПЦИИ ДЛЯ БЛОКА
         let tOption = '';
         document.querySelector('#tOption').checked ? (tOption = document.querySelector('#tOption').value) : '';
@@ -203,12 +212,14 @@ $(document).ready(function () {
 
         is_true = [x1, x2, x3, x4, x5, x6, x7, x8, x9].includes('X');
 
-        mark_gen.text(x0 + x1 + '-' + x2 + x3 + '-' + x4 + optionssetCheckBox + optForBu + '-' + x5 + '-' + x6 + x7 + x8 + x9);
+        mark_gen.text(x0 + x1 + '-' + x2 + x3 + '-' + x4 + secondVimuBlock + optionssetCheckBox + optForBu + '-' + x5 + '-' + x6 + x7 + x8 + x9);
 
     });
 
     // ФЕТЧ НА ДОКУМЕНТАЦИЮ
     $('#download').on('click', function () {
+        secondBlock = document.querySelector("#controle-blocks2").value;
+
         let BoMark = 'ВЭ1';
         console.log('hea');
         let optForBu = $('#control-block-optionsset option:selected').val() != 'noValue' ? $('#control-block-optionsset option:selected').val() : '';
@@ -267,7 +278,7 @@ $(document).ready(function () {
         let j35 = selectPositionSignal(); // Сигнализация положения
 
         let j36 = ''; // Сигнал момэнт
-        if (j30 == 'ВЭ13' || j30 == 'ВЭ15' || j30 == 'ВЭ17') {
+        if ((j30 == 'ВЭ13' || j30 == 'ВЭ15' || j30 == 'ВЭ17') || (secondBlock == 'ВЭ13' || secondBlock == 'ВЭ15' || secondBlock == 'ВЭ17')) {
             j36 = 'Есть';
         }
         else {
@@ -276,7 +287,7 @@ $(document).ready(function () {
 
 
         let j37 = ''; // Дублирование RS485
-        if (j30 == 'ВЭ18' || j30 == 'ВЭ110' || j30 == 'ВЭ24' || j30 == 'ВЭ26') { j37 = 'Есть' }
+        if ((j30 == 'ВЭ18' || j30 == 'ВЭ110' || j30 == 'ВЭ24' || j30 == 'ВЭ26') || (secondBlock == 'ВЭ18' || secondBlock == 'ВЭ110' || secondBlock == 'ВЭ24' || secondBlock == 'ВЭ26')) { j37 = 'Есть' }
         else { j37 = 'Отсутствует' };
 
         let j38 = 'Одиночные';
@@ -523,4 +534,30 @@ $(document).ready(function () {
             document.querySelector('#ralColor').value = '';
         }
     });
+
+    // Обработка доп платы
+    let vimuBlock2Modal = new bootstrap.Modal($("#ve2Config"));
+
+    $('#control-block2-config').on('click', function (e) {
+        vimuBlock2Modal.show();
+    });
+
+    $("#closeve2modal").on("click", function (e) {
+        vimuBlock2Modal.hide();
+    });
+
+    $("#ve2c-submit").on("click", function (e) {
+        $("#controle-blocks2").val($("input.cur-vexecution2-value").text()).trigger("change");
+        vimuBlock2Modal.hide();
+    });
+
+    $('#ve2Clear').on('click', function (e) {
+        $('#controle-blocks2').val('');
+        vimuBlock2Modal.hide();
+    });
+
+    $('#control-block-fieldset').on('change', function (e) {
+        $('#controle-blocks2').val() ? $('#sumBlocks').val($('#controle-blocks').val() + '/' + $('#controle-blocks2').val()) : $('#sumBlocks').val($('#controle-blocks').val());
+    });
+
 });
