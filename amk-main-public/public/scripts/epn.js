@@ -1197,38 +1197,38 @@ $(document).ready(function () {
                 return positionSignal = '';
             }
             else if (vimublock == 'ВЭ12' || vimublock == 'ВЭ13' || vimublock == 'ВЭ16' || vimublock == 'ВЭ17') {
-                return positionSignal = '4–20 мА';
+                return positionSignal = '/4–20 мА';
             }
             else if (vimublock == 'ВЭ14' || vimublock == 'ВЭ18') {
-                return positionSignal = 'RS485 Modbus';
+                return positionSignal = '/RS485 Modbus';
             }
             else if (vimublock == 'ВЭ15') {
-                return positionSignal = '4–20 мА и RS485 Modbus';
+                return positionSignal = '/4–20 мА и RS485 Modbus';
             }
             else if (vimublock == 'ВЭ19' || vimublock == 'ВЭ110') {
-                return positionSignal = 'Profibus DP';
+                return positionSignal = '/Profibus DP';
             }
         }
         else if (BoMark == 'ВЭ11') {
             return positionSignal = '';
         }
         else if (BoMark == 'ВЭ12' || BoMark == 'ВЭ13' || BoMark == 'ВЭ16' || BoMark == 'ВЭ17') {
-            return positionSignal = '4–20 мА';
+            return positionSignal = '/4–20 мА';
         }
         else if (BoMark == 'ВЭ14' || BoMark == 'ВЭ18') {
-            return positionSignal = 'RS485 Modbus';
+            return positionSignal = '/RS485 Modbus';
         }
         else if (BoMark == 'ВЭ15') {
-            return positionSignal = '4–20 мА и RS485 Modbus';
+            return positionSignal = '/4–20 мА и RS485 Modbus';
         }
         else if (BoMark == 'ВЭ19' || BoMark == 'ВЭ110') {
-            return positionSignal = 'Profibus DP';
+            return positionSignal = '/Profibus DP';
         }
         else if (document.querySelector("#m2-2").checked) {
-            return positionSignal = 'Потенциометр 100 Ом';
+            return positionSignal = '/Потенциометр 100 Ом';
         }
         else if (document.querySelector("#m2-3").checked) {
-            return positionSignal = '4-20мА';
+            return positionSignal = '/4-20мА';
         }
         else {
             return positionSignal = '';
