@@ -541,7 +541,7 @@ $(document).ready(function () {
         }
     });
     $('#step-5').on('change', function (e) {
-        if (document.querySelector("#climate").value != '' && $("input[name='placeForEnv']:checked").val() != undefined) {
+        if (document.querySelector("#climate").value != '') {
             $('#step-6').show();
         } else {
             $('#step-6').hide();
