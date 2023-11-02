@@ -696,7 +696,7 @@ $(document).ready(function () {
                 .then((response) => response.json())
                 .then((data) => {
                     let id = data.id;
-                    let name = name.id;
+                    let name = data.name;
                     DOCX(id, name);
                     EXEL(id, name);
                     allInPdf(id, name);
