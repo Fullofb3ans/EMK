@@ -10,19 +10,6 @@ $(document).ready(function () {
     });
 
     // КОНСТАНТЫ ДЛЯ JSON
-    const certs_pdf = {
-        ep4: {
-            Н: {
-                cert: 'certEp4.pdf',
-                decl: 'declarationEp4.pdf',
-            },
-            В: {
-                cert: 'certEp4.pdf',
-                decl: 'declarationEp4.pdf',
-            },
-        },
-    };
-
     const cheme_img = {
         ep4: {
             40: 'ep4-scheme-40.png',
@@ -650,7 +637,7 @@ $(document).ready(function () {
         let j16 = ''; // установка
         let j17 = document.querySelector('#rotation-frequency').value; // частота вращения
         let j18 = schemeForSend; // конструктивная схема
-        let j19 = ''; // оборотов на закрытие
+        let j19 = '21'; // оборотов на закрытие
         // json1 = [j10, j11, j12, j13, j14, j15, j16, j17, j18];
 
         //json2
