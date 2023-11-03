@@ -1138,7 +1138,7 @@ $(document).ready(function () {
     }
 
 
-    // МЕСТНЫЕ И ДИСТ СИГНАЛЫ
+    //ДИСТ и МЕСТНЫЕ СИГНАЛЫ
     function selectRemoteSignal() {
 
         let BoMark = document.querySelector("#controle-blocks-series").value;
@@ -1255,7 +1255,7 @@ $(document).ready(function () {
                 return positionSignal = ' Дополнительная плата: Profibus DP';
             }
             else {
-                return positionSignal = ' Дополнительная плата: отсутствуют';
+                return positionSignal = '';
             }
         }
         else {
@@ -1276,7 +1276,7 @@ $(document).ready(function () {
                 return positionSignal = ' Дополнительная плата: Profibus DP';
             }
             else {
-                return positionSignal = ' Дополнительная плата: отсутствуют';
+                return positionSignal = '';
             }
         }
     }

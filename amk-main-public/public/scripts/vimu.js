@@ -524,7 +524,7 @@ $(document).ready(function () {
             return positionSignal = ' Дополнительная плата: Profibus DP';
         }
         else {
-            return positionSignal = ' Дополнительная плата: Отсутствуют';
+            return positionSignal = '';
         }
     }
 

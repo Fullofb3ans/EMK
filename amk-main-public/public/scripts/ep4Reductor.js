@@ -650,7 +650,7 @@ $(document).ready(function () {
         let j16 = ''; // установка
         let j17 = document.querySelector('#rotation-frequency').value; // частота вращения
         let j18 = schemeForSend; // конструктивная схема
-        let j19 = '90 градусов'; // оборотов на закрытие
+        let j19 = ''; // оборотов на закрытие
         // json1 = [j10, j11, j12, j13, j14, j15, j16, j17, j18];
 
         //json2

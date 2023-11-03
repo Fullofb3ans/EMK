@@ -8,20 +8,25 @@ $(document).ready(function () {
         $(el).toggleClass('table-success');
     });
 
-    // КОНСТАНТЫ ДЛЯ JSON
-    const certs_pdf = {
-        ep4: {
-            Н: {
-                cert: 'certEp4.pdf',
-                decl: 'declarationEp4.pdf',
-            },
-            В: {
-                cert: 'certEp4.pdf',
-                decl: 'declarationEp4.pdf',
-            },
-        },
-    };
+    $(document).on('click', '#ve2-table th, #ve2-table td', function (e) {
+        let target = $(this).data('target');
+        let el = document.getElementById('v2' + target);
+        $('.cur-vexecution2-value').text(target).val(target);
+        $('#ve2-table th').removeClass('table-success');
+        $(el).toggleClass('table-success');
+    });
 
+    $(document).on('change', function (e) {
+        if ($('#controle-blocks2').val()) {
+            document.querySelector("#PanelOptionLabel").checked = false;
+            $('#PanelOptionLabel').hide();
+        }
+        else {
+            $('#PanelOptionLabel').show();
+        }
+    });
+
+    // КОНСТАНТЫ ДЛЯ JSON
     const cheme_img = {
         ep4: {
             40: 'ep4-scheme-40.png',
@@ -197,14 +202,6 @@ $(document).ready(function () {
     });
 
     let cur_constructive_scheme = $("input[name='constructive-scheme']:checked").val();
-
-    let execution_id = '';
-
-    let m1BlockModal = new bootstrap.Modal($('#block-configure-m1'));
-    let m2BlockModal = new bootstrap.Modal($('#block-configure-m2'));
-    let vimuBlockModal = new bootstrap.Modal($('#block-configure-e1'));
-    let e2BlockModal = new bootstrap.Modal($('#block-configure-e2'));
-    let e1SBlockModal = new bootstrap.Modal($('#e1SModal'));
 
     // ПРОГРУЗКА ДАННЫХ ПРЕДЕЛА С ТАБЛИЦЫ
     $('#connection-type-wrap').on('change', function (e) {
@@ -425,21 +422,6 @@ $(document).ready(function () {
         document.querySelector('#connectionForEp4-8div').style.display = 'flow';
     }
 
-    // let control_block = $('#controle-blocks');
-    // let cur_control_block = $('#controle-blocks').val();
-
-    // let control_select = $('#controle-blocks-series').empty().append(new Option('Выберите значение', ''));
-    // if (!!cur_constructive_scheme) {
-    //     // $("#controle-blocks").empty().append(new Option('Выберите значение', ''));
-    //     control_select.empty().append(new Option('Выберите тип блока управления', ''));
-    //     control_block.val('');
-
-    //     $('#control-block-fieldset').attr('disabled', false);
-    //     $.each(series['ep4'], function (key, item) {
-    //         control_select.append(new Option(item, key, false, cur_control_block == item));
-    //     });
-    // }
-
     // ЗАПОЛНЕНИЕ ИСПОЛНЕНИЯ ДЛЯ ЕП4
     $.each(executions['ep4'], function (key, item) {
         execution_wrap.append(
@@ -465,6 +447,55 @@ $(document).ready(function () {
         );
     });
 
+    let m1BlockModal = new bootstrap.Modal($('#block-configure-m1'));
+    let m2BlockModal = new bootstrap.Modal($('#block-configure-m2'));
+    let vimuBlockModal = new bootstrap.Modal($('#block-configure-e1'));
+    let e2BlockModal = new bootstrap.Modal($('#block-configure-e2'));
+    let e1SBlockModal = new bootstrap.Modal($('#e1SModal'));
+
+    // Обработка доп платы
+    let vimuBlock2Modal = new bootstrap.Modal($("#ve2Config"));
+
+    $('#control-block2-config').on('click', function (e) {
+        vimuBlock2Modal.show();
+    });
+
+    $("#closeve2modal").on("click", function (e) {
+        vimuBlock2Modal.hide();
+    });
+
+    $("#ve2c-submit").on("click", function (e) {
+        $("#controle-blocks2").val($("input.cur-vexecution2-value").text()).trigger("change");
+        vimuBlock2Modal.hide();
+    });
+
+    $('#ve2Clear').on('click', function (e) {
+        $('#controle-blocks2').val('');
+        vimuBlock2Modal.hide();
+        $('#control-block-fieldset').trigger('change');
+    });
+
+    $('#control-block-fieldset').on('change', function (e) {
+        $('#controle-blocks2').val() ? $('#sumBlocks').val($('#controle-blocks').val() + '/' + $('#controle-blocks2').val()) : $('#sumBlocks').val($('#controle-blocks').val());
+    });
+
+    $('#control-block-fieldset').on('change', function (e) {
+        if ($("#controle-blocks-series").val() !== 'Э1') {
+            $("#controle-blocks2").val('');
+            console.log('deleteIT');
+            $('#control-block2-config').hide();
+            $('#sumBlocks').show();
+        }
+        else {
+            $('#control-block2-config').show();
+            $('#sumBlocks').show();
+        }
+
+        if ($('#controle-blocks-series').val() == 'Э0') {
+            $('#sumBlocks').hide();
+        }
+    });
+
     $(document).on('change', function (e) {
         let a = document.querySelector('.aVandalCap');
         let cbs = document.querySelector('#controle-blocks-series');
@@ -475,20 +506,10 @@ $(document).ready(function () {
         }
 
         let mark_gen = $('#mark-gen');
-        let modal_button = $('#modal-button');
         let x2;
 
         let x0 = 'ЭП4';
         let x1 = $("input[name='working-mode']:checked").val() ? $("input[name='working-mode']:checked").val() : ''; // Назначение по режимам работы
-        // switch (x1) {
-        //     case 'X':
-        //         $("input[name='working-mode']").closest('fieldset').removeClass('ReqValueOk');
-        //         $("input[name='working-mode']").closest('fieldset').addClass('noReqValue');
-        //         break;
-        //     default:
-        //         $("input[name='working-mode']").closest('fieldset').removeClass('noReqValue');
-        //         $("input[name='working-mode']").closest('fieldset').addClass('ReqValueOk');
-        // }
 
         x2 = $("input[name='execution']:checked").val() ? $("input[name='execution']:checked").val() : 'X'; // Исполнение по взрывозащите
         switch (x2) {
@@ -533,7 +554,9 @@ $(document).ready(function () {
                 $('#rotation-frequency').closest('fieldset').addClass('ReqValueOk');
         }
 
-        let x6 = $('#controle-blocks').val() ? $('#controle-blocks').val() : 'X'; // Todo: Надо создать отдельный конфигуратор Исполнение блока управления
+        let VE = document.querySelector('#commandBlockType-2').checked ? 'В' : '';
+
+        let x6 = $('#controle-blocks').val() ? VE + $('#controle-blocks').val() : 'X';
         switch (x6) {
             case 'X':
                 $('#controle-blocks').closest('fieldset').removeClass('ReqValueOk');
@@ -626,6 +649,8 @@ $(document).ready(function () {
 
         let x13 = $("input[name='special']:checked").val() ? $("input[name='special']:checked").val() : ''; // Специальное исполнение
 
+        let secondVimuBlock = $('#controle-blocks2').val() ? '/' + VE + $('#controle-blocks2').val() : '';
+
         let optForBu = $('#control-block-optionsset option:selected').val() != 'noValue' ? $('#control-block-optionsset option:selected').val() : '';
 
         let tuMpX1 = document.querySelector('#maxStepMp').value;
@@ -639,9 +664,6 @@ $(document).ready(function () {
 
         let suffix = '';
 
-        let VE = '';
-        document.querySelector('#commandBlockType-2').checked ? (VE = 'В') : '';
-
         if (constructive_scheme === '40') {
             suffix += '-40';
         }
@@ -652,7 +674,8 @@ $(document).ready(function () {
         }
 
         is_true = [x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12].includes('X');
-        mark_gen.text(x0 + x1 + x2 + '-' + x3 + '-' + x4 + '-' + x5 + '-' + VE + x6 + optionssetCheckBox + optForBu + '-' + x7 + '-' + x8 + x9 + x10 + x11 + x12 + x13 + suffix);
+        mark_gen.text(x0 + x1 + x2 + '-' + x3 + '-' + x4 + '-' + x5 + '-' + x6 + VE + secondVimuBlock +
+            optionssetCheckBox + optForBu + '-' + x7 + '-' + x8 + x9 + x10 + x11 + x12 + x13 + suffix);
         let check = document.querySelector('#tuMpCheck > input[type=checkbox]');
         if (check.checked) {
             mark_gen.text(
@@ -666,7 +689,6 @@ $(document).ready(function () {
                 '-' +
                 x5 +
                 '-' +
-                VE +
                 x6 +
                 optionssetCheckBox +
                 optForBu +
@@ -689,7 +711,6 @@ $(document).ready(function () {
             );
         }
 
-        // modal_button.toggle(!is_true);
         mark_gen.toggleClass('is-invalid', is_true).toggleClass('is-valid', !is_true);
     });
 
@@ -700,7 +721,7 @@ $(document).ready(function () {
         let tuMpX2 = document.querySelector('#stepForOne').value;
         let TuMp = tuMpX1 ? tuMpX1 + '-' + tuMpX2 : '';
         let optForBu = $('#control-block-optionsset option:selected').val() != 'noValue' ? $('#control-block-optionsset option:selected').val() : '';
-
+        let secondBlock = document.querySelector("#controle-blocks2").value;
         // CХЕМА
         let schemeForSend = $("input[name='constructive-scheme']:checked").val();
 
@@ -745,8 +766,8 @@ $(document).ready(function () {
         // json2 = [j20, j21, j22, j23, j24];
 
         //json3
-        let j30 = document.querySelector('#controle-blocks').value; // тип бу
-        let j31 = checkCommandBlock(); // Тип управления
+        let j30 = document.querySelector("#sumBlocks").value; // тип бу
+        let j31 = checkSecondCommandBlock() ? 'Основная плата: ' + checkCommandBlock() + '; ' + checkSecondCommandBlock() : checkCommandBlock(); // Тип управления
         let j32 = selectRemoteSignal(); // сигналы дист управления
 
         let j33 = ''; //Тип БКВ
@@ -767,10 +788,10 @@ $(document).ready(function () {
             j34 = 'Отсутствует';
         }
 
-        let j35 = selectPositionSignal(); // Сигнализация положения
+        let j35 = selectPositionSignalSecondCommandBlock() ? 'Основная плата: ' + selectPositionSignal() + '; ' + selectPositionSignalSecondCommandBlock() : selectPositionSignal(); // Сигнализация положения
 
         let j36 = ''; // Сигнал момэнт
-        if (BoMark == 'Э13' || BoMark == 'Э15' || BoMark == 'Э17' || BoMark == 'ВЭ13' || BoMark == 'ВЭ15' || BoMark == 'ВЭ17') {
+        if ((BoMark == 'Э13' || BoMark == 'Э15' || BoMark == 'Э17' || BoMark == 'ВЭ13' || BoMark == 'ВЭ15' || BoMark == 'ВЭ17') || (secondBlock == 'Э13' || secondBlock == 'Э15' || secondBlock == 'Э17' || secondBlock == 'ВЭ13' || secondBlock == 'ВЭ15' || secondBlock == 'ВЭ17')) {
             j36 = 'Есть';
         }
         else {
@@ -778,7 +799,7 @@ $(document).ready(function () {
         }
 
         let j37 = ''; // Дублирование RS485
-        if (j30 == 'Э18' || j30 == 'Э110' || j30 == 'Э24' || j30 == 'Э26') {
+        if ((j30 == 'Э18' || j30 == 'Э110' || j30 == 'Э24' || j30 == 'Э26') || (secondBlock == 'Э18' || secondBlock == 'Э110' || secondBlock == 'Э24' || secondBlock == 'Э26')) {
             j37 = 'Есть';
         } else {
             j37 = 'Отсутствует';
@@ -1428,7 +1449,7 @@ $(document).ready(function () {
         let BoMark = document.querySelector('#controle-blocks').value;
 
         if (BoMark == 'Э11') {
-            return (positionSignal = '');
+            return (positionSignal = 'Отсутствует');
         } else if (BoMark == 'Э12' || BoMark == 'Э13' || BoMark == 'Э16' || BoMark == 'Э17') {
             return (positionSignal = '4–20 мА');
         } else if (BoMark == 'Э14' || BoMark == 'Э18' || BoMark == 'Э01' || BoMark == 'Э1S1') {
@@ -1524,4 +1545,55 @@ $(document).ready(function () {
             $('#step-10').hide();
         }
     });
+
+    // Проверка доп платы
+    function checkSecondCommandBlock() {
+        let secondBlock = document.querySelector("#controle-blocks2").value;
+        switch (secondBlock) {
+            case 'Э11':
+                return ' Дополнительная плата: Базовый набор функций';
+            case 'Э12':
+                return ' Дополнительная плата: 1)Базовый набор функций 2)Передача информации о положении выходного звена привода посредством токового сигнала (4–20 мА)';
+            case 'Э13':
+                return ' Дополнительная плата: 1)Базовый набор функций 2)Передача информации о положении выходного звена привода посредством токового сигнала (4–20 мА)  3)Передача текущего значения движущего момента на выходном звене привода посредством токового сигнала (4–20 мА).';
+            case 'Э14':
+                return ' Дополнительная плата: 1)Базовый набор функций 2)Диагностирование отказов опциональных модулей.  3)Автоматический выбор активного интерфейса дистанционного управления.';
+            case 'Э15':
+                return ' Дополнительная плата: 1)Базовый набор функций 2)Диагностирование отказов опциональных модулей.  3)Автоматический выбор активного интерфейса дистанционного управления.  4) Передача информации о положении выходного звена привода посредством токового сигнала (4–20 мА)  5)Передача текущего значения движущего момента на выходном звене привода посредством токового сигнала (4–20 мА).';
+            case 'Э16':
+                return ' Дополнительная плата: 1)Базовый набор функций 2)Аналоговое управление приводом — прием от дистанционного пульта и отработка токового сигнала (4–20 мА) задания положения выходного звена привода с контролем наличия связи  3)Диагностирование отказов опциональных модулей.  4)Автоматический выбор активного интерфейса дистанционного управления. 5)Передача информации о положении выходного звена привода посредством токового сигнала (4–20 мА).';
+            case 'Э17':
+                return ' Дополнительная плата: 1)Базовый набор функций 2)Передача информации о положении выходного звена привода посредством токового сигнала (4–20 мА)  3)Передача текущего значения движущего момента на выходном звене привода посредством токового сигнала (4–20 мА).  4) Аналоговое управление приводом — прием от дистанционного пульта и отработка токового сигнала (4–20 мА) задания положения выходного звена привода с контролем наличия связи  5) Диагностирование отказов опциональных модулей.  6)Автоматический выбор активного интерфейса дистанционного управления.';
+            case 'Э18':
+                return ' Дополнительная плата: 1)Базовый набор функций 2)Цифровое управление и настройка привода с дублированием каналов связи посредством цифрового канала связи, интерфейс RS485, протокол обмена — MODBUS RTU  3)Диагностирование отказов опциональных модулей.   4)Автоматический выбор активного интерфейса дистанционного управления.';
+            case 'Э19':
+                return ' Дополнительная плата: 1)Базовый набор функций 2)Цифровое управление приводом посредством цифрового канала связи, интерфейс RS485, протокол обмена — PROFIBUS DP  3)Диагностирование отказов опциональных модулей.   4)Автоматический выбор активного интерфейса дистанционного управления.';
+            case 'Э110':
+                return ' Дополнительная плата: 1)Базовый набор функций 2)Цифровое управление приводом с дублированием каналов связи посредством цифрового канала связи, интерфейс RS485, протокол обмена — PROFIBUS DP.  3)Диагностирование отказов опциональных модулей.   4)Автоматический выбор активного интерфейса дистанционного управления.';
+            default:
+                return '';
+        }
+    }
+    // Обработка сигналов второго блока
+    function selectPositionSignalSecondCommandBlock() {
+        let BoMark = document.querySelector("#controle-blocks2").value;
+        if (BoMark == 'Э11') {
+            return positionSignal = ' Дополнительная плата: Отсутствуют';
+        }
+        else if (BoMark == 'Э12' || BoMark == 'Э13' || BoMark == 'Э16' || BoMark == 'Э17') {
+            return positionSignal = ' Дополнительная плата: 4–20 мА';
+        }
+        else if (BoMark == 'Э14' || BoMark == 'Э18') {
+            return positionSignal = ' Дополнительная плата: RS485 Modbus';
+        }
+        else if (BoMark == 'Э15') {
+            return positionSignal = ' Дополнительная плата: 4–20 мА и RS485 Modbus';
+        }
+        else if (BoMark == 'Э19' || BoMark == 'Э110') {
+            return positionSignal = ' Дополнительная плата: Profibus DP';
+        }
+        else {
+            return positionSignal = '';
+        }
+    }
 });
