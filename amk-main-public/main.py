@@ -24,6 +24,10 @@ from conf import mk_DOCX
 from conf import mk_XL
 from conf import DB
 
+from pypdf import PdfMerger
+
+import json
+
 
 
 def make_clean(Id):
@@ -98,14 +102,28 @@ def ep4Reductor():
 
 
 
-@app.get("/Tula/{ID}", response_class = FileResponse)
-def download_file(ID):
+@app.get("/Tula/{ID}/{name}", response_class = FileResponse)
+def download_file(ID, name):
     #headers = {'Content-Disposition': f'attachment; filename="Tula{ID}.pdf"'}
-    return FileResponse(f'Tula{ID}.docx', filename=f'ОЛ ТЭП {ID}.docx', media_type='application/docx')#, headers=headers)
+    return FileResponse(f'Tula{ID}.docx', filename=f'ОЛ ТЭП {name} {ID}.docx', media_type='application/docx')#, headers=headers)
 
-@app.get("/TulaEXEL/{ID}", response_class = FileResponse)
-def download_file(ID):
-    return FileResponse(f'Tula{ID}.xlsx', filename=f'ТКП {ID}.xlsx', media_type='application/xlsx')#, headers=headers)
+@app.get("/TulaEXEL/{ID}/{name}", response_class = FileResponse)
+def download_file(ID, name):
+    return FileResponse(f'Tula{ID}.xlsx', filename=f'ТКП {name} {ID}.xlsx', media_type='application/xlsx')#, headers=headers)
+
+@app.get("/TulaPDF/{ID}/{name}", response_class = FileResponse)
+def download_file(ID, name):
+    os.system(f"unoconv -f pdf Tula{ID}.xlsx")
+    os.rename(f"Tula{ID}.pdf", "Tula.pdf")
+    os.system(f"unoconv -f pdf Tula{ID}.docx")
+
+    pdfs = ["Tula.pdf", f"Tula{ID}.pdf"]
+    merger = PdfMerger()
+    for pdf in pdfs:
+         merger.append(pdf)
+    merger.write(f"Tula{ID}.pdf")
+    merger.close()
+    return FileResponse(f'Tula{ID}.pdf', filename=f'Опросный лист на подпись {name} {ID}.pdf', media_type='application/pdf')#, headers=headers)
 
 
 
@@ -122,7 +140,7 @@ def get_param(jsn = Body()):
     try:
         res.sort(key=int)
     except:
-        res = [res]
+        pass
     print(res)
     return {"ans" : res}
 
@@ -167,7 +185,6 @@ def get_param(jsn = Body()):
 
 
 
-
 @app.post("/download")
 def download_file(jsn = Body()):
 
@@ -181,7 +198,12 @@ def download_file(jsn = Body()):
     jsn6 = jsn["jsn6"]
     jsn7 = jsn["jsn7"]
 
-    ID = randint(1000000, 10000000)
+    import json
+    f = open("ID.json", 'r')
+    ID = json.load(f)
+    f.close()
+
+    ID = int(ID["ID"]) + 1
     
     
     
@@ -189,29 +211,29 @@ def download_file(jsn = Body()):
     print(jsn2[1])
 
     if mark[:3] == "ЭП4":
-        dc = mk_DOCX(jsn0, jsn1, jsn2, jsn3, jsn4, jsn6) 
+        dc = mk_DOCX(jsn5[1], jsn0, jsn1, jsn2, jsn3, jsn4, jsn6) 
         tbls = dc.ep4()
 
         xl = mk_XL(ID, mark, [jsn0, jsn1, jsn2, jsn3, jsn4, jsn5, jsn6, jsn7])
         wb = xl.ep()
 
     elif mark[:3] == "ЭПН":
-        dc = mk_DOCX(jsn0, jsn1, jsn2, jsn3, jsn4, jsn6) 
+        dc = mk_DOCX(jsn5[1], jsn0, jsn1, jsn2, jsn3, jsn4, jsn6) 
         tbls = dc.epn()
 
         xl = mk_XL(ID, mark, [jsn0, jsn1, jsn2, jsn3, jsn4, jsn5, jsn6, jsn7])
         wb = xl.ep()
 
     elif mark[:4] == 'ВИМУ':
-        dc = mk_DOCX(jsn0, jsn1, jsn2, jsn3, jsn4, [jsn5[1], jsn5[3]])
+        dc = mk_DOCX(jsn5[1], jsn0, jsn1, jsn2, jsn3, jsn4, [jsn5[1], jsn5[3]])
         tbls = dc.vimu()
 
         xl = mk_XL(ID, mark, [jsn0, jsn2, jsn3, [jsn4[0], jsn4[2], jsn4[4], jsn4[5], jsn5[1], jsn5[3]] ])
         wb = xl.vimu()
 
     else:
-        dc = mk_DOCX(jsn0, jsn1, jsn2, jsn3, jsn4,  jsn5)
-        tbls = dc.classic(jsn6[0])
+        dc = mk_DOCX(jsn5[1], jsn0, jsn1, jsn2, jsn3, jsn4,  jsn5)
+        tbls = dc.classic()#jsn6[0])
 
         xl = mk_XL(ID, mark, [jsn0, jsn1, jsn2, jsn3, jsn4, jsn5, jsn6])
         wb = xl.classic()
@@ -299,8 +321,13 @@ def download_file(jsn = Body()):
     #сохранение файлов с уникальным id
     doc_new.save(f'Tula{ID}.docx')
     wb.save(f"Tula{ID}.xlsx")
+
+    jsn = {"ID" : ID} 
+
+    with open("ID.json", "w") as fh:
+        json.dump(jsn, fh)
     #convert(f"Tula{ID}.docx")
 
 
 
-    return {"id" : ID}
+    return {"id" : ID, "name" : jsn0[1]}
