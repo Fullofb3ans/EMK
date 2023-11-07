@@ -290,6 +290,15 @@ $(document).ready(function () {
         }
     });
 
+    $('#workStep').on('change', function () {
+        if (document.querySelector("#stroke-1").checked) {
+            $('#optionsfield').hide()
+        }
+        else {
+            $('#optionsfield').show()
+        }
+    })
+
     $('#control-block-fieldset').on('change', function (e) {
         let x6 = $('#controle-blocks-series').val();
         console.log(x6);
