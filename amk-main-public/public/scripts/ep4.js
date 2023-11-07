@@ -953,6 +953,25 @@ $(document).ready(function () {
         }
     })
 
+    $('#m1-form').on('change', function () {
+        fetch('https://emk.websto.pro/M1', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json;charset=utf-8' },
+            body: JSON.stringify({
+                a: [scheme, upLim, rotationFrequency],
+            }),
+        })
+            .then((res) => res.json())
+            .then((res) => {
+                console.log(res);
+                for (i in res) fetchResult.push(res[i]);
+                // fetchResult[0].sort((a, b) => a - b);
+                $.each(fetchResult[0], function (key, item) {
+                    $(flange).append(new Option(item));
+                });
+            });
+    });
+
     $('#closeNumbers').on('change', function (e) {
         document.querySelector("#closeNumbersForM").value = document.querySelector("#closeNumbers").value;
         $('#m1-form').trigger('change');
@@ -1276,7 +1295,6 @@ $(document).ready(function () {
         let m7 = document.querySelector('#m1-7').checked
             ? 'Блокировка возможности повторного включения двигателя привода по электрической цепи, содержащей нормально замкнутый контакт моментного выключателя, размыканием которого был выключен двигатель привода при достижении крутящего момента, заданного при настройке блока (фиксация моментных выключателей); '
             : '';
-        let m8 = 'Верхний предел настройки путевых выключателей в оборотах выходного вала:' + ' ' + document.querySelector('#upper-limitForM1').value;
 
         let base = document.querySelector('#controle-blocks').value;
         switch (base) {
@@ -1330,7 +1348,7 @@ $(document).ready(function () {
                 return 'Базовый набор функций. Цифровое управление и приводом посредством цифрового канала связи, интерфейс RS485, протокол обмена - PROFIBUS';
             default:
                 console.log(base);
-                return (g6 = m1 + m2 + m3 + m4 + m5 + m6 + m7 + m8);
+                return (g6 = m1 + m2 + m3 + m4 + m5 + m6 + m7);
         }
     }
 
