@@ -943,6 +943,37 @@ $(document).ready(function () {
         $('.cur-m1-value').text('М10').val('M10');
     });
 
+    // Обработка М1 БЛОКА
+    $('#m1-form').on('change', function () {
+        if (document.querySelector("#closeNumbersForM").value > 0.8 && document.querySelector("#closeNumbersForM").value < 1250) {
+            $('#m1-submit').prop('disabled', false)
+        }
+        else {
+            $('#m1-submit').prop('disabled', true)
+        }
+    })
+
+    $('#closeNumbers').on('change', function (e) {
+        document.querySelector("#closeNumbersForM").value = document.querySelector("#closeNumbers").value;
+        $('#m1-form').trigger('change');
+    })
+
+    $('#closeNumbersForM').on('change', function (e) {
+        document.querySelector("#closeNumbers").value = document.querySelector("#closeNumbersForM").value;
+        $('#closeNumbers').trigger('change');
+
+    })
+    // Стили для оборотов м1
+    $('#m1-form').on('change', function (e) {
+        if (document.querySelector("#closeNumbersForM").value || document.querySelector("#closeNumbers").value) {
+            document.querySelector('.closeNumbersFieldForM').classList.remove('noReqValue');
+            document.querySelector('.closeNumbersFieldForM').classList.add('ReqValueOk');
+        } else {
+            document.querySelector('.closeNumbersFieldForM').classList.remove('ReqValueOk');
+            document.querySelector('.closeNumbersFieldForM').classList.add('noReqValue');
+        };
+    })
+
     $('#m1-submit').on('click', function (e) {
         $('#controle-blocks').val($('.cur-m1-value').val()).trigger('change');
         m1BlockModal.hide();
