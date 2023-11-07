@@ -931,11 +931,11 @@ $(document).ready(function () {
         $.each($('#m1-form input:checked'), function () {
             mod += Math.pow(2, parseInt($(this).data('position')));
         });
-        let up = $('#upper-limitForM1').val() ? $('#upper-limitForM1').val() : '';
+        // let up = $('#upper-limitForM1').val() ? $('#upper-limitForM1').val() : '';
 
         $('.cur-m1-value')
-            .text('М1' + mod + '.' + up)
-            .val('М1' + mod + '.' + up);
+            .text('М1' + mod)
+            .val('М1' + mod);
     });
 
     $('#clear-m1').on('click', function (e) {
@@ -1337,23 +1337,6 @@ $(document).ready(function () {
     });
 
     // СТИЛИ ДЛЯ M1 МОДАЛЬНОГО
-    $('#upperLimitInM').on('change', function (e) {
-        if (document.querySelector('#upper-limitForM1').value != '') {
-            document.querySelector('#upperLimitInM').classList.add('ReqValueOk');
-            document.querySelector('#upperLimitInM').classList.remove('noReqValue');
-        } else {
-            document.querySelector('#upperLimitInM').classList.add('noReqValue');
-            document.querySelector('#upperLimitInM').classList.remove('ReqValueOk');
-        }
-    });
-    // Ограничение конфигуратора при пропуске верхнего предела
-    $('#m1-form').on('change', function (e) {
-        if (document.querySelector('#upper-limitForM1').value == '') {
-            document.querySelector('#m1-submit').disabled = true;
-        } else {
-            document.querySelector('#m1-submit').disabled = false;
-        }
-    });
 
     // Открытие пункта виму эиму для блока управления
     $('#control-block-fieldset').on('change', function (e) {
