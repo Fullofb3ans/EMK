@@ -577,12 +577,13 @@ $(document).ready(function () {
         let voptForBu = $('#vimucontrol-block-optionsset option:selected').val() != 'noValue' ? $('#control-block-optionsset option:selected').val() : '';
 
         // ДОП ОПЦИИ
-        let addOption1 = document.querySelector("#PanelOption").checked ? 'Механический селектор переключения режима работы местн./дист.' : '';
+        let addOption1 = document.querySelector("#PanelOption").checked ? 'Механический селектор переключения режима работы местн./дист.; ' : ' ';
         let addOption2 = '';
         if (BoMark == 'Э1' || BoMark == 'ВЭ1' || BoMark == 'Э1S' || BoMark == 'ВЭ') {
-            addOption2 = 'Плата регистратор';
+            addOption2 = 'Плата регистратор; ';
         } else { addOption2 = '' };
-        let addOptions = addOption1 ? addOption1 + ' ' + '' + ' ' + addOption2 : addOption2;
+        let addOption3 = document.querySelector('#upTo180f').checked ? 'Рабочий ход до 180 градусов; ' : ' ';
+        let addOptions = addOption1 + addOption2 + addOption3;
         // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         // json0
@@ -629,9 +630,7 @@ $(document).ready(function () {
             j33 = 'ВИМУ';
         }
 
-        let j34 = ''; //Механический указатель
-        if (document.querySelector("#pointer > input[type=checkbox]").checked) { j34 = 'Есть' }
-        else { j34 = 'Отсутствует' };
+        let j34 = ''; //Механический указатель;
 
         let j35 = selectPositionSignalSecondCommandBlock() ? 'Основная плата: ' + selectPositionSignal() + '; ' + selectPositionSignalSecondCommandBlock() : selectPositionSignal(); // Сигнализация положения
 
@@ -667,9 +666,9 @@ $(document).ready(function () {
 
         //json4
         let j40 = $("input[name='connection']:checked").val(); //Электрическое подключение (обозначение)
-        let j41 = document.querySelector("#cap > input[type=checkbox]").checked ? 'Есть' : 'Отсутствует'; //Защитный колпак
+        let j41 = ''; //Защитный колпак
         let j42 = document.querySelector("#color-1").checked ? 'Серый' : document.querySelector("#ralColor").value; //Цвет
-        let j43 = document.querySelector("#mechSelectorId > input[type=checkbox]") ? 'Есть' : 'Отсутствует'; //Механический указатель
+        let j43 = ''; //Механический указатель
         let j44 = addOptions;//Доп опции 
         let j45 = document.querySelector('#addReqarea').value; //Дополнительные требования
         // json4 = [j40, j41, j42, j43, j44, j45];
