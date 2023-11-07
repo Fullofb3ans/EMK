@@ -879,14 +879,14 @@ $(document).ready(function () {
             [j70, j71, j72, j73, j74, j75]
         );
 
-        function DOCX(id, name) {
-            window.open(`https://emk.websto.pro/Tula/${id + '/' + name}`);
+        function DOCX(id, name, mark) {
+            window.open(`https://emk.websto.pro/Tula/${id + '/' + name + '/' + mark}`);
         }
-        function EXEL(id, name) {
-            window.open(`https://emk.websto.pro/TulaEXEL/${id + '/' + name}`);
+        function EXEL(id, name, mark) {
+            window.open(`https://emk.websto.pro/TulaEXEL/${id + '/' + name + '/' + mark}`);
         }
-        function allInPdf(id, name) {
-            window.open(`https://emk.websto.pro/TulaPDF/${id + '/' + name}`);
+        function allInPdf(id, name, mark) {
+            window.open(`https://emk.websto.pro/TulaPDF/${id + '/' + name + '/' + mark}`);
         }
         function sendToServer() {
             let post = fetch('https://emk.websto.pro/download', {
@@ -905,11 +905,12 @@ $(document).ready(function () {
             })
                 .then((response) => response.json())
                 .then((data) => {
+                    let mark = data.mark
                     let id = data.id;
                     let name = data.name;
-                    DOCX(id, name);
-                    EXEL(id, name);
-                    allInPdf(id, name);
+                    DOCX(id, name, mark);
+                    EXEL(id, name, mark);
+                    allInPdf(id, name, mark);
                 });
         }
         sendToServer();
@@ -954,11 +955,17 @@ $(document).ready(function () {
     })
 
     $('#m1-form').on('change', function () {
+        let upLim = document.querySelector('#upper-limit').value;
+        let rotationFrequency = document.getElementById('rotation-frequency').value;
+        let scheme = $("input[name='constructive-scheme']:checked").val();
+        let closeNumbers = document.querySelector('#closeNumbers').value;
+        let fetchResult = [];
+
         fetch('https://emk.websto.pro/M1', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json;charset=utf-8' },
             body: JSON.stringify({
-                a: [scheme, upLim, rotationFrequency],
+                a: [scheme, upLim, rotationFrequency, closeNumbers],
             }),
         })
             .then((res) => res.json())
@@ -966,9 +973,7 @@ $(document).ready(function () {
                 console.log(res);
                 for (i in res) fetchResult.push(res[i]);
                 // fetchResult[0].sort((a, b) => a - b);
-                $.each(fetchResult[0], function (key, item) {
-                    $(flange).append(new Option(item));
-                });
+                document.querySelector("#mLimitNum").value = fetchResult[0];
             });
     });
 

@@ -359,14 +359,14 @@ $(document).ready(function () {
             [j60, j61, j62, j63, j64, j65],
             [j70, j71, j72, j73, j74, j75]);
 
-        function DOCX(id, name) {
-            window.open(`https://emk.websto.pro/Tula/${id + '/' + name}`);
+        function DOCX(id, name, mark) {
+            window.open(`https://emk.websto.pro/Tula/${id + '/' + name + '/' + mark}`);
         }
-        function EXEL(id, name) {
-            window.open(`https://emk.websto.pro/TulaEXEL/${id + '/' + name}`);
+        function EXEL(id, name, mark) {
+            window.open(`https://emk.websto.pro/TulaEXEL/${id + '/' + name + '/' + mark}`);
         }
-        function allInPdf(id, name) {
-            window.open(`https://emk.websto.pro/TulaPDF/${id + '/' + name}`);
+        function allInPdf(id, name, mark) {
+            window.open(`https://emk.websto.pro/TulaPDF/${id + '/' + name + '/' + mark}`);
         }
         function sendToServer() {
             let post = fetch('https://emk.websto.pro/download', {
@@ -385,11 +385,12 @@ $(document).ready(function () {
             })
                 .then((response) => response.json())
                 .then((data) => {
+                    let mark = data.mark;
                     let id = data.id;
                     let name = data.name;
-                    DOCX(id, name);
-                    EXEL(id, name);
-                    allInPdf(id, name);
+                    DOCX(id, name, mark);
+                    EXEL(id, name, mark);
+                    allInPdf(id, name, mark);
                 });
         }
         sendToServer();
