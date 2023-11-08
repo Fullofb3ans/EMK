@@ -1301,7 +1301,7 @@ $(document).ready(function () {
             }
         }
         else {
-            return (remoteSignal = 'Пункт только для ЭИМУ или ВИМУ');
+            return (remoteSignal = 'Сигналы дистанционного управления: пункт только для ЭИМУ или ВИМУ');
         }
     }
 
@@ -1325,9 +1325,9 @@ $(document).ready(function () {
         } else if (BoMark == 'Э25' || BoMark == 'Э26') {
             return (positionSignal = 'RS485 Profibus');
         } else if (document.querySelector('#m1-2').checked) {
-            return (positionSignal = 'Потенциометр 100 Ом');
+            return (positionSignal = 'Сигнализация положения: потенциометр 100 Ом');
         } else if (document.querySelector('#m1-3').checked) {
-            return (positionSignal = '4-20мА');
+            return (positionSignal = 'Сигнализация положения: 4-20мА');
         } else {
             return (positionSignal = '');
         }

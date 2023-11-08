@@ -1195,7 +1195,7 @@ $(document).ready(function () {
             }
         }
         else {
-            return remoteSignal = 'Пункт только для ЭИМУ или ВИМУ';
+            return remoteSignal = 'Сигналы дистанционного управления: только для ЭИМУ или ВИМУ';
         }
     }
 
@@ -1235,13 +1235,13 @@ $(document).ready(function () {
             return positionSignal = 'Profibus DP';
         }
         else if (document.querySelector("#m2-2").checked) {
-            return positionSignal = 'Потенциометр 100 Ом';
+            return positionSignal = 'Сигнализация положения: потенциометр 100 Ом';
         }
         else if (document.querySelector("#m2-3").checked) {
-            return positionSignal = '4-20мА';
+            return positionSignal = 'Сигнализация положения: 4-20мА';
         }
         else {
-            return positionSignal = 'Отсутствуют';
+            return positionSignal = 'Сигнализация положения: отсутствует';
         }
     }
     // Обработка сигналов второго блока
