@@ -648,21 +648,21 @@
 										заданного при настройке блока (фиксация моментных выключателей)</label
 									>
 								</div>
-								<div class="col-sm-9 noReqValue" id="upper-limitForM1set" style="padding: 1%">
-									<label>Верхний предел настройки путевых выключателей в оборотах выходного вала</label>
-									<select class="form-select" name="upper-limitForM1" id="upper-limitForM1">
-										<option value="" selected disabled>Выберите значение</option>
-										<option value="2,5">2,5</option>
-										<option value="5">5</option>
-										<option value="10">10</option>
-										<option value="20">20</option>
-										<option value="40">40</option>
-										<option value="80">80</option>
-										<option value="160">160</option>
-										<option value="320">320</option>
-										<option value="630">630</option>
-										<option value="1250">1250</option>
-									</select>
+								<div class="spinningNumbers">
+									<fieldset class="row mb-3 noReqValue closeNumbersFieldForM">
+										<div class="col-sm-9">
+											<legend class="col-form-label col-sm-3 pt-0">Кол-во оборотов для закрытия арматуры</legend>
+											<input placeholder="............" type="number" class="form-input" name="closeNumbersForM" id="closeNumbersForM" min="0.8" max="1250" /> об.
+										</div>
+									</fieldset>
+								</div>
+								<div class="mLimit">
+									<fieldset class="row mb-3 optionalField mLimitfield">
+										<div class="col-sm-9">
+											<legend class="col-form-label col-sm-3 pt-0">Верхний предел настройки путевых выключателей в оборотах выходного вала:</legend>
+											<input placeholder="............" type="text" class="form-input" name="mLimitNum" id="mLimitNum" disabled /> об.
+										</div>
+									</fieldset>
 								</div>
 							</form>
 						</div>

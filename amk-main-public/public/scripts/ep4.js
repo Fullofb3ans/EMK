@@ -946,8 +946,8 @@ $(document).ready(function () {
     });
 
     // Обработка М1 БЛОКА
-    $('#m1-form').on('change', function () {
-        if (document.querySelector("#closeNumbersForM").value > 0.8 && document.querySelector("#closeNumbersForM").value < 1250) {
+    $('#closeNumbersForM').on('change', function () {
+        if (document.querySelector("#closeNumbersForM").value > 0.8 && document.querySelector("#closeNumbersForM").value < 1250 && document.querySelector("#controle-blocks-series").value == 'М1') {
             $('#m1-submit').prop('disabled', false)
         }
         else {

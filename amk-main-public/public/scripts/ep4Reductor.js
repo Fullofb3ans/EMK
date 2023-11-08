@@ -350,15 +350,6 @@ $(document).ready(function () {
         }
     });
 
-    // Ограничение конфигуратора при пропуске верхнего предела
-    $('#m1-form').on('change', function (e) {
-        if (document.querySelector('#upper-limitForM1').value == '') {
-            document.querySelector('#m1-submit').disabled = true;
-        } else {
-            document.querySelector('#m1-submit').disabled = false;
-        }
-    });
-
     $('#block-configure-e2').on('change', function (e) {
         if (document.querySelector("#e2-1").checked) {
             $('#e22signalDiv').show();
@@ -857,12 +848,59 @@ $(document).ready(function () {
         $.each($('#m1-form input:checked'), function () {
             mod += Math.pow(2, parseInt($(this).data('position')));
         });
-        let up = $('#upper-limitForM1').val() ? $('#upper-limitForM1').val() : '';
+        // let up = $('#upper-limitForM1').val() ? $('#upper-limitForM1').val() : '';
+        spot = document.querySelector("#mLimitNum").value ? document.querySelector("#mLimitNum").value : '';
 
         $('.cur-m1-value')
-            .text('М1' + mod + '.' + up)
-            .val('М1' + mod + '.' + up);
+            .text('М1' + mod + spot)
+            .val('М1' + mod + spot);
     });
+
+    function yo() {
+        let upLim = document.querySelector('#upper-limit').value;
+        let rotationFrequency = document.getElementById('rotation-frequency').value;
+        let scheme = $("input[name='constructive-scheme']:checked").val();
+        let closeNumbers = document.querySelector('#closeNumbersForM').value;
+        let fetchResult = [];
+
+        if (upLim && rotationFrequency && scheme && closeNumbers > 0.8 && closeNumbers < 1250) {
+            fetch('https://emk.websto.pro/M1', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json;charset=utf-8' },
+                body: JSON.stringify({
+                    a: [scheme, upLim, rotationFrequency, closeNumbers],
+                }),
+            })
+                .then((res) => res.json())
+                .then((res) => {
+                    console.log(res);
+                    for (i in res) fetchResult.push(res[i]);
+                    // fetchResult[0].sort((a, b) => a - b);
+                    document.querySelector("#mLimitNum").value = fetchResult[0];
+                });
+        }
+    }
+
+    $('#closeNumbersForM').on('keyup', function (e) {
+        if (document.querySelector("#closeNumbersForM").value) {
+            document.querySelector('.closeNumbersFieldForM').classList.remove('noReqValue');
+            document.querySelector('.closeNumbersFieldForM').classList.add('ReqValueOk');
+        } else {
+            document.querySelector('.closeNumbersFieldForM').classList.remove('ReqValueOk');
+            document.querySelector('.closeNumbersFieldForM').classList.add('noReqValue');
+        };
+        yo();
+    })
+
+    $('#closeNumbersForM').on('change', function () {
+        if (document.querySelector("#closeNumbersForM").value > 0.8 && document.querySelector("#closeNumbersForM").value < 1250) {
+            $('#m1-submit').prop('disabled', false)
+        }
+        else {
+            $('#m1-submit').prop('disabled', true);
+            alert('Возможное количество оборотов в диапазоне от 0.8 до 1250')
+        }
+    })
 
     $('#clear-m1').on('click', function (e) {
         document.querySelector('#upper-limitForM1set').classList.add('noReqValue');
@@ -1135,7 +1173,6 @@ $(document).ready(function () {
         let m7 = document.querySelector('#m1-7').checked
             ? 'Блокировка возможности повторного включения двигателя привода по электрической цепи, содержащей нормально замкнутый контакт моментного выключателя, размыканием которого был выключен двигатель привода при достижении крутящего момента, заданного при настройке блока (фиксация моментных выключателей); '
             : '';
-        let m8 = 'Верхний предел настройки путевых выключателей в оборотах выходного вала:' + ' ' + document.querySelector('#upper-limitForM1').value;
 
         let base = document.querySelector('#controle-blocks').value;
         switch (base) {
@@ -1189,7 +1226,7 @@ $(document).ready(function () {
                 return 'Базовый набор функций. Цифровое управление и приводом посредством цифрового канала связи, интерфейс RS485, протокол обмена - PROFIBUS';
             default:
                 console.log(base);
-                return (g6 = m1 + m2 + m3 + m4 + m5 + m6 + m7 + m8);
+                return (g6 = m1 + m2 + m3 + m4 + m5 + m6 + m7);
         }
     }
 
@@ -1218,15 +1255,7 @@ $(document).ready(function () {
             document.querySelector('#upperLimitInM').classList.remove('ReqValueOk');
         }
     });
-    // Ограничение конфигуратора при пропуске верхнего предела
-    $('#m1-form').on('change', function (e) {
-        if (document.querySelector("#upper-limitForM1").value == '') {
-            document.querySelector("#m1-submit").disabled = true;
-        }
-        else {
-            document.querySelector("#m1-submit").disabled = false;
-        }
-    });
+
 
     // Открытие пункта виму эиму для блока управления
     $('#control-block-fieldset').on('change', function (e) {
