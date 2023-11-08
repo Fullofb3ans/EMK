@@ -686,12 +686,7 @@ $(document).ready(function () {
             document.querySelector('#commandBlockType-1').checked ? (j33 = 'ЭИМУ') : document.querySelector('#commandBlockType-2').checked ? (j33 = 'ВИМУ') : 'Конфигуратор пропущен';
         }
 
-        let j34 = ''; //Механический указатель
-        if (document.querySelector('#pointer > input[type=checkbox]').checked) {
-            j34 = 'Есть';
-        } else {
-            j34 = 'Отсутствует';
-        }
+        let j34 = 'Есть'; //Механический указатель
 
         let j35 = selectPositionSignalSecondCommandBlock() ? 'Основная плата: ' + selectPositionSignal() + '; ' + selectPositionSignalSecondCommandBlock() : selectPositionSignal(); // Сигнализация положения
 

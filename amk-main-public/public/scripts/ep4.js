@@ -933,10 +933,11 @@ $(document).ready(function () {
             mod += Math.pow(2, parseInt($(this).data('position')));
         });
         // let up = $('#upper-limitForM1').val() ? $('#upper-limitForM1').val() : '';
+        spot = document.querySelector("#mLimitNum").value ? document.querySelector("#mLimitNum").value : '';
 
         $('.cur-m1-value')
-            .text('М1' + mod)
-            .val('М1' + mod);
+            .text('М1' + mod + spot)
+            .val('М1' + mod + spot);
     });
 
     $('#clear-m1').on('click', function (e) {
@@ -950,42 +951,52 @@ $(document).ready(function () {
             $('#m1-submit').prop('disabled', false)
         }
         else {
-            $('#m1-submit').prop('disabled', true)
+            $('#m1-submit').prop('disabled', true);
+            alert('Возможное количество оборотов в диапазоне от 0.8 до 1250')
         }
     })
 
-    $('#m1-form').on('change', function () {
+
+    // $('#m1-form').on('change', 
+    function yo() {
         let upLim = document.querySelector('#upper-limit').value;
         let rotationFrequency = document.getElementById('rotation-frequency').value;
         let scheme = $("input[name='constructive-scheme']:checked").val();
         let closeNumbers = document.querySelector('#closeNumbers').value;
         let fetchResult = [];
 
-        fetch('https://emk.websto.pro/M1', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json;charset=utf-8' },
-            body: JSON.stringify({
-                a: [scheme, upLim, rotationFrequency, closeNumbers],
-            }),
-        })
-            .then((res) => res.json())
-            .then((res) => {
-                console.log(res);
-                for (i in res) fetchResult.push(res[i]);
-                // fetchResult[0].sort((a, b) => a - b);
-                document.querySelector("#mLimitNum").value = fetchResult[0];
-            });
-    });
+        if (upLim && rotationFrequency && scheme && closeNumbers > 0.8 && closeNumbers < 1250) {
+            fetch('https://emk.websto.pro/M1', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json;charset=utf-8' },
+                body: JSON.stringify({
+                    a: [scheme, upLim, rotationFrequency, closeNumbers],
+                }),
+            })
+                .then((res) => res.json())
+                .then((res) => {
+                    console.log(res);
+                    for (i in res) fetchResult.push(res[i]);
+                    // fetchResult[0].sort((a, b) => a - b);
+                    document.querySelector("#mLimitNum").value = fetchResult[0];
+                });
+        }
+    }
+    // });
 
-    $('#closeNumbers').on('change', function (e) {
+    // $("#closeNumbersForM").on('keydown', function () {
+    //     $('#m1-form').trigger('change');
+    //     console.log('hey');
+    // })
+
+    $('#closeNumbers').on('keyup', function (e) {
         document.querySelector("#closeNumbersForM").value = document.querySelector("#closeNumbers").value;
-        $('#m1-form').trigger('change');
+        yo();
     })
 
-    $('#closeNumbersForM').on('change', function (e) {
+    $('#closeNumbersForM').on('keyup', function (e) {
         document.querySelector("#closeNumbers").value = document.querySelector("#closeNumbersForM").value;
-        $('#closeNumbers').trigger('change');
-
+        yo();
     })
     // Стили для оборотов м1
     $('#m1-form').on('change', function (e) {
@@ -1075,6 +1086,8 @@ $(document).ready(function () {
         let cbs = $('#controle-blocks-series').val();
         if (cbs === 'М1') {
             m1BlockModal.show();
+            yo();
+            $('#m1-form').trigger('change');
         } else if (cbs === 'М2') {
             m2BlockModal.show();
         } else if (cbs === 'ВЭ' || cbs === 'Э0' || cbs === 'Э1') {

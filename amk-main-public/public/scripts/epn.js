@@ -677,7 +677,7 @@ $(document).ready(function () {
         let j40 = $("input[name='connection']:checked").val(); //Электрическое подключение (обозначение)
         let j41 = ''; //Защитный колпак
         let j42 = document.querySelector("#color-1").checked ? 'Серый' : document.querySelector("#ralColor").value; //Цвет
-        let j43 = ''; //Механический указатель
+        let j43 = 'Есть'; //Механический указатель
         let j44 = addOptions;//Доп опции 
         let j45 = document.querySelector('#addReqarea').value; //Дополнительные требования
         // json4 = [j40, j41, j42, j43, j44, j45];
