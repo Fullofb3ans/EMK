@@ -318,6 +318,7 @@ $(document).ready(function () {
             $('#vimucontrole-blocks2').val('');
             $('#control-block-config').val('');
             $('#control-block2-config').val('');
+            $('#control-block2-config').hide();
             $(document.querySelector('#control-block-config')).show();
             $(document.querySelector('#controle-blocks')).hide();
             $("#vimuMark").val('');
