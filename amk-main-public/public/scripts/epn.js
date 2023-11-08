@@ -1241,7 +1241,7 @@ $(document).ready(function () {
             return positionSignal = 'Сигнализация положения: 4-20мА';
         }
         else {
-            return positionSignal = 'Сигнализация положения: отсутствует';
+            return positionSignal = '';
         }
     }
     // Обработка сигналов второго блока
