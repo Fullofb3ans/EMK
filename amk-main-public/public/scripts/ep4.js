@@ -1081,7 +1081,6 @@ $(document).ready(function () {
             m1BlockModal.show();
             yo();
             $('#closeNumbersForM').trigger('change');
-            $('#m1-form').trigger('change');
         } else if (cbs === 'М2') {
             m2BlockModal.show();
         } else if (cbs === 'ВЭ' || cbs === 'Э0' || cbs === 'Э1') {
