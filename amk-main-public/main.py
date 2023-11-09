@@ -102,17 +102,17 @@ def ep4Reductor():
 
 
 
-@app.get("/Tula/{ID}/{name}", response_class = FileResponse)
-def download_file(ID, name):
+@app.get("/Tula/{ID}/{name}/{mark}", response_class = FileResponse)
+def download_file(ID, name, mark):
     #headers = {'Content-Disposition': f'attachment; filename="Tula{ID}.pdf"'}
-    return FileResponse(f'Tula{ID}.docx', filename=f'ОЛ ТЭП {name} {ID}.docx', media_type='application/docx')#, headers=headers)
+    return FileResponse(f'Tula{ID}.docx', filename=f'ОЛ ТЭП {mark} {name} {ID}.docx', media_type='application/docx')#, headers=headers)
 
-@app.get("/TulaEXEL/{ID}/{name}", response_class = FileResponse)
-def download_file(ID, name):
-    return FileResponse(f'Tula{ID}.xlsx', filename=f'ТКП {name} {ID}.xlsx', media_type='application/xlsx')#, headers=headers)
+@app.get("/TulaEXEL/{ID}/{name}/{mark}", response_class = FileResponse)
+def download_file(ID, name, mark):
+    return FileResponse(f'Tula{ID}.xlsx', filename=f'ТКП {mark} {name} {ID}.xlsx', media_type='application/xlsx')#, headers=headers)
 
-@app.get("/TulaPDF/{ID}/{name}", response_class = FileResponse)
-def download_file(ID, name):
+@app.get("/TulaPDF/{ID}/{name}/{mark}", response_class = FileResponse)
+def download_file(ID, name, mark):
     os.system(f"unoconv -f pdf Tula{ID}.xlsx")
     os.rename(f"Tula{ID}.pdf", "Tula.pdf")
     os.system(f"unoconv -f pdf Tula{ID}.docx")
@@ -123,7 +123,7 @@ def download_file(ID, name):
          merger.append(pdf)
     merger.write(f"Tula{ID}.pdf")
     merger.close()
-    return FileResponse(f'Tula{ID}.pdf', filename=f'Опросный лист на подпись {name} {ID}.pdf', media_type='application/pdf')#, headers=headers)
+    return FileResponse(f'Tula{ID}.pdf', filename=f'Информация на подпись {mark} {name} {ID}.pdf', media_type='application/pdf')#, headers=headers)
 
 
 
@@ -143,8 +143,6 @@ def get_param(jsn = Body()):
         pass
     print(res)
     return {"ans" : res}
-
-
 
 @app.post("/DBrn")
 def get_param(jsn = Body()):
@@ -182,6 +180,14 @@ def get_param(jsn = Body()):
 
     print(res)
     return {"ans" : res}
+
+@app.post("/M1")
+def get_param(jsn = Body()):
+    a = jsn["a"]
+    bd = DB("M1")
+    ans = bd.get_M1(a[0], a[1], a[2], a[3])
+    
+    return {"ans" : ans}
 
 
 
@@ -328,6 +334,16 @@ def download_file(jsn = Body()):
         json.dump(jsn, fh)
     #convert(f"Tula{ID}.docx")
 
+    file_break=['/', '\\', '\n', '*', '|', '\'', '\"']
+    Mark = ""
+    k=0
+    for m in mark:
+        if m == "-":
+            k+=1
+        if (k < 4) and (m not in file_break):
+            Mark += m
+    print(Mark)
+        
 
 
-    return {"id" : ID, "name" : jsn0[1]}
+    return {"id" : ID, "name" : jsn0[1], "mark" : Mark}

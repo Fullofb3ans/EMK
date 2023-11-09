@@ -9,6 +9,11 @@ from openpyxl.drawing.image import Image
 
 from datetime import date
 
+def toFloat(val):
+    if (type(val) == type(" ")) and (',' in  val):
+        val = val.replace(',', '.')
+    return float(val)
+
 class mk_DOCX():
     def __init__(self, elpod = "", list0 = [], list1 = [], list2 = [], list3 = [], list4 = [], list5 = []):
         self.elpod = elpod
@@ -22,10 +27,13 @@ class mk_DOCX():
 
     
     def ep4(self):
-        if 'М1' == self.list3[0][:2]:
+        mA=''
+        if ('Э16' in self.list3[0]) or ('Э17' in self.list3[0]):
+            mA = " 4-20 мА"
+        '''if 'М1' == self.list3[0][:2]:
             M = DB(self.list3[0])
             M1 = M.get_M1(self.list1[8], self.list1[4], self.list1[7], self.list1[9])
-            self.list3[0] = str(self.list3[0]) + str(M1)
+            self.list3[0] = str(self.list3[0]) + str(M1)'''
 
         names1 = ["Тип арматуры", "Маркировка", "Завод-изготовитель",  "Требуемое время закрытия", "Максимальный крутящий момент", "Присоединение к приводу"]
         ans1 = self.list1[:-4]
@@ -35,9 +43,6 @@ class mk_DOCX():
         names2 = ['Исполнение по назначению', 'Режим работы', 'Степень защиты от проникновения пыли и влаги', 'Вращение выходного вала при закрывании', 'Температура окружающей среды (Климат)'] 
         names2 += ['Тип блока управления ', 'Сигнал дистанционного управления', 'Тип блока концевых выключателей (без встроенного пускателя)', 'Механический указатель сигнализации положения', 'Сигнализация положения', 'Сигнал «Момент» 4-20 мА', 'Дублирование шины RS485'] 
         names2 += ["Электрическое подключение", 'Защитный колпак', 'Цвет окраски', 'Напряжение питания электродвигателя', 'Количество эл./приводов', 'Дополнительные опции', 'Дополнительные требования']
-        mA=''
-        if ('16' in self.list3[0]) or ('17' in self.list3[0]):
-            mA = " 4-20 мА"
         ans2 = self.list2 + [self.list3[0], self.list3[2]+mA] + self.list3[3:-4] + [ f"« {self.list4[0]}» - {self.elpod}", self.list4[1], self.list4[2], self.list5[5], self.list0[-2]] + self.list4[-2:]
 
         ans3 = self.list0[:-2]
@@ -45,7 +50,9 @@ class mk_DOCX():
         return {"names1" : names1, "names2" : names2, "ans1" : ans1, "ans2" : ans2, "ans3" : ans3}
     
     def epn(self):
-        #print(self.list1)
+        mA=''
+        if ('Э16' in self.list3[0]) or ('Э17' in self.list3[0]):
+            mA = " 4-20 мА"
         names1 = ["Тип арматуры", "Маркировка", "Завод-изготовитель",  "Требуемое время закрытия", "Максимальный крутящий момент", "Присоединение к приводу"]
         ans1 = self.list1[:-4]
         names1.append("Количество оборотов (угол поворота) для закрытия арматуры")
@@ -57,12 +64,10 @@ class mk_DOCX():
             ans1[i] = str(ans1[i])
         
         names2 = ["Исполнение по назначению", "Режим работы", "Степень защиты от проникновения пыли и влаги", "Вращение выходного вала при закрывании", "Температура окружающей среды (Климат)"] 
-        names2 += ["Тип блока управления", "Сигнал дистанционного управления", "Тип блока концевых выключателей (без встроенного пускателя)", "Механический указатель сигнализации положения", "Сигнализация положения", "Сигнал «Момент» 4-20 мА", "Дублирование шины RS485"] 
-        names2 += ["Электрическое подключение", "Защитный колпак", "Цвет окраски", "Напряжение питания электродвигателя", "Количество эл./приводов", "Дополнительные опции", "Дополнительные требования"]
-        mA=''
-        if ('16' in self.list3[0]) or ('17' in self.list3[0]):
-            mA = " 4-20 мА"
-        ans2 = self.list2 + [self.list3[0], self.list3[2]+mA] + self.list3[3:-4] + [ f"« {self.list4[0]}» - {self.elpod}", self.list4[1], self.list4[2], self.list5[5], self.list0[-2]] + self.list4[-2:]
+        names2 += ["Тип блока управления", "Сигнал дистанционного управления", "Тип блока концевых выключателей (без встроенного пускателя)", "Сигнализация положения", "Сигнал «Момент» 4-20 мА", "Дублирование шины RS485"] 
+        names2 += ["Электрическое подключение", "Цвет окраски", "Напряжение питания электродвигателя", "Количество эл./приводов", "Дополнительные опции", "Дополнительные требования"]
+        
+        ans2 = self.list2 + [self.list3[0], self.list3[2]+mA, self.list3[3]] + self.list3[5:-4] + [ f"« {self.list4[0]}» - {self.elpod}", self.list4[2], self.list5[5], self.list0[-2]] + self.list4[-2:]
 
         ans3 = self.list0[:-2]
 
@@ -92,7 +97,7 @@ class mk_DOCX():
         ans2 = self.list2
 
         names2 += ['Тип блока концевых выключателей (без встроенного пускателя)', "Электрическое подключение", 'Напряжение питания электродвигателя', 'Количество эл./приводов', 'Дополнительные опции', 'Дополнительные требования']
-        ans2 += [self.list3[3], f"{self.elpod}", "380 B   6 фаз", self.list0[-2]] + self.list4[-2:]
+        ans2 += [self.list3[3], f"{self.elpod}", "380 B   3 фазы", self.list0[-2]] + self.list4[-2:]
 
         #ans2[-6] = self.list5[1]
         ans3 = self.list0[:-2]
@@ -119,10 +124,10 @@ class mk_XL():
             wb = load_workbook('epnTKP.xlsx')
         sheet = wb['Формат ТКП']
 
-        '''if 'М1' == a[3][0][:2]:
+        if 'М1' == a[3][0][:2]:
             M = DB(a[3][0])
             M1 = M.get_M1(a[1][8], a[1][4], a[1][7], a[1][9])
-            a[3][0] = str(a[3][0]) + str(M1)'''
+            a[3][1] += f"Верхний предел настройки путевых выключателей в оборотах выходного вала- {M1[1:]}."
 
         #Лицевая часть
         current_date = date.today()
@@ -319,6 +324,8 @@ class DB():
     def get_engin(self, mark, sh, Mom, V, flc, U=""):
         WB = load_workbook('BD.xlsx')
         Sheet = WB['Связь']
+
+        print("Подбор двигателя для ЭП")
             
         ansi = []
         for i in range(2, 1500):
@@ -345,6 +352,9 @@ class DB():
         ans = []
         WB = load_workbook('BD.xlsx')
         Sheet = WB['Электропривода']
+
+        print("Подбор параметров для ЭП")
+
         if flc_type == "" or flc_type == None:
             ans = "Укажите тип фланца"
 
@@ -399,6 +409,9 @@ class DB():
         ans = []
         WB = load_workbook('BD.xlsx')
         Sheet = WB['Электропривода']
+
+        print("Подбор параметров для ЭП4 с РН")
+
         if rn == "":
             for i in range(2, 568):
                 rn = Sheet[f"I{i}"].value
@@ -459,6 +472,9 @@ class DB():
         ElPod = str(elpod)
         WB = load_workbook('BD.xlsx')
         Sheet = WB['Классика']
+
+        print("Подбор параметров для классики")
+
         if isp == "":
             for i in range(2, 417):
                 isp = Sheet[f"B{i}"].value
@@ -540,7 +556,7 @@ class DB():
     def get_class_engin(self, isp = "", flc = "", mod = "", nom = ""):
         WB = load_workbook('BD.xlsx')
         Sheet = WB['Классика']
-
+        print("Подбор двигателя для классики")
 
 
         ansi = []
@@ -551,11 +567,11 @@ class DB():
             NOM = Sheet[f"E{i}"].value
             if ((str(isp) == str(ISP)) and (str(flc) == str(FLC)) and (int(mod) == int(MOD)) and (int(nom) == int(NOM)) ):
                 ansi.append(i)
-                #print(i)
                     
             if ansi != []:
                 for i in ansi:
                     ans = [str(Sheet[f"J{i}"].value) + " кВт", str(Sheet[f"K{i}"].value) + " кВт", str(Sheet[f"L{i}"].value) + " А", str(Sheet[f"M{i}"].value) + " А", str(Sheet[f"N{i}"].value) + " В", str(Sheet[f"O{i}"].value), str(Sheet[f"I{i}"].value)]
+                    print(ans)
             else:
                 ans = "Не удалось подобрать"
         return ans
@@ -571,6 +587,9 @@ class DB():
             V = str(arr[3])
             type_flc = str(arr[4])
             sh = str(arr[5])
+            print(f"Подбор маркировки для {mark}:")
+            print(f"[фланец, моент, частота, тип фланца, схема]")
+            print(arr)
 
             if Hm == "":
                 for i in range(2, 568):
@@ -624,8 +643,12 @@ class DB():
         mom = int(mom)
         v = float(v)
         ob = float(ob)
-        Sim = ['M', 'L', 'K', 'J', 'I', 'H', 'G', 'F', 'E', 'D']
-        k = '2'
+        print(f"Подбор блока М1 при схеме - {sh}, моменте - {mom}, частоте - {v}, и оборотах - {ob}.")
+        #Sim = ['M', 'L', 'K', 'J', 'I', 'H', 'G', 'F', 'E', 'D'] #слева направо
+        Sim = ['D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M'] #справа налево
+        k = 2
+        m = 70
+
 
         WB = load_workbook("M1.xlsx")
         sheet = WB["M1"]
@@ -635,20 +658,32 @@ class DB():
             Mom = sheet[f'B{i}'].value
             V = float(sheet[f'C{i}'].value) 
             if (sh == SH) and (mom == Mom) and (v == V):
-                k = str(i)
+                k = i
+                m = i+68
 
         for s in Sim:
-            pos = s + k
-            min_ob = sheet[pos].value
+            pos_min = f"{s}{k}"
+            pos_max = f"{s}{m}"
+
+            min_ob = sheet[pos_min].value
+            max_ob = sheet[pos_max].value
+            
             if min_ob == "-":
-                 pos = f"{s}2"
-                 min_ob = sheet[pos].value
-            print(pos)
-            min_ob = float(min_ob)
-            print(min_ob, ob)
-            if min_ob <= ob:
-                if sheet[f"{s}1"].value == 2.5:
+                 pos_min = f"{s}2"
+                 min_ob = sheet[pos_min].value
+            if max_ob == "-":
+                 pos_max = f"{s}70"
+                 max_ob = sheet[pos_max].value
+            
+            min_ob = toFloat(min_ob)
+            max_ob = toFloat(max_ob)
+
+            if min_ob <= ob <= max_ob:
+                print(sheet[f"{s}1"].value)
+                if sheet[f"{s}1"].value == 2.5: 
                     return ".2,5"
                 return "." + str(sheet[f"{s}1"].value)
         
         return ""
+
+
