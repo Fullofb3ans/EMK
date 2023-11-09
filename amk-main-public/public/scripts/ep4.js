@@ -956,8 +956,6 @@ $(document).ready(function () {
         }
     })
 
-
-    // $('#m1-form').on('change', 
     function yo() {
         let upLim = document.querySelector('#upper-limit').value;
         let rotationFrequency = document.getElementById('rotation-frequency').value;
@@ -977,17 +975,10 @@ $(document).ready(function () {
                 .then((res) => {
                     console.log(res);
                     for (i in res) fetchResult.push(res[i]);
-                    // fetchResult[0].sort((a, b) => a - b);
                     document.querySelector("#mLimitNum").value = fetchResult[0];
                 });
         }
     }
-    // });
-
-    // $("#closeNumbersForM").on('keydown', function () {
-    //     $('#m1-form').trigger('change');
-    //     console.log('hey');
-    // })
 
     $('#closeNumbers').on('keyup', function (e) {
         document.querySelector("#closeNumbersForM").value = document.querySelector("#closeNumbers").value;
@@ -1087,6 +1078,8 @@ $(document).ready(function () {
         if (cbs === 'М1') {
             m1BlockModal.show();
             yo();
+            $('#closeNumbersForM').trigger('change');
+
             $('#m1-form').trigger('change');
         } else if (cbs === 'М2') {
             m2BlockModal.show();
