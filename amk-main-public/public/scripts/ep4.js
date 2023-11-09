@@ -951,8 +951,10 @@ $(document).ready(function () {
             $('#m1-submit').prop('disabled', false)
         }
         else {
-            $('#m1-submit').prop('disabled', true);
-            alert('Возможное количество оборотов в диапазоне от 0.8 до 1250')
+            if (document.querySelector("#closeNumbersForM").value) {
+                $('#m1-submit').prop('disabled', true);
+                alert('Возможное количество оборотов в диапазоне от 0.8 до 1250')
+            }
         }
     })
 
@@ -1079,7 +1081,6 @@ $(document).ready(function () {
             m1BlockModal.show();
             yo();
             $('#closeNumbersForM').trigger('change');
-
             $('#m1-form').trigger('change');
         } else if (cbs === 'М2') {
             m2BlockModal.show();
