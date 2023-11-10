@@ -16,6 +16,14 @@ $(document).ready(function () {
         $(el).toggleClass('table-success');
     });
 
+    $(document).on('click', '#ve2-table16 th, #ve2-table16 td', function (e) {
+        let target = $(this).data('target');
+        let el = document.getElementById('v' + target);
+        $('.cur-vexecution2e16-value').text(target).val(target);
+        $('#ve2-table16 th').removeClass('table-success');
+        $(el).toggleClass('table-success');
+    });
+
     $(document).on('change', function (e) {
         if ($('#controle-blocks2').val()) {
             document.querySelector("#PanelOption").checked = false;
@@ -1406,16 +1414,26 @@ $(document).ready(function () {
     });
 
     // Обработка доп платы
+    let vimuBlock2ModalForE16 = new bootstrap.Modal($("#ve2ConfigE16"));
     let vimuBlock2Modal = new bootstrap.Modal($("#ve2Config"));
 
-    $('#control-block2-config').on('click', function (e) {
-        vimuBlock2Modal.show();
+    $("#closeve2E16modal").on("click", function (e) {
+        vimuBlock2ModalForE16.hide();
     });
-
     $("#closeve2modal").on("click", function (e) {
         vimuBlock2Modal.hide();
     });
 
+    $("#ve2E16c-submit").on("click", function (e) {
+        $("#controle-blocks2").val($("input.cur-vexecution2e16-value").text()).trigger("change");
+        vimuBlock2ModalForE16.hide();
+    });
+
+    $('#ve2E16Clear').on('click', function (e) {
+        $('#controle-blocks2').val('');
+        vimuBlock2ModalForE16.hide();
+        $('#control-block-fieldset').trigger('change');
+    });
     $("#ve2c-submit").on("click", function (e) {
         $("#controle-blocks2").val($("input.cur-vexecution2-value").text()).trigger("change");
         vimuBlock2Modal.hide();
@@ -1425,6 +1443,53 @@ $(document).ready(function () {
         $('#controle-blocks2').val('');
         vimuBlock2Modal.hide();
         $('#control-block-fieldset').trigger('change');
+    });
+
+    $('#control-block-fieldset').on('change', function (e) {
+        $('#controle-blocks2').val() ? $('#sumBlocks').val($('#controle-blocks').val() + '/' + $('#controle-blocks2').val()) : $('#sumBlocks').val($('#controle-blocks').val());
+    });
+
+    $('#controle-blocks').on('change', function () {
+        let BU = $('#controle-blocks').val();
+        if (BU == 'Э16') {
+            $("#controle-blocks2").val('');
+            $('#control-block-fieldset').trigger('change');
+            $("#control-block2-config").off('click');
+            $("#control-block2-config").show();
+            $("#control-block2-config").on('click', function () {
+                vimuBlock2ModalForE16.show();
+            })
+        }
+        else if (BU == 'Э18' || BU == 'Э19' || BU == 'Э110' || BU == 'Э14') {
+            $("#controle-blocks2").val('');
+            $('#control-block-fieldset').trigger('change');
+            $("#control-block2-config").off('click');
+            $("#control-block2-config").show();
+            $("#control-block2-config").on('click', function () {
+                vimuBlock2Modal.show();
+            })
+        }
+        else {
+            $("#control-block2-config").hide();
+            $("#controle-blocks2").val('');
+            $('#control-block-fieldset').trigger('change');
+        }
+    })
+
+    $('#control-block-fieldset').on('change', function (e) {
+        if ($("#controle-blocks-series").val() !== 'Э1') {
+            $("#control-block2-config").hide();
+            $("#controle-blocks2").val('');
+            $('#sumBlocks').show();
+            $('#control-block-fieldset').trigger('change');
+        }
+        else {
+            $('#sumBlocks').show();
+        }
+
+        if ($('#controle-blocks-series').val() == 'Э0') {
+            $('#sumBlocks').hide();
+        }
     });
 
     $('#control-block-fieldset').on('change', function (e) {

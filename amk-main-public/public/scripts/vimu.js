@@ -15,6 +15,14 @@ $(document).ready(function () {
         $(el).toggleClass('table-success');
     });
 
+    $(document).on('click', '#ve2E16-table th, #ve2E16-table td', function (e) {
+        let target = $(this).data('target');
+        let el = document.getElementById('v216' + target);
+        $('.cur-vexecution2e16-value').text(target).val(target);
+        $('#ve2E16-table th').removeClass('table-success');
+        $(el).toggleClass('table-success');
+    });
+
     $(document).on('change', function (e) {
         if ($('#controle-blocks2').val()) {
             document.querySelector("#PanelOptionLabel").checked = false;
@@ -594,16 +602,26 @@ $(document).ready(function () {
     });
 
     // Обработка доп платы
+    let vimuBlock2ModalForE16 = new bootstrap.Modal($("#ve2ConfigE16"));
     let vimuBlock2Modal = new bootstrap.Modal($("#ve2Config"));
 
-    $('#control-block2-config').on('click', function (e) {
-        vimuBlock2Modal.show();
+    $("#closeve2E16modal").on("click", function (e) {
+        vimuBlock2ModalForE16.hide();
     });
-
     $("#closeve2modal").on("click", function (e) {
         vimuBlock2Modal.hide();
     });
 
+    $("#ve2E16c-submit").on("click", function (e) {
+        $("#controle-blocks2").val($("input.cur-vexecution2e16-value").text()).trigger("change");
+        vimuBlock2ModalForE16.hide();
+    });
+
+    $('#ve2E16Clear').on('click', function (e) {
+        $('#controle-blocks2').val('');
+        vimuBlock2ModalForE16.hide();
+        $('#control-block-fieldset').trigger('change');
+    });
     $("#ve2c-submit").on("click", function (e) {
         $("#controle-blocks2").val($("input.cur-vexecution2-value").text()).trigger("change");
         vimuBlock2Modal.hide();
@@ -614,6 +632,33 @@ $(document).ready(function () {
         vimuBlock2Modal.hide();
         $('#control-block-fieldset').trigger('change');
     });
+
+    $('#controle-blocks').on('change', function () {
+        let BU = $('#controle-blocks').val();
+        if (BU == 'ВЭ16') {
+            $("#controle-blocks2").val('');
+            $('#control-block-fieldset').trigger('change');
+            $("#control-block2-config").off('click');
+            $("#control-block2-config").show();
+            $("#control-block2-config").on('click', function () {
+                vimuBlock2ModalForE16.show();
+            })
+        }
+        else if (BU == 'ВЭ18' || BU == 'ВЭ19' || BU == 'ВЭ110' || BU == 'ВЭ14') {
+            $("#controle-blocks2").val('');
+            $('#control-block-fieldset').trigger('change');
+            $("#control-block2-config").off('click');
+            $("#control-block2-config").show();
+            $("#control-block2-config").on('click', function () {
+                vimuBlock2Modal.show();
+            })
+        }
+        else {
+            $("#control-block2-config").hide();
+            $("#controle-blocks2").val('');
+            $('#control-block-fieldset').trigger('change');
+        }
+    })
 
     $('#control-block-fieldset').on('change', function (e) {
         $('#controle-blocks2').val() ? $('#sumBlocks').val($('#controle-blocks').val() + '/' + $('#controle-blocks2').val()) : $('#sumBlocks').val($('#controle-blocks').val());

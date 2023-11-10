@@ -183,7 +183,7 @@
 							<input type="text" class="form-control ch-mark" name="controle-blocks2" id="controle-blocks2" value="" disabled="" style="display: none" />
 							<input type="text" class="form-control ch-mark" name="sumBlocks" id="sumBlocks" value="" disabled="" style="margin-top: 22px; margin-bottom: 10px; background: #fff4e95e; border: none" />
 							<button class="btn btn-outline-secondary" type="button" id="control-block-config">Конфигуратор</button>
-							<button class="btn btn-outline-secondary" type="button" id="control-block2-config">Добавить плату</button>
+							<button class="btn btn-outline-secondary none" type="button" id="control-block2-config">Добавить плату</button>
 						</div>
 					</div>
 				</fieldset>
@@ -705,7 +705,7 @@
 				</div>
 			</div>
 
-			<!-- Таблица для доп платы виму в ВЭ1 -->
+			<!-- Таблица для доп платы виму в ВЭ1 под != э16 -->
 			<div class="modal" id="ve2Config" tabindex="-1">
 				<div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
 					<div class="modal-content" style="width: 100%; font-size: smaller">
@@ -721,148 +721,59 @@
 										<th style="pointer-events: none" colspan="10">Код исполнения</th>
 									</tr>
 									<tr>
-										<th data-target="ВЭ11" id="v2ВЭ11">ВЭ11</th>
-										<th data-target="ВЭ12" id="v2ВЭ12">ВЭ12</th>
-										<th data-target="ВЭ13" id="v2ВЭ13">ВЭ13</th>
-										<th data-target="ВЭ14" id="v2ВЭ14">ВЭ14</th>
-										<th data-target="ВЭ15" id="v2ВЭ15">ВЭ15</th>
 										<th data-target="ВЭ16" id="v2ВЭ16">ВЭ16</th>
-										<th data-target="ВЭ17" id="v2ВЭ17">ВЭ17</th>
-										<th data-target="ВЭ18" id="v2ВЭ18">ВЭ18</th>
-										<th data-target="ВЭ19" id="v2ВЭ19">ВЭ19</th>
-										<th data-target="ВЭ110" id="v2ВЭ110">ВЭ110</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
 										<td style="pointer-events: none">Базовый набор функций ВИМУ</td>
-										<td data-target="ВЭ11" class="table-success"></td>
-										<td data-target="ВЭ12" class="table-success"></td>
-										<td data-target="ВЭ13" class="table-success"></td>
-										<td data-target="ВЭ14" class="table-success"></td>
-										<td data-target="ВЭ15" class="table-success"></td>
+
 										<td data-target="ВЭ16" class="table-success"></td>
-										<td data-target="ВЭ17" class="table-success"></td>
-										<td data-target="ВЭ18" class="table-success"></td>
-										<td data-target="ВЭ19" class="table-success"></td>
-										<td data-target="ВЭ110" class="table-success"></td>
 									</tr>
 									<tr>
 										<td style="pointer-events: none">Передача информации о положении выходного звена привода посредством токового сигнала (4–20 мА)</td>
-										<td data-target="ВЭ11"></td>
-										<td data-target="ВЭ12" class="table-success"></td>
-										<td data-target="ВЭ13" class="table-success"></td>
-										<td data-target="ВЭ14"></td>
-										<td data-target="ВЭ15" class="table-success"></td>
+
 										<td data-target="ВЭ16" class="table-success"></td>
-										<td data-target="ВЭ17" class="table-success"></td>
-										<td data-target="ВЭ18"></td>
-										<td data-target="ВЭ19"></td>
-										<td data-target="ВЭ110"></td>
 									</tr>
 									<tr>
 										<td style="pointer-events: none">Передача текущего значения движущего момента на выходном звене привода посредством токового сигнала (4–20 мА).</td>
-										<td data-target="ВЭ11"></td>
-										<td data-target="ВЭ12"></td>
-										<td data-target="ВЭ13" class="table-success"></td>
-										<td data-target="ВЭ14"></td>
-										<td data-target="ВЭ15" class="table-success"></td>
+
 										<td data-target="ВЭ16"></td>
-										<td data-target="ВЭ17" class="table-success"></td>
-										<td data-target="ВЭ18"></td>
-										<td data-target="ВЭ19"></td>
-										<td data-target="ВЭ110"></td>
 									</tr>
 									<tr>
 										<td style="pointer-events: none">Аналоговое управление приводом — прием от дистанционного пульта и отработка токового сигнала (4–20 мА) задания положения выходного звена привода с контролем наличия связи</td>
-										<td data-target="ВЭ11"></td>
-										<td data-target="ВЭ12"></td>
-										<td data-target="ВЭ13"></td>
-										<td data-target="ВЭ14"></td>
-										<td data-target="ВЭ15"></td>
+
 										<td data-target="ВЭ16" class="table-success"></td>
-										<td data-target="ВЭ17" class="table-success"></td>
-										<td data-target="ВЭ18"></td>
-										<td data-target="ВЭ19"></td>
-										<td data-target="ВЭ110"></td>
 									</tr>
 									<tr>
 										<td style="pointer-events: none">Цифровое управление и настройка привода посредством цифрового канала связи, интерфейс RS485, протокол обмена — MODBUS RTU.</td>
-										<td data-target="ВЭ11"></td>
-										<td data-target="ВЭ12"></td>
-										<td data-target="ВЭ13"></td>
-										<td data-target="ВЭ14" class="table-success"></td>
-										<td data-target="ВЭ15" class="table-success"></td>
+
 										<td data-target="ВЭ16"></td>
-										<td data-target="ВЭ17"></td>
-										<td data-target="ВЭ18"></td>
-										<td data-target="ВЭ19"></td>
-										<td data-target="ВЭ110"></td>
 									</tr>
 									<tr>
 										<td style="pointer-events: none">Цифровое управление и настройка привода с дублированием каналов связи посредством цифрового канала связи, интерфейс RS485, протокол обмена — MODBUS RTU</td>
-										<td data-target="ВЭ11"></td>
-										<td data-target="ВЭ12"></td>
-										<td data-target="ВЭ13"></td>
-										<td data-target="ВЭ14"></td>
-										<td data-target="ВЭ15"></td>
+
 										<td data-target="ВЭ16"></td>
-										<td data-target="ВЭ17"></td>
-										<td data-target="ВЭ18" class="table-success"></td>
-										<td data-target="ВЭ19"></td>
-										<td data-target="ВЭ110"></td>
 									</tr>
 									<tr>
 										<td style="pointer-events: none">Цифровое управление приводом посредством цифрового канала связи, интерфейс RS485, протокол обмена — PROFIBUS DP</td>
-										<td data-target="ВЭ11"></td>
-										<td data-target="ВЭ12"></td>
-										<td data-target="ВЭ13"></td>
-										<td data-target="ВЭ14"></td>
-										<td data-target="ВЭ15"></td>
+
 										<td data-target="ВЭ16"></td>
-										<td data-target="ВЭ17"></td>
-										<td data-target="ВЭ18"></td>
-										<td data-target="ВЭ19" class="table-success"></td>
-										<td data-target="ВЭ110"></td>
 									</tr>
 									<tr>
 										<td style="pointer-events: none">Цифровое управление приводом с дублированием каналов связи посредством цифрового канала связи, интерфейс RS485, протокол обмена — PROFIBUS DP.</td>
-										<td data-target="ВЭ11"></td>
-										<td data-target="ВЭ12"></td>
-										<td data-target="ВЭ13"></td>
-										<td data-target="ВЭ14"></td>
-										<td data-target="ВЭ15"></td>
+
 										<td data-target="ВЭ16"></td>
-										<td data-target="ВЭ17"></td>
-										<td data-target="ВЭ18"></td>
-										<td data-target="ВЭ19"></td>
-										<td data-target="ВЭ110" class="table-success"></td>
 									</tr>
 									<tr>
 										<td style="pointer-events: none">Диагностирование отказов опциональных модулей.</td>
-										<td data-target="ВЭ11"></td>
-										<td data-target="ВЭ12" class="table-success"></td>
-										<td data-target="ВЭ13" class="table-success"></td>
-										<td data-target="ВЭ14" class="table-success"></td>
-										<td data-target="ВЭ15" class="table-success"></td>
+
 										<td data-target="ВЭ16" class="table-success"></td>
-										<td data-target="ВЭ17" class="table-success"></td>
-										<td data-target="ВЭ18" class="table-success"></td>
-										<td data-target="ВЭ19" class="table-success"></td>
-										<td data-target="ВЭ110" class="table-success"></td>
 									</tr>
 									<tr>
 										<td style="pointer-events: none">Автоматический выбор активного интерфейса дистанционного управления.</td>
-										<td data-target="ВЭ11"></td>
-										<td data-target="ВЭ12"></td>
-										<td data-target="ВЭ13"></td>
-										<td data-target="ВЭ14" class="table-success"></td>
-										<td data-target="ВЭ15" class="table-success"></td>
+
 										<td data-target="ВЭ16" class="table-success"></td>
-										<td data-target="ВЭ17" class="table-success"></td>
-										<td data-target="ВЭ18" class="table-success"></td>
-										<td data-target="ВЭ19" class="table-success"></td>
-										<td data-target="ВЭ110" class="table-success"></td>
 									</tr>
 								</tbody>
 							</table>
@@ -872,6 +783,133 @@
 							<div class="modal-title m-auto">Код исполнения: <span class="cur-vexecution2-value">ВЭ</span></div>
 							<input type="hidden" class="cur-vexecution2-value" value="ВЭ" />
 							<button type="button" class="btn btn-primary" id="ve2c-submit">Применить</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Таблица для доп платы виму в ВЭ1 под э16 -->
+			<div class="modal" id="ve2ConfigE16" tabindex="-1">
+				<div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+					<div class="modal-content" style="width: 100%; font-size: smaller">
+						<div class="modal-header" style="flex-wrap: wrap">
+							<button type="button" id="closeve2E16modal" class="btn2-close" data-bs-dismiss="modal" aria-label="Close">Закрыть</button>
+							<h5 class="modal-title">Опциональный набор функций ВИМУ и коды исполнения</h5>
+						</div>
+						<div class="modal-body">
+							<table id="ve2E16-table" class="table table-bordered">
+								<thead>
+									<tr>
+										<th style="pointer-events: none" rowspan="2">Функции</th>
+										<th style="pointer-events: none" colspan="10">Код исполнения</th>
+									</tr>
+									<tr>
+										<th data-target="ВЭ14" id="v216ВЭ14">ВЭ14</th>
+
+										<th data-target="ВЭ18" id="v216ВЭ18">ВЭ18</th>
+										<th data-target="ВЭ19" id="v216ВЭ19">ВЭ19</th>
+										<th data-target="ВЭ110" id="v216ВЭ110">ВЭ110</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td style="pointer-events: none">Базовый набор функций ВИМУ</td>
+
+										<td data-target="ВЭ14" class="table-success"></td>
+
+										<td data-target="ВЭ18" class="table-success"></td>
+										<td data-target="ВЭ19" class="table-success"></td>
+										<td data-target="ВЭ110" class="table-success"></td>
+									</tr>
+									<tr>
+										<td style="pointer-events: none">Передача информации о положении выходного звена привода посредством токового сигнала (4–20 мА)</td>
+
+										<td data-target="ВЭ14"></td>
+
+										<td data-target="ВЭ18"></td>
+										<td data-target="ВЭ19"></td>
+										<td data-target="ВЭ110"></td>
+									</tr>
+									<tr>
+										<td style="pointer-events: none">Передача текущего значения движущего момента на выходном звене привода посредством токового сигнала (4–20 мА).</td>
+
+										<td data-target="ВЭ14"></td>
+
+										<td data-target="ВЭ18"></td>
+										<td data-target="ВЭ19"></td>
+										<td data-target="ВЭ110"></td>
+									</tr>
+									<tr>
+										<td style="pointer-events: none">Аналоговое управление приводом — прием от дистанционного пульта и отработка токового сигнала (4–20 мА) задания положения выходного звена привода с контролем наличия связи</td>
+
+										<td data-target="ВЭ14"></td>
+
+										<td data-target="ВЭ18"></td>
+										<td data-target="ВЭ19"></td>
+										<td data-target="ВЭ110"></td>
+									</tr>
+									<tr>
+										<td style="pointer-events: none">Цифровое управление и настройка привода посредством цифрового канала связи, интерфейс RS485, протокол обмена — MODBUS RTU.</td>
+
+										<td data-target="ВЭ14" class="table-success"></td>
+
+										<td data-target="ВЭ18"></td>
+										<td data-target="ВЭ19"></td>
+										<td data-target="ВЭ110"></td>
+									</tr>
+									<tr>
+										<td style="pointer-events: none">Цифровое управление и настройка привода с дублированием каналов связи посредством цифрового канала связи, интерфейс RS485, протокол обмена — MODBUS RTU</td>
+
+										<td data-target="ВЭ14"></td>
+
+										<td data-target="ВЭ18" class="table-success"></td>
+										<td data-target="ВЭ19"></td>
+										<td data-target="ВЭ110"></td>
+									</tr>
+									<tr>
+										<td style="pointer-events: none">Цифровое управление приводом посредством цифрового канала связи, интерфейс RS485, протокол обмена — PROFIBUS DP</td>
+
+										<td data-target="ВЭ14"></td>
+
+										<td data-target="ВЭ18"></td>
+										<td data-target="ВЭ19" class="table-success"></td>
+										<td data-target="ВЭ110"></td>
+									</tr>
+									<tr>
+										<td style="pointer-events: none">Цифровое управление приводом с дублированием каналов связи посредством цифрового канала связи, интерфейс RS485, протокол обмена — PROFIBUS DP.</td>
+
+										<td data-target="ВЭ14"></td>
+
+										<td data-target="ВЭ18"></td>
+										<td data-target="ВЭ19"></td>
+										<td data-target="ВЭ110" class="table-success"></td>
+									</tr>
+									<tr>
+										<td style="pointer-events: none">Диагностирование отказов опциональных модулей.</td>
+
+										<td data-target="ВЭ14" class="table-success"></td>
+
+										<td data-target="ВЭ18" class="table-success"></td>
+										<td data-target="ВЭ19" class="table-success"></td>
+										<td data-target="ВЭ110" class="table-success"></td>
+									</tr>
+									<tr>
+										<td style="pointer-events: none">Автоматический выбор активного интерфейса дистанционного управления.</td>
+
+										<td data-target="ВЭ14" class="table-success"></td>
+
+										<td data-target="ВЭ18" class="table-success"></td>
+										<td data-target="ВЭ19" class="table-success"></td>
+										<td data-target="ВЭ110" class="table-success"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary" id="ve2E16Clear">Сбросить</button>
+							<div class="modal-title m-auto">Код исполнения: <span class="cur-vexecution2e16-value">ВЭ</span></div>
+							<input type="hidden" class="cur-vexecution2e16-value" value="ВЭ" />
+							<button type="button" class="btn btn-primary" id="ve2E16c-submit">Применить</button>
 						</div>
 					</div>
 				</div>
