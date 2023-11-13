@@ -375,29 +375,32 @@ $(document).ready(function () {
 
 
 
-    $(document).on('change', "input[name='constructive-scheme']", function (e) {
+    $('#constructive-scheme-wrap').on('change', function () {
         cur_constructive_scheme = $("input[name='constructive-scheme']").val();
 
         // СОКРЫТИЕ КАБЕЛЬНЫЙ ПОДКЛЮЧЕНИЙ ДЛЯ СХем 43/44/430
-        if (cur_constructive_scheme == '43' || cur_constructive_scheme == '430' || cur_constructive_scheme == '44') {
-            document.querySelector("#firstCon").style.display = 'none';
-            document.querySelector("#twoCon").style.display = 'none';
-            document.querySelector("#threeCon").checked = 'true';
-            document.querySelector("#fourCon").style.display = 'none';
-            document.querySelector("#fiveCon").style.display = 'none';
-            document.querySelector("#sixCon").style.display = 'none';
-            document.querySelector("#sevenCon").style.display = 'none';
-            document.querySelector("#eightCon").style.display = 'none';
+        if (cur_constructive_scheme == '43' || cur_constructive_scheme == '430') {
+            $("input[name='connectionForEp4']:checked").prop('checked', false);
+            $(document).trigger('change');
+            document.querySelector("#connectionForEp4-1div").style.display = 'flow';
+            document.querySelector("#connectionForEp4-2div").style.display = 'none';
+            // document.querySelector("#connectionForEp4-3div").checked = '';
+            document.querySelector("#connectionForEp4-4div").style.display = 'flow';
+            document.querySelector("#connectionForEp4-5div").style.display = 'none';
+            document.querySelector("#connectionForEp4-6div").style.display = 'flow';
+            document.querySelector("#connectionForEp4-7div").style.display = 'none';
+            document.querySelector("#connectionForEp4-8div").style.display = 'flow';
         }
         else {
-            document.querySelector("#firstCon").style.display = 'flow';
-            document.querySelector("#twoCon").style.display = 'flow';
-            document.querySelector("#fourCon").style.display = 'flow';
-            document.querySelector("#fiveCon").style.display = 'flow';
-            document.querySelector("#sixCon").style.display = 'flow';
-            document.querySelector("#sevenCon").style.display = 'flow';
-            document.querySelector("#eightCon").style.display = 'flow';
+            document.querySelector("#connectionForEp4-1div").style.display = 'flow';
+            document.querySelector("#connectionForEp4-2div").style.display = 'flow';
+            document.querySelector("#connectionForEp4-4div").style.display = 'flow';
+            document.querySelector("#connectionForEp4-5div").style.display = 'flow';
+            document.querySelector("#connectionForEp4-6div").style.display = 'flow';
+            document.querySelector("#connectionForEp4-7div").style.display = 'flow';
+            document.querySelector("#connectionForEp4-8div").style.display = 'flow';
         }
+
     });
 
     $(document).on('change', function (e) {
