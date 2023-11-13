@@ -1484,7 +1484,6 @@ $(document).ready(function () {
             $("#control-block2-config").hide();
             $("#controle-blocks2").val('');
             $('#sumBlocks').show();
-            $('#control-block-fieldset').trigger('change');
         }
         else {
             $('#sumBlocks').show();
