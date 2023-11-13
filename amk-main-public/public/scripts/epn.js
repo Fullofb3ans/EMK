@@ -300,8 +300,6 @@ $(document).ready(function () {
             $('#controle-blocks').val('ВЭ1');
             $('#control-block-config').hide();
             $('#control-block2-config').hide();
-            $('#control-block-config').val('');
-            $('#control-block2-config').val('');
             $(document.querySelector('#controle-blocks')).hide();
             $("#vimuMark").show();
             $("#vimuSet").show();
@@ -310,8 +308,6 @@ $(document).ready(function () {
             $('#vimusumBlocks').val('');
             $('#vimucontrole-blocks').val('');
             $('#vimucontrole-blocks2').val('');
-            $('#control-block-config').val('');
-            $('#control-block2-config').val('');
             $('#control-block2-config').hide();
             $(document.querySelector('#control-block-config')).show();
             $(document.querySelector('#controle-blocks')).hide();
@@ -366,7 +362,6 @@ $(document).ready(function () {
         }
         else if (x6 == 'ВЭ1') {
             $('#controle-blocks2').val('');
-
             $('#sumBlocks').val($('#controle-blocks').val());
             $('#sumBlocks').hide();
         }
@@ -913,7 +908,7 @@ $(document).ready(function () {
     $('#controle-blocks-series').on('change', function (e) {
         let cbs = $('#controle-blocks-series').val();
         let cb = $('#controle-blocks');
-        if (cbs === 'Э1' || cbs === 'Э2' || cbs === 'ВЭ1' || cbs === 'ВЭ' || cbs === '' || cbs === 'М1' || cbs === 'М2') {
+        if (cbs === 'Э1' || cbs === 'Э2' || cbs === 'ВЭ' || cbs === '' || cbs === 'М1' || cbs === 'М2') {
             $(cb).val('');
         } else {
             cb.val(cbs);

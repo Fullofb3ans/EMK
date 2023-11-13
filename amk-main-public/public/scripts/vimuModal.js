@@ -213,7 +213,6 @@ $(document).ready(function () {
     });
 
     // КНОПКИ В ТАБЛИЦЕ
-
     $("#ve1c-submit").on("click", function (e) {
         $('#vimucontrole-blocks').val($('.cur-vexecution-value').val()).trigger('change');
         vimuBlockModal.hide();
