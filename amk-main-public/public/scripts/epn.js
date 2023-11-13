@@ -14,20 +14,14 @@ $(document).ready(function () {
         $('#e2-table th').removeClass('table-success');
         $(el).toggleClass('table-success');
     });
-    $(document).on('click', '#ve2-table th, #ve2-table td', function (e) {
+    $(document).on('click', '#e2E16-table th, #e2E16-table td', function (e) {
         let target = $(this).data('target');
-        let el = document.getElementById('ve2' + target);
-        $('.cur-vexecution2-value').text(target).val(+ target);
-        $('#ve2-table th').removeClass('table-success');
+        let el = document.getElementById('e2' + target);
+        $('.cur-executionE16-value').text('В' + target).val('В' + target);
+        $('#e2E16-table th').removeClass('table-success');
         $(el).toggleClass('table-success');
     });
-    $(document).on('click', '#ve1-table th, #ve1-table td', function (e) {
-        let target = $(this).data('target');
-        let el = document.getElementById('ve1' + target);
-        $('.cur-vexecution-value').text(target).val(target);
-        $('#ve1-table th').removeClass('table-success');
-        $(el).toggleClass('table-success');
-    });
+
 
     const cheme_img = {
         epn: {
@@ -299,7 +293,7 @@ $(document).ready(function () {
         }
     })
 
-    $('#control-block-fieldset').on('change', function (e) {
+    $('#controle-blocks-series').on('change', function (e) {
         let x6 = $('#controle-blocks-series').val();
         console.log(x6);
         if (x6 === 'ВЭ1') {
@@ -329,13 +323,40 @@ $(document).ready(function () {
             $('#vimucontrole-blocks').val('');
             $('#vimucontrole-blocks2').val('');
             $(document.querySelector('#control-block-config')).show();
-            $(document.querySelector('#control-block2-config')).show();
             $(document.querySelector('#controle-blocks')).hide();
             $("#vimuMark").val('');
             $("#vimuMark").hide();
             $("#vimuSet").hide();
         }
     });
+    $('#controle-blocks').on('change', function (e) {
+        let BU = $('#controle-blocks').val();
+        if (BU == 'ВЭ16') {
+            $("#controle-blocks2").val('');
+            $('#control-block-fieldset').trigger('change');
+            $("#control-block2-config").off('click');
+            $("#control-block2-config").show();
+            $("#control-block2-config").on('click', function () {
+                vimuBlock2ModalForE16.show();
+            })
+        }
+        else if (BU == 'ВЭ18' || BU == 'ВЭ19' || BU == 'ВЭ110' || BU == 'ВЭ14') {
+            $("#controle-blocks2").val('');
+            $('#control-block-fieldset').trigger('change');
+            $("#control-block2-config").off('click');
+            $("#control-block2-config").show();
+            $("#control-block2-config").on('click', function () {
+                vimuBlock2ModalOnlyE16.show();
+            })
+        }
+        else {
+            $("#control-block2-config").hide();
+            $("#controle-blocks2").val('');
+            $('#control-block-fieldset').trigger('change');
+        }
+    });
+
+
     $('#controle-blocks-series').on('change', function (e) {
         let x6 = $('#controle-blocks-series').val();
         if (x6 == 'М2') {
@@ -785,7 +806,11 @@ $(document).ready(function () {
     let m2BlockModal = new bootstrap.Modal($('#block-configure-m2'));
     let vimuBlockModal = new bootstrap.Modal($('#block-configure-e1'));
     let e2BlockModal = new bootstrap.Modal($('#block-configure-e2'));
-    let addBlockModal = new bootstrap.Modal($('#addNewBlock'));
+    let vimuBlock2ModalForE16 = new bootstrap.Modal($('#addNewBlock'));
+    let vimuBlock2ModalOnlyE16 = new bootstrap.Modal($('#addNewBlockE16'));
+
+    let addVimuBlockForE16 = new bootstrap.Modal($('#ve2Config'));
+    let addVimuBlockOnlyE16 = new bootstrap.Modal($('#ve2Config2'));
 
     // Кнопки в таблицу
     $('#m1-form').on('change', function (e) {
@@ -838,10 +863,20 @@ $(document).ready(function () {
     $('#AddNewsubmit').on('click', function (e) {
         console.log('privet');
         $('#controle-blocks2').val($('input.cur-execution2-value').val()).trigger('change');
-        addBlockModal.hide();
+        vimuBlock2ModalForE16.hide();
+    });
+    $('#AddNewsubmitE16').on('click', function (e) {
+        console.log('privet');
+        $('#controle-blocks2').val($('input.cur-executionE16-value').val()).trigger('change');
+        vimuBlock2ModalOnlyE16.hide();
     });
     $('#AddNewClear').on('click', function (e) {
-        addBlockModal.hide();
+        vimuBlock2ModalForE16.hide();
+        $('#controle-blocks2').val('');
+        $(document).trigger('change')
+    });
+    $('#AddNewClearE16').on('click', function (e) {
+        vimuBlock2ModalOnlyE16.hide();
         $('#controle-blocks2').val('');
         $(document).trigger('change')
     });
@@ -872,9 +907,7 @@ $(document).ready(function () {
             $('#vimuModal').show();
         }
     });
-    $('#control-block2-config').on('click', function (e) {
-        addBlockModal.show();
-    });
+
 
 
     $('#controle-blocks-series').on('change', function (e) {
@@ -1290,6 +1323,7 @@ $(document).ready(function () {
             }
         }
     }
+
     // Обработка окна ВИМУ
     $('#closeVimuModal').on('click', function () {
         $('#vimuModal').hide();

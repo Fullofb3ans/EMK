@@ -7,11 +7,28 @@ $(document).ready(function () {
         $('#e1-table th').removeClass('table-success');
         $(el).toggleClass('table-success');
     });
+
+    $(document).on('click', '#ve1-table th, #ve1-table td', function (e) {
+        let target = $(this).data('target');
+        let el = document.getElementById('ve1' + target);
+        $('.cur-vexecution-value').text(target).val(target);
+        $('#ve1-table th').removeClass('table-success');
+        $(el).toggleClass('table-success');
+    });
     $(document).on('click', '#ve2-table th, #ve2-table td', function (e) {
         let target = $(this).data('target');
-        let el = document.getElementById(target);
+        let el = document.getElementById('ve2' + target);
         $('.cur-vexecution2-value').text(target).val(target);
+        console.log($('.cur-vexecution2-value').text());
         $('#ve2-table th').removeClass('table-success');
+        $(el).toggleClass('table-success');
+    });
+    $(document).on('click', '#ve2-table2 th, #ve2-table2 td', function (e) {
+        let target = $(this).data('target');
+        let el = document.getElementById('ve22' + target);
+        $('.cur-vexecution22-value').text(target).val(target);
+        console.log($('.cur-vexecution22-value').text());
+        $('#ve2-table2 th').removeClass('table-success');
         $(el).toggleClass('table-success');
     });
 
@@ -144,16 +161,39 @@ $(document).ready(function () {
 
     });
 
+
     // Обработка модальных
     let vimuBlockModal = new bootstrap.Modal($("#ve1Config"));
     let vimuBlock2Modal = new bootstrap.Modal($("#ve2Config"));
+    let vimuBlock3Modal = new bootstrap.Modal($("#ve2Config2"));
+
+    $('#vimucontrole-blocks').on('change', function () {
+        $('#vimucontrole-blocks2').val('');
+    });
+
 
     $('#vimucontrol-block-config').on('click', function () {
         vimuBlockModal.show();
     });
 
+    $('#vimucontrol-block-fieldset').on('change', function (e) {
+        let BU = document.querySelector("#vimucontrole-blocks").value;
+        if (BU == 'ВЭ14' || BU == 'ВЭ18' || BU == 'ВЭ19' || BU == 'ВЭ110' || BU == 'ВЭ16') {
+            $('#vimucontrol-block2-config').show();
+        }
+        else {
+            $('#vimucontrol-block2-config').hide();
+        }
+    });
     $('#vimucontrol-block2-config').on('click', function (e) {
-        vimuBlock2Modal.show();
+        document.querySelector("#vimucontrole-blocks").value
+        let BU = document.querySelector("#vimucontrole-blocks").value;
+        if (BU == 'ВЭ16') {
+            vimuBlock2Modal.show()
+        }
+        else if (BU == 'ВЭ14' || BU == 'ВЭ18' || BU == 'ВЭ19' || BU == 'ВЭ110') {
+            vimuBlock3Modal.show();
+        };
     });
 
     $("#closeve1modal").on("click", function (e) {
@@ -162,6 +202,9 @@ $(document).ready(function () {
 
     $("#closeve2modal").on("click", function (e) {
         vimuBlock2Modal.hide();
+    });
+    $("#closeve2modal2").on("click", function (e) {
+        vimuBlock3Modal.hide();
     });
 
     // Обработка доп платы
@@ -182,12 +225,24 @@ $(document).ready(function () {
         vimuBlock2Modal.hide();
         $("#vimuSet").trigger('change');
     });
+    $("#ve2c2-submit").on("click", function (e) {
+        $("#vimucontrole-blocks2").val($("input.cur-vexecution2-value").text()).trigger("change");
+        vimuBlock3Modal.hide();
+        $("#vimuSet").trigger('change');
+    });
 
     $('#ve2Clear').on('click', function (e) {
         $('#vimucontrole-blocks2').val('');
         $('#vimuSet').trigger('change');
         $('#vimuSet').trigger('change');
         vimuBlock2Modal.hide();
+    });
+
+    $('#ve22Clear').on('click', function (e) {
+        $('#vimucontrole-blocks2').val('');
+        $('#vimuSet').trigger('change');
+        $('#vimuSet').trigger('change');
+        vimuBlock3Modal.hide();
     });
 
     // КНОПКА КОНФИГУРАТОРА
