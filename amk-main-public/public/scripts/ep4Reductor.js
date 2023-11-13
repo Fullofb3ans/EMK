@@ -379,7 +379,7 @@ $(document).ready(function () {
         cur_constructive_scheme = $("input[name='constructive-scheme']").val();
 
         // СОКРЫТИЕ КАБЕЛЬНЫЙ ПОДКЛЮЧЕНИЙ ДЛЯ СХем 43/44/430
-        if (cur_constructive_scheme == '43' || cur_constructive_scheme == '430') {
+        if (cur_constructive_scheme == '43' || cur_constructive_scheme == '430' || cur_constructive_scheme == '44') {
             $("input[name='connectionForEp4']:checked").prop('checked', false);
             $(document).trigger('change');
             document.querySelector("#connectionForEp4-1div").style.display = 'flow';
