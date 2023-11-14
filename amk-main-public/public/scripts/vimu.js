@@ -285,7 +285,7 @@ $(document).ready(function () {
         let j30 = document.querySelector("#sumBlocks").value; // тип бу 
         let j31 = checkSecondCommandBlock() ? 'Основная плата: ' + checkCommandBlock() + '; ' + checkSecondCommandBlock() : checkCommandBlock(); // Тип управления
 
-        let microOrPot = document.querySelector("#roundControl-1").checked ? ' + ' + document.querySelector("#microOrPot").value : '';
+        let microOrPot = document.querySelector("#roundControl-1").checked ? ' + ' + document.querySelector("#microOrPot").value + '; ' : '';
         let j32 = selectRemoteSignal() + microOrPot;// сигналы дист управления
 
         let j33 = 'ВИМУ'; //Тип БКВ
