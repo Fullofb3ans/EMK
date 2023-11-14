@@ -665,7 +665,7 @@ $(document).ready(function () {
         let j13 = document.querySelector('#turnTime').value; //время закрытия
         let j14 = document.querySelector('#upper-limit').value; //Максимальный крутящий момент
         let j15 = document.querySelector('#flange').value; //присоединение к приводу
-        let j16 = ''; // установка
+        let j16 = 'РН'; // установка
         let j17 = document.querySelector('#rotation-frequency').value; // частота вращения
         let j18 = schemeForSend; // конструктивная схема
         let j19 = '21'; // оборотов на закрытие
@@ -756,11 +756,11 @@ $(document).ready(function () {
         // json5 = [j50, j51, j52, j53, j54];
 
         //json6
-        let j60 = '?'; //Номинальное давление
+        let j60 = document.querySelector("#rn").value; //ТИП РН
         let j61 = $("input[name='connection-type']:checked").closest('.form-check').find('.form-check-label').text(); //Тип присоединения выходного вала
-        let j62 = '?'; //Кабельные вводы
-        let j63 = '?'; //Штепсельные разъемы
-        let j64 = '?'; //Тип подводимых кабелей
+        let j62 = document.querySelector("#roundOutMoment").value; //Номинальный крутящий момент на выходном валу редуктора, Н·м:
+        let j63 = document.querySelector("#roundOut").value; //Диапазон крутящих моментов на выходном валу редуктора (при настройке привода от 40 до 100 % от номинала), Н·м:
+        let j64 = document.querySelector("#armFlange").value; //Тип фланца по ISO 5211 для присоединения к арматуре:
         let j65 = '380В';
         if (document.querySelector('#special-4').checked) {
             j65 = '660В';
