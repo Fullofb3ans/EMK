@@ -337,12 +337,6 @@ $(document).ready(function () {
     $('#constructive-scheme-wrap').on('change', function (e) {
         let cur_constructive_scheme = $("input[name='constructive-scheme']:checked").val();
 
-        if (cur_constructive_scheme !== '41' && cur_constructive_scheme !== '410') {
-            $('#E1SinSelect').hide();
-        } else {
-            $('#E1SinSelect').show();
-        }
-
         $('#constructive-scheme-img')
             .empty()
             .append(
@@ -378,9 +372,6 @@ $(document).ready(function () {
     let m1BlockModal = new bootstrap.Modal($('#block-configure-m1'));
     let vimuBlockModal = new bootstrap.Modal($('#block-configure-e1'));
     let e2BlockModal = new bootstrap.Modal($('#block-configure-e2'));
-    let e1SBlockModal = new bootstrap.Modal($('#e1SModal'));
-
-
 
     $('#constructive-scheme-wrap').on('change', function () {
         cur_constructive_scheme = $("input[name='constructive-scheme']").val();
@@ -990,15 +981,9 @@ $(document).ready(function () {
         }
     });
 
-    $('#e1s-submit').on('click', function (e) {
-        $('#controle-blocks').val($('input.cur-e1s-value').val()).trigger('change');
-        e1SBlockModal.hide();
-    });
 
-    $('#e1SModal').on('change', function (e) {
-        let mod = $("input[name='Э1Sopt']:checked").val();
-        $('.cur-e1s-value').text(mod).val(mod);
-    });
+
+
 
     $('#control-block-config').on('click', function (e) {
         let cbs = $('#controle-blocks-series').val();
@@ -1009,14 +994,14 @@ $(document).ready(function () {
             vimuBlockModal.show();
         } else if (cbs === 'Э2') {
             e2BlockModal.show();
-        } else if (cbs === 'Э1S') { e1SBlockModal.show(); }
+        };
 
     });
 
     $('#controle-blocks-series').on('change', function (e) {
         let cbs = $('#controle-blocks-series').val();
         let cb = $('#controle-blocks');
-        if (cbs === 'Э1' || cbs === 'Э2' || cbs === 'ВЭ' || cbs === '' || cbs === 'М1' || cbs === 'Э1S') {
+        if (cbs === 'Э1' || cbs === 'Э2' || cbs === 'ВЭ' || cbs === '' || cbs === 'М1') {
             $(cb).val('');
         } else {
             cb.val(cbs);
@@ -1334,31 +1319,31 @@ $(document).ready(function () {
         optForBu = $('#control-block-optionsset option:selected').val() != 'noValue' ? $('#control-block-optionsset option:selected').val() : '';
 
         if (BoMark == 'Э2') {
-            return (remoteSignal = 'Привод с шестью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 24 В/220 В;');
+            return (remoteSignal = 'Привод с шестью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 24 В/220 В; ');
         }
         else if (BoMark == 'Э0' || BoMark == 'Э1S') {
-            return (remoteSignal = 'Привод с шестью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 24 В');
+            return (remoteSignal = 'Привод с шестью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 24 В; ');
         } else if (BoMark == 'Э1') {
             if (optForBu == 'X') {
-                return (remoteSignal = 'Привод с шестью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 220 В;');
+                return (remoteSignal = 'Привод с шестью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 220 В; ');
             }
             if (optForBu == 'Y') {
-                return (remoteSignal = 'Привод с восемью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 24 В;');
+                return (remoteSignal = 'Привод с восемью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 24 В; ');
             }
             if (optForBu == 'Z') {
-                return (remoteSignal = 'Привод с двенадцатью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 24 В;');
+                return (remoteSignal = 'Привод с двенадцатью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 24 В; ');
             }
             if (optForBu == 'V') {
-                return (remoteSignal = 'Привод с восемью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 220 В;');
+                return (remoteSignal = 'Привод с восемью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 220 В; ');
             }
             if (optForBu == 'W') {
-                return (remoteSignal = 'Привод с двенадцатью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 220 В;');
+                return (remoteSignal = 'Привод с двенадцатью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 220 В; ');
             } else {
-                return (remoteSignal = 'Привод с шестью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 24 В;');
+                return (remoteSignal = 'Привод с шестью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 24 В; ');
             }
         }
         else {
-            return (remoteSignal = 'Сигналы дистанционного управления: пункт только для ЭИМУ или ВИМУ');
+            return (remoteSignal = 'Сигналы дистанционного управления: пункт только для ЭИМУ или ВИМУ; ');
         }
     }
 

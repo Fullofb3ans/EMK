@@ -252,7 +252,6 @@
 								<select class="form-select form-element ch-mark" data-step="4" name="controle-blocks-series" id="controle-blocks-series">
 									<option value="">Выберите тип блока управления</option>
 									<option value="Э1">Встроенный интеллектуальный модуль управления с пускателем Э1</option>
-									<option value="Э1S" id="E1SinSelect">Электронный интеллектуальный модуль управления для искробезопасных приводов Э1S</option>
 									<option value="Э2">Электронный блок концевых выключателей без пускателя Э2</option>
 									<option value="М1">Механический блок концевых выключателей без пускателя М1</option>
 								</select>
@@ -900,32 +899,6 @@
 						<div class="modal-body">
 							<p><b>"Запорная арматура"</b> — для перекрытия потока рабочей среды.</p>
 							<p><b>"Запорно-регулирующая арматура"</b> — для настройки параметров потока рабочей среды и его перекрытия.</p>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="modal" id="e1SModal" tabindex="-1">
-				<div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title">Дополнительные опции блока управления серии Э1S</h5>
-							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Закрыть</button>
-						</div>
-						<div class="modal-body" style="padding: 2%">
-							<div class="form-check mb-3">
-								<input class="form-check-input" type="radio" name="Э1Sopt" value="Э1S1" id="Э1S1" data-position="0" />
-								<label class="form-check-label" for="Э1S1">Базовый набор функций привода с блоком серии Э1S. Цифровое управление и настройка привода посредством цифрового канала связи, интерфейс RS485, протокол обмена — MODBUS RTU</label>
-							</div>
-							<div class="form-check mb-3">
-								<input class="form-check-input" type="radio" name="Э1Sopt" value="Э1S2" id="Э1S2" data-position="1" />
-								<label class="form-check-label" for="Э1S2">Базовый набор функций привода с блоком серии Э1S. Цифровое управление приводом посредством цифрового канала связи, интерфейс RS485, протокол обмена — PROFIBUS DP</label>
-							</div>
-						</div>
-						<div class="modal-footer">
-							<div class="modal-title m-auto">Код исполнения: <span class="cur-e1s-value"></span></div>
-							<input type="hidden" class="cur-e1s-value" value="" />
-							<button type="button" class="btn btn-primary" id="e1s-submit">Применить</button>
 						</div>
 					</div>
 				</div>
