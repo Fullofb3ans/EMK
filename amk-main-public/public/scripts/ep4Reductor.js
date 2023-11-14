@@ -337,6 +337,12 @@ $(document).ready(function () {
     $('#constructive-scheme-wrap').on('change', function (e) {
         let cur_constructive_scheme = $("input[name='constructive-scheme']:checked").val();
 
+        if (cur_constructive_scheme !== '41' && cur_constructive_scheme !== '410') {
+            $('#E1SinSelect').hide();
+        } else {
+            $('#E1SinSelect').show();
+        }
+
         $('#constructive-scheme-img')
             .empty()
             .append(
@@ -372,6 +378,7 @@ $(document).ready(function () {
     let m1BlockModal = new bootstrap.Modal($('#block-configure-m1'));
     let vimuBlockModal = new bootstrap.Modal($('#block-configure-e1'));
     let e2BlockModal = new bootstrap.Modal($('#block-configure-e2'));
+    let e1SBlockModal = new bootstrap.Modal($('#e1SModal'));
 
 
 
@@ -983,6 +990,16 @@ $(document).ready(function () {
         }
     });
 
+    $('#e1s-submit').on('click', function (e) {
+        $('#controle-blocks').val($('input.cur-e1s-value').val()).trigger('change');
+        e1SBlockModal.hide();
+    });
+
+    $('#e1SModal').on('change', function (e) {
+        let mod = $("input[name='Э1Sopt']:checked").val();
+        $('.cur-e1s-value').text(mod).val(mod);
+    });
+
     $('#control-block-config').on('click', function (e) {
         let cbs = $('#controle-blocks-series').val();
         if (cbs === 'М1') {
@@ -992,7 +1009,7 @@ $(document).ready(function () {
             vimuBlockModal.show();
         } else if (cbs === 'Э2') {
             e2BlockModal.show();
-        }
+        } else if (cbs === 'Э1S') { e1SBlockModal.show(); }
 
     });
 
