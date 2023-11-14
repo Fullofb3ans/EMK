@@ -225,7 +225,7 @@ $(document).ready(function () {
         $("#vimuSet").trigger('change');
     });
     $("#ve2c2-submit").on("click", function (e) {
-        $("#vimucontrole-blocks2").val($("input.cur-vexecution2-value").text()).trigger("change");
+        $("#vimucontrole-blocks2").val($("input.cur-vexecution22-value").text()).trigger("change");
         vimuBlock3Modal.hide();
         $("#vimuSet").trigger('change');
     });

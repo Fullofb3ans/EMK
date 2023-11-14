@@ -264,6 +264,7 @@ $(document).ready(function () {
                     a = [fetchResult[0][0][0]];
                     b = [fetchResult[0][0][1]];
                     $.each(a, function (key, item) {
+                        if (item == '0') { item = 'Отсутствует' }
                         $(selectModern).append(new Option(item, item));
                     });
                     $.each(b, function (key, item) {
@@ -410,7 +411,7 @@ $(document).ready(function () {
                 $('#upgradeNumber').closest('fieldset').removeClass('ReqValueOk');
                 $('#upgradeNumber').closest('fieldset').addClass('noReqValue');
                 break;
-            case '0':
+            case 'Отсутствует':
                 $('#upgradeNumber').closest('fieldset').removeClass('noReqValue');
                 $('#upgradeNumber').closest('fieldset').addClass('ReqValueOk');
                 x3 = '';
