@@ -677,7 +677,7 @@ $(document).ready(function () {
 
         let j33 = ''; //Тип БКВ
         if (BoMark == 'Э0') {
-            j33 = 'ЭИМУ';
+            j33 = 'ЭМД';
         } else if (BoMark == 'Э2') {
             j33 = 'ЭБКВ';
         } else if (BoMark == 'М1') {
