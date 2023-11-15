@@ -1369,7 +1369,7 @@ $(document).ready(function () {
         }
     });
     $('#step-5').on('change', function (e) {
-        if (document.querySelector("#controle-blocks-series").value && document.querySelector("#climatic-modification").value) {
+        if (document.querySelector("#controle-blocks").value && document.querySelector("#climatic-modification").value) {
             $('#step-6').show();
         } else {
             $('#step-6').hide();

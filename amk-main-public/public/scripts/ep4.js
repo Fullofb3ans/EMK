@@ -280,6 +280,9 @@ $(document).ready(function () {
         let connectionType = $("input[name='connection-type']:checked").val();
         let rotationFrequency = document.getElementById('rotation-frequency');
         $(rotationFrequency).empty();
+        if (!upLim) {
+            return alert('Пропущен верхний предел');
+        }
 
         let fetchResult = [];
 
