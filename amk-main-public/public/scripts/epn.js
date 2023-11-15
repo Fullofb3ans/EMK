@@ -634,6 +634,30 @@ $(document).ready(function () {
     });
 
     $('#download').on('click', function () {
+        if ($("input[name='constructive-scheme']:checked").val() == undefined) {
+            goTo = document.querySelector("#schemeFieldSet");
+            goTo.scrollIntoView({ block: "center", behavior: "smooth" });
+            return alert('Не выбрана конструктивная схема')
+        } else if ($("#flange").val() == undefined) {
+            goTo = document.querySelector("#flange");
+            goTo.scrollIntoView({ block: "center", behavior: "smooth" });
+            return alert('Не выбран фланец')
+        } else if ($("#upper-limit").val() == undefined) {
+            goTo = document.querySelector("#upper-limit");
+            goTo.scrollIntoView({ block: "center", behavior: "smooth" });
+            return alert('Не выбран верхний предел крутящего момент')
+        } else if ($("#time-limit").val() == undefined) {
+            goTo = document.querySelector("#time-limit");
+            goTo.scrollIntoView({ block: "center", behavior: "smooth" });
+            return alert('Не выбрано время рабочего хода')
+        }
+        else if ($("#powerType").val() == undefined) {
+            goTo = document.querySelector("#powerType");
+            goTo.scrollIntoView({ block: "center", behavior: "smooth" });
+            return alert('Не выбран тип силового электропитания')
+        };
+
+
         let firstBuMark = document.querySelector("#controle-blocks2").value;
         let secondBuMark = document.querySelector("#controle-blocks2").value;
         let BoMark = document.querySelector("#controle-blocks-series").value;

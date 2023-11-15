@@ -252,7 +252,7 @@ $(document).ready(function () {
             let connectionType = $("input[name='connection-type']:checked").val();
             let vPower = document.getElementById('vPower');
             $(vPower).empty();
-            vPower.innerHTML = '<option value="0" disabled selected>Выберите значение</option>';
+            vPower.innerHTML = '<option value="0" selected>Выберите значение</option>';
 
             let fetchResult = [];
 
@@ -371,7 +371,7 @@ $(document).ready(function () {
                                         id: '/img/' + 'scheme-' + item,
                                         name: 'constructive-scheme',
                                         value: item,
-                                        class: 'form-check-input ch-mark',
+                                        class: 'form-check-input ch-mark'
                                     })
                                 )
                                 .append(
@@ -797,6 +797,24 @@ $(document).ready(function () {
     });
 
     $(document.querySelector('#download')).on('click', function () {
+        if ($("input[name='constructive-scheme']:checked").val() == undefined) {
+            goTo = document.querySelector("#schemeFieldSet");
+            goTo.scrollIntoView({ block: "center", behavior: "smooth" });
+            return alert('Не выбрана конструктивная схема')
+        } else if ($("#flange").val() == undefined) {
+            goTo = document.querySelector("#flange");
+            goTo.scrollIntoView({ block: "center", behavior: "smooth" });
+            return alert('Не выбран фланец')
+        } else if ($("#upper-limit").val() == undefined) {
+            goTo = document.querySelector("#upper-limit");
+            goTo.scrollIntoView({ block: "center", behavior: "smooth" });
+            return alert('Не выбран верхний предел крутящего момента')
+        } else if ($("#rotation-frequency").val() == undefined) {
+            goTo = document.querySelector("#rotation-frequency");
+            goTo.scrollIntoView({ block: "center", behavior: "smooth" });
+            return alert('Не выбрана частота вращения')
+        };
+
         let BoMark = document.querySelector('#controle-blocks-series').value;
 
         let tuMpX1 = document.querySelector('#maxStepMp').value ? 'МП40-' + document.querySelector('#maxStepMp').value : '';

@@ -565,6 +565,31 @@ $(document).ready(function () {
 
     // Скачать документацию
     $('#download').on('click', function () {
+        if ($("#connectionTypeForclassicEpa").val() == undefined) {
+            goTo = document.querySelector("#connectionTypeForclassicEpa");
+            goTo.scrollIntoView({ block: "center", behavior: "smooth" });
+            return alert('Не выбрана буква, означающая тип электропривода по присоединению')
+        } else if ($("#roundNumbers").val() == undefined) {
+            goTo = document.querySelector("#roundNumbers");
+            goTo.scrollIntoView({ block: "center", behavior: "smooth" });
+            return alert('Не выбрано число оборотов выходного выла, необх. для закрывания арматуры')
+        } else if ($("#outVal").val() == undefined) {
+            goTo = document.querySelector("#outVal");
+            goTo.scrollIntoView({ block: "center", behavior: "smooth" });
+            return alert('Не выбрана частота вращения')
+        } else if ($("#roundMoment").val() == undefined) {
+            goTo = document.querySelector("#roundMoment");
+            goTo.scrollIntoView({ block: "center", behavior: "smooth" });
+            return alert('Не выбран крутящий момент')
+        } else if ($("#bkvType").val() == undefined) {
+            goTo = document.querySelector("#bkvType");
+            goTo.scrollIntoView({ block: "center", behavior: "smooth" });
+            return alert('Не выбран тип БКВ')
+        } else if ($("#salOrStepse").val() == undefined) {
+            goTo = document.querySelector("#salOrStepse");
+            goTo.scrollIntoView({ block: "center", behavior: "smooth" });
+            return alert('Не выбран тип ввода кабельного кабеля')
+        };
         console.log('hea');
         Option1 = document.querySelector("#additional-1").checked ? 'Резистор' : '';
         Option2 = document.querySelector("#additional-2").checked ? 'Микровыключатели Д3031' : '';

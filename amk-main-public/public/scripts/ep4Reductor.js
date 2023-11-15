@@ -621,6 +621,27 @@ $(document).ready(function () {
     });
 
     $(document.querySelector('#download')).on('click', function () {
+        if ($("input[name='constructive-scheme']:checked").val() == undefined) {
+            goTo = document.querySelector("#schemeFieldSet");
+            goTo.scrollIntoView({ block: "center", behavior: "smooth" });
+            return alert('Не выбрана конструктивная схема')
+        } else if ($("#flange").val() == undefined) {
+            goTo = document.querySelector("#flange");
+            goTo.scrollIntoView({ block: "center", behavior: "smooth" });
+            return alert('Не выбран фланец')
+        } else if ($("#upper-limit").val() == undefined) {
+            goTo = document.querySelector("#upper-limit");
+            goTo.scrollIntoView({ block: "center", behavior: "smooth" });
+            return alert('Не выбран крутящий момент')
+        } else if ($("#rotation-frequency").val() == undefined) {
+            goTo = document.querySelector("#rotation-frequency");
+            goTo.scrollIntoView({ block: "center", behavior: "smooth" });
+            return alert('Не выбрана частота вращения')
+        } else if ($("#turnTime").val() == undefined) {
+            goTo = document.querySelector("#turnTime");
+            goTo.scrollIntoView({ block: "center", behavior: "smooth" });
+            return alert('Не выбрано время поворота на 90 градусов')
+        };
         secondBlock = document.querySelector("#controle-blocks2").value;
 
         let BoMark = document.querySelector('#controle-blocks-series').value;
@@ -1096,8 +1117,8 @@ $(document).ready(function () {
     });
 
     // ВРЕМЯ ПОВОРОТА
-    $('#turnTime').on('change', function (e) {
-        if (document.querySelector('#turnTime').value != '') {
+    $('.row').on('change', function (e) {
+        if ($('#turnTime').val()) {
             document.querySelector('#turnTimeFieldset').classList.add('ReqValueOk');
             document.querySelector('#turnTimeFieldset').classList.remove('noReqValue');
         } else {
@@ -1396,7 +1417,7 @@ $(document).ready(function () {
         else { $('#step-5').hide(); }
     });
     $('#step-5').on('change', function (e) {
-        if ($("input[name='constructive-scheme']:checked").val() != '' && $("#controle-blocks-series").val() != '') { $('#step-6').show(); }
+        if ($("input[name='constructive-scheme']:checked").val() != '' && $('#controle-blocks').val() != '') { $('#step-6').show(); }
         else { $('#step-6').hide(); }
     });
     $('#step-6').on('change', function (e) {
