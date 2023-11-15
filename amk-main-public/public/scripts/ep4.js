@@ -276,49 +276,28 @@ $(document).ready(function () {
         Vv();
     });
 
+    // Формула от частоты вращения и двигателя
+    $('#stepClose').on('change', function (e) {
+        rotationFrequencySelectCreate();
+    })
 
     // ПРОГРУЗКА ДАННЫХ ЧАСТОТЫ ВРАЩЕНИЯ С ТАБЛИЦЫ
     $('#vPower').on('change', function (e) {
-        allRotationFrequencySelectCreate();
+        rotationFrequencySelectCreate();
     });
 
     // ПРОГРУЗКА ДАННЫХ ЧАСТОТЫ ВРАЩЕНИЯ С ТАБЛИЦЫ ПОСЛЕ ЗАПОЛНЕНИЯ МОЩНОСТИ
     $('#upper-limit').on('change', function (e) {
         $('#closeNumbers').val('');
         $('#closingTime').val('');
-        allRotationFrequencySelectCreate();
+        rotationFrequencySelectCreate();
         $('#stepClose').trigger('change');
     });
 
-    function allRotationFrequencySelectCreate() {
-        let vPower = document.querySelector("#vPower").value;
-        let upLim = document.querySelector('#upper-limit').value;
-        let connectionType = $("input[name='connection-type']:checked").val();
-        let rotationFrequency = document.getElementById('rotation-frequency');
-        $(rotationFrequency).empty();
-        rotationFrequency.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
-
-        let fetchResult = [];
-
-        fetch('https://emk.websto.pro/DB', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json;charset=utf-8' },
-            body: JSON.stringify({
-                a: ['ЭП4', connectionType, upLim, vPower],
-            }),
-        })
-            .then((res) => res.json())
-            .then((res) => {
-                console.log(res);
-                for (i in res) fetchResult.push(res[i]);
-                // fetchResult[0].sort((a, b) => a - b);
-                $.each(fetchResult[0], function (key, item) {
-                    $(rotationFrequency).append(new Option(item, item));
-                });
-            });
-    }
-
     function rotationFrequencySelectCreate() {
+        let closeNumbers = document.querySelector('#closeNumbers').value;
+        let closingTime = document.querySelector('#closingTime').value;
+        let expression = (closeNumbers && closingTime) ? (closeNumbers / closingTime) : (1 / 60);
         let vPower = document.querySelector("#vPower").value;
         let upLim = document.querySelector('#upper-limit').value;
         let connectionType = $("input[name='connection-type']:checked").val();
@@ -343,7 +322,7 @@ $(document).ready(function () {
                 for (i in res) fetchResult.push(res[i]);
                 // fetchResult[0].sort((a, b) => a - b);
                 $.each(fetchResult[0], function (key, item) {
-                    if (item > Math.round(60 * (document.querySelector('#closeNumbers').value / document.querySelector('#closingTime').value))) {
+                    if (item > Math.round(60 * (expression))) {
                         $(rotationFrequency).append(new Option(item, item));
                     }
                     $('#step-2').trigger('change');
@@ -1544,18 +1523,6 @@ $(document).ready(function () {
             document.querySelector('#control-block-optionsset').classList.add('noReqValue');
         }
     });
-
-    // Формула от частоты вращения и двигателя
-    $('#stepClose').on('change', function (e) {
-        closingTime = document.querySelector('#closingTime').value;
-        rotAtMin = document.querySelector('#rotation-frequency');
-        closeNumbers = document.querySelector('#closeNumbers').value;
-
-        if (closingTime !== '' && closeNumbers !== '') {
-            rotationFrequencySelectCreate();
-        }
-    })
-
 
     function selectRemoteSignal() {
         let BoMark = document.querySelector('#controle-blocks-series').value;
