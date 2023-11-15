@@ -75,6 +75,8 @@ $(document).ready(function () {
         },
     };
 
+    //ПРОГРУЗКА МП МОДУЛЯ НА СТРАНИЦЕ
+
     //ОТКРЫТИЕ БЛОКА С МП МОДУЛЕМ
     $('.tuMpCheck').on('change', function (e) {
         let check = document.querySelector('#tuMpCheck > input[type=checkbox]');
@@ -208,6 +210,8 @@ $(document).ready(function () {
         });
     });
 
+
+    // ПРОГРУЗКА ОСНОВНОЙ СТРАНИЦЫ
     let cur_constructive_scheme = $("input[name='constructive-scheme']:checked").val();
 
     // ПРОГРУЗКА ДАННЫХ ПРЕДЕЛА С ТАБЛИЦЫ
@@ -240,7 +244,45 @@ $(document).ready(function () {
         upLimSelectCreate();
     });
 
+    // ПРОГРУЗКА ДАННЫХ МОЩНОСТИ С ТАБЛИЦЫ
+    $('#upper-limit').on('change', function (e) {
+
+        function Vv() {
+            let upLim = document.querySelector('#upper-limit').value;
+            let connectionType = $("input[name='connection-type']:checked").val();
+            let vPower = document.getElementById('vPower');
+            $(vPower).empty();
+            vPower.innerHTML = '<option value="0" disabled selected>Выберите значение</option>';
+
+            let fetchResult = [];
+
+            fetch('https://emk.websto.pro/DB', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json;charset=utf-8' },
+                body: JSON.stringify({
+                    a: ['ЭП4', connectionType, upLim],
+                }),
+            })
+                .then((res) => res.json())
+                .then((res) => {
+                    console.log(res);
+                    for (i in res) fetchResult.push(res[i]);
+                    // fetchResult[0].sort((a, b) => a - b);
+                    $.each(fetchResult[0], function (key, item) {
+                        $(vPower).append(new Option(item, item));
+                    });
+                });
+        }
+        Vv();
+    });
+
+
     // ПРОГРУЗКА ДАННЫХ ЧАСТОТЫ ВРАЩЕНИЯ С ТАБЛИЦЫ
+    $('#vPower').on('change', function (e) {
+        allRotationFrequencySelectCreate();
+    });
+
+    // ПРОГРУЗКА ДАННЫХ ЧАСТОТЫ ВРАЩЕНИЯ С ТАБЛИЦЫ ПОСЛЕ ЗАПОЛНЕНИЯ МОЩНОСТИ
     $('#upper-limit').on('change', function (e) {
         $('#closeNumbers').val('');
         $('#closingTime').val('');
@@ -249,6 +291,7 @@ $(document).ready(function () {
     });
 
     function allRotationFrequencySelectCreate() {
+        let vPower = document.querySelector("#vPower").value;
         let upLim = document.querySelector('#upper-limit').value;
         let connectionType = $("input[name='connection-type']:checked").val();
         let rotationFrequency = document.getElementById('rotation-frequency');
@@ -261,7 +304,7 @@ $(document).ready(function () {
             method: 'POST',
             headers: { 'Content-Type': 'application/json;charset=utf-8' },
             body: JSON.stringify({
-                a: ['ЭП4', connectionType, upLim],
+                a: ['ЭП4', connectionType, upLim, vPower],
             }),
         })
             .then((res) => res.json())
@@ -276,6 +319,7 @@ $(document).ready(function () {
     }
 
     function rotationFrequencySelectCreate() {
+        let vPower = document.querySelector("#vPower").value;
         let upLim = document.querySelector('#upper-limit').value;
         let connectionType = $("input[name='connection-type']:checked").val();
         let rotationFrequency = document.getElementById('rotation-frequency');
@@ -290,7 +334,7 @@ $(document).ready(function () {
             method: 'POST',
             headers: { 'Content-Type': 'application/json;charset=utf-8' },
             body: JSON.stringify({
-                a: ['ЭП4', connectionType, upLim],
+                a: ['ЭП4', connectionType, upLim, vPower],
             }),
         })
             .then((res) => res.json())
@@ -306,7 +350,7 @@ $(document).ready(function () {
                     $(document).trigger('change');
                 });
                 if (rotationFrequency.length == 0) {
-                    alert('С данной комбинацией оборотов и времени закрытия нет подходящей частоты вращения');
+                    alert('С указанной комбинацией оборотов и времени закрытия нет подходящей частоты вращения');
                 }
                 $('#rotation-frequency-wrap').trigger('change');
             });
@@ -315,6 +359,7 @@ $(document).ready(function () {
     // ПРОГРУЗКА ДАННЫХ КОНСТРУКТИВНЫХ СХЕМ С ТАБЛИЦЫ
     $('#rotation-frequency-wrap').on('change', function (e) {
         function SchemeSelectCreate() {
+            let vPower = document.querySelector("#vPower").value;
             let upLim = document.querySelector('#upper-limit').value;
             let connectionType = $("input[name='connection-type']:checked").val();
             let rotationFrequency = document.getElementById('rotation-frequency').value;
@@ -327,7 +372,7 @@ $(document).ready(function () {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json;charset=utf-8' },
                 body: JSON.stringify({
-                    a: ['ЭП4', connectionType, upLim, rotationFrequency],
+                    a: ['ЭП4', connectionType, upLim, vPower, rotationFrequency],
                 }),
             })
                 .then((res) => res.json())
@@ -382,6 +427,7 @@ $(document).ready(function () {
             );
 
         function flangeSelectCreate() {
+            let vPower = document.querySelector("#vPower").value;
             const upLim = document.querySelector('#upper-limit').value;
             let connectionType = $("input[name='connection-type']:checked").val();
             const rotationFrequency = document.getElementById('rotation-frequency').value;
@@ -398,7 +444,7 @@ $(document).ready(function () {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json;charset=utf-8' },
                 body: JSON.stringify({
-                    a: ['ЭП4', connectionType, upLim, rotationFrequency, scheme],
+                    a: ['ЭП4', connectionType, upLim, vPower, rotationFrequency, scheme],
                 }),
             })
                 .then((res) => res.json())
@@ -411,6 +457,8 @@ $(document).ready(function () {
                     });
                 });
         }
+        let flange = document.querySelector('#flange');
+        $(flange).empty();
         flangeSelectCreate();
     });
 
@@ -1229,6 +1277,7 @@ $(document).ready(function () {
             document.querySelector('.roundMomentEngine').classList.remove('ReqValueOk');
         }
     });
+
     // Стиль для модуля Диапазон усилий на штоке модуля при настройке привода на крутящий момент
     $('#tuMpField').on('change', function (e) {
         if (document.querySelector('#roundMomentInterval').value != '') {
@@ -1496,11 +1545,12 @@ $(document).ready(function () {
         }
     });
 
-    // Формула от частоты вращения
+    // Формула от частоты вращения и двигателя
     $('#stepClose').on('change', function (e) {
         closingTime = document.querySelector('#closingTime').value;
         rotAtMin = document.querySelector('#rotation-frequency');
         closeNumbers = document.querySelector('#closeNumbers').value;
+
         if (closingTime !== '' && closeNumbers !== '') {
             rotationFrequencySelectCreate();
         }
