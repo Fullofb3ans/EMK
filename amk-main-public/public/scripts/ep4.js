@@ -303,10 +303,11 @@ $(document).ready(function () {
         let upLim = document.querySelector('#upper-limit').value;
         let connectionType = $("input[name='connection-type']:checked").val();
         let rotationFrequency = document.getElementById('rotation-frequency');
-        $(rotationFrequency).empty();
+
         if (!upLim) {
             return alert('Пропущен верхний предел');
         }
+
         $(rotationFrequency).empty();
         let fetchResult = [];
 
@@ -411,7 +412,6 @@ $(document).ready(function () {
             const upLim = document.querySelector('#upper-limit').value;
             let connectionType = $("input[name='connection-type']:checked").val();
             const rotationFrequency = document.getElementById('rotation-frequency').value;
-            $(rotationFrequency).empty();
             let scheme = $("input[name='constructive-scheme']:checked").val();
 
             let flange = document.querySelector('#flange');
@@ -437,8 +437,7 @@ $(document).ready(function () {
                     });
                 });
         }
-        let flange = document.querySelector('#flange');
-        $(flange).empty();
+
         flangeSelectCreate();
     });
 
