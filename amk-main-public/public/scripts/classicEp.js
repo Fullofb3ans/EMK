@@ -113,6 +113,10 @@ $(document).ready(function () {
                     // fetchResult[0].sort((a, b) => a - b);
                     $.each(fetchResult[0], function (key, item) {
                         $(select).append(new Option(item, item));
+                        if (fetchResult[0].length == 1) {
+                            select.selectedIndex = 1;
+                            $('#outVal').trigger('change');
+                        };
                     });
                 });
         }
@@ -146,6 +150,10 @@ $(document).ready(function () {
                     // fetchResult[0].sort((a, b) => a - b);
                     $.each(fetchResult[0], function (key, item) {
                         $(select).append(new Option(item, item));
+                        if (fetchResult[0].length == 1) {
+                            select.selectedIndex = 1;
+                            $('#roundMoment').trigger('change');
+                        };
                     });
                 });
         }
@@ -179,7 +187,11 @@ $(document).ready(function () {
                     for (i in res) fetchResult.push(res[i]);
                     // fetchResult[0].sort((a, b) => a - b);
                     $.each(fetchResult[0], function (key, item) {
-                        $(select).append(new Option(item, item));
+                        $(select).append(new Option(item, item))
+                        if (fetchResult[0].length == 1) {
+                            select.selectedIndex = 1;
+                            $('#bkvType').trigger('change');
+                        };
                     });
                 });
         }
@@ -220,6 +232,8 @@ $(document).ready(function () {
                         }
                         else {
                             $(select).append(new Option(item, item));
+                            select.selectedIndex = 1;
+                            $('#salOrStepse').trigger('change');
                         }
                     });
                 });
