@@ -307,7 +307,7 @@ $(document).ready(function () {
         if (!upLim) {
             return alert('Пропущен верхний предел');
         }
-
+        $(rotationFrequency).empty();
         let fetchResult = [];
 
         fetch('https://emk.websto.pro/DB', {
