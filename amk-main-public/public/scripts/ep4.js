@@ -288,6 +288,7 @@ $(document).ready(function () {
 
     // ПРОГРУЗКА ДАННЫХ ЧАСТОТЫ ВРАЩЕНИЯ С ТАБЛИЦЫ ПОСЛЕ ЗАПОЛНЕНИЯ МОЩНОСТИ
     $('#upper-limit').on('change', function (e) {
+        $('#vPower').val('0');
         $('#closeNumbers').val('');
         $('#closingTime').val('');
         rotationFrequencySelectCreate();
