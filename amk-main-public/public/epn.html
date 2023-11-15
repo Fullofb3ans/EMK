@@ -162,8 +162,29 @@
 						</div>
 					</fieldset>
 
+					<div class="vPowerClass">
+						<fieldset class="row mb-3 optionalField vPowerField">
+							<legend class="blockNumber">
+								4
+								<a href="#" class="" data-bs-toggle="modal" data-bs-target="#vPowerField-modal">
+									<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
+										<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+										<path
+											d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z" />
+									</svg>
+								</a>
+							</legend>
+							<div class="col-sm-9">
+								<legend class="col-form-label col-sm-3 pt-0">Мощность двигателя (кВт):</legend>
+								<select class="form-select form-element ch-mark" data-step="4" name="vPower" id="vPower">
+									<option value="0">Выберите значение</option>
+								</select>
+							</div>
+						</fieldset>
+					</div>
+
 					<fieldset class="row mb-3 noReqValue" id="time-limit-wrap">
-						<legend class="blockNumber">4</legend>
+						<legend class="blockNumber">5</legend>
 						<div class="col-sm-9">
 							<legend class="col-form-label col-sm-3 pt-0">Время рабочего хода, с:</legend>
 							<select class="form-select form-element ch-mark ch-cs" name="time-limit" id="time-limit">
@@ -173,7 +194,7 @@
 					</fieldset>
 
 					<fieldset class="row mb-3 noReqValue" id="workStep">
-						<legend class="blockNumber">5</legend>
+						<legend class="blockNumber">6</legend>
 						<div class="col-sm-9">
 							<legend class="col-form-label col-sm-3 pt-0">Номинальный рабочий ход, град.:</legend>
 							<div class="form-check">
@@ -211,7 +232,7 @@
 
 				<div id="step-4">
 					<fieldset class="row mb-3 noReqValue">
-						<legend class="blockNumber">6</legend>
+						<legend class="blockNumber">7</legend>
 						<div class="col-sm-9">
 							<legend class="col-form-label col-sm-3 pt-0">Присоединительный фланец:</legend>
 							<select class="form-select form-element ch-mark" data-step="4" name="flange" id="flange">
@@ -221,7 +242,7 @@
 					</fieldset>
 
 					<fieldset class="row mb-3 noReqValue" id="power-type-wrap">
-						<legend class="blockNumber">7</legend>
+						<legend class="blockNumber">8</legend>
 						<div class="col-sm-9">
 							<legend class="col-form-label col-sm-3 pt-0">Тип силового электропитания:</legend>
 							<select class="form-select form-element ch-mark" name="powerType" id="powerType"></select>
@@ -232,7 +253,7 @@
 
 				<div id="step-5">
 					<fieldset class="row mb-3 noReqValue" id="control-block-fieldset">
-						<legend class="blockNumber">8</legend>
+						<legend class="blockNumber">9</legend>
 						<div class="col-sm-9">
 							<legend class="col-form-label col-sm-3 pt-0">Тип блока управления:</legend>
 							<div class="input-group">
@@ -496,7 +517,7 @@
 					</div>
 					<!-- /ВИМУ -->
 					<fieldset class="row mb-3 noReqValue" id="control-block-optionsset" style="display: none">
-						<legend class="blockNumber">8.1</legend>
+						<legend class="blockNumber">9.1</legend>
 						<div class="col-sm-9">
 							<legend class="col-form-label col-sm-3 pt-0">Оснащение привода:</legend>
 							<select class="form-select form-element ch-mark" data-step="4" name="controle-blocks-options" id="controle-blocks-options">
@@ -512,7 +533,7 @@
 					</fieldset>
 
 					<fieldset class="row mb-3 optionalField" id="control-block-optionssetCheckBox" style="display: none">
-						<legend class="blockNumber">8.2</legend>
+						<legend class="blockNumber">9.2</legend>
 						<div class="col-sm-9">
 							<legend class="col-form-label col-sm-3 pt-0">Оснащение привода (дополнительные опции):</legend>
 							<div>
@@ -532,7 +553,7 @@
 
 					<fieldset class="row mb-3 noReqValue" id="temperature">
 						<legend class="blockNumber">
-							9
+							10
 							<a href="#" class="" data-bs-toggle="modal" data-bs-target="#tempModal">
 								<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
 									<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
@@ -559,7 +580,7 @@
 				<div id="step-6">
 					<fieldset class="row mb-3 noReqValue" id="waterProtection">
 						<legend class="blockNumber">
-							10
+							11
 							<a href="#" class="" data-bs-toggle="modal" data-bs-target="#IPModal">
 								<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
 									<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
@@ -583,7 +604,7 @@
 
 					<fieldset class="row mb-3 noReqValue" id="colorType">
 						<legend class="blockNumber">
-							11
+							12
 							<a href="#" class="" data-bs-toggle="modal" data-bs-target="#modalForColor">
 								<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
 									<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
@@ -613,7 +634,7 @@
 				<div id="step-7">
 					<fieldset class="row mb-3 epn-only noReqValue">
 						<legend class="blockNumber">
-							12
+							13
 							<a href="#" class="" data-bs-toggle="modal" data-bs-target="#cabelModal">
 								<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
 									<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
@@ -669,7 +690,7 @@
 					</fieldset>
 
 					<fieldset class="row mb-3 noReqValue">
-						<legend class="blockNumber">13</legend>
+						<legend class="blockNumber">14</legend>
 						<div class="col-sm-9">
 							<legend class="col-form-label col-sm-3 pt-0">Специальное исполнение:</legend>
 							<div class="form-check">
@@ -684,7 +705,7 @@
 					</fieldset>
 
 					<fieldset class="row mb-3 optionalField" id="optionsfield">
-						<legend class="blockNumber">13.1</legend>
+						<legend class="blockNumber">14.1</legend>
 						<div class="additional accessories">
 							<label id="upTo180">
 								<legend class="col-form-label col-sm-3 pt-0">Дополнительные аксессуары:</legend>
@@ -697,7 +718,7 @@
 
 				<div id="step-8">
 					<fieldset class="row mb-3 optionalField addRequirements">
-						<legend class="blockNumber">14</legend>
+						<legend class="blockNumber">15</legend>
 						<div class="col-sm-9" id="addReq">
 							<legend class="col-form-label col-sm-3 pt-0">Дополнительные требования:</legend>
 							<div class="form-check">
@@ -709,7 +730,7 @@
 
 				<div id="step-9">
 					<fieldset class="persInfo noReqValue">
-						<legend class="blockNumber">15</legend>
+						<legend class="blockNumber">16</legend>
 						<div class="persInfoFlex" style="display: flex; text-align: justify; flex-direction: row; flex-wrap: wrap; align-content: space-around; align-items: flex-end; gap: 5%; justify-content: center">
 							<div class="mb-3" id="persInfo-1">
 								<label for="organization"><b>Организация:</b></label>
@@ -735,7 +756,7 @@
 					</fieldset>
 
 					<fieldset class="row mb-3 numbersOfEp noReqValue" id="executionWrapLegend">
-						<legend class="blockNumber">16</legend>
+						<legend class="blockNumber">17</legend>
 						<div class="mb-3" id="numbers">
 							<legend class="col-form-label col-sm-3 pt-0">Кол-во приводов:</legend>
 							<input class="form-input form-element input" id="numbersOfEp" type="number" placeholder="Введите кол-во" min="0" />
@@ -1687,7 +1708,19 @@
 							<button type="button" class="btn-info" data-bs-dismiss="modal" aria-label="Close">Закрыть</button>
 						</div>
 						<div class="modal-body">
-							<p>В графе "По спецификации заказа" можете указать RAL</p>
+							<p>В графе "По спецификации заказа" можете указать RAL.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal" id="vPowerField-modal" tabindex="-1">
+				<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="btn-info" data-bs-dismiss="modal" aria-label="Close">Закрыть</button>
+						</div>
+						<div class="modal-body">
+							<p>Необязательный пункт, укажите его для подбора подходящих под мощность двигателя параметров.</p>
 						</div>
 					</div>
 				</div>

@@ -67,13 +67,17 @@ $(document).ready(function () {
         rMomentSelectCreate();
     });
 
-    // ЗАПОЛНЕНИЕ Времени Хода ЧЕРЕЗ БД
+    // ЗАПОЛНЕНИЕ Мощности двигателя ЧЕРЕЗ БД
+    $('#vPower').on('change', function (e) {
+        stepTimeSelectCreate();
+    });
+
     $('#upper-limit').on('change', function (e) {
-        function stepTimeSelectCreate() {
+        function vV() {
             let uplim = document.querySelector("#upper-limit").value;
-            let select = document.querySelector("#time-limit");
-            $(select).empty();
-            select.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
+            let vPower = document.getElementById('vPower');
+            $(vPower).empty();
+            vPower.innerHTML = '<option value="0" disabled selected>Выберите значение</option>';
 
             let fetchResult = [];
 
@@ -91,17 +95,51 @@ $(document).ready(function () {
                         fetchResult.push(res[i]);
                     // fetchResult[0].sort((a, b) => a - b);
                     $.each(fetchResult[0], function (key, item) {
-                        $(select).append(new Option(item, item))
+                        $(vPower).append(new Option(item, item))
                     }
                     );
                 })
         }
+        vV();
+    });
+
+    // ЗАПОЛНЕНИЕ Времени Хода ЧЕРЕЗ БД
+    $('#upper-limit').on('change', function (e) {
         stepTimeSelectCreate();
     });
+    function stepTimeSelectCreate() {
+        let vPower = document.getElementById('vPower').value;
+        let uplim = document.querySelector("#upper-limit").value;
+        let select = document.querySelector("#time-limit");
+        $(select).empty();
+        select.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
+
+        let fetchResult = [];
+
+        fetch('https://emk.websto.pro/DB', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json;charset=utf-8' },
+            body: JSON.stringify({
+                a: ['ЭПН', '3', uplim, vPower],
+            }),
+        })
+            .then(res => res.json())
+            .then(res => {
+                console.log(res)
+                for (i in res)
+                    fetchResult.push(res[i]);
+                // fetchResult[0].sort((a, b) => a - b);
+                $.each(fetchResult[0], function (key, item) {
+                    $(select).append(new Option(item, item))
+                }
+                );
+            })
+    }
 
     // ПРОГРУЗКА ДАННЫХ КОНСТРУКТИВНЫХ СХЕМ С ТАБЛИЦЫ 
     $('#step-2').on('change', function (e) {
         function SchemeSelectCreate() {
+            let vPower = document.getElementById('vPower').value;
             let upLim = document.querySelector("#upper-limit").value;
             let timeLim = document.querySelector("#time-limit").value;
             $('#constructive-scheme-wrap').empty();
@@ -114,7 +152,7 @@ $(document).ready(function () {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json;charset=utf-8' },
                 body: JSON.stringify({
-                    a: ['ЭПН', '3', upLim, timeLim],
+                    a: ['ЭПН', '3', upLim, vPower, timeLim],
                 }),
             })
                 .then(res => res.json())
@@ -161,6 +199,7 @@ $(document).ready(function () {
     // ПРОГРУЗКА ФЛАНЦЕВ С БД
     $('#schemeFieldSet').on('change', function (e) {
         function flangeSelectCreate() {
+            let vPower = document.getElementById('vPower').value;
             let upLim = document.querySelector("#upper-limit").value;
             let timeLim = document.querySelector("#time-limit").value;
             let scheme = $("input[name='constructive-scheme']:checked").val();
@@ -175,7 +214,7 @@ $(document).ready(function () {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json;charset=utf-8' },
                 body: JSON.stringify({
-                    a: ['ЭПН', "3", upLim, timeLim, scheme],
+                    a: ['ЭПН', "3", upLim, vPower, timeLim, scheme],
                 }),
             })
                 .then(res => res.json())
@@ -196,6 +235,7 @@ $(document).ready(function () {
     // ПРОГРУЗКА ТИПА СИЛОВОГО ПИТАНИЯ 
     $('#flange').on('change', function (e) {
         function PowerTypeSelectCreate() {
+            let vPower = document.getElementById('vPower').value;
             let upLim = document.querySelector("#upper-limit").value;
             let select = document.querySelector("#powerType");
             let timeLim = document.querySelector("#time-limit").value;
@@ -211,7 +251,7 @@ $(document).ready(function () {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json;charset=utf-8' },
                 body: JSON.stringify({
-                    a: ['ЭПН', '3', upLim, timeLim, scheme, flange],
+                    a: ['ЭПН', '3', upLim, vPower, timeLim, scheme, flange],
                 }),
             })
                 .then(res => res.json())
