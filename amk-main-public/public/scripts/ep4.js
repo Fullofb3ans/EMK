@@ -298,11 +298,13 @@ $(document).ready(function () {
                 $.each(fetchResult[0], function (key, item) {
                     if (item > Math.round(60 * (document.querySelector('#closeNumbers').value / document.querySelector('#closingTime').value))) {
                         $(rotationFrequency).append(new Option(item, item));
-
                     }
                     $('#step-2').trigger('change');
                     $(document).trigger('change');
                 });
+                if (rotationFrequency.length == 0) {
+                    alert('С данной комбинацией оборотов и времени закрытия нет подходящей частоты вращения');
+                }
                 $('#rotation-frequency-wrap').trigger('change');
             });
     }
