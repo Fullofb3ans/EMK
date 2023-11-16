@@ -107,6 +107,7 @@ $(document).ready(function () {
     $('#upper-limit').on('change', function (e) {
         stepTimeSelectCreate();
     });
+
     function stepTimeSelectCreate() {
         let vPower = document.getElementById('vPower').value;
         let uplim = document.querySelector("#upper-limit").value;
@@ -131,6 +132,10 @@ $(document).ready(function () {
                 // fetchResult[0].sort((a, b) => a - b);
                 $.each(fetchResult[0], function (key, item) {
                     $(select).append(new Option(item, item))
+                    if (fetchResult[0].length == 1) {
+                        select.selectedIndex = 1;
+                        $('#step-2').trigger('change');
+                    };
                 }
                 );
             })
@@ -169,7 +174,7 @@ $(document).ready(function () {
                                 .append(
                                     $('<input>').prop({
                                         type: 'radio',
-                                        id: '/img/' + 'scheme-' + item,
+                                        id: 'scheme-' + item,
                                         name: 'constructive-scheme',
                                         value: item,
                                         class: 'form-check-input ch-mark',
@@ -184,8 +189,12 @@ $(document).ready(function () {
                                         .text(' Конструктивная схема ' + item)
                                 )
                         )
-                    }
-                    );
+                    });
+                    if (fetchResult[0].length == 1) {
+                        let a = document.getElementsByName('constructive-scheme');
+                        a[0].checked = true;
+                        $('#constructive-scheme-wrap').trigger('change');
+                    };
                 }
                 );
         }
@@ -234,6 +243,9 @@ $(document).ready(function () {
 
     // ПРОГРУЗКА ТИПА СИЛОВОГО ПИТАНИЯ 
     $('#flange').on('change', function (e) {
+        let scheme = $("input[name='constructive-scheme']:checked").val();
+
+        if (scheme == undefined) { return alert('Пропущена схема'); }
         function PowerTypeSelectCreate() {
             let vPower = document.getElementById('vPower').value;
             let upLim = document.querySelector("#upper-limit").value;
@@ -241,7 +253,6 @@ $(document).ready(function () {
             let timeLim = document.querySelector("#time-limit").value;
             let scheme = $("input[name='constructive-scheme']:checked").val();
             let flange = document.querySelector("#flange").value;
-
             $(select).empty();
             select.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
 
@@ -262,6 +273,10 @@ $(document).ready(function () {
                     // fetchResult[0].sort((a, b) => a - b);
                     $.each(fetchResult[0], function (key, item) {
                         $(select).append(new Option(item, item))
+                        if (fetchResult[0].length == 1) {
+                            select.selectedIndex = 1;
+                            $('#powerType').trigger('change');
+                        };
                     }
                     );
                 })
@@ -1405,14 +1420,14 @@ $(document).ready(function () {
 
     // Открытие по шагам
     $('#step-1').on('change', function (e) {
-        if ($("input[name='working-mode']:checked").val() != undefined && $("input[name='execution']:checked").val() != undefined) {
+        if ($("input[name='working-mode']:checked").val() !== undefined && $("input[name='execution']:checked").val() != undefined) {
             $('#step-2').show();
         } else {
             $('#step-2').hide();
         }
     });
     $('#step-2').on('change', function (e) {
-        if ($("input[name='stroke']:checked").val() != undefined && document.querySelector('#upper-limit') != '' && document.querySelector('#time-limit').value != '') {
+        if ($("input[name='stroke']:checked").val() !== undefined && document.querySelector('#upper-limit') != '' && document.querySelector('#time-limit').value != '') {
             $('#step-3').show();
         } else {
             $('#step-3').hide();

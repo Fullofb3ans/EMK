@@ -279,11 +279,13 @@ $(document).ready(function () {
     // Формула от частоты вращения и двигателя
     $('#stepClose').on('change', function (e) {
         rotationFrequencySelectCreate();
+        // $('#rotation-frequency').trigger('change');
     })
 
     // ПРОГРУЗКА ДАННЫХ ЧАСТОТЫ ВРАЩЕНИЯ С ТАБЛИЦЫ
     $('#vPower').on('change', function (e) {
         rotationFrequencySelectCreate();
+        // $('#rotation-frequency').trigger('change');
     });
 
     // ПРОГРУЗКА ДАННЫХ ЧАСТОТЫ ВРАЩЕНИЯ С ТАБЛИЦЫ ПОСЛЕ ЗАПОЛНЕНИЯ МОЩНОСТИ
@@ -292,7 +294,8 @@ $(document).ready(function () {
         $('#closeNumbers').val('');
         $('#closingTime').val('');
         rotationFrequencySelectCreate();
-        $('#stepClose').trigger('change');
+        // $('#stepClose').trigger('change');
+        // $('#rotation-frequency').trigger('change');
     });
 
     function rotationFrequencySelectCreate() {
@@ -332,13 +335,14 @@ $(document).ready(function () {
                 });
                 if (rotationFrequency.length == 0) {
                     alert('С указанной комбинацией оборотов и времени закрытия нет подходящей частоты вращения');
+                } else {
+                    $('#rotation-frequency').trigger('change');
                 }
-                $('#rotation-frequency-wrap').trigger('change');
             });
     }
 
     // ПРОГРУЗКА ДАННЫХ КОНСТРУКТИВНЫХ СХЕМ С ТАБЛИЦЫ
-    $('#rotation-frequency-wrap').on('change', function (e) {
+    $('#rotation-frequency').on('change', function (e) {
         function SchemeSelectCreate() {
             let vPower = document.querySelector("#vPower").value;
             let upLim = document.querySelector('#upper-limit').value;
@@ -368,7 +372,7 @@ $(document).ready(function () {
                                 .append(
                                     $('<input>').prop({
                                         type: 'radio',
-                                        id: '/img/' + 'scheme-' + item,
+                                        id: 'scheme-' + item,
                                         name: 'constructive-scheme',
                                         value: item,
                                         class: 'form-check-input ch-mark'
@@ -384,6 +388,11 @@ $(document).ready(function () {
                                 )
                         );
                     });
+                    if (fetchResult[0].length == 1) {
+                        let a = document.getElementsByName('constructive-scheme');
+                        a[0].checked = true;
+                        $('#constructive-scheme-wrap').trigger('change');
+                    };
                 });
         }
         SchemeSelectCreate();
@@ -413,8 +422,8 @@ $(document).ready(function () {
             let connectionType = $("input[name='connection-type']:checked").val();
             const rotationFrequency = document.getElementById('rotation-frequency').value;
             let scheme = $("input[name='constructive-scheme']:checked").val();
-
             let flange = document.querySelector('#flange');
+
             $(flange).empty();
             flange.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
 
@@ -434,6 +443,10 @@ $(document).ready(function () {
                     // fetchResult[0].sort((a, b) => a - b);
                     $.each(fetchResult[0], function (key, item) {
                         $(flange).append(new Option(item));
+                        if (fetchResult[0].length == 1) {
+                            flange.selectedIndex = 1;
+                            $('#flange').trigger('change');
+                        };
                     });
                 });
         }

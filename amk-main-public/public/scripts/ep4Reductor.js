@@ -149,6 +149,10 @@ $(document).ready(function () {
                     // fetchResult[0].sort((a, b) => a - b);
                     $.each(fetchResult[0], function (key, item) {
                         $(select).append(new Option(item, item));
+                        if (fetchResult[0].length == 1) {
+                            select.selectedIndex = 1;
+                            $('#flange').trigger('change');
+                        };
                     });
                 });
         }
@@ -181,6 +185,10 @@ $(document).ready(function () {
                     // fetchResult[0].sort((a, b) => a - b);
                     $.each(fetchResult[0], function (key, item) {
                         $(select).append(new Option(item, item));
+                        if (fetchResult[0].length == 1) {
+                            select.selectedIndex = 1;
+                            $('#upper-limit').trigger('change');
+                        };
                     });
                 });
         }
@@ -216,6 +224,10 @@ $(document).ready(function () {
                     // fetchResult[0].sort((a, b) => a - b);
                     $.each(fetchResult[0], function (key, item) {
                         $(select).append(new Option(item, item));
+                        if (fetchResult[0].length == 1) {
+                            select.selectedIndex = 1;
+                            $('#rotation-frequency').trigger('change');
+                        };
                     });
                 });
         }
@@ -250,6 +262,10 @@ $(document).ready(function () {
                     // fetchResult[0].sort((a, b) => a - b);
                     $.each(fetchResult[0], function (key, item) {
                         $(select).append(new Option(item, item));
+                        if (fetchResult[0].length == 1) {
+                            select.selectedIndex = 1;
+                            $("#turnTime").trigger('change');
+                        };
                     });
                 });
         }
@@ -313,7 +329,7 @@ $(document).ready(function () {
                                 .append(
                                     $('<input>').prop({
                                         type: 'radio',
-                                        id: '/img/' + 'scheme-' + item,
+                                        id: 'scheme-' + item,
                                         name: 'constructive-scheme',
                                         value: item,
                                         class: 'form-check-input ch-mark',
@@ -329,6 +345,11 @@ $(document).ready(function () {
                                 )
                         );
                     });
+                    if (fetchResult[0].length == 1) {
+                        let a = document.getElementsByName('constructive-scheme');
+                        a[0].checked = true;
+                        $('#constructive-scheme-wrap').trigger('change');
+                    };
                 });
         }
         SchemeSelectCreate();
