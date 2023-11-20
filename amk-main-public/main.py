@@ -189,6 +189,14 @@ def get_param(jsn = Body()):
     
     return {"ans" : ans}
 
+@app.post("/VIMU")
+def vimu(jsn = Body()):
+    a = jsn["a"]
+    bd = DB("ВИМУ")
+    (key, ans) = bd.Vimu(a)
+    
+    return {f"{key}" : ans}
+
 @app.post("/Mark")
 def get_param(jsn = Body()):
     a = jsn["a"]

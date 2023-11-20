@@ -726,6 +726,16 @@ class DB():
         
         return ans
     
+    def Vimu(self, ID):
+        WB = load_workbook('BD.xlsx')
+        Sheet = WB['ВИМУ']
+        ans = []
+        for i in range(2, 41):
+            if str(ID) == str(Sheet[f"A{i}"].value):
+                key = str(Sheet[f"B{i}"].value)
+                ans.append([str(Sheet[f"C{i}"].value), str(Sheet[f"D{i}"].value)])
+        return (key, ans)
+
     def get_M1(self, sh, mom, v, ob):
         sh = int(sh)
         mom = int(mom)
