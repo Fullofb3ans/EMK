@@ -7,6 +7,7 @@ $(document).ready(function () {
         $('#e1-table th').removeClass('table-success');
         $(el).toggleClass('table-success');
     });
+
     $(document).on('click', '#ve2-table th, #ve2-table td', function (e) {
         let target = $(this).data('target');
         let el = document.getElementById('v2' + target);
@@ -62,18 +63,14 @@ $(document).ready(function () {
         if (document.querySelector("#executionWrapLegend").classList.contains('ReqValueOk') && document.querySelector("#roundControl").classList.contains('ReqValueOk')) {
             $('#step-2').show();
         }
-        else {
-            $('#step-2').hide();
-        }
+
     });
 
     $('#step-2').on('change', function (e) {
         if (document.querySelector("#engineStartType").classList.contains('ReqValueOk') && document.querySelector("#control-block-fieldset").classList.contains('ReqValueOk') && document.querySelector("#control-block-optionsset").classList.contains('ReqValueOk')) {
             $('#step-3').show();
         }
-        else {
-            $('#step-3').hide();
-        }
+
     });
 
     $('#step-3').on('change', function (e) {
@@ -81,37 +78,28 @@ $(document).ready(function () {
             && (document.querySelector("#protection-1").checked || document.querySelector("#protection-2").checked)) {
             $('#step-4').show();
         }
-        else {
-            $('#step-4').hide();
-        }
-    });
 
+    });
 
     $('#step-4').on('change', function (e) {
         if ($("input[name='connectionForVimu']:checked").val() && (document.querySelector("#color-1").checked || document.querySelector("#ralColor").value !== '')) {
             $('#step-5').show();
         }
-        else {
-            $('#step-5').hide();
-        }
+
     });
 
     $('#step-5').on('change', function (e) {
         if ($("input[name='specialForVimu']:checked").val() || document.querySelector("#specialForVimu-1").checked) {
             $('#step-6').show();
         }
-        else {
-            $('#step-6').hide();
-        }
+
     });
 
     $('#step-6').on('change', function (e) {
         if (document.querySelector("#organization").value !== '' && document.querySelector("#fio").value !== '' && document.querySelector("#phone").value !== '' && document.querySelector("#email").value !== '' && document.querySelector("#numbersOfEp").value !== '') {
             $('#step-7').show();
         }
-        else {
-            $('#step-7').hide();
-        }
+
     });
 
     // МАРКИРОВКА
@@ -412,7 +400,6 @@ $(document).ready(function () {
 
     // КНОПКА КОНФИГУРАТОРА
     function checkCommandBlock() {
-
         let base = document.querySelector('#controle-blocks').value;
         switch (base) {
             case 'ВЭ11':
@@ -467,7 +454,6 @@ $(document).ready(function () {
     }
     // МЕСТНЫЕ И ДИСТ СИГНАЛЫ
     function selectRemoteSignal() {
-
         optForBu = $('#control-block-optionsset option:selected').val() != 'noValue' ? $('#control-block-optionsset option:selected').val() : '';
 
         if (optForBu == 'X') {
@@ -493,7 +479,6 @@ $(document).ready(function () {
 
     function selectPositionSignal() {
         let BoMark = document.querySelector("#controle-blocks");
-
         if (BoMark == 'ВЭ11') {
             return positionSignal = 'Отсутствуют';
         }
@@ -536,7 +521,6 @@ $(document).ready(function () {
             return positionSignal = '';
         }
     }
-
 
     $("#control-block-config").on("click", function (e) {
         vimuBlockModal.show();

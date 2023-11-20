@@ -753,10 +753,6 @@ $(document).ready(function () {
 
         let constructive_scheme = $("input[name='constructive-scheme']:checked").val();
 
-        if (x3.search(/[МА][КЧ]/g) == 0) {
-            x3 = x3.substr(0, 1);
-        }
-
         let suffix = '';
 
         if (constructive_scheme === '40') {
@@ -769,8 +765,6 @@ $(document).ready(function () {
         }
 
         is_true = [x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12].includes('X');
-        mark_gen.text(x0 + x1 + x2 + '-' + x3 + '-' + x4 + '-' + x5 + '-' + x6 + secondVimuBlock +
-            optionssetCheckBox + optForBu + '-' + x7 + '-' + x8 + x9 + x10 + x11 + x12 + x13 + suffix);
         let check = document.querySelector('#tuMpCheck > input[type=checkbox]');
         if (check.checked) {
             mark_gen.text(
@@ -803,12 +797,17 @@ $(document).ready(function () {
                 tuMpX1 +
                 '-' +
                 tuMpX2
-            );
+            )
+        }
+        else {
+            mark_gen.text(x0 + x1 + x2 + '-' + x3 + '-' + x4 + '-' + x5 + '-' + x6 + secondVimuBlock +
+                optionssetCheckBox + optForBu + '-' + x7 + '-' + x8 + x9 + x10 + x11 + x12 + x13 + suffix);
         }
 
         mark_gen.toggleClass('is-invalid', is_true).toggleClass('is-valid', !is_true);
     });
 
+    // Обработка пропусков
     $(document.querySelector('#download')).on('click', function () {
         if ($("input[name='constructive-scheme']:checked").val() == undefined) {
             goTo = document.querySelector("#schemeFieldSet");
@@ -1217,6 +1216,72 @@ $(document).ready(function () {
         }
     });
 
+    // открытие сертификатов и деклараций под общепром и взрыв
+    $('#execution-wrap').on('change', function (e) {
+        if (document.querySelector("#execution-Н").checked) {
+            $('#declaration').show();
+            $('#declarationV').hide();
+            $('#certV').hide();
+        }
+        else {
+            $('#declaration').hide();
+            $('#declarationV').show();
+            $('#certV').show();
+        }
+    });
+
+    // Проверка на запорно-регулирующую арматуру для пм модуля
+    $('.timeMode').on('change', function (e) {
+        if ($("input[name='working-mode']:checked").val() == 'Р') {
+            document.querySelector('.tuMpField').style.display = 'block';
+        } else {
+            document.querySelector('.tuMpField').style.display = 'none';
+            document.querySelector("#tuMpCheck > input[type=checkbox]").checked = false;
+            $('#tuMpCheck').trigger('change');
+        }
+    });
+
+    $('#block-configure-e2').on('change', function (e) {
+        if (document.querySelector("#e2-1").checked) {
+            $('#e22signalDiv').show();
+        }
+        else {
+            document.querySelector("#e22signal4").checked = false;
+            document.querySelector("#e22signal0").checked = false;
+            $('#e22signalDiv').hide();
+        }
+    });
+
+    // Открытие пункта виму эиму для блока управления
+    $('#control-block-fieldset').on('change', function (e) {
+        if ($('#controle-blocks-series').val() == 'Э1') {
+            document.querySelector('.commandBlockType').style.display = 'block';
+        } else {
+            document.querySelector('.commandBlockType').classList.remove('ReqValueOk');
+            document.querySelector('.commandBlockType').classList.add('noReqValue');
+            document.querySelector('#commandBlockType-2').checked = false;
+            document.querySelector('#commandBlockType-1').checked = false;
+            document.querySelector('.commandBlockType').style.display = 'none';
+        }
+    });
+    // Открытие доп оснащения для блока управления при Э1
+    $('#control-block-fieldset').on('change', function (e) {
+        if ($('#controle-blocks-series').val() == 'Э1') {
+            document.querySelector('#control-block-optionsset').style.display = 'block';
+            document.querySelector('#control-block-optionssetCheckBox').style.display = 'block';
+        } else {
+            $('#controle-blocks-options').val('noValue');
+            document.querySelector('#PanelOption').checked = false;
+            document.querySelector('#tOption').checked = false;
+            document.querySelector('#bluetoothOption').checked = false;
+            document.querySelector('#regOption').checked = false;
+            document.querySelector('#control-block-optionsset').style.display = 'none';
+            document.querySelector('#control-block-optionssetCheckBox').style.display = 'none';
+            document.querySelector('#control-block-optionsset').classList.remove('ReqValueOk');
+            document.querySelector('#control-block-optionsset').classList.add('noReqValue');
+        }
+    });
+
     // СТИЛЬ ДЛЯ ПОЛЯ С ДАННЫМИ
     $('.persInfo').on('change', function (e) {
         if (
@@ -1384,14 +1449,25 @@ $(document).ready(function () {
         }
     });
 
-    $('#block-configure-e2').on('change', function (e) {
-        if (document.querySelector("#e2-1").checked) {
-            $('#e22signalDiv').show();
+    // СТИЛИ ДЛЯ РЕЖИМА РАБОТЫ
+    $('.timeMode').on('change', function (e) {
+        if ($("input[name='working-mode']:checked")) {
+            document.querySelector('.timeMode').classList.add('ReqValueOk');
+            document.querySelector('.timeMode').classList.remove('noReqValue');
+        } else {
+            document.querySelector('.timeMode').classList.add('noReqValue');
+            document.querySelector('.timeMode').classList.remove('ReqValueOk');
         }
-        else {
-            document.querySelector("#e22signal4").checked = false;
-            document.querySelector("#e22signal0").checked = false;
-            $('#e22signalDiv').hide();
+    });
+
+    // стили оснащения для блока управления при Э1
+    $('#control-block-optionsset').on('change', function (e) {
+        if ($('#controle-blocks-options option:selected').val() !== 'noValue') {
+            document.querySelector('#control-block-optionsset').classList.add('ReqValueOk');
+            document.querySelector('#control-block-optionsset').classList.remove('noReqValue');
+        } else {
+            document.querySelector('#control-block-optionsset').classList.remove('ReqValueOk');
+            document.querySelector('#control-block-optionsset').classList.add('noReqValue');
         }
     });
 
@@ -1479,81 +1555,34 @@ $(document).ready(function () {
         }
     }
 
-    // открытие сертификатов и деклараций под общепром и взрыв
-    $('#execution-wrap').on('change', function (e) {
-        if (document.querySelector("#execution-Н").checked) {
-            $('#declaration').show();
-            $('#declarationV').hide();
-            $('#certV').hide();
+    // Проверка доп платы
+    function checkSecondCommandBlock() {
+        let secondBlock = document.querySelector("#controle-blocks2").value;
+        switch (secondBlock) {
+            case 'Э11':
+                return ' Дополнительная плата: Базовый набор функций';
+            case 'Э12':
+                return ' Дополнительная плата: 1)Базовый набор функций 2)Передача информации о положении выходного звена привода посредством токового сигнала (4–20 мА)';
+            case 'Э13':
+                return ' Дополнительная плата: 1)Базовый набор функций 2)Передача информации о положении выходного звена привода посредством токового сигнала (4–20 мА)  3)Передача текущего значения движущего момента на выходном звене привода посредством токового сигнала (4–20 мА).';
+            case 'Э14':
+                return ' Дополнительная плата: 1)Базовый набор функций 2)Диагностирование отказов опциональных модулей.  3)Автоматический выбор активного интерфейса дистанционного управления.';
+            case 'Э15':
+                return ' Дополнительная плата: 1)Базовый набор функций 2)Диагностирование отказов опциональных модулей.  3)Автоматический выбор активного интерфейса дистанционного управления.  4) Передача информации о положении выходного звена привода посредством токового сигнала (4–20 мА)  5)Передача текущего значения движущего момента на выходном звене привода посредством токового сигнала (4–20 мА).';
+            case 'Э16':
+                return ' Дополнительная плата: 1)Базовый набор функций 2)Аналоговое управление приводом — прием от дистанционного пульта и отработка токового сигнала (4–20 мА) задания положения выходного звена привода с контролем наличия связи  3)Диагностирование отказов опциональных модулей.  4)Автоматический выбор активного интерфейса дистанционного управления. 5)Передача информации о положении выходного звена привода посредством токового сигнала (4–20 мА).';
+            case 'Э17':
+                return ' Дополнительная плата: 1)Базовый набор функций 2)Передача информации о положении выходного звена привода посредством токового сигнала (4–20 мА)  3)Передача текущего значения движущего момента на выходном звене привода посредством токового сигнала (4–20 мА).  4) Аналоговое управление приводом — прием от дистанционного пульта и отработка токового сигнала (4–20 мА) задания положения выходного звена привода с контролем наличия связи  5) Диагностирование отказов опциональных модулей.  6)Автоматический выбор активного интерфейса дистанционного управления.';
+            case 'Э18':
+                return ' Дополнительная плата: 1)Базовый набор функций 2)Цифровое управление и настройка привода с дублированием каналов связи посредством цифрового канала связи, интерфейс RS485, протокол обмена — MODBUS RTU  3)Диагностирование отказов опциональных модулей.   4)Автоматический выбор активного интерфейса дистанционного управления.';
+            case 'Э19':
+                return ' Дополнительная плата: 1)Базовый набор функций 2)Цифровое управление приводом посредством цифрового канала связи, интерфейс RS485, протокол обмена — PROFIBUS DP  3)Диагностирование отказов опциональных модулей.   4)Автоматический выбор активного интерфейса дистанционного управления.';
+            case 'Э110':
+                return ' Дополнительная плата: 1)Базовый набор функций 2)Цифровое управление приводом с дублированием каналов связи посредством цифрового канала связи, интерфейс RS485, протокол обмена — PROFIBUS DP.  3)Диагностирование отказов опциональных модулей.   4)Автоматический выбор активного интерфейса дистанционного управления.';
+            default:
+                return '';
         }
-        else {
-            $('#declaration').hide();
-            $('#declarationV').show();
-            $('#certV').show();
-        }
-    });
-
-    // Проверка на запорно-регулирующую арматуру для пм модуля
-    $('.timeMode').on('change', function (e) {
-        if ($("input[name='working-mode']:checked").val() == 'Р') {
-            document.querySelector('.tuMpField').style.display = 'block';
-        } else {
-            document.querySelector('.tuMpField').style.display = 'none';
-        }
-    });
-    // СТИЛИ ДЛЯ РЕЖИМА РАБОТЫ
-    $('.timeMode').on('change', function (e) {
-        if ($("input[name='working-mode']:checked")) {
-            document.querySelector('.timeMode').classList.add('ReqValueOk');
-            document.querySelector('.timeMode').classList.remove('noReqValue');
-        } else {
-            document.querySelector('.timeMode').classList.add('noReqValue');
-            document.querySelector('.timeMode').classList.remove('ReqValueOk');
-        }
-    });
-
-    // СТИЛИ ДЛЯ M1 МОДАЛЬНОГО
-
-    // Открытие пункта виму эиму для блока управления
-    $('#control-block-fieldset').on('change', function (e) {
-        if ($('#controle-blocks-series').val() == 'Э1') {
-            document.querySelector('.commandBlockType').style.display = 'block';
-        } else {
-            document.querySelector('.commandBlockType').classList.remove('ReqValueOk');
-            document.querySelector('.commandBlockType').classList.add('noReqValue');
-            document.querySelector('#commandBlockType-2').checked = false;
-            document.querySelector('#commandBlockType-1').checked = false;
-            document.querySelector('.commandBlockType').style.display = 'none';
-        }
-    });
-    // Открытие доп оснащения для блока управления при Э1
-    $('#control-block-fieldset').on('change', function (e) {
-        if ($('#controle-blocks-series').val() == 'Э1') {
-            document.querySelector('#control-block-optionsset').style.display = 'block';
-            document.querySelector('#control-block-optionssetCheckBox').style.display = 'block';
-        } else {
-            $('#controle-blocks-options').val('noValue');
-            document.querySelector('#PanelOption').checked = false;
-            document.querySelector('#tOption').checked = false;
-            document.querySelector('#bluetoothOption').checked = false;
-            document.querySelector('#regOption').checked = false;
-            document.querySelector('#control-block-optionsset').style.display = 'none';
-            document.querySelector('#control-block-optionssetCheckBox').style.display = 'none';
-            document.querySelector('#control-block-optionsset').classList.remove('ReqValueOk');
-            document.querySelector('#control-block-optionsset').classList.add('noReqValue');
-        }
-    });
-
-    // стили оснащения для блока управления при Э1
-    $('#control-block-optionsset').on('change', function (e) {
-        if ($('#controle-blocks-options option:selected').val() !== 'noValue') {
-            document.querySelector('#control-block-optionsset').classList.add('ReqValueOk');
-            document.querySelector('#control-block-optionsset').classList.remove('noReqValue');
-        } else {
-            document.querySelector('#control-block-optionsset').classList.remove('ReqValueOk');
-            document.querySelector('#control-block-optionsset').classList.add('noReqValue');
-        }
-    });
+    }
 
     function selectRemoteSignal() {
         let BoMark = document.querySelector('#controle-blocks-series').value;
@@ -1620,108 +1649,7 @@ $(document).ready(function () {
             return (positionSignal = '');
         }
     }
-    // ОТКРЫТИЕ ПО ШАГАМ
-    $('#step-1').on('change', function (e) {
-        if ($("input[name='working-mode']:checked").val() != undefined && $("input[name='execution']:checked").val() != undefined) {
-            $('#step-2').show();
-        } else {
-            $('#step-2').hide();
-        }
-    });
-    $('#step-2').on('change', function (e) {
-        if ($("input[name='connection-type']:checked").val() != undefined && document.querySelector('#upper-limit') != '') {
-            $('#step-3').show();
-        } else {
-            $('#step-3').hide();
-        }
-    });
-    $('#step-3').on('change', function (e) {
-        if (document.querySelector('#rotation-frequency').value != '') {
-            $('#step-4').show();
-        } else {
-            $('#step-4').hide();
-        }
-    });
-    $('#step-4').on('change', function (e) {
-        if ($("input[name='constructive-scheme']:checked").val() != '1' && document.querySelector('#flange').value) {
-            $('#step-5').show();
-        } else {
-            $('#step-5').hide();
-        }
-    });
-    $('#step-5').on('change', function (e) {
-        if (document.querySelector('#control-block-fieldset').classList.contains('ReqValueOk') && document.querySelector('#climatic-modification').value != '') {
-            $('#step-6').show();
-        } else {
-            $('#step-6').hide();
-        }
-    });
-    $('#step-6').on('change', function (e) {
-        if ($("input[name='rotating']:checked").val() != undefined && $("input[name='protection']:checked").val() != undefined) {
-            $('#step-7').show();
-        } else {
-            $('#step-7').hide();
-        }
-    });
-    $('#step-7').on('change', function (e) {
-        if ($("input[name='color']:checked").val() != undefined && $("input[name='connectionForEp4']:checked").val() != undefined) {
-            $('#step-8').show();
-        }
-    });
-    $('#step-8').on('change', function (e) {
-        if ($("input[name='special']:checked").val() != undefined) {
-            $("input[name='special']").closest('fieldset').removeClass('noReqValue');
-            $("input[name='special']").closest('fieldset').addClass('ReqValueOk');
-            $('#step-9').show();
-            $('#step-9').show();
-        } else {
-            $('#step-8').hide();
-            $('#step-9').hide();
-        }
-    });
 
-    $('#step-9').on('change', function (e) {
-        if (
-            document.querySelector('#organization').value != '' &&
-            document.querySelector('#fio').value != '' &&
-            document.querySelector('#phone').value != '' &&
-            document.querySelector('#email').value != '' &&
-            document.querySelector('#numbersOfEp').value != ''
-        ) {
-            $('#step-10').show();
-        } else {
-            $('#step-10').hide();
-        }
-    });
-
-    // Проверка доп платы
-    function checkSecondCommandBlock() {
-        let secondBlock = document.querySelector("#controle-blocks2").value;
-        switch (secondBlock) {
-            case 'Э11':
-                return ' Дополнительная плата: Базовый набор функций';
-            case 'Э12':
-                return ' Дополнительная плата: 1)Базовый набор функций 2)Передача информации о положении выходного звена привода посредством токового сигнала (4–20 мА)';
-            case 'Э13':
-                return ' Дополнительная плата: 1)Базовый набор функций 2)Передача информации о положении выходного звена привода посредством токового сигнала (4–20 мА)  3)Передача текущего значения движущего момента на выходном звене привода посредством токового сигнала (4–20 мА).';
-            case 'Э14':
-                return ' Дополнительная плата: 1)Базовый набор функций 2)Диагностирование отказов опциональных модулей.  3)Автоматический выбор активного интерфейса дистанционного управления.';
-            case 'Э15':
-                return ' Дополнительная плата: 1)Базовый набор функций 2)Диагностирование отказов опциональных модулей.  3)Автоматический выбор активного интерфейса дистанционного управления.  4) Передача информации о положении выходного звена привода посредством токового сигнала (4–20 мА)  5)Передача текущего значения движущего момента на выходном звене привода посредством токового сигнала (4–20 мА).';
-            case 'Э16':
-                return ' Дополнительная плата: 1)Базовый набор функций 2)Аналоговое управление приводом — прием от дистанционного пульта и отработка токового сигнала (4–20 мА) задания положения выходного звена привода с контролем наличия связи  3)Диагностирование отказов опциональных модулей.  4)Автоматический выбор активного интерфейса дистанционного управления. 5)Передача информации о положении выходного звена привода посредством токового сигнала (4–20 мА).';
-            case 'Э17':
-                return ' Дополнительная плата: 1)Базовый набор функций 2)Передача информации о положении выходного звена привода посредством токового сигнала (4–20 мА)  3)Передача текущего значения движущего момента на выходном звене привода посредством токового сигнала (4–20 мА).  4) Аналоговое управление приводом — прием от дистанционного пульта и отработка токового сигнала (4–20 мА) задания положения выходного звена привода с контролем наличия связи  5) Диагностирование отказов опциональных модулей.  6)Автоматический выбор активного интерфейса дистанционного управления.';
-            case 'Э18':
-                return ' Дополнительная плата: 1)Базовый набор функций 2)Цифровое управление и настройка привода с дублированием каналов связи посредством цифрового канала связи, интерфейс RS485, протокол обмена — MODBUS RTU  3)Диагностирование отказов опциональных модулей.   4)Автоматический выбор активного интерфейса дистанционного управления.';
-            case 'Э19':
-                return ' Дополнительная плата: 1)Базовый набор функций 2)Цифровое управление приводом посредством цифрового канала связи, интерфейс RS485, протокол обмена — PROFIBUS DP  3)Диагностирование отказов опциональных модулей.   4)Автоматический выбор активного интерфейса дистанционного управления.';
-            case 'Э110':
-                return ' Дополнительная плата: 1)Базовый набор функций 2)Цифровое управление приводом с дублированием каналов связи посредством цифрового канала связи, интерфейс RS485, протокол обмена — PROFIBUS DP.  3)Диагностирование отказов опциональных модулей.   4)Автоматический выбор активного интерфейса дистанционного управления.';
-            default:
-                return '';
-        }
-    }
     // Обработка сигналов второго блока
     function selectPositionSignalSecondCommandBlock() {
         let BoMark = document.querySelector("#controle-blocks2").value;
@@ -1744,4 +1672,61 @@ $(document).ready(function () {
             return positionSignal = '';
         }
     }
+
+    // ОТКРЫТИЕ ПО ШАГАМ
+    $('#step-1').on('change', function (e) {
+        if ($("input[name='working-mode']:checked").val() != undefined && $("input[name='execution']:checked").val() != undefined) {
+            $('#step-2').show();
+        }
+    });
+    $('#step-2').on('change', function (e) {
+        if ($("input[name='connection-type']:checked").val() != undefined && document.querySelector('#upper-limit') != '') {
+            $('#step-3').show();
+        }
+    });
+    $('#step-3').on('change', function (e) {
+        if (document.querySelector('#rotation-frequency').value != '') {
+            $('#step-4').show();
+        }
+    });
+    $('#step-4').on('change', function (e) {
+        if ($("input[name='constructive-scheme']:checked").val() != '1' && document.querySelector('#flange').value) {
+            $('#step-5').show();
+        }
+    });
+    $('#step-5').on('change', function (e) {
+        if (document.querySelector('#control-block-fieldset').classList.contains('ReqValueOk') && document.querySelector('#climatic-modification').value != '') {
+            $('#step-6').show();
+        }
+    });
+    $('#step-6').on('change', function (e) {
+        if ($("input[name='rotating']:checked").val() != undefined && $("input[name='protection']:checked").val() != undefined) {
+            $('#step-7').show();
+        }
+    });
+    $('#step-7').on('change', function (e) {
+        if ($("input[name='color']:checked").val() != undefined && $("input[name='connectionForEp4']:checked").val() != undefined) {
+            $('#step-8').show();
+        }
+    });
+    $('#step-8').on('change', function (e) {
+        if ($("input[name='special']:checked").val() != undefined) {
+            $("input[name='special']").closest('fieldset').removeClass('noReqValue');
+            $("input[name='special']").closest('fieldset').addClass('ReqValueOk');
+            $('#step-9').show();
+            $('#step-9').show();
+        }
+    });
+
+    $('#step-9').on('change', function (e) {
+        if (
+            document.querySelector('#organization').value != '' &&
+            document.querySelector('#fio').value != '' &&
+            document.querySelector('#phone').value != '' &&
+            document.querySelector('#email').value != '' &&
+            document.querySelector('#numbersOfEp').value != ''
+        ) {
+            $('#step-10').show();
+        }
+    });
 });

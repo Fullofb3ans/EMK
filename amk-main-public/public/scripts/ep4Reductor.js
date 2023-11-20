@@ -1421,25 +1421,21 @@ $(document).ready(function () {
         if ($("rn").val() != '') {
             $('#step-2').show();
         }
-        else { $('#step-2').hide(); }
+
     });
     $('#step-2').on('change', function (e) {
         if ($("input[name='working-mode']:checked").val() != undefined && ($("input[name='execution']:checked").val() != undefined)) {
             $('#step-3').show();
         }
-        else { $('#step-3').hide(); }
     });
     $('#step-3').on('change', function (e) {
         if ($('#flange').val() != '' && document.querySelector("#upper-limit").value != '') { $('#step-4').show(); }
-        else { $('#step-4').hide(); }
     });
     $('#step-4').on('change', function (e) {
         if (document.querySelector("#rotation-frequency").value && document.querySelector("#turnTime").value) { $('#step-5').show(); }
-        else { $('#step-5').hide(); }
     });
     $('#step-5').on('change', function (e) {
         if ($("input[name='constructive-scheme']:checked").val() != '' && $('#controle-blocks').val() != '') { $('#step-6').show(); }
-        else { $('#step-6').hide(); }
     });
     $('#step-6').on('change', function (e) {
         if ($("#climatic-modification").val() != '' && $("input[name='protection']:checked").val() != undefined) { $('#step-7').show(); }
@@ -1449,15 +1445,11 @@ $(document).ready(function () {
             $('#step-8').show();
             $('#step-9').show();
         }
-        else {
-            $('#step-8').hide();
-            $('#step-9').hide();
-        }
+
     });
 
     $('#step-9').on('change', function (e) {
         if (document.querySelector("#organization").value != '' && document.querySelector("#fio").value != '' && document.querySelector("#phone").value != '' && document.querySelector("#email").value != '' && document.querySelector("#numbersOfEp").value != '') { $('#step-10').show(); }
-        else { $('#step-10').hide(); }
     });
 
     // Обработка доп платы

@@ -588,7 +588,7 @@ closeve2modal2:hover {
 	border-bottom-left-radius: calc(0.3rem - 1px);
 }
 
-#mark-gen {
+#mark-gen, #markMark {
 	background: #fff;
 	padding: 8%;
 	background: rgb(249 84 0 / 21%);
@@ -603,6 +603,9 @@ closeve2modal2:hover {
 	font-size: 100%;
 	word-break: break-word;
 	color: black;
+	padding: 0%;
+	margin: 0%;
+	border-radius: 0;
 }
 
 .table {
@@ -1089,12 +1092,6 @@ body > header > nav > div > a {
 	position: relative;
 	width: 100%;
 	right: 0%;
-}
-
-#mark-gen {
-	padding: 0%;
-	margin: 0%;
-	border-radius: 0;
 }
 
 a.brand-logo.center {

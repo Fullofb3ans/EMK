@@ -1422,36 +1422,26 @@ $(document).ready(function () {
     $('#step-1').on('change', function (e) {
         if ($("input[name='working-mode']:checked").val() !== undefined && $("input[name='execution']:checked").val() != undefined) {
             $('#step-2').show();
-        } else {
-            $('#step-2').hide();
         }
     });
     $('#step-2').on('change', function (e) {
         if ($("input[name='stroke']:checked").val() !== undefined && document.querySelector('#upper-limit') != '' && document.querySelector('#time-limit').value != '') {
             $('#step-3').show();
-        } else {
-            $('#step-3').hide();
         }
     });
     $('#step-3').on('change', function (e) {
         if ($("input[name='constructive-scheme']:checked").val() != '') {
             $('#step-4').show();
-        } else {
-            $('#step-4').hide();
         }
     });
     $('#step-4').on('change', function (e) {
         if (document.querySelector('#flange').value && document.querySelector('#powerType').value != '') {
             $('#step-5').show();
-        } else {
-            $('#step-5').hide();
         }
     });
     $('#step-5').on('change', function (e) {
         if (document.querySelector("#controle-blocks").value && document.querySelector("#climatic-modification").value) {
             $('#step-6').show();
-        } else {
-            $('#step-6').hide();
         }
     });
     $('#step-6').on('change', function (e) {
@@ -1463,9 +1453,6 @@ $(document).ready(function () {
         if ($("input[name='specialForEpn']:checked").val() != undefined && $("input[name='connection']:checked").val() != undefined) {
             $('#step-8').show();
             $('#step-9').show();
-        } else {
-            $('#step-8').hide();
-            $('#step-9').hide();
         }
     });
 
@@ -1478,8 +1465,6 @@ $(document).ready(function () {
             document.querySelector('#numbersOfEp').value != ''
         ) {
             $('#step-10').show();
-        } else {
-            $('#step-10').hide();
         }
     });
 

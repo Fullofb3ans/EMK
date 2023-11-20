@@ -530,36 +530,26 @@ $(document).ready(function () {
     $('#step-1').on('change', function (e) {
         if ($("input[name='epPlace']:checked").val() != undefined && document.querySelector("#connectionTypeForclassicEpa").value != '') {
             $('#step-2').show();
-        } else {
-            $('#step-2').hide();
         }
     });
     $('#step-2').on('change', function (e) {
         if (document.querySelector("#roundNumbers").value != '' && document.querySelector("#outVal").value != '') {
             $('#step-3').show();
-        } else {
-            $('#step-3').hide();
         }
     });
     $('#step-3').on('change', function (e) {
         if (document.querySelector("#roundMoment").value != '' && document.querySelector('#bkvType').value != '') {
             $('#step-4').show();
-        } else {
-            $('#step-4').hide();
         }
     });
     $('#step-4').on('change', function (e) {
         if (document.querySelector("#salOrStepse").value != '' && document.querySelector("#upgradeNumber").value != '') {
             $('#step-5').show();
-        } else {
-            $('#step-5').hide();
         }
     });
     $('#step-5').on('change', function (e) {
         if (document.querySelector("#climate").value != '') {
             $('#step-6').show();
-        } else {
-            $('#step-6').hide();
         }
     });
 
@@ -572,8 +562,6 @@ $(document).ready(function () {
             document.querySelector('#numbersOfEp').value != ''
         ) {
             $('#step-7').show();
-        } else {
-            $('#step-7').hide();
         }
     });
 
