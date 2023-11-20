@@ -44,7 +44,7 @@
 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js" integrity="sha512-Eak/29OTpb36LLo2r47IpVzPBLXnAMPAVypbSZiZ4Qkf8p/7S/XRG5xp7OKWPPYfJT6metI+IORkR5G8F900+g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-		<script src="./scripts/preloaderScript.js"></script>
+		<!-- <script src="./scripts/preloaderScript.js"></script> -->
 
 		<script src="./scripts/vimu.js" type="text/javascript"></script>
 
@@ -112,7 +112,7 @@
 					</legend>
 					<div class="col-sm-9" id="execution-wrap">
 						<legend class="col-form-label col-sm-3 pt-0">Исполнение по взрывозащите:</legend>
-						<div class="form-check">
+						<!-- <div class="form-check">
 							<input class="form-check-input ch-mark" type="radio" name="execution" id="execution-1" value="В" />
 							<label class="form-check-label" for="execution-1">Взрывозащищенное исполнение</label>
 						</div>
@@ -123,7 +123,7 @@
 						<div class="form-check">
 							<input class="form-check-input ch-mark" type="radio" name="execution" id="execution-3" value="П" />
 							<label class="form-check-label" for="execution-3">Общепромышленное исполнение в пластиковом корпусе</label>
-						</div>
+						</div> -->
 					</div>
 				</fieldset>
 
@@ -132,8 +132,8 @@
 					<div class="col-sm-9">
 						<legend class="col-form-label col-sm-3 pt-0">Контроль положения и крутящего момента (усилия) на выходном звене привода:</legend>
 						<div class="form-check">
-							<input class="form-check-input ch-roundControl" type="radio" value="1" name="roundControl" id="roundControl-1" />
-							<label class="form-check-label" for="roundControl-1">Контроль по микровыключателям или потенциометрам привода </label>
+							<!-- <input class="form-check-input ch-roundControl" type="radio" value="1" name="roundControl" id="roundControl-1" />
+							<label class="form-check-label" for="roundControl-1">Контроль по микровыключателям или потенциометрам привода </label> -->
 							<div class="microOrPotField" style="padding-bottom: 10px; display: none">
 								<select class="form-select form-element ch-mark" name="microOrPot" id="microOrPot">
 									<option value="" disabled selected>Выберите значение</option>
@@ -142,10 +142,10 @@
 								</select>
 							</div>
 						</div>
-						<div class="form-check">
+						<!-- <div class="form-check">
 							<input class="form-check-input ch-roundControl" type="radio" value="2" name="roundControl" id="roundControl-2" />
 							<label class="form-check-label" for="roundControl-2"> Контроль по цифровым датчикам привода: </label>
-						</div>
+						</div> -->
 					</div>
 				</fieldset>
 			</div>
@@ -155,7 +155,7 @@
 					<legend class="blockNumber">3</legend>
 					<div class="col-sm-9">
 						<legend class="col-form-label col-sm-3 pt-0">Напряжение питания двигателя:</legend>
-						<div class="form-check">
+						<!-- <div class="form-check">
 							<input class="form-check-input ch-engineStartType" type="radio" value="1" name="engineStartType" id="engineStartType-1" />
 							<label class="form-check-label" for="engineStartType-1">Трехфазовое электропитание (380 В, 50 Гц), электромеханический пускатель в ВИМУ </label>
 						</div>
@@ -170,7 +170,7 @@
 						<div class="form-check">
 							<input class="form-check-input ch-engineStartType" type="radio" value="4" name="engineStartType" id="engineStartType-4" />
 							<label class="form-check-label" for="engineStartType-4">Однофазное электропитание (220 В, 50 Гц), твердотельный пускатель ВИМУ, двигатель привода с конденсатором </label>
-						</div>
+						</div> -->
 					</div>
 				</fieldset>
 
@@ -203,12 +203,12 @@
 						<legend class="col-form-label col-sm-3 pt-0">Дополнительное оснащение:</legend>
 						<select class="form-select form-element ch-mark" data-step="4" name="controle-blocks-options" id="controle-blocks-options">
 							<option value="noValue" selected>Выберите значение</option>
-							<option value="">Стандартное оснащение</option>
+							<!-- <option value="">Стандартное оснащение</option>
 							<option value="X">Шесть сигнальных реле и дискретное управление с использованием пятиканальной линии связи 220 В</option>
 							<option value="Y">Восемь сигнальных реле и дискретное управление с использованием пятиканальной линии связи 24 В</option>
 							<option value="Z">Двенадцать сигнальных реле и дискретное управление с использованием пятиканальной линии связи 24 В</option>
 							<option value="V">Восемь сигнальных реле и дискретное управление с использованием пятиканальной линии связи 220 В</option>
-							<option value="W">Двенадцать сигнальных реле и дискретное управлением с использованием пятиканальной линии связи 220 В</option>
+							<option value="W">Двенадцать сигнальных реле и дискретное управлением с использованием пятиканальной линии связи 220 В</option> -->
 						</select>
 					</div>
 				</fieldset>
@@ -217,7 +217,7 @@
 					<legend class="blockNumber">4.2</legend>
 					<div class="col-sm-9">
 						<legend class="col-form-label col-sm-3 pt-0">Дополнительное оснащение:</legend>
-						<div>
+						<!-- <div>
 							<label><input type="checkbox" name="blockOption" value="T" id="tOption" /> Твердотельный пускатель</label>
 						</div>
 						<div id="PanelOptionLabel">
@@ -228,7 +228,7 @@
 						</div>
 						<div>
 							<label><input type="checkbox" name="blockOption" value="R" id="regOption" /> Регистратор параметров состояния и конфигурации привода</label>
-						</div>
+						</div> -->
 					</div>
 				</fieldset>
 			</div>
@@ -249,12 +249,12 @@
 						<legend class="col-form-label col-sm-3 pt-0">Вариант температурного исполнения:</legend>
 						<select class="form-select form-element ch-mark" data-step="4" name="climatic-modification" id="climatic-modification">
 							<option value="">Выберите значение</option>
-							<option value="1">-25°C/+60°C - 100% при 25°C - (У1)</option>
+							<!-- <option value="1">-25°C/+60°C - 100% при 25°C - (У1)</option>
 							<option value="2">-40°C/+60°C - 100% при 25°C - (У1)</option>
 							<option value="3">-60°C/+60°C - 100% при 25°C - (УХЛ1)</option>
 							<option value="4">-10°C/+60°C - 100% при 45°C - (Т1)</option>
 							<option value="5">-40°C/+40°C - 100% при 25°C - (М1)</option>
-							<option value="6">-40°C/+40°C - 98% при 25°C - (М5.1)</option>
+							<option value="6">-40°C/+40°C - 98% при 25°C - (М5.1)</option> -->
 						</select>
 					</div>
 				</fieldset>
@@ -272,14 +272,14 @@
 					</legend>
 					<div class="col-sm-9">
 						<legend class="col-form-label col-sm-3 pt-0">Степень защиты от проникновения пыли и воды:</legend>
-						<div class="form-check">
+						<!-- <div class="form-check">
 							<input class="form-check-input ch-mark" type="radio" value="1" name="protection" id="protection-1" />
 							<label class="form-check-label" for="protection-1">IP67</label>
 						</div>
 						<div class="form-check">
 							<input class="form-check-input ch-mark" type="radio" value="2" name="protection" id="protection-2" />
 							<label class="form-check-label" for="protection-2">IP68</label>
-						</div>
+						</div> -->
 					</div>
 				</fieldset>
 			</div>
@@ -298,18 +298,13 @@
 					</legend>
 					<div class="col-sm-9">
 						<legend class="col-form-label col-sm-3 pt-0">Цвет окраски:</legend>
-						<div class="form-check">
-							<input class="form-check-input ch-mark" type="radio" value="1" name="color" id="color-1" />
-							<label class="form-check-label" for="color-1">Серый</label>
+						<div id="colorHere"></div>
+						<div class="none" id="ralDiv">
+							<input class="form-input" type="text" name="ralColor" id="ralColor" placeholder="Укажите требования" />
+							<label class="form-check-label" for="ralColor"></label>
 						</div>
-						<div class="form-check">
-							<input class="form-check-input ch-mark" type="radio" value="2" name="color" id="color-2" />
-							<label class="form-check-label" for="color-2">По спецификации заказа</label>
-							<div class="none" id="ralDiv">
-								<input class="form-input" type="text" name="ralColor" id="ralColor" placeholder="Укажите требования" />
-								<label class="form-check-label" for="ralColor"></label>
-							</div>
-						</div>
+						<!--
+						</div> -->
 					</div>
 				</fieldset>
 
@@ -326,7 +321,7 @@
 					</legend>
 					<div class="col-sm-9">
 						<legend class="col-form-label col-sm-3 pt-0">Электрическое подключение:</legend>
-						<div class="form-check">
+						<!-- <div class="form-check">
 							<input class="form-check-input ch-mark" type="radio" value="0" name="connectionForVimu" id="connectionForVimu-1" />
 							<label class="form-check-label" for="connectionForVimu-1">Заглушки на местах трех кабельный вводов, штепсельное подключение внутри привода</label>
 						</div>
@@ -353,18 +348,18 @@
 						<div class="form-check">
 							<input class="form-check-input ch-mark" type="radio" value="7" name="connectionForVimu" id="connectionForVimu-8" />
 							<label class="form-check-label" for="connectionForVimu-8">Кабельные вводы, 4-7шт. по спецификации заказа, штепсельное подключение внутри привода</label>
-						</div>
+						</div> -->
 					</div>
 				</fieldset>
 			</div>
 
 			<div id="step-5">
-				<fieldset class="row mb-3 vimu-only noReqValue">
+				<fieldset class="row mb-3 vimu-only noReqValue" id="speciality">
 					<legend class="blockNumber">9</legend>
 					<div class="col-sm-9">
 						<legend class="col-form-label col-sm-3 pt-0">Специальное исполнение:</legend>
-						<div class="form-check">
-							<input class="form-check-input ch-mark" type="radio" value="" name="specialForVimu" id="specialForVimu-1" />
+						<!-- <div class="form-check">
+							<input class="form-check-input ch-mark" type="radio" value="" name="specialForVimu" id="specialForVimu-" />
 							<label class="form-check-label" for="specialForVimu-1">Нет специального исполнения</label>
 						</div>
 						<div class="form-check">
@@ -374,7 +369,7 @@
 						<div class="form-check">
 							<input class="form-check-input ch-mark" type="radio" value="Э" name="specialForVimu" id="specialForVimu-3" />
 							<label class="form-check-label" for="specialForVimu-3">Исполнение ВИМУ для комплектования приводов серии ЭПН</label>
-						</div>
+						</div> -->
 					</div>
 				</fieldset>
 

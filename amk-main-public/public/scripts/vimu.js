@@ -1,5 +1,407 @@
 // http://www.tulaprivod.ru/dokument/rukovodstva/VIMU_2021.pdf
 $(document).ready(function () {
+
+
+    // ПРОГРУЗКА СТАТИЧНЫХ ПАРАМЕТРОВ
+    fethExecute()
+
+    // ПРОГРУЗКА Исполнения
+    async function fethExecute() {
+        let fetchResult = [];
+        await fetch('https://emk.websto.pro/VIMU', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json;charset=utf-8' },
+            body: JSON.stringify({
+                a: "1",
+            }),
+        })
+            .then((res) => res.json())
+            .then((res) => {
+                console.log(res);
+                for (i in res) fetchResult.push(res[i]);
+                // fetchResult[0].sort((a, b) => a - b);
+                $.each(fetchResult[0], function (key, item) {
+                    $('#execution-wrap').append(
+                        $('<div>')
+                            .prop({ class: 'form-check' })
+                            .append(
+                                $('<input>').prop({
+                                    type: 'radio',
+                                    id: 'execution-' + item.value,
+                                    name: 'execution',
+                                    value: item.value,
+                                    class: 'form-check-input ch-mark'
+                                })
+                            )
+                            .append(
+                                $('<label>')
+                                    .prop({
+                                        for: 'execution-' + item.value,
+                                        class: 'form-check-label',
+                                    })
+                                    .text(' ' + item.id)
+                            )
+                    );
+                });
+                fetchRound();
+                console.log(1);
+            });
+    }
+    // ПРОГРУЗКА Контроля положения и крутящего момента
+    async function fetchRound() {
+        fetchResult = [];
+        await fetch('https://emk.websto.pro/VIMU', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json;charset=utf-8' },
+            body: JSON.stringify({
+                a: "2",
+            }),
+        })
+            .then((res) => res.json())
+            .then((res) => {
+                console.log(res);
+                for (i in res) fetchResult.push(res[i]);
+                // fetchResult[0].sort((a, b) => a - b);
+                $.each(fetchResult[0], function (key, item) {
+                    $('#roundControl').append(
+                        $('<div>')
+                            .prop({ class: 'form-check' })
+                            .append(
+                                $('<input>').prop({
+                                    type: 'radio',
+                                    id: 'roundControl-' + item.value,
+                                    name: 'roundControl',
+                                    value: item.value,
+                                    class: 'form-check-input ch-mark'
+                                })
+                            )
+                            .append(
+                                $('<label>')
+                                    .prop({
+                                        for: 'roundControl-' + item.value,
+                                        class: 'form-check-label',
+                                    })
+                                    .text(' ' + item.id)
+                            )
+                    );
+                });
+                fetchEnginge();
+                $('#preloader').fadeOut(400);
+
+                console.log(2);
+            });
+    }
+    // ПРОГРУЗКА Напряжение питания двигателя:
+
+    async function fetchEnginge() {
+        fetchResult = [];
+
+        await fetch('https://emk.websto.pro/VIMU', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json;charset=utf-8' },
+            body: JSON.stringify({
+                a: "3",
+            }),
+        })
+            .then((res) => res.json())
+            .then((res) => {
+                console.log(res);
+                for (i in res) fetchResult.push(res[i]);
+                // fetchResult[0].sort((a, b) => a - b);
+                $.each(fetchResult[0], function (key, item) {
+                    $('#engineStartType').append(
+                        $('<div>')
+                            .prop({ class: 'form-check' })
+                            .append(
+                                $('<input>').prop({
+                                    type: 'radio',
+                                    id: 'engineStartType-' + item.value,
+                                    name: 'engineStartType',
+                                    value: item.value,
+                                    class: 'form-check-input ch-mark'
+                                })
+                            )
+                            .append(
+                                $('<label>')
+                                    .prop({
+                                        for: 'engineStartType-' + item.value,
+                                        class: 'form-check-label',
+                                    })
+                                    .text(' ' + item.id)
+                            )
+                    );
+                });
+                fetchOptionsSelect()
+                console.log(3);
+            });
+    }
+
+    // Прогрузка доп оснащения
+    async function fetchOptionsSelect() {
+        fetchResult = [];
+
+        await fetch('https://emk.websto.pro/VIMU', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json;charset=utf-8' },
+            body: JSON.stringify({
+                a: "4.1",
+            }),
+        })
+            .then((res) => res.json())
+            .then((res) => {
+                console.log(res);
+                for (i in res) fetchResult.push(res[i]);
+                // fetchResult[0].sort((a, b) => a - b);
+                $.each(fetchResult[0], function (key, item) {
+                    $('#controle-blocks-options').append(new Option(item.id, item.value));
+                });
+                fetchOptionsCheck();
+                console.log(4.1);
+            });
+    }
+
+    // ПРОГРУЗКА чекбокса доп оснащения:
+    async function fetchOptionsCheck() {
+        fetchResult = [];
+
+        await fetch('https://emk.websto.pro/VIMU', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json;charset=utf-8' },
+            body: JSON.stringify({
+                a: "4.2",
+            }),
+        })
+            .then((res) => res.json())
+            .then((res) => {
+                console.log(res);
+                for (i in res) fetchResult.push(res[i]);
+                // fetchResult[0].sort((a, b) => a - b);
+                $.each(fetchResult[0], function (key, item) {
+                    $('#control-block-optionssetCheckBox').append(
+                        $('<div>')
+                            .prop({ class: 'form-check' })
+                            .append(
+                                $('<input>').prop({
+                                    type: 'checkbox',
+                                    id: 'blockOption-' + item.value,
+                                    name: 'blockOption',
+                                    value: item.value,
+                                    class: 'form-check-input ch-mark'
+                                })
+                            )
+                            .append(
+                                $('<label>')
+                                    .prop({
+                                        for: 'blockOption-' + item.value,
+                                        class: 'form-check-label',
+                                    })
+                                    .text(' ' + item.id)
+                            )
+                    );
+                });
+                fetchTemp();
+                console.log(4.2);
+            });
+    }
+    // Прогрузка Температуры
+    async function fetchTemp() {
+        fetchResult = [];
+
+        await fetch('https://emk.websto.pro/VIMU', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json;charset=utf-8' },
+            body: JSON.stringify({
+                a: "5",
+            }),
+        })
+            .then((res) => res.json())
+            .then((res) => {
+                console.log(res);
+                for (i in res) fetchResult.push(res[i]);
+                // fetchResult[0].sort((a, b) => a - b);
+                $.each(fetchResult[0], function (key, item) {
+                    $('#climatic-modification').append(new Option(item.id, item.value));
+                });
+            });
+        fetchProtect();
+        console.log(5);
+
+    }
+    // ПРОГРУЗКА IP ЗАЩИТЫ:
+    async function fetchProtect() {
+        fetchResult = [];
+
+        await fetch('https://emk.websto.pro/VIMU', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json;charset=utf-8' },
+            body: JSON.stringify({
+                a: "6",
+            }),
+        })
+            .then((res) => res.json())
+            .then((res) => {
+                console.log(res);
+                for (i in res) fetchResult.push(res[i]);
+                // fetchResult[0].sort((a, b) => a - b);
+                $.each(fetchResult[0], function (key, item) {
+                    $('#waterProtection').append(
+                        $('<div>')
+                            .prop({ class: 'form-check' })
+                            .append(
+                                $('<input>').prop({
+                                    type: 'radio',
+                                    id: 'protection-' + item.value,
+                                    name: 'protection',
+                                    value: item.value,
+                                    class: 'form-check-input ch-mark'
+                                })
+                            )
+                            .append(
+                                $('<label>')
+                                    .prop({
+                                        for: 'protection-' + item.value,
+                                        class: 'form-check-label',
+                                    })
+                                    .text(' ' + item.id)
+                            )
+                    );
+                });
+                fetchColor();
+                console.log(6);
+            });
+    }
+    // ПРОГРУЗКА цвета:
+    async function fetchColor() {
+        fetchResult = [];
+
+        await fetch('https://emk.websto.pro/VIMU', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json;charset=utf-8' },
+            body: JSON.stringify({
+                a: "7",
+            }),
+        })
+            .then((res) => res.json())
+            .then((res) => {
+                console.log(res);
+                for (i in res) fetchResult.push(res[i]);
+                // fetchResult[0].sort((a, b) => a - b);
+                $.each(fetchResult[0], function (key, item) {
+                    $('#colorHere').append(
+                        $('<div>')
+                            .prop({ class: 'form-check' })
+                            .append(
+                                $('<input>').prop({
+                                    type: 'radio',
+                                    id: 'color-' + item.value,
+                                    name: 'color',
+                                    value: item.value,
+                                    class: 'form-check-input ch-mark'
+                                })
+                            )
+                            .append(
+                                $('<label>')
+                                    .prop({
+                                        for: 'color-' + item.value,
+                                        class: 'form-check-label',
+                                    })
+                                    .text(' ' + item.id)
+                            )
+                    );
+                });
+                fetchElectro();
+                console.log(7);
+            });
+    }
+
+    // ПРОГРУЗКА электрического подключения:
+    async function fetchElectro() {
+        fetchResult = [];
+
+        await fetch('https://emk.websto.pro/VIMU', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json;charset=utf-8' },
+            body: JSON.stringify({
+                a: "8",
+            }),
+        })
+            .then((res) => res.json())
+            .then((res) => {
+                console.log(res);
+                for (i in res) fetchResult.push(res[i]);
+                // fetchResult[0].sort((a, b) => a - b);
+                $.each(fetchResult[0], function (key, item) {
+                    $('#electricity').append(
+                        $('<div>')
+                            .prop({ class: 'form-check' })
+                            .append(
+                                $('<input>').prop({
+                                    type: 'radio',
+                                    id: 'connectionForVimu-' + item.value,
+                                    name: 'connectionForVimu',
+                                    value: item.value,
+                                    class: 'form-check-input ch-mark'
+                                })
+                            )
+                            .append(
+                                $('<label>')
+                                    .prop({
+                                        for: 'connectionForVimu-' + item.value,
+                                        class: 'form-check-label',
+                                    })
+                                    .text(' ' + item.id)
+                            )
+                    );
+                });
+                fetchSpecial();
+                console.log(8);
+            });
+    }
+
+    // ПРОГРУЗКА СПЕЦИАЛЬНОГО ПОДКЛЮЧЕНИЯ:
+    async function fetchSpecial() {
+
+        fetchResult = [];
+
+        await fetch('https://emk.websto.pro/VIMU', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json;charset=utf-8' },
+            body: JSON.stringify({
+                a: '9',
+            }),
+        })
+            .then((res) => res.json())
+            .then((res) => {
+                console.log(res);
+                for (i in res) fetchResult.push(res[i]);
+                // fetchResult[0].sort((a, b) => a - b);
+                $.each(fetchResult[0], function (key, item) {
+                    $('#speciality').append(
+                        $('<div>')
+                            .prop({ class: 'form-check' })
+                            .append(
+                                $('<input>').prop({
+                                    type: 'radio',
+                                    id: 'specialForVimu-' + item.value,
+                                    name: 'specialForVimu',
+                                    value: item.value,
+                                    class: 'form-check-input ch-mark'
+                                })
+                            )
+                            .append(
+                                $('<label>')
+                                    .prop({
+                                        for: 'specialForVimu-' + item.value,
+                                        class: 'form-check-label',
+                                    })
+                                    .text(' ' + item.id)
+                            )
+                    );
+                });
+                console.log(9);
+                return timeToGo = 1;
+            });
+    }
     $(document).on('click', '#e1-table th, #e1-table td', function (e) {
         let target = $(this).data('target');
         let el = document.getElementById(target);
@@ -26,11 +428,11 @@ $(document).ready(function () {
 
     $(document).on('change', function (e) {
         if ($('#controle-blocks2').val()) {
-            document.querySelector("#PanelOptionLabel").checked = false;
-            $('#PanelOptionLabel').hide();
+            document.querySelector("#blockOption-S").checked = false;
+            $('#blockOption-S').closest('.form-check').hide();
         }
         else {
-            $('#PanelOptionLabel').show();
+            $('#blockOption-S').closest('.form-check').show();
         }
     });
 
@@ -199,19 +601,19 @@ $(document).ready(function () {
         secondVimuBlock = $('#controle-blocks2').val() ? '/' + $('#controle-blocks2').val() : '';
 
         // ДОП ОПЦИИ ДЛЯ БЛОКА
-        let tOption = '';
-        document.querySelector('#tOption').checked ? (tOption = document.querySelector('#tOption').value) : '';
+        let blockOptionT = '';
+        document.querySelector('#blockOption-T').checked ? (blockOptionT = document.querySelector('#blockOption-T').value) : '';
 
-        let PanelOption = '';
-        document.querySelector('#PanelOption').checked ? (PanelOption = document.querySelector('#PanelOption').value) : '';
+        let blockOptionS = '';
+        document.querySelector('#blockOption-S').checked ? (blockOptionS = document.querySelector('#blockOption-S').value) : '';
 
-        let bluetoothOption = '';
-        document.querySelector('#bluetoothOption').checked ? (bluetoothOption = document.querySelector('#bluetoothOption').value) : '';
+        let blockOptionB = '';
+        document.querySelector('#blockOption-B').checked ? (blockOptionB = document.querySelector('#blockOption-B').value) : '';
 
-        let regOption = '';
-        document.querySelector('#regOption').checked ? (regOption = document.querySelector('#regOption').value) : '';
+        let blockOptionR = '';
+        document.querySelector('#blockOption-R').checked ? (blockOptionR = document.querySelector('#blockOption-R').value) : '';
 
-        let optionssetCheckBox = tOption + PanelOption + bluetoothOption + regOption;
+        let optionssetCheckBox = blockOptionT + blockOptionS + blockOptionB + blockOptionR;
 
         let optForBu = $('#control-block-optionsset option:selected').val() != 'noValue' ? $('#control-block-optionsset option:selected').val() : '';
 
@@ -231,7 +633,7 @@ $(document).ready(function () {
         let optForBu = $('#control-block-optionsset option:selected').val() != 'noValue' ? $('#control-block-optionsset option:selected').val() : '';
 
         // ДОП ОПЦИИ
-        let addOption1 = document.querySelector("#PanelOption").checked ? 'Механический селектор переключения режима работы местн./дист.' : '';
+        let addOption1 = document.querySelector("#blockOption-S").checked ? 'Механический селектор переключения режима работы местн./дист.' : '';
         let addOption2 = '';
         if (BoMark == 'Э1' || BoMark == 'ВЭ1' || BoMark == 'Э1S' || BoMark == 'ВЭ') {
             addOption2 = 'Плата регистратор';
@@ -495,7 +897,7 @@ $(document).ready(function () {
             return positionSignal = 'Profibus DP';
         }
         else {
-            return positionSignal = 'Отсутствуют';
+            return positionSignal = '';
         }
     }
 
@@ -554,7 +956,7 @@ $(document).ready(function () {
 
     // Сертификаты и декларации
     $('#execution-wrap').on('change', function (e) {
-        if (document.querySelector("#execution-1").checked) {
+        if (document.querySelector("#execution-В").checked) {
             $('#vimuV').show();
             $('#vimuO').hide();
         }
