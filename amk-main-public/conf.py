@@ -14,6 +14,28 @@ def toFloat(val):
         val = val.replace(',', '.')
     return float(val)
 
+def ch20(blok):
+    mA = ''
+    bus= ''
+    
+    for key in ['Э19', 'Э110',  'Э1S2']: 
+        if key in blok:
+            bus = 'Profibus DP'
+    for key in ['Э23', 'Э24', 'Э25', 'Э26']:
+        if key in blok:
+            bus = 'RS485 Profibus'
+    for key in ['Э14', 'Э15', 'Э18', 'Э01', 'Э1S1']: 
+        if key in blok:
+            bus = 'RS485 Modbus' 
+    for key in ['Э16', 'Э17']:
+        if key in blok:
+            if bus != '':
+                mA = ', 4-20мА'
+            else:
+                mA = '4-20мА'
+    return bus + mA
+    
+
 class mk_DOCX():
     def __init__(self, elpod = "", list0 = [], list1 = [], list2 = [], list3 = [], list4 = [], list5 = []):
         self.elpod = elpod
@@ -25,34 +47,39 @@ class mk_DOCX():
         #jsn6[5] -> list5[5] 660 B - доп опция для шахтного исполения
         self.list5 = list5
 
-    
     def ep4(self):
-        mA=''
-        if ('Э16' in self.list3[0]) or ('Э17' in self.list3[0]):
-            mA = " 4-20 мА"
-        '''if 'М1' == self.list3[0][:2]:
-            M = DB(self.list3[0])
-            M1 = M.get_M1(self.list1[8], self.list1[4], self.list1[7], self.list1[9])
-            self.list3[0] = str(self.list3[0]) + str(M1)'''
-
+        mA=ch20(self.list3[0])
+        
         names1 = ["Тип арматуры", "Маркировка", "Завод-изготовитель",  "Требуемое время закрытия", "Максимальный крутящий момент", "Присоединение к приводу"]
         ans1 = self.list1[:-4]
-        names1 += ["Количество оборотов для поворота на 90°"]
-        ans1 += self.list1[9]
+        
+        if self.list1[6] == "РН":
+            names1 += ["Количество оборотов для поворота на 90° "]
+            ans1 += [self.list1[9]]
+        else:
+            names1 += ["Количество оборотов для закрытия арматуры "]
+            ans1 += [self.list1[9]+""]
+        
+        
 
         names2 = ['Исполнение по назначению', 'Режим работы', 'Степень защиты от проникновения пыли и влаги', 'Вращение выходного вала при закрывании', 'Температура окружающей среды (Климат)'] 
         names2 += ['Тип блока управления ', 'Сигнал дистанционного управления', 'Тип блока концевых выключателей (без встроенного пускателя)', 'Механический указатель сигнализации положения', 'Сигнализация положения', 'Сигнал «Момент» 4-20 мА', 'Дублирование шины RS485'] 
+        
+        ans2 = self.list2 + [self.list3[0], self.list3[2]+mA] + self.list3[3:-4] 
+
+        if self.list1[6] == "РН":
+            names2 +=["Тип РН", "Номинальный крутящий момент на выходном валу редуктора, Н·м ", "Диапазон крутящих моментов на выходном валу редуктора, Н·м ", "Тип фланца по ISO 5211 для присоединения редуктора к арматуре "]
+            ans2+=[self.list5[0], self.list5[2], self.list5[3], self.list5[4]]
+
         names2 += ["Электрическое подключение", 'Защитный колпак', 'Цвет окраски', 'Напряжение питания электродвигателя', 'Количество эл./приводов', 'Дополнительные опции', 'Дополнительные требования']
-        ans2 = self.list2 + [self.list3[0], self.list3[2]+mA] + self.list3[3:-4] + [ f"« {self.list4[0]}» - {self.elpod}", self.list4[1], self.list4[2], self.list5[5], self.list0[-2]] + self.list4[-2:]
+        ans2 += [ f"« {self.list4[0]}» - {self.elpod}", self.list4[1], self.list4[2], self.list5[5], self.list0[-2]] + self.list4[-2:]
 
         ans3 = self.list0[:-2]
 
         return {"names1" : names1, "names2" : names2, "ans1" : ans1, "ans2" : ans2, "ans3" : ans3}
     
     def epn(self):
-        mA=''
-        if ('Э16' in self.list3[0]) or ('Э17' in self.list3[0]):
-            mA = " 4-20 мА"
+        mA=ch20(self.list1[1])
         names1 = ["Тип арматуры", "Маркировка", "Завод-изготовитель",  "Требуемое время закрытия", "Максимальный крутящий момент", "Присоединение к приводу"]
         ans1 = self.list1[:-4]
         names1.append("Количество оборотов (угол поворота) для закрытия арматуры")
@@ -74,12 +101,10 @@ class mk_DOCX():
         return {"names1" : names1, "names2" : names2, "ans1" : ans1, "ans2" : ans2, "ans3" : ans3}
 
     def vimu(self):
+        mA=ch20(self.list3[0])
         names2 = ['Маркировка', 'Исполнение по взрывзащите', 'Контроль положения и крутящего момента (усилия) на выходном звене привода', 'Степень защиты от проникновения пыли и влаги', 'Способ включения двигателя привода ', 'Температура окружающей среды (Климат)'] 
         ans2 = [self.list1[1]] + self.list2
         names2 += ['Тип блока управления ', 'Сигнал дистанционного управления', 'Сигнализация положения', 'Сигнал «Момент» 4-20 мА', 'Дублирование шины RS485', 'Промежуточные выключатели', 'Моментные выключатели', 'Концевые выключатели'] 
-        mA=''
-        if ('16' in self.list3[0]) or ('17' in self.list3[0]):
-            mA = " 4-20 мА"
         ans2 += [self.list3[0], self.list3[2]+mA] + self.list3[5:-1]
         names2 += ["Электрическое подключение", 'Цвет окраски', 'Специальное исполнение', 'Количество', 'Дополнительные опции', 'Дополнительные требования']
         ans2 += [f'«{self.list5[0]}» - {self.elpod}', self.list4[2], self.list5[1], self.list0[4], self.list4[4], self.list4[5]]
@@ -303,8 +328,11 @@ class mk_XL():
 
         #Маркировка
         bd = DB("Классика")
-        
-        aaa = bd.get_class_engin(isp = a[6][0], flc = a[1][5], mod = a[1][8], nom = a[5][4])
+        if a[1][8] == 'Отсутствует':
+            mod = 0
+        else: 
+            mod = a[1][8]
+        aaa = bd.get_class_engin(isp = a[6][0], flc = a[1][5], mod = mod, nom = a[5][4])
         ans = ans + aaa
 
         for i in range(len(keys)):
@@ -348,10 +376,13 @@ class DB():
                 ans = "Не удалось подобрать"
         return ans
 
-    def get_params(self, mark, flc_type = "", Hm = "", V = "", sh = "", flc = "", fz = ""):
+    def get_params(self, mark, flc_type = "", Hm = "", N = "", V = "", sh = "", flc = "", fz = ""):
         ans = []
         WB = load_workbook('BD.xlsx')
         Sheet = WB['Электропривода']
+        sheet = WB['Связь']
+
+
 
         print("Подбор параметров для ЭП")
 
@@ -365,12 +396,21 @@ class DB():
                 if (str(Sheet[f"A{i}"].value) == mark) and (str(Sheet[f"G{i}"].value) == str(flc_type)):
                     if Sheet[f"D{i}"].value not in ans:
                         ans.append(Sheet[f"D{i}"].value)
+        
+        elif N == "" or N == None:
+            ans = []
+            #print("Крутящий момент не задан")
+            for i in range(2, 1500):
+                N = sheet[f'H{i}'].value
+                if (str(Sheet[f"A{i}"].value) == mark) and (str(Sheet[f"G{i}"].value) == str(flc_type)) and (str(Sheet[f"D{i}"].value) == str(Hm)):
+                    if N not in ans:
+                        ans.append(N)
 
         elif V == "" or V ==None:
             ans = []
             #print("Частота не задана")
             for i in range(2, 1020):
-                if (Sheet[f"A{i}"].value == mark) and (str(Sheet[f"G{i}"].value) == str(flc_type)) and (str(Sheet[f"D{i}"].value) == str(Hm)):
+                if (Sheet[f"A{i}"].value == mark) and (str(Sheet[f"G{i}"].value) == str(flc_type)) and (str(Sheet[f"D{i}"].value) == str(Hm)) and ((str(N) == str(sheet[f'H{i}'].value)) or (str(N) == "0")):
                     if  Sheet[f"E{i}"].value not in ans:
                         ans.append(Sheet[f"E{i}"].value)
 
@@ -378,7 +418,7 @@ class DB():
             ans = []
             #print("Конструктивная схема не задана")
             for i in range(2, 1020):
-                if (Sheet[f"A{i}"].value == mark) and (str(Sheet[f"G{i}"].value) == str(flc_type)) and (str(Sheet[f"D{i}"].value) == str(Hm)) and (str(Sheet[f"E{i}"].value) == str(V)):
+                if (Sheet[f"A{i}"].value == mark) and (str(Sheet[f"G{i}"].value) == str(flc_type)) and (str(Sheet[f"D{i}"].value) == str(Hm)) and (str(Sheet[f"E{i}"].value) == str(V)) and ((str(N) == str(sheet[f'H{i}'].value)) or (str(N) == "0")):
                     if Sheet[f"B{i}"].value not in ans:
                         ans.append(Sheet[f"B{i}"].value)
             
@@ -386,14 +426,14 @@ class DB():
             ans = []
             #print("Все парметры указаны верно")
             for i in range(2, 1020):
-                if (Sheet[f"A{i}"].value == mark) and (str(Sheet[f"G{i}"].value) == str(flc_type)) and (str(Sheet[f"D{i}"].value) == str(Hm)) and (str(Sheet[f"E{i}"].value) == str(V)) and (str(Sheet[f"B{i}"].value) == str(sh)):
+                if (Sheet[f"A{i}"].value == mark) and (str(Sheet[f"G{i}"].value) == str(flc_type)) and (str(Sheet[f"D{i}"].value) == str(Hm)) and (str(Sheet[f"E{i}"].value) == str(V)) and (str(Sheet[f"B{i}"].value) == str(sh)) and ((str(N) == str(sheet[f'H{i}'].value)) or (str(N) == "0")):
                     if Sheet[f"C{i}"].value not in ans:
                         ans.append(Sheet[f"C{i}"].value)
 
         elif (flc_type != "" and Hm != "" and V != "" and sh != "" and flc != ""):
             sheet = WB["Связь"]
             for i in range(2, 1500):
-                if (sheet[f"A{i}"].value == mark) and (str(sheet[f"A{i}"].value) == mark) and (str(sh) == str(sheet[f'B{i}'].value)) and (str(flc) == str(sheet[f'c{i}'].value)) and (str(Hm) == str(sheet[f'D{i}'].value)) and (str(V) == str(sheet[f'E{i}'].value)):
+                if (sheet[f"A{i}"].value == mark) and (str(sh) == str(sheet[f'B{i}'].value)) and (str(flc) == str(sheet[f'c{i}'].value)) and (str(Hm) == str(sheet[f'D{i}'].value)) and (str(V) == str(sheet[f'E{i}'].value)) and ((str(N) == str(sheet[f'H{i}'].value)) or (str(N) == "0")):
                     if str(sheet[f"L{i}"].value) + "B " + str(sheet[f"M{i}"].value) + " фаз(ы) " not in ans:
                         if str(sheet[f"L{i}"].value) == "220" or "380":
                             ans.append(str(sheet[f"L{i}"].value) + "B " + str(sheet[f"M{i}"].value) + " фаз(ы) ")
@@ -409,6 +449,8 @@ class DB():
         ans = []
         WB = load_workbook('BD.xlsx')
         Sheet = WB['Электропривода']
+        
+        
 
         print("Подбор параметров для ЭП4 с РН")
 
@@ -445,7 +487,7 @@ class DB():
                 v = Sheet[f"E{i}"].value
                 RN = Sheet[f"I{i}"].value
                 t = Sheet[f"J{i}"].value
-                if (t != "") and (t not in ans) and (str(V) == str(v)) and (str(Hm) == str(HM)) and (flc == Flc) and (rn == RN):
+                if (t != "") and (t not in ans) and (str(V) == str(v)) and (str(Hm) == str(HM)) and (flc == Flc) and (rn == RN) :
                     ans.append(t)
         elif sh == "":
             for i in range(2, 568):
@@ -565,6 +607,8 @@ class DB():
             FLC = Sheet[f"C{i}"].value
             MOD = Sheet[f"D{i}"].value
             NOM = Sheet[f"E{i}"].value
+            if MOD == "Отсутствует":
+                MOD = 0
             if ((str(isp) == str(ISP)) and (str(flc) == str(FLC)) and (int(mod) == int(MOD)) and (int(nom) == int(NOM)) ):
                 ansi.append(i)
                     
@@ -576,10 +620,10 @@ class DB():
                 ans = "Не удалось подобрать"
         return ans
     
-    def get_mark(self, arr=[]):
+    def get_mark(self, arr=["", "", "", "", "", ""]):
         ans = []
-        mark = arr[0]
-        if mark == 'ЭП4':
+        Mark = arr[0]
+        if Mark == 'ЭП4':
             WB = load_workbook('BD.xlsx')
             Sheet = WB['Электропривода']
             flc = str(arr[1])
@@ -588,56 +632,110 @@ class DB():
             type_flc = str(arr[4])
             sh = str(arr[5])
             print(f"Подбор маркировки для {mark}:")
-            print(f"[фланец, моент, частота, тип фланца, схема]")
+            print(f"[фланец, момент, частота, тип фланца, схема]")
             print(arr)
-
-            if Hm == "":
+            if flc == "":
                 for i in range(2, 568):
                     FLC = str(Sheet[f"C{i}"].value)
-                    if (flc not in ans) and (flc == FLC):
-                        ans.append(flc)
+                    if (FLC not in ans):
+                        ans.append(FLC)
+            elif Hm == "":
+                for i in range(2, 568):
+                    FLC = str(Sheet[f"C{i}"].value)
+                    HM = str(Sheet[f"D{i}"].value)
+                    if (HM not in ans) and (HM != "") and (flc == FLC):
+                        ans.append(HM)
             elif V == "":
                 for i in range(2, 568):
                     FLC = str(Sheet[f"C{i}"].value)
                     HM = str(Sheet[f"D{i}"].value)
-                    if (Hm not in ans) and (Hm != "") and (Hm == HM) and (flc == FLC):
-                        ans.append(Hm)
+                    v = str(Sheet[f"E{i}"].value)
+                    if (v not in ans) and (v != "") and (Hm == HM) and (flc == FLC):
+                        ans.append(v)
             elif type_flc == "":
                 for i in range(2, 568):
                     FLC = str(Sheet[f"C{i}"].value)
                     HM = str(Sheet[f"D{i}"].value)
                     v = str(Sheet[f"E{i}"].value)
-                    if (V not in ans) and (V != "") and (V == v) and (Hm == HM) and (flc == FLC):
-                        ans.append(V)
-            elif sh:
-                for i in range(2, 568):
-                    FLC = str(Sheet[f"C{i}"].value)
-                    HM = str(Sheet[f"D{i}"].value)
-                    v = str(Sheet[f"E{i}"].value)
                     TFlc = str(Sheet[f"G{i}"].value)
-                    if (type_flc not in ans) and (type_flc != "") and (type_flc == TFlc) and (V == v) and (Hm == HM) and (flc == FLC):
-                        ans.append(type_flc)
-            else:
+                    if (TFlc not in ans) and (TFlc != "") and (V == v) and (Hm == HM) and (flc == FLC):
+                        ans.append(TFlc)
+            elif sh == "":
                 for i in range(2, 568):
                     FLC = str(Sheet[f"C{i}"].value)
                     HM = str(Sheet[f"D{i}"].value)
                     v = str(Sheet[f"E{i}"].value)
                     TFlc = str(Sheet[f"G{i}"].value)
                     SH = str(Sheet[f"B{i}"].value)
-                    if (sh not in ans) and (sh != "") and (sh == SH) and (type_flc == TFlc) and (V == v) and (Hm == HM) and (flc == FLC):
-                        ans.append(sh)
+                    if (SH not in ans) and (SH != "") and (type_flc == TFlc) and (V == v) and (Hm == HM) and (flc == FLC):
+                        ans.append(SH)
+
+
                 
-        elif mark == 'ЭПН':
+        elif Mark == 'ЭПН':
             WB = load_workbook('BD.xlsx')
-            Sheet = WB['Связь']
-            for i in range(568, 1098):
-                pass
-        else:
+            Sheet = WB['Электропривода']
+            sheet = WB['Связь']
+            flc = str(arr[1])
+            Hm = str(arr[2])
+            V = str(arr[3])
+            fz = str(arr[4])
+            sh = str(arr[5])
+            print(f"Подбор маркировки для {mark}:")
+            print(f"[фланец, моент, частота, тип фланца, схема]")
+            print(arr)
+            
+            if flc == "":
+                for i in range(568, 1200):
+                    FLC = str(Sheet[f"C{i}"].value)
+                    if (FLC not in ans):
+                        ans.append(FLC)
+            elif Hm == "":
+                for i in range(568, 1200):
+                    FLC = str(Sheet[f"C{i}"].value)
+                    HM = str(Sheet[f"D{i}"].value)
+                    if (HM not in ans) and (HM != "") and (flc == FLC):
+                        ans.append(HM)
+            elif V == "":
+                for i in range(568, 1200):
+                    FLC = str(Sheet[f"C{i}"].value)
+                    HM = str(Sheet[f"D{i}"].value)
+                    v = str(Sheet[f"E{i}"].value)
+                    if (v not in ans) and (v != "") and (Hm == HM) and (flc == FLC):
+                        ans.append(v)
+            elif fz == "":
+                for i in range(568, 1200):
+                    FLC = str(Sheet[f"C{i}"].value)
+                    HM = str(Sheet[f"D{i}"].value)
+                    v = str(Sheet[f"E{i}"].value)
+                    FZ = str(sheet[f"M{i}"].value)
+                    if (FZ not in ans) and (FZ != "") and (V == v) and (Hm == HM) and (flc == FLC):
+                        ans.append(FZ)
+            elif sh == "":
+                for i in range(568, 1200):
+                    FLC = str(Sheet[f"C{i}"].value)
+                    HM = str(Sheet[f"D{i}"].value)
+                    v = str(Sheet[f"E{i}"].value)
+                    FZ = str(sheet[f"M{i}"].value)
+                    SH = str(Sheet[f"B{i}"].value)
+                    if (SH not in ans) and (SH != "") and (fz == FZ) and (V == v) and (Hm == HM) and (flc == FLC):
+                        ans.append(SH)
+        elif Mark == 'ВИМУ':
             WB = load_workbook('BD.xlsx')
-            Sheet = WB['Классика']
+            #Sheet = WB['ВИМУ']
         
         return ans
     
+    def Vimu(self, ID):
+        WB = load_workbook('BD.xlsx')
+        Sheet = WB['ВИМУ']
+        ans = []
+        for i in range(2, 41):
+            if str(ID) == str(Sheet[f"A{i}"].value):
+                key = str(Sheet[f"B{i}"].value)
+                ans.append([str(Sheet[f"C{i}"].value), str(Sheet[f"D{i}"].value)])
+        return (key, ans)
+
     def get_M1(self, sh, mom, v, ob):
         sh = int(sh)
         mom = int(mom)
@@ -685,5 +783,3 @@ class DB():
                 return "." + str(sheet[f"{s}1"].value)
         
         return ""
-
-
