@@ -105,11 +105,11 @@ def ep4Reductor():
 @app.get("/Tula/{ID}/{name}/{mark}", response_class = FileResponse)
 def download_file(ID, name, mark):
     #headers = {'Content-Disposition': f'attachment; filename="Tula{ID}.pdf"'}
-    return FileResponse(f'Tula{ID}.docx', filename=f'ОЛ ТЭП {mark} {name} {ID}.docx', media_type='application/docx')#, headers=headers)
+    return FileResponse(f'Tula{ID}.docx', filename=f'ОЛ ТЭП {name} {ID} {mark}.docx', media_type='application/docx')#, headers=headers)
 
 @app.get("/TulaEXEL/{ID}/{name}/{mark}", response_class = FileResponse)
 def download_file(ID, name, mark):
-    return FileResponse(f'Tula{ID}.xlsx', filename=f'ТКП {mark} {name} {ID}.xlsx', media_type='application/xlsx')#, headers=headers)
+    return FileResponse(f'Tula{ID}.xlsx', filename=f'ТКП {name} {ID} {mark}.xlsx', media_type='application/xlsx')#, headers=headers)
 
 @app.get("/TulaPDF/{ID}/{name}/{mark}", response_class = FileResponse)
 def download_file(ID, name, mark):
@@ -123,7 +123,7 @@ def download_file(ID, name, mark):
          merger.append(pdf)
     merger.write(f"Tula{ID}.pdf")
     merger.close()
-    return FileResponse(f'Tula{ID}.pdf', filename=f'Информация на подпись {mark} {name} {ID}.pdf', media_type='application/pdf')#, headers=headers)
+    return FileResponse(f'Tula{ID}.pdf', filename=f'Информация на подпись  {name} {ID} {mark}.pdf', media_type='application/pdf')#, headers=headers)
 
 
 
@@ -131,14 +131,14 @@ def download_file(ID, name, mark):
 def get_param(jsn = Body()):
     a = jsn["a"]
     bd = DB(a[0])
-    for i in range(7-len(a)):
+    for i in range(8-len(a)):
         a.append("")
     if a[0] == "ЭП4":
-        res = bd.get_params(a[0], a[1], a[2], a[3], a[4], "", "")
+        res = bd.get_params(a[0], a[1], a[2], a[3], a[4], a[5], "", "")
     elif a[0] == "ЭПН":
-        res = bd.get_params(a[0], a[1], a[2], a[3], a[4], a[5], a[6])
+        res = bd.get_params(a[0], a[1], a[2], a[3], a[4], a[5], a[6], a[7])
     try:
-        res.sort(key=int)
+        res.sort(key=float)
     except:
         pass
     print(res)
@@ -148,7 +148,7 @@ def get_param(jsn = Body()):
 def get_param(jsn = Body()):
     a = jsn["a"]
     bd = DB("ЭП4")
-    for i in range(6-len(a)):
+    for i in range(7-len(a)):
         a.append("")
     ans = bd.get_RN(a[0], a[1], a[2], a[3], a[4], "")
     res=[]
@@ -156,7 +156,7 @@ def get_param(jsn = Body()):
         if (x != " ") and (x != "null") and (x != None):
             res.append(x)
     try:
-        res.sort(key=int)
+        res.sort(key=float)
     except:
         pass
     print(res)
@@ -174,7 +174,7 @@ def get_param(jsn = Body()):
         if (x != " ") and (x != "null") and (x != None):
             res.append(x)
     try:
-        res.sort(key=int)
+        res.sort(key=float)
     except:
         pass
 
@@ -187,6 +187,16 @@ def get_param(jsn = Body()):
     bd = DB("M1")
     ans = bd.get_M1(a[0], a[1], a[2], a[3])
     
+    return {"ans" : ans}
+
+@app.post("/Mark")
+def get_param(jsn = Body()):
+    a = jsn["a"]
+    for i in range(6-len(a)):
+        a.append("")
+    bd = DB(a[0])
+    ans = bd.get_mark(a)
+    print(ans)
     return {"ans" : ans}
 
 
