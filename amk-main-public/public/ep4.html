@@ -494,38 +494,37 @@
 				</div>
 
 				<div id="step-8">
-					<fieldset class="row mb-3 ep4-only noReqValue">
+					<fieldset class="row mb-3 optionalField" id="specialField">
 						<legend class="blockNumber">16</legend>
 						<div class="col-sm-9">
 							<legend class="col-form-label col-sm-3 pt-0">Специальное исполнение:</legend>
-							<div class="form-check">
-								<input class="form-check-input ch-mark" type="radio" value="" name="special" id="special-1" />
+							<div id="special-1Field">
+								<input type="checkbox" name="special-1" value="" id="special-1" />
 								<label class="form-check-label" for="special-1">Нет специального исполнения</label>
 							</div>
-							<div class="form-check">
-								<input class="form-check-input ch-mark" type="radio" value="К" name="special" id="special-2" />
+							<div id="special-2Field">
+								<input type="checkbox" name="special-2" value="К" id="special-2" />
 								<label class="form-check-label" for="special-2">Для применения в установках с повышенным уровнем вибрации, в частности, в компрессорных установках</label>
 							</div>
-							<div class="form-check">
-								<input class="form-check-input ch-mark" type="radio" value="Т" name="special" id="special-3" />
+							<div id="special-3Field">
+								<input type="checkbox" name="special-3" value="Т" id="special-3" />
 								<label class="form-check-label" for="special-3">Исполнение с тормозом обратного хода</label>
 							</div>
-							<div class="form-check">
-								<input class="form-check-input ch-mark" type="radio" value="В" name="special" id="special-4" />
+							<div id="special-4Field">
+								<input type="checkbox" name="special-4" value="В" id="special-4" />
 								<label class="form-check-label" for="special-4">Высоковольтное исполнение с электропитанием от трехфазной сети переменного тока с напряжением 660 В</label>
 							</div>
-							<div class="form-check">
-								<input class="form-check-input ch-mark" type="radio" value="Э" name="special" id="special-5" />
+							<div id="special-5Field">
+								<input type="checkbox" name="special-5" value="Э" id="special-5" />
 								<label class="form-check-label" for="special-5">Исполнение для энергетики</label>
 							</div>
-							<div class="form-check">
-								<div class="aVandalCap" style="display: none">
-									<input class="form-check-input ch-mark" type="radio" value="П" name="special" id="special-6" />
-									<label class="form-check-label" for="special-6">Антивандальная крышка</label>
-								</div>
+							<div id="special-6Field">
+								<input type="checkbox" name="special-6" value="П" id="special-6" />
+								<label class="form-check-label" for="special-6">Антивандальная крышка</label>
 							</div>
 						</div>
 					</fieldset>
+
 					<fieldset class="row mb-3 optionalField">
 						<legend class="blockNumber">17</legend>
 						<div class="additional accessories">
