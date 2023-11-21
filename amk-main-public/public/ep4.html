@@ -525,16 +525,26 @@
 						</div>
 					</fieldset>
 
-					<fieldset class="row mb-3 optionalField">
+					<fieldset class="row mb-3 optionalField" id="pointerAndCap">
 						<legend class="blockNumber">17</legend>
 						<div class="additional accessories">
-							<label id="cap">
-								<legend class="col-form-label col-sm-3 pt-0">Дополнительные аксессуары:</legend>
-								<input type="checkbox" value="Защитный колпак" name="cap" /> Защитный колпак
-							</label>
-							<br />
-							<label id="pointer"> <input type="checkbox" value="Механический указатель" name="pointer" /> Механический указатель </label>
-							<br />
+							<legend class="col-form-label col-sm-3 pt-0">Дополнительные аксессуары:</legend>
+							<div>
+								<input type="checkbox" value="Защитный колпак" name="cap" id="cap" />
+								<label for="cap">Защитный колпак </label>
+								<div class="none" id="stockForCapDiv">
+									<input class="form-input" type="text" name="stockForCap" id="stockForCap" placeholder="Укажите вылет штока арматуры" />мм.
+									<label class="form-check-label" for="stockForCap"></label>
+								</div>
+							</div>
+							<div>
+								<input type="checkbox" value="Механический указатель" name="pointer" id="pointer" />
+								<label for="pointer"> Механический указатель </label>
+								<div class="none" id="stockForPointerDiv">
+									<input class="form-input" type="text" name="stockForPointer" id="stockForPointer" placeholder="Укажите ход штока арматуры" />мм.
+									<label class="form-check-label" for="stockForPointer"></label>
+								</div>
+							</div>
 						</div>
 					</fieldset>
 

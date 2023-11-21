@@ -510,11 +510,16 @@
 
 					<fieldset class="row mb-3 optionalField">
 						<legend class="blockNumber">19</legend>
-						<div class="additional accessories">
-							<label id="cap">
-								<legend class="col-form-label col-sm-3 pt-0">Дополнительные аксессуары:</legend>
-								<input type="checkbox" value="Защитный колпак" name="cap" /> Защитный колпак
-							</label>
+						<div id="pointerAndCap">
+							<legend class="col-form-label col-sm-3 pt-0">Дополнительные аксессуары:</legend>
+							<div>
+								<input type="checkbox" value="Защитный колпак" name="cap" id="cap" />
+								<label for="cap">Защитный колпак </label>
+								<div class="none" id="stockForCapDiv">
+									<input class="form-input" type="text" name="stockForCap" id="stockForCap" placeholder="Укажите вылет штока арматуры" />мм.
+									<label class="form-check-label" for="stockForCap"></label>
+								</div>
+							</div>
 						</div>
 					</fieldset>
 

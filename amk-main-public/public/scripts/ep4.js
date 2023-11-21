@@ -910,6 +910,16 @@ $(document).ready(function () {
             goTo = document.querySelector("#rotation-frequency");
             goTo.scrollIntoView({ block: "center", behavior: "smooth" });
             return alert('Не выбрана частота вращения')
+        }
+        else if (document.querySelector("#cap").checked && document.querySelector("#stockForCap").value == '') {
+            goTo = document.querySelector("#cap");
+            goTo.scrollIntoView({ block: "center", behavior: "smooth" });
+            return alert('При выборе защитного колпака необходимо указать вылет штока в мм.')
+        }
+        else if (document.querySelector("#pointer").checked && document.querySelector("#stockForPointer").value == '') {
+            goTo = document.querySelector("#pointer");
+            goTo.scrollIntoView({ block: "center", behavior: "smooth" });
+            return alert('При выборе механического указателя необходимо указать ход штока в мм.')
         };
 
         let BoMark = document.querySelector('#controle-blocks-series').value;
@@ -981,8 +991,8 @@ $(document).ready(function () {
         }
 
         let j34 = ''; //Механический указатель
-        if (document.querySelector('#pointer > input[type=checkbox]').checked) {
-            j34 = 'Есть';
+        if (document.querySelector('#pointer').checked) {
+            j34 = 'Есть,' + ' ход штока: ' + document.querySelector("#stockForPointer").value + 'мм.';
         } else {
             j34 = 'Отсутствует';
         }
@@ -1030,9 +1040,9 @@ $(document).ready(function () {
 
         //json4
         let j40 = $("input[name='connectionForEp4']:checked").val(); //Электрическое подключение (обозначение)
-        let j41 = document.querySelector('#cap > input[type=checkbox]').checked ? 'Есть' : 'Отсутствует'; //Защитный колпак
+        let j41 = document.querySelector('#cap').checked ? 'Есть,' + ' вылет штока: ' + document.querySelector("#stockForCap").value + 'мм.' : 'Отсутствует'; //Защитный колпак
         let j42 = document.querySelector('#color-1').checked ? 'Серый' : document.querySelector('#ralColor').value; //Цвет
-        let j43 = document.querySelector('#mechSelectorId > input[type=checkbox]') ? 'Есть' : 'Отсутствует'; //Механический селектор
+        let j43 = ''; //Механический селектор
         let j44 = addOptions; //Доп опции
         let j45 = document.querySelector('#addReqarea').value ? document.querySelector('#addReqarea').value : '' + TuMp; //Дополнительные требования
         // json4 = [j40, j41, j42, j43, j44, j45];
@@ -1131,6 +1141,24 @@ $(document).ready(function () {
         } else {
             document.querySelector('#ralDiv').classList.add('none');
             document.querySelector('#ralColor').value = '';
+        }
+    });
+    // сокрытие/открытие вылета штока под колпаком
+    $('#pointerAndCap').on('change', function (e) {
+        if (document.querySelector("#pointer").checked) {
+            document.querySelector('#stockForPointerDiv').classList.remove('none');
+        } else {
+            document.querySelector('#stockForPointerDiv').classList.add('none');
+            document.querySelector('#stockForPointerDiv').value = '';
+        }
+    });
+    // сокрытие/открытие вылета штока под колпаком
+    $('#pointerAndCap').on('change', function (e) {
+        if (document.querySelector("#cap").checked) {
+            document.querySelector('#stockForCapDiv').classList.remove('none');
+        } else {
+            document.querySelector('#stockForCapDiv').classList.add('none');
+            document.querySelector('#stockForCapDiv').value = '';
         }
     });
 

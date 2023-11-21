@@ -692,27 +692,37 @@ $(document).ready(function () {
 
     $(document.querySelector('#download')).on('click', function () {
         if ($("input[name='constructive-scheme']:checked").val() == undefined) {
-            goTo = document.querySelector("#schemeFieldSet");
+            let goTo = document.querySelector("#schemeFieldSet");
             goTo.scrollIntoView({ block: "center", behavior: "smooth" });
             return alert('Не выбрана конструктивная схема')
-        } else if ($("#flange").val() == undefined) {
-            goTo = document.querySelector("#flange");
+        }
+        else if ($("#flange").val() == undefined) {
+            let goTo = document.querySelector("#flange");
             goTo.scrollIntoView({ block: "center", behavior: "smooth" });
             return alert('Не выбран фланец')
-        } else if ($("#upper-limit").val() == undefined) {
-            goTo = document.querySelector("#upper-limit");
+        }
+        else if ($("#upper-limit").val() == undefined) {
+            let goTo = document.querySelector("#upper-limit");
             goTo.scrollIntoView({ block: "center", behavior: "smooth" });
             return alert('Не выбран крутящий момент')
-        } else if ($("#rotation-frequency").val() == undefined) {
-            goTo = document.querySelector("#rotation-frequency");
+        }
+        else if ($("#rotation-frequency").val() == undefined) {
+            let goTo = document.querySelector("#rotation-frequency");
             goTo.scrollIntoView({ block: "center", behavior: "smooth" });
             return alert('Не выбрана частота вращения')
-        } else if ($("#turnTime").val() == undefined) {
-            goTo = document.querySelector("#turnTime");
+        }
+        else if (document.querySelector("#cap").checked && document.querySelector("#stockForCap").value == '') {
+            let goTo = document.querySelector("#cap");
+            goTo.scrollIntoView({ block: "center", behavior: "smooth" });
+            return alert('При выборе защитного колпака необходимо указать вылет штока в мм.')
+        }
+        else if ($("#turnTime").val() == undefined) {
+            let goTo = document.querySelector("#turnTime");
             goTo.scrollIntoView({ block: "center", behavior: "smooth" });
             return alert('Не выбрано время поворота на 90 градусов')
         };
-        secondBlock = document.querySelector("#controle-blocks2").value;
+
+        let secondBlock = document.querySelector("#controle-blocks2").value;
 
         let BoMark = document.querySelector('#controle-blocks-series').value;
 
@@ -822,9 +832,9 @@ $(document).ready(function () {
 
         //json4
         let j40 = $("input[name='connectionForEp4']:checked").val(); //Электрическое подключение (цифра)
-        let j41 = document.querySelector('#cap > input[type=checkbox]').checked ? 'Есть' : 'Отсутствует'; //Защитный колпак
+        let j41 = document.querySelector('#cap').checked ? 'Есть,' + ' вылет штока: ' + document.querySelector("#stockForCap").value + 'мм.' : 'Отсутствует'; //Защитный колпак
         let j42 = document.querySelector('#color-1').checked ? 'Серый' : document.querySelector('#ralColor').value; //Цвет
-        let j43 = document.querySelector('#mechSelectorId > input[type=checkbox]') ? 'Есть' : 'Отсутствует'; //Механический селектор
+        let j43 = ''; //Механический селектор
         let j44 = addOptions; //Доп опции
         let j45 = document.querySelector('#addReqarea').value; //Дополнительные требования
         // json4 = [j40, j41, j42, j43, j44, j45];
@@ -948,6 +958,16 @@ $(document).ready(function () {
         } else {
             document.querySelector('#ralDiv').classList.add('none');
             document.querySelector('#ralColor').value = '';
+        }
+    });
+
+    // сокрытие/открытие вылета штока под колпаком
+    $('#pointerAndCap').on('change', function (e) {
+        if (document.querySelector("#cap").checked) {
+            document.querySelector('#stockForCapDiv').classList.remove('none');
+        } else {
+            document.querySelector('#stockForCapDiv').classList.add('none');
+            document.querySelector('#stockForCapDiv').value = '';
         }
     });
 
