@@ -422,6 +422,51 @@ $(document).ready(function () {
 
     });
 
+    // Обработка исполнений
+    $('#specialField').on('change', function (e) {
+        if (document.querySelector("#special-1").checked) {
+            document.querySelector("#special-2").disabled = true;
+            document.querySelector("#special-2").checked = false;
+            document.querySelector("#special-3").disabled = true;
+            document.querySelector("#special-3").checked = false;
+            document.querySelector("#special-4").disabled = true;
+            document.querySelector("#special-4").checked = false;
+            document.querySelector("#special-5").disabled = true;
+            document.querySelector("#special-5").checked = false;
+            document.querySelector("#special-6").disabled = true;
+            document.querySelector("#special-6").checked = false;
+        }
+        else {
+            document.querySelector("#special-2").disabled = false;
+            document.querySelector("#special-3").disabled = false;
+            document.querySelector("#special-4").disabled = false;
+            document.querySelector("#special-5").disabled = false;
+            document.querySelector("#special-6").disabled = false;
+        }
+    })
+
+    // УБИРАЮ 660В(спец исполнение)
+    $('.row').on('change', function () {
+        let scheme = $("input[name='constructive-scheme']:checked").val();
+        if ((document.querySelector("#execution-В").checked) && (((scheme == '41' || scheme == '410') && document.querySelector("#controle-blocks-series").value == 'Э1') || (document.querySelector("#controle-blocks-series").value == 'М1'))) {
+            $('#special-4Field').show();
+        }
+        else if ((document.querySelector("#execution-С").checked) && (((scheme == '41' || scheme == '410' || scheme == '40') && (document.querySelector("#controle-blocks-series").value == 'М1')) || ((scheme == '41' || scheme == '410') && (document.querySelector("#controle-blocks-series").value == 'Э1')))) {
+            $('#special-4Field').show();
+        }
+        else if ((scheme == '41' || scheme == '410') && (document.querySelector("#controle-blocks-series").value == 'Э1') && (document.querySelector("#execution-Ш").checked)) {
+            $('#special-4Field').show();
+        }
+        else if ((scheme == '41' || scheme == '410') && (document.querySelector("#controle-blocks-series").value == 'Э1S') && (document.querySelector("#execution-S").checked)) {
+            $('#special-4Field').show();
+        }
+        else {
+            document.querySelector("#special-4").checked = false;
+            $('#special-4Field').hide();
+
+        }
+    });
+
     $(document).on('change', function (e) {
         let a = document.querySelector('.aVandalCap');
         let cbs = document.querySelector('#controle-blocks-series');
@@ -576,7 +621,14 @@ $(document).ready(function () {
                 $("input[name='connectionForEp4']").closest('fieldset').addClass('ReqValueOk');
         }
 
-        let x13 = $("input[name='special']:checked").val() ? $("input[name='special']:checked").val() : ''; // Специальное исполнение
+        let special1 = document.querySelector("#special-1").checked ? document.querySelector("#special-1").value : '';
+        let special2 = document.querySelector("#special-2").checked ? document.querySelector("#special-2").value : '';
+        let special3 = document.querySelector("#special-3").checked ? document.querySelector("#special-3").value : '';
+        let special4 = document.querySelector("#special-4").checked ? document.querySelector("#special-4").value : '';
+        let special5 = document.querySelector("#special-5").checked ? document.querySelector("#special-5").value : '';
+        let special6 = document.querySelector("#special-6").checked ? document.querySelector("#special-6").value : '';
+        let specialSum = special1 + special2 + special3 + special4 + special5 + special6;
+        let x13 = specialSum ? '-' + specialSum : ''; // Специальное исполнение
 
         let x14 = $("select[name='rn']").val() ? $("input[name='rn']").val() : ''; // Специальное исполнение
         switch (x14) {
@@ -636,9 +688,6 @@ $(document).ready(function () {
 
         is_true = [x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, rnx1].includes('X');
         mark_gen.text(x0 + x1 + x2 + '-' + x3 + '-' + x4 + '-' + x5 + '-' + x6 + secondVimuBlock + optionssetCheckBox + optForBu + '-' + x7 + '-' + x8 + x9 + x10 + x11 + x12 + x13 + suffix + '/' + rnx1);
-
-        // modal_button.toggle(!is_true);
-        mark_gen.toggleClass('is-invalid', is_true).toggleClass('is-valid', !is_true);
     });
 
     $(document.querySelector('#download')).on('click', function () {
@@ -784,7 +833,16 @@ $(document).ready(function () {
         let j50 = $("input[name='working-mode']:checked").closest('.form-check').find('.form-check-label').text(); //Назначение по режиму работы
         let j51 = $("input[name='connectionForEp4']:checked").closest('.form-check').find('.form-check-label').text(); //Электрическое подключение (расшифровка)
         let j52 = 'SIL-3'; // SIL
-        let j53 = $("input[name='special']:checked").closest('.form-check').find('.form-check-label').text(); //Специальное исполнение
+
+        let special1 = document.querySelector("#special-1").checked ? $("#special-1").siblings('label').text() : '';
+        let special2 = document.querySelector("#special-2").checked ? $("#special-2").siblings('label').text() + '; ' : '';
+        let special3 = document.querySelector("#special-3").checked ? $("#special-3").siblings('label').text() + '; ' : '';
+        let special4 = document.querySelector("#special-4").checked ? $("#special-4").siblings('label').text() + '; ' : '';
+        let special5 = document.querySelector("#special-5").checked ? $("#special-5").siblings('label').text() + '; ' : '';
+        let special6 = document.querySelector("#special-6").checked ? $("#special-6").siblings('label').text() + '; ' : '';
+        let specialSumTxt = special1 + special2 + special3 + special4 + special5 + special6;
+        let j53 = specialSumTxt ? specialSumTxt : 'Нет специального исполнения'; //Специальное исполнение
+
         let j54 = ''; //Масса
         // json5 = [j50, j51, j52, j53, j54];
 
@@ -1058,18 +1116,6 @@ $(document).ready(function () {
         } else {
             document.querySelector('.persInfo ').classList.remove('ReqValueOk');
             document.querySelector('.persInfo ').classList.add('noReqValue');
-        }
-    });
-
-    // СТИЛЬ ДЛЯ ПОЛЯ с исполнением 
-    $('#specialSet').on('change', function (e) {
-        if ($("input[name='special']:checked").val() !== undefined) {
-            document.querySelector('#specialSet').classList.add('ReqValueOk');
-            document.querySelector('#specialSet').classList.remove('noReqValue');
-        }
-        else {
-            document.querySelector('#specialSet').classList.remove('ReqValueOk');
-            document.querySelector('#specialSet').classList.add('noReqValue');
         }
     });
 

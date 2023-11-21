@@ -376,12 +376,15 @@ $(document).ready(function () {
                 for (i in res) fetchResult.push(res[i]);
                 // fetchResult[0].sort((a, b) => a - b);
                 $.each(fetchResult[0], function (key, item) {
+                    if (item.value == ' ') {
+                        item.value = '';
+                    }
                     $('#speciality').append(
                         $('<div>')
                             .prop({ class: 'form-check' })
                             .append(
                                 $('<input>').prop({
-                                    type: 'radio',
+                                    type: 'checkbox',
                                     id: 'specialForVimu-' + item.value,
                                     name: 'specialForVimu',
                                     value: item.value,
@@ -399,7 +402,6 @@ $(document).ready(function () {
                     );
                 });
                 console.log(9);
-                return timeToGo = 1;
             });
     }
     $(document).on('click', '#e1-table th, #e1-table td', function (e) {
@@ -435,6 +437,20 @@ $(document).ready(function () {
             $('#blockOption-S').closest('.form-check').show();
         }
     });
+
+    // Обработка исполнений
+    $('#speciality').on('change', function (e) {
+        if (document.querySelector("#specialForVimu-").checked) {
+            document.querySelector("#specialForVimu-К").disabled = true;
+            document.querySelector("#specialForVimu-К").checked = false;
+            document.querySelector("#specialForVimu-Э").disabled = true;
+            document.querySelector("#specialForVimu-Э").checked = false;
+        }
+        else {
+            document.querySelector("#specialForVimu-К").disabled = false;
+            document.querySelector("#specialForVimu-Э").disabled = false;
+        }
+    })
 
     let vimuBlockModal = new bootstrap.Modal($("#block-configure-e1"));
 
@@ -490,8 +506,9 @@ $(document).ready(function () {
 
     });
 
+
     $('#step-5').on('change', function (e) {
-        if ($("input[name='specialForVimu']:checked").val() || document.querySelector("#specialForVimu-1").checked) {
+        if ($("input[name='specialForVimu']:checked").val() || document.querySelector("#specialForVimu-").checked) {
             $('#step-6').show();
         }
 
@@ -587,16 +604,11 @@ $(document).ready(function () {
                 ($("input[name='connectionForVimu']")).closest('fieldset').addClass('ReqValueOk');
         }
 
-        let x9 = $("input[name='specialForVimu']:checked").val() ? $("input[name='specialForVimu']:checked").val() : ''; //специальное исполнение
-        switch ($('input[name="specialForVimu"]:checked').val()) {
-            case undefined:
-                ($("input[name='specialForVimu']")).closest('fieldset').removeClass('ReqValueOk');
-                ($("input[name='specialForVimu']")).closest('fieldset').addClass('noReqValue');
-                break;
-            default:
-                ($("input[name='specialForVimu']")).closest('fieldset').removeClass('noReqValue');
-                ($("input[name='specialForVimu']")).closest('fieldset').addClass('ReqValueOk');
-        }
+        let special1 = document.querySelector("#specialForVimu-").checked ? document.querySelector("#specialForVimu-").value : '';
+        let special2 = document.querySelector("#specialForVimu-К").checked ? document.querySelector("#specialForVimu-К").value : '';
+        let special3 = document.querySelector("#specialForVimu-Э").checked ? document.querySelector("#specialForVimu-Э").value : '';
+        let specialSum = special1 + special2 + special3;
+        let x9 = specialSum ? '-' + specialSum : ''; //специальное исполнение
 
         secondVimuBlock = $('#controle-blocks2').val() ? '/' + $('#controle-blocks2').val() : '';
 
@@ -726,7 +738,13 @@ $(document).ready(function () {
         let j50 = $("input[name='engineStartType']:checked").closest('.form-check').find('.form-check-label').text(); //Назначение по режиму работы
         let j51 = $("input[name='connectionForVimu']:checked").closest('.form-check').find('.form-check-label').text(); //Электрическое подключение (расшифровка)
         let j52 = 'SIL-3'; // SIL
-        let j53 = $("input[name='specialForVimu']:checked").closest('.form-check').find('.form-check-label').text(); //Специальное исполнение
+
+        let special1 = document.querySelector("#specialForVimu-").checked ? $("#specialForVimu-").siblings('label').text() : '';
+        let special2 = document.querySelector("#specialForVimu-К").checked ? $("#specialForVimu-К").siblings('label').text() + '; ' : '';
+        let special3 = document.querySelector("#specialForVimu-Э").checked ? $("#specialForVimu-Э").siblings('label').text() + '; ' : '';
+        let specialSumTxt = special1 + special2 + special3;
+        let j53 = specialSumTxt ? specialSumTxt : 'Нет специального исполнения'; //Специальное исполнение
+
         let j54 = ''; //Масса
         // json5 = [j50, j51, j52, j53, j54];
 

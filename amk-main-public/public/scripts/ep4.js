@@ -311,6 +311,29 @@ $(document).ready(function () {
     //     }
     // })
 
+    // Обработка исполнений
+    $('#specialField').on('change', function (e) {
+        if (document.querySelector("#special-1").checked) {
+            document.querySelector("#special-2").disabled = true;
+            document.querySelector("#special-2").checked = false;
+            document.querySelector("#special-3").disabled = true;
+            document.querySelector("#special-3").checked = false;
+            document.querySelector("#special-4").disabled = true;
+            document.querySelector("#special-4").checked = false;
+            document.querySelector("#special-5").disabled = true;
+            document.querySelector("#special-5").checked = false;
+            document.querySelector("#special-6").disabled = true;
+            document.querySelector("#special-6").checked = false;
+        }
+        else {
+            document.querySelector("#special-2").disabled = false;
+            document.querySelector("#special-3").disabled = false;
+            document.querySelector("#special-4").disabled = false;
+            document.querySelector("#special-5").disabled = false;
+            document.querySelector("#special-6").disabled = false;
+        }
+    })
+
     // УБИРАЮ 660В(спец исполнение)
     $('.row').on('change', function () {
         let scheme = $("input[name='constructive-scheme']:checked").val();
@@ -647,29 +670,6 @@ $(document).ready(function () {
             $('#sumBlocks').hide();
         }
     });
-
-    // Обработка исполнений
-    $('#specialField').on('change', function (e) {
-        if (document.querySelector("#special-1").checked) {
-            document.querySelector("#special-2").disabled = true;
-            document.querySelector("#special-2").checked = false;
-            document.querySelector("#special-3").disabled = true;
-            document.querySelector("#special-3").checked = false;
-            document.querySelector("#special-4").disabled = true;
-            document.querySelector("#special-4").checked = false;
-            document.querySelector("#special-5").disabled = true;
-            document.querySelector("#special-5").checked = false;
-            document.querySelector("#special-6").disabled = true;
-            document.querySelector("#special-6").checked = false;
-        }
-        else {
-            document.querySelector("#special-2").disabled = false;
-            document.querySelector("#special-3").disabled = false;
-            document.querySelector("#special-4").disabled = false;
-            document.querySelector("#special-5").disabled = false;
-            document.querySelector("#special-6").disabled = false;
-        }
-    })
 
     $(document).on('change', function (e) {
         let a = document.querySelector('.aVandalCap');
@@ -1049,7 +1049,7 @@ $(document).ready(function () {
         let special5 = document.querySelector("#special-5").checked ? $("#special-5").siblings('label').text() + '; ' : '';
         let special6 = document.querySelector("#special-6").checked ? $("#special-6").siblings('label').text() + '; ' : '';
         let specialSumTxt = special1 + special2 + special3 + special4 + special5 + special6;
-        let j53 = specialSumTxt; //Специальное исполнение
+        let j53 = specialSumTxt ? specialSumTxt : 'Нет специального исполнения'; //Специальное исполнение
 
         let j54 = ''; //Масса
         // json5 = [j50, j51, j52, j53, j54];
