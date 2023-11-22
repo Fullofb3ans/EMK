@@ -421,29 +421,28 @@ $(document).ready(function () {
         }
 
     });
-
     // Обработка исполнений
-    $('#specialField').on('change', function (e) {
-        if (document.querySelector("#special-1").checked) {
-            document.querySelector("#special-2").disabled = true;
-            document.querySelector("#special-2").checked = false;
-            document.querySelector("#special-3").disabled = true;
-            document.querySelector("#special-3").checked = false;
-            document.querySelector("#special-4").disabled = true;
-            document.querySelector("#special-4").checked = false;
-            document.querySelector("#special-5").disabled = true;
-            document.querySelector("#special-5").checked = false;
-            document.querySelector("#special-6").disabled = true;
-            document.querySelector("#special-6").checked = false;
-        }
-        else {
-            document.querySelector("#special-2").disabled = false;
-            document.querySelector("#special-3").disabled = false;
-            document.querySelector("#special-4").disabled = false;
-            document.querySelector("#special-5").disabled = false;
-            document.querySelector("#special-6").disabled = false;
-        }
-    })
+    // $('#specialField').on('change', function (e) {
+    //     if (document.querySelector("#special-1").checked) {
+    //         document.querySelector("#special-2").disabled = true;
+    //         document.querySelector("#special-2").checked = false;
+    //         document.querySelector("#special-3").disabled = true;
+    //         document.querySelector("#special-3").checked = false;
+    //         document.querySelector("#special-4").disabled = true;
+    //         document.querySelector("#special-4").checked = false;
+    //         document.querySelector("#special-5").disabled = true;
+    //         document.querySelector("#special-5").checked = false;
+    //         document.querySelector("#special-6").disabled = true;
+    //         document.querySelector("#special-6").checked = false;
+    //     }
+    //     else {
+    //         document.querySelector("#special-2").disabled = false;
+    //         document.querySelector("#special-3").disabled = false;
+    //         document.querySelector("#special-4").disabled = false;
+    //         document.querySelector("#special-5").disabled = false;
+    //         document.querySelector("#special-6").disabled = false;
+    //     }
+    // })
 
     // УБИРАЮ 660В(спец исполнение)
     $('.row').on('change', function () {
@@ -621,13 +620,13 @@ $(document).ready(function () {
                 $("input[name='connectionForEp4']").closest('fieldset').addClass('ReqValueOk');
         }
 
-        let special1 = document.querySelector("#special-1").checked ? document.querySelector("#special-1").value : '';
+        // let special1 = document.querySelector("#special-1").checked ? document.querySelector("#special-1").value : '';
         let special2 = document.querySelector("#special-2").checked ? document.querySelector("#special-2").value : '';
         let special3 = document.querySelector("#special-3").checked ? document.querySelector("#special-3").value : '';
         let special4 = document.querySelector("#special-4").checked ? document.querySelector("#special-4").value : '';
         let special5 = document.querySelector("#special-5").checked ? document.querySelector("#special-5").value : '';
         let special6 = document.querySelector("#special-6").checked ? document.querySelector("#special-6").value : '';
-        let specialSum = special1 + special2 + special3 + special4 + special5 + special6;
+        let specialSum = special2 + special3 + special4 + special5 + special6;
         let x13 = specialSum ? '-' + specialSum : ''; // Специальное исполнение
 
         let x14 = $("select[name='rn']").val() ? $("input[name='rn']").val() : ''; // Специальное исполнение
@@ -844,13 +843,13 @@ $(document).ready(function () {
         let j51 = $("input[name='connectionForEp4']:checked").closest('.form-check').find('.form-check-label').text(); //Электрическое подключение (расшифровка)
         let j52 = 'SIL-3'; // SIL
 
-        let special1 = document.querySelector("#special-1").checked ? $("#special-1").siblings('label').text() : '';
+        // let special1 = document.querySelector("#special-1").checked ? $("#special-1").siblings('label').text() : '';
         let special2 = document.querySelector("#special-2").checked ? $("#special-2").siblings('label').text() + '; ' : '';
         let special3 = document.querySelector("#special-3").checked ? $("#special-3").siblings('label').text() + '; ' : '';
         let special4 = document.querySelector("#special-4").checked ? $("#special-4").siblings('label').text() + '; ' : '';
         let special5 = document.querySelector("#special-5").checked ? $("#special-5").siblings('label').text() + '; ' : '';
         let special6 = document.querySelector("#special-6").checked ? $("#special-6").siblings('label').text() + '; ' : '';
-        let specialSumTxt = special1 + special2 + special3 + special4 + special5 + special6;
+        let specialSumTxt = special2 + special3 + special4 + special5 + special6;
         let j53 = specialSumTxt ? specialSumTxt : 'Нет специального исполнения'; //Специальное исполнение
 
         let j54 = ''; //Масса
