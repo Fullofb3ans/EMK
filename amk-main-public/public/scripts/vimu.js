@@ -1,409 +1,427 @@
 // http://www.tulaprivod.ru/dokument/rukovodstva/VIMU_2021.pdf
 $(document).ready(function () {
+    listToHtml();
+
+    function listToHtml() {
+        const executionList = [
+            {
+                "id": "Взрывозащищенное исполнение",
+                "value": "В"
+            },
+            {
+                "id": "Общепромышленное исполнение в металлическом корпусе",
+                "value": "Н"
+            },
+            {
+                "id": "Общепромышленное исполнение в пластиковом корпусе",
+                "value": "П"
+            }
+        ]
+
+        const roundControlList = [
+            {
+                "id": "Контроль по микровыключателям или потенциометрам привода",
+                "value": "1"
+            },
+            {
+                "id": "Контроль по цифровым датчикам привода",
+                "value": "2"
+            }
+        ]
+
+        const engineList = [
+            {
+                "id": "Трехфазовое электропитание (380 В, 50 Гц), электромеханический пускатель в ВИМУ",
+                "value": "1"
+            },
+            {
+                "id": "Трехфазовое электропитание (380 В, 50 Гц), твердотельный пускатель в ВИМУ",
+                "value": "2"
+            },
+            {
+                "id": "Однофазное электропитание (220 В, 50 Гц), электромеханический пускатель ВИМУ, двигатель привода с конденсатором",
+                "value": "3"
+            },
+            {
+                "id": "Однофазное электропитание (220 В, 50 Гц), твердотельный пускатель ВИМУ, двигатель привода с конденсатором",
+                "value": "4"
+            }
+        ]
+
+        const optionsSelectList =
+            [
+                {
+                    "id": "Стандартное оснащение",
+                    "value": ""
+                },
+                {
+                    "id": "Шесть сигнальных реле и дискретное управление с использованием пятиканальной линии связи 220 В",
+                    "value": "X"
+                },
+                {
+                    "id": "Восемь сигнальных реле и дискретное управление с использованием пятиканальной линии связи 24 В",
+                    "value": "Y"
+                },
+                {
+                    "id": "Двенадцать сигнальных реле и дискретное управление с использованием пятиканальной линии связи 24 В",
+                    "value": "Z"
+                },
+                {
+                    "id": "Восемь сигнальных реле и дискретное управление с использованием пятиканальной линии связи 220 В",
+                    "value": "V"
+                },
+                {
+                    "id": "Двенадцать сигнальных реле и дискретное управлением с использованием пятиканальной линии связи 220 В",
+                    "value": "W"
+                }
+            ]
+
+        const optionsCheckList = [
+            {
+                "id": "Твердотельный пускатель",
+                "value": "T"
+            },
+            {
+                "id": "Переключатель режимов работы на панели управления",
+                "value": "S"
+            },
+            {
+                "id": "Канал связи Bluetooth",
+                "value": "B"
+            },
+            {
+                "id": "Регистратор параметров состояния и конфигурации привода",
+                "value": "R"
+            }
+        ]
+
+        const tempList = [
+            {
+                "id": "25°C/+60°C - 100% при 25°C - (У1)",
+                "value": "1"
+            },
+            {
+                "id": "40°C/+60°C - 100% при 25°C - (У1)",
+                "value": "2"
+            },
+            {
+                "id": "60°C/+60°C - 100% при 25°C - (УХЛ1)",
+                "value": "3"
+            },
+            {
+                "id": "10°C/+60°C - 100% при 45°C - (Т1)",
+                "value": "4"
+            },
+            {
+                "id": "40°C/+40°C - 100% при 25°C - (М1)",
+                "value": "5"
+            },
+            {
+                "id": "40°C/+40°C - 98% при 25°C - (М5.1)",
+                "value": "6"
+            }
+        ]
+
+        const protectList = [
+            {
+                "id": "IP67",
+                "value": "1"
+            },
+            {
+                "id": "IP68",
+                "value": "2"
+            }
+        ]
+
+        const colorList = [
+            {
+                "id": "Серый",
+                "value": "1"
+            },
+            {
+                "id": "По спецификации заказа",
+                "value": "2"
+            }
+        ]
+
+        const connectList = [
+            {
+                "id": "Заглушки на местах трех кабельный вводов, штепсельное подключение внутри привода",
+                "value": "0"
+            },
+            {
+                "id": "Кабельные вводы, 3 штуки, клеемное подключение внутри привода",
+                "value": "1"
+            },
+            {
+                "id": "Кабельные вводы, 3 штуки, штепсельное подключение внутри привода",
+                "value": "2"
+            },
+            {
+                "id": "Штепсельное подключение без кабельных вводов",
+                "value": "3"
+            },
+            {
+                "id": "Заглушки на местах кабельных вводов, клеемное подключение внутри привода",
+                "value": "4"
+            },
+            {
+                "id": "Кабельные вводы, 4-7шт. по спецификации заказа, клеммное подключение внутри привода",
+                "value": "6"
+            },
+            {
+                "id": "Кабельные вводы, 4-7шт. по спецификации заказа, штепсельное подключение внутри привода",
+                "value": "7"
+            }
+        ]
+
+        const specialList = [
+            {
+                "id": "Нет специального исполнения",
+                "value": ""
+            },
+            {
+                "id": "Комплектуется кабелями для подключения привода",
+                "value": "К"
+            },
+            {
+                "id": "Исполнение ВИМУ для комплектования приводов серии ЭПН",
+                "value": "Э"
+            }
+        ]
+
+        $.each(executionList, function (key, item) {
+            $('#execution-wrap').append(
+                $('<div>')
+                    .prop({ class: 'form-check' })
+                    .append(
+                        $('<input>').prop({
+                            type: 'radio',
+                            id: 'execution-' + item.value,
+
+                            name: 'execution',
+                            value: item.value,
+                            class: 'form-check-input ch-mark'
+                        })
+                    )
+                    .append(
+                        $('<label>')
+                            .prop({
+                                for: 'execution-' + item.value,
+                                class: 'form-check-label',
+                            })
+                            .text(' ' + item.id)
+                    )
+            );
+        });
 
 
-    // ПРОГРУЗКА СТАТИЧНЫХ ПАРАМЕТРОВ
-    fethExecute()
+        // ПРОГРУЗКА Контроля положения и крутящего момента
+        // fetchResult[0].sort((a, b) => a - b);
+        $.each(roundControlList, function (key, item) {
+            $('#roundControl').append(
+                $('<div>')
+                    .prop({ class: 'form-check' })
+                    .append(
+                        $('<input>').prop({
+                            type: 'radio',
+                            id: 'roundControl-' + item.value,
+                            name: 'roundControl',
+                            value: item.value,
+                            class: 'form-check-input ch-mark'
+                        })
+                    )
+                    .append(
+                        $('<label>')
+                            .prop({
+                                for: 'roundControl-' + item.value,
+                                class: 'form-check-label',
+                            })
+                            .text(' ' + item.id)
+                    )
+            );
+        });
 
-    // ПРОГРУЗКА Исполнения
-    async function fethExecute() {
-        let fetchResult = [];
-        await fetch('https://emk.websto.pro/VIMU', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json;charset=utf-8' },
-            body: JSON.stringify({
-                a: "1",
-            }),
-        })
-            .then((res) => res.json())
-            .then((res) => {
-                console.log(res);
-                for (i in res) fetchResult.push(res[i]);
-                // fetchResult[0].sort((a, b) => a - b);
-                $.each(fetchResult[0], function (key, item) {
-                    $('#execution-wrap').append(
-                        $('<div>')
-                            .prop({ class: 'form-check' })
-                            .append(
-                                $('<input>').prop({
-                                    type: 'radio',
-                                    id: 'execution-' + item.value,
-                                    name: 'execution',
-                                    value: item.value,
-                                    class: 'form-check-input ch-mark'
-                                })
-                            )
-                            .append(
-                                $('<label>')
-                                    .prop({
-                                        for: 'execution-' + item.value,
-                                        class: 'form-check-label',
-                                    })
-                                    .text(' ' + item.id)
-                            )
-                    );
-                });
-                fetchRound();
-                console.log(1);
-            });
+
+        // ПРОГРУЗКА Напряжение питания двигателя:
+        $.each(engineList, function (key, item) {
+            $('#engineStartType').append(
+                $('<div>')
+                    .prop({ class: 'form-check' })
+                    .append(
+                        $('<input>').prop({
+                            type: 'radio',
+                            id: 'engineStartType-' + item.value,
+                            name: 'engineStartType',
+                            value: item.value,
+                            class: 'form-check-input ch-mark'
+                        })
+                    )
+                    .append(
+                        $('<label>')
+                            .prop({
+                                for: 'engineStartType-' + item.value,
+                                class: 'form-check-label',
+                            })
+                            .text(' ' + item.id)
+                    )
+            );
+        });
+
+
+        // Прогрузка доп оснащения
+        // fetchResult[0].sort((a, b) => a - b);
+        $.each(optionsSelectList, function (key, item) {
+            // if (item.value == ' ') { item.value = '' };
+            $('#controle-blocks-options').append(new Option(item.id, item.value));
+        });
+
+
+        // ПРОГРУЗКА чекбокса доп оснащения:
+        // fetchResult[0].sort((a, b) => a - b);
+        $.each(optionsCheckList, function (key, item) {
+            $('#control-block-optionssetCheckBox').append(
+                $('<div>')
+                    .prop({ class: 'form-check' })
+                    .append(
+                        $('<input>').prop({
+                            type: 'checkbox',
+                            id: 'blockOption-' + item.value,
+                            name: 'blockOption',
+                            value: item.value,
+                            class: 'form-check-input ch-mark'
+                        })
+                    )
+                    .append(
+                        $('<label>')
+                            .prop({
+                                for: 'blockOption-' + item.value,
+                                class: 'form-check-label',
+                            })
+                            .text(' ' + item.id)
+                    )
+            );
+        });
+
+
+        // Прогрузка Температуры
+        // fetchResult[0].sort((a, b) => a - b);
+        $.each(tempList, function (key, item) {
+            $('#climatic-modification').append(new Option(item.id, item.value));
+        });
+
+
+
+        // ПРОГРУЗКА IP ЗАЩИТЫ:
+        $.each(protectList, function (key, item) {
+            $('#waterProtection').append(
+                $('<div>')
+                    .prop({ class: 'form-check' })
+                    .append(
+                        $('<input>').prop({
+                            type: 'radio',
+                            id: 'protection-' + item.value,
+                            name: 'protection',
+                            value: item.value,
+                            class: 'form-check-input ch-mark'
+                        })
+                    )
+                    .append(
+                        $('<label>')
+                            .prop({
+                                for: 'protection-' + item.value,
+                                class: 'form-check-label',
+                            })
+                            .text(' ' + item.id)
+                    )
+            );
+        });
+
+
+        // ПРОГРУЗКА цвета:
+
+        // fetchResult[0].sort((a, b) => a - b);
+        $.each(colorList, function (key, item) {
+            $('#colorHere').append(
+                $('<div>')
+                    .prop({ class: 'form-check' })
+                    .append(
+                        $('<input>').prop({
+                            type: 'radio',
+                            id: 'color-' + item.value,
+                            name: 'color',
+                            value: item.value,
+                            class: 'form-check-input ch-mark'
+                        })
+                    )
+                    .append(
+                        $('<label>')
+                            .prop({
+                                for: 'color-' + item.value,
+                                class: 'form-check-label',
+                            })
+                            .text(' ' + item.id)
+                    )
+            );
+        });
+
+
+        // ПРОГРУЗКА электрического подключения:
+
+        // fetchResult[0].sort((a, b) => a - b);
+        $.each(connectList, function (key, item) {
+            $('#electricity').append(
+                $('<div>')
+                    .prop({ class: 'form-check' })
+                    .append(
+                        $('<input>').prop({
+                            type: 'radio',
+                            id: 'connectionForVimu-' + item.value,
+                            name: 'connectionForVimu',
+                            value: item.value,
+                            class: 'form-check-input ch-mark'
+                        })
+                    )
+                    .append(
+                        $('<label>')
+                            .prop({
+                                for: 'connectionForVimu-' + item.value,
+                                class: 'form-check-label',
+                            })
+                            .text(' ' + item.id)
+                    )
+            );
+        });
+
+
+        // ПРОГРУЗКА СПЕЦИАЛЬНОГО ПОДКЛЮЧЕНИЯ:
+
+        // fetchResult[0].sort((a, b) => a - b);
+        $.each(specialList, function (key, item) {
+            $('#speciality').append(
+                $('<div>')
+                    .prop({ class: 'form-check' })
+                    .append(
+                        $('<input>').prop({
+                            type: 'checkbox',
+                            id: 'specialForVimu-' + item.value,
+                            name: 'specialForVimu',
+                            value: item.value,
+                            class: 'form-check-input ch-mark'
+                        })
+                    )
+                    .append(
+                        $('<label>')
+                            .prop({
+                                for: 'specialForVimu-' + item.value,
+                                class: 'form-check-label',
+                            })
+                            .text(' ' + item.id)
+                    )
+            );
+        });
     }
-    // ПРОГРУЗКА Контроля положения и крутящего момента
-    async function fetchRound() {
-        fetchResult = [];
-        await fetch('https://emk.websto.pro/VIMU', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json;charset=utf-8' },
-            body: JSON.stringify({
-                a: "2",
-            }),
-        })
-            .then((res) => res.json())
-            .then((res) => {
-                console.log(res);
-                for (i in res) fetchResult.push(res[i]);
-                // fetchResult[0].sort((a, b) => a - b);
-                $.each(fetchResult[0], function (key, item) {
-                    $('#roundControl').append(
-                        $('<div>')
-                            .prop({ class: 'form-check' })
-                            .append(
-                                $('<input>').prop({
-                                    type: 'radio',
-                                    id: 'roundControl-' + item.value,
-                                    name: 'roundControl',
-                                    value: item.value,
-                                    class: 'form-check-input ch-mark'
-                                })
-                            )
-                            .append(
-                                $('<label>')
-                                    .prop({
-                                        for: 'roundControl-' + item.value,
-                                        class: 'form-check-label',
-                                    })
-                                    .text(' ' + item.id)
-                            )
-                    );
-                });
-                fetchEnginge();
-                $('#preloader').fadeOut(400);
 
-                console.log(2);
-            });
-    }
-    // ПРОГРУЗКА Напряжение питания двигателя:
-
-    async function fetchEnginge() {
-        fetchResult = [];
-
-        await fetch('https://emk.websto.pro/VIMU', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json;charset=utf-8' },
-            body: JSON.stringify({
-                a: "3",
-            }),
-        })
-            .then((res) => res.json())
-            .then((res) => {
-                console.log(res);
-                for (i in res) fetchResult.push(res[i]);
-                // fetchResult[0].sort((a, b) => a - b);
-                $.each(fetchResult[0], function (key, item) {
-                    $('#engineStartType').append(
-                        $('<div>')
-                            .prop({ class: 'form-check' })
-                            .append(
-                                $('<input>').prop({
-                                    type: 'radio',
-                                    id: 'engineStartType-' + item.value,
-                                    name: 'engineStartType',
-                                    value: item.value,
-                                    class: 'form-check-input ch-mark'
-                                })
-                            )
-                            .append(
-                                $('<label>')
-                                    .prop({
-                                        for: 'engineStartType-' + item.value,
-                                        class: 'form-check-label',
-                                    })
-                                    .text(' ' + item.id)
-                            )
-                    );
-                });
-                fetchOptionsSelect()
-                console.log(3);
-            });
-    }
-
-    // Прогрузка доп оснащения
-    async function fetchOptionsSelect() {
-        fetchResult = [];
-
-        await fetch('https://emk.websto.pro/VIMU', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json;charset=utf-8' },
-            body: JSON.stringify({
-                a: "4.1",
-            }),
-        })
-            .then((res) => res.json())
-            .then((res) => {
-                console.log(res);
-                for (i in res) fetchResult.push(res[i]);
-                // fetchResult[0].sort((a, b) => a - b);
-                $.each(fetchResult[0], function (key, item) {
-                    $('#controle-blocks-options').append(new Option(item.id, item.value));
-                });
-                fetchOptionsCheck();
-                console.log(4.1);
-            });
-    }
-
-    // ПРОГРУЗКА чекбокса доп оснащения:
-    async function fetchOptionsCheck() {
-        fetchResult = [];
-
-        await fetch('https://emk.websto.pro/VIMU', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json;charset=utf-8' },
-            body: JSON.stringify({
-                a: "4.2",
-            }),
-        })
-            .then((res) => res.json())
-            .then((res) => {
-                console.log(res);
-                for (i in res) fetchResult.push(res[i]);
-                // fetchResult[0].sort((a, b) => a - b);
-                $.each(fetchResult[0], function (key, item) {
-                    $('#control-block-optionssetCheckBox').append(
-                        $('<div>')
-                            .prop({ class: 'form-check' })
-                            .append(
-                                $('<input>').prop({
-                                    type: 'checkbox',
-                                    id: 'blockOption-' + item.value,
-                                    name: 'blockOption',
-                                    value: item.value,
-                                    class: 'form-check-input ch-mark'
-                                })
-                            )
-                            .append(
-                                $('<label>')
-                                    .prop({
-                                        for: 'blockOption-' + item.value,
-                                        class: 'form-check-label',
-                                    })
-                                    .text(' ' + item.id)
-                            )
-                    );
-                });
-                fetchTemp();
-                console.log(4.2);
-            });
-    }
-    // Прогрузка Температуры
-    async function fetchTemp() {
-        fetchResult = [];
-
-        await fetch('https://emk.websto.pro/VIMU', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json;charset=utf-8' },
-            body: JSON.stringify({
-                a: "5",
-            }),
-        })
-            .then((res) => res.json())
-            .then((res) => {
-                console.log(res);
-                for (i in res) fetchResult.push(res[i]);
-                // fetchResult[0].sort((a, b) => a - b);
-                $.each(fetchResult[0], function (key, item) {
-                    $('#climatic-modification').append(new Option(item.id, item.value));
-                });
-            });
-        fetchProtect();
-        console.log(5);
-
-    }
-    // ПРОГРУЗКА IP ЗАЩИТЫ:
-    async function fetchProtect() {
-        fetchResult = [];
-
-        await fetch('https://emk.websto.pro/VIMU', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json;charset=utf-8' },
-            body: JSON.stringify({
-                a: "6",
-            }),
-        })
-            .then((res) => res.json())
-            .then((res) => {
-                console.log(res);
-                for (i in res) fetchResult.push(res[i]);
-                // fetchResult[0].sort((a, b) => a - b);
-                $.each(fetchResult[0], function (key, item) {
-                    $('#waterProtection').append(
-                        $('<div>')
-                            .prop({ class: 'form-check' })
-                            .append(
-                                $('<input>').prop({
-                                    type: 'radio',
-                                    id: 'protection-' + item.value,
-                                    name: 'protection',
-                                    value: item.value,
-                                    class: 'form-check-input ch-mark'
-                                })
-                            )
-                            .append(
-                                $('<label>')
-                                    .prop({
-                                        for: 'protection-' + item.value,
-                                        class: 'form-check-label',
-                                    })
-                                    .text(' ' + item.id)
-                            )
-                    );
-                });
-                fetchColor();
-                console.log(6);
-            });
-    }
-    // ПРОГРУЗКА цвета:
-    async function fetchColor() {
-        fetchResult = [];
-
-        await fetch('https://emk.websto.pro/VIMU', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json;charset=utf-8' },
-            body: JSON.stringify({
-                a: "7",
-            }),
-        })
-            .then((res) => res.json())
-            .then((res) => {
-                console.log(res);
-                for (i in res) fetchResult.push(res[i]);
-                // fetchResult[0].sort((a, b) => a - b);
-                $.each(fetchResult[0], function (key, item) {
-                    $('#colorHere').append(
-                        $('<div>')
-                            .prop({ class: 'form-check' })
-                            .append(
-                                $('<input>').prop({
-                                    type: 'radio',
-                                    id: 'color-' + item.value,
-                                    name: 'color',
-                                    value: item.value,
-                                    class: 'form-check-input ch-mark'
-                                })
-                            )
-                            .append(
-                                $('<label>')
-                                    .prop({
-                                        for: 'color-' + item.value,
-                                        class: 'form-check-label',
-                                    })
-                                    .text(' ' + item.id)
-                            )
-                    );
-                });
-                fetchElectro();
-                console.log(7);
-            });
-    }
-
-    // ПРОГРУЗКА электрического подключения:
-    async function fetchElectro() {
-        fetchResult = [];
-
-        await fetch('https://emk.websto.pro/VIMU', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json;charset=utf-8' },
-            body: JSON.stringify({
-                a: "8",
-            }),
-        })
-            .then((res) => res.json())
-            .then((res) => {
-                console.log(res);
-                for (i in res) fetchResult.push(res[i]);
-                // fetchResult[0].sort((a, b) => a - b);
-                $.each(fetchResult[0], function (key, item) {
-                    $('#electricity').append(
-                        $('<div>')
-                            .prop({ class: 'form-check' })
-                            .append(
-                                $('<input>').prop({
-                                    type: 'radio',
-                                    id: 'connectionForVimu-' + item.value,
-                                    name: 'connectionForVimu',
-                                    value: item.value,
-                                    class: 'form-check-input ch-mark'
-                                })
-                            )
-                            .append(
-                                $('<label>')
-                                    .prop({
-                                        for: 'connectionForVimu-' + item.value,
-                                        class: 'form-check-label',
-                                    })
-                                    .text(' ' + item.id)
-                            )
-                    );
-                });
-                fetchSpecial();
-                console.log(8);
-            });
-    }
-
-    // ПРОГРУЗКА СПЕЦИАЛЬНОГО ПОДКЛЮЧЕНИЯ:
-    async function fetchSpecial() {
-
-        fetchResult = [];
-
-        await fetch('https://emk.websto.pro/VIMU', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json;charset=utf-8' },
-            body: JSON.stringify({
-                a: '9',
-            }),
-        })
-            .then((res) => res.json())
-            .then((res) => {
-                console.log(res);
-                for (i in res) fetchResult.push(res[i]);
-                // fetchResult[0].sort((a, b) => a - b);
-                $.each(fetchResult[0], function (key, item) {
-                    if (item.value == ' ') {
-                        item.value = '';
-                    }
-                    $('#speciality').append(
-                        $('<div>')
-                            .prop({ class: 'form-check' })
-                            .append(
-                                $('<input>').prop({
-                                    type: 'checkbox',
-                                    id: 'specialForVimu-' + item.value,
-                                    name: 'specialForVimu',
-                                    value: item.value,
-                                    class: 'form-check-input ch-mark'
-                                })
-                            )
-                            .append(
-                                $('<label>')
-                                    .prop({
-                                        for: 'specialForVimu-' + item.value,
-                                        class: 'form-check-label',
-                                    })
-                                    .text(' ' + item.id)
-                            )
-                    );
-                });
-                console.log(9);
-            });
-    }
     $(document).on('click', '#e1-table th, #e1-table td', function (e) {
         let target = $(this).data('target');
         let el = document.getElementById(target);
@@ -524,7 +542,6 @@ $(document).ready(function () {
     // МАРКИРОВКА
     $(document).on('change', function (e) {
         let mark_gen = $('#mark-gen');
-        let modal_button = $('#download');
 
         let x0 = 'ВИМУ';
         let x1 = $("input[name='execution']:checked").val() ? $("input[name='execution']:checked").val() : ''; //взрывозащита
@@ -628,9 +645,6 @@ $(document).ready(function () {
         let optionssetCheckBox = blockOptionT + blockOptionS + blockOptionB + blockOptionR;
 
         let optForBu = $('#control-block-optionsset option:selected').val() != 'noValue' ? $('#control-block-optionsset option:selected').val() : '';
-
-
-        is_true = [x1, x2, x3, x4, x5, x6, x7, x8, x9].includes('X');
 
         mark_gen.text(x0 + x1 + '-' + x2 + x3 + '-' + x4 + secondVimuBlock + optionssetCheckBox + optForBu + '-' + x5 + '-' + x6 + x7 + x8 + x9);
 
