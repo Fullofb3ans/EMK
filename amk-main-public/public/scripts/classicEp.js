@@ -1,5 +1,156 @@
 // https://www.tulaprivod.ru/dokument/rukovodstva/BLTU_89_2022_v2.pdf
 $(document).ready(function () {
+    listToHtml();
+    function listToHtml() {
+
+        const executionList = [
+            {
+                "id": "Общего назначения",
+                "value": "Н"
+            },
+            {
+                "id": "Взрывозащищенное 1ExdbIIBT4Gb",
+                "value": "В"
+            },
+            {
+                "id": "Взрывозащищенное 1ExdbeIICT4Gb",
+                "value": "С"
+            }
+        ]
+
+        const upgradeFlangeList = [
+            {
+                "id": "Под кулачки",
+                "value": "К"
+            },
+            {
+                "id": "Под квадрат",
+                "value": "Ч"
+            }
+        ]
+
+        const tempList = [
+            {
+                "id": "-45°C/+40°C - 100% при 25°C - (У1)",
+                "value": "У1"
+            },
+            {
+                "id": "-10°C/+50°C - 100% при 35°C - (Т1)",
+                "value": "Т1"
+            },
+            {
+                "id": "-60°C/+40°C - 100% при 25°C - (УХЛ1)",
+                "value": "УХЛ1"
+            },
+            {
+                "id": "-45°C/+40°C - 100% при 25°C - (У2)",
+                "value": "У2"
+            },
+            {
+                "id": "-10°C/+50°C - 100% при 35°C - (Т2)",
+                "value": "Т2"
+            },
+            {
+                "id": "-60°C/+40°C - 100% при 25°C - (УХЛ2)",
+                "value": "УХЛ2"
+            }
+        ]
+
+        const optionsList = [
+            {
+                "id": "Резистор",
+                "value": "Р"
+            },
+            {
+                "id": "Микровыключатели Д3031",
+                "value": "24DC"
+            },
+            {
+                "id": "Закрывание против часовой стрелке",
+                "value": "Л"
+            }
+        ]
+
+        $.each(executionList, function (key, item) {
+            $('#epPlace').append(
+                $('<div>')
+                    .prop({ class: 'form-check' })
+                    .append(
+                        $('<input>').prop({
+                            type: 'radio',
+                            id: 'epPlace-' + item.value,
+
+                            name: 'epPlace',
+                            value: item.value,
+                            class: 'form-check-input ch-mark'
+                        })
+                    )
+                    .append(
+                        $('<label>')
+                            .prop({
+                                for: 'epPlace-' + item.value,
+                                class: 'form-check-label',
+                            })
+                            .text(' ' + item.id)
+                    )
+            );
+        });
+
+        $.each(upgradeFlangeList, function (key, item) {
+            $('#engineUpgrade').append(
+                $('<div>')
+                    .prop({ class: 'form-check' })
+                    .append(
+                        $('<input>').prop({
+                            type: 'radio',
+                            id: 'engineUpgrade-' + item.value,
+
+                            name: 'engineUpgrade',
+                            value: item.value,
+                            class: 'form-check-input ch-mark'
+                        })
+                    )
+                    .append(
+                        $('<label>')
+                            .prop({
+                                for: 'engineUpgrade-' + item.value,
+                                class: 'form-check-label',
+                            })
+                            .text(' ' + item.id)
+                    )
+            );
+        });
+
+        $.each(tempList, function (key, item) {
+            // if (item.value == ' ') { item.value = '' };
+            $('#climate').append(new Option(item.id, item.value));
+        });
+
+        $.each(optionsList, function (key, item) {
+            $('#additionalFieldset').append(
+                $('<div>')
+                    .prop({ class: 'form-check' })
+                    .append(
+                        $('<input>').prop({
+                            type: 'checkbox',
+                            id: 'additional-' + item.value,
+
+                            name: 'additional',
+                            value: item.value,
+                            class: 'form-check-input ch-mark'
+                        })
+                    )
+                    .append(
+                        $('<label>')
+                            .prop({
+                                for: 'additional-' + item.value,
+                                class: 'form-check-label',
+                            })
+                            .text(' ' + item.id)
+                    )
+            );
+        });
+    }
 
     //картинки типов 
     const cheme_img = {
@@ -12,6 +163,7 @@ $(document).ready(function () {
             'Д': 'epcTypeD.jpg',
         },
     };
+
 
     // ПРОГРУЗКА буквы привода С ТАБЛИЦЫ
     $('#epPlace').on('change', function (e) {
@@ -367,7 +519,7 @@ $(document).ready(function () {
 
     // Вывод сертификата и декларации
     $('#epPlace').on('change', function (e) {
-        if (document.querySelector("#epPlace-1").checked) {
+        if (document.querySelector("#epPlace-Н").checked) {
             $('#declarationEpc').show();
             $('#declarationEpcV').hide();
             $('#certEpcV').hide();
@@ -385,8 +537,8 @@ $(document).ready(function () {
             $('#engineUpgrade').show();
         } else {
             $('#engineUpgrade').hide();
-            document.querySelector("#engineUpgrade-1").checked = false;
-            document.querySelector("#engineUpgrade-2").checked = false;
+            document.querySelector("#engineUpgrade-К").checked = false;
+            document.querySelector("#engineUpgrade-Ч").checked = false;
         }
     });
 
@@ -456,9 +608,9 @@ $(document).ready(function () {
                 ($('#engineUpgrade')).closest('fieldset').addClass('ReqValueOk');
         }
 
-        let x6 = $("input[name='additional-1']:checked").val() ? $("input[name='additional-1']:checked").val() : '';
-        let x7 = $("input[name='additional-2']:checked").val() ? $("input[name='additional-2']:checked").val() : '';
-        let x8 = $("input[name='additional-3']:checked").val() ? $("input[name='additional-3']:checked").val() : '';
+        let x6 = document.querySelector("#additional-Р").checked ? document.querySelector("#additional-Р").value : '';
+        let x7 = document.querySelector("#additional-24DC").checked ? document.querySelector("#additional-24DC").value : '';
+        let x8 = document.querySelector("#additional-Л").checked ? document.querySelector("#additional-Л").value : '';
 
         let x9 = $('#climate').val() ? $('#climate').val() : 'X';
         switch (x9) {
@@ -593,9 +745,9 @@ $(document).ready(function () {
             return alert('Не выбран тип ввода кабельного кабеля')
         };
         console.log('hea');
-        Option1 = document.querySelector("#additional-1").checked ? 'Резистор' : '';
-        Option2 = document.querySelector("#additional-2").checked ? 'Микровыключатели Д3031' : '';
-        addOptions = Option1 + ' ' + Option2;
+        Option1 = document.querySelector("#additional-Р").checked ? 'Резистор; ' : '';
+        Option2 = document.querySelector("#additional-24DC").checked ? 'Микровыключатели Д3031; ' : '';
+        addOptions = Option1 + Option2;
         // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         // json0
@@ -621,10 +773,10 @@ $(document).ready(function () {
         // json1 = [j10, j11, j12, j13, j14, j15, j16, j17, j18];
 
         //json2
-        let j20 = $("input[name='epPlace']:checked").closest('.form-check').find('.form-check-label').text(); //исполнение по назначению
+        let j20 = $("input[name='epPlace']:checked").closest('.form-check').find('.form-check-label').text().trim(); //исполнение по назначению
         let j21 = 'Запорная'; //режим работы
         let j22 = 'IP54'; //Влагозащита
-        let j23 = document.querySelector("#additional-3").checked ? 'Закрывание против часовой стрелке' : 'Закрывание по часовой стрелке'; //Вращение вых вала
+        let j23 = document.querySelector("#additional-Л").checked ? 'Закрывание против часовой стрелке' : 'Закрывание по часовой стрелке'; //Вращение вых вала
         let j24 = $("select[name='climate'] option:selected").text(); //Температура
         // json2 = [j20, j21, j22, j23, j24];
 
@@ -671,7 +823,7 @@ $(document).ready(function () {
 
         //json6
         let j60 = $("input[name='epPlace']:checked").val(); //буква исполнения классики
-        let j61 = document.querySelector("#engineUpgrade-2").checked ? 'Под квадрат' : 'Под кулачки';//Тип присоединения выходного вала
+        let j61 = document.querySelector("#engineUpgrade-Ч").checked ? 'Под квадрат' : 'Под кулачки';//Тип присоединения выходного вала
         let j62 = ''; //Кабельные вводы
         let j63 = ''; //Штепсельные разъемы
         let j64 = ''; //Тип подводимых кабелей

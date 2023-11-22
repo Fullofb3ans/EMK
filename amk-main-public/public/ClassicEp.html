@@ -110,18 +110,6 @@
 							</legend>
 							<div class="col-sm-9" id="epPlace">
 								<legend class="col-form-label col-sm-3 pt-0">Исполнение электропривода по взрывозащите:</legend>
-								<div class="form-check">
-									<input class="form-check-input ch-mark" type="radio" name="epPlace" id="epPlace-1" required value="Н" />
-									<label class="form-check-label" for="epPlace-1">Общего назначения</label>
-								</div>
-								<div class="form-check">
-									<input class="form-check-input ch-mark" type="radio" name="epPlace" id="epPlace-2" value="В" />
-									<label class="form-check-label" for="epPlace-2">Взрывозащищенное 1ExdbIIBT4Gb</label>
-								</div>
-								<div class="form-check">
-									<input class="form-check-input ch-mark" type="radio" name="epPlace" id="epPlace-3" value="С" />
-									<label class="form-check-label" for="epPlace-3">Взрывозащищенное 1ExdbeIICT4Gb</label>
-								</div>
 							</div>
 						</fieldset>
 
@@ -142,14 +130,6 @@
 							<legend class="blockNumber">2.1</legend>
 							<div class="col-sm-9">
 								<legend class="col-form-label col-sm-3 pt-0">Модификация электропривода:</legend>
-								<div class="form-check">
-									<input class="form-check-input ch-mark" type="radio" value="К" name="engineUpgrade" id="engineUpgrade-1" />
-									<label class="form-check-label" for="engineUpgrade-1">"Под кулачки"</label>
-								</div>
-								<div class="form-check">
-									<input class="form-check-input ch-mark" type="radio" value="Ч" name="engineUpgrade" id="engineUpgrade-2" />
-									<label class="form-check-label" for="engineUpgrade-2">"Под квадрат"</label>
-								</div>
 							</div>
 						</fieldset>
 					</div>
@@ -261,12 +241,12 @@
 							<legend class="col-form-label col-sm-3 pt-0">Климатическое исполнение и категория размещения привода:</legend>
 							<select class="form-select form-element ch-mark" data-step="4" name="climate" id="climate">
 								<option selected disabled>Выберите значение</option>
-								<option id="u1" value="У1">-45°C/+40°C - 100% при 25°C - (У1)</option>
+								<!-- <option id="u1" value="У1">-45°C/+40°C - 100% при 25°C - (У1)</option>
 								<option id="t1" value="Т1">-10°C/+50°C - 100% при 35°C - (Т1)</option>
 								<option id="uxl1" value="УХЛ1">-60°C/+40°C - 100% при 25°C - (УХЛ1)</option>
 								<option id="u2" value="У2">-45°C/+40°C - 100% при 25°C - (У2)</option>
 								<option id="t2" value="Т2">-10°C/+50°C - 100% при 35°C - (Т2)</option>
-								<option id="uxl2" value="УХЛ2">-60°C/+40°C - 100% при 25°C - (УХЛ2)</option>
+								<option id="uxl2" value="УХЛ2">-60°C/+40°C - 100% при 25°C - (УХЛ2)</option> -->
 							</select>
 						</div>
 					</fieldset>
@@ -275,24 +255,8 @@
 						<legend class="blockNumber">12</legend>
 						<div class="col-sm-9">
 							<legend class="col-form-label col-sm-3 pt-0">Наличие дополнительных опций:</legend>
-							<div class="form-check">
-								<input class="form-check-input ch-mark" type="checkbox" value="Р" name="additional-1" id="additional-1" />
-								<label class="form-check-label" for="additional-1">Резистор</label>
-							</div>
-							<div class="form-check">
-								<input class="form-check-input ch-mark" type="checkbox" value="24DC" name="additional-2" id="additional-2" />
-								<label class="form-check-label" for="additional-2">Микровыключатели Д3031</label>
-							</div>
-							<div class="form-check">
-								<input class="form-check-input ch-mark" type="checkbox" value="Л" name="additional-3" id="additional-3" />
-								<label class="form-check-label" for="additional-3">Закрывание против часовой стрелке</label>
-							</div>
 						</div>
 					</fieldset>
-					<!-- </div> -->
-
-					<!-- <div id="step-5"> -->
-					<!-- </div> -->
 				</div>
 
 				<div id="step-6">
@@ -323,17 +287,6 @@
 								<label for="phone"><b>Телефон:</b></label>
 								<br />
 								<input class="form-input form-element input" id="phone" type="number" style="margin-top: 2.5%" placeholder="Введите телефон" required />
-								<style>
-									input::-webkit-outer-spin-button,
-									input::-webkit-inner-spin-button {
-										-webkit-appearance: none;
-										margin: 0;
-									}
-
-									input[type='number'] {
-										-moz-appearance: textfield;
-									}
-								</style>
 							</div>
 							<div class="mb-3" id="persInfo-4">
 								<label for="email"><b>Email:</b></label>
@@ -407,10 +360,7 @@
 		</main>
 		<footer class="page-footer #ff8a65 deep-orange lighten-2">
 			<div className="footer-copyright">
-				<div class="container">
-					© ЭМК 2023
-					<!-- <a class="grey-text text-lighten-4 right" href="#!">ЕМК</a> -->
-				</div>
+				<div class="container">© ЭМК 2023</div>
 			</div>
 		</footer>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
