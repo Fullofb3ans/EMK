@@ -480,17 +480,22 @@ $(document).ready(function () {
                 $("input[name='execution']").closest('fieldset').addClass('ReqValueOk');
         }
 
-        let x3 = $('#flange').val() ? $('#flange').val() : 'X';
+        let x3 = $('#flange').val() ? $('#flange').val() : 'X'; // Тип присоединения к арматуре
         switch (x3) {
             case 'X':
-                ($('#flange')).closest('fieldset').removeClass('ReqValueOk');
-                ($('#flange')).closest('fieldset').addClass('noReqValue');
+                $('#flange').closest('fieldset').removeClass('ReqValueOk');
+                $('#flange').closest('fieldset').addClass('noReqValue');
                 break;
             default:
-                ($('#flange')).closest('fieldset').removeClass('noReqValue');
-                ($('#flange')).closest('fieldset').addClass('ReqValueOk');
+                if (x3.includes('А')) {
+                    x3 = 'А';
+                }
+                else if (x3.includes('М')) {
+                    x3 = 'М';
+                }
+                $('#flange').closest('fieldset').removeClass('noReqValue');
+                $('#flange').closest('fieldset').addClass('ReqValueOk');
         }
-
         let x4 = $('#upper-limit').val() ? $('#upper-limit').val() : 'X';
         switch (x4) {
             case 'X':

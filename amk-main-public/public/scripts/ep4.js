@@ -704,6 +704,12 @@ $(document).ready(function () {
                 $('#flange').closest('fieldset').addClass('noReqValue');
                 break;
             default:
+                if (x3.includes('А')) {
+                    x3 = 'А';
+                }
+                else if (x3.includes('М')) {
+                    x3 = 'М';
+                }
                 $('#flange').closest('fieldset').removeClass('noReqValue');
                 $('#flange').closest('fieldset').addClass('ReqValueOk');
         }
