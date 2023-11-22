@@ -3,75 +3,82 @@ $(document).ready(function () {
     listToHtml();
     function listToHtml() {
 
-        const executionList = [
-            {
-                "id": "Общего назначения",
-                "value": "Н"
-            },
-            {
-                "id": "Взрывозащищенное 1ExdbIIBT4Gb",
-                "value": "В"
-            },
-            {
-                "id": "Взрывозащищенное 1ExdbeIICT4Gb",
-                "value": "С"
-            }
-        ]
+        const jsonListToHtml = {
+            // Исполнение
+            '1': [
+                {
+                    "id": "Общего назначения",
+                    "value": "Н"
+                },
+                {
+                    "id": "Взрывозащищенное 1ExdbIIBT4Gb",
+                    "value": "В"
+                },
+                {
+                    "id": "Взрывозащищенное 1ExdbeIICT4Gb",
+                    "value": "С"
+                }
+            ],
 
-        const upgradeFlangeList = [
-            {
-                "id": "Под кулачки",
-                "value": "К"
-            },
-            {
-                "id": "Под квадрат",
-                "value": "Ч"
-            }
-        ]
+            // Модификация(Под кулачки, под квадрат)
+            '2.1':
+                [
+                    {
+                        "id": "Под кулачки",
+                        "value": "К"
+                    },
+                    {
+                        "id": "Под квадрат",
+                        "value": "Ч"
+                    }
+                ],
 
-        const tempList = [
-            {
-                "id": "-45°C/+40°C - 100% при 25°C - (У1)",
-                "value": "У1"
-            },
-            {
-                "id": "-10°C/+50°C - 100% при 35°C - (Т1)",
-                "value": "Т1"
-            },
-            {
-                "id": "-60°C/+40°C - 100% при 25°C - (УХЛ1)",
-                "value": "УХЛ1"
-            },
-            {
-                "id": "-45°C/+40°C - 100% при 25°C - (У2)",
-                "value": "У2"
-            },
-            {
-                "id": "-10°C/+50°C - 100% при 35°C - (Т2)",
-                "value": "Т2"
-            },
-            {
-                "id": "-60°C/+40°C - 100% при 25°C - (УХЛ2)",
-                "value": "УХЛ2"
-            }
-        ]
+            // Температура
+            '11': [
+                {
+                    "id": "-45°C/+40°C - 100% при 25°C - (У1)",
+                    "value": "У1"
+                },
+                {
+                    "id": "-10°C/+50°C - 100% при 35°C - (Т1)",
+                    "value": "Т1"
+                },
+                {
+                    "id": "-60°C/+40°C - 100% при 25°C - (УХЛ1)",
+                    "value": "УХЛ1"
+                },
+                {
+                    "id": "-45°C/+40°C - 100% при 25°C - (У2)",
+                    "value": "У2"
+                },
+                {
+                    "id": "-10°C/+50°C - 100% при 35°C - (Т2)",
+                    "value": "Т2"
+                },
+                {
+                    "id": "-60°C/+40°C - 100% при 25°C - (УХЛ2)",
+                    "value": "УХЛ2"
+                }
+            ],
 
-        const optionsList = [
-            {
-                "id": "Резистор",
-                "value": "Р"
-            },
-            {
-                "id": "Микровыключатели Д3031",
-                "value": "24DC"
-            },
-            {
-                "id": "Закрывание против часовой стрелке",
-                "value": "Л"
-            }
-        ]
+            // Дополнительное оснащение
+            '12': [
+                {
+                    "id": "Резистор",
+                    "value": "Р"
+                },
+                {
+                    "id": "Микровыключатели Д3031",
+                    "value": "24DC"
+                },
+                {
+                    "id": "Закрывание против часовой стрелке",
+                    "value": "Л"
+                }
+            ]
+        }
 
-        $.each(executionList, function (key, item) {
+        $.each(jsonListToHtml[1], function (key, item) {
             $('#epPlace').append(
                 $('<div>')
                     .prop({ class: 'form-check' })
@@ -96,7 +103,7 @@ $(document).ready(function () {
             );
         });
 
-        $.each(upgradeFlangeList, function (key, item) {
+        $.each(jsonListToHtml[2.1], function (key, item) {
             $('#engineUpgrade').append(
                 $('<div>')
                     .prop({ class: 'form-check' })
@@ -121,12 +128,12 @@ $(document).ready(function () {
             );
         });
 
-        $.each(tempList, function (key, item) {
+        $.each(jsonListToHtml[11], function (key, item) {
             // if (item.value == ' ') { item.value = '' };
             $('#climate').append(new Option(item.id, item.value));
         });
 
-        $.each(optionsList, function (key, item) {
+        $.each(jsonListToHtml[12], function (key, item) {
             $('#additionalFieldset').append(
                 $('<div>')
                     .prop({ class: 'form-check' })

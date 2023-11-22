@@ -3,23 +3,25 @@ $(document).ready(function () {
     listToHtml();
 
     function listToHtml() {
-        const executionList = [
-            {
-                "id": "Взрывозащищенное исполнение",
-                "value": "В"
-            },
-            {
-                "id": "Общепромышленное исполнение в металлическом корпусе",
-                "value": "Н"
-            },
-            {
-                "id": "Общепромышленное исполнение в пластиковом корпусе",
-                "value": "П"
-            }
-        ]
+        const jsonListToHtml = {
+            // Исполнение
+            '1': [
+                {
+                    "id": "Взрывозащищенное исполнение",
+                    "value": "В"
+                },
+                {
+                    "id": "Общепромышленное исполнение в металлическом корпусе",
+                    "value": "Н"
+                },
+                {
+                    "id": "Общепромышленное исполнение в пластиковом корпусе",
+                    "value": "П"
+                }
+            ],
 
-        const roundControlList = [
-            {
+            // Контроль
+            '2': [{
                 "id": "Контроль по микровыключателям или потенциометрам привода",
                 "value": "1"
             },
@@ -27,10 +29,10 @@ $(document).ready(function () {
                 "id": "Контроль по цифровым датчикам привода",
                 "value": "2"
             }
-        ]
+            ],
 
-        const engineList = [
-            {
+            // Питание ВИМУ
+            '3': [{
                 "id": "Трехфазовое электропитание (380 В, 50 Гц), электромеханический пускатель в ВИМУ",
                 "value": "1"
             },
@@ -46,10 +48,10 @@ $(document).ready(function () {
                 "id": "Однофазное электропитание (220 В, 50 Гц), твердотельный пускатель ВИМУ, двигатель привода с конденсатором",
                 "value": "4"
             }
-        ]
+            ],
 
-        const optionsSelectList =
-            [
+            // ДОП ОСНАЩЕНИЕ
+            '4.1': [
                 {
                     "id": "Стандартное оснащение",
                     "value": ""
@@ -74,123 +76,130 @@ $(document).ready(function () {
                     "id": "Двенадцать сигнальных реле и дискретное управлением с использованием пятиканальной линии связи 220 В",
                     "value": "W"
                 }
+            ],
+
+            // ДОП ОСНАЩЕНИЕ
+            '4.2': [
+                {
+                    "id": "Твердотельный пускатель",
+                    "value": "T"
+                },
+                {
+                    "id": "Переключатель режимов работы на панели управления",
+                    "value": "S"
+                },
+                {
+                    "id": "Канал связи Bluetooth",
+                    "value": "B"
+                },
+                {
+                    "id": "Регистратор параметров состояния и конфигурации привода",
+                    "value": "R"
+                }
+            ],
+
+            // ТЕМПЕРАТУРА
+            '5': [
+                {
+                    "id": "25°C/+60°C - 100% при 25°C - (У1)",
+                    "value": "1"
+                },
+                {
+                    "id": "40°C/+60°C - 100% при 25°C - (У1)",
+                    "value": "2"
+                },
+                {
+                    "id": "60°C/+60°C - 100% при 25°C - (УХЛ1)",
+                    "value": "3"
+                },
+                {
+                    "id": "10°C/+60°C - 100% при 45°C - (Т1)",
+                    "value": "4"
+                },
+                {
+                    "id": "40°C/+40°C - 100% при 25°C - (М1)",
+                    "value": "5"
+                },
+                {
+                    "id": "40°C/+40°C - 98% при 25°C - (М5.1)",
+                    "value": "6"
+                }
+            ],
+
+            // ЗАЩИТА
+            '6': [
+                {
+                    "id": "IP67",
+                    "value": "1"
+                },
+                {
+                    "id": "IP68",
+                    "value": "2"
+                }
+            ],
+
+            // ЦВЕТ
+            '7': [
+                {
+                    "id": "Серый",
+                    "value": "1"
+                },
+                {
+                    "id": "По спецификации заказа",
+                    "value": "2"
+                }
+            ],
+
+            // Электр подключение
+            '8': [
+                {
+                    "id": "Заглушки на местах трех кабельный вводов, штепсельное подключение внутри привода",
+                    "value": "0"
+                },
+                {
+                    "id": "Кабельные вводы, 3 штуки, клеемное подключение внутри привода",
+                    "value": "1"
+                },
+                {
+                    "id": "Кабельные вводы, 3 штуки, штепсельное подключение внутри привода",
+                    "value": "2"
+                },
+                {
+                    "id": "Штепсельное подключение без кабельных вводов",
+                    "value": "3"
+                },
+                {
+                    "id": "Заглушки на местах кабельных вводов, клеемное подключение внутри привода",
+                    "value": "4"
+                },
+                {
+                    "id": "Кабельные вводы, 4-7шт. по спецификации заказа, клеммное подключение внутри привода",
+                    "value": "6"
+                },
+                {
+                    "id": "Кабельные вводы, 4-7шт. по спецификации заказа, штепсельное подключение внутри привода",
+                    "value": "7"
+                }
+            ],
+
+            // Специальное исполнение
+            '9': [
+                {
+                    "id": "Нет специального исполнения",
+                    "value": ""
+                },
+                {
+                    "id": "Комплектуется кабелями для подключения привода",
+                    "value": "К"
+                },
+                {
+                    "id": "Исполнение ВИМУ для комплектования приводов серии ЭПН",
+                    "value": "Э"
+                }
             ]
+        }
 
-        const optionsCheckList = [
-            {
-                "id": "Твердотельный пускатель",
-                "value": "T"
-            },
-            {
-                "id": "Переключатель режимов работы на панели управления",
-                "value": "S"
-            },
-            {
-                "id": "Канал связи Bluetooth",
-                "value": "B"
-            },
-            {
-                "id": "Регистратор параметров состояния и конфигурации привода",
-                "value": "R"
-            }
-        ]
-
-        const tempList = [
-            {
-                "id": "25°C/+60°C - 100% при 25°C - (У1)",
-                "value": "1"
-            },
-            {
-                "id": "40°C/+60°C - 100% при 25°C - (У1)",
-                "value": "2"
-            },
-            {
-                "id": "60°C/+60°C - 100% при 25°C - (УХЛ1)",
-                "value": "3"
-            },
-            {
-                "id": "10°C/+60°C - 100% при 45°C - (Т1)",
-                "value": "4"
-            },
-            {
-                "id": "40°C/+40°C - 100% при 25°C - (М1)",
-                "value": "5"
-            },
-            {
-                "id": "40°C/+40°C - 98% при 25°C - (М5.1)",
-                "value": "6"
-            }
-        ]
-
-        const protectList = [
-            {
-                "id": "IP67",
-                "value": "1"
-            },
-            {
-                "id": "IP68",
-                "value": "2"
-            }
-        ]
-
-        const colorList = [
-            {
-                "id": "Серый",
-                "value": "1"
-            },
-            {
-                "id": "По спецификации заказа",
-                "value": "2"
-            }
-        ]
-
-        const connectList = [
-            {
-                "id": "Заглушки на местах трех кабельный вводов, штепсельное подключение внутри привода",
-                "value": "0"
-            },
-            {
-                "id": "Кабельные вводы, 3 штуки, клеемное подключение внутри привода",
-                "value": "1"
-            },
-            {
-                "id": "Кабельные вводы, 3 штуки, штепсельное подключение внутри привода",
-                "value": "2"
-            },
-            {
-                "id": "Штепсельное подключение без кабельных вводов",
-                "value": "3"
-            },
-            {
-                "id": "Заглушки на местах кабельных вводов, клеемное подключение внутри привода",
-                "value": "4"
-            },
-            {
-                "id": "Кабельные вводы, 4-7шт. по спецификации заказа, клеммное подключение внутри привода",
-                "value": "6"
-            },
-            {
-                "id": "Кабельные вводы, 4-7шт. по спецификации заказа, штепсельное подключение внутри привода",
-                "value": "7"
-            }
-        ]
-
-        const specialList = [
-            {
-                "id": "Нет специального исполнения",
-                "value": ""
-            },
-            {
-                "id": "Комплектуется кабелями для подключения привода",
-                "value": "К"
-            },
-            {
-                "id": "Исполнение ВИМУ для комплектования приводов серии ЭПН",
-                "value": "Э"
-            }
-        ]
-
-        $.each(executionList, function (key, item) {
+        $.each(jsonListToHtml[1], function (key, item) {
             $('#execution-wrap').append(
                 $('<div>')
                     .prop({ class: 'form-check' })
@@ -218,7 +227,7 @@ $(document).ready(function () {
 
         // ПРОГРУЗКА Контроля положения и крутящего момента
         // fetchResult[0].sort((a, b) => a - b);
-        $.each(roundControlList, function (key, item) {
+        $.each(jsonListToHtml[2], function (key, item) {
             $('#roundControl').append(
                 $('<div>')
                     .prop({ class: 'form-check' })
@@ -244,7 +253,7 @@ $(document).ready(function () {
 
 
         // ПРОГРУЗКА Напряжение питания двигателя:
-        $.each(engineList, function (key, item) {
+        $.each(jsonListToHtml[3], function (key, item) {
             $('#engineStartType').append(
                 $('<div>')
                     .prop({ class: 'form-check' })
@@ -271,7 +280,7 @@ $(document).ready(function () {
 
         // Прогрузка доп оснащения
         // fetchResult[0].sort((a, b) => a - b);
-        $.each(optionsSelectList, function (key, item) {
+        $.each(jsonListToHtml[4.1], function (key, item) {
             // if (item.value == ' ') { item.value = '' };
             $('#controle-blocks-options').append(new Option(item.id, item.value));
         });
@@ -279,7 +288,7 @@ $(document).ready(function () {
 
         // ПРОГРУЗКА чекбокса доп оснащения:
         // fetchResult[0].sort((a, b) => a - b);
-        $.each(optionsCheckList, function (key, item) {
+        $.each(jsonListToHtml[4.2], function (key, item) {
             $('#control-block-optionssetCheckBox').append(
                 $('<div>')
                     .prop({ class: 'form-check' })
@@ -306,14 +315,14 @@ $(document).ready(function () {
 
         // Прогрузка Температуры
         // fetchResult[0].sort((a, b) => a - b);
-        $.each(tempList, function (key, item) {
+        $.each(jsonListToHtml[5], function (key, item) {
             $('#climatic-modification').append(new Option(item.id, item.value));
         });
 
 
 
         // ПРОГРУЗКА IP ЗАЩИТЫ:
-        $.each(protectList, function (key, item) {
+        $.each(jsonListToHtml[6], function (key, item) {
             $('#waterProtection').append(
                 $('<div>')
                     .prop({ class: 'form-check' })
@@ -341,7 +350,7 @@ $(document).ready(function () {
         // ПРОГРУЗКА цвета:
 
         // fetchResult[0].sort((a, b) => a - b);
-        $.each(colorList, function (key, item) {
+        $.each(jsonListToHtml[7], function (key, item) {
             $('#colorHere').append(
                 $('<div>')
                     .prop({ class: 'form-check' })
@@ -369,7 +378,7 @@ $(document).ready(function () {
         // ПРОГРУЗКА электрического подключения:
 
         // fetchResult[0].sort((a, b) => a - b);
-        $.each(connectList, function (key, item) {
+        $.each(jsonListToHtml[8], function (key, item) {
             $('#electricity').append(
                 $('<div>')
                     .prop({ class: 'form-check' })
@@ -393,11 +402,10 @@ $(document).ready(function () {
             );
         });
 
-
         // ПРОГРУЗКА СПЕЦИАЛЬНОГО ПОДКЛЮЧЕНИЯ:
 
         // fetchResult[0].sort((a, b) => a - b);
-        $.each(specialList, function (key, item) {
+        $.each(jsonListToHtml[9], function (key, item) {
             $('#speciality').append(
                 $('<div>')
                     .prop({ class: 'form-check' })
