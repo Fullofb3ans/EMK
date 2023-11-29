@@ -441,7 +441,7 @@
 						</div>
 					</fieldset>
 
-					<fieldset class="row mb-3 ep4-only noReqValue">
+					<fieldset class="row mb-3 ep4-only noReqValue" id="electricityField">
 						<legend class="blockNumber">
 							15
 							<a href="#" class="" data-bs-toggle="modal" data-bs-target="#cabelModal">
@@ -487,6 +487,79 @@
 								<div class="form-check" id="connectionForEp4-8div">
 									<input class="form-check-input ch-mark" type="radio" value="7" name="connectionForEp4" id="connectionForEp4-8" />
 									<label class="form-check-label" for="connectionForEp4-8">Кабельные вводы, 4-7шт. по спецификации заказа, штепсельное подключение внутри привода</label>
+								</div>
+							</div>
+						</div>
+					</fieldset>
+
+					<fieldset style="display: none" class="row mb-3 ReqValueOk" id="standartField">
+						<div class="col-sm-9">
+							<legend class="col-form-label col-sm-3 pt-0">Дополнительная информация по кабелям:</legend>
+							<input class="form-select form-element ch-mark ch-cs" name="standart" id="standart" style="color: black; background-color: #e4e4e48c" disabled />
+						</div>
+					</fieldset>
+
+					<fieldset class="row mb-3 optionalField" id="cabelsTypeField">
+						<legend class="blockNumber">
+							15.1
+							<a href="#" class="" data-bs-toggle="modal" data-bs-target="#cabelTypeModal">
+								<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
+									<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+									<path
+										d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z" />
+								</svg>
+							</a>
+						</legend>
+						<div class="cabelsType">
+							<legend class="col-form-label col-sm-3 pt-0">Требования по подключаемым кабелям:</legend>
+							<div>
+								<input type="checkbox" value="protect" name="protCabel" id="protCabel" />
+								<label for="protCabel">Бронированный </label>
+								<div id="protCabelDiv" style="display: none">
+									<div id="protCabelNumDiv">
+										<input class="form-input" type="text" name="protCabelNum" id="protCabelNum" placeholder="Укажите кол-во" />шт.
+										<label class="form-check-label" for="protCabelNum"></label>
+									</div>
+									<div id="protCabelInputDiv">
+										<input class="form-input" type="text" name="protCabelInput" id="protCabelInput" placeholder="Укажите диаметр по броне" />мм.
+										<label class="form-check-label" for="protCabelInput"></label>
+									</div>
+								</div>
+							</div>
+							<div>
+								<input type="checkbox" value="metal" name="metal" id="metal" />
+								<label for="metal">Под металлорукавом</label>
+								<div id="metalDiv" style="display: none">
+									<div id="metalNumDiv">
+										<input class="form-input" type="text" name="metalNum" id="metalNum" placeholder="Укажите кол-во" />шт.
+										<label class="form-check-label" for="metalNum"></label>
+									</div>
+									<div id="metalNumInputDiv">
+										<input class="form-input" type="text" name="metalInput" id="metalInput" placeholder="Укажите диаметр металлорукава" />мм.
+										<label class="form-check-label" for="metalNumInput"></label>
+									</div>
+								</div>
+							</div>
+							<div>
+								<input type="checkbox" value="protectMetal" name="protectMetal" id="protectMetal" />
+								<label for="protectMetal">Под бронированным в металлорукаве</label>
+								<div id="protectMetalDiv" style="display: none">
+									<div id="protectMetalNumDiv">
+										<input class="form-input" type="text" name="protectMetalNum" id="protectMetalNum" placeholder="Укажите кол-во" />шт.
+										<label class="form-check-label" for="protectMetalNum"></label>
+									</div>
+									<div id="protectMetalInputDiv">
+										<input class="form-input" type="text" name="protectMetalInput" id="protectMetalInput" placeholder="Укажите диаметр по броне" />мм.
+										<label class="form-check-label" for="protectMetalInput"></label>
+									</div>
+								</div>
+							</div>
+							<div>
+								<input type="checkbox" value="stubs" name="stubs" id="stubs" />
+								<label for="stubs">Заглушки</label>
+								<div style="display: none" id="stubsDiv">
+									<input class="form-input" type="text" name="stubsNum" id="stubsNum" placeholder="Укажите кол-во" />шт.
+									<label class="form-check-label" for="stubsNum"></label>
 								</div>
 							</div>
 						</div>
@@ -677,9 +750,9 @@
 				</button>
 			</div>
 
-			<div class="modal" id="block-configure-m1" tabindex="-1">
+			<div class="modal" id="block-configure-m1" tabindex="-1" style="z-index: 99999">
 				<div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
-					<div class="modal-content">
+					<div class="modal-content" style="width: 95%">
 						<div class="modal-header" style="flex-wrap: wrap">
 							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Закрыть</button>
 							<h5 class="modal-title">Дополнительные опции блока управления серии М1</h5>
@@ -698,13 +771,6 @@
 								<div class="form-check mb-3">
 									<input class="form-check-input" type="radio" name="m1-signal" value="1" id="m1-3" data-position="2" />
 									<label class="form-check-label" for="m1-3">Сигнализация о текущем положении выходного вала посредством токового сигнала, изменяющегося пропорционально пути, пройденному выходным валом привода</label>
-								</div>
-								<div class="form-check mb-3">
-									<input class="form-check-input" type="checkbox" name="m1-signal" value="1" id="m1-4" data-position="3" />
-									<label class="form-check-label" for="m1-4"
-										>Сигнализация факта вращения выходного вала привода посредством замыкания и размыкания сухих контактов выключателя (блинкера) при изменении положения входного путевого вала блока (1 импульс на 1 оборот выходного вала привода (оснащение
-										блока управления блинкером — по отдельному заказу))</label
-									>
 								</div>
 								<div class="form-check mb-3">
 									<input class="form-check-input" type="checkbox" name="m1-signal" value="1" id="m1-5" data-position="4" />
@@ -1370,6 +1436,18 @@
 						</div>
 						<div class="modal-body">
 							<p>Необязательный пункт, укажите его для автоматического подбора подходящих под мощность двигателя параметров.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal" id="cabelTypeModal" tabindex="-1">
+				<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="btn-info" data-bs-dismiss="modal" aria-label="Close">Закрыть</button>
+						</div>
+						<div class="modal-body">
+							<p>При пропуске этого пункта выбирается стандартная комплектация кабелей</p>
 						</div>
 					</div>
 				</div>

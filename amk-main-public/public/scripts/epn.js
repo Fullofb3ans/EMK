@@ -305,6 +305,28 @@ $(document).ready(function () {
         }
     })
 
+    $('#electricityField').on('change', function () {
+        let scheme = $("input[name='constructive-scheme']:checked").val();
+        // СТАНДАРТЫ КАБЕЛЕЙ 
+        if (document.querySelector("#connection-2").checked) {
+            if (scheme == '0' || scheme == '1' || scheme == '11' || scheme == '12') {
+                $('#standartField').show();
+                $('#standart').val('С кабельными вводами под кабели диаметром 6...12 мм.');
+            }
+            else if (scheme == '3' || scheme == '31' || scheme == '32') {
+                $('#standartField').show();
+                $('#standart').val('С кабельными вводами под кабели диаметром 12...18 мм.');
+            }
+            else {
+                $('#standartField').hide();
+                $('#standart').val('');
+            }
+        } else {
+            $('#standartField').hide();
+            $('#standart').val('');
+        }
+    });
+
     $('#schemeFieldSet').on('change', function (e) {
         cur_constructive_scheme = $("input[name='constructive-scheme']:checked").val();
 
@@ -653,6 +675,45 @@ $(document).ready(function () {
         }
     });
 
+    // Обработка доп полей кабелей
+    $('#cabelsTypeField').on('change', function () {
+        if (document.querySelector("#protCabel").checked) {
+            $("#protCabelDiv").show();
+        }
+        else {
+            $("#protCabelInput").val('');
+            $("#protCabelNum").val('');
+            $("#protCabelDiv").hide();
+        }
+
+        if (document.querySelector("#metal").checked) {
+            $("#metalDiv").show();
+        }
+        else {
+            $("#metalInput").val('');
+            $("#metalNum").val('');
+            $("#metalDiv").hide();
+        }
+
+        if (document.querySelector("#protectMetal").checked) {
+            $("#protectMetalDiv").show();
+        }
+        else {
+            $("#protectMetalInput").val('');
+            $("#protectMetalNum").val('');
+            $("#protectMetalDiv").hide();
+        }
+
+        if (document.querySelector("#stubs").checked) {
+            $("#stubsDiv").show();
+        }
+        else {
+            $("#stubsNum").val('');
+            $("#stubsDiv").hide();
+        }
+
+    })
+
     $('#download').on('click', function () {
         if ($("input[name='constructive-scheme']:checked").val() == undefined) {
             goTo = document.querySelector("#schemeFieldSet");
@@ -774,13 +835,20 @@ $(document).ready(function () {
         };
         // json3 = [j30, j31, j32, j33, j34, j35, j36, j37, j38, j39, j310, j311];
 
+        // Кабели
+        let connectionCableType = (document.querySelector("#protCabelNum").value ? 'Бронированный кабель, кол-во: ' + document.querySelector("#protCabelNum").value + 'шт.' + ' Диаметр по броне: ' + document.querySelector("#protCabelInput").value + 'мм.; ' : '') +
+            (document.querySelector("#metalNum").value ? 'Кабель под металлорукавом, кол-во: ' + document.querySelector("#metalNum").value + 'шт.' + ' Диаметр металлорукава: ' + document.querySelector("#metalInput").value + 'мм.; ' : '') +
+            (document.querySelector("#protectMetalNum").value ? 'Кабель под бронированным в металлорукаве, кол-во: ' + document.querySelector("#protectMetalNum").value + 'шт.' + ' Диаметр по броне: ' + document.querySelector("#protectMetalInput").value + 'мм.; ' : '') +
+            (document.querySelector("#stubsNum").value ? 'Заглушки, кол-во: ' + document.querySelector("#stubsNum").value + 'шт.;' : '');
+        // Доп требования
+        let addReq = document.querySelector('#addReqarea').value ? document.querySelector('#addReqarea').value + '; ' : '';
         //json4
         let j40 = $("input[name='connection']:checked").val(); //Электрическое подключение (обозначение)
         let j41 = ''; //Защитный колпак
         let j42 = document.querySelector("#color-1").checked ? 'Серый' : document.querySelector("#ralColor").value; //Цвет
         let j43 = ''; //Механический селектор
         let j44 = addOptions;//Доп опции 
-        let j45 = document.querySelector('#addReqarea').value; //Дополнительные требования
+        let j45 = connectionCableType ? addReq + 'Требования по кабелям: ' + connectionCableType : addReq; //Дополнительные требования
         // json4 = [j40, j41, j42, j43, j44, j45];
 
         //json5
@@ -800,7 +868,6 @@ $(document).ready(function () {
         let j65 = document.querySelector("#powerType").value;
 
         // json6 = [j60, j61, j62, j63];
-
         //json7
         let j70 = '';//Защита от коррозии
         let j71 = '';//Ручной маховик
@@ -914,15 +981,17 @@ $(document).ready(function () {
         m1BlockModal.hide();
     });
 
-    $('#m2-form input').on('change', function (e) {
+    $('#m2Full').on('change', function (e) {
+        let d3 = '';
         let mod = 0;
         $.each($('#m2-form input:checked'), function () {
             mod += Math.pow(2, parseInt($(this).data('position')));
-        });
+        })
+        d3 = document.querySelector("#d3").checked ? 'М' : '';
 
         $('.cur-m2-value')
-            .text('М2' + mod)
-            .val('М2' + mod);
+            .text('М2' + mod + d3)
+            .val('М2' + mod + d3);
     });
 
     $('#clear-m2').on('click', function (e) {
@@ -1135,15 +1204,15 @@ $(document).ready(function () {
     function checkCommandBlock() {
         let m1 = document.querySelector('#m2-1').checked ? 'Сигнализация о двух промежуточных положениях выходного вала посредством двух путевых (промежуточных) выключателей.; ' : '';
         let m2 = document.querySelector('#m2-2').checked ? 'Сигнализация о текущем положении выходного вала посредством изменения сопротивления потенциометра. Настройка на ноль сопротивления потенциометра обратной связи.; ' : '';
-        let m3 = document.querySelector('#m2-3').checked ? ' Сигнализация о текущем положении выходного вала посредством токового сигнала (4–20 мА), изменяющегося пропорционально пути, пройденному выходным валом привода. Настройка токового сигнализатора положения.; ' : '';
-
+        let m3 = document.querySelector('#m2-3').checked ? 'Сигнализация о текущем положении выходного вала посредством токового сигнала (4–20 мА), изменяющегося пропорционально пути, пройденному выходным валом привода. Настройка токового сигнализатора положения.; ' : '';
+        let m4 = document.querySelector("#d3").checked ? 'Микровыключатели Д3031; ' : '';
         let base = document.querySelector('#controle-blocks').value;
         switch (base) {
 
             case 'М20':
                 return 'Базовый набор функций привода с блоком серии М2';
-            case 'М21':
-                return 'Сигнализация о двух промежуточных положениях выходного вала посредством двух путевых (промежуточных) выключателей.';
+            case 'М20М':
+                return 'Базовый набор функций привода с блоком серии М2 + Микровыключатели Д3031';
             case 'ВЭ11':
                 return 'Базовый набор функций';
             case 'ВЭ12':
@@ -1196,7 +1265,7 @@ $(document).ready(function () {
 
             default:
                 console.log(base);
-                return (g6 = m1 + m2 + m3);
+                return (g6 = m1 + m2 + m3 + m4);
         }
     }
 

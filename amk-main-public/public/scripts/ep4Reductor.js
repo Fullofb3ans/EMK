@@ -419,30 +419,120 @@ $(document).ready(function () {
             document.querySelector("#connectionForEp4-7div").style.display = 'flow';
             document.querySelector("#connectionForEp4-8div").style.display = 'flow';
         }
-
     });
-    // Обработка исполнений
-    // $('#specialField').on('change', function (e) {
-    //     if (document.querySelector("#special-1").checked) {
-    //         document.querySelector("#special-2").disabled = true;
-    //         document.querySelector("#special-2").checked = false;
-    //         document.querySelector("#special-3").disabled = true;
-    //         document.querySelector("#special-3").checked = false;
-    //         document.querySelector("#special-4").disabled = true;
-    //         document.querySelector("#special-4").checked = false;
-    //         document.querySelector("#special-5").disabled = true;
-    //         document.querySelector("#special-5").checked = false;
-    //         document.querySelector("#special-6").disabled = true;
-    //         document.querySelector("#special-6").checked = false;
-    //     }
-    //     else {
-    //         document.querySelector("#special-2").disabled = false;
-    //         document.querySelector("#special-3").disabled = false;
-    //         document.querySelector("#special-4").disabled = false;
-    //         document.querySelector("#special-5").disabled = false;
-    //         document.querySelector("#special-6").disabled = false;
-    //     }
-    // })
+
+    // Открытие стандартов вариантов кабелей
+    $('#electricityField').on('change', function () {
+        let scheme = $("input[name='constructive-scheme']:checked").val();
+
+        // СТАНДАРТЫ КАБЕЛЕЙ ОБЩЕПРОМ
+        if (document.querySelector("#execution-Н").checked) {
+            if (scheme == '40') {
+                if (document.querySelector("#connectionForEp4-2").checked || document.querySelector("#connectionForEp4-3").checked) {
+                    $('#standartField').show();
+                    $('#standart').val('С двумя кабельными вводами под кабели без брони диаметром 13-18 мм и одним кабельным вводом под кабель без брони диаметром 9-14 мм.');
+                }
+                else if (document.querySelector("#connectionForEp4-7").checked || document.querySelector("#connectionForEp4-8").checked) {
+                    $('#standartField').show();
+                    $('#standart').val('С двумя кабельными вводами под кабели без брони диаметром 13-18 мм и двумя-четырьмя кабельными вводами под кабель без брони диаметром 9-14 мм.');
+                }
+                else {
+                    $('#standart').val('');
+                    $('#standartField').hide();
+                }
+            }
+            else if (scheme == '41' || scheme == '410') {
+                if (document.querySelector("#connectionForEp4-2").checked || document.querySelector("#connectionForEp4-3").checked) {
+                    $('#standartField').show();
+                    $('#standart').val('С тремя кабельными вводами под кабели без брони диаметром 13-18 мм.');
+                }
+                else if (document.querySelector("#connectionForEp4-7").checked || document.querySelector("#connectionForEp4-8").checked) {
+                    $('#standartField').show();
+                    $('#standart').val('С четырьмя-шестью кабельными вводами под кабели без брони диаметром 9-14 мм и 13-18 мм.');
+                }
+                else {
+                    $('#standart').val('');
+                    $('#standartField').hide();
+                }
+
+            }
+            else if (scheme == '44' || scheme == '43' || scheme == '430') {
+                if (document.querySelector("#connectionForEp4-2").checked || document.querySelector("#connectionForEp4-3").checked) {
+                    $('#standartField').show();
+
+                    $('#standart').val('С тремя кабельными вводами под кабели без брони диаметром 18-25 мм.');
+                }
+                else if (document.querySelector("#connectionForEp4-7").checked || document.querySelector("#connectionForEp4-8").checked) {
+                    $('#standartField').show();
+
+                    $('#standart').val('С четырьмя-шестью кабельными вводами под кабели без брони диаметром 9-14 мм и 18-25 мм.');
+                }
+                else {
+                    $('#standart').val('');
+                    $('#standartField').hide();
+                }
+            }
+        }
+        // СТАНДАРТЫ КАБЕЛЕЙ ВЗРЫВНИКОВ
+        else {
+            if (scheme == '40') {
+                if (document.querySelector("#connectionForEp4-2").checked || document.querySelector("#connectionForEp4-3").checked) {
+                    $('#standartField').show();
+                    $('#standart').val('С двумя кабельными вводами под кабели без брони диаметром 16-17 мм и одним кабельным вводом под кабель без брони диаметром 10.5-12 мм.');
+                }
+                else if (document.querySelector("#connectionForEp4-7").checked || document.querySelector("#connectionForEp4-8").checked) {
+                    $('#standartField').show();
+                    $('#standart').val('С двумя кабельными вводами под кабели без брони диаметром 16-17 мм и двумя-четырьмя кабельными вводами под кабель без брони диаметром 10.5-12 мм.');
+                }
+                else {
+                    $('#standart').val('');
+                    $('#standartField').hide();
+                }
+            }
+            else if (scheme == '41' || scheme == '410') {
+                if (document.querySelector("#connectionForEp4-2").checked || document.querySelector("#connectionForEp4-3").checked) {
+                    $('#standartField').show();
+                    $('#standart').val('С тремя кабельными вводами под кабели без брони диаметром 16-17 мм.');
+                }
+                else if (document.querySelector("#connectionForEp4-7").checked || document.querySelector("#connectionForEp4-8").checked) {
+                    $('#standartField').show();
+                    $('#standart').val('С четырьмя-шестью кабельными вводами под кабели без брони диаметром 10.5-12 мм и 16-17 мм.');
+                }
+                else {
+                    $('#standart').val('');
+                    $('#standartField').hide();
+                }
+            }
+            else if (scheme == '44' || scheme == '43' || scheme == '430') {
+                if (document.querySelector("#connectionForEp4-2").checked || document.querySelector("#connectionForEp4-3").checked) {
+                    $('#standartField').show();
+                    $('#standart').val('С тремя кабельными вводами под кабели без брони диаметром 21.5-23 мм.');
+                }
+                else if (document.querySelector("#connectionForEp4-7").checked || document.querySelector("#connectionForEp4-8").checked) {
+                    $('#standartField').show();
+                    $('#standart').val('С четырьмя-шестью кабельными вводами под кабели без брони диаметром 10.5-12 мм и 21.5-23 мм.');
+                }
+                else {
+                    $('#standart').val('');
+                    $('#standartField').hide();
+                }
+            }
+        }
+    });
+
+
+    // ОБРАБОТКА ИСПОЛНЕНИЯ
+    $('#executionWrapLegend').on('change', function () {
+        switch (true) {
+            case document.querySelector("#execution-Ш").checked:
+            case document.querySelector("#execution-S").checked:
+                $('#M1SinSelect').hide();
+                break;
+            default:
+                $('#M1SinSelect').show();
+                break;
+        }
+    })
 
     // УБИРАЮ 660В(спец исполнение)
     $('.row').on('change', function () {
@@ -466,15 +556,23 @@ $(document).ready(function () {
         }
     });
 
-    $(document).on('change', function (e) {
+    $('#controle-blocks-series').on('change', function (e) {
         let a = document.querySelector('.aVandalCap');
         let cbs = document.querySelector('#controle-blocks-series');
-        if (cbs.value === 'Э1' || cbs.value === 'Э2') {
+        if (cbs.value == 'Э1' || cbs.value == 'Э2') {
+            $('.specialConnection').show();
             $(a).show();
-        } else {
+        } else if (cbs.value == 'Э1S') {
+            $('.specialConnection').show();
             $(a).hide();
         }
+        else {
+            $('.specialConnection').hide();
+            $(a).hide();
+        }
+    });
 
+    $(document).on('change', function (e) {
         let mark_gen = $('#mark-gen');
         let modal_button = $('#modal-button');
         let x2;
@@ -686,7 +784,7 @@ $(document).ready(function () {
             suffix += '-40';
         }
         //
-        if (cbs === 'Э0') {
+        if (document.querySelector('#controle-blocks-series').value === 'Э0') {
             x6 = 'Э01';
             // suffix += '\\ВИМУ-';
         }
@@ -835,13 +933,19 @@ $(document).ready(function () {
 
         // json3 = [j30, j31, j32, j33, j34, j35, j36, j37, j38, j39, j310, j311];
 
+        let connectionCableType = (document.querySelector("#protCabelNum").value ? 'Бронированный кабель, кол-во: ' + document.querySelector("#protCabelNum").value + 'шт.' + ' Диаметр по броне: ' + document.querySelector("#protCabelInput").value + 'мм.; ' : '') +
+            (document.querySelector("#metalNum").value ? 'Кабель под металлорукавом, кол-во: ' + document.querySelector("#metalNum").value + 'шт.' + ' Диаметр металлорукава: ' + document.querySelector("#metalInput").value + 'мм.; ' : '') +
+            (document.querySelector("#protectMetalNum").value ? 'Кабель под бронированным в металлорукаве, кол-во: ' + document.querySelector("#protectMetalNum").value + 'шт.' + ' Диаметр по броне: ' + document.querySelector("#protectMetalInput").value + 'мм.; ' : '') +
+            (document.querySelector("#stubsNum").value ? 'Заглушки, кол-во: ' + document.querySelector("#stubsNum").value + 'шт.;' : '');
+        // Доп требования
+        let addReq = document.querySelector('#addReqarea').value ? document.querySelector('#addReqarea').value + '; ' : '';
         //json4
         let j40 = $("input[name='connectionForEp4']:checked").val(); //Электрическое подключение (цифра)
         let j41 = document.querySelector('#cap').checked ? 'Есть,' + ' вылет штока: ' + document.querySelector("#stockForCap").value + 'мм.' : 'Отсутствует'; //Защитный колпак
         let j42 = document.querySelector('#color-1').checked ? 'Серый' : document.querySelector('#ralColor').value; //Цвет
         let j43 = ''; //Механический селектор
         let j44 = addOptions; //Доп опции
-        let j45 = document.querySelector('#addReqarea').value; //Дополнительные требования
+        let j45 = connectionCableType ? addReq + 'Требования по кабелям: ' + connectionCableType : addReq; //Дополнительные требования
         // json4 = [j40, j41, j42, j43, j44, j45];
 
         //json5
@@ -873,7 +977,6 @@ $(document).ready(function () {
         }
 
         // json6 = [j60, j61, j62, j63];
-
         //json7
         let j70 = ''; //Защита от коррозии
         let j71 = ''; //Ручной маховик
@@ -994,15 +1097,14 @@ $(document).ready(function () {
         let upLim = document.querySelector('#upper-limit').value;
         let rotationFrequency = document.getElementById('rotation-frequency').value;
         let scheme = $("input[name='constructive-scheme']:checked").val();
-        let closeNumbers = document.querySelector('#closeNumbersForM').value;
         let fetchResult = [];
 
-        if (upLim && rotationFrequency && scheme && closeNumbers > 0.8 && closeNumbers < 1250) {
+        if (upLim && rotationFrequency && scheme) {
             fetch('https://emk.websto.pro/M1', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json;charset=utf-8' },
                 body: JSON.stringify({
-                    a: [scheme, upLim, rotationFrequency, closeNumbers],
+                    a: [scheme, upLim, rotationFrequency, '21'],
                 }),
             })
                 .then((res) => res.json())
@@ -1011,37 +1113,18 @@ $(document).ready(function () {
                     for (i in res) fetchResult.push(res[i]);
                     // fetchResult[0].sort((a, b) => a - b);
                     document.querySelector("#mLimitNum").value = fetchResult[0];
+                    $('#m1-form').trigger('change');
                 });
         }
     }
 
-    $('#closeNumbersForM').on('keyup', function (e) {
-        if (document.querySelector("#closeNumbersForM").value) {
-            document.querySelector('.closeNumbersFieldForM').classList.remove('noReqValue');
-            document.querySelector('.closeNumbersFieldForM').classList.add('ReqValueOk');
-        } else {
-            document.querySelector('.closeNumbersFieldForM').classList.remove('ReqValueOk');
-            document.querySelector('.closeNumbersFieldForM').classList.add('noReqValue');
-        };
+    $("#block-configure-m1").on('shown.bs.modal', function () {
         yo();
-    })
-
-    $('#closeNumbersForM').on('change', function () {
-        if (document.querySelector("#closeNumbersForM").value > 0.8 && document.querySelector("#closeNumbersForM").value < 1250) {
-            $('#m1-submit').prop('disabled', false)
-        }
-        else {
-            $('#m1-submit').prop('disabled', true);
-            alert('Возможное количество оборотов в диапазоне от 0.8 до 1250')
-        }
-    })
+    });
 
     $('#clear-m1').on('click', function (e) {
-        document.querySelector('#upper-limitForM1set').classList.add('noReqValue');
-        document.querySelector('#upper-limitForM1set').classList.remove('ReqValueOk');
         $('#m1-form')[0].reset();
         $('#upper-limitForM1').val('');
-        document.querySelector("#m1-submit").disabled = true;
         $('.cur-m1-value').text('М10').val('M10');
     });
 
@@ -1260,12 +1343,20 @@ $(document).ready(function () {
 
     // открытие сертификатов и деклараций под общепром и взрыв
     $('#execution-wrap').on('change', function (e) {
+        $('#electricityField').trigger('change');
         if (document.querySelector("#execution-Н").checked) {
+            // 3 кабель
+            $('#connectionForEp4-4div').show();
+            // 
             $('#declaration').show();
             $('#declarationV').hide();
             $('#certV').hide();
         }
         else {
+            // 3 кабель
+            document.querySelector("#connectionForEp4-4").checked = false;
+            $('#connectionForEp4-4div').hide();
+            // 
             $('#declaration').hide();
             $('#declarationV').show();
             $('#certV').show();
@@ -1286,9 +1377,6 @@ $(document).ready(function () {
         let m2 = document.querySelector('#m1-2').checked ? 'Сигнализация о текущем положении выходного вала посредством изменения сопротивления потенциометра; ' : '';
         let m3 = document.querySelector('#m1-3').checked
             ? 'Сигнализация о текущем положении выходного вала посредством токового сигнала, изменяющегося пропорционально пути, пройденному выходным валом привода; '
-            : '';
-        let m4 = document.querySelector('#m1-4').checked
-            ? 'Сигнализация факта вращения выходного вала привода посредством замыкания и размыкания сухих контактов выключателя (блинкера) при изменении положения входного путевого вала блока (1 импульс на 1 оборот выходного вала привода (оснащение блока управления блинкером — по отдельному заказу)); '
             : '';
         let m5 = document.querySelector('#m1-5').checked
             ? 'Сигнализация о достигаемых положениях и моментах посредством 4 контактных микровыключателей (код z5=0) или 3-контактных микровыключателей (код z5=1); '
@@ -1414,6 +1502,45 @@ $(document).ready(function () {
             document.querySelector("#control-block-optionsset").classList.add('noReqValue');
         }
     });
+
+    // Обработка доп полей кабелей
+    $('#cabelsTypeField').on('change', function () {
+        if (document.querySelector("#protCabel").checked) {
+            $("#protCabelDiv").show();
+        }
+        else {
+            $("#protCabelInput").val('');
+            $("#protCabelNum").val('');
+            $("#protCabelDiv").hide();
+        }
+
+        if (document.querySelector("#metal").checked) {
+            $("#metalDiv").show();
+        }
+        else {
+            $("#metalInput").val('');
+            $("#metalNum").val('');
+            $("#metalDiv").hide();
+        }
+
+        if (document.querySelector("#protectMetal").checked) {
+            $("#protectMetalDiv").show();
+        }
+        else {
+            $("#protectMetalInput").val('');
+            $("#protectMetalNum").val('');
+            $("#protectMetalDiv").hide();
+        }
+
+        if (document.querySelector("#stubs").checked) {
+            $("#stubsDiv").show();
+        }
+        else {
+            $("#stubsNum").val('');
+            $("#stubsDiv").hide();
+        }
+
+    })
 
     // стили оснащения для блока управления при Э1
     $('#control-block-optionsset').on('change', function (e) {

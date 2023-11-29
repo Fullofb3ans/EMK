@@ -491,6 +491,45 @@ $(document).ready(function () {
         }
     });
 
+    // Обработка доп полей кабелей
+    $('#cabelsTypeField').on('change', function () {
+        if (document.querySelector("#protCabel").checked) {
+            $("#protCabelDiv").show();
+        }
+        else {
+            $("#protCabelInput").val('');
+            $("#protCabelNum").val('');
+            $("#protCabelDiv").hide();
+        }
+
+        if (document.querySelector("#metal").checked) {
+            $("#metalDiv").show();
+        }
+        else {
+            $("#metalInput").val('');
+            $("#metalNum").val('');
+            $("#metalDiv").hide();
+        }
+
+        if (document.querySelector("#protectMetal").checked) {
+            $("#protectMetalDiv").show();
+        }
+        else {
+            $("#protectMetalInput").val('');
+            $("#protectMetalNum").val('');
+            $("#protectMetalDiv").hide();
+        }
+
+        if (document.querySelector("#stubs").checked) {
+            $("#stubsDiv").show();
+        }
+        else {
+            $("#stubsNum").val('');
+            $("#stubsDiv").hide();
+        }
+
+    })
+
     // стиль потенциометра и микровыкл
     $('#roundControl').on('change', function (e) {
         if ((document.querySelector("#roundControl-2").checked) || (document.querySelector("#microOrPot").value != '')) {
@@ -746,14 +785,19 @@ $(document).ready(function () {
             j311 = 'На приводе';
         };
         // json3 = [j30, j31, j32, j33, j34, j35, j36, j37, j38, j39, j310, j311];
-
+        let connectionCableType = (document.querySelector("#protCabelNum").value ? 'Бронированный кабель, кол-во: ' + document.querySelector("#protCabelNum").value + 'шт.' + ' Диаметр по броне: ' + document.querySelector("#protCabelInput").value + 'мм.; ' : '') +
+            (document.querySelector("#metalNum").value ? 'Кабель под металлорукавом, кол-во: ' + document.querySelector("#metalNum").value + 'шт.' + ' Диаметр металлорукава: ' + document.querySelector("#metalInput").value + 'мм.; ' : '') +
+            (document.querySelector("#protectMetalNum").value ? 'Кабель под бронированным в металлорукаве, кол-во: ' + document.querySelector("#protectMetalNum").value + 'шт.' + ' Диаметр по броне: ' + document.querySelector("#protectMetalInput").value + 'мм.; ' : '') +
+            (document.querySelector("#stubsNum").value ? 'Заглушки, кол-во: ' + document.querySelector("#stubsNum").value + 'шт.;' : '');
+        // Доп требования
+        let addReq = document.querySelector('#addReqarea').value ? document.querySelector('#addReqarea').value + '; ' : '';
         //json4
         let j40 = $("input[name='connectionForVimu']:checked").val(); //Электрическое подключение (обозначение)
         let j41 = ''; //Защитный колпак
         let j42 = document.querySelector("#color-1").checked ? 'Серый' : document.querySelector("#ralColor").value; //Цвет
         let j43 = ''; //Механический указатель
         let j44 = addOptions;//Доп опции 
-        let j45 = document.querySelector('#addReqarea').value; //Дополнительные требования
+        let j45 = connectionCableType ? addReq + 'Требования по кабелям: ' + connectionCableType : addReq; //Дополнительные требования
         // json4 = [j40, j41, j42, j43, j44, j45];
 
         //json5
