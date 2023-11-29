@@ -308,12 +308,12 @@ $(document).ready(function () {
     $('#electricityField').on('change', function () {
         let scheme = $("input[name='constructive-scheme']:checked").val();
         // СТАНДАРТЫ КАБЕЛЕЙ 
-        if (document.querySelector("#connection-2").checked) {
+        if (document.querySelector("#connection-1").checked) {
             if (scheme == '0' || scheme == '1' || scheme == '11' || scheme == '12') {
                 $('#standartField').show();
                 $('#standart').val('С кабельными вводами под кабели диаметром 6...12 мм.');
             }
-            else if (scheme == '3' || scheme == '31' || scheme == '32') {
+            else if (scheme == '2' || scheme == '3' || scheme == '31' || scheme == '32') {
                 $('#standartField').show();
                 $('#standart').val('С кабельными вводами под кабели диаметром 12...18 мм.');
             }

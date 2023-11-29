@@ -401,23 +401,23 @@ $(document).ready(function () {
         if (cur_constructive_scheme == '43' || cur_constructive_scheme == '430' || cur_constructive_scheme == '44') {
             $("input[name='connectionForEp4']:checked").prop('checked', false);
             $(document).trigger('change');
-            document.querySelector("#connectionForEp4-1div").style.display = 'flow';
-            document.querySelector("#connectionForEp4-2div").style.display = 'none';
-            // document.querySelector("#connectionForEp4-3div").checked = '';
-            document.querySelector("#connectionForEp4-4div").style.display = 'flow';
-            document.querySelector("#connectionForEp4-5div").style.display = 'none';
-            document.querySelector("#connectionForEp4-6div").style.display = 'flow';
-            document.querySelector("#connectionForEp4-7div").style.display = 'none';
-            document.querySelector("#connectionForEp4-8div").style.display = 'flow';
+            document.querySelector("#connectionForEp4-0div").style.display = 'flow';
+            document.querySelector("#connectionForEp4-1div").style.display = 'none';
+            // document.querySelector("#connectionForEp4-2div").checked = '';
+            // document.querySelector("#connectionForEp4-3div").style.display = 'flow';
+            document.querySelector("#connectionForEp4-4div").style.display = 'none';
+            // document.querySelector("#connectionForEp4-5div").style.display = 'flow';
+            document.querySelector("#connectionForEp4-6div").style.display = 'none';
+            document.querySelector("#connectionForEp4-7div").style.display = 'flow';
         }
         else {
+            document.querySelector("#connectionForEp4-0div").style.display = 'flow';
             document.querySelector("#connectionForEp4-1div").style.display = 'flow';
-            document.querySelector("#connectionForEp4-2div").style.display = 'flow';
+            // document.querySelector("#connectionForEp4-3div").style.display = 'flow';
             document.querySelector("#connectionForEp4-4div").style.display = 'flow';
-            document.querySelector("#connectionForEp4-5div").style.display = 'flow';
+            // document.querySelector("#connectionForEp4-5div").style.display = 'flow';
             document.querySelector("#connectionForEp4-6div").style.display = 'flow';
             document.querySelector("#connectionForEp4-7div").style.display = 'flow';
-            document.querySelector("#connectionForEp4-8div").style.display = 'flow';
         }
     });
 
@@ -428,11 +428,11 @@ $(document).ready(function () {
         // СТАНДАРТЫ КАБЕЛЕЙ ОБЩЕПРОМ
         if (document.querySelector("#execution-Н").checked) {
             if (scheme == '40') {
-                if (document.querySelector("#connectionForEp4-2").checked || document.querySelector("#connectionForEp4-3").checked) {
+                if (document.querySelector("#connectionForEp4-1").checked || document.querySelector("#connectionForEp4-2").checked) {
                     $('#standartField').show();
                     $('#standart').val('С двумя кабельными вводами под кабели без брони диаметром 13-18 мм и одним кабельным вводом под кабель без брони диаметром 9-14 мм.');
                 }
-                else if (document.querySelector("#connectionForEp4-7").checked || document.querySelector("#connectionForEp4-8").checked) {
+                else if (document.querySelector("#connectionForEp4-6").checked || document.querySelector("#connectionForEp4-7").checked) {
                     $('#standartField').show();
                     $('#standart').val('С двумя кабельными вводами под кабели без брони диаметром 13-18 мм и двумя-четырьмя кабельными вводами под кабель без брони диаметром 9-14 мм.');
                 }
@@ -442,11 +442,11 @@ $(document).ready(function () {
                 }
             }
             else if (scheme == '41' || scheme == '410') {
-                if (document.querySelector("#connectionForEp4-2").checked || document.querySelector("#connectionForEp4-3").checked) {
+                if (document.querySelector("#connectionForEp4-1").checked || document.querySelector("#connectionForEp4-2").checked) {
                     $('#standartField').show();
                     $('#standart').val('С тремя кабельными вводами под кабели без брони диаметром 13-18 мм.');
                 }
-                else if (document.querySelector("#connectionForEp4-7").checked || document.querySelector("#connectionForEp4-8").checked) {
+                else if (document.querySelector("#connectionForEp4-6").checked || document.querySelector("#connectionForEp4-7").checked) {
                     $('#standartField').show();
                     $('#standart').val('С четырьмя-шестью кабельными вводами под кабели без брони диаметром 9-14 мм и 13-18 мм.');
                 }
@@ -457,12 +457,12 @@ $(document).ready(function () {
 
             }
             else if (scheme == '44' || scheme == '43' || scheme == '430') {
-                if (document.querySelector("#connectionForEp4-2").checked || document.querySelector("#connectionForEp4-3").checked) {
+                if (document.querySelector("#connectionForEp4-1").checked || document.querySelector("#connectionForEp4-2").checked) {
                     $('#standartField').show();
 
                     $('#standart').val('С тремя кабельными вводами под кабели без брони диаметром 18-25 мм.');
                 }
-                else if (document.querySelector("#connectionForEp4-7").checked || document.querySelector("#connectionForEp4-8").checked) {
+                else if (document.querySelector("#connectionForEp4-6").checked || document.querySelector("#connectionForEp4-7").checked) {
                     $('#standartField').show();
 
                     $('#standart').val('С четырьмя-шестью кабельными вводами под кабели без брони диаметром 9-14 мм и 18-25 мм.');
@@ -476,11 +476,11 @@ $(document).ready(function () {
         // СТАНДАРТЫ КАБЕЛЕЙ ВЗРЫВНИКОВ
         else {
             if (scheme == '40') {
-                if (document.querySelector("#connectionForEp4-2").checked || document.querySelector("#connectionForEp4-3").checked) {
+                if (document.querySelector("#connectionForEp4-1").checked || document.querySelector("#connectionForEp4-2").checked) {
                     $('#standartField').show();
                     $('#standart').val('С двумя кабельными вводами под кабели без брони диаметром 16-17 мм и одним кабельным вводом под кабель без брони диаметром 10.5-12 мм.');
                 }
-                else if (document.querySelector("#connectionForEp4-7").checked || document.querySelector("#connectionForEp4-8").checked) {
+                else if (document.querySelector("#connectionForEp4-6").checked || document.querySelector("#connectionForEp4-7").checked) {
                     $('#standartField').show();
                     $('#standart').val('С двумя кабельными вводами под кабели без брони диаметром 16-17 мм и двумя-четырьмя кабельными вводами под кабель без брони диаметром 10.5-12 мм.');
                 }
@@ -490,11 +490,11 @@ $(document).ready(function () {
                 }
             }
             else if (scheme == '41' || scheme == '410') {
-                if (document.querySelector("#connectionForEp4-2").checked || document.querySelector("#connectionForEp4-3").checked) {
+                if (document.querySelector("#connectionForEp4-1").checked || document.querySelector("#connectionForEp4-2").checked) {
                     $('#standartField').show();
                     $('#standart').val('С тремя кабельными вводами под кабели без брони диаметром 16-17 мм.');
                 }
-                else if (document.querySelector("#connectionForEp4-7").checked || document.querySelector("#connectionForEp4-8").checked) {
+                else if (document.querySelector("#connectionForEp4-6").checked || document.querySelector("#connectionForEp4-7").checked) {
                     $('#standartField').show();
                     $('#standart').val('С четырьмя-шестью кабельными вводами под кабели без брони диаметром 10.5-12 мм и 16-17 мм.');
                 }
@@ -504,11 +504,11 @@ $(document).ready(function () {
                 }
             }
             else if (scheme == '44' || scheme == '43' || scheme == '430') {
-                if (document.querySelector("#connectionForEp4-2").checked || document.querySelector("#connectionForEp4-3").checked) {
+                if (document.querySelector("#connectionForEp4-1").checked || document.querySelector("#connectionForEp4-2").checked) {
                     $('#standartField').show();
                     $('#standart').val('С тремя кабельными вводами под кабели без брони диаметром 21.5-23 мм.');
                 }
-                else if (document.querySelector("#connectionForEp4-7").checked || document.querySelector("#connectionForEp4-8").checked) {
+                else if (document.querySelector("#connectionForEp4-6").checked || document.querySelector("#connectionForEp4-7").checked) {
                     $('#standartField').show();
                     $('#standart').val('С четырьмя-шестью кабельными вводами под кабели без брони диаметром 10.5-12 мм и 21.5-23 мм.');
                 }
@@ -1346,7 +1346,7 @@ $(document).ready(function () {
         $('#electricityField').trigger('change');
         if (document.querySelector("#execution-Н").checked) {
             // 3 кабель
-            $('#connectionForEp4-4div').show();
+            $('#connectionForEp4-3div').show();
             // 
             $('#declaration').show();
             $('#declarationV').hide();
@@ -1354,8 +1354,8 @@ $(document).ready(function () {
         }
         else {
             // 3 кабель
-            document.querySelector("#connectionForEp4-4").checked = false;
-            $('#connectionForEp4-4div').hide();
+            document.querySelector("#connectionForEp4-3").checked = false;
+            $('#connectionForEp4-3div').hide();
             // 
             $('#declaration').hide();
             $('#declarationV').show();
