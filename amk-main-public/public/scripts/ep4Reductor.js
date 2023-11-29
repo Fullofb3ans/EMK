@@ -867,8 +867,8 @@ $(document).ready(function () {
         // json1 = [j10, j11, j12, j13, j14, j15, j16, j17, j18];
 
         //json2
-        let j20 = $("input[name='execution']:checked").closest('.form-check').find('.form-check-label').text(); //исполнение по назначению
-        let j21 = $("input[name='working-mode']:checked").closest('.form-check').find('.form-check-label').text(); //режим работы
+        let j20 = $("input[name='execution']:checked").closest('.form-check').find('.form-check-label').text().trim(); //Исполнение по назначению
+        let j21 = $("input[name='working-mode']:checked").closest('.form-check').find('.form-check-label').text(); //Режим работы
         let j22 = $("input[name='protection']:checked").closest('.form-check').find('.form-check-label').text(); //Влагозащита
         let j23 = 'Закрывание против часовой стрелки'; //Вращение вых вала
         let j24 = $('#climatic-modification option:selected').text(); //Температура
@@ -1440,7 +1440,7 @@ $(document).ready(function () {
                 return 'Базовый набор функций. Цифровое управление и приводом посредством цифрового канала связи, интерфейс RS485, протокол обмена - PROFIBUS';
             default:
                 console.log(base);
-                return (g6 = m1 + m2 + m3 + m4 + m5 + m6 + m7);
+                return (g6 = m1 + m2 + m3 + m5 + m6 + m7);
         }
     }
 

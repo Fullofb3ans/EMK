@@ -1093,7 +1093,7 @@ $(document).ready(function () {
         // json1 = [j10, j11, j12, j13, j14, j15, j16, j17, j18];
 
         //json2
-        let j20 = $("input[name='execution']:checked").closest('.form-check').find('.form-check-label').text(); //исполнение по назначению
+        let j20 = $("input[name='execution']:checked").closest('.form-check').find('.form-check-label').text().trim(); //исполнение по назначению
         let j21 = $("input[name='working-mode']:checked").closest('.form-check').find('.form-check-label').text(); //режим работы
         let j22 = $("input[name='protection']:checked").closest('.form-check').find('.form-check-label').text(); //Влагозащита
         let j23 = $("input[name='rotating']:checked").closest('.form-check').find('.form-check-label').text(); //Вращение вых вала
@@ -1355,7 +1355,6 @@ $(document).ready(function () {
     $("#block-configure-m1").on('shown.bs.modal', function () {
         yo();
     });
-
 
     $('#closeNumbers').on('keyup', function (e) {
         document.querySelector("#closeNumbersForM").value = document.querySelector("#closeNumbers").value;
