@@ -391,6 +391,8 @@ $(document).ready(function () {
                         }
                         else {
                             $(select).append(new Option(item, item));
+                        }
+                        if (select.length == 2) {
                             select.selectedIndex = 1;
                             $('#salOrStepse').trigger('change');
                         }
@@ -402,6 +404,13 @@ $(document).ready(function () {
 
     // Получение модернизации и номера исполнения
     $('#salOrStepse').on('change', function (e) {
+        if ($('#salOrStepse').val() == 'Сальниковый ввод') {
+            $('#standartField').show();
+        }
+        else {
+            $('#standartField').hide();
+
+        }
         function exNumSelectCreate() {
             let execution = $("input[name='epPlace']:checked").val();
             let connect = document.getElementById('connectionTypeForclassicEpa').value;
