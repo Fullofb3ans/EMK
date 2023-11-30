@@ -253,4 +253,14 @@ $(document).ready(function () {
         }
     });
 
+    // ОГРАНИЧЕНИЕ ПО IP КЛИМАТИЧЕСКИХ УСЛОВИЙ в ВИМУ
+    $('#vimuclimatic-modification').on('change', function () {
+        if (document.querySelector("#vimuclimatic-modification").value == '4' || document.querySelector("#vimuclimatic-modification").value == '5' || document.querySelector("#vimuclimatic-modification").value == '6') {
+            $('#vimuip67div').hide();
+            document.querySelector("#vimuprotection-1").checked = false;
+        }
+        else {
+            $('#vimuip67div').show();
+        };
+    });
 });
