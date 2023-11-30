@@ -41,10 +41,10 @@ $(document).ready(function () {
         function rMomentSelectCreate() {
             let uplim = document.getElementById('upper-limit');
             $(uplim).empty();
+
             uplim.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
 
             let fetchResult = [];
-
             fetch('https://emk.websto.pro/DB', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json;charset=utf-8' },
@@ -77,6 +77,11 @@ $(document).ready(function () {
             let uplim = document.querySelector("#upper-limit").value;
             let vPower = document.getElementById('vPower');
             $(vPower).empty();
+
+            if (!uplim) {
+                return alert('Пропущен верхний предел');
+            }
+
             vPower.innerHTML = '<option value="0" disabled selected>Выберите значение</option>';
 
             let fetchResult = [];
@@ -113,6 +118,14 @@ $(document).ready(function () {
         let uplim = document.querySelector("#upper-limit").value;
         let select = document.querySelector("#time-limit");
         $(select).empty();
+
+        if (!vPower) {
+            return alert('Пропущен кабельный ввод');
+        }
+        else if (!uplim) {
+            return alert('Пропущен кабельный ввод');
+        }
+
         select.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
 
         let fetchResult = [];
@@ -151,6 +164,14 @@ $(document).ready(function () {
             $('#constructive-scheme-img').empty();
             $('#constructive-scheme-Epnimg').empty();
             $('#constructive-schemeFull-img').empty();
+
+            if (!upLim) {
+                return alert('Пропущен верхний предел');
+            }
+            else if (!timeLim) {
+                return alert('Пропущен кабельный ввод');
+            }
+
 
             let fetchResult = [];
             fetch('https://emk.websto.pro/DB', {
@@ -215,6 +236,17 @@ $(document).ready(function () {
 
             let flange = document.querySelector("#flange");
             $(flange).empty();
+
+            if (!upLim) {
+                return alert('Пропущен верхний предел');
+            }
+            else if (!timeLim) {
+                return alert('Пропущено время рабочего хода');
+            }
+            else if (!scheme) {
+                return alert('Пропущена схема');
+            }
+
             flange.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
 
             let fetchResult = [];
@@ -254,6 +286,20 @@ $(document).ready(function () {
             let scheme = $("input[name='constructive-scheme']:checked").val();
             let flange = document.querySelector("#flange").value;
             $(select).empty();
+
+            if (!upLim) {
+                return alert('Пропущен верхний предел');
+            }
+            else if (!timeLim) {
+                return alert('Пропущено время рабочего хода');
+            }
+            else if (!scheme) {
+                return alert('Пропущена схема');
+            }
+            else if (!flange) {
+                return alert('Пропущен фланецввод');
+            }
+
             select.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
 
             let fetchResult = [];
@@ -284,8 +330,9 @@ $(document).ready(function () {
         PowerTypeSelectCreate();
     });
 
+    // Ограничение блоков по вольтажу
     $('#powerType').on('change', function (e) {
-        if (document.querySelector("#powerType").value == '24B ') {
+        if (document.querySelector("#powerType").value == '24B 1 фаз(ы) ') {
             $('#buVe').hide();
             $('#buVe1').hide();
         }
@@ -293,22 +340,43 @@ $(document).ready(function () {
             $('#buVe').show();
             $('#buVe1').show();
         }
-    })
-    $('#controle-blocks-series').on('change', function (e) {
-        if (document.querySelector("#controle-blocks-series").value.includes('ВЭ')) {
-            document.querySelector("#connectLabel2").innerText = 'Три кабельных ввода';
-            $('#connection3div').show();
+
+        cur_constructive_scheme = $("input[name='constructive-scheme']:checked").val();
+
+        if (cur_constructive_scheme == '0') {
+            $("#buVe").hide();
         }
         else {
-            document.querySelector("#connectLabel2").innerText = 'Два кабельных ввода'
-            $('#connection3div').hide();
+            $("#buVe").show();
         }
     })
+
+    // ОГРАНИЧЕНИЕ ПО IP КЛИМАТИЧЕСКИХ УСЛОВИЙ
+    $('#climatic-modification').on('change', function () {
+        if (document.querySelector("#climatic-modification").value == '4' || document.querySelector("#climatic-modification").value == '5' || document.querySelector("#climatic-modification").value == '6') {
+            $('#ip67div').hide();
+            document.querySelector("#protection-1").checked = false;
+        }
+        else {
+            $('#ip67div').show();
+        };
+    });
+
+    // ОГРАНИЧЕНИЕ 3 КАБЕЛЕЙ ОТ ИСПОЛНЕНИЯ
+    $('#executionWrapLegend').on('change', function () {
+        if (document.querySelector("#В-execute").checked) {
+            $('#connection3').prop('checked', false);
+            $('#connection3div').hide();
+        }
+        else {
+            $('#connection3div').show();
+        }
+    });
 
     $('#electricityField').on('change', function () {
         let scheme = $("input[name='constructive-scheme']:checked").val();
         // СТАНДАРТЫ КАБЕЛЕЙ 
-        if (document.querySelector("#connection-1").checked) {
+        if (document.querySelector("#connection-1").checked || document.querySelector("#connection-3").checked) {
             if (scheme == '0' || scheme == '1' || scheme == '11' || scheme == '12') {
                 $('#standartField').show();
                 $('#standart').val('С кабельными вводами под кабели диаметром 6...12 мм.');
@@ -640,16 +708,10 @@ $(document).ready(function () {
                 ($("input[name='connection']")).closest('fieldset').addClass('ReqValueOk');
         }
 
-        let x13 = $("input[name='specialForEpn']:checked").val() ? $("input[name='specialForEpn']:checked").val() : 'X';
-        switch (x13) {
-            case 'X':
-                ($("input[name='specialForEpn']")).closest('fieldset').removeClass('ReqValueOk');
-                ($("input[name='specialForEpn']")).closest('fieldset').addClass('noReqValue');
-                break;
-            default:
-                ($("input[name='specialForEpn']")).closest('fieldset').removeClass('noReqValue');
-                ($("input[name='specialForEpn']")).closest('fieldset').addClass('ReqValueOk');
-        }
+        let special1 = document.querySelector("#specialForEpn-1").checked ? document.querySelector("#specialForEpn-1").value : '';
+        let special2 = document.querySelector("#specialForEpn-А").checked ? document.querySelector("#specialForEpn-А").value : '';
+        let specialSum = special1 + special2;
+        let x13 = specialSum ? '-' + specialSum : '';
 
         let secondBlock = document.querySelector("#controle-blocks2").value ? '/' + document.querySelector("#controle-blocks2").value : '';
 
@@ -855,7 +917,11 @@ $(document).ready(function () {
         let j50 = $("input[name='working-mode']:checked").closest('.form-check').find('.form-check-label').text(); //Назначение по режиму работы
         let j51 = $("input[name='connection']:checked").closest('.form-check').find('.form-check-label').text(); //Электрическое подключение (расшифровка)
         let j52 = 'SIL-3'; // SIL
-        let j53 = $("input[name='specialForEpn']:checked").closest('.form-check').find('.form-check-label').text(); //Специальное исполнение
+
+        let special1 = document.querySelector("#specialForEpn-1").checked ? $("#specialForEpn-1").closest('.form-check').find('.form-check-label').text() + '; ' : '';
+        let special2 = document.querySelector("#specialForEpn-А").checked ? $("#specialForEpn-А").closest('.form-check').find('.form-check-label').text() : '';
+        let specialSumText = special1 + special2;
+        let j53 = specialSumText ? specialSumText : 'Нет специального исполнения'; //Специальное исполнение
         let j54 = ''; //Масса
         // json5 = [j50, j51, j52, j53, j54];
 
@@ -1524,7 +1590,7 @@ $(document).ready(function () {
         }
     });
     $('#step-7').on('change', function (e) {
-        if ($("input[name='specialForEpn']:checked").val() != undefined && $("input[name='connection']:checked").val() != undefined) {
+        if ($("input[name='connection']:checked").val() != undefined) {
             $('#step-8').show();
             $('#step-9').show();
         }

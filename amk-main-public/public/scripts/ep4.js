@@ -222,6 +222,10 @@ $(document).ready(function () {
             $(uplim).empty();
             uplim.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
 
+            if (!uplim) {
+                return alert('Пропущен верхний предел');
+            }
+
             let fetchResult = [];
 
             fetch('https://emk.websto.pro/DB', {
@@ -252,6 +256,11 @@ $(document).ready(function () {
             let connectionType = $("input[name='connection-type']:checked").val();
             let vPower = document.getElementById('vPower');
             $(vPower).empty();
+
+            if (!upLim) {
+                return alert('Пропущен верхний предел');
+            }
+
             vPower.innerHTML = '<option value="0" selected>Выберите значение</option>';
 
             let fetchResult = [];
@@ -365,8 +374,14 @@ $(document).ready(function () {
         let connectionType = $("input[name='connection-type']:checked").val();
         let rotationFrequency = document.getElementById('rotation-frequency');
 
-        if (!upLim) {
-            return alert('Пропущен верхний предел');
+        if (!vPower) {
+            return alert('Пропущен кабельный ввод');
+        }
+        else if (!upLim) {
+            return alert('Пропущен тип бкв');
+        }
+        else if (!connectionType) {
+            return alert('Пропущен крутящий момент');
         }
 
         $(rotationFrequency).empty();
@@ -408,6 +423,14 @@ $(document).ready(function () {
             let rotationFrequency = document.getElementById('rotation-frequency').value;
             $('#constructive-scheme-wrap').empty();
             $('#constructive-scheme-img').empty();
+
+            if (!upLim) {
+                return alert('Пропущен верхний предел');
+            }
+
+            else if (!rotationFrequency) {
+                return alert('Пропущена частота вращения выходного вала');
+            }
 
             let fetchResult = [];
 
@@ -476,13 +499,25 @@ $(document).ready(function () {
 
         function flangeSelectCreate() {
             let vPower = document.querySelector("#vPower").value;
-            const upLim = document.querySelector('#upper-limit').value;
+            let upLim = document.querySelector('#upper-limit').value;
             let connectionType = $("input[name='connection-type']:checked").val();
-            const rotationFrequency = document.getElementById('rotation-frequency').value;
+            let rotationFrequency = document.getElementById('rotation-frequency').value;
             let scheme = $("input[name='constructive-scheme']:checked").val();
             let flange = document.querySelector('#flange');
 
             $(flange).empty();
+
+            if (!upLim) {
+                return alert('Пропущен верхний предел');
+            }
+
+            else if (!rotationFrequency) {
+                return alert('Пропущена частота вращения выходного вала');
+            }
+            else if (!scheme) {
+                return alert('Пропущена схема');
+            }
+
             flange.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
 
             let fetchResult = [];

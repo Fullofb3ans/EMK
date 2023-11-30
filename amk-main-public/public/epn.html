@@ -491,21 +491,17 @@
 								</div>
 							</fieldset>
 
-							<fieldset class="row mb-3 vimu-only noReqValue">
+							<fieldset class="row mb-3 vimu-only optionalField">
 								<legend class="blockNumber">9</legend>
 								<div class="col-sm-9">
 									<legend class="col-form-label col-sm-3 pt-0">Специальное исполнение:</legend>
 									<div class="form-check">
-										<input class="form-check-input ch-mark" type="radio" value="" name="specialForVimu" id="specialForVimu-1" />
-										<label class="form-check-label" for="specialForVimu-1">Нет специального исполнения</label>
+										<input class="form-check-input ch-mark" type="checkbox" value="К" name="specialForVimu" id="specialForVimu-К" />
+										<label class="form-check-label" for="specialForVimu-К">Комплектуется кабелями для подключения привода</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input ch-mark" type="radio" value="К" name="specialForVimu" id="specialForVimu-2" />
-										<label class="form-check-label" for="specialForVimu-2">Комплектуется кабелями для подключения привода</label>
-									</div>
-									<div class="form-check">
-										<input class="form-check-input ch-mark" type="radio" value="Э" name="specialForVimu" id="specialForVimu-3" />
-										<label class="form-check-label" for="specialForVimu-3">Исполнение ВИМУ для комплектования приводов серии ЭПН</label>
+										<input class="form-check-input ch-mark" type="checkbox" value="Э" name="specialForVimu" id="specialForVimu-Э" />
+										<label class="form-check-label" for="specialForVimu-Э">Исполнение ВИМУ для комплектования приводов серии ЭПН</label>
 									</div>
 								</div>
 							</fieldset>
@@ -587,11 +583,11 @@
 						</legend>
 						<div class="col-sm-9">
 							<legend class="col-form-label col-sm-3 pt-0">Степень защиты от проникновения пыли и воды:</legend>
-							<div class="form-check">
+							<div class="form-check" id="ip67div">
 								<input class="form-check-input ch-mark" type="radio" value="1" name="protection" id="protection-1" />
 								<label class="form-check-label" for="protection-1">IP67</label>
 							</div>
-							<div class="form-check">
+							<div class="form-check" id="ip68div">
 								<input class="form-check-input ch-mark" type="radio" value="2" name="protection" id="protection-2" />
 								<label class="form-check-label" for="protection-2">IP68</label>
 							</div>
@@ -651,8 +647,8 @@
 									<label id="connectLabel2" class="form-check-label" for="connection-1">Два кабельных ввода</label>
 								</div>
 								<div class="form-check" id="connection3div">
-									<input class="form-check-input ch-mark" type="radio" value="6" name="connection" id="connection-6" />
-									<label class="form-check-label" for="connection-6">4-7 кабельных ввода по спецификации заказа, клемное подключение внутри ВИМУ</label>
+									<input class="form-check-input ch-mark" type="radio" value="3" name="connection" id="connection-3" />
+									<label class="form-check-label" for="connection-3">Три кабельных ввода</label>
 								</div>
 							</div>
 
@@ -758,17 +754,21 @@
 						</div>
 					</fieldset>
 
-					<fieldset class="row mb-3 noReqValue">
+					<fieldset class="row mb-3 optionalField">
 						<legend class="blockNumber">14</legend>
 						<div class="col-sm-9">
 							<legend class="col-form-label col-sm-3 pt-0">Специальное исполнение:</legend>
+							<!-- <div class="form-check">
+								<input class="form-check-input ch-mark" type="checkbox" value="" id="specialForEpn-" />
+								<label class="form-check-label" for="specialForEpn-">Нет специального исполнения</label>
+							</div> -->
 							<div class="form-check">
-								<input class="form-check-input ch-mark" type="radio" value=" " name="specialForEpn" id="specialForEpn-1" />
-								<label class="form-check-label" for="specialForEpn-1">Нет специального исполнения</label>
+								<input class="form-check-input ch-mark" type="checkbox" value="1" id="specialForEpn-1" />
+								<label class="form-check-label" for="specialForEpn-1">Панель управления ВИМУ расположена фронтально (в плоскости параллельной оси вращения вала привода)</label>
 							</div>
-							<div class="form-check">
-								<input class="form-check-input ch-mark" type="radio" value="1" name="specialForEpn" id="specialForEpn-2" />
-								<label class="form-check-label" for="specialForEpn-2">Панель управления ВИМУ расположена фронтально (в плоскости параллельной оси вращения вала привода);</label>
+							<div class="form-check" id="atomSpecial">
+								<input class="form-check-input ch-mark" type="checkbox" value="А" id="specialForEpn-А" />
+								<label class="form-check-label" for="specialForEpn-А">Для атомных станций</label>
 							</div>
 						</div>
 					</fieldset>

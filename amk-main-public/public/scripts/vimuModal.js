@@ -126,17 +126,10 @@ $(document).ready(function () {
                 ($("input[name='connectionForVimu']")).closest('fieldset').removeClass('noReqValue');
                 ($("input[name='connectionForVimu']")).closest('fieldset').addClass('ReqValueOk');
         }
-
-        let x9 = $("input[name='specialForVimu']:checked").val() ? $("input[name='specialForVimu']:checked").val() : ''; //специальное исполнение
-        switch ($('input[name="specialForVimu"]:checked').val()) {
-            case undefined:
-                ($("input[name='specialForVimu']")).closest('fieldset').removeClass('ReqValueOk');
-                ($("input[name='specialForVimu']")).closest('fieldset').addClass('noReqValue');
-                break;
-            default:
-                ($("input[name='specialForVimu']")).closest('fieldset').removeClass('noReqValue');
-                ($("input[name='specialForVimu']")).closest('fieldset').addClass('ReqValueOk');
-        }
+        let special1 = document.querySelector("#specialForVimu-К").checked ? document.querySelector("#specialForVimu-К").value : '';
+        let special2 = document.querySelector("#specialForVimu-Э").checked ? document.querySelector("#specialForVimu-Э").value : '';
+        let specialSum = special1 + special2;
+        let x9 = specialSum ? '-' + specialSum : '';
 
         // ДОП ОПЦИИ ДЛЯ БЛОКА
         let tOption = '';

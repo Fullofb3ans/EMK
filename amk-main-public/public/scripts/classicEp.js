@@ -224,6 +224,13 @@ $(document).ready(function () {
             $(select).empty();
             select.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
 
+            if (!connect) {
+                return alert('Пропущен тип электропривода');
+            }
+            else if (!execution) {
+                return alert('Пропущен тип электропривода');
+            }
+
             let fetchResult = [];
 
             fetch('https://emk.websto.pro/classicDB', {
@@ -255,6 +262,16 @@ $(document).ready(function () {
             let select = document.querySelector("#outVal");
             $(select).empty();
             select.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
+
+            if (!rNumber) {
+                return alert('Пропущено число оборотов выходного вала');
+            }
+            else if (!connect) {
+                return alert('Пропущен тип электропривода');
+            }
+            else if (!execution) {
+                return alert('Пропущен тип электропривода');
+            }
 
             let fetchResult = [];
 
@@ -293,6 +310,19 @@ $(document).ready(function () {
             $(select).empty();
             select.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
 
+            if (!outVal) {
+                return alert('Пропущена частота вращения выходного вала');
+            }
+            else if (!rNumber) {
+                return alert('Пропущено число оборотов выходного вала');
+            }
+            else if (!connect) {
+                return alert('Пропущен тип электропривода');
+            }
+            else if (!execution) {
+                return alert('Пропущен тип электропривода');
+            }
+
             let fetchResult = [];
 
             fetch('https://emk.websto.pro/classicDB', {
@@ -322,12 +352,29 @@ $(document).ready(function () {
     // Прогрузка типа бкв с таблицы
     $('#roundMoment').on('change', function (e) {
         function exNumSelectCreate() {
+
             let execution = $("input[name='epPlace']:checked").val();
             let connect = document.getElementById('connectionTypeForclassicEpa').value;
             let rNumber = document.querySelector("#roundNumbers").value;
             let outVal = document.querySelector("#outVal").value;
             let rMoment = document.querySelector("#roundMoment").value;
             let select = document.querySelector("#bkvType");
+
+            if (!rMoment) {
+                return alert('Пропущен крутящий момент');
+            }
+            else if (!outVal) {
+                return alert('Пропущена частота вращения выходного вала');
+            }
+            else if (!rNumber) {
+                return alert('Пропущено число оборотов выходного вала');
+            }
+            else if (!connect) {
+                return alert('Пропущен тип электропривода');
+            }
+            else if (!execution) {
+                return alert('Пропущен тип электропривода');
+            }
             $(select).empty();
             select.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
 
@@ -366,6 +413,26 @@ $(document).ready(function () {
             let outVal = document.querySelector("#outVal").value;
             let rMoment = document.querySelector("#roundMoment").value;
             let bkv = document.querySelector("#bkvType").value;
+
+            if (!bkv) {
+                return alert('Пропущен тип бкв');
+            }
+            else if (!rMoment) {
+                return alert('Пропущен крутящий момент');
+            }
+            else if (!outVal) {
+                return alert('Пропущена частота вращения выходного вала');
+            }
+            else if (!rNumber) {
+                return alert('Пропущено число оборотов выходного вала');
+            }
+            else if (!connect) {
+                return alert('Пропущен тип электропривода');
+            }
+            else if (!execution) {
+                return alert('Пропущен тип электропривода');
+            }
+
             let select = document.querySelector("#salOrStepse");
             $(select).empty();
             select.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
@@ -419,8 +486,30 @@ $(document).ready(function () {
             let rMoment = document.querySelector("#roundMoment").value;
             let bkv = document.querySelector("#bkvType").value;
             let salOrStepse = document.querySelector("#salOrStepse").value;
-            selectModern = document.querySelector("#upgradeNumber");
-            selectExec = document.querySelector("#executionclassicEpaNumber");
+            let selectModern = document.querySelector("#upgradeNumber");
+            let selectExec = document.querySelector("#executionclassicEpaNumber");
+
+            if (!salOrStepse) {
+                return alert('Пропущен кабельный ввод');
+            }
+            else if (!bkv) {
+                return alert('Пропущен тип бкв');
+            }
+            else if (!rMoment) {
+                return alert('Пропущен крутящий момент');
+            }
+            else if (!outVal) {
+                return alert('Пропущена частота вращения выходного вала');
+            }
+            else if (!rNumber) {
+                return alert('Пропущено число оборотов выходного вала');
+            }
+            else if (!connect) {
+                return alert('Пропущен тип электропривода');
+            }
+            else if (!execution) {
+                return alert('Пропущен тип электропривода');
+            }
 
             $(selectModern).empty();
             $(selectExec).empty();

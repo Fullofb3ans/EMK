@@ -398,7 +398,7 @@ $(document).ready(function () {
             );
         });
 
-        // ПРОГРУЗКА СПЕЦИАЛЬНОГО ПОДКЛЮЧЕНИЯ:
+        // ПРОГРУЗКА СПЕЦИАЛЬНОГО ИСПОЛНЕНИЯ:
 
         // fetchResult[0].sort((a, b) => a - b);
         $.each(jsonListToHtml[9], function (key, item) {
