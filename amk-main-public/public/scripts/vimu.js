@@ -321,7 +321,7 @@ $(document).ready(function () {
         $.each(jsonListToHtml[6], function (key, item) {
             $('#waterProtection').append(
                 $('<div>')
-                    .prop({ class: 'form-check' })
+                    .prop({ class: 'form-check', id: item.id + 'div' })
                     .append(
                         $('<input>').prop({
                             type: 'radio',
@@ -563,13 +563,6 @@ $(document).ready(function () {
     $('#step-4').on('change', function (e) {
         if ($("input[name='connectionForVimu']:checked").val() && (document.querySelector("#color-1").checked || document.querySelector("#ralColor").value !== '')) {
             $('#step-5').show();
-        }
-
-    });
-
-
-    $('#step-5').on('change', function (e) {
-        if ($("input[name='specialForVimu']:checked").val() || document.querySelector("#specialForVimu-").checked) {
             $('#step-6').show();
         }
 
@@ -878,6 +871,17 @@ $(document).ready(function () {
     $("#e1-submit").on("click", function (e) {
         $("#controle-blocks").val($("input.cur-execution-value").val()).trigger("change");
         vimuBlockModal.hide();
+    });
+
+    // ОГРАНИЧЕНИЕ ПО IP КЛИМАТИЧЕСКИХ УСЛОВИЙ
+    $('#climatic-modification').on('change', function () {
+        if (document.querySelector("#climatic-modification").value == '4' || document.querySelector("#climatic-modification").value == '5' || document.querySelector("#climatic-modification").value == '6') {
+            $('#IP67div').hide();
+            document.querySelector("#protection-1").checked = false;
+        }
+        else {
+            $('#IP67div').show();
+        };
     });
 
     // КНОПКА КОНФИГУРАТОРА

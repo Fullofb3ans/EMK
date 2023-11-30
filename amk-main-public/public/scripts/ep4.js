@@ -298,34 +298,37 @@ $(document).ready(function () {
         }
     })
 
-    // Обработка исполнений
-    // $('#specialField').on('change', function (e) {
-    //     if (document.querySelector("#special-1").checked) {
-    //         document.querySelector("#special-2").disabled = true;
-    //         document.querySelector("#special-2").checked = false;
-    //         document.querySelector("#special-3").disabled = true;
-    //         document.querySelector("#special-3").checked = false;
-    //         document.querySelector("#special-4").disabled = true;
-    //         document.querySelector("#special-4").checked = false;
-    //         document.querySelector("#special-5").disabled = true;
-    //         document.querySelector("#special-5").checked = false;
-    //         document.querySelector("#special-6").disabled = true;
-    //         document.querySelector("#special-6").checked = false;
-    //     }
-    //     else {
-    //         document.querySelector("#special-2").disabled = false;
-    //         document.querySelector("#special-3").disabled = false;
-    //         document.querySelector("#special-4").disabled = false;
-    //         document.querySelector("#special-5").disabled = false;
-    //         document.querySelector("#special-6").disabled = false;
-    //     }
-    // })
+    // Открываю кабели и исполнение с вандальной крышкой под блоки
+    $('#controle-blocks-series').on('change', function (e) {
+        let cbs = document.querySelector('#controle-blocks-series');
+        if (cbs.value == 'Э1' || cbs.value == 'Э2' || cbs.value == 'Э1S') {
+            $('.specialConnection').show();
+            $('#special-6Field').show();
+        }
+        else {
+            $('.specialConnection').hide();
+            document.querySelector("#connectionForEp4-7").checked = false;
+            document.querySelector("#connectionForEp4-6").checked = false;
+            $('#special-6Field').hide();
+            document.querySelector("#special-6").checked = false;
+        }
+    });
 
+    // Убираю исполнению под вибрацию при схемах != 41 && != 410
+    $('.row').on('change', function () {
+        let scheme = $("input[name='constructive-scheme']:checked").val();
+        if ((scheme == '41' || scheme == '410')) {
+            $('#special-2Field').show();
+        }
+        else {
+            $('#special-2Field').hide();
+        }
+    });
 
     // УБИРАЮ 660В(спец исполнение)
     $('.row').on('change', function () {
         let scheme = $("input[name='constructive-scheme']:checked").val();
-        if ((document.querySelector("#execution-В").checked) && (((scheme == '41' || scheme == '410') && document.querySelector("#controle-blocks-series").value == 'Э1') || (document.querySelector("#controle-blocks-series").value == 'М1'))) {
+        if ((((scheme == '41' || scheme == '410') && document.querySelector("#controle-blocks-series").value == 'Э1') || (document.querySelector("#controle-blocks-series").value == 'М1'))) {
             $('#special-4Field').show();
         }
         else if ((document.querySelector("#execution-С").checked) && (((scheme == '41' || scheme == '410' || scheme == '40') && (document.querySelector("#controle-blocks-series").value == 'М1')) || ((scheme == '41' || scheme == '410') && (document.querySelector("#controle-blocks-series").value == 'Э1')))) {
@@ -342,6 +345,7 @@ $(document).ready(function () {
             $('#special-4Field').hide();
         }
     });
+
 
     // Формула от частоты вращения и двигателя
     $('#stepClose').on('change', function (e) {
@@ -573,6 +577,17 @@ $(document).ready(function () {
             // document.querySelector("#connectionForEp4-7div").style.display = 'flow';
         }
 
+    });
+
+    // ОГРАНИЧЕНИЕ ПО IP КЛИМАТИЧЕСКИХ УСЛОВИЙ
+    $('#climatic-modification').on('change', function () {
+        if (document.querySelector("#climatic-modification").value == '4' || document.querySelector("#climatic-modification").value == '5' || document.querySelector("#climatic-modification").value == '6') {
+            $('#ip67div').hide();
+            document.querySelector("#protection-1").checked = false;
+        }
+        else {
+            $('#ip67div').show();
+        };
     });
 
     // Обработка доп полей кабелей
@@ -818,22 +833,6 @@ $(document).ready(function () {
 
         if ($('#controle-blocks-series').val() == 'Э0') {
             $('#sumBlocks').hide();
-        }
-    });
-
-    $('#controle-blocks-series').on('change', function (e) {
-        let a = document.querySelector('.aVandalCap');
-        let cbs = document.querySelector('#controle-blocks-series');
-        if (cbs.value == 'Э1' || cbs.value == 'Э2') {
-            $('.specialConnection').show();
-            $(a).show();
-        } else if (cbs.value == 'Э1S') {
-            $('.specialConnection').show();
-            $(a).hide();
-        }
-        else {
-            $('.specialConnection').hide();
-            $(a).hide();
         }
     });
 
