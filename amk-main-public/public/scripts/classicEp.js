@@ -182,7 +182,7 @@ $(document).ready(function () {
 
             let fetchResult = [];
 
-            fetch('https://emk.websto.pro/classicDB', {
+            fetch('https://emk.websto.pro/DBclassic', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json;charset=utf-8' },
                 body: JSON.stringify({
@@ -233,7 +233,7 @@ $(document).ready(function () {
 
             let fetchResult = [];
 
-            fetch('https://emk.websto.pro/classicDB', {
+            fetch('https://emk.websto.pro/DBclassic', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json;charset=utf-8' },
                 body: JSON.stringify({
@@ -275,7 +275,7 @@ $(document).ready(function () {
 
             let fetchResult = [];
 
-            fetch('https://emk.websto.pro/classicDB', {
+            fetch('https://emk.websto.pro/DBclassic', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json;charset=utf-8' },
                 body: JSON.stringify({
@@ -288,7 +288,7 @@ $(document).ready(function () {
                     for (i in res) fetchResult.push(res[i]);
                     // fetchResult[0].sort((a, b) => a - b);
                     $.each(fetchResult[0], function (key, item) {
-                        $(select).append(new Option(item, item));
+                        $(select).append(new Option(Number(item), Number(item)));
                         if (fetchResult[0].length == 1) {
                             select.selectedIndex = 1;
                             $('#outVal').trigger('change');
@@ -325,7 +325,7 @@ $(document).ready(function () {
 
             let fetchResult = [];
 
-            fetch('https://emk.websto.pro/classicDB', {
+            fetch('https://emk.websto.pro/DBclassic', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json;charset=utf-8' },
                 body: JSON.stringify({
@@ -380,7 +380,7 @@ $(document).ready(function () {
 
             let fetchResult = [];
 
-            fetch('https://emk.websto.pro/classicDB', {
+            fetch('https://emk.websto.pro/DBclassic', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json;charset=utf-8' },
                 body: JSON.stringify({
@@ -439,7 +439,7 @@ $(document).ready(function () {
 
             let fetchResult = [];
 
-            fetch('https://emk.websto.pro/classicDB', {
+            fetch('https://emk.websto.pro/DBclassic', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json;charset=utf-8' },
                 body: JSON.stringify({
@@ -459,11 +459,11 @@ $(document).ready(function () {
                         else {
                             $(select).append(new Option(item, item));
                         }
-                        if (select.length == 2) {
-                            select.selectedIndex = 1;
-                            $('#salOrStepse').trigger('change');
-                        }
                     });
+                    if (select.length == 2) {
+                        select.selectedIndex = 1;
+                        $(select).trigger('change');
+                    }
                 });
         }
         exNumSelectCreate();
@@ -471,7 +471,7 @@ $(document).ready(function () {
 
     // Получение модернизации и номера исполнения
     $('#salOrStepse').on('change', function (e) {
-        if ($('#salOrStepse').val() == 'Сальниковый ввод') {
+        if ($("#salOrStepse option:checked").text() == 'Сальниковый ввод') {
             $('#standartField').show();
         }
         else {
@@ -518,7 +518,7 @@ $(document).ready(function () {
 
             let fetchResult = [];
 
-            fetch('https://emk.websto.pro/classicDB', {
+            fetch('https://emk.websto.pro/DBclassic', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json;charset=utf-8' },
                 body: JSON.stringify({

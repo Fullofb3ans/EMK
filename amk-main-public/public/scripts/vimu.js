@@ -377,7 +377,7 @@ $(document).ready(function () {
         $.each(jsonListToHtml[8], function (key, item) {
             $('#electricity').append(
                 $('<div>')
-                    .prop({ class: 'form-check' })
+                    .prop({ class: 'form-check', id: 'electr' + item.value + 'div' })
                     .append(
                         $('<input>').prop({
                             type: 'radio',
@@ -404,7 +404,7 @@ $(document).ready(function () {
         $.each(jsonListToHtml[9], function (key, item) {
             $('#speciality').append(
                 $('<div>')
-                    .prop({ class: 'form-check' })
+                    .prop({ class: 'form-check', id: 'special' + item.value + 'div' })
                     .append(
                         $('<input>').prop({
                             type: 'checkbox',
@@ -883,6 +883,24 @@ $(document).ready(function () {
             $('#IP67div').show();
         };
     });
+
+    // СОКРЫТИе 'Э' спешла при метал корпусе
+    $('#executionWrapLegend').on('change', function () {
+        if (document.querySelector("#execution-П").checked) {
+            $('#specialЭdiv').hide();
+            $('#electr0div').hide();
+            $('#electr2div').hide();
+            $('#electr6div').hide();
+            $('#electr7div').hide();
+        }
+        else {
+            $('#specialЭdiv').show();
+            $('#electr0div').show();
+            $('#electr2div').show();
+            $('#electr6div').show();
+            $('#electr7div').show();
+        }
+    })
 
     // КНОПКА КОНФИГУРАТОРА
     function checkCommandBlock() {

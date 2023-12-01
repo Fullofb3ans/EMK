@@ -218,6 +218,7 @@ $(document).ready(function () {
     $('#connection-type-wrap').on('change', function (e) {
         function upLimSelectCreate() {
             let uplim = document.getElementById('upper-limit');
+            let execution = $("input[name='execution']:checked").val();
             let connectionType = $("input[name='connection-type']:checked").val();
             $(uplim).empty();
             uplim.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
@@ -228,11 +229,11 @@ $(document).ready(function () {
 
             let fetchResult = [];
 
-            fetch('https://emk.websto.pro/DB', {
+            fetch('https://emk.websto.pro/DBep', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json;charset=utf-8' },
                 body: JSON.stringify({
-                    a: ['ЭП4', connectionType],
+                    a: ['ЭП4', execution, connectionType],
                 }),
             })
                 .then((res) => res.json())
@@ -250,10 +251,10 @@ $(document).ready(function () {
 
     // ПРОГРУЗКА ДАННЫХ МОЩНОСТИ С ТАБЛИЦЫ
     $('#upper-limit').on('change', function (e) {
-
         function Vv() {
-            let upLim = document.querySelector('#upper-limit').value;
+            let execution = $("input[name='execution']:checked").val();
             let connectionType = $("input[name='connection-type']:checked").val();
+            let upLim = document.querySelector('#upper-limit').value;
             let vPower = document.getElementById('vPower');
             $(vPower).empty();
 
@@ -265,11 +266,11 @@ $(document).ready(function () {
 
             let fetchResult = [];
 
-            fetch('https://emk.websto.pro/DB', {
+            fetch('https://emk.websto.pro/DBep', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json;charset=utf-8' },
                 body: JSON.stringify({
-                    a: ['ЭП4', connectionType, upLim],
+                    a: ['ЭП4', execution, connectionType, upLim],
                 }),
             })
                 .then((res) => res.json())
@@ -284,6 +285,239 @@ $(document).ready(function () {
         }
         Vv();
     });
+
+    // Формула от частоты вращения и двигателя
+    $('#stepClose').on('change', function (e) {
+        rotationFrequencySelectCreate();
+        // $('#rotation-frequency').trigger('change');
+    })
+
+    // ПРОГРУЗКА ДАННЫХ ЧАСТОТЫ ВРАЩЕНИЯ С ТАБЛИЦЫ
+    $('#vPower').on('change', function (e) {
+        rotationFrequencySelectCreate();
+        // $('#rotation-frequency').trigger('change');
+    });
+
+    // ПРОГРУЗКА ДАННЫХ ЧАСТОТЫ ВРАЩЕНИЯ С ТАБЛИЦЫ ПОСЛЕ ЗАПОЛНЕНИЯ МОЩНОСТИ
+    $('#upper-limit').on('change', function (e) {
+        $('#vPower').val('0');
+        $('#closeNumbers').val('');
+        $('#closingTime').val('');
+        rotationFrequencySelectCreate();
+        // $('#stepClose').trigger('change');
+        // $('#rotation-frequency').trigger('change');
+    });
+
+    function rotationFrequencySelectCreate() {
+        let execution = $("input[name='execution']:checked").val();
+        let closeNumbers = document.querySelector('#closeNumbers').value;
+        let closingTime = document.querySelector('#closingTime').value;
+        let expression = (closeNumbers && closingTime) ? (closeNumbers / closingTime) : (1 / 60);
+        let vPower = document.querySelector("#vPower").value;
+        let upLim = document.querySelector('#upper-limit').value;
+        let connectionType = $("input[name='connection-type']:checked").val();
+        let rotationFrequency = document.getElementById('rotation-frequency');
+
+        if (!upLim) {
+            return alert('Пропущен верхний предел');
+        }
+        else if (!connectionType) {
+            return alert('Пропущен тип присоединения фланца');
+        }
+
+        $(rotationFrequency).empty();
+        let fetchResult = [];
+
+        fetch('https://emk.websto.pro/DBep', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json;charset=utf-8' },
+            body: JSON.stringify({
+                a: ['ЭП4', execution, connectionType, upLim, vPower],
+            }),
+        })
+            .then((res) => res.json())
+            .then((res) => {
+                console.log(res);
+                for (i in res) fetchResult.push(res[i]);
+                // fetchResult[0].sort((a, b) => a - b);
+                $.each(fetchResult[0], function (key, item) {
+                    if (item > Math.round(60 * (expression))) {
+                        $(rotationFrequency).append(new Option(Number(item), Number(item)));
+                    }
+                    $('#step-2').trigger('change');
+                    $(document).trigger('change');
+                });
+                if (rotationFrequency.length == 0) {
+                    alert('С указанной комбинацией оборотов и времени закрытия нет подходящей частоты вращения');
+                } else {
+                    $('#rotation-frequency').trigger('change');
+                }
+            });
+    }
+
+    // ПРОГРУЗКА ДАННЫХ КОНСТРУКТИВНЫХ СХЕМ С ТАБЛИЦЫ
+    $('#rotation-frequency').on('change', function (e) {
+        function SchemeSelectCreate() {
+            let vPower = document.querySelector("#vPower").value;
+            let execution = $("input[name='execution']:checked").val();
+            let upLim = document.querySelector('#upper-limit').value;
+            let connectionType = $("input[name='connection-type']:checked").val();
+            let rotationFrequency = document.getElementById('rotation-frequency').value;
+            $('#constructive-scheme-wrap').empty();
+            $('#constructive-scheme-img').empty();
+
+            if (!upLim) {
+                return alert('Пропущен верхний предел');
+            }
+
+            else if (!rotationFrequency) {
+                return alert('Пропущена частота вращения выходного вала');
+            }
+
+            let fetchResult = [];
+
+            fetch('https://emk.websto.pro/DBep', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json;charset=utf-8' },
+                body: JSON.stringify({
+                    a: ['ЭП4', execution, connectionType, upLim, vPower, rotationFrequency],
+                }),
+            })
+                .then((res) => res.json())
+                .then((res) => {
+                    console.log(res);
+                    for (i in res) fetchResult.push(res[i]);
+                    // fetchResult[0].sort((a, b) => a - b);
+                    $.each(fetchResult[0], function (key, item) {
+                        $('#constructive-scheme-wrap').append(
+                            $('<div>')
+                                .prop({ class: 'form-check' })
+                                .append(
+                                    $('<input>').prop({
+                                        type: 'radio',
+                                        id: 'scheme-' + item,
+                                        name: 'constructive-scheme',
+                                        value: item,
+                                        class: 'form-check-input ch-mark'
+                                    })
+                                )
+                                .append(
+                                    $('<label>')
+                                        .prop({
+                                            for: 'scheme-' + item,
+                                            class: 'form-check-label',
+                                        })
+                                        .text(' Конструктивная схема ' + item)
+                                )
+                        );
+                    });
+                    if (fetchResult[0].length == 1) {
+                        let a = document.getElementsByName('constructive-scheme');
+                        a[0].checked = true;
+                        $('#constructive-scheme-wrap').trigger('change');
+                    };
+                });
+        }
+        SchemeSelectCreate();
+    });
+
+    $('#constructive-scheme-wrap').on('change', function (e) {
+        let cur_constructive_scheme = $("input[name='constructive-scheme']:checked").val();
+
+        if (cur_constructive_scheme !== '41' && cur_constructive_scheme !== '410') {
+            $('#E1SinSelect').hide();
+        } else {
+            $('#E1SinSelect').show();
+        }
+
+        $('#constructive-scheme-img')
+            .empty()
+            .append(
+                $('<img>').prop({
+                    src: './img/' + cheme_img['ep4'][cur_constructive_scheme],
+                    class: 'img-fluid',
+                })
+            );
+
+        function flangeSelectCreate() {
+            let execution = $("input[name='execution']:checked").val();
+            let vPower = document.querySelector("#vPower").value;
+            let upLim = document.querySelector('#upper-limit').value;
+            let connectionType = $("input[name='connection-type']:checked").val();
+            let rotationFrequency = document.getElementById('rotation-frequency').value;
+            let scheme = $("input[name='constructive-scheme']:checked").val();
+            let flange = document.querySelector('#flange');
+
+            $(flange).empty();
+
+            if (!upLim) {
+                return alert('Пропущен верхний предел');
+            }
+
+            else if (!rotationFrequency) {
+                return alert('Пропущена частота вращения выходного вала');
+            }
+            else if (!scheme) {
+                return alert('Пропущена схема');
+            }
+
+            flange.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
+
+            let fetchResult = [];
+
+            fetch('https://emk.websto.pro/DBep', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json;charset=utf-8' },
+                body: JSON.stringify({
+                    a: ['ЭП4', execution, connectionType, upLim, vPower, rotationFrequency, scheme],
+                }),
+            })
+                .then((res) => res.json())
+                .then((res) => {
+                    console.log(res);
+                    for (i in res) fetchResult.push(res[i]);
+                    // fetchResult[0].sort((a, b) => a - b);
+                    $.each(fetchResult[0], function (key, item) {
+                        $(flange).append(new Option(item));
+                        if (fetchResult[0].length == 1) {
+                            flange.selectedIndex = 1;
+                            $('#flange').trigger('change');
+                        };
+                    });
+                });
+        }
+
+        flangeSelectCreate();
+    });
+
+    $('#constructive-scheme-wrap').on('change', function () {
+        cur_constructive_scheme = $("input[name='constructive-scheme']").val();
+
+        // СОКРЫТИЕ КАБЕЛЬНЫЙ ПОДКЛЮЧЕНИЙ ДЛЯ СХем 43/44/430
+        if (cur_constructive_scheme == '43' || cur_constructive_scheme == '430' || cur_constructive_scheme == '44') {
+            $("input[name='connectionForEp4']:checked").prop('checked', false);
+            $(document).trigger('change');
+            document.querySelector("#connectionForEp4-0div").style.display = 'flow';
+            document.querySelector("#connectionForEp4-1div").style.display = 'none';
+            // document.querySelector("#connectionForEp4-2div").checked = '';
+            // document.querySelector("#connectionForEp4-3div").style.display = 'flow';
+            document.querySelector("#connectionForEp4-4div").style.display = 'none';
+            // document.querySelector("#connectionForEp4-5div").style.display = 'flow';
+            document.querySelector("#connectionForEp4-6div").style.display = 'none';
+            // document.querySelector("#connectionForEp4-7div").style.display = 'flow';
+        }
+        else {
+            document.querySelector("#connectionForEp4-0div").style.display = 'flow';
+            document.querySelector("#connectionForEp4-1div").style.display = 'flow';
+            // document.querySelector("#connectionForEp4-3div").style.display = 'flow';
+            document.querySelector("#connectionForEp4-4div").style.display = 'flow';
+            // document.querySelector("#connectionForEp4-5div").style.display = 'flow';
+            document.querySelector("#connectionForEp4-6div").style.display = 'flow';
+            // document.querySelector("#connectionForEp4-7div").style.display = 'flow';
+        }
+
+    });
+
 
     // ОБРАБОТКА ИСПОЛНЕНИЯ
     $('#executionWrapLegend').on('change', function () {
@@ -344,239 +578,6 @@ $(document).ready(function () {
             document.querySelector("#special-4").checked = false;
             $('#special-4Field').hide();
         }
-    });
-
-
-    // Формула от частоты вращения и двигателя
-    $('#stepClose').on('change', function (e) {
-        rotationFrequencySelectCreate();
-        // $('#rotation-frequency').trigger('change');
-    })
-
-    // ПРОГРУЗКА ДАННЫХ ЧАСТОТЫ ВРАЩЕНИЯ С ТАБЛИЦЫ
-    $('#vPower').on('change', function (e) {
-        rotationFrequencySelectCreate();
-        // $('#rotation-frequency').trigger('change');
-    });
-
-    // ПРОГРУЗКА ДАННЫХ ЧАСТОТЫ ВРАЩЕНИЯ С ТАБЛИЦЫ ПОСЛЕ ЗАПОЛНЕНИЯ МОЩНОСТИ
-    $('#upper-limit').on('change', function (e) {
-        $('#vPower').val('0');
-        $('#closeNumbers').val('');
-        $('#closingTime').val('');
-        rotationFrequencySelectCreate();
-        // $('#stepClose').trigger('change');
-        // $('#rotation-frequency').trigger('change');
-    });
-
-    function rotationFrequencySelectCreate() {
-        let closeNumbers = document.querySelector('#closeNumbers').value;
-        let closingTime = document.querySelector('#closingTime').value;
-        let expression = (closeNumbers && closingTime) ? (closeNumbers / closingTime) : (1 / 60);
-        let vPower = document.querySelector("#vPower").value;
-        let upLim = document.querySelector('#upper-limit').value;
-        let connectionType = $("input[name='connection-type']:checked").val();
-        let rotationFrequency = document.getElementById('rotation-frequency');
-
-        if (!vPower) {
-            return alert('Пропущен кабельный ввод');
-        }
-        else if (!upLim) {
-            return alert('Пропущен тип бкв');
-        }
-        else if (!connectionType) {
-            return alert('Пропущен крутящий момент');
-        }
-
-        $(rotationFrequency).empty();
-        let fetchResult = [];
-
-        fetch('https://emk.websto.pro/DB', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json;charset=utf-8' },
-            body: JSON.stringify({
-                a: ['ЭП4', connectionType, upLim, vPower],
-            }),
-        })
-            .then((res) => res.json())
-            .then((res) => {
-                console.log(res);
-                for (i in res) fetchResult.push(res[i]);
-                // fetchResult[0].sort((a, b) => a - b);
-                $.each(fetchResult[0], function (key, item) {
-                    if (item > Math.round(60 * (expression))) {
-                        $(rotationFrequency).append(new Option(item, item));
-                    }
-                    $('#step-2').trigger('change');
-                    $(document).trigger('change');
-                });
-                if (rotationFrequency.length == 0) {
-                    alert('С указанной комбинацией оборотов и времени закрытия нет подходящей частоты вращения');
-                } else {
-                    $('#rotation-frequency').trigger('change');
-                }
-            });
-    }
-
-    // ПРОГРУЗКА ДАННЫХ КОНСТРУКТИВНЫХ СХЕМ С ТАБЛИЦЫ
-    $('#rotation-frequency').on('change', function (e) {
-        function SchemeSelectCreate() {
-            let vPower = document.querySelector("#vPower").value;
-            let upLim = document.querySelector('#upper-limit').value;
-            let connectionType = $("input[name='connection-type']:checked").val();
-            let rotationFrequency = document.getElementById('rotation-frequency').value;
-            $('#constructive-scheme-wrap').empty();
-            $('#constructive-scheme-img').empty();
-
-            if (!upLim) {
-                return alert('Пропущен верхний предел');
-            }
-
-            else if (!rotationFrequency) {
-                return alert('Пропущена частота вращения выходного вала');
-            }
-
-            let fetchResult = [];
-
-            fetch('https://emk.websto.pro/DB', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json;charset=utf-8' },
-                body: JSON.stringify({
-                    a: ['ЭП4', connectionType, upLim, vPower, rotationFrequency],
-                }),
-            })
-                .then((res) => res.json())
-                .then((res) => {
-                    console.log(res);
-                    for (i in res) fetchResult.push(res[i]);
-                    // fetchResult[0].sort((a, b) => a - b);
-                    $.each(fetchResult[0], function (key, item) {
-                        $('#constructive-scheme-wrap').append(
-                            $('<div>')
-                                .prop({ class: 'form-check' })
-                                .append(
-                                    $('<input>').prop({
-                                        type: 'radio',
-                                        id: 'scheme-' + item,
-                                        name: 'constructive-scheme',
-                                        value: item,
-                                        class: 'form-check-input ch-mark'
-                                    })
-                                )
-                                .append(
-                                    $('<label>')
-                                        .prop({
-                                            for: 'scheme-' + item,
-                                            class: 'form-check-label',
-                                        })
-                                        .text(' Конструктивная схема ' + item)
-                                )
-                        );
-                    });
-                    if (fetchResult[0].length == 1) {
-                        let a = document.getElementsByName('constructive-scheme');
-                        a[0].checked = true;
-                        $('#constructive-scheme-wrap').trigger('change');
-                    };
-                });
-        }
-        SchemeSelectCreate();
-    });
-
-    $('#constructive-scheme-wrap').on('change', function (e) {
-        let cur_constructive_scheme = $("input[name='constructive-scheme']:checked").val();
-
-        if (cur_constructive_scheme !== '41' && cur_constructive_scheme !== '410') {
-            $('#E1SinSelect').hide();
-        } else {
-            $('#E1SinSelect').show();
-        }
-
-        $('#constructive-scheme-img')
-            .empty()
-            .append(
-                $('<img>').prop({
-                    src: './img/' + cheme_img['ep4'][cur_constructive_scheme],
-                    class: 'img-fluid',
-                })
-            );
-
-        function flangeSelectCreate() {
-            let vPower = document.querySelector("#vPower").value;
-            let upLim = document.querySelector('#upper-limit').value;
-            let connectionType = $("input[name='connection-type']:checked").val();
-            let rotationFrequency = document.getElementById('rotation-frequency').value;
-            let scheme = $("input[name='constructive-scheme']:checked").val();
-            let flange = document.querySelector('#flange');
-
-            $(flange).empty();
-
-            if (!upLim) {
-                return alert('Пропущен верхний предел');
-            }
-
-            else if (!rotationFrequency) {
-                return alert('Пропущена частота вращения выходного вала');
-            }
-            else if (!scheme) {
-                return alert('Пропущена схема');
-            }
-
-            flange.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
-
-            let fetchResult = [];
-
-            fetch('https://emk.websto.pro/DB', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json;charset=utf-8' },
-                body: JSON.stringify({
-                    a: ['ЭП4', connectionType, upLim, vPower, rotationFrequency, scheme],
-                }),
-            })
-                .then((res) => res.json())
-                .then((res) => {
-                    console.log(res);
-                    for (i in res) fetchResult.push(res[i]);
-                    // fetchResult[0].sort((a, b) => a - b);
-                    $.each(fetchResult[0], function (key, item) {
-                        $(flange).append(new Option(item));
-                        if (fetchResult[0].length == 1) {
-                            flange.selectedIndex = 1;
-                            $('#flange').trigger('change');
-                        };
-                    });
-                });
-        }
-
-        flangeSelectCreate();
-    });
-
-    $('#constructive-scheme-wrap').on('change', function () {
-        cur_constructive_scheme = $("input[name='constructive-scheme']").val();
-
-        // СОКРЫТИЕ КАБЕЛЬНЫЙ ПОДКЛЮЧЕНИЙ ДЛЯ СХем 43/44/430
-        if (cur_constructive_scheme == '43' || cur_constructive_scheme == '430' || cur_constructive_scheme == '44') {
-            $("input[name='connectionForEp4']:checked").prop('checked', false);
-            $(document).trigger('change');
-            document.querySelector("#connectionForEp4-0div").style.display = 'flow';
-            document.querySelector("#connectionForEp4-1div").style.display = 'none';
-            // document.querySelector("#connectionForEp4-2div").checked = '';
-            // document.querySelector("#connectionForEp4-3div").style.display = 'flow';
-            document.querySelector("#connectionForEp4-4div").style.display = 'none';
-            // document.querySelector("#connectionForEp4-5div").style.display = 'flow';
-            document.querySelector("#connectionForEp4-6div").style.display = 'none';
-            // document.querySelector("#connectionForEp4-7div").style.display = 'flow';
-        }
-        else {
-            document.querySelector("#connectionForEp4-0div").style.display = 'flow';
-            document.querySelector("#connectionForEp4-1div").style.display = 'flow';
-            // document.querySelector("#connectionForEp4-3div").style.display = 'flow';
-            document.querySelector("#connectionForEp4-4div").style.display = 'flow';
-            // document.querySelector("#connectionForEp4-5div").style.display = 'flow';
-            document.querySelector("#connectionForEp4-6div").style.display = 'flow';
-            // document.querySelector("#connectionForEp4-7div").style.display = 'flow';
-        }
-
     });
 
     // ОГРАНИЧЕНИЕ ПО IP КЛИМАТИЧЕСКИХ УСЛОВИЙ
@@ -1368,8 +1369,18 @@ $(document).ready(function () {
         let closeNumbers = document.querySelector('#closeNumbers').value;
         let fetchResult = [];
 
+        if (!scheme) {
+            return alert('Пропущена cхема');
+        }
+        else if (!upLim) {
+            return alert('Пропущен верхний предел');
+        }
+        else if (!rotationFrequency) {
+            return alert('Пропущена частота вращения');
+        }
+
         if (upLim && rotationFrequency && scheme && closeNumbers > 0.8 && closeNumbers < 1250) {
-            fetch('https://emk.websto.pro/M1', {
+            fetch('https://emk.websto.pro/m1', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json;charset=utf-8' },
                 body: JSON.stringify({
@@ -1393,11 +1404,22 @@ $(document).ready(function () {
     $('#closeNumbers').on('keyup', function (e) {
         document.querySelector("#closeNumbersForM").value = document.querySelector("#closeNumbers").value;
         // yo();
-    })
+    });
 
     $('#closeNumbersForM').on('keyup', function (e) {
         document.querySelector("#closeNumbers").value = document.querySelector("#closeNumbersForM").value;
         yo();
+    });
+
+    // Стиль для оборотов закрытия 
+    $(document).on('change', function () {
+        if (document.querySelector('#closeNumbers').value != '') {
+            document.querySelector('.closeNumbers').classList.add('ReqValueOk');
+            document.querySelector('.closeNumbers').classList.remove('noReqValue');
+        } else {
+            document.querySelector('.closeNumbers').classList.add('noReqValue');
+            document.querySelector('.closeNumbers').classList.remove('ReqValueOk');
+        }
     })
     // Стили для оборотов м1
     $('#m1-form').on('change', function (e) {
@@ -1487,7 +1509,6 @@ $(document).ready(function () {
         let cbs = $('#controle-blocks-series').val();
         if (cbs === 'М1') {
             m1BlockModal.show();
-            yo();
             $('#closeNumbersForM').trigger('change');
         } else if (cbs === 'М2') {
             m2BlockModal.show();
@@ -1678,16 +1699,6 @@ $(document).ready(function () {
         } else {
             document.querySelector('.closingTime').classList.remove('ReqValueOk');
             document.querySelector('.closingTime').classList.add('noReqValue');
-        }
-    });
-
-    $('#stepClose').on('change', function (e) {
-        if (document.querySelector('#closeNumbers').value != '') {
-            document.querySelector('.closeNumbers').classList.add('ReqValueOk');
-            document.querySelector('.closeNumbers').classList.remove('noReqValue');
-        } else {
-            document.querySelector('.closeNumbers').classList.add('noReqValue');
-            document.querySelector('.closeNumbers').classList.remove('ReqValueOk');
         }
     });
 

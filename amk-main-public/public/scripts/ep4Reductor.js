@@ -65,7 +65,7 @@ $(document).ready(function () {
 
         let fetchResult = [];
 
-        fetch('https://emk.websto.pro/DBrn', {
+        fetch('https://emk.websto.pro/DBRN', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json;charset=utf-8' },
             body: JSON.stringify({
@@ -123,23 +123,22 @@ $(document).ready(function () {
         }
     });
 
-
-
     // ПРОГРУЗКА фланца С ТАБЛИЦЫ
-    $('#rn').on('change', function (e) {
+    $('#executionWrapLegend').on('change', function (e) {
         function flangeSelect() {
-            let select = document.querySelector("#flange");
             let rn = document.querySelector("#rn").value;
+            let execution = $("input[name='execution']:checked").val();
+            let select = document.querySelector("#flange");
             $(select).empty();
             select.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
 
             let fetchResult = [];
 
-            fetch('https://emk.websto.pro/DBrn', {
+            fetch('https://emk.websto.pro/DBRN', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json;charset=utf-8' },
                 body: JSON.stringify({
-                    a: [rn],
+                    a: [rn, execution],
                 }),
             })
                 .then((res) => res.json())
@@ -162,20 +161,21 @@ $(document).ready(function () {
     // ПРОГРУЗКА крут момента С ТАБЛИЦЫ
     $('#flange').on('change', function (e) {
         function roundMomentSelect() {
-            let select = document.querySelector("#upper-limit");
             let rn = document.querySelector("#rn").value;
+            let execution = $("input[name='execution']:checked").val();
             let flange = document.querySelector("#flange").value;
+            let select = document.querySelector("#upper-limit");
 
             $(select).empty();
             select.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
 
             let fetchResult = [];
 
-            fetch('https://emk.websto.pro/DBrn', {
+            fetch('https://emk.websto.pro/DBRN', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json;charset=utf-8' },
                 body: JSON.stringify({
-                    a: [rn, flange],
+                    a: [rn, execution, flange],
                 }),
             })
                 .then((res) => res.json())
@@ -200,21 +200,22 @@ $(document).ready(function () {
     // ПРОГРУЗКА частоты вращения С ТАБЛИЦЫ
     $('#upper-limit').on('change', function (e) {
         function uplimSelect() {
-            let select = document.querySelector("#rotation-frequency");
-            let upLim = document.querySelector("#upper-limit").value;
             let rn = document.querySelector("#rn").value;
+            let execution = $("input[name='execution']:checked").val();
             let flange = document.querySelector("#flange").value;
+            let upLim = document.querySelector("#upper-limit").value;
+            let select = document.querySelector("#rotation-frequency");
 
             $(select).empty();
             select.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
 
             let fetchResult = [];
 
-            fetch('https://emk.websto.pro/DBrn', {
+            fetch('https://emk.websto.pro/DBRN', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json;charset=utf-8' },
                 body: JSON.stringify({
-                    a: [rn, flange, upLim],
+                    a: [rn, execution, flange, upLim],
                 }),
             })
                 .then((res) => res.json())
@@ -223,7 +224,7 @@ $(document).ready(function () {
                     for (i in res) fetchResult.push(res[i]);
                     // fetchResult[0].sort((a, b) => a - b);
                     $.each(fetchResult[0], function (key, item) {
-                        $(select).append(new Option(item, item));
+                        $(select).append(new Option(Number(item), Number(item)));
                         if (fetchResult[0].length == 1) {
                             select.selectedIndex = 1;
                             $('#rotation-frequency').trigger('change');
@@ -237,22 +238,23 @@ $(document).ready(function () {
     // ПРОГРУЗКА времени поворота с таблицы
     $('#rotation-frequency').on('change', function (e) {
         function turnTimeSelect() {
-            select = document.querySelector('#turnTime');
-            let rot = document.querySelector("#rotation-frequency").value;
-            let upLim = document.querySelector("#upper-limit").value;
             let rn = document.querySelector("#rn").value;
+            let execution = $("input[name='execution']:checked").val();
             let flange = document.querySelector("#flange").value;
+            let upLim = document.querySelector("#upper-limit").value;
+            let rot = document.querySelector("#rotation-frequency").value;
+            let select = document.querySelector('#turnTime');
 
             $(select).empty();
             select.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
 
             let fetchResult = [];
 
-            fetch('https://emk.websto.pro/DBrn', {
+            fetch('https://emk.websto.pro/DBRN', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json;charset=utf-8' },
                 body: JSON.stringify({
-                    a: [rn, flange, upLim, rot],
+                    a: [rn, execution, flange, upLim, rot],
                 }),
             })
                 .then((res) => res.json())
@@ -300,21 +302,22 @@ $(document).ready(function () {
     // ПРОГРУЗКА ДАННЫХ КОНСТРУКТИВНЫХ СХЕМ С ТАБЛИЦЫ
     $('#turnTime').on('change', function (e) {
         function SchemeSelectCreate() {
-            let turnTime = document.querySelector('#turnTime').value;
-            let rot = document.querySelector("#rotation-frequency").value;
-            let upLim = document.querySelector("#upper-limit").value;
             let rn = document.querySelector("#rn").value;
+            let execution = $("input[name='execution']:checked").val();
             let flange = document.querySelector("#flange").value;
+            let upLim = document.querySelector("#upper-limit").value;
+            let rot = document.querySelector("#rotation-frequency").value;
+            let turnTime = document.querySelector('#turnTime').value;
             $('#constructive-scheme-wrap').empty();
             $('#constructive-scheme-img').empty();
 
             let fetchResult = [];
 
-            fetch('https://emk.websto.pro/DBrn', {
+            fetch('https://emk.websto.pro/DBRN', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json;charset=utf-8' },
                 body: JSON.stringify({
-                    a: [rn, flange, upLim, rot, turnTime],
+                    a: [rn, execution, flange, upLim, rot, turnTime],
                 }),
             })
                 .then((res) => res.json())
@@ -357,7 +360,6 @@ $(document).ready(function () {
 
     $('#constructive-scheme-wrap').on('change', function (e) {
         let cur_constructive_scheme = $("input[name='constructive-scheme']:checked").val();
-
         $('#constructive-scheme-img')
             .empty()
             .append(
@@ -1120,8 +1122,18 @@ $(document).ready(function () {
         let scheme = $("input[name='constructive-scheme']:checked").val();
         let fetchResult = [];
 
+        if (!scheme) {
+            return alert('Пропущена cхема');
+        }
+        else if (!upLim) {
+            return alert('Пропущен верхний предел');
+        }
+        else if (!rotationFrequency) {
+            return alert('Пропущена частота вращения');
+        }
+
         if (upLim && rotationFrequency && scheme) {
-            fetch('https://emk.websto.pro/M1', {
+            fetch('https://emk.websto.pro/m1', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json;charset=utf-8' },
                 body: JSON.stringify({

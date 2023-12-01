@@ -22,7 +22,6 @@ $(document).ready(function () {
         $(el).toggleClass('table-success');
     });
 
-
     const cheme_img = {
         epn: {
             0: 'epn0.png',
@@ -39,17 +38,18 @@ $(document).ready(function () {
     // ЗАПОЛНЕНИЕ КрутяЩИХ МОМЕНТОВ ЧЕРЕЗ БД
     $('#executionWrapLegend').on('change', function (e) {
         function rMomentSelectCreate() {
+            let execution = $("input[name='execution']:checked").val();
             let uplim = document.getElementById('upper-limit');
             $(uplim).empty();
 
             uplim.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
 
             let fetchResult = [];
-            fetch('https://emk.websto.pro/DB', {
+            fetch('https://emk.websto.pro/DBep', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json;charset=utf-8' },
                 body: JSON.stringify({
-                    a: ['ЭПН', '3'],
+                    a: ['ЭПН', execution],
                 }),
             })
                 .then(res => res.json())
@@ -74,6 +74,7 @@ $(document).ready(function () {
 
     $('#upper-limit').on('change', function (e) {
         function vV() {
+            let execution = $("input[name='execution']:checked").val();
             let uplim = document.querySelector("#upper-limit").value;
             let vPower = document.getElementById('vPower');
             $(vPower).empty();
@@ -86,11 +87,11 @@ $(document).ready(function () {
 
             let fetchResult = [];
 
-            fetch('https://emk.websto.pro/DB', {
+            fetch('https://emk.websto.pro/DBep', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json;charset=utf-8' },
                 body: JSON.stringify({
-                    a: ['ЭПН', '3', uplim],
+                    a: ['ЭПН', execution, uplim],
                 }),
             })
                 .then(res => res.json())
@@ -111,48 +112,50 @@ $(document).ready(function () {
     // ЗАПОЛНЕНИЕ Времени Хода ЧЕРЕЗ БД
     $('#upper-limit').on('change', function (e) {
         stepTimeSelectCreate();
+
+        function stepTimeSelectCreate() {
+            let execution = $("input[name='execution']:checked").val();
+            let vPower = document.getElementById('vPower').value;
+            let uplim = document.querySelector("#upper-limit").value;
+            let select = document.querySelector("#time-limit");
+            $(select).empty();
+
+            if (!vPower) {
+                return alert('Пропущен кабельный ввод');
+            }
+            else if (!uplim) {
+                return alert('Пропущен кабельный ввод');
+            }
+
+            select.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
+
+            let fetchResult = [];
+
+            fetch('https://emk.websto.pro/DBep', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json;charset=utf-8' },
+                body: JSON.stringify({
+                    a: ['ЭПН', execution, uplim, vPower],
+                }),
+            })
+                .then(res => res.json())
+                .then(res => {
+                    console.log(res)
+                    for (i in res)
+                        fetchResult.push(res[i]);
+                    // fetchResult[0].sort((a, b) => a - b);
+                    $.each(fetchResult[0], function (key, item) {
+                        $(select).append(new Option(Number(item), Number(item)))
+                        if (fetchResult[0].length == 1) {
+                            select.selectedIndex = 1;
+                            $('#step-2').trigger('change');
+                        };
+                    }
+                    );
+                })
+        }
     });
 
-    function stepTimeSelectCreate() {
-        let vPower = document.getElementById('vPower').value;
-        let uplim = document.querySelector("#upper-limit").value;
-        let select = document.querySelector("#time-limit");
-        $(select).empty();
-
-        if (!vPower) {
-            return alert('Пропущен кабельный ввод');
-        }
-        else if (!uplim) {
-            return alert('Пропущен кабельный ввод');
-        }
-
-        select.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
-
-        let fetchResult = [];
-
-        fetch('https://emk.websto.pro/DB', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json;charset=utf-8' },
-            body: JSON.stringify({
-                a: ['ЭПН', '3', uplim, vPower],
-            }),
-        })
-            .then(res => res.json())
-            .then(res => {
-                console.log(res)
-                for (i in res)
-                    fetchResult.push(res[i]);
-                // fetchResult[0].sort((a, b) => a - b);
-                $.each(fetchResult[0], function (key, item) {
-                    $(select).append(new Option(item, item))
-                    if (fetchResult[0].length == 1) {
-                        select.selectedIndex = 1;
-                        $('#step-2').trigger('change');
-                    };
-                }
-                );
-            })
-    }
 
     // ПРОГРУЗКА ДАННЫХ КОНСТРУКТИВНЫХ СХЕМ С ТАБЛИЦЫ 
     $('#step-2').on('change', function (e) {
@@ -160,6 +163,7 @@ $(document).ready(function () {
             let vPower = document.getElementById('vPower').value;
             let upLim = document.querySelector("#upper-limit").value;
             let timeLim = document.querySelector("#time-limit").value;
+            let execution = $("input[name='execution']:checked").val();
             $('#constructive-scheme-wrap').empty();
             $('#constructive-scheme-img').empty();
             $('#constructive-scheme-Epnimg').empty();
@@ -172,13 +176,12 @@ $(document).ready(function () {
                 return alert('Пропущен кабельный ввод');
             }
 
-
             let fetchResult = [];
-            fetch('https://emk.websto.pro/DB', {
+            fetch('https://emk.websto.pro/DBep', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json;charset=utf-8' },
                 body: JSON.stringify({
-                    a: ['ЭПН', '3', upLim, vPower, timeLim],
+                    a: ['ЭПН', execution, upLim, vPower, timeLim],
                 }),
             })
                 .then(res => res.json())
@@ -229,6 +232,7 @@ $(document).ready(function () {
     // ПРОГРУЗКА ФЛАНЦЕВ С БД
     $('#schemeFieldSet').on('change', function (e) {
         function flangeSelectCreate() {
+            let execution = $("input[name='execution']:checked").val();
             let vPower = document.getElementById('vPower').value;
             let upLim = document.querySelector("#upper-limit").value;
             let timeLim = document.querySelector("#time-limit").value;
@@ -251,11 +255,11 @@ $(document).ready(function () {
 
             let fetchResult = [];
 
-            fetch('https://emk.websto.pro/DB', {
+            fetch('https://emk.websto.pro/DBep', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json;charset=utf-8' },
                 body: JSON.stringify({
-                    a: ['ЭПН', "3", upLim, vPower, timeLim, scheme],
+                    a: ['ЭПН', execution, upLim, vPower, timeLim, scheme],
                 }),
             })
                 .then(res => res.json())
@@ -275,6 +279,7 @@ $(document).ready(function () {
 
     // ПРОГРУЗКА ТИПА СИЛОВОГО ПИТАНИЯ 
     $('#flange').on('change', function (e) {
+        let execution = $("input[name='execution']:checked").val();
         let scheme = $("input[name='constructive-scheme']:checked").val();
 
         if (scheme == undefined) { return alert('Пропущена схема'); }
@@ -304,11 +309,11 @@ $(document).ready(function () {
 
             let fetchResult = [];
 
-            fetch('https://emk.websto.pro/DB', {
+            fetch('https://emk.websto.pro/DBep', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json;charset=utf-8' },
                 body: JSON.stringify({
-                    a: ['ЭПН', '3', upLim, vPower, timeLim, scheme, flange],
+                    a: ['ЭПН', execution, upLim, vPower, timeLim, scheme, flange],
                 }),
             })
                 .then(res => res.json())
@@ -497,7 +502,6 @@ $(document).ready(function () {
         }
     });
 
-
     $('#controle-blocks-series').on('change', function (e) {
         let x6 = $('#controle-blocks-series').val();
         if (x6 == 'М2') {
@@ -511,7 +515,6 @@ $(document).ready(function () {
             $('#sumBlocks').hide();
         }
         else $('#sumBlocks').show();
-
     });
 
     $('#control-block-fieldset').on('change', function (e) {
@@ -632,13 +635,13 @@ $(document).ready(function () {
         function rebuildX7() {
             let x7check = document.querySelector("#powerType").value;
             switch (x7check) {
-                case ('220B 1 фаз(ы) '):
+                case ('220 В 1 фаз(а/ы)'):
                     return '1';
-                case ('220B 3 фаз(ы) '):
+                case ('220 В 3 фаз(а/ы)'):
                     return '3';
-                case ('380B 3 фаз(ы) '):
+                case ('380 В 3 фазы'):
                     return '3';
-                case ('24B 1 фаз(ы) '):
+                case ('24 В'):
                     return '6';
                 default:
                     return 'X';
@@ -990,7 +993,6 @@ $(document).ready(function () {
         sendToServer();
     });
 
-
     // сокрытия пункта Ral
     $('#colorType').on('change', function (e) {
         if (document.querySelector('#color-2').checked) {
@@ -1122,8 +1124,6 @@ $(document).ready(function () {
         }
     });
 
-
-
     $('#controle-blocks-series').on('change', function (e) {
         let cbs = $('#controle-blocks-series').val();
         let cb = $('#controle-blocks');
@@ -1133,7 +1133,6 @@ $(document).ready(function () {
             cb.val(cbs);
         }
     });
-
 
     // стиль для режима работы
     $('.timeMode').on('change', function (e) {
@@ -1147,6 +1146,7 @@ $(document).ready(function () {
 
         }
     });
+
     // стиль для силового электропитания
     $('.power-type-wrap').on('change', function (e) {
         if (document.querySelector("#powerType").value !== '') {
@@ -1171,6 +1171,7 @@ $(document).ready(function () {
             document.querySelector('.numbersOfEp').classList.remove('ReqValueOk');
         }
     });
+
     // СТИЛЬ ДЛЯ ПОЛЯ С ДАННЫМИ
     $('.persInfo').on('change', function (e) {
         if (document.querySelector('#organization').value != '' && document.querySelector('#fio').value != '' && document.querySelector('#phone').value != '' && document.querySelector('#email').value != '') {
@@ -1181,6 +1182,7 @@ $(document).ready(function () {
             document.querySelector('.persInfo ').classList.add('noReqValue');
         }
     });
+
     // СТИЛЬ ДЛЯ ПОЛЯ Со схемами
     $('№schemeFieldSet').on('change', function (e) {
         if (document.querySelector('#organization').value != '' && document.querySelector('#fio').value != '' && document.querySelector('#phone').value != '' && document.querySelector('#email').value != '') {
@@ -1203,6 +1205,7 @@ $(document).ready(function () {
             document.querySelector('.typeEndSwich').classList.remove('ReqValueOk');
         }
     });
+
     // Тип блока управления привода
     $('.commandBlockType').on('change', function (e) {
         if (document.querySelector("#commandBlockType-1").checked || document.querySelector("#commandBlockType-2").checked) {
@@ -1214,6 +1217,7 @@ $(document).ready(function () {
             document.querySelector('.commandBlockType').classList.remove('ReqValueOk');
         }
     });
+
     // Сигнализация положения
     $('.signal').on('change', function (e) {
         if (document.querySelector("#signal").value != '') {
@@ -1225,6 +1229,7 @@ $(document).ready(function () {
             document.querySelector('.signal').classList.remove('ReqValueOk');
         }
     });
+
     // Сигналы дист управления 
     $('.commandSignal').on('change', function (e) {
         if (document.querySelector("#commandSignal").value != '') {
@@ -1364,7 +1369,6 @@ $(document).ready(function () {
                     return '';
             }
         }
-
         else {
             let base = document.querySelector('#controle-blocks2').value;
             switch (base) {
@@ -1394,10 +1398,8 @@ $(document).ready(function () {
         }
     }
 
-
     //ДИСТ и МЕСТНЫЕ СИГНАЛЫ
     function selectRemoteSignal() {
-
         let BoMark = document.querySelector("#controle-blocks-series").value;
         optForBu = $('#control-block-optionsset option:selected').val() != 'noValue' ? $('#control-block-optionsset option:selected').val() : '';
         voptForBu = $('#vimucontrol-block-optionsset option:selected').val();
@@ -1492,6 +1494,7 @@ $(document).ready(function () {
             return positionSignal = '';
         }
     }
+
     // Обработка сигналов второго блока
     function selectPositionSignalSecondCommandBlock() {
         if (document.querySelector('#controle-blocks').value == 'ВЭ1') {
@@ -1595,7 +1598,6 @@ $(document).ready(function () {
             $('#step-9').show();
         }
     });
-
     $('#step-9').on('change', function (e) {
         if (
             document.querySelector('#organization').value != '' &&
