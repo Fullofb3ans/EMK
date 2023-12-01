@@ -470,8 +470,8 @@ $(document).ready(function () {
     });
 
     // Получение модернизации и номера исполнения
-    $('#salOrStepse').on('change', function (e) {
-        if ($("#salOrStepse option:checked").text() == 'Сальниковый ввод') {
+    $('#row').on('change', function (e) {
+        if ($("#salOrStepse option:checked").text() == 'Cальниковый ввод') {
             $('#standartField').show();
         }
         else {
