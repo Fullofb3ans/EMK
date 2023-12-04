@@ -555,6 +555,7 @@ $(document).ready(function () {
             $('#special-2Field').show();
         }
         else {
+            document.querySelector("#special-2").checked = false;
             $('#special-2Field').hide();
         }
     });
@@ -854,7 +855,7 @@ $(document).ready(function () {
                 $("input[name='execution']").closest('fieldset').removeClass('noReqValue');
                 $("input[name='execution']").closest('fieldset').addClass('ReqValueOk');
         }
-        let x3 = $('#flange').val() ? $('#flange').val() : 'X'; // Тип присоединения к арматуре
+        let x3 = document.querySelector("#flange").value ? document.querySelector("#flange").value : 'X'; // Тип присоединения к арматуре
         switch (x3) {
             case 'X':
                 $('#flange').closest('fieldset').removeClass('ReqValueOk');
@@ -871,7 +872,7 @@ $(document).ready(function () {
                 $('#flange').closest('fieldset').addClass('ReqValueOk');
         }
 
-        let x4 = $('#upper-limit').val() ? $('#upper-limit').val() : 'X'; // Верхний предел настройки ограничителя крутящего момента, Н·м
+        let x4 = document.querySelector("#upper-limit").value ? document.querySelector("#upper-limit").value : 'X'; // Верхний предел настройки ограничителя крутящего момента, Н·м
         switch (x4) {
             case 'X':
                 $('#upper-limit').closest('fieldset').removeClass('ReqValueOk');
@@ -882,7 +883,7 @@ $(document).ready(function () {
                 $('#upper-limit').closest('fieldset').addClass('ReqValueOk');
         }
 
-        let x5 = $('#rotation-frequency').val() ? $('#rotation-frequency').val() : 'X'; // Частота вращения выходного вала, об/мин
+        let x5 = document.querySelector("#rotation-frequency").value ? document.querySelector("#rotation-frequency").value : 'X'; // Частота вращения выходного вала, об/мин
         switch (x5) {
             case 'X':
                 $('#rotation-frequency').closest('fieldset').removeClass('ReqValueOk');
@@ -1057,22 +1058,27 @@ $(document).ready(function () {
 
     // Обработка пропусков
     $(document.querySelector('#download')).on('click', function () {
-        if ($("input[name='constructive-scheme']:checked").val() == undefined) {
+        if ($("input[name='constructive-scheme']:checked").value == '') {
             goTo = document.querySelector("#schemeFieldSet");
             goTo.scrollIntoView({ block: "center", behavior: "smooth" });
             return alert('Не выбрана конструктивная схема')
-        } else if ($("#flange").val() == undefined) {
+        } else if (document.querySelector("#flange").value == '') {
             goTo = document.querySelector("#flange");
             goTo.scrollIntoView({ block: "center", behavior: "smooth" });
             return alert('Не выбран фланец')
-        } else if ($("#upper-limit").val() == undefined) {
+        } else if (document.querySelector("#upper-limit").value == '') {
             goTo = document.querySelector("#upper-limit");
             goTo.scrollIntoView({ block: "center", behavior: "smooth" });
             return alert('Не выбран верхний предел крутящего момента')
-        } else if ($("#rotation-frequency").val() == undefined) {
+        } else if (document.querySelector("#rotation-frequency").value == '') {
             goTo = document.querySelector("#rotation-frequency");
             goTo.scrollIntoView({ block: "center", behavior: "smooth" });
             return alert('Не выбрана частота вращения')
+        }
+        else if (document.querySelector("#controle-blocks").value == '') {
+            goTo = document.querySelector("#control-block-fieldset");
+            goTo.scrollIntoView({ block: "center", behavior: "smooth" });
+            return alert('Пропущен конфигуратор')
         }
         else if (document.querySelector("#cap").checked && document.querySelector("#stockForCap").value == '') {
             goTo = document.querySelector("#cap");
@@ -1083,6 +1089,22 @@ $(document).ready(function () {
             goTo = document.querySelector("#pointer");
             goTo.scrollIntoView({ block: "center", behavior: "smooth" });
             return alert('При выборе механического указателя необходимо указать ход штока в мм.')
+        }
+        else if (document.querySelector("#color-2").checked && document.querySelector("#ralColor").value == '') {
+            goTo = document.querySelector("#color-2");
+            goTo.scrollIntoView({ block: "center", behavior: "smooth" });
+            return alert('Не указан цвет краски')
+        }
+        else if (document.querySelector("#controle-blocks-series").value == 'Э1' && !document.querySelector("#commandBlockType-1").checked && !document.querySelector("#commandBlockType-2").checked) {
+            goTo = document.querySelector(".commandBlockType");
+            goTo.scrollIntoView({ block: "center", behavior: "smooth" });
+            return alert('Не указан тип блока управления')
+        }
+        else if (document.querySelector("#controle-blocks-series").value == 'Э1' && document.querySelector("#control-block-optionsset").classList.contains('noReqValue')
+        ) {
+            goTo = document.querySelector("#control-block-optionsset");
+            goTo.scrollIntoView({ block: "center", behavior: "smooth" });
+            return alert('Не указано оснащение привода')
         };
 
         let BoMark = document.querySelector('#controle-blocks-series').value;
