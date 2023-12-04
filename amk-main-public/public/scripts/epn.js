@@ -112,49 +112,49 @@ $(document).ready(function () {
     // ЗАПОЛНЕНИЕ Времени Хода ЧЕРЕЗ БД
     $('#upper-limit').on('change', function (e) {
         stepTimeSelectCreate();
-
-        function stepTimeSelectCreate() {
-            let execution = $("input[name='execution']:checked").val();
-            let vPower = document.getElementById('vPower').value;
-            let uplim = document.querySelector("#upper-limit").value;
-            let select = document.querySelector("#time-limit");
-            $(select).empty();
-
-            if (!vPower) {
-                return alert('Пропущен кабельный ввод');
-            }
-            else if (!uplim) {
-                return alert('Пропущен кабельный ввод');
-            }
-
-            select.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
-
-            let fetchResult = [];
-
-            fetch('https://emk.websto.pro/DBep', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json;charset=utf-8' },
-                body: JSON.stringify({
-                    a: ['ЭПН', execution, uplim, vPower],
-                }),
-            })
-                .then(res => res.json())
-                .then(res => {
-                    console.log(res)
-                    for (i in res)
-                        fetchResult.push(res[i]);
-                    // fetchResult[0].sort((a, b) => a - b);
-                    $.each(fetchResult[0], function (key, item) {
-                        $(select).append(new Option(Number(item), Number(item)))
-                        if (fetchResult[0].length == 1) {
-                            select.selectedIndex = 1;
-                            $('#step-2').trigger('change');
-                        };
-                    }
-                    );
-                })
-        }
     });
+
+    function stepTimeSelectCreate() {
+        let execution = $("input[name='execution']:checked").val();
+        let vPower = document.getElementById('vPower').value;
+        let uplim = document.querySelector("#upper-limit").value;
+        let select = document.querySelector("#time-limit");
+        $(select).empty();
+
+        if (!vPower) {
+            return alert('Пропущен кабельный ввод');
+        }
+        else if (!uplim) {
+            return alert('Пропущен кабельный ввод');
+        }
+
+        select.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
+
+        let fetchResult = [];
+
+        fetch('https://emk.websto.pro/DBep', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json;charset=utf-8' },
+            body: JSON.stringify({
+                a: ['ЭПН', execution, uplim, vPower],
+            }),
+        })
+            .then(res => res.json())
+            .then(res => {
+                console.log(res)
+                for (i in res)
+                    fetchResult.push(res[i]);
+                // fetchResult[0].sort((a, b) => a - b);
+                $.each(fetchResult[0], function (key, item) {
+                    $(select).append(new Option(Number(item), Number(item)))
+                    if (fetchResult[0].length == 1) {
+                        select.selectedIndex = 1;
+                        $('#step-2').trigger('change');
+                    };
+                }
+                );
+            })
+    }
 
 
     // ПРОГРУЗКА ДАННЫХ КОНСТРУКТИВНЫХ СХЕМ С ТАБЛИЦЫ 

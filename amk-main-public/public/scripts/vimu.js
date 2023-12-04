@@ -888,6 +888,7 @@ $(document).ready(function () {
     $('#executionWrapLegend').on('change', function () {
         if (document.querySelector("#execution-П").checked) {
             $('#specialЭdiv').hide();
+            document.querySelector("#specialForVimu-Э").checked = false;
             $('#electr0div').hide();
             document.querySelector("#connectionForVimu-0").checked = false;
             $('#electr2div').hide();

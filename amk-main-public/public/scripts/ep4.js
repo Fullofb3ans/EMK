@@ -215,39 +215,39 @@ $(document).ready(function () {
     let cur_constructive_scheme = $("input[name='constructive-scheme']:checked").val();
 
     // ПРОГРУЗКА ДАННЫХ ПРЕДЕЛА С ТАБЛИЦЫ
-    $('#connection-type-wrap').on('change', function (e) {
-        function upLimSelectCreate() {
-            let uplim = document.getElementById('upper-limit');
-            let execution = $("input[name='execution']:checked").val();
-            let connectionType = $("input[name='connection-type']:checked").val();
-            $(uplim).empty();
-            uplim.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
-
-            if (!uplim) {
-                return alert('Пропущен верхний предел');
-            }
-
-            let fetchResult = [];
-
-            fetch('https://emk.websto.pro/DBep', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json;charset=utf-8' },
-                body: JSON.stringify({
-                    a: ['ЭП4', execution, connectionType],
-                }),
-            })
-                .then((res) => res.json())
-                .then((res) => {
-                    console.log(res);
-                    for (i in res) fetchResult.push(res[i]);
-                    // fetchResult[0].sort((a, b) => a - b);
-                    $.each(fetchResult[0], function (key, item) {
-                        $(uplim).append(new Option(item, item));
-                    });
-                });
-        }
+    $('#executionWrapLegend').on('change', function (e) {
         upLimSelectCreate();
     });
+    $('#connection-type-wrap').on('change', function (e) {
+        upLimSelectCreate();
+    });
+    function upLimSelectCreate() {
+        let uplim = document.getElementById('upper-limit');
+        let execution = $("input[name='execution']:checked").val();
+        let connectionType = $("input[name='connection-type']:checked").val();
+        $(uplim).empty();
+        uplim.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
+
+        if (!connectionType) { return }
+        let fetchResult = [];
+
+        fetch('https://emk.websto.pro/DBep', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json;charset=utf-8' },
+            body: JSON.stringify({
+                a: ['ЭП4', execution, connectionType],
+            }),
+        })
+            .then((res) => res.json())
+            .then((res) => {
+                console.log(res);
+                for (i in res) fetchResult.push(res[i]);
+                // fetchResult[0].sort((a, b) => a - b);
+                $.each(fetchResult[0], function (key, item) {
+                    $(uplim).append(new Option(item, item));
+                });
+            });
+    }
 
     // ПРОГРУЗКА ДАННЫХ МОЩНОСТИ С ТАБЛИЦЫ
     $('#upper-limit').on('change', function (e) {
