@@ -889,9 +889,13 @@ $(document).ready(function () {
         if (document.querySelector("#execution-П").checked) {
             $('#specialЭdiv').hide();
             $('#electr0div').hide();
+            document.querySelector("#connectionForVimu-0").checked = false;
             $('#electr2div').hide();
+            document.querySelector("#connectionForVimu-2").checked = false;
             $('#electr6div').hide();
+            document.querySelector("#connectionForVimu-6").checked = false;
             $('#electr7div').hide();
+            document.querySelector("#connectionForVimu-7").checked = false;
         }
         else {
             $('#specialЭdiv').show();
