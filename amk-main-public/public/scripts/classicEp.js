@@ -227,9 +227,7 @@ $(document).ready(function () {
             if (!connect) {
                 return alert('Пропущен тип электропривода');
             }
-            else if (!execution) {
-                return alert('Пропущен тип электропривода');
-            }
+
 
             let fetchResult = [];
 
@@ -267,9 +265,6 @@ $(document).ready(function () {
                 return alert('Пропущено число оборотов выходного вала');
             }
             else if (!connect) {
-                return alert('Пропущен тип электропривода');
-            }
-            else if (!execution) {
                 return alert('Пропущен тип электропривода');
             }
 
@@ -319,9 +314,7 @@ $(document).ready(function () {
             else if (!connect) {
                 return alert('Пропущен тип электропривода');
             }
-            else if (!execution) {
-                return alert('Пропущен тип электропривода');
-            }
+
 
             let fetchResult = [];
 
@@ -372,9 +365,7 @@ $(document).ready(function () {
             else if (!connect) {
                 return alert('Пропущен тип электропривода');
             }
-            else if (!execution) {
-                return alert('Пропущен тип электропривода');
-            }
+
             $(select).empty();
             select.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
 
@@ -429,9 +420,6 @@ $(document).ready(function () {
             else if (!connect) {
                 return alert('Пропущен тип электропривода');
             }
-            else if (!execution) {
-                return alert('Пропущен тип электропривода');
-            }
 
             let select = document.querySelector("#salOrStepse");
             $(select).empty();
@@ -470,14 +458,16 @@ $(document).ready(function () {
     });
 
     // Получение модернизации и номера исполнения
-    $('#row').on('change', function (e) {
-        if ($("#salOrStepse option:checked").text() == 'Cальниковый ввод') {
+    $('.row').on('change', function (e) {
+        if ($("#salOrStepse option:checked").text().includes('ввод')) {
             $('#standartField').show();
         }
         else {
             $('#standartField').hide();
-
         }
+    });
+
+    $('#salOrStepseField').on('change', function () {
         function exNumSelectCreate() {
             let execution = $("input[name='epPlace']:checked").val();
             let connect = document.getElementById('connectionTypeForclassicEpa').value;
@@ -489,10 +479,7 @@ $(document).ready(function () {
             let selectModern = document.querySelector("#upgradeNumber");
             let selectExec = document.querySelector("#executionclassicEpaNumber");
 
-            if (!salOrStepse) {
-                return alert('Пропущен кабельный ввод');
-            }
-            else if (!bkv) {
+            if (!bkv) {
                 return alert('Пропущен тип бкв');
             }
             else if (!rMoment) {
