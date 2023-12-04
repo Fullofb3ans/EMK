@@ -118,10 +118,7 @@ $(document).ready(function (e) {
         $('#step-8').trigger('change');
 
         $(document).trigger('change');
-        if (buValue != 'Э0') {
-            buSelect = document.querySelector("#step-5");
-            buSelect.scrollIntoView({ block: "center", behavior: "smooth" });
-        }
+
         SchemeSelectCreate();
     })
 
