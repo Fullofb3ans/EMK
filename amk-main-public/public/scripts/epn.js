@@ -156,9 +156,8 @@ $(document).ready(function () {
             })
     }
 
-
     // ПРОГРУЗКА ДАННЫХ КОНСТРУКТИВНЫХ СХЕМ С ТАБЛИЦЫ 
-    $('#step-2').on('change', function (e) {
+    $("#time-limit").on('change', function (e) {
         function SchemeSelectCreate() {
             let vPower = document.getElementById('vPower').value;
             let upLim = document.querySelector("#upper-limit").value;
@@ -230,7 +229,7 @@ $(document).ready(function () {
     });
 
     // ПРОГРУЗКА ФЛАНЦЕВ С БД
-    $('#schemeFieldSet').on('change', function (e) {
+    $('#constructive-scheme-wrap').on('change', function (e) {
         function flangeSelectCreate() {
             let execution = $("input[name='execution']:checked").val();
             let vPower = document.getElementById('vPower').value;
@@ -302,7 +301,7 @@ $(document).ready(function () {
                 return alert('Пропущена схема');
             }
             else if (!flange) {
-                return alert('Пропущен фланецввод');
+                return alert('Пропущен фланец');
             }
 
             select.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
@@ -337,7 +336,7 @@ $(document).ready(function () {
 
     // Ограничение блоков по вольтажу
     $('#powerType').on('change', function (e) {
-        if (document.querySelector("#powerType").value == '24B 1 фаз(ы) ') {
+        if (document.querySelector("#powerType").value == '24B') {
             $('#buVe').hide();
             $('#buVe1').hide();
         }
@@ -556,7 +555,6 @@ $(document).ready(function () {
         let optionssetCheckBox = tOption + PanelOption + bluetoothOption + regOption;
 
         let mark_gen = $('#mark-gen');
-        let modal_button = $('#modal-button');
 
         let x0 = 'ЭПН';
         let x1 = $("input[name='working-mode']:checked").val() ? $("input[name='working-mode']:checked").val() : '';
@@ -573,7 +571,7 @@ $(document).ready(function () {
                 $("input[name='execution']").closest('fieldset').addClass('ReqValueOk');
         }
 
-        let x3 = $('#flange').val() ? $('#flange').val() : 'X'; // Тип присоединения к арматуре
+        let x3 = document.querySelector("#flange").value != '' ? document.querySelector("#flange").value : 'X'; // Тип присоединения к арматуре
         switch (x3) {
             case 'X':
                 $('#flange').closest('fieldset').removeClass('ReqValueOk');

@@ -56,6 +56,9 @@ $(document).ready(function (e) {
     })
 
     $('#markSub').on('click', function (e) {
+        if (document.querySelector("#markMark").innerText.includes('X')) {
+            return alert('Пропущены поля в маркировке');
+        }
         $('#markModal').hide();
         rezValue = document.querySelector("#rezhimSelect").value;
         document.querySelector(`input[type='radio'][name='working-mode'][value='${rezValue}']`).checked = true;

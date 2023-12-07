@@ -25,16 +25,16 @@ $(document).ready(function (e) {
     })
 
     $('#markModal').on('change', function (e) {
-        let special1 = document.querySelector("#kspecial").checked ? 'К' : '';
-        let special2 = document.querySelector("#vspecial").checked ? 'В' : '';
-        let special3 = document.querySelector("#especial").checked ? 'Э' : '';
-        let special4 = document.querySelector("#tspecial").checked ? 'Т' : '';
-        let special5 = document.querySelector("#pspecial").checked ? 'П' : '';
-        let special = special1 + special2 + special3 + special4 + special5;
+        let special1 = document.querySelector("#special1").checked ? '1' : '';
+        let special2 = document.querySelector("#specialА").checked ? 'А' : '';
+        let special = special1 + special2;
         let speciali = special ? '-' + special : '';
+        let electricity = '';
+        if ($("#electroConnSelect").is(':visible')) { $("#vimuElectroConnSelect").val('X'); electricity = $("#electroConnSelect option:selected").val() }
+        else if ($("#vimuElectroConnSelect").is(':visible')) { $("#electroConnSelect").val('X'); electricity = $("#vimuElectroConnSelect option:selected").val() }
 
         document.querySelector("#markMark").innerText =
-            'ЭП4' +
+            'ЭПН' +
             $("#rezhimSelect option:selected").val() + '' +
             $("#executionSelect option:selected").val() + '-' +
             $("#flangeSelect option:selected").val() + '-' +
@@ -46,16 +46,43 @@ $(document).ready(function (e) {
             $("#closeVectorSelect option:selected").val() + '' +
             $("#protectionSelect option:selected").val() + '' +
             $("#colorSelect option:selected").val() + '' +
-            $("#electroConnSelect option:selected").val() + '' + speciali;
+            electricity + '' + speciali;
 
         // Исключение IP
         if (document.querySelector("#temperatureSelect").value > 3) {
             $('#temperature1').hide();
         }
         else { $('#temperature1').show() };
-    })
+
+        // Исключение питания по блоку
+        if (document.querySelector("#blockSelect").value == 'ВЭ') {
+            $('#vimuElectroConnSelect').show();
+            $('#classForVimuEpn').show();
+            $('#electroConnSelect').hide();
+            $('#classicConnect').hide();
+        }
+        else {
+            $('#electroConnSelect').show();
+            $('#classicConnect').show();
+            $('#vimuElectroConnSelect').hide();
+            $('#classForVimuEpn').hide();
+        }
+
+        // Ислючение 3 каб от исполнения
+        if (document.querySelector("#executionSelect").value == 'В') {
+            $('#fastcon3').hide();
+        }
+        else {
+            $('#fastcon3').show();
+        }
+
+    });
 
     $('#markSub').on('click', function (e) {
+        if (document.querySelector("#markMark").innerText.includes('X')) {
+            return alert('Пропущены поля в маркировке');
+        }
+
         $('#markModal').hide();
         rezValue = document.querySelector("#rezhimSelect").value;
         document.querySelector(`input[type='radio'][name='working-mode'][value='${rezValue}']`).checked = true;
@@ -65,29 +92,48 @@ $(document).ready(function (e) {
         document.querySelector(`input[type='radio'][name='execution'][value='${execValue}']`).checked = true;
         $('#step-1').trigger('change')
 
-        conTupeValue = document.querySelector("#conTupeSelect").value;
-        document.querySelector(`input[type='radio'][name='connection-type'][value='${conTupeValue}']`).checked = true;
-
         upValue = document.querySelector("#upLimSelect").value;
         uplim = document.querySelector("#upper-limit");
-        uplim.innerHTML = `<option value=${upValue} disabled selected>${upValue}</option>`;
-        $('#step-2').trigger('change')
+        $(uplim).append($('<option>', {
+            value: upValue,
+            text: upValue
+        }));
+        $(uplim).val(upValue);
 
+        vSelect = document.querySelector("#time-limit");
         vValue = document.querySelector("#vSelect").value;
-        vSelect = document.querySelector("#rotation-frequency");
-        vSelect.innerHTML = `<option value=${vValue} disabled selected>${vValue}</option>`;
-        $('#step-3').trigger('change')
+        $(vSelect).append($('<option>', {
+            value: vValue,
+            text: vValue
+        }));
+        $(vSelect).val(vValue);
 
-        flangeValue = document.querySelector("#flangeSelect").value;
+        rotateValue = document.querySelector("#closeVectorSelect").value;
+        document.querySelector(`input[type='radio'][name='stroke'][value='${rotateValue}']`).checked = true;
+        // $('#step-2').trigger('change')
+
         flangeSelect = document.querySelector("#flange");
-        flangeSelect.innerHTML = `<option value=${flangeValue} disabled selected>${flangeValue}</option>`;
+        flangeValue = document.querySelector("#flangeSelect").value;
+        $(flangeSelect).append($('<option>', {
+            value: flangeValue,
+            text: flangeValue
+        }));
+        $(flangeSelect).val(flangeValue);
+        $('#step-2').trigger('change');
 
         buValue = document.querySelector("#blockSelect").value;
         buSelect = document.querySelector("#controle-blocks-series");
         $(buSelect).val(buValue);
-        $('#control-block-fieldset').trigger('change');
-        $('#controle-blocks-series').trigger('click');
+        $('#controle-blocks-series').trigger('change')
+        $('#step-3').trigger('change');
 
+        voltType = document.querySelector("#powerType");
+        voltValue = $("#conTupeSelect option:selected").text();
+        $(voltType).append($('<option>', {
+            value: voltValue,
+            text: voltValue
+        }));
+        $(voltType).val(voltValue);
         $('#step-4').trigger('change');
 
         tempValue = document.querySelector("#temperatureSelect").value;
@@ -95,8 +141,6 @@ $(document).ready(function (e) {
         tempSelect.value = tempValue;
         $('#step-5').trigger('change');
 
-        rotatingValue = document.querySelector("#closeVectorSelect").value;
-        document.querySelector(`input[type='radio'][name='rotating'][value='${rotatingValue}']`).checked = true;
 
         protectionValue = document.querySelector("#protectionSelect").value;
         document.querySelector(`input[type='radio'][name='protection'][value='${protectionValue}']`).checked = true;
@@ -106,15 +150,13 @@ $(document).ready(function (e) {
         document.querySelector(`input[type='radio'][name='color'][value='${colorValue}']`).checked = true;
         $(colorType).trigger('change');
 
-        connectionValue = document.querySelector("#electroConnSelect").value;
-        document.querySelector(`input[type='radio'][name='connectionForEp4'][value='${connectionValue}']`).checked = true;
+        if ($("#electroConnSelect").val() !== null) { document.querySelector(`input[type='radio'][name='connection'][value='${$("#electroConnSelect").val()}']`).checked = true; }
+        else if ($("#vimuElectroConnSelect").val() !== null) { document.querySelector(`input[type='radio'][id='connectionForepn-${$("#vimuElectroConnSelect").val()}']`).checked = true; }
+
         $('#step-7').trigger('change');
 
-        document.querySelector("#kspecial").checked ? document.querySelector("#special-2").checked = true : '';
-        document.querySelector("#vspecial").checked ? document.querySelector("#special-3").checked = true : '';
-        document.querySelector("#especial").checked ? document.querySelector("#special-4").checked = true : '';
-        document.querySelector("#tspecial").checked ? document.querySelector("#special-5").checked = true : '';
-        document.querySelector("#pspecial").checked ? document.querySelector("#special-6").checked = true : '';
+        document.querySelector("#special1").checked ? document.querySelector("#specialForEpn-1").checked = true : '';
+        document.querySelector("#specialА").checked ? document.querySelector("#specialForEpn-А").checked = true : '';
         $('#step-8').trigger('change');
 
         $(document).trigger('change');
@@ -123,13 +165,15 @@ $(document).ready(function (e) {
     })
 
     const cheme_img = {
-        ep4: {
-            40: 'ep4-scheme-40.png',
-            41: 'ep4-scheme-41.png',
-            410: 'ep4-scheme-410.png',
-            43: 'ep4-scheme-43.png',
-            430: 'ep4-scheme-430.png',
-            44: 'ep4-scheme-44.png',
+        epn: {
+            0: 'epn0.png',
+            1: 'epn1_11.png',
+            2: 'epn2.png',
+            11: 'epn1_11.png',
+            12: 'epn12.png',
+            3: 'epn3_31.png',
+            31: 'epn3_31.png',
+            32: 'epn32.png',
         },
     };
 
@@ -144,7 +188,7 @@ $(document).ready(function (e) {
             method: 'POST',
             headers: { 'Content-Type': 'application/json;charset=utf-8' },
             body: JSON.stringify({
-                a: ['ЭП4', execution]
+                a: ['ЭПН', execution]
 
             })
         })
@@ -160,7 +204,6 @@ $(document).ready(function (e) {
     }
 
     function upLimSelect() {
-
         let select = document.getElementById('upLimSelect');
         let execution = document.querySelector("#executionSelect").value;
         let flange = document.getElementById('flangeSelect').value;
@@ -173,7 +216,7 @@ $(document).ready(function (e) {
             method: 'POST',
             headers: { 'Content-Type': 'application/json;charset=utf-8' },
             body: JSON.stringify({
-                a: ['ЭП4', execution, flange],
+                a: ['ЭПН', execution, flange],
             }),
         })
             .then((res) => res.json())
@@ -201,7 +244,7 @@ $(document).ready(function (e) {
             method: 'POST',
             headers: { 'Content-Type': 'application/json;charset=utf-8' },
             body: JSON.stringify({
-                a: ['ЭП4', execution, flange, upLim],
+                a: ['ЭПН', execution, flange, upLim],
             }),
         })
             .then((res) => res.json())
@@ -214,6 +257,7 @@ $(document).ready(function (e) {
                 });
             });
     }
+
     function valTypeSelect() {
         let execution = document.querySelector("#executionSelect").value;
         let upLim = document.getElementById('upLimSelect').value;
@@ -229,7 +273,7 @@ $(document).ready(function (e) {
             method: 'POST',
             headers: { 'Content-Type': 'application/json;charset=utf-8' },
             body: JSON.stringify({
-                a: ['ЭП4', execution, flange, upLim, v],
+                a: ['ЭПН', execution, flange, upLim, v],
             }),
         })
             .then((res) => res.json())
@@ -237,7 +281,15 @@ $(document).ready(function (e) {
                 console.log(res);
                 for (i in res) fetchResult.push(res[i]);
                 $.each(fetchResult[0], function (key, item) {
-                    $(select).append(new Option(item, item));
+                    if (item.includes('3 фазы') || item.includes('3 фаз(а/ы)')) {
+                        $(select).append(new Option(item, '3'));
+                    }
+                    else if (item.includes('1 фаз(а/ы)')) {
+                        $(select).append(new Option(item, '1'));
+                    }
+                    else {
+                        $(select).append(new Option(item, '6'));
+                    }
                 });
             });
     }
@@ -247,7 +299,22 @@ $(document).ready(function (e) {
         let upLim = document.getElementById('upLimSelect').value;
         let flange = document.getElementById('flangeSelect').value;
         let v = document.querySelector("#vSelect").value;
-        let conTupe = document.querySelector("#conTupeSelect").value;
+        let conTupe = $("#conTupeSelect option:selected").text();
+        let conForFetch = '';
+
+        if (conTupe == '380 В 3 фазы') {
+            conForFetch = ['380', '3'];
+        }
+        else if (conTupe == '220 В 3 фаз(а/ы)') {
+            conForFetch = ['220', '3'];
+        }
+        else if (conTupe == '220 В 1 фаз(а/ы)') {
+            conForFetch = ['220', '1'];
+        }
+        else if (conTupe == '24 В') {
+            conForFetch = ['24', ''];
+        }
+
         $('#constructive-scheme-wrap').empty();
         $('#constructive-scheme-img').empty();
 
@@ -257,7 +324,7 @@ $(document).ready(function (e) {
             method: 'POST',
             headers: { 'Content-Type': 'application/json;charset=utf-8' },
             body: JSON.stringify({
-                a: ['ЭП4', execution, flange, upLim, v, conTupe],
+                a: ['ЭПН', execution, flange, upLim, v, conForFetch],
             }),
         })
             .then((res) => res.json())
@@ -292,10 +359,11 @@ $(document).ready(function (e) {
                         .empty()
                         .append(
                             $('<img>').prop({
-                                src: './img/' + cheme_img['ep4'][item],
+                                src: './img/' + cheme_img['epn'][item],
                                 class: 'img-fluid',
                             })
                         );
+                    $('#schemeFieldSet').trigger('change');
                 });
             });
     }

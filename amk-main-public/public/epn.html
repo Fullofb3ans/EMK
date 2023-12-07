@@ -48,6 +48,7 @@
 		<script src="./scripts/vimuModal.js"></script>
 		<script src="./scripts/epn.js"></script>
 		<script src="./scripts/preloaderScript.js"></script>
+		<script src="./scripts/fastMarkEpn.js"></script>
 
 		<link href="./styles/materialize.css" rel="stylesheet" />
 		<link href="./styles/konfiguratorStyle.css" rel="stylesheet" />
@@ -1823,9 +1824,6 @@
 										<option value="X" selected disabled>Исполнение</option>
 										<option value="Н">Н</option>
 										<option value="В">В</option>
-										<option value="Ш">Ш</option>
-										<option value="S">S</option>
-										<option value="С">С</option>
 									</select>
 								</div>
 								-
@@ -1843,18 +1841,22 @@
 								-
 								<div class="container">
 									<select id="vSelect" style="display: block; height: 120px; width: 100%; cursor: pointer; box-shadow: 1px 3px 6px 0px #ff864c70">
-										<option value="X" selected disabled>Частота</option>
+										<option value="X" selected disabled>Время рабочего хода</option>
 									</select>
 								</div>
 								-
 								<div class="container">
 									<select id="blockSelect" style="display: block; height: 120px; width: 100%; cursor: pointer; box-shadow: 1px 3px 6px 0px #ff864c70">
 										<option value="X" selected disabled>Блок</option>
-										<option value="Э0">Э0</option>
-										<option value="Э1">Э1</option>
-										<option value="Э1S">Э1S</option>
-										<option value="Э2">Э2</option>
-										<option value="М1">M1</option>
+										<option value="М2">М2</option>
+										<option value="ВЭ">ВЭ</option>
+										<option value="ВЭ1">ВЭ1</option>
+									</select>
+								</div>
+								-
+								<div class="container">
+									<select id="conTupeSelect" style="display: block; height: 120px; width: 100%; cursor: pointer; box-shadow: 1px 3px 6px 0px #ff864c70">
+										<option value="X" selected disabled>Тип силового электропитания</option>
 									</select>
 								</div>
 								-
@@ -1869,18 +1871,9 @@
 										<option value="6">6</option>
 									</select>
 								</div>
-								-
-								<div class="container">
-									<select id="conTupeSelect" style="display: block; height: 120px; width: 100%; cursor: pointer; box-shadow: 1px 3px 6px 0px #ff864c70">
-										<option value="X" selected disabled>Тип присоединения вала</option>
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-									</select>
-								</div>
 								<div class="container">
 									<select id="closeVectorSelect" style="display: block; height: 120px; width: 100%; cursor: pointer; box-shadow: 1px 3px 6px 0px #ff864c70">
-										<option value="X" selected disabled>Направление вращения</option>
+										<option value="X" selected disabled>Ном. рабочий ход</option>
 										<option value="1">1</option>
 										<option value="2">2</option>
 									</select>
@@ -1899,8 +1892,14 @@
 										<option value="2">2</option>
 									</select>
 								</div>
-								<div class="container">
+								<div class="container" id="connectChoiceSelect">
 									<select id="electroConnSelect" style="display: block; height: 120px; width: 100%; cursor: pointer; box-shadow: 1px 3px 6px 0px #ff864c70">
+										<option value="X" selected disabled>Прис. электропитания</option>
+										<option value="0">0</option>
+										<option value="1">1</option>
+										<option id="fastcon3" value="3">3</option>
+									</select>
+									<select id="vimuElectroConnSelect" style="display: none; height: 120px; width: 100%; cursor: pointer; box-shadow: 1px 3px 6px 0px #ff864c70">
 										<option value="X" selected disabled>Прис. электропитания</option>
 										<option value="0">0</option>
 										<option value="1">1</option>
@@ -1916,19 +1915,10 @@
 										<div id="openSpecial" style="vertical-align: center; text-align: center; cursor: pointer">Спец. исполнение</div>
 										<ul class="dropdown-menu none">
 											<li class="dropdown-input">
-												<label><input id="kspecial" style="width: 40%" type="checkbox" /> К</label>
+												<label><input id="special1" style="width: 40%" type="checkbox" /> 1</label>
 											</li>
 											<li class="dropdown-input">
-												<label><input id="vspecial" style="width: 40%" type="checkbox" /> В</label>
-											</li>
-											<li class="dropdown-input">
-												<label><input id="especial" style="width: 40%" type="checkbox" /> Э</label>
-											</li>
-											<li class="dropdown-input">
-												<label><input id="tspecial" style="width: 40%" type="checkbox" /> Т</label>
-											</li>
-											<li class="dropdown-input">
-												<label><input id="pspecial" style="width: 40%" type="checkbox" /> П</label>
+												<label><input id="specialА" style="width: 40%" type="checkbox" /> А</label>
 											</li>
 										</ul>
 									</div>
