@@ -265,7 +265,7 @@ $(document).ready(function (e) {
         let v = document.querySelector("#vSelect").value;
         select = document.querySelector("#conTupeSelect");
         $(select).empty();
-        select.innerHTML = '<option value="X" disabled selected>Тип вала</option>';
+        select.innerHTML = '<option value="X" disabled selected>Тип электропитания</option>';
 
         let fetchResult = [];
 
