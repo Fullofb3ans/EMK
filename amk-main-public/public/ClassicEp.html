@@ -134,9 +134,18 @@
 						</fieldset>
 					</div>
 					<div id="step-2">
+						<fieldset class="row mb-3 optionalField enginePowerSet">
+							<legend class="blockNumber">3</legend>
+							<div class="col-sm-9">
+								<legend class="col-form-label col-sm-3 pt-0">Мощность двигателя, КвТ:</legend>
+								<select class="form-select" name="enginePower" id="enginePower">
+									<option value="" selected disabled>Выберите значение</option>
+								</select>
+							</div>
+						</fieldset>
 						<div id="changeTime">
 							<fieldset class="row mb-3 classicEpa-only noReqValue" id="roundNumbersFieldSet">
-								<legend class="blockNumber">3</legend>
+								<legend class="blockNumber">4</legend>
 								<div class="col-sm-9">
 									<legend class="col-form-label col-sm-3 pt-0">Число оборотов выходного вала, необх. для закрывания арматуры:</legend>
 									<select class="form-select" name="roundNumbers" id="roundNumbers">
@@ -146,7 +155,7 @@
 							</fieldset>
 
 							<fieldset class="row mb-3 classicEpa-only noReqValue" id="outValFieldSet">
-								<legend class="blockNumber">4</legend>
+								<legend class="blockNumber">5</legend>
 								<div class="col-sm-9">
 									<legend class="col-form-label col-sm-3 pt-0">Частота вращения выходного вала:</legend>
 									<select class="form-select" name="outVal" id="outVal">
@@ -155,14 +164,6 @@
 								</div>
 							</fieldset>
 						</div>
-
-						<fieldset class="row mb-3 noReqValue closingTime">
-							<legend class="blockNumber">5</legend>
-							<div class="col-sm-9">
-								<legend class="col-form-label col-sm-3 pt-0">Требуемое время закрытия:</legend>
-								<input type="number" class="form-input" name="closingTime" id="closingTime" placeholder="" style="margin-top: 0.5%; background: rgb(255 255 255 / 68%)" disabled /> сек
-							</div>
-						</fieldset>
 					</div>
 
 					<div id="step-3">
@@ -248,12 +249,6 @@
 							<legend class="col-form-label col-sm-3 pt-0">Климатическое исполнение и категория размещения привода:</legend>
 							<select class="form-select form-element ch-mark" data-step="4" name="climate" id="climate">
 								<option selected disabled>Выберите значение</option>
-								<!-- <option id="u1" value="У1">-45°C/+40°C - 100% при 25°C - (У1)</option>
-								<option id="t1" value="Т1">-10°C/+50°C - 100% при 35°C - (Т1)</option>
-								<option id="uxl1" value="УХЛ1">-60°C/+40°C - 100% при 25°C - (УХЛ1)</option>
-								<option id="u2" value="У2">-45°C/+40°C - 100% при 25°C - (У2)</option>
-								<option id="t2" value="Т2">-10°C/+50°C - 100% при 35°C - (Т2)</option>
-								<option id="uxl2" value="УХЛ2">-60°C/+40°C - 100% при 25°C - (УХЛ2)</option> -->
 							</select>
 						</div>
 					</fieldset>

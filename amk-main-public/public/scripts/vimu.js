@@ -688,8 +688,48 @@ $(document).ready(function () {
 
     // ФЕТЧ НА ДОКУМЕНТАЦИЮ
     $('#download').on('click', function () {
-        secondBlock = document.querySelector("#controle-blocks2").value;
+        if (document.querySelector("#roundControl-1").checked == true && document.querySelector("#microOrPot").value == '') {
+            goTo = document.querySelector("#roundControl");
+            goTo.scrollIntoView({ block: "center", behavior: "smooth" });
+            return alert('Не выбран контроль')
+        }
+        else if (document.querySelector("#controle-blocks").value == '') {
+            goTo = document.querySelector("#control-block-fieldset");
+            goTo.scrollIntoView({ block: "center", behavior: "smooth" });
+            return alert('Пропущен конфигуратор')
+        }
+        else if (document.querySelector("#organization").value == '') {
+            goTo = document.querySelector("#organization");
+            goTo.scrollIntoView({ block: "center", behavior: "smooth" });
+            return alert('Пропущено название организации')
+        }
+        else if (document.querySelector("#fio").value == '') {
+            goTo = document.querySelector("#fio");
+            goTo.scrollIntoView({ block: "center", behavior: "smooth" });
+            return alert('Пропущено контактное лицо')
+        }
+        else if (document.querySelector("#phone").value == '') {
+            goTo = document.querySelector("#phone");
+            goTo.scrollIntoView({ block: "center", behavior: "smooth" });
+            return alert('Пропущен телефон')
+        }
+        else if (document.querySelector("#numbersOfEp").value == '') {
+            goTo = document.querySelector("#numbersOfEp");
+            goTo.scrollIntoView({ block: "center", behavior: "smooth" });
+            return alert('Пропущено кол-во')
+        }
+        else if (document.querySelector("#email").value == '') {
+            goTo = document.querySelector("#email");
+            goTo.scrollIntoView({ block: "center", behavior: "smooth" });
+            return alert('Пропущен email')
+        }
+        else if (document.querySelector("#color-2").checked && document.querySelector("#ralColor").value == '') {
+            goTo = document.querySelector("#color-2");
+            goTo.scrollIntoView({ block: "center", behavior: "smooth" });
+            return alert('Не указан цвет краски')
+        };
 
+        secondBlock = document.querySelector("#controle-blocks2").value;
         let BoMark = 'ВЭ1';
         console.log('hea');
         let optForBu = $('#control-block-optionsset option:selected').val() != 'noValue' ? $('#control-block-optionsset option:selected').val() : '';
@@ -726,10 +766,10 @@ $(document).ready(function () {
         // json1 = [j10, j11, j12, j13, j14, j15, j16, j17, j18];
 
         //json2
-        let j20 = $("input[name='execution']:checked").closest('.form-check').find('.form-check-label').text(); //исполнение по назначению
-        let j21 = $("input[name='roundControl']:checked").closest('.form-check').find('.form-check-label').text(); //режим работы
-        let j22 = $("input[name='protection']:checked").closest('.form-check').find('.form-check-label').text(); //Влагозащита
-        let j23 = $("input[name='engineStartType']:checked").closest('.form-check').find('.form-check-label').text(); //способ включения двигателя
+        let j20 = $("input[name='execution']:checked").closest('.form-check').find('.form-check-label').text().trim(); //исполнение по назначению
+        let j21 = $("input[name='roundControl']:checked").closest('.form-check').find('.form-check-label').text().trim(); //режим работы
+        let j22 = $("input[name='protection']:checked").closest('.form-check').find('.form-check-label').text().trim(); //Влагозащита
+        let j23 = $("input[name='engineStartType']:checked").closest('.form-check').find('.form-check-label').text().trim(); //способ включения двигателя
         let j24 = $('#climatic-modification option:selected').text(); //Температура
         // json2 = [j20, j21, j22, j23, j24];
 
@@ -791,14 +831,14 @@ $(document).ready(function () {
 
         //json5
         let j50 = $("input[name='engineStartType']:checked").closest('.form-check').find('.form-check-label').text(); //Назначение по режиму работы
-        let j51 = $("input[name='connectionForVimu']:checked").closest('.form-check').find('.form-check-label').text(); //Электрическое подключение (расшифровка)
+        let j51 = $("input[name='connectionForVimu']:checked").closest('.form-check').find('.form-check-label').text().trim(); //Электрическое подключение (расшифровка)
         let j52 = 'SIL-3'; // SIL
 
         let special1 = document.querySelector("#specialForVimu-").checked ? $("#specialForVimu-").siblings('label').text() : '';
         let special2 = document.querySelector("#specialForVimu-К").checked ? $("#specialForVimu-К").siblings('label').text() + '; ' : '';
         let special3 = document.querySelector("#specialForVimu-Э").checked ? $("#specialForVimu-Э").siblings('label').text() + '; ' : '';
         let specialSumTxt = special1 + special2 + special3;
-        let j53 = specialSumTxt ? specialSumTxt : 'Нет специального исполнения'; //Специальное исполнение
+        let j53 = specialSumTxt ? specialSumTxt.trim() : 'Нет специального исполнения'; //Специальное исполнение
 
         let j54 = ''; //Масса
         // json5 = [j50, j51, j52, j53, j54];

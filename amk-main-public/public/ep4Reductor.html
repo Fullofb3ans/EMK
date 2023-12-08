@@ -46,6 +46,7 @@
 
 		<script src="./scripts/ep4Reductor.js" type="text/javascript"></script>
 		<script src="./scripts/preloaderScript.js" type="text/javascript"></script>
+		<script src="./scripts/fastMarkEp4RN.js" type="text/javascript"></script>
 
 		<link href="./styles/materialize.css" rel="stylesheet" />
 		<link href="./styles/konfiguratorStyle.css" rel="stylesheet" />
@@ -95,6 +96,9 @@
 			</div>
 
 			<div class="row">
+				<div id="iHaveAMarkGen" style="text-align: center">
+					<button class="btn-info" id="haveMarkBut">Ввести маркировку</button>
+				</div>
 				<div id="step-1">
 					<fieldset class="row mb-3 reductor noReqValue">
 						<legend class="blockNumber">1</legend>
@@ -1257,6 +1261,154 @@
 						</div>
 						<div class="modal-body">
 							<p>При пропуске этого пункта выбирается стандартная комплектация кабелей</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- FASTMARK -->
+			<div class="modal" id="markModal" tabindex="-1" style="width: 100%; z-index: 111111">
+				<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" style="width: 100%">
+					<div class="modal-content" style="width: 100%">
+						<div class="modal-header">
+							<button type="button" id="closeSub" class="btn-info" data-bs-dismiss="modal" aria-label="Close">Закрыть</button>
+						</div>
+						<div class="modal-body" style="width: 100%">
+							<div style="font-size: small; display: flex; flex-direction: row; flex-wrap: nowrap; gap: 2px; height: 140px; justify-content: center; align-content: center; align-items: center">
+								<div class="container">
+									<select id="rnFastSelect" style="display: block; height: 120px; width: 100%; cursor: pointer; box-shadow: 1px 3px 6px 0px #ff864c70">
+										<option value="X" selected disabled>Редуктор</option>
+									</select>
+								</div>
+								<div class="container">
+									<select id="rezhimSelect" style="display: block; height: 120px; width: 100%; cursor: pointer; box-shadow: 1px 3px 6px 0px #ff864c70">
+										<option value="X" selected disabled>Режим</option>
+										<option value=""></option>
+										<option value="Р">Р</option>
+									</select>
+								</div>
+								<div class="container">
+									<select id="executionSelect" style="display: block; height: 120px; width: 100%; cursor: pointer; box-shadow: 1px 3px 6px 0px #ff864c70">
+										<option value="X" selected disabled>Исполнение</option>
+										<option value="Н">Н</option>
+										<option value="В">В</option>
+										<option value="Ш">Ш</option>
+										<option value="S">S</option>
+										<option value="С">С</option>
+									</select>
+								</div>
+								-
+								<div class="container">
+									<select id="flangeSelect" style="display: block; height: 120px; width: 100%; cursor: pointer; box-shadow: 1px 3px 6px 0px #ff864c70">
+										<option value="X" selected disabled>Фланец</option>
+									</select>
+								</div>
+								-
+								<div class="container">
+									<select id="upLimSelect" style="display: block; height: 120px; width: 100%; cursor: pointer; box-shadow: 1px 3px 6px 0px #ff864c70">
+										<option value="X" selected disabled>Верхний предел</option>
+									</select>
+								</div>
+								-
+								<div class="container">
+									<select id="vSelect" style="display: block; height: 120px; width: 100%; cursor: pointer; box-shadow: 1px 3px 6px 0px #ff864c70">
+										<option value="X" selected disabled>Частота</option>
+									</select>
+								</div>
+								-
+								<div class="container">
+									<select id="blockSelect" style="display: block; height: 120px; width: 100%; cursor: pointer; box-shadow: 1px 3px 6px 0px #ff864c70">
+										<option value="X" selected disabled>Блок</option>
+										<option value="Э1">Э1</option>
+										<option value="Э2">Э2</option>
+										<option value="М1">M1</option>
+									</select>
+								</div>
+								-
+								<div class="container">
+									<select id="temperatureSelect" style="display: block; height: 120px; width: 100%; cursor: pointer; box-shadow: 1px 3px 6px 0px #ff864c70">
+										<option value="X" selected disabled>Температура</option>
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+										<option value="6">6</option>
+									</select>
+								</div>
+								-
+								<div class="container">
+									<select id="conTupeSelect" style="display: block; height: 120px; width: 100%; cursor: pointer; box-shadow: 1px 3px 6px 0px #ff864c70">
+										<option value="X" disabled>Тип присоединения вала</option>
+										<option value="1" selected>1</option>
+									</select>
+								</div>
+								<div class="container">
+									<select id="closeVectorSelect" style="display: block; height: 120px; width: 100%; cursor: pointer; box-shadow: 1px 3px 6px 0px #ff864c70">
+										<option value="" disabled>Направление вращения</option>
+										<option value="2" selected>2</option>
+									</select>
+								</div>
+								<div class="container">
+									<select id="protectionSelect" style="display: block; height: 120px; width: 100%; cursor: pointer; box-shadow: 1px 3px 6px 0px #ff864c70">
+										<option value="X" selected disabled>Защита</option>
+										<option id="temperature1" value="1">1</option>
+										<option value="2">2</option>
+									</select>
+								</div>
+								<div class="container">
+									<select id="colorSelect" style="display: block; height: 120px; width: 100%; cursor: pointer; box-shadow: 1px 3px 6px 0px #ff864c70">
+										<option value="X" selected disabled>Цвет</option>
+										<option value="1">1</option>
+										<option value="2">2</option>
+									</select>
+								</div>
+								<div class="container">
+									<select id="electroConnSelect" style="display: block; height: 120px; width: 100%; cursor: pointer; box-shadow: 1px 3px 6px 0px #ff864c70">
+										<option value="X" selected disabled>Прис. электропитания</option>
+										<option value="0">0</option>
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="4">4</option>
+										<option value="6">6</option>
+										<option value="7">7</option>
+									</select>
+								</div>
+
+								<div class="container">
+									<div class="dropdown">
+										<div id="openSpecial" style="vertical-align: center; text-align: center; cursor: pointer">Спец. исполнение</div>
+										<ul class="dropdown-menu none">
+											<li class="dropdown-input">
+												<label><input id="kspecial" style="width: 40%" type="checkbox" /> К</label>
+											</li>
+											<li class="dropdown-input">
+												<label><input id="vspecial" style="width: 40%" type="checkbox" /> В</label>
+											</li>
+											<li class="dropdown-input">
+												<label><input id="especial" style="width: 40%" type="checkbox" /> Э</label>
+											</li>
+											<li class="dropdown-input">
+												<label><input id="tspecial" style="width: 40%" type="checkbox" /> Т</label>
+											</li>
+											<li class="dropdown-input">
+												<label><input id="pspecial" style="width: 40%" type="checkbox" /> П</label>
+											</li>
+										</ul>
+									</div>
+									<script>
+										$('#openSpecial').on('click', function () {
+											$('.dropdown-menu').toggle();
+											$('#openSpecial').hide();
+										});
+									</script>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<div class="marknnumbers">
+								<div id="markMark" class="lead mb-3 form-control">ЭП4-X-X-X-X-X-X-XX</div>
+							</div>
+							<button type="button" class="markSub" id="markSub" style="padding: 7px; background: #d1e7dd; transition-duration: 0.4s; cursor: pointer; border-radius: 10px">Применить</button>
 						</div>
 					</div>
 				</div>

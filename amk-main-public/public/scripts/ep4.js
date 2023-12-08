@@ -1151,9 +1151,9 @@ $(document).ready(function () {
 
         //json2
         let j20 = $("input[name='execution']:checked").closest('.form-check').find('.form-check-label').text().trim(); //исполнение по назначению
-        let j21 = $("input[name='working-mode']:checked").closest('.form-check').find('.form-check-label').text(); //режим работы
-        let j22 = $("input[name='protection']:checked").closest('.form-check').find('.form-check-label').text(); //Влагозащита
-        let j23 = $("input[name='rotating']:checked").closest('.form-check').find('.form-check-label').text(); //Вращение вых вала
+        let j21 = $("input[name='working-mode']:checked").closest('.form-check').find('.form-check-label').text().trim(); //режим работы
+        let j22 = $("input[name='protection']:checked").closest('.form-check').find('.form-check-label').text().trim(); //Влагозащита
+        let j23 = $("input[name='rotating']:checked").closest('.form-check').find('.form-check-label').text().trim(); //Вращение вых вала
         let j24 = $('#climatic-modification option:selected').text(); //Температура
         // json2 = [j20, j21, j22, j23, j24];
 
@@ -1239,8 +1239,8 @@ $(document).ready(function () {
         // json4 = [j40, j41, j42, j43, j44, j45];
 
         //json5
-        let j50 = $("input[name='working-mode']:checked").closest('.form-check').find('.form-check-label').text(); //Назначение по режиму работы
-        let j51 = $("input[name='connectionForEp4']:checked").closest('.form-check').find('.form-check-label').text(); //Электрическое подключение (расшифровка)
+        let j50 = $("input[name='working-mode']:checked").closest('.form-check').find('.form-check-label').text().trim(); //Назначение по режиму работы
+        let j51 = $("input[name='connectionForEp4']:checked").closest('.form-check').find('.form-check-label').text().trim(); //Электрическое подключение (расшифровка)
         let j52 = 'SIL-3'; // SIL
 
         // let special1 = document.querySelector("#special-1").checked ? $("#special-1").siblings('label').text() : '';

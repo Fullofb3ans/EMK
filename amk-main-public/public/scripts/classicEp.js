@@ -215,19 +215,18 @@ $(document).ready(function () {
             );
     });
 
-    // ПРОГРУЗКА числа оборотов С ТАБЛИЦЫ
+    // ПРОГРУЗКА Мощности С ТАБЛИЦЫ
     $('#connectionTypeForclassicEpa').on('change', function (e) {
-        function exNumSelectCreate() {
+        function enginePowerSelectCreate() {
             let execution = $("input[name='epPlace']:checked").val();
             let connect = document.getElementById('connectionTypeForclassicEpa').value;
-            let select = document.querySelector("#roundNumbers");
+            let select = document.querySelector("#enginePower");
             $(select).empty();
-            select.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
+            select.innerHTML = '<option value="0" selected>Выберите значение</option>';
 
             if (!connect) {
                 return alert('Пропущен тип электропривода');
             }
-
 
             let fetchResult = [];
 
@@ -248,14 +247,57 @@ $(document).ready(function () {
                     });
                 });
         }
+        enginePowerSelectCreate();
+    });
+
+    // ПРОГРУЗКА числа оборотов С ТАБЛИЦЫ ПО МОЩНОСТИ
+    $('#enginePower').on('change', function () {
         exNumSelectCreate();
     });
 
-    // Прогруз частоты вращения с таблицы
+    // ПРОГРУЗКА числа оборотов С ТАБЛИЦЫ
+    $('#connectionTypeForclassicEpa').on('change', function (e) {
+        exNumSelectCreate();
+    });
+
+    function exNumSelectCreate() {
+        let execution = $("input[name='epPlace']:checked").val();
+        let connect = document.getElementById('connectionTypeForclassicEpa').value;
+        let power = document.querySelector("#enginePower").value ? document.querySelector("#enginePower").value : '0';
+        let select = document.querySelector("#roundNumbers");
+        $(select).empty();
+        select.innerHTML = '<option value="" disabled selected>Выберите значение</option>';
+
+        if (!connect) {
+            return alert('Пропущен тип электропривода');
+        }
+
+        let fetchResult = [];
+
+        fetch('https://emk.websto.pro/DBclassic', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json;charset=utf-8' },
+            body: JSON.stringify({
+                a: [execution, connect, power],
+            }),
+        })
+            .then((res) => res.json())
+            .then((res) => {
+                console.log(res);
+                for (i in res) fetchResult.push(res[i]);
+                // fetchResult[0].sort((a, b) => a - b);
+                $.each(fetchResult[0], function (key, item) {
+                    $(select).append(new Option(item, item));
+                });
+            });
+    }
+
+    // Прогруз числа оборотов с таблицы
     $('#roundNumbers').on('change', function (e) {
-        function exNumSelectCreate() {
+        function outValSelectCreate() {
             let execution = $("input[name='epPlace']:checked").val();
             let connect = document.getElementById('connectionTypeForclassicEpa').value;
+            let power = document.querySelector("#enginePower").value ? document.querySelector("#enginePower").value : '0';
             let rNumber = document.querySelector("#roundNumbers").value;
             let select = document.querySelector("#outVal");
             $(select).empty();
@@ -274,7 +316,7 @@ $(document).ready(function () {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json;charset=utf-8' },
                 body: JSON.stringify({
-                    a: [execution, connect, rNumber],
+                    a: [execution, connect, power, rNumber],
                 }),
             })
                 .then((res) => res.json())
@@ -291,14 +333,15 @@ $(document).ready(function () {
                     });
                 });
         }
-        exNumSelectCreate();
+        outValSelectCreate();
     });
 
-    // Прогрузка крутящего момента на выходном валу с таблицы
+    // Прогрузка Крутящего момента
     $('#outVal').on('change', function (e) {
         function exNumSelectCreate() {
             let execution = $("input[name='epPlace']:checked").val();
             let connect = document.getElementById('connectionTypeForclassicEpa').value;
+            let power = document.querySelector("#enginePower").value ? document.querySelector("#enginePower").value : '0';
             let rNumber = document.querySelector("#roundNumbers").value;
             let outVal = document.querySelector("#outVal").value;
             select = document.querySelector("#roundMoment");
@@ -322,7 +365,7 @@ $(document).ready(function () {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json;charset=utf-8' },
                 body: JSON.stringify({
-                    a: [execution, connect, rNumber, outVal],
+                    a: [execution, connect, power, rNumber, outVal],
                 }),
             })
                 .then((res) => res.json())
@@ -345,7 +388,7 @@ $(document).ready(function () {
     // Прогрузка типа бкв с таблицы
     $('#roundMoment').on('change', function (e) {
         function exNumSelectCreate() {
-
+            let power = document.querySelector("#enginePower").value ? document.querySelector("#enginePower").value : '0';
             let execution = $("input[name='epPlace']:checked").val();
             let connect = document.getElementById('connectionTypeForclassicEpa').value;
             let rNumber = document.querySelector("#roundNumbers").value;
@@ -375,7 +418,7 @@ $(document).ready(function () {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json;charset=utf-8' },
                 body: JSON.stringify({
-                    a: [execution, connect, rNumber, outVal, rMoment],
+                    a: [execution, connect, power, rNumber, outVal, rMoment],
                 }),
             })
                 .then((res) => res.json())
@@ -398,6 +441,7 @@ $(document).ready(function () {
     // Прогрузка кабелей с таблицы
     $('#bkvType').on('change', function (e) {
         function exNumSelectCreate() {
+            let power = document.querySelector("#enginePower").value ? document.querySelector("#enginePower").value : '0';
             let execution = $("input[name='epPlace']:checked").val();
             let connect = document.getElementById('connectionTypeForclassicEpa').value;
             let rNumber = document.querySelector("#roundNumbers").value;
@@ -431,7 +475,7 @@ $(document).ready(function () {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json;charset=utf-8' },
                 body: JSON.stringify({
-                    a: [execution, connect, rNumber, outVal, rMoment, bkv],
+                    a: [execution, connect, power, rNumber, outVal, rMoment, bkv],
                 }),
             })
                 .then((res) => res.json())
@@ -471,6 +515,7 @@ $(document).ready(function () {
         function exNumSelectCreate() {
             let execution = $("input[name='epPlace']:checked").val();
             let connect = document.getElementById('connectionTypeForclassicEpa').value;
+            let power = document.querySelector("#enginePower").value ? document.querySelector("#enginePower").value : '0';
             let rNumber = document.querySelector("#roundNumbers").value;
             let outVal = document.querySelector("#outVal").value;
             let rMoment = document.querySelector("#roundMoment").value;
@@ -509,7 +554,7 @@ $(document).ready(function () {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json;charset=utf-8' },
                 body: JSON.stringify({
-                    a: [execution, connect, rNumber, outVal, rMoment, bkv, salOrStepse],
+                    a: [execution, connect, power, rNumber, outVal, rMoment, bkv, salOrStepse],
                 }),
             })
                 .then((res) => res.json())
@@ -636,10 +681,7 @@ $(document).ready(function () {
 
     // заполнение маркировки
     $(document).on('change', function (e) {
-
-
         let mark_gen = $('#mark-gen');
-        let modal_button = $('#modal-button');
 
         let x1 = $("input[name='epPlace']:checked").val() ? $("input[name='epPlace']:checked").val() : 'X';
         switch (x1) {
@@ -747,27 +789,6 @@ $(document).ready(function () {
         is_true = [x1, x2, x3, x4, x5, x6, x7].includes('X');
 
         mark_gen.text(x1 + '-' + x2 + x3 + '-' + x4 + x5 + x6 + x7 + x8 + x9);
-    });
-
-    // Формула для требуемого времени закрытия по оборотам
-    $('#changeTime').on('change', function (e) {
-        closeNumbers = document.querySelector('#roundNumbers').value;
-        rotAtMin = document.querySelector('#outVal').value;
-        if (closeNumbers && rotAtMin) {
-            document.querySelector('#closingTime').value = closingTime = Math.round(closeNumbers / (rotAtMin / 60));
-            $('#closingTime').trigger('change');
-        }
-    });
-
-    // Стиль для времени закрытия
-    $('.closingTime').on('change', function (e) {
-        if (document.querySelector('#closingTime').value != '') {
-            document.querySelector('.closingTime').classList.add('ReqValueOk');
-            document.querySelector('.closingTime').classList.remove('noReqValue');
-        } else {
-            document.querySelector('.closingTime').classList.add('noReqValue');
-            document.querySelector('.closingTime').classList.remove('ReqValueOk');
-        }
     });
 
     // ОТКРЫТИЕ ПО ШАГАМ

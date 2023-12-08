@@ -7,6 +7,7 @@ $(document).ready(function (e) {
     });
     $('#flangeSelect').on('change', function () {
         upLimSelect();
+        valTypeSelect();
     });
 
     $('#upLimSelect').on('change', function () {
@@ -59,6 +60,7 @@ $(document).ready(function (e) {
         if (document.querySelector("#markMark").innerText.includes('X')) {
             return alert('Пропущены поля в маркировке');
         }
+        $('#step-1, #step-2,#step-3,#step-4,#step-5,#step-6,#step-7,#step-8').show()
         $('#markModal').hide();
         rezValue = document.querySelector("#rezhimSelect").value;
         document.querySelector(`input[type='radio'][name='working-mode'][value='${rezValue}']`).checked = true;
@@ -229,23 +231,25 @@ $(document).ready(function (e) {
         $(select).empty();
         select.innerHTML = '<option value="X" disabled selected>Тип вала</option>';
 
-        let fetchResult = [];
+        if (execution != 'X' && upLim != 'X' && flange != 'X' && v != 'X') {
+            let fetchResult = [];
 
-        fetch('https://emk.websto.pro/Mark', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json;charset=utf-8' },
-            body: JSON.stringify({
-                a: ['ЭП4', execution, flange, upLim, v],
-            }),
-        })
-            .then((res) => res.json())
-            .then((res) => {
-                console.log(res);
-                for (i in res) fetchResult.push(res[i]);
-                $.each(fetchResult[0], function (key, item) {
-                    $(select).append(new Option(item, item));
+            fetch('https://emk.websto.pro/Mark', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json;charset=utf-8' },
+                body: JSON.stringify({
+                    a: ['ЭП4', execution, flange, upLim, v],
+                }),
+            })
+                .then((res) => res.json())
+                .then((res) => {
+                    console.log(res);
+                    for (i in res) fetchResult.push(res[i]);
+                    $.each(fetchResult[0], function (key, item) {
+                        $(select).append(new Option(item, item));
+                    });
                 });
-            });
+        }
     }
 
     function SchemeSelectCreate() {

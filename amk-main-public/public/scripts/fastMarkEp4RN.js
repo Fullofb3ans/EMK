@@ -1,7 +1,36 @@
 // ЗАПОЛНЕНИЕ НОМИНАЛЬНОГО КРУТЯЩЕГО МОМЕНТА С JSON
 $(document).ready(function (e) {
     const ruCollator = new Intl.Collator('ru-RU');
+    getRn();
 
+    // $('#haveMarkBut').on('click', function () {
+    function getRn() {
+        let select = document.getElementById('rnFastSelect');
+        $(select).empty();
+        select.innerHTML = '<option value="X" disabled selected>Редуктор</option>';
+        let fetchResult = [];
+
+        fetch('https://emk.websto.pro/Mark', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json;charset=utf-8' },
+            body: JSON.stringify({
+                a: ['ЭП4РН']
+
+            })
+        })
+            .then((res) => res.json())
+            .then((res) => {
+                console.log(res);
+                for (i in res) fetchResult.push(res[i]);
+                // fetchResult[0].sort((a, b) => ruCollator.compare(a, b));
+                // fetchResult[0].sort();
+                $.each(fetchResult[0], function (key, item) {
+                    $(select).append(new Option(item, item));
+                });
+            });
+    }
+    //     getRn();
+    // })
     $('#executionSelect').on('change', function () {
         flange();
     });
@@ -10,11 +39,10 @@ $(document).ready(function (e) {
     });
 
     $('#upLimSelect').on('change', function () {
-        vSelect();
+        vSelectCreate();
     });
-
     $('#vSelect').on('change', function () {
-        valTypeSelect();
+        timeTo90();
     });
 
     $('#haveMarkBut').on('click', function (e) {
@@ -25,16 +53,16 @@ $(document).ready(function (e) {
     })
 
     $('#markModal').on('change', function (e) {
-        let special1 = document.querySelector("#special1").checked ? '1' : '';
-        let special2 = document.querySelector("#specialА").checked ? 'А' : '';
-        let special = special1 + special2;
+        let special1 = document.querySelector("#kspecial").checked ? 'К' : '';
+        let special2 = document.querySelector("#vspecial").checked ? 'В' : '';
+        let special3 = document.querySelector("#especial").checked ? 'Э' : '';
+        let special4 = document.querySelector("#tspecial").checked ? 'Т' : '';
+        let special5 = document.querySelector("#pspecial").checked ? 'П' : '';
+        let special = special1 + special2 + special3 + special4 + special5;
         let speciali = special ? '-' + special : '';
-        let electricity = '';
-        if ($("#electroConnSelect").is(':visible')) { $("#vimuElectroConnSelect").val('X'); electricity = $("#electroConnSelect option:selected").val() }
-        else if ($("#vimuElectroConnSelect").is(':visible')) { $("#electroConnSelect").val('X'); electricity = $("#vimuElectroConnSelect option:selected").val() }
 
         document.querySelector("#markMark").innerText =
-            'ЭПН' +
+            'ЭП4' +
             $("#rezhimSelect option:selected").val() + '' +
             $("#executionSelect option:selected").val() + '-' +
             $("#flangeSelect option:selected").val() + '-' +
@@ -46,37 +74,14 @@ $(document).ready(function (e) {
             $("#closeVectorSelect option:selected").val() + '' +
             $("#protectionSelect option:selected").val() + '' +
             $("#colorSelect option:selected").val() + '' +
-            electricity + '' + speciali;
+            $("#electroConnSelect option:selected").val() + '' + speciali + '/' + $("#rnFastSelect option:selected").val();
 
         // Исключение IP
         if (document.querySelector("#temperatureSelect").value > 3) {
             $('#temperature1').hide();
         }
         else { $('#temperature1').show() };
-
-        // Исключение питания по блоку
-        if (document.querySelector("#blockSelect").value == 'ВЭ') {
-            $('#vimuElectroConnSelect').show();
-            $('#classForVimuEpn').show();
-            $('#electroConnSelect').hide();
-            $('#classicConnect').hide();
-        }
-        else {
-            $('#electroConnSelect').show();
-            $('#classicConnect').show();
-            $('#vimuElectroConnSelect').hide();
-            $('#classForVimuEpn').hide();
-        }
-
-        // Ислючение 3 каб от исполнения
-        if (document.querySelector("#executionSelect").value == 'В') {
-            $('#fastcon3').hide();
-        }
-        else {
-            $('#fastcon3').show();
-        }
-
-    });
+    })
 
     $('#markSub').on('click', function (e) {
         if (document.querySelector("#markMark").innerText.includes('X')) {
@@ -85,6 +90,10 @@ $(document).ready(function (e) {
         $('#step-1, #step-2,#step-3,#step-4,#step-5,#step-6,#step-7,#step-8').show()
 
         $('#markModal').hide();
+
+        $('#rn').val($('#rnFastSelect').val());
+        $('#rn').trigger('change');
+
         rezValue = document.querySelector("#rezhimSelect").value;
         document.querySelector(`input[type='radio'][name='working-mode'][value='${rezValue}']`).checked = true;
         $('.timeMode').trigger('change');
@@ -93,6 +102,8 @@ $(document).ready(function (e) {
         document.querySelector(`input[type='radio'][name='execution'][value='${execValue}']`).checked = true;
         $('#step-1').trigger('change')
 
+        conTupeValue = document.querySelector("#conTupeSelect").value;
+        document.querySelector(`input[type='radio'][name='connection-type'][value='${conTupeValue}']`).checked = true;
         upValue = document.querySelector("#upLimSelect").value;
         uplim = document.querySelector("#upper-limit");
         $(uplim).append($('<option>', {
@@ -101,17 +112,14 @@ $(document).ready(function (e) {
         }));
         $(uplim).val(upValue);
 
-        vSelect = document.querySelector("#time-limit");
+        vSelect = document.querySelector("#rotation-frequency");
         vValue = document.querySelector("#vSelect").value;
         $(vSelect).append($('<option>', {
             value: vValue,
             text: vValue
         }));
         $(vSelect).val(vValue);
-
-        rotateValue = document.querySelector("#closeVectorSelect").value;
-        document.querySelector(`input[type='radio'][name='stroke'][value='${rotateValue}']`).checked = true;
-        // $('#step-2').trigger('change')
+        $('#step-2').trigger('change')
 
         flangeSelect = document.querySelector("#flange");
         flangeValue = document.querySelector("#flangeSelect").value;
@@ -120,21 +128,14 @@ $(document).ready(function (e) {
             text: flangeValue
         }));
         $(flangeSelect).val(flangeValue);
-        $('#step-2').trigger('change');
 
         buValue = document.querySelector("#blockSelect").value;
         buSelect = document.querySelector("#controle-blocks-series");
         $(buSelect).val(buValue);
         $('#controle-blocks-series').trigger('change')
+        $('#controle-blocks-series').trigger('click')
         $('#step-3').trigger('change');
 
-        voltType = document.querySelector("#powerType");
-        voltValue = $("#conTupeSelect option:selected").text();
-        $(voltType).append($('<option>', {
-            value: voltValue,
-            text: voltValue
-        }));
-        $(voltType).val(voltValue);
         $('#step-4').trigger('change');
 
         tempValue = document.querySelector("#temperatureSelect").value;
@@ -142,6 +143,8 @@ $(document).ready(function (e) {
         tempSelect.value = tempValue;
         $('#step-5').trigger('change');
 
+        rotatingValue = document.querySelector("#closeVectorSelect").value;
+        document.querySelector(`input[type='radio'][name='rotating'][value='${rotatingValue}']`).checked = true;
 
         protectionValue = document.querySelector("#protectionSelect").value;
         document.querySelector(`input[type='radio'][name='protection'][value='${protectionValue}']`).checked = true;
@@ -151,36 +154,36 @@ $(document).ready(function (e) {
         document.querySelector(`input[type='radio'][name='color'][value='${colorValue}']`).checked = true;
         $(colorType).trigger('change');
 
-        if ($("#electroConnSelect").val() !== null) { document.querySelector(`input[type='radio'][name='connection'][value='${$("#electroConnSelect").val()}']`).checked = true; }
-        else if ($("#vimuElectroConnSelect").val() !== null) { document.querySelector(`input[type='radio'][id='connectionForepn-${$("#vimuElectroConnSelect").val()}']`).checked = true; }
-
+        connectionValue = document.querySelector("#electroConnSelect").value;
+        document.querySelector(`input[type='radio'][name='connectionForEp4'][value='${connectionValue}']`).checked = true;
         $('#step-7').trigger('change');
 
-        document.querySelector("#special1").checked ? document.querySelector("#specialForEpn-1").checked = true : '';
-        document.querySelector("#specialА").checked ? document.querySelector("#specialForEpn-А").checked = true : '';
+        document.querySelector("#kspecial").checked ? document.querySelector("#special-2").checked = true : '';
+        document.querySelector("#vspecial").checked ? document.querySelector("#special-3").checked = true : '';
+        document.querySelector("#especial").checked ? document.querySelector("#special-4").checked = true : '';
+        document.querySelector("#tspecial").checked ? document.querySelector("#special-5").checked = true : '';
+        document.querySelector("#pspecial").checked ? document.querySelector("#special-6").checked = true : '';
         $('#step-8').trigger('change');
 
         $(document).trigger('change');
-
+        buSelect = document.querySelector("#step-5");
+        buSelect.scrollIntoView({ block: "center", behavior: "smooth" });
         SchemeSelectCreate();
-        $("#step-5").show();
-        document.querySelector("#step-5").scrollIntoView({ block: "center", behavior: "smooth" });
     })
 
     const cheme_img = {
-        epn: {
-            0: 'epn0.png',
-            1: 'epn1_11.png',
-            2: 'epn2.png',
-            11: 'epn1_11.png',
-            12: 'epn12.png',
-            3: 'epn3_31.png',
-            31: 'epn3_31.png',
-            32: 'epn32.png',
+        ep4: {
+            40: 'ep4-scheme-40.png',
+            41: 'ep4-scheme-41.png',
+            410: 'ep4-scheme-410.png',
+            43: 'ep4-scheme-43.png',
+            430: 'ep4-scheme-430.png',
+            44: 'ep4-scheme-44.png',
         },
     };
 
     function flange() {
+        let rn = document.querySelector("#rnFastSelect").value;
         let select = document.getElementById('flangeSelect');
         $(select).empty();
         select.innerHTML = '<option value="X" disabled selected>Фланец</option>';
@@ -191,7 +194,7 @@ $(document).ready(function (e) {
             method: 'POST',
             headers: { 'Content-Type': 'application/json;charset=utf-8' },
             body: JSON.stringify({
-                a: ['ЭПН', execution]
+                a: ['ЭП4РН', rn, execution]
 
             })
         })
@@ -207,6 +210,7 @@ $(document).ready(function (e) {
     }
 
     function upLimSelect() {
+        let rn = document.querySelector("#rnFastSelect").value;
         let select = document.getElementById('upLimSelect');
         let execution = document.querySelector("#executionSelect").value;
         let flange = document.getElementById('flangeSelect').value;
@@ -219,7 +223,7 @@ $(document).ready(function (e) {
             method: 'POST',
             headers: { 'Content-Type': 'application/json;charset=utf-8' },
             body: JSON.stringify({
-                a: ['ЭПН', execution, flange],
+                a: ['ЭП4РН', rn, execution, flange],
             }),
         })
             .then((res) => res.json())
@@ -233,7 +237,8 @@ $(document).ready(function (e) {
             });
     }
 
-    function vSelect() {
+    function vSelectCreate() {
+        let rn = document.querySelector("#rnFastSelect").value;
         let execution = document.querySelector("#executionSelect").value;
         let upLim = document.getElementById('upLimSelect').value;
         let flange = document.getElementById('flangeSelect').value;
@@ -247,7 +252,7 @@ $(document).ready(function (e) {
             method: 'POST',
             headers: { 'Content-Type': 'application/json;charset=utf-8' },
             body: JSON.stringify({
-                a: ['ЭПН', execution, flange, upLim],
+                a: ['ЭП4РН', rn, execution, flange, upLim],
             }),
         })
             .then((res) => res.json())
@@ -256,19 +261,18 @@ $(document).ready(function (e) {
                 for (i in res) fetchResult.push(res[i]);
                 fetchResult[0].sort((a, b) => a - b);
                 $.each(fetchResult[0], function (key, item) {
-                    $(select).append(new Option(Number(item), Number(item)));
+                    $(select).append(new Option(Number(item)), (Number(item)));
                 });
             });
     }
 
-    function valTypeSelect() {
+    function timeTo90() {
+        let rn = document.querySelector("#rnFastSelect").value;
         let execution = document.querySelector("#executionSelect").value;
-        let upLim = document.getElementById('upLimSelect').value;
         let flange = document.getElementById('flangeSelect').value;
+        let upLim = document.getElementById('upLimSelect').value;
         let v = document.querySelector("#vSelect").value;
-        select = document.querySelector("#conTupeSelect");
-        $(select).empty();
-        select.innerHTML = '<option value="X" disabled selected>Тип электропитания</option>';
+        let select = $('#turnTime');
 
         let fetchResult = [];
 
@@ -276,48 +280,32 @@ $(document).ready(function (e) {
             method: 'POST',
             headers: { 'Content-Type': 'application/json;charset=utf-8' },
             body: JSON.stringify({
-                a: ['ЭПН', execution, flange, upLim, v],
+                a: ['ЭП4РН', rn, execution, flange, upLim, v],
             }),
         })
             .then((res) => res.json())
             .then((res) => {
                 console.log(res);
                 for (i in res) fetchResult.push(res[i]);
+                // fetchResult[0].sort((a, b) => a - b);
                 $.each(fetchResult[0], function (key, item) {
-                    if (item.includes('3 фазы') || item.includes('3 фаз(а/ы)')) {
-                        $(select).append(new Option(item, '3'));
-                    }
-                    else if (item.includes('1 фаз(а/ы)')) {
-                        $(select).append(new Option(item, '1'));
-                    }
-                    else {
-                        $(select).append(new Option(item, '6'));
-                    }
+                    $(select).append(new Option(item, item));
+                    if (fetchResult[0].length == 1) {
+                        select.selectedIndex = 1;
+                        $("#turnTime").trigger('change');
+                    };
                 });
             });
     }
 
     function SchemeSelectCreate() {
+        let rn = document.querySelector("#rnFastSelect").value;
         let execution = document.querySelector("#executionSelect").value;
         let upLim = document.getElementById('upLimSelect').value;
         let flange = document.getElementById('flangeSelect').value;
         let v = document.querySelector("#vSelect").value;
-        let conTupe = $("#conTupeSelect option:selected").text();
-        let conForFetch = '';
-
-        if (conTupe == '380 В 3 фазы') {
-            conForFetch = ['380', '3'];
-        }
-        else if (conTupe == '220 В 3 фаз(а/ы)') {
-            conForFetch = ['220', '3'];
-        }
-        else if (conTupe == '220 В 1 фаз(а/ы)') {
-            conForFetch = ['220', '1'];
-        }
-        else if (conTupe == '24 В') {
-            conForFetch = ['24', ''];
-        }
-
+        let turnTime = $('#turnTime').val();
+        // let conTupe = document.querySelector("#conTupeSelect").value;
         $('#constructive-scheme-wrap').empty();
         $('#constructive-scheme-img').empty();
 
@@ -327,7 +315,7 @@ $(document).ready(function (e) {
             method: 'POST',
             headers: { 'Content-Type': 'application/json;charset=utf-8' },
             body: JSON.stringify({
-                a: ['ЭПН', execution, flange, upLim, v, conForFetch],
+                a: ['ЭП4РН', rn, execution, flange, upLim, v, turnTime],
             }),
         })
             .then((res) => res.json())
@@ -362,11 +350,10 @@ $(document).ready(function (e) {
                         .empty()
                         .append(
                             $('<img>').prop({
-                                src: './img/' + cheme_img['epn'][item],
+                                src: './img/' + cheme_img['ep4'][item],
                                 class: 'img-fluid',
                             })
                         );
-                    $('#schemeFieldSet').trigger('change');
                 });
             });
     }
