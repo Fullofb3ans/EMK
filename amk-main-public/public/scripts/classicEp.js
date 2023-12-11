@@ -609,8 +609,8 @@ $(document).ready(function () {
     });
 
     //  стили для вводов
-    $('#salOrStepseField').on('change', function (e) {
-        if ($("input[name='salOrStepse']:checked").val() != undefined) {
+    $('#allInOneStyle').on('change', function (e) {
+        if (document.querySelector("#salOrStepse").value != '') {
             document.querySelector("#salOrStepseField").classList.add('ReqValueOk');
             document.querySelector("#salOrStepseField").classList.remove('noReqValue');
         }
@@ -620,8 +620,8 @@ $(document).ready(function () {
         }
     });
 
-    //  стили для оборотов на закрытие
-    $('.row').on('change', function (e) {
+    //  стили для бкв
+    $('#allInOneStyle').on('change', function (e) {
         if (document.querySelector("#bkvType").value != '') {
             document.querySelector("#bkvTypeField").classList.add('ReqValueOk');
             document.querySelector("#bkvTypeField").classList.remove('noReqValue');
@@ -631,8 +631,8 @@ $(document).ready(function () {
             document.querySelector("#bkvTypeField").classList.add('noReqValue');
         }
     });
-    //  стили для оборотов на закрытие
-    $('.row').on('change', function (e) {
+    //  стили для крут моментов
+    $('#allInOneStyle').on('change', function (e) {
         if (document.querySelector("#roundNumbers").value != '') {
             document.querySelector("#roundNumbersFieldSet").classList.add('ReqValueOk');
             document.querySelector("#roundNumbersFieldSet").classList.remove('noReqValue');
@@ -643,16 +643,6 @@ $(document).ready(function () {
         }
     });
 
-    $('.row').on('change', function (e) {
-        if (document.querySelector("#salOrStepse").value != '') {
-            document.querySelector("#salOrStepseField").classList.add('ReqValueOk');
-            document.querySelector("#salOrStepseField").classList.remove('noReqValue');
-        }
-        else {
-            document.querySelector("#salOrStepseField").classList.remove('ReqValueOk');
-            document.querySelector("#salOrStepseField").classList.add('noReqValue');
-        }
-    });
 
     // Вывод сертификата и декларации
     $('#epPlace').on('change', function (e) {
@@ -832,6 +822,7 @@ $(document).ready(function () {
 
     // Скачать документацию
     $('#download').on('click', function () {
+        // Обработка пропусков
         if ($("#connectionTypeForclassicEpa").val() == undefined) {
             goTo = document.querySelector("#connectionTypeForclassicEpa");
             goTo.scrollIntoView({ block: "center", behavior: "smooth" });
@@ -856,8 +847,38 @@ $(document).ready(function () {
             goTo = document.querySelector("#salOrStepse");
             goTo.scrollIntoView({ block: "center", behavior: "smooth" });
             return alert('Не выбран тип ввода кабельного кабеля')
+        } else if (document.querySelector("#organization").value == '') {
+            goTo = document.querySelector("#organization");
+            goTo.scrollIntoView({ block: "center", behavior: "smooth" });
+            return alert('Пропущено название организации')
+        }
+        else if (document.querySelector("#fio").value == '') {
+            goTo = document.querySelector("#fio");
+            goTo.scrollIntoView({ block: "center", behavior: "smooth" });
+            return alert('Пропущено контактное лицо')
+        }
+        else if (document.querySelector("#phone").value == '') {
+            goTo = document.querySelector("#phone");
+            goTo.scrollIntoView({ block: "center", behavior: "smooth" });
+            return alert('Пропущен телефон')
+        }
+        else if (document.querySelector("#numbersOfEp").value == '') {
+            goTo = document.querySelector("#numbersOfEp");
+            goTo.scrollIntoView({ block: "center", behavior: "smooth" });
+            return alert('Пропущено кол-во')
+        }
+        else if (document.querySelector("#email").value == '') {
+            goTo = document.querySelector("#email");
+            goTo.scrollIntoView({ block: "center", behavior: "smooth" });
+            return alert('Пропущен email')
+        }
+        else if (document.querySelector(`input[type='radio'][name='engineUpgrade']`).checked == false
+            && (document.querySelector("#connectionTypeForclassicEpa").value == 'М' || document.querySelector("#connectionTypeForclassicEpa").value == 'А')) {
+            goTo = document.querySelector("#engineUpgrade");
+            goTo.scrollIntoView({ block: "center", behavior: "smooth" });
+            return alert('Пропущена модификация')
         };
-        console.log('hea');
+
         Option1 = document.querySelector("#additional-Р").checked ? 'Резистор; ' : '';
         Option2 = document.querySelector("#additional-24DC").checked ? 'Микровыключатели Д3031; ' : '';
         addOptions = Option1 + Option2;

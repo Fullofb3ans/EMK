@@ -122,11 +122,9 @@ $(document).ready(function (e) {
         document.querySelector("#pspecial").checked ? document.querySelector("#special-6").checked = true : '';
         $('#step-8').trigger('change');
 
-        $(document).trigger('change');
-        if (buValue != 'Э0') {
-            buSelect = document.querySelector("#step-5");
-            buSelect.scrollIntoView({ block: "center", behavior: "smooth" });
-        }
+        buSelect = document.querySelector("#step-5");
+        buSelect.scrollIntoView({ block: "center", behavior: "smooth" });
+
         SchemeSelectCreate();
     })
 

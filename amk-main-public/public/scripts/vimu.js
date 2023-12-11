@@ -688,6 +688,7 @@ $(document).ready(function () {
 
     // ФЕТЧ НА ДОКУМЕНТАЦИЮ
     $('#download').on('click', function () {
+        // Обработка пропусков
         if (document.querySelector("#roundControl-1").checked == true && document.querySelector("#microOrPot").value == '') {
             goTo = document.querySelector("#roundControl");
             goTo.scrollIntoView({ block: "center", behavior: "smooth" });
@@ -697,6 +698,11 @@ $(document).ready(function () {
             goTo = document.querySelector("#control-block-fieldset");
             goTo.scrollIntoView({ block: "center", behavior: "smooth" });
             return alert('Пропущен конфигуратор')
+        }
+        else if (document.querySelector("#color-2").checked && document.querySelector("#ralColor").value == '') {
+            goTo = document.querySelector("#color-2");
+            goTo.scrollIntoView({ block: "center", behavior: "smooth" });
+            return alert('Не указан цвет краски')
         }
         else if (document.querySelector("#organization").value == '') {
             goTo = document.querySelector("#organization");
@@ -722,11 +728,6 @@ $(document).ready(function () {
             goTo = document.querySelector("#email");
             goTo.scrollIntoView({ block: "center", behavior: "smooth" });
             return alert('Пропущен email')
-        }
-        else if (document.querySelector("#color-2").checked && document.querySelector("#ralColor").value == '') {
-            goTo = document.querySelector("#color-2");
-            goTo.scrollIntoView({ block: "center", behavior: "smooth" });
-            return alert('Не указан цвет краски')
         };
 
         secondBlock = document.querySelector("#controle-blocks2").value;

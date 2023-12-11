@@ -44,6 +44,7 @@
 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js" integrity="sha512-Eak/29OTpb36LLo2r47IpVzPBLXnAMPAVypbSZiZ4Qkf8p/7S/XRG5xp7OKWPPYfJT6metI+IORkR5G8F900+g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+		<script src="./scripts/fastMarkClassic.js"></script>
 		<script src="./scripts/classicEp.js"></script>
 		<script src="./scripts/preloaderScript.js"></script>
 		<link href="./styles/materialize.css" rel="stylesheet" />
@@ -95,6 +96,10 @@
 			</div>
 
 			<div class="row">
+				<div id="iHaveAMarkGen" style="text-align: center">
+					<button class="btn-info" id="haveMarkBut">Ввести маркировку</button>
+				</div>
+
 				<div id="checkStepse">
 					<div id="step-1">
 						<fieldset class="row mb-3 classicEpa-only noReqValue">
@@ -143,7 +148,8 @@
 								</select>
 							</div>
 						</fieldset>
-						<div id="changeTime">
+
+						<div id="allInOneStyle">
 							<fieldset class="row mb-3 classicEpa-only noReqValue" id="roundNumbersFieldSet">
 								<legend class="blockNumber">4</legend>
 								<div class="col-sm-9">
@@ -163,59 +169,58 @@
 									</select>
 								</div>
 							</fieldset>
+
+							<div id="step-3">
+								<fieldset class="row mb-3 classicEpa-only noReqValue" id="roundMomentFieldSet">
+									<legend class="blockNumber">6</legend>
+
+									<div class="col-sm-9">
+										<legend class="col-form-label col-sm-3 pt-0">Крутящий момент на выходном валу:</legend>
+										<select class="form-select" name="roundMoment" id="roundMoment">
+											<option value="" selected disabled>Выберите значение</option>
+										</select>
+									</div>
+								</fieldset>
+
+								<fieldset class="row mb-3 classicEpa-only noReqValue" id="bkvTypeField">
+									<legend class="blockNumber">7</legend>
+									<div class="col-sm-9">
+										<legend class="col-form-label col-sm-3 pt-0">Тип БКВ:</legend>
+										<select class="form-select" name="bkvType" id="bkvType">
+											<option value="" selected disabled>Выберите значение</option>
+										</select>
+									</div>
+								</fieldset>
+							</div>
+
+							<div id="step-4">
+								<fieldset class="row mb-3 classicEpa-only noReqValue" id="salOrStepseField">
+									<legend class="blockNumber">
+										8
+										<a href="#" class="" data-bs-toggle="modal" data-bs-target="#cabelModal">
+											<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
+												<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+												<path
+													d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z" />
+											</svg>
+										</a>
+									</legend>
+									<div class="col-sm-9">
+										<legend class="col-form-label col-sm-3 pt-0">Кабельный ввод:</legend>
+										<select class="form-select" name="salOrStepse" id="salOrStepse">
+											<option value="" selected disabled>Выберите значение</option>
+										</select>
+									</div>
+								</fieldset>
+							</div>
 						</div>
-					</div>
-
-					<div id="step-3">
-						<fieldset class="row mb-3 classicEpa-only noReqValue" id="roundMomentFieldSet">
-							<legend class="blockNumber">6</legend>
-
+						<fieldset style="display: none" class="row mb-3 ReqValueOk" id="standartField">
 							<div class="col-sm-9">
-								<legend class="col-form-label col-sm-3 pt-0">Крутящий момент на выходном валу:</legend>
-								<select class="form-select" name="roundMoment" id="roundMoment">
-									<option value="" selected disabled>Выберите значение</option>
-								</select>
+								<legend class="col-form-label col-sm-3 pt-0">Дополнительная информация по кабелям:</legend>
+								<input class="form-select form-element ch-mark ch-cs" value="Комплект из сальниковых вводов 3 шт. под небронированный кабель диаметром до 20 мм." name="standart" id="standart" style="color: black; background-color: #e4e4e48c" disabled />
 							</div>
 						</fieldset>
-
-						<fieldset class="row mb-3 classicEpa-only noReqValue" id="bkvTypeField">
-							<legend class="blockNumber">7</legend>
-							<div class="col-sm-9">
-								<legend class="col-form-label col-sm-3 pt-0">Тип БКВ:</legend>
-								<select class="form-select" name="bkvType" id="bkvType">
-									<option value="" selected disabled>Выберите значение</option>
-								</select>
-							</div>
-						</fieldset>
 					</div>
-				</div>
-
-				<div id="step-4">
-					<fieldset class="row mb-3 classicEpa-only noReqValue" id="salOrStepseField">
-						<legend class="blockNumber">
-							8
-							<a href="#" class="" data-bs-toggle="modal" data-bs-target="#cabelModal">
-								<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
-									<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-									<path
-										d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z" />
-								</svg>
-							</a>
-						</legend>
-						<div class="col-sm-9">
-							<legend class="col-form-label col-sm-3 pt-0">Кабельный ввод:</legend>
-							<select class="form-select" name="salOrStepse" id="salOrStepse">
-								<option value="" selected disabled>Выберите значение</option>
-							</select>
-						</div>
-					</fieldset>
-
-					<fieldset style="display: none" class="row mb-3 ReqValueOk" id="standartField">
-						<div class="col-sm-9">
-							<legend class="col-form-label col-sm-3 pt-0">Дополнительная информация по кабелям:</legend>
-							<input class="form-select form-element ch-mark ch-cs" value="Комплект из сальниковых вводов 3 шт. под небронированный кабель диаметром до 20 мм." name="standart" id="standart" style="color: black; background-color: #e4e4e48c" disabled />
-						</div>
-					</fieldset>
 
 					<fieldset class="row mb-3 classicEpa-only noReqValue">
 						<legend class="blockNumber">9</legend>
@@ -355,6 +360,94 @@
 						</div>
 						<div class="modal-body">
 							<p><b>Кабельный ввод</b> - устройство, посредством которого осуществляется ввод в электрооборудование одного или нескольких электрических и/или оптоволоконных кабелей.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- FASTMARK -->
+			<div class="modal" id="markModal" tabindex="-1" style="width: 100%; z-index: 111111">
+				<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" style="width: 100%">
+					<div class="modal-content" style="width: 100%">
+						<div class="modal-header">
+							<button type="button" id="closeSub" class="btn-info" data-bs-dismiss="modal" aria-label="Close">Закрыть</button>
+						</div>
+						<div class="modal-body" style="width: 100%">
+							<div style="font-size: small; display: flex; flex-direction: row; flex-wrap: nowrap; gap: 2px; height: 140px; justify-content: center; align-content: center; align-items: center">
+								<div class="container">
+									<select id="executionSelect" style="display: block; height: 120px; width: 100%; cursor: pointer; box-shadow: 1px 3px 6px 0px #ff864c70">
+										<option value="X" selected disabled>Исполнение</option>
+										<option value="Н">Н</option>
+										<option value="В">В</option>
+										<option value="С">С</option>
+									</select>
+								</div>
+								-
+								<div class="container">
+									<select id="typeSelect" style="display: block; height: 120px; width: 100%; cursor: pointer; box-shadow: 1px 3px 6px 0px #ff864c70">
+										<option value="X" selected disabled>Тип</option>
+									</select>
+								</div>
+								-
+								<div class="container">
+									<select id="upgrSelect" style="display: block; height: 120px; width: 100%; cursor: pointer; box-shadow: 1px 3px 6px 0px #ff864c70">
+										<option value="X" selected disabled>Номер модернизации</option>
+									</select>
+								</div>
+								-
+								<div class="container">
+									<select id="numSelect" style="display: block; height: 120px; width: 100%; cursor: pointer; box-shadow: 1px 3px 6px 0px #ff864c70">
+										<option value="X" selected disabled>Номер исполнения</option>
+									</select>
+								</div>
+								<div class="container" id="modeDiv">
+									<select disabled id="mode" style="display: block; height: 120px; width: 100%; cursor: pointer; box-shadow: 1px 3px 6px 0px #ff864c70">
+										<option value="" selected>Модификация электропривода</option>
+										<option value="К">Под кулачки</option>
+										<option value="Ч">Под квадрат</option>
+									</select>
+								</div>
+								-
+								<div class="container">
+									<select id="temperatureSelect" style="display: block; height: 120px; width: 100%; cursor: pointer; box-shadow: 1px 3px 6px 0px #ff864c70">
+										<option value="X" selected disabled>Температура</option>
+										<option value="У1">У1</option>
+										<option value="Т1">Т1</option>
+										<option value="УХЛ1">УХЛ1</option>
+										<option value="У2">У2</option>
+										<option value="Т2">Т2</option>
+										<option value="УХЛ2">УХЛ2</option>
+									</select>
+								</div>
+
+								<div class="container">
+									<div class="dropdown">
+										<div id="openSpecial" style="vertical-align: center; text-align: center; cursor: pointer">Доп. опции</div>
+										<ul class="dropdown-menu none">
+											<li class="dropdown-input">
+												<label><input id="rspecial" style="width: 40%" type="checkbox" /> Р</label>
+											</li>
+											<li class="dropdown-input">
+												<label><input id="microspecial" style="width: 40%" type="checkbox" /> DC</label>
+											</li>
+											<li class="dropdown-input">
+												<label><input id="lspecial" style="width: 40%" type="checkbox" /> Л</label>
+											</li>
+										</ul>
+									</div>
+									<script>
+										$('#openSpecial').on('click', function () {
+											$('.dropdown-menu').toggle();
+											$('#openSpecial').hide();
+										});
+									</script>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<div class="marknnumbers">
+								<div id="markMark" class="lead mb-3 form-control">X-X-XXXXX(XX)X</div>
+							</div>
+							<button type="button" class="markSub" id="markSub" style="padding: 7px; background: #d1e7dd; transition-duration: 0.4s; cursor: pointer; border-radius: 10px">Применить</button>
 						</div>
 					</div>
 				</div>

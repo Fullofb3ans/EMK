@@ -778,6 +778,7 @@ $(document).ready(function () {
     })
 
     $('#download').on('click', function () {
+        // Обработка пропусков
         if ($("input[name='constructive-scheme']:checked").val() == undefined) {
             goTo = document.querySelector("#schemeFieldSet");
             goTo.scrollIntoView({ block: "center", behavior: "smooth" });
@@ -799,6 +800,30 @@ $(document).ready(function () {
             goTo = document.querySelector("#powerType");
             goTo.scrollIntoView({ block: "center", behavior: "smooth" });
             return alert('Не выбран тип силового электропитания')
+        } else if (document.querySelector("#organization").value == '') {
+            goTo = document.querySelector("#organization");
+            goTo.scrollIntoView({ block: "center", behavior: "smooth" });
+            return alert('Пропущено название организации')
+        }
+        else if (document.querySelector("#fio").value == '') {
+            goTo = document.querySelector("#fio");
+            goTo.scrollIntoView({ block: "center", behavior: "smooth" });
+            return alert('Пропущено контактное лицо')
+        }
+        else if (document.querySelector("#phone").value == '') {
+            goTo = document.querySelector("#phone");
+            goTo.scrollIntoView({ block: "center", behavior: "smooth" });
+            return alert('Пропущен телефон')
+        }
+        else if (document.querySelector("#numbersOfEp").value == '') {
+            goTo = document.querySelector("#numbersOfEp");
+            goTo.scrollIntoView({ block: "center", behavior: "smooth" });
+            return alert('Пропущено кол-во')
+        }
+        else if (document.querySelector("#email").value == '') {
+            goTo = document.querySelector("#email");
+            goTo.scrollIntoView({ block: "center", behavior: "smooth" });
+            return alert('Пропущен email')
         };
 
 
