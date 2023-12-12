@@ -51,14 +51,14 @@ input[type='text']:focus {
 	border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-#constructive-scheme-img > img {
+#constructive-scheme-img>img {
 	border: 1px solid rgb(249 84 0 / 41%);
 	min-width: 51%;
 	max-width: 95%;
 	border-radius: 17px;
 }
 
-#constructive-scheme-Epnimg > img {
+#constructive-scheme-Epnimg>img {
 	width: 100%;
 	height: 410px;
 	object-fit: cover;
@@ -67,7 +67,7 @@ input[type='text']:focus {
 	border-radius: 17px;
 }
 
-#constructive-schemeFull-img > img {
+#constructive-schemeFull-img>img {
 	width: 100%;
 	height: 410px;
 	object-fit: cover;
@@ -399,12 +399,12 @@ fieldset.no-success legend {
 	border-right: 4px solid var(--empty-color);
 }
 
-#block-configure-e1 > div > div {
+#block-configure-e1>div>div {
 	/* margin-top: -4%; */
 	font-size: smaller;
 }
 
-#block-configure-e12 > div > div {
+#block-configure-e12>div>div {
 	/* margin-top: -4%; */
 	font-size: smaller;
 }
@@ -462,7 +462,7 @@ fieldset.no-success legend {
 }
 
 @media ((min-width: 1492px) and (max-width: 1664px)) {
-	body > div.row > div > div > div:nth-child(2) > figure > a > img {
+	body>div.row>div>div>div:nth-child(2)>figure>a>img {
 		padding-top: 7%;
 	}
 }
@@ -624,7 +624,7 @@ closeve2modal2:hover {
 	border-color: #dee2e6;
 }
 
-.table > :not(caption) > * > * {
+.table> :not(caption)>*>* {
 	padding: 0.5rem 0.5rem;
 	background-color: var(--bs-table-bg);
 	border-bottom-width: 1px;
@@ -648,7 +648,7 @@ table {
 	border-collapse: collapse;
 }
 
-.table-bordered > :not(caption) > * > * {
+.table-bordered> :not(caption)>*>* {
 	border-width: 0 1px;
 }
 
@@ -663,7 +663,7 @@ tr {
 	border-width: 0;
 }
 
-.table-bordered > :not(caption) > * {
+.table-bordered> :not(caption)>* {
 	border-width: 1px 0;
 }
 
@@ -1016,7 +1016,7 @@ th {
 }
 
 /* ШАПКА И ПОДВАЛ */
-body > header > nav > div {
+body>header>nav>div {
 	font-weight: var(--bs-body-font-weight);
 	text-align: var(--bs-body-text-align);
 	-webkit-text-size-adjust: 100%;
@@ -1031,7 +1031,7 @@ body > header > nav > div {
 	background-color: #ff8a65 !important;
 }
 
-body > header > nav > div > a {
+body>header>nav>div>a {
 	font-weight: var(--bs-body-font-weight);
 	-webkit-text-size-adjust: 100%;
 	font-family: system-ui;
@@ -1067,7 +1067,7 @@ body > header > nav > div > a {
 	list-style-type: none;
 }
 
-#nav-mobile > li {
+#nav-mobile>li {
 	font-weight: var(--bs-body-font-weight);
 	-webkit-text-size-adjust: 100%;
 	-webkit-tap-highlight-color: transparent;
@@ -1122,6 +1122,25 @@ input[type='number'] {
 	white-space: nowrap;
 }
 
-.fastMarkContainer{
+.fastMarkContainer {
 	display: block;
+}
+
+#markModalFlex {
+	font-size: small;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	gap: 2px;
+	height: 140px;
+	justify-content: center;
+	align-content: center;
+	align-items: center
+}
+
+@media (max-width: 750px) {
+	#markModalFlex {
+		flex-direction: column;
+		justify-content: flex-start;
+	}
 }
