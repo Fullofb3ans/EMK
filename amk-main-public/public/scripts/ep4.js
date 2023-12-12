@@ -1142,13 +1142,15 @@ $(document).ready(function () {
         let schemeForSend = $("input[name='constructive-scheme']:checked").val();
 
         // ДОП ОПЦИИ
-        let addOption1 = document.querySelector('#PanelOption').checked ? 'Механический селектор переключения режима работы местн./дист.' : '';
-        let addOption2 = '';
-        if (BoMark == 'Э1' || BoMark == 'ВЭ1' || BoMark == 'Э1S' || BoMark == 'ВЭ') {
-            addOption2 = 'Плата регистратор';
-        } else { addOption2 = '' };
-
-        let addOptions = addOption1 ? addOption1 + ' ' + '' + ' ' + addOption2 : addOption2;
+        // let addOption2 = '';
+        // if (BoMark == 'Э1' || BoMark == 'ВЭ1' || BoMark == 'Э1S' || BoMark == 'ВЭ') {
+        //     addOption2 = 'Плата регистратор';
+        // } else { addOption2 = '' };
+        let addOptionT = document.querySelector("#tOption").checked ? 'Твердотельный пускатель; ' : '';
+        let addOptionP = document.querySelector('#PanelOption').checked ? 'Механический селектор переключения режима работы местн./дист.; ' : '';
+        let addOptionB = document.querySelector("#bluetoothOption").checked ? 'Канал связи "Bluetooth; ' : '';
+        let addOptionR = document.querySelector("#regOption").checked ? 'Регистратор параметров состояния и конфигурации привода' : '';
+        let addOptions = addOptionT + addOptionP + addOptionB + addOptionR;
         // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         // json0
@@ -1239,7 +1241,7 @@ $(document).ready(function () {
         } // Концевые выключатели
 
         let j311 = ''; // Монтаж БУ
-        if (BoMark == 'Э1') {
+        if (document.querySelector("#commandBlockType-2").checked) {
             j311 = 'Выносной';
         } else {
             j311 = 'На приводе';

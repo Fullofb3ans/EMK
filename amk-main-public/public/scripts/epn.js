@@ -837,13 +837,12 @@ $(document).ready(function () {
         let voptForBu = $('#vimucontrol-block-optionsset option:selected').val() != 'noValue' ? $('#control-block-optionsset option:selected').val() : '';
 
         // ДОП ОПЦИИ
-        let addOption1 = document.querySelector("#PanelOption").checked ? 'Механический селектор переключения режима работы местн./дист.; ' : ' ';
-        let addOption2 = '';
-        if (BoMark == 'Э1' || BoMark == 'ВЭ1' || BoMark == 'Э1S' || BoMark == 'ВЭ') {
-            addOption2 = 'Плата регистратор; ';
-        } else { addOption2 = '' };
-        let addOption3 = document.querySelector('#upTo180f').checked ? 'Рабочий ход до 180 градусов; ' : ' ';
-        let addOptions = addOption1 + addOption2 + addOption3;
+        let addOptionT = document.querySelector("#tOption").checked ? 'Твердотельный пускатель; ' : '';
+        let addOptionP = document.querySelector('#PanelOption').checked ? 'Механический селектор переключения режима работы местн./дист.; ' : '';
+        let addOptionB = document.querySelector("#bluetoothOption").checked ? 'Канал связи "Bluetooth; ' : '';
+        let addOptionR = document.querySelector("#regOption").checked ? 'Регистратор параметров состояния и конфигурации привода' : '';
+        let addOption180 = document.querySelector('#upTo180f').checked ? 'Рабочий ход до 180 градусов; ' : ' ';
+        let addOptions = addOptionT + addOptionP + addOptionB + addOptionR + addOption180;
         // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         // json0

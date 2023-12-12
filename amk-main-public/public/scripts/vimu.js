@@ -736,12 +736,11 @@ $(document).ready(function () {
         let optForBu = $('#control-block-optionsset option:selected').val() != 'noValue' ? $('#control-block-optionsset option:selected').val() : '';
 
         // ДОП ОПЦИИ
-        let addOption1 = document.querySelector("#blockOption-S").checked ? 'Механический селектор переключения режима работы местн./дист.' : '';
-        let addOption2 = '';
-        if (BoMark == 'Э1' || BoMark == 'ВЭ1' || BoMark == 'Э1S' || BoMark == 'ВЭ') {
-            addOption2 = 'Плата регистратор';
-        } else { addOption2 = '' };
-        let addOptions = addOption1 ? addOption1 + ' ' + '' + ' ' + addOption2 : addOption2;
+        let addOptionT = document.querySelector("#blockOption-T").checked ? 'Твердотельный пускатель; ' : '';
+        let addOptionP = document.querySelector('#blockOption-S').checked ? 'Механический селектор переключения режима работы местн./дист.; ' : '';
+        let addOptionB = document.querySelector("#blockOption-B").checked ? 'Канал связи "Bluetooth; ' : '';
+        let addOptionR = document.querySelector("#blockOption-R").checked ? 'Регистратор параметров состояния и конфигурации привода' : '';
+        let addOptions = addOptionT + addOptionP + addOptionB + addOptionR;
         // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         // json0
