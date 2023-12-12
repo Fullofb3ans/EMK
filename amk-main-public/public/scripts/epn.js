@@ -150,6 +150,7 @@ $(document).ready(function () {
                     if (fetchResult[0].length == 1) {
                         select.selectedIndex = 1;
                         $('#step-2').trigger('change');
+                        $("#schemeStep").trigger('change');
                     };
                 }
                 );
@@ -157,7 +158,7 @@ $(document).ready(function () {
     }
 
     // ПРОГРУЗКА ДАННЫХ КОНСТРУКТИВНЫХ СХЕМ С ТАБЛИЦЫ 
-    $("#time-limit").on('change', function (e) {
+    $("#schemeStep").on('change', function (e) {
         function SchemeSelectCreate() {
             let vPower = document.getElementById('vPower').value;
             let upLim = document.querySelector("#upper-limit").value;

@@ -192,6 +192,12 @@ $(document).ready(function () {
     $("#closeve1modal").on("click", function (e) {
         vimuBlockModal.hide();
     });
+    $("#closeve11modal").on("click", function (e) {
+        vimuBlockModal.hide();
+    });
+    $("#closeve111modal").on("click", function (e) {
+        vimuBlockModal.hide();
+    });
 
     $("#closeve2modal").on("click", function (e) {
         vimuBlock2Modal.hide();

@@ -1,5 +1,5 @@
-<!-- https://www.tulaprivod.ru/dokument/shema/%D0%BA%D0%B0%D1%82%D0%B0%D0%BB%D0%BE%D0%B3%20%D0%AD%D0%9F%D0%9D.pdf -->
 <!DOCTYPE html>
+<!-- https://www.tulaprivod.ru/dokument/shema/%D0%BA%D0%B0%D1%82%D0%B0%D0%BB%D0%BE%D0%B3%20%D0%AD%D0%9F%D0%9D.pdf -->
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
@@ -188,15 +188,17 @@
 						</fieldset>
 					</div>
 
-					<fieldset class="row mb-3 noReqValue" id="time-limit-wrap">
-						<legend class="blockNumber">5</legend>
-						<div class="col-sm-9">
-							<legend class="col-form-label col-sm-3 pt-0">Время рабочего хода, с:</legend>
-							<select class="form-select form-element ch-mark ch-cs" name="time-limit" id="time-limit">
-								<option value="">Выберите значение</option>
-							</select>
-						</div>
-					</fieldset>
+					<div id="schemeStep">
+						<fieldset class="row mb-3 noReqValue" id="time-limit-wrap">
+							<legend class="blockNumber">5</legend>
+							<div class="col-sm-9">
+								<legend class="col-form-label col-sm-3 pt-0">Время рабочего хода, с:</legend>
+								<select class="form-select form-element ch-mark ch-cs" name="time-limit" id="time-limit">
+									<option value="">Выберите значение</option>
+								</select>
+							</div>
+						</fieldset>
+					</div>
 
 					<fieldset class="row mb-3 noReqValue" id="workStep">
 						<legend class="blockNumber">6</legend>
@@ -213,7 +215,6 @@
 						</div>
 					</fieldset>
 				</div>
-
 				<div id="step-3">
 					<div class="flexForImg">
 						<div class="flexImg">
@@ -291,9 +292,9 @@
 							</div>
 
 							<!-- <div id="step-2"> -->
-							<fieldset class="row mb-3 noReqValue" id="executionWrapLegend">
+							<fieldset class="row mb-3 noReqValue" id="vimuExecutionWrapLegend">
 								<legend class="blockNumber">1</legend>
-								<div class="col-sm-9" id="execution-wrap">
+								<div class="col-sm-9" id="vimuExecution-wrap">
 									<legend class="col-form-label col-sm-3 pt-0">Исполнение по взрывзащите:</legend>
 									<div class="form-check">
 										<input class="form-check-input ch-mark" type="radio" name="vimuexecution" id="execution-1" value="В" />
@@ -410,7 +411,7 @@
 							<!-- </div> -->
 
 							<!-- <div id="step-4"> -->
-							<fieldset class="row mb-3 noReqValue" id="temperature">
+							<fieldset class="row mb-3 noReqValue" id="vimuTemperature">
 								<legend class="blockNumber">
 									5
 									<a href="#" class="" data-bs-toggle="modal" data-bs-target="#tempModal">
@@ -831,7 +832,7 @@
 						</div>
 					</fieldset>
 
-					<fieldset class="row mb-3 numbersOfEp noReqValue" id="executionWrapLegend">
+					<fieldset class="row mb-3 numbersOfEp noReqValue">
 						<legend class="blockNumber">17</legend>
 						<div class="mb-3" id="numbers">
 							<legend class="col-form-label col-sm-3 pt-0">Кол-во приводов:</legend>
@@ -1239,7 +1240,7 @@
 				<div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
 					<div class="modal-content" style="width: 100%; font-size: smaller">
 						<div class="modal-header" style="flex-wrap: wrap">
-							<button type="button" id="closeve1modal" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Закрыть</button>
+							<button type="button" id="closeve11modal" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Закрыть</button>
 							<h5 class="modal-title">Опциональный набор функций ВИМУ и коды исполнения</h5>
 						</div>
 						<div class="modal-body">
@@ -1405,7 +1406,7 @@
 				<div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
 					<div class="modal-content" style="width: 100%; font-size: smaller">
 						<div class="modal-header" style="flex-wrap: wrap">
-							<button type="button" id="closeve1modal" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Закрыть</button>
+							<button type="button" id="closeve111modal" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Закрыть</button>
 							<h5 class="modal-title">Опциональный набор функций ВИМУ и коды исполнения</h5>
 						</div>
 						<div class="modal-body">
@@ -1944,7 +1945,7 @@
 			</div>
 		</main>
 		<footer class="page-footer #ff8a65 deep-orange lighten-2">
-			<div className="footer-copyright">
+			<div classname="footer-copyright">
 				<div class="container">
 					© ЭМК 2023
 					<!-- <a class="grey-text text-lighten-4 right" href="#!">ЕМК</a> -->
