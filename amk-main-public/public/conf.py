@@ -9,6 +9,10 @@ from openpyxl.drawing.image import Image
 
 from datetime import date
 
+import jwt
+from jwt import encode, decode
+from datetime import datetime, timedelta
+
 import psycopg2
 conn = psycopg2.connect(dbname='emk', user='emk_u', password='cdjkjxm', host='127.0.0.1')
 cursor =  conn.cursor()
@@ -43,7 +47,7 @@ def sql_format(res):
     ans=[]
     for a in res:
         a=str(a[0])
-        if a not in ans:
+        if (a not in ans) and (a != 'None'):
             ans.append(a)
     
     try:
@@ -51,7 +55,9 @@ def sql_format(res):
     except:
         pass
     return ans
-    
+
+
+
 class mk_DOCX():
     def __init__(self, elpod = "", list0 = [], list1 = [], list2 = [], list3 = [], list4 = [], list5 = []):
         self.elpod = elpod
@@ -235,7 +241,20 @@ class mk_XL():
             aaa[4] = a[6][5]
         if mark == "ЭПН":
             bd = DataBase()
-            aaa = bd.get_engin(mark, sh, Mom, V, flc)
+            U = a[6][5]
+            if U[:2] == '24':
+                U='24'
+                fz=''
+            elif a[6][5][:3] == '380':
+                U = '380'
+                fz = '3'
+            elif a[6][5][:3] == '220':
+                U='220'
+                fz = a[6][5][6] 
+            else:
+                U = ''
+                fz =''
+            aaa = bd.get_engin(mark, sh, Mom, V, flc, U, fz)
 
         
         ans = ans + aaa
@@ -286,7 +305,7 @@ class mk_XL():
 
             f'{a[3][5]}', #16 "Специальное исполнение",
 
-            f'{a[3][5]}', #17 "Особые требовнаия",
+            f'{a[3][3]}', #17 "Особые требовнаия",
         ]
 
         for i in range(len(keys)):
@@ -796,7 +815,7 @@ class DB():
 
 
 class DataBase():
-    def get_engin(self, mark, sh, Mom, V, flc):
+    def get_engin(self, mark, sh, Mom, V, flc, U ="", fz =""):
         conn = psycopg2.connect(dbname='emk', user='emk_u', password='cdjkjxm', host='127.0.0.1')
         cursor =  conn.cursor()
         ans = []
@@ -805,14 +824,16 @@ class DataBase():
         Mom=int(Mom)
         V=float(V)
         flc=str(flc)
-        print(f'SELECT (N, N, Ipusk, Inom, U, fz, Mas) FROM ElectroDrive WHERE Mark=\'{mark}\' AND sh=\'{sh}\' AND Mom=\'{Mom}\' AND V=\'{V}\' AND flc=\'{flc}\';')
-        cursor.execute(f'SELECT (N, N, Ipusk, Inom, U, fz, Mas) FROM ElectroDrive WHERE Mark=\'{mark}\' AND sh=\'{sh}\' AND Mom=\'{Mom}\' AND V=\'{V}\' AND flc=\'{flc}\';')
+        request=""
+        if U != "":
+           request = f'AND U = \'{U}\''
+        if str(U) == '220':
+            request = request + f"AND fz = \'{fz}\'"
+        print(f'SELECT (N, N, Ipusk, Inom, U, fz, Mas) FROM ElectroDrive WHERE Mark=\'{mark}\' AND sh=\'{sh}\' AND Mom=\'{Mom}\' AND V=\'{V}\' AND flc=\'{flc}\' {request};')
+        cursor.execute(f'SELECT (N, N, Ipusk, Inom, U, fz, Mas) FROM ElectroDrive WHERE Mark=\'{mark}\' AND sh=\'{sh}\' AND Mom=\'{Mom}\' AND V=\'{V}\' AND flc=\'{flc}\' {request};')
         res = cursor.fetchone()[0].split(',')
         print(res)
-        res[0]=res[0][1:]
-        res[6]=res[6][:-1]
-        print(res)
-        ans = [str(res[0]) + " кВт", str(res[1]) + " кВт", str(res[1]) + " А", str(res[2]) + " А", str(res[3]) + " В", str(res[4]), str(res[5]), str(res[6])]
+        ans = [str(res[0][1:]) + " кВт", str(res[1]) + " кВт", str(res[2]) + " А", str(res[3]) + " А", str(res[4]) + " В", str(res[5]), str(res[6][:-1])]
         cursor.close() # закрываем курсор
         conn.close()
         return ans
@@ -907,7 +928,7 @@ class DataBase():
             if N != '0':
                 N = float(N)
                 response = f" AND N=\'{N}\'"
-            cursor.execute(f'SELECT flc FROM ElectroDrive WHERE Mark=\'{mark}\' AND Isp=\'{Isp}\' AND flc_type{equal}{flc_type} AND Mom={Mom}AND V=\'{V}\' {response}  AND sh=\'{sh}\';')
+            cursor.execute(f'SELECT flc FROM ElectroDrive WHERE Mark=\'{mark}\' AND Isp=\'{Isp}\' AND flc_type{equal}{flc_type} AND Mom={Mom} AND V=\'{V}\' {response}  AND sh=\'{sh}\';')
             res = cursor.fetchall()
             ans = sql_format(res)
             cursor.close() # закрываем курсор
@@ -923,23 +944,23 @@ class DataBase():
             if N != '0':
                 N = float(N)
                 response = f" AND N=\'{N}\'"
-            cursor.execute(f'SELECT fz FROM ElectroDrive WHERE Mark=\'{mark}\' AND Isp=\'{Isp}\' AND flc_type{equal}{flc_type} AND Mom={Mom}AND V=\'{V}{response}\'  AND sh=\'{sh}\' AND flc=\'{flc}\';')
+            cursor.execute(f'SELECT fz FROM ElectroDrive WHERE Mark=\'{mark}\' AND Isp=\'{Isp}\' AND flc_type{equal}{flc_type} AND Mom={Mom} AND V=\'{V}\' {response}  AND sh=\'{sh}\' AND flc=\'{flc}\';')
             res_fz = cursor.fetchall()
-            cursor.execute(f'SELECT U FROM ElectroDrive WHERE Mark=\'{mark}\' AND Isp=\'{Isp}\' AND flc_type{equal}{flc_type} AND Mom={Mom}AND V=\'{V}\'{response}  AND sh=\'{sh}\' AND flc=\'{flc}\';')
-            res_U = cursor.fetchall()
-            if res_fz!=[]:
-                fz = int(res_fz[0][0])
-            print(res_U)
-            for a in res_U:
-                a=int(a[0])
-                if a == 220:
-                    a = f"{a} В {fz} фаз(а/ы)"
-                elif  a == 380:
+            cursor.execute(f'SELECT U, fz FROM ElectroDrive WHERE Mark=\'{mark}\' AND Isp=\'{Isp}\' AND flc_type{equal}{flc_type} AND Mom={Mom} AND V=\'{V}\' {response}  AND sh=\'{sh}\' AND flc=\'{flc}\';')
+            
+            res = cursor.fetchall()    
+            print(res)
+            for a in res:
+                U=int(a[0])
+                if U == 220:
+                    a = f"{U} В {a[1]} фаз(а/ы)"
+                elif  U == 380:
                     a = "380 В 3 фазы"
-                elif a == 24:
+                elif U == 24:
                     a = "24 В"
                 if a not in ans:
                     ans.append(a)
+
             cursor.close() # закрываем курсор
             conn.close()
             return ans
@@ -1009,7 +1030,7 @@ class DataBase():
             conn.close()
             return ans
 
-    def get_classic(self, isp = "", flc = "", ob = "", V = "", Mom = "", bkw = "", elpod = "", nom = ""):
+    def get_classic(self, isp = "", flc = "", N="", ob = "", V = "", Mom = "", bkw = "", elpod = "", nom = ""):
         conn = psycopg2.connect(dbname='emk', user='emk_u', password='cdjkjxm', host='127.0.0.1')
         cursor =  conn.cursor()
         print("Подбор классики")
@@ -1030,7 +1051,15 @@ class DataBase():
             conn.close()
             return ans
         
-        elif ob=="":
+        elif (N=="") and (ob  == ""):
+            cursor.execute(f'SELECT N FROM ClassicElectroDrive WHERE isp = \'{isp}\' AND flc = \'{flc}\';')
+            res = cursor.fetchall()
+            ans = sql_format(res)
+            cursor.close() # закрываем курсор
+            conn.close()
+            return ans
+        
+        elif (N=="0") and (ob  == ""):
             cursor.execute(f'SELECT ob FROM ClassicElectroDrive WHERE isp = \'{isp}\' AND flc = \'{flc}\';')
             res = cursor.fetchall()
             ans = sql_format(res)
@@ -1038,8 +1067,23 @@ class DataBase():
             conn.close()
             return ans
         
+        elif (N != "") and (ob  == ""):
+            cursor.execute(f'SELECT ob FROM ClassicElectroDrive WHERE isp = \'{isp}\' AND flc = \'{flc}\' AND N = \'{N}\';')
+            res = cursor.fetchall()
+            ans = sql_format(res)
+            cursor.close() # закрываем курсор
+            conn.close()
+            return ans
+        
         elif V =="":
-            cursor.execute(f'SELECT V FROM ClassicElectroDrive WHERE isp = \'{isp}\' AND flc = \'{flc}\'  AND ob = \'{ob}\';')
+            request=""
+            if (N == "0") or (N == ""):
+                request=""
+            else:
+                request=f" AND N = \'{N}\'"
+                
+            print(f'SELECT V FROM ClassicElectroDrive WHERE isp = \'{isp}\' AND flc = \'{flc}\'  AND ob = \'{ob}\'{request};')
+            cursor.execute(f'SELECT V FROM ClassicElectroDrive WHERE isp = \'{isp}\' AND flc = \'{flc}\'  AND ob = \'{ob}\'{request};')
             res = cursor.fetchall()
             ans = sql_format(res)
             cursor.close() # закрываем курсор
@@ -1047,7 +1091,12 @@ class DataBase():
             return ans
         
         elif Mom =="":
-            cursor.execute(f'SELECT Mom FROM ClassicElectroDrive WHERE isp = \'{isp}\' AND flc = \'{flc}\'  AND ob = \'{ob}\' AND V = \'{V}\';')
+            request=""
+            if (N == "0") or (N == ""):
+                request=""
+            else:
+                request=f" AND N = \'{N}\'"
+            cursor.execute(f'SELECT Mom FROM ClassicElectroDrive WHERE isp = \'{isp}\' AND flc = \'{flc}\'  AND ob = \'{ob}\' AND V = \'{V}\'{request};')
             res = cursor.fetchall()
             ans = sql_format(res)
             cursor.close() # закрываем курсор
@@ -1055,7 +1104,12 @@ class DataBase():
             return ans
         
         elif bkw =="":
-            cursor.execute(f'SELECT BKV_type FROM ClassicElectroDrive WHERE isp = \'{isp}\' AND flc = \'{flc}\'  AND ob = \'{ob}\' AND V = \'{V}\' AND Mom = {Mom};')
+            request=""
+            if (N == "0") or (N == ""):
+                request=""
+            else:
+                request=f" AND N = \'{N}\'"
+            cursor.execute(f'SELECT BKV_type FROM ClassicElectroDrive WHERE isp = \'{isp}\' AND flc = \'{flc}\'  AND ob = \'{ob}\' AND V = \'{V}\' AND Mom = {Mom}{request};')
             res = cursor.fetchall()
             ans = sql_format(res)
             cursor.close() # закрываем курсор
@@ -1063,7 +1117,12 @@ class DataBase():
             return ans
         
         elif elpod =="":
-            cursor.execute(f'SELECT elpod FROM ClassicElectroDrive WHERE isp = \'{isp}\' AND flc = \'{flc}\'  AND ob = \'{ob}\' AND V = \'{V}\' AND Mom = \'{Mom}\' AND BKV_type = \'{bkw}\';')
+            request=""
+            if (N == "0") or (N == ""):
+                request=""
+            else:
+                request=f" AND N = \'{N}\'"
+            cursor.execute(f'SELECT elpod FROM ClassicElectroDrive WHERE isp = \'{isp}\' AND flc = \'{flc}\'  AND ob = \'{ob}\' AND V = \'{V}\' AND Mom = \'{Mom}\' AND BKV_type = \'{bkw}\'{request};')
             res = cursor.fetchall()
             ans = sql_format(res)
             cursor.close() # закрываем курсор
@@ -1071,7 +1130,12 @@ class DataBase():
             return ans
         
         elif nom=="":
-            cursor.execute(f'SELECT modify, N_isp FROM ClassicElectroDrive WHERE isp = \'{isp}\' AND flc = \'{flc}\'  AND ob = \'{ob}\' AND V = \'{V}\' AND Mom = \'{Mom}\' AND BKV_type = \'{bkw}\' AND elpod = \'{elpod}\';')
+            request=""
+            if (N == "0") or (N == ""):
+                request=""
+            else:
+                request=f" AND N = \'{N}\'"
+            cursor.execute(f'SELECT modify, N_isp FROM ClassicElectroDrive WHERE isp = \'{isp}\' AND flc = \'{flc}\'  AND ob = \'{ob}\' AND V = \'{V}\' AND Mom = \'{Mom}\' AND BKV_type = \'{bkw}\' AND elpod = \'{elpod}\'{request};')
             res = cursor.fetchall()
             a=[]
             for check in res:
@@ -1099,10 +1163,8 @@ class DataBase():
         print(f'SELECT (N, N, Ipusk, Inom, U, fz, Mas) FROM ClassicElectroDrive WHERE isp=\'{isp}\' AND flc=\'{flc}\' AND mod={mod} AND N_isp=\'{nom}\';')
         cursor.execute(f'SELECT (N, N, Ipusk, Inom, U, fz, Mas) FROM ClassicElectroDrive WHERE isp=\'{isp}\' AND flc=\'{flc}\' AND modify {mod} AND N_isp=\'{nom}\';')
         res = cursor.fetchone()[0].split(',')
-        res[0]=res[0][1:]
-        res[6]=res[6][:-1]
         print(res)
-        ans = [str(res[0]) + " кВт", str(res[1]) + " кВт", str(res[1]) + " А", str(res[2]) + " А", str(res[3]) + " В", str(res[4]), str(res[5]), str(res[6])]
+        ans = [str(res[0][1:]) + " кВт", str(res[1]) + " кВт", str(res[2]) + " А", str(res[3]) + " А", str(res[4]) + " В", str(res[5]), str(res[6][:-1])]
         cursor.close() # закрываем курсор
         conn.close()
         return ans
@@ -1153,3 +1215,257 @@ class DataBase():
                 return "." + str(sheet[f"{s}1"].value)
         
         return ""
+    
+    def getMark(self, arr = ["", "", "", "", "", "", "", ""]):
+
+        conn = psycopg2.connect(dbname='emk', user='emk_u', password='cdjkjxm', host='127.0.0.1')
+        cursor =  conn.cursor()
+
+        ans = []
+        mark = arr[0]
+        if mark == 'ЭП4РН':
+            print("Маркировка ЭП4 с РН")
+            rn = arr[1]
+            isp = arr[2]
+            flc = arr[3]
+            mom = arr[4]
+            V = arr[5]
+            T_pov = arr[6]
+            sh = arr[7]
+            if rn == '':
+                cursor.execute(f'SELECT rn FROM ElectroDrive WHERE RN IS NOT NULL;')
+                res = cursor.fetchall()
+                ans = sql_format(res)
+            elif isp == '':
+                cursor.execute(f'SELECT Isp FROM ElectroDrive WHERE RN = \'{rn}\';')
+                res = cursor.fetchall()
+                ans = sql_format(res)
+            elif flc == '':
+                cursor.execute(f'SELECT flc FROM ElectroDrive WHERE RN = \'{rn}\' AND isp = \'{isp}\';')
+                res = cursor.fetchall()
+                ans = sql_format(res)
+            elif mom == '':
+                cursor.execute(f'SELECT mom FROM ElectroDrive WHERE RN = \'{rn}\' AND isp = \'{isp}\' AND flc=\'{flc}\';')
+                res = cursor.fetchall()
+                ans = sql_format(res)
+            elif V == '':
+                cursor.execute(f'SELECT V FROM ElectroDrive WHERE RN = \'{rn}\' AND isp = \'{isp}\' AND flc=\'{flc}\' AND mom=\'{mom}\';')
+                res = cursor.fetchall()
+                ans = sql_format(res)
+            elif T_pov == '':
+                cursor.execute(f'SELECT T_pov FROM ElectroDrive WHERE RN = \'{rn}\' AND isp = \'{isp}\' AND flc=\'{flc}\' AND mom=\'{mom}\' AND V=\'{V}\';')
+                res = cursor.fetchall()
+                ans = sql_format(res)
+            elif sh == '':
+                cursor.execute(f'SELECT sh FROM ElectroDrive WHERE RN = \'{rn}\' AND isp = \'{isp}\' AND flc=\'{flc}\' AND mom=\'{mom}\' AND V=\'{V}\' AND T_pov=\'{T_pov}\';')
+                res = cursor.fetchall()
+                ans = sql_format(res)
+            
+            
+
+        elif mark == 'ЭП4':
+            print("Маркировка ЭП4")
+            isp = arr[1]
+            flc = arr[2]
+            mom = arr[3]
+            V = arr[4]
+            flc_type = arr[5]
+            sh = arr[6]
+            print('Быстры подбор {mark}')
+            if isp == '':
+                cursor.execute(f'SELECT Isp FROM ElectroDrive WHERE Mark=\'{mark}\';')
+                res = cursor.fetchall()
+                ans = sql_format(res)
+            elif flc == '':
+                cursor.execute(f'SELECT flc FROM ElectroDrive WHERE Mark=\'{mark}\' AND isp = \'{isp}\';')
+                res = cursor.fetchall()
+                ans = sql_format(res)
+            elif mom == '':
+                cursor.execute(f'SELECT Mom FROM ElectroDrive WHERE Mark=\'{mark}\' AND isp=\'{isp}\' AND flc = \'{flc}\';')
+                res = cursor.fetchall()
+                ans = sql_format(res)
+            elif V == '':
+                cursor.execute(f'SELECT V FROM ElectroDrive WHERE Mark=\'{mark}\' AND isp=\'{isp}\' AND flc = \'{flc}\' and Mom = \'{mom}\';')
+                res = cursor.fetchall()
+                ans = sql_format(res)
+            elif flc_type == '':
+                cursor.execute(f'SELECT flc_type FROM ElectroDrive WHERE Mark=\'{mark}\' AND isp=\'{isp}\' AND flc = \'{flc}\' and Mom = \'{mom}\' and V = \'{V}\';')
+                res = cursor.fetchall()
+                ans = sql_format(res)
+            elif sh == '':
+                cursor.execute(f'SELECT sh FROM ElectroDrive WHERE Mark=\'{mark}\' AND isp=\'{isp}\' AND flc = \'{flc}\' and Mom = \'{mom}\' and V = \'{V}\' AND flc_type = \'{flc_type}\';')
+                res = cursor.fetchall()
+                ans = sql_format(res)
+
+        elif mark == 'ЭПН':
+            print("Маркировка ЭПН")
+            isp = str(arr[1])
+            flc = str(arr[2])
+            mom = arr[3]
+            V = arr[4]
+            if arr[5] == "":
+                arr[5]=('', '') 
+            U=arr[5][0]
+            fz = arr[5][1]
+            sh = arr[6]
+            if fz == '':
+                fz = '=1'
+            else:
+                fz = f" = \'{fz}\'"
+            sh = str(arr[6])
+            if isp == '':
+                cursor.execute(f'SELECT Isp FROM ElectroDrive WHERE Mark=\'{mark}\';')
+                res = cursor.fetchall()
+                ans = sql_format(res)
+            elif flc == '':
+                cursor.execute(f'SELECT flc FROM ElectroDrive WHERE Mark=\'{mark}\' AND isp=\'{isp}\';')
+                res = cursor.fetchall()
+                ans = sql_format(res)
+            elif mom == '':
+                cursor.execute(f'SELECT Mom FROM ElectroDrive WHERE Mark=\'{mark}\' AND isp=\'{isp}\' AND flc = \'{flc}\';')
+                res = cursor.fetchall()
+                ans = sql_format(res)
+            elif V == '':
+                cursor.execute(f'SELECT V FROM ElectroDrive WHERE Mark=\'{mark}\' AND isp=\'{isp}\' AND flc = \'{flc}\' and Mom = \'{mom}\';')
+                res = cursor.fetchall()
+                ans = sql_format(res)
+            elif U == '':
+                
+                print(f'SELECT U FROM ElectroDrive WHERE Mark=\'{mark}\' AND Isp=\'{isp}\'  AND Mom={mom} AND V=\'{V}\' AND flc=\'{flc}\';')
+                cursor.execute(f'SELECT U, fz FROM ElectroDrive WHERE Mark=\'{mark}\' AND Isp=\'{isp}\'  AND Mom={mom} AND V=\'{V}\' AND flc=\'{flc}\';')
+                
+                res = cursor.fetchall()
+                    
+                print(res)
+                for a in res:
+                    U=int(a[0])
+                    if U == 220:
+                        a = f"{U} В {a[1]} фаз(а/ы)"
+                    elif  U == 380:
+                        a = "380 В 3 фазы"
+                    elif U == 24:
+                        a = "24 В"
+                    if a not in ans:
+                        ans.append(a)
+            elif sh == '':
+                print(f'SELECT sh FROM ElectroDrive WHERE Mark=\'{mark}\' AND isp=\'{isp}\' AND flc = \'{flc}\' AND Mom = \'{mom}\' AND V = \'{V}\' AND U = \'{U}\' AND fz {fz};')
+                cursor.execute(f'SELECT sh FROM ElectroDrive WHERE Mark=\'{mark}\' AND isp=\'{isp}\' AND flc = \'{flc}\' AND Mom = \'{mom}\' AND V = \'{V}\' AND U = \'{U}\' AND fz {fz};')
+                res = cursor.fetchall()
+                ans = sql_format(res)
+
+        else:
+            print("Маркировка Классики")
+            isp = arr[1]
+            flc = arr[2]
+            modify = arr[3]
+            N_isp = arr[4]
+            key = arr[5]
+            
+            if isp=="":
+                cursor.execute(f'SELECT isp FROM ClassicElectroDrive;')
+                res = cursor.fetchall()
+                ans = sql_format(res)
+        
+            elif flc=="":
+                cursor.execute(f'SELECT flc FROM ClassicElectroDrive WHERE isp = \'{isp}\';')
+                res = cursor.fetchall()
+                ans = sql_format(res)
+            
+            elif modify=="":
+                print(f'SELECT modify FROM ClassicElectroDrive WHERE isp = \'{isp}\' AND flc = \'{flc}\';')
+                cursor.execute(f'SELECT modify FROM ClassicElectroDrive WHERE isp = \'{isp}\' AND flc = \'{flc}\';')
+                res = cursor.fetchall()
+                for mod in res:
+                    if mod[0] == None:
+                        print(0)
+                        if 0 not in ans:
+                            ans.append(0)
+                    else:
+                        print(mod[0])
+                        if mod[0] not in ans:
+                            ans.append(mod[0])
+            
+            
+            elif N_isp == "":
+                if modify == "0":
+                    request = ""
+                else:
+                    request = f"  AND modify = \'{modify}\'"
+                cursor.execute(f'SELECT N_isp FROM ClassicElectroDrive WHERE isp = \'{isp}\' AND flc = \'{flc}\'{request};')
+                res = cursor.fetchall()
+                ans = sql_format(res)
+            
+            elif key =="":
+                if modify == "0":
+                    request = ""
+                else:
+                    request = f"  AND modify = \'{modify}\'"
+                cursor.execute(f'SELECT ob, V, Mom, BKV_type, elpod FROM ClassicElectroDrive WHERE isp = \'{isp}\' AND flc = \'{flc}\'{request} AND N_isp = \'{N_isp}\';')
+                res = cursor.fetchall()
+                ans = {
+                    "Обороты" : res[0][0],
+                    "Частота" : res[0][1],
+                    "Крутящий момент" : res[0][2],
+                    "Тип БКВ" : res[0][3],
+                    "Электричеcкое подключение" : res[0][4]
+                }
+                
+
+        cursor.close() # закрываем курсор
+        conn.close()
+        return ans
+
+
+
+
+
+class Auth():
+
+    def get_token(self, user: dict):
+        conn = psycopg2.connect(dbname='emk', user='emk_u', password='cdjkjxm', host='127.0.0.1')
+        cursor =  conn.cursor()
+        #если данные валидны => даем токен
+        #если user уже есть
+        #cursor.execute
+        #если user новый => регистрируем
+        #если не валидные self.token = ""
+        #создаем токен
+        token = encode(payload={"name":user["uuid"]}, key='emk', algorithm="HS512")
+        cursor.close()
+        conn.close()
+        return token
+
+
+
+    def get_user(self, token: str):
+        print(token)
+        #проверяем валидность токена
+        conn = psycopg2.connect(dbname='emk', user='emk_u', password='cdjkjxm', host='127.0.0.1')
+        cursor =  conn.cursor()
+        user = {
+            "name" : "", 
+            "surname" : "", 
+            "patronymic" : "", 
+            "direction" : ""  
+        }
+        #если он валидный, дать данные
+        print(token)
+        try:
+            valid = decode(token, key='emk', algorithms=["HS512"])
+            valid = True
+        except:
+            valid = False
+
+        cursor.close()
+        conn.close()
+        return {"valid" : valid, "user" : user}
+
+'''
+{
+    "uuid" : "c97f2043-7e8a-4b0f-9bf7-e6bfcf9fccb6",
+    "name" : "Александр", 
+    "surname" : "Тимофеев", 
+    "patronymic" : "Анатольевич", 
+    "direction" : "Дирекция по маркетингу ЭМК"  
+}
+'''

@@ -1,7 +1,7 @@
-from fastapi import FastAPI, Body
+from fastapi import FastAPI, Body, Response, Cookie
 from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
-from starlette.responses import RedirectResponse, Response
+from starlette.responses import RedirectResponse, HTMLResponse
 from fastapi.staticfiles import StaticFiles
 
 
@@ -24,6 +24,7 @@ from conf import mk_DOCX
 from conf import mk_XL
 from conf import DB
 from conf import DataBase
+from conf import Auth
 
 from pypdf import PdfMerger
 
@@ -108,6 +109,40 @@ def download_file(ID, name, mark):
     #headers = {'Content-Disposition': f'attachment; filename="Tula{ID}.pdf"'}
     return FileResponse(f'Tula{ID}.docx', filename=f'ОЛ ТЭП {name} {ID} {mark}.docx', media_type='application/docx')#, headers=headers)
 
+
+
+@app.post("/login")
+def login(jsn = Body()):
+    user = jsn
+    #запрос на БД
+    auth = Auth()
+    tkn = auth.get_token(user)
+    #записать в куки
+    return {"token" : tkn}
+
+@app.get("/{token}")
+async def auth(token):
+    print(token)
+    print(token["token"])
+    auth = Auth()
+    ans = auth.get_user(token["token"])
+    
+    response = RedirectResponse("https://emk.websto.pro/static/select.html")
+    if ans["valid"]:
+        #вписать токен в куки
+        print("valid")
+        response.set_cookie(key="token", value=token["token"])
+        response.headers["token"] = token["token"]
+        return response
+
+    """if ans:
+        print(token)
+    link = "\"https://emk.websto.pro/static/select.html\""
+    data = f"<script> document.cookie=\"{token.key()}={token}\";</script>"
+    return HTMLResponse(content=data)"""
+#https://emk.websto.pro/?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJuYW1lIjoiYzk3ZjIwNDMtN2U4YS00YjBmLTliZjctZTZiZmNmOWZjY2I2In0.m-ogzfNizGr8dUA5ldXJFK9Rotca14ThtyAvRwetZ4us2Fy6xDexEi4UaXioJUg9TEtaxWLc60o_ab30N6Ut3w
+
+
 @app.get("/TulaEXEL/{ID}/{name}/{mark}", response_class = FileResponse)
 def download_file(ID, name, mark):
     return FileResponse(f'Tula{ID}.xlsx', filename=f'ТКП {name} {ID} {mark}.xlsx', media_type='application/xlsx')#, headers=headers)
@@ -156,10 +191,10 @@ def get_param(jsn = Body()):
 @app.post("/DBclassic")
 def get_param(jsn = Body()):
     a = jsn["a"]
-    for i in range(9-len(a)):
+    for i in range(10-len(a)):
         a.append("")
     db = DataBase()
-    res=db.get_classic(isp = a[0], flc = a[1], ob = a[2], V = a[3], Mom = a[4], bkw = a[5], elpod = a[6], nom = a[7])
+    res=db.get_classic(isp = a[0], flc = a[1], N = a[2], ob = a[3], V = a[4], Mom = a[5], bkw = a[6], elpod = a[7], nom = a[8])
     print(res)
     return {"ans" : res}
 
@@ -236,12 +271,13 @@ def get_param(jsn = Body()):
     return {"ans" : ans}
 
 @app.post("/Mark")
-def get_param(jsn = Body()):
+def get_mark(jsn = Body()):
     a = jsn["a"]
-    for i in range(6-len(a)):
+    for i in range(8-len(a)):
         a.append("")
-    bd = DB(a[0])
-    ans = bd.get_mark(a)
+    print(a)
+    bd = DataBase()
+    ans = bd.getMark(a)
     print(ans)
     return {"ans" : ans}
 
@@ -340,13 +376,11 @@ def download_file(jsn = Body()):
                 txt = f'ОРГАНИЗАЦИЯ - заказчик: \t {tbls["ans3"][0]}'
                 p = doc_new.add_paragraph('')
                 run = p.add_run(txt)
-                run.font.bold = True
 
             elif para.text == 'Ф.И.О. ____________________ Тел: ____________________ E-mail:_____________________':
-                txt = f'Ф.И.О. \t  {tbls["ans3"][1]} \n Тел.: \t  {tbls["ans3"][2]} \n E-mail:  {tbls["ans3"][3]} \n Дата: «   » ____________________ 202__ г'
+                txt = f' Ф.И.О. \t  {tbls["ans3"][1]} \n Тел.: \t  {tbls["ans3"][2]} \n E-mail:  {tbls["ans3"][3]} \n Дата: «   » ____________________ 202__ г'
                 p = doc_new.add_paragraph('')
                 run = p.add_run(txt)
-                run.font.bold = True
 
             elif para.text == 'Характеристика и параметры электропривода:':
                 para.text = ""
@@ -355,7 +389,6 @@ def download_file(jsn = Body()):
                 txt = 'Характеристика и параметры внешнего интеллектуального модуля управления'
                 p = doc_new.add_paragraph('')
                 run = p.add_run(txt)
-                run.font.bold = True
                 
                 tbl1 = doc_new.add_table(rows=0, cols=2)
                 tbl1.style = 'Table Grid'
