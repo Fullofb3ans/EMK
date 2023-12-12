@@ -51,31 +51,31 @@ $(document).ready(function (e) {
         document.querySelector(`input[type='radio'][name='epPlace'][value='${execValue}']`).checked = true;
         $('#step-1').trigger('change')
 
-        typeSelect = document.querySelector("#connectionTypeForclassicEpa");
+        typeSelectIn = document.querySelector("#connectionTypeForclassicEpa");
         typeValue = document.querySelector("#typeSelect").value;
-        $(typeSelect).append($('<option>', {
+        $(typeSelectIn).append($('<option>', {
             value: typeValue,
             text: typeValue
         }));
-        $(typeSelect).val(typeValue);
+        $(typeSelectIn).val(typeValue);
         $('#step-2').trigger('change');
 
         upgrValue = document.querySelector("#upgrSelect").value == '0' ? 'Отсутствует' : document.querySelector("#upgrSelect").value;
-        upgrSelect = document.querySelector("#upgradeNumber");
-        $(upgrSelect).append($('<option>', {
+        upgrSelectIn = document.querySelector("#upgradeNumber");
+        $(upgrSelectIn).append($('<option>', {
             value: upgrValue,
             text: upgrValue
         }));
-        $(upgrSelect).val(upgrValue);
+        $(upgrSelectIn).val(upgrValue);
         $('#step-2').trigger('change')
 
         numValue = document.querySelector("#numSelect").value;
-        numSelect = document.querySelector("#executionclassicEpaNumber");
-        $(numSelect).append($('<option>', {
+        numSelectIn = document.querySelector("#executionclassicEpaNumber");
+        $(numSelectIn).append($('<option>', {
             value: numValue,
             text: numValue
         }));
-        $(numSelect).val(numValue);
+        $(numSelectIn).val(numValue);
         $('#step-3').trigger('change')
 
         let mode = $("#mode").val();

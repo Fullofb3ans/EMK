@@ -101,13 +101,13 @@ $(document).ready(function (e) {
         }));
         $(uplim).val(upValue);
 
-        vSelect = document.querySelector("#time-limit");
+        vSelectIn = document.querySelector("#time-limit");
         vValue = document.querySelector("#vSelect").value;
-        $(vSelect).append($('<option>', {
+        $(vSelectIn).append($('<option>', {
             value: vValue,
             text: vValue
         }));
-        $(vSelect).val(vValue);
+        $(vSelectIn).val(vValue);
 
         rotateValue = document.querySelector("#closeVectorSelect").value;
         document.querySelector(`input[type='radio'][name='stroke'][value='${rotateValue}']`).checked = true;

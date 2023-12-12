@@ -80,6 +80,8 @@ $(document).ready(function (e) {
         $('#step-6').trigger('change');
         $('#step-7').trigger('change');
         $('#step-8').trigger('change');
+
+        document.querySelector('#control-block-optionssetCheckBox').scrollIntoView({ block: "center", behavior: "smooth" });
     })
 
     $('#haveMarkBut').on('click', function (e) {

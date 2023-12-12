@@ -79,8 +79,8 @@ $(document).ready(function (e) {
         $('#step-2').trigger('change')
 
         vValue = document.querySelector("#vSelect").value;
-        vSelect = document.querySelector("#rotation-frequency");
-        vSelect.innerHTML = `<option value=${vValue} disabled selected>${vValue}</option>`;
+        vSelectIn = document.querySelector("#rotation-frequency");
+        vSelectIn.innerHTML = `<option value=${vValue} disabled selected>${vValue}</option>`;
         $('#step-3').trigger('change')
 
         flangeValue = document.querySelector("#flangeSelect").value;
