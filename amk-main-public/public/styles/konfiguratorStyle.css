@@ -155,7 +155,7 @@ input[type='text']:focus {
 
 body {
 	background-color: #ffffff63;
-	background-image: url(https://www.transparenttextures.com/patterns/binding-light.png);
+	background-image: url('./background.png');
 	line-height: 150%;
 }
 
