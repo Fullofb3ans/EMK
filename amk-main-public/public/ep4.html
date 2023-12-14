@@ -350,6 +350,14 @@
 						</div>
 					</fieldset>
 
+					<fieldset style="display: none" class="row mb-3 ReqValueOk" id="schemeForConnectionSet">
+						<div class="col-sm-9">
+							<button class="schemeForConnection" id="schemeForConnectionButt">
+								<a id="schemeForConnectionLink" href="" style="text-decoration: none; color: black" target="”_blank”">Схема подключения</a>
+							</button>
+						</div>
+					</fieldset>
+
 					<fieldset class="row mb-3 noReqValue" id="temperature">
 						<legend class="blockNumber">
 							11
@@ -733,9 +741,13 @@
 				</div>
 			</div>
 			<div id="certs-pdf">
-				<button class="btn-info" id="certV" style="display: none"><a href="./pdf/certEp4V.pdf" style="text-decoration: none; color: black" target="”_blank”">Сертификат</a></button>
+				<button class="btn-info" id="certV" style="display: none">
+					<a href="./pdf/certEp4V.pdf" style="text-decoration: none; color: black" target="”_blank”">Сертификат</a>
+				</button>
 
-				<button class="btn-info" id="certSil"><a href="./pdf/certSil.pdf" style="text-decoration: none; color: black" target="”_blank”">Сертификат Sil</a></button>
+				<button class="btn-info" id="certSil">
+					<a href="./pdf/certSil.pdf" style="text-decoration: none; color: black" target="”_blank”">Сертификат Sil</a>
+				</button>
 
 				<button class="btn-info" id="declaration" style="display: none">
 					<a href="./pdf/declarationEp4.pdf" style="text-decoration: none; color: black" target="”_blank”">Декларация</a>
@@ -790,7 +802,8 @@
 									<fieldset class="row mb-3 noReqValue closeNumbersFieldForM">
 										<div class="col-sm-9">
 											<legend class="col-form-label col-sm-3 pt-0">Кол-во оборотов для закрытия арматуры</legend>
-											<input placeholder="............" type="number" class="form-input" name="closeNumbersForM" id="closeNumbersForM" min="0.8" max="1250" /> об.
+											<input placeholder="............" type="number" class="form-input" name="closeNumbersForM" id="closeNumbersForM" min="0.8" max="1250" />
+											об.
 										</div>
 									</fieldset>
 								</div>

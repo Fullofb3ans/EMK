@@ -423,6 +423,69 @@ $(document).ready(function () {
         }
     });
 
+    // Обработка кнопки схем подключения
+    $('#step-5').on('change', function () {
+        switch ($('#controle-blocks').val()) {
+            case 'Э11':
+                if ($('#controle-blocks-options').val() == '') {
+                    $("#schemeForConnectionSet").show();
+                    document.getElementById("schemeForConnectionLink").href = './pdf/conSchemes/ep4E11ConScheme.pdf';
+                } else if ($('#controle-blocks-options').val() == 'W') {
+                    $("#schemeForConnectionSet").show();
+                    document.getElementById("schemeForConnectionLink").href = './pdf/ConSchemes/ep4E11WConScheme.pdf';
+                } else $("#schemeForConnectionSet").hide();
+                break;
+            case 'Э12':
+                if ($('#controle-blocks-options').val() == 'Z') {
+                    $("#schemeForConnectionSet").show();
+                    document.getElementById("schemeForConnectionLink").href = './pdf/ConSchemes/ep4E12ZConScheme.pdf';
+                } else if ($('#controle-blocks-options').val() == '') {
+                    $("#schemeForConnectionSet").show();
+                    document.getElementById("schemeForConnectionLink").href = './pdf/ConSchemes/ep4E12ConScheme.pdf';
+                } else $("#schemeForConnectionSet").hide();
+                break;
+            case 'Э14':
+                if ($('#controle-blocks-options').val() == '') {
+                    $("#schemeForConnectionSet").show();
+                    document.getElementById("schemeForConnectionLink").href = './pdf/ConSchemes/ep4E14ConScheme.pdf';
+                } else if ($('#controle-blocks-options').val() == 'Z') {
+                    $("#schemeForConnectionSet").show();
+                    document.getElementById("schemeForConnectionLink").href = './pdf/ConSchemes/ep4E14ZConScheme.pdf';
+                } else $("#schemeForConnectionSet").hide();
+                break;
+            case 'Э15':
+                if ($('#controle-blocks-options').val() == '') {
+                    $("#schemeForConnectionSet").show();
+                    document.getElementById("schemeForConnectionLink").href = './pdf/ConSchemes/ep4E15ConScheme.pdf';
+                } else $("#schemeForConnectionSet").hide();
+                break;
+            case 'Э17':
+                if ($('#controle-blocks-options').val() == 'X') {
+                    $("#schemeForConnectionSet").show();
+                    document.getElementById("schemeForConnectionLink").href = './pdf/ConSchemes/ep4E17XConScheme.pdf';
+                } else $("#schemeForConnectionSet").hide();
+                break;
+            case 'Э16':
+                if ($('#controle-blocks-options').val() == '') {
+                    $("#schemeForConnectionSet").show();
+                    document.getElementById("schemeForConnectionLink").href = './pdf/ConSchemes/ep4E16ConScheme.pdf';
+                } else $("#schemeForConnectionSet").hide();
+                break;
+            case 'Э21':
+                $("#schemeForConnectionSet").show();
+                document.getElementById("schemeForConnectionLink").href = './pdf/ConSchemes/ep4E21ConScheme.pdf';
+                break;
+            case 'Э22':
+                $("#schemeForConnectionSet").show();
+                document.getElementById("schemeForConnectionLink").href = './pdf/ConSchemes/ep4E22ConScheme.pdf';
+                break;
+            default:
+                $("#schemeForConnectionSet").hide();
+                document.getElementById("schemeForConnectionLink").href = '';
+                break;
+        }
+    });
+
     // Открытие стандартов вариантов кабелей
     $('#electricityField').on('change', function () {
         let scheme = $("input[name='constructive-scheme']:checked").val();
