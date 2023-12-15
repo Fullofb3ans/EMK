@@ -1,17 +1,27 @@
 $(document).ready(function () {
-    listToHtml();
+    let start = 0;
     checkUser();
+    start != 0 ? listToHtml() : alertBitrix();
+    alertBitrix();
+
+    function alertBitrix() {
+        $('#containerForPI').text('Для пользования личным кабинетом, предназначенным для файлового хранения, вам необходимо зайти со своего браузера в intranet, перейти во вкладу сервисы и нажать подбор оборудования, после чего вернуться на эту страницу');
+    }
 
     function checkUser() {
         fetch('https://emk.websto.pro/user', {
         })
             .then((res) => res.json())
             .then((res) => {
-                $('#containerForPI').append(
-                    $('<h5 class="textInlk">').text(res.user.department)).append(
-                        $('<div class="textInlk">').text(res.user.fio[0] + ' ' + res.user.fio[1] + ' ' + res.user.fio[2]));
-                console.log(res.valid);
-                console.log(res);
+                if (res.valid == false) { return start = 0 }
+                else {
+                    $('#containerForPI').append(
+                        $('<h5 class="textInlk">').text(res.user.department)).append(
+                            $('<div class="textInlk">').text(res.user.fio[1] + ' ' + res.user.fio[0] + ' ' + res.user.fio[2]));
+                    console.log(res.valid);
+                    console.log(res);
+                    start++;
+                }
             });
     }
 
