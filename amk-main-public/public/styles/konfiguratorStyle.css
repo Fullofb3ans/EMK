@@ -1169,13 +1169,10 @@ input[type='number'] {
     background: #fff;
     padding: 8%;
     background: rgb(249 84 0 / 21%);
-    /* border: 4px solid rgb(0 0 0 / 25%); */
     border: 1px solid rgb(0 0 0 / 25%);
-    border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(4.7px);
     -webkit-backdrop-filter: blur(4.7px);
-    /* border: 1px solid rgba(249, 84, 0, 0.08); */
     margin: 2%;
     font-size: 100%;
     word-break: break-word;
@@ -1183,10 +1180,8 @@ input[type='number'] {
     padding: 0%;
     margin: 1%;
     border-radius: 0;
-    text-align: center;
 	cursor: pointer;
-	width: 10%;
-	text-align: center;
+	width: 200px;
 }
 
 .dataToggle:hover{
@@ -1224,4 +1219,32 @@ input[type='number'] {
 	text-align: center;
 	justify-content: flex-start;
 	gap: 30px;
+}
+.flexContainerLk {
+	display: flex;
+	flex-direction: column-reverse;
+	flex-wrap: nowrap;
+	align-content: center;
+	align-items: stretch;
+	text-align: left;
+	justify-content: space-between;
+}
+#containerForPI {
+	text-align: center;
+	margin: 1%;
+	background: rgba(255, 255, 255, 0.2);
+	border-radius: 16px;
+	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+	backdrop-filter: blur(11.8px);
+	-webkit-backdrop-filter: blur(11.8px);
+	border: 1px solid rgba(255, 255, 255, 0.12);
+	transition: 0.3s;
+	/* width: 100%; */
+}
+
+.textInlk{
+	display:block;
+	width:100%; /*растягиваем тексовое поле на всю ширину родителя*/
+	border:none;
+	min-width:0;
 }
