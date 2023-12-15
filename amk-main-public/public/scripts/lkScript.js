@@ -8,8 +8,8 @@ $(document).ready(function () {
             .then((res) => res.json())
             .then((res) => {
                 $('#containerForPI').append(
-                    $('<h5 class="textInlk">').text('res.user.department')).append(
-                        $('<div class="textInlk">').text('res.user.fio[0] +  res.user.fio[1] + res.user.fio[2]'));
+                    $('<h5 class="textInlk">').text(res.user.department)).append(
+                        $('<div class="textInlk">').text(res.user.fio[0] + ' ' + res.user.fio[1] + ' ' + res.user.fio[2]));
                 console.log(res.valid);
                 console.log(res);
             });
