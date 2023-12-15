@@ -47,11 +47,7 @@ $(document).ready(function () {
                         console.log(item.id);
                         let li = $('<li>').addClass('flexContForLk');
                         li.on('click', function () {
-                            fetch(`https://emk.websto.pro/getFile/${item.id}`, {
-                                method: 'GET',
-                                headers: { 'Content-Type': 'application/json;charset=utf-8' },
-
-                            })
+                            window.open(`https://emk.websto.pro/getFile/${item.id}`)
                         });
 
                         let a = $('<p>').text(item.text).css('overflow-wrap', 'break-word');
