@@ -2,7 +2,7 @@ $(document).ready(function () {
     checkUser();
 
     function alertBitrix() {
-        $('#containerForPI').html('Для пользования личным кабинетом, предназначенным для файлового хранения, вам необходимо зайти со своего браузера в учетную запись intranet, перейти во вкладу "сервисы" и нажать "подбор оборудования" (либо по <a style="color:blue" href="https://portal.emk.ru/intranet/tools/configurator.php"> ссылке</a> ), после чего вернуться на эту страницу.');
+        $('#containerForPI').html('Для пользования личным кабинетом, предназначенным для файлового хранения, вам необходимо зайти со своего браузера в учетную запись intranet, перейти во вкладу "сервисы" и нажать "подбор оборудования" (либо перейти по <a style="color:blue" href="https://portal.emk.ru/intranet/tools/configurator.php">ссылке</a>), после чего вернуться на эту страницу.');
     }
 
     function checkUser() {
