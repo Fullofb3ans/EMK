@@ -643,6 +643,10 @@ $(document).ready(function () {
         }
     });
 
+    $('#step-1').on('change', function () {
+        $('#allInOneStyle').trigger('change');
+    })
+
 
     // Вывод сертификата и декларации
     $('#epPlace').on('change', function (e) {
