@@ -179,7 +179,7 @@ class mk_XL():
         #Лицевая часть
         current_date = date.today()
         keys = ["I7", "C9", "C10", "C12", "I12", "C48"]
-        ans = [ID, f"Организация: {a[0][0]}   ФИО представителя: {a[0][1]}   Тел.: {a[0][2]}   email: {a[0][3]}", "", mark, str(a[0][-2]), str(current_date)]
+        ans = [ID, f"Организация: {a[0][0]}   ФИО представителя: {a[0][1]}   Тел.: {a[0][2]}   email: {a[0][3]}", "", mark, str(a[0][-2]), str(f"{current_date.day}.{current_date.month}.{current_date.year}")]
 
         #Техническая часть
         for i in range(16, 40):
@@ -277,7 +277,7 @@ class mk_XL():
         current_date = date.today()
         keys = ["I7", "C9", "C10", "C12", "I12", "C31"]
         mark = a[1][1]
-        ans = [self.ID, f"Организация: {a[0][0]}   ФИО представителя: {a[0][1]}   Тел.: {a[0][2]}   email: {a[0][3]}", "", self.mark, str(a[0][-2]), str(current_date)]
+        ans = [self.ID, f"Организация: {a[0][0]}   ФИО представителя: {a[0][1]}   Тел.: {a[0][2]}   email: {a[0][3]}", "", self.mark, str(a[0][-2]), str(f"{current_date.day}.{current_date.month}.{current_date.year}")]
 
         #Техническая часть
         for i in range(16, 31):
@@ -326,7 +326,7 @@ class mk_XL():
         #Лицевая часть
         current_date = date.today()
         keys = ["I7", "C9", "C10", "C12", "I12", "C42"]
-        ans = [ID, f"Организация: {a[0][0]}   ФИО представителя: {a[0][1]}   Тел.: {a[0][2]}   email: {a[0][3]}", "", mark, str(a[0][-2]), str(current_date)]
+        ans = [ID, f"Организация: {a[0][0]}   ФИО представителя: {a[0][1]}   Тел.: {a[0][2]}   email: {a[0][3]}", "", mark, str(a[0][-2]), str(f"{current_date.day}.{current_date.month}.{current_date.year}")]
 
         #Техническая часть
         for i in range(16, 34):
@@ -1417,21 +1417,44 @@ class DataBase():
 
 
 
-
-
 class Auth():
 
     def get_token(self, user: dict):
         conn = psycopg2.connect(dbname='emk', user='emk_u', password='cdjkjxm', host='127.0.0.1')
         cursor =  conn.cursor()
+        token = "the data is not correct"
         #если данные валидны => даем токен
-        #если user уже есть
-        #cursor.execute
-        #если user новый => регистрируем
-        #если не валидные self.token = ""
-        #создаем токен
-        token = encode(payload={"name":user["uuid"]}, key='emk', algorithm="HS512")
+        if (len(user["fio"]) == 3):
+            #если user уже есть
+            cursor.execute(f'SELECT Id FROM Client WHERE name=\'{user["fio"][0]}\' AND surname=\'{user["fio"][1]}\' AND partronymic=\'{user["fio"][2]}\';')
+            res = cursor.fetchone()
+
+            
+            
+            #если user новый => регистрируем
+            if res == None:
+                cursor.execute(f"select max(id) from Client;")
+                max_id = cursor.fetchone()[0]
+                dep = ""
+                for dr in user['department']:
+                    dep= f"{dep} {dr} "
+                response = f"INSERT INTO Client (ID, UUID, name, surname, partronymic, department) VALUES (\'{max_id+1}\', \'{ user['uuid'] }\', \'{user['fio'][0]}\', \'{user['fio'][1]}\', \'{user['fio'][2]}\', \'{dep}\' );"
+                cursor.execute(response)
+
+                #создаем токен
+                token = encode(payload={"uuid": user["uuid"]}, key='emk', algorithm="HS512")
+
+                print("Пользователь с ID =", max_id+1, ", создан")
+            
+            else:
+                #создаем токен
+                print("Пользователь с ID =", res[0], ", входит в систему")
+                token = encode(payload={"uuid": user["uuid"]}, key='emk', algorithm="HS512")
+        else:
+            print("Не валидный user")
+            
         cursor.close()
+        conn.commit()
         conn.close()
         return token
 
@@ -1439,33 +1462,150 @@ class Auth():
 
     def get_user(self, token: str):
         print(token)
-        #проверяем валидность токена
-        conn = psycopg2.connect(dbname='emk', user='emk_u', password='cdjkjxm', host='127.0.0.1')
-        cursor =  conn.cursor()
-        user = {
-            "name" : "", 
-            "surname" : "", 
-            "patronymic" : "", 
-            "direction" : ""  
-        }
+        
         #если он валидный, дать данные
-        print(token)
         try:
-            valid = decode(token, key='emk', algorithms=["HS512"])
+            uuid = decode(token, key='emk', algorithms=["HS512"])
             valid = True
         except:
             valid = False
 
+        #проверяем валидность токена
+        user_inf = {
+                "fio" : ["", "", ""], 
+                "department" : "",
+                "user_id" : ""
+        }
+
+        conn = psycopg2.connect(dbname='emk', user='emk_u', password='cdjkjxm', host='127.0.0.1')
+        cursor =  conn.cursor()
+
+        if valid:
+            uuid = uuid["uuid"]
+            user_inf["uuid"] = uuid
+            cursor.execute(f"SELECT name, surname, partronymic, department, id FROM Client WHERE UUID=\'{uuid}\';")
+            inf = cursor.fetchone()
+            user_inf["fio"] = [inf[0], inf[1], inf[2]]
+            user_inf["department"] = inf[3]
+            user_inf["user_id"] = inf[4]
+            
         cursor.close()
         conn.close()
-        return {"valid" : valid, "user" : user}
+
+        return {"valid" : valid, "user" : user_inf}
+    
+
+
+    def client_file(self, client_id, file_id):
+        conn = psycopg2.connect(dbname='emk', user='emk_u', password='cdjkjxm', host='127.0.0.1')
+        cursor =  conn.cursor()
+
+        cursor.execute(f"select max(id) from Client_File;")
+        max_id = cursor.fetchone()[0]
+        cursor.execute(f"INSERT INTO Client_File (id, client_id, file_id) VALUES ({max_id+1}, \'{client_id}\', \'{file_id}\');")
+
+        cursor.close()
+        conn.commit()
+        conn.close()
+
+    def auth_file(self, ID, name, user_id):
+        conn = psycopg2.connect(dbname='emk', user='emk_u', password='cdjkjxm', host='127.0.0.1')
+        cursor =  conn.cursor()
+
+        cursor.execute(f"select max(id) from File;")
+        max_id = cursor.fetchone()[0]
+        current_date = date.today()
+
+        response = f"INSERT INTO File (ID, f_id, name, dt) VALUES ({max_id+1}, \'{ID}\', \'{name}\', \'{str(current_date)}\');"
+        cursor.execute(response)
+
+        cursor.close()
+        conn.commit()
+        conn.close()
+
+        self.client_file(user_id, ID)
+
+
+    
+    def download_file(self, ID):
+        conn = psycopg2.connect(dbname='emk', user='emk_u', password='cdjkjxm', host='127.0.0.1')
+        cursor =  conn.cursor()
+
+        cursor.execute(f"select f_id, name from File WHERE id=\'{ID}\';")
+        file_inf = cursor.fetchone()
+        
+        iidd = file_inf[0]
+        nm = file_inf[1]
+        if nm[-4:] == ".pdf":
+            fl_rormat = ".pdf"
+        else:
+            fl_rormat = nm[-5:]
+        f_name = f"Tula{iidd}{fl_rormat}"
+        cursor.close()
+        conn.close()
+        return [f_name, file_inf[1]]
+
+    def get_files(self, ID):
+        conn = psycopg2.connect(dbname='emk', user='emk_u', password='cdjkjxm', host='127.0.0.1')
+        cursor =  conn.cursor()
+        cursor.execute(f"select file_id from Client_File where client_id = \'{ID}\';")
+        f_id = cursor.fetchall()
+        files_id = []
+        for fid in f_id:
+            if fid[0] not in files_id:
+                files_id.append(fid[0])
+        
+        fid_data = dict()
+        ff_iiDD=[]
+        for f_id in files_id:
+            if f_id not in ff_iiDD:
+                ff_iiDD.append(f_id)
+
+        for f_id in ff_iiDD:
+            cursor.execute(f"SELECT id, name FROM File WHERE f_id = \'{f_id}\' ORDER BY dt DESC;")
+            dat = cursor.fetchall()
+            for data in dat:
+                if f_id in fid_data.keys():
+                    fid_data[f_id].append({"id" : data[0], "text" : data[1]})
+                else:
+                    fid_data[f_id]=[{"id" : data[0], "text" : data[1]}]
+
+        print(fid_data, '\n')
+
+        dt_fid=dict()
+        for f_id in files_id:
+            cursor.execute(f"SELECT dt FROM File WHERE f_id = \'{f_id}\' ORDER BY dt DESC;")
+            dt = cursor.fetchall()
+            for cur_dt in dt:
+                current_date = cur_dt[0]
+                cur_dt = f"{current_date.day}.{current_date.month}.{current_date.year}"
+                if (cur_dt in dt_fid.keys()) and (f_id not in dt_fid[cur_dt]):
+                    dt_fid[cur_dt].append(f_id)
+                elif cur_dt not in dt_fid.keys():
+                    print(cur_dt)
+                    dt_fid[cur_dt] = [f_id]
+        
+        print(dt_fid, '\n')
+
+        ans=dict()
+        for dt in dt_fid.keys():
+            fids = dt_fid[dt]
+            data = []
+            for fid in fids:
+                for fd in fid_data[fid]:
+                    data.append(fd)
+            ans[dt] = data
+
+        print(ans)             
+        
+        cursor.close()
+        conn.close()
+        return ans
 
 '''
 {
     "uuid" : "c97f2043-7e8a-4b0f-9bf7-e6bfcf9fccb6",
-    "name" : "Александр", 
-    "surname" : "Тимофеев", 
-    "patronymic" : "Анатольевич", 
-    "direction" : "Дирекция по маркетингу ЭМК"  
+    "fio" : ["Александр", "Тимофеев", "Анатольевич"], 
+    "department" : ["ЭМК", "Дирекция по маркетингу ЭМК"]  
 }
 '''
