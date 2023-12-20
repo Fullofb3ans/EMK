@@ -30,6 +30,10 @@ from pypdf import PdfMerger
 
 import json
 
+from datetime import datetime
+
+from typing import Optional
+
 
 
 def make_clean(Id):
@@ -102,53 +106,57 @@ def epn():
 def ep4Reductor():
     return RedirectResponse("https://emk.websto.pro/static/ep4Reductor.html")
 
+@app.get("/classic")
+def ep4Reductor():
+    return RedirectResponse("https://emk.websto.pro/static/ep4Reductor.html")
+
+@app.get("/vimu")
+def ep4Reductor():
+    return RedirectResponse("https://emk.websto.pro/static/vimu.html")
+
 
 
 @app.get("/Tula/{ID}/{name}/{mark}", response_class = FileResponse)
-def download_file(ID, name, mark):
+def download_file(ID, name, mark, token: Optional[str] = Cookie(default=None)):
     #headers = {'Content-Disposition': f'attachment; filename="Tula{ID}.pdf"'}
+    auth = Auth()
+    ans = auth.get_user(token)
+    if ans["valid"]:
+        os.system(f"cp Tula{ID}.docx /files")
+        auth.auth_file(ID, f'ОЛ ТЭП {name} {ID} {mark}.docx', ans["user"]["user_id"])
     return FileResponse(f'Tula{ID}.docx', filename=f'ОЛ ТЭП {name} {ID} {mark}.docx', media_type='application/docx')#, headers=headers)
 
-
-
-@app.post("/login")
-def login(jsn = Body()):
-    user = jsn
-    #запрос на БД
+@app.get("/user")
+def user_data(token: Optional[str] = Cookie(default=None)):
     auth = Auth()
-    tkn = auth.get_token(user)
-    #записать в куки
-    return {"token" : tkn}
+    ans = auth.get_user(token)
 
-@app.get("/{token}")
-async def auth(token):
-    print(token)
-    print(token["token"])
-    auth = Auth()
-    ans = auth.get_user(token["token"])
+    print(ans)
     
-    response = RedirectResponse("https://emk.websto.pro/static/select.html")
     if ans["valid"]:
-        #вписать токен в куки
-        print("valid")
-        response.set_cookie(key="token", value=token["token"])
-        response.headers["token"] = token["token"]
-        return response
-
-    """if ans:
-        print(token)
-    link = "\"https://emk.websto.pro/static/select.html\""
-    data = f"<script> document.cookie=\"{token.key()}={token}\";</script>"
-    return HTMLResponse(content=data)"""
-#https://emk.websto.pro/?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJuYW1lIjoiYzk3ZjIwNDMtN2U4YS00YjBmLTliZjctZTZiZmNmOWZjY2I2In0.m-ogzfNizGr8dUA5ldXJFK9Rotca14ThtyAvRwetZ4us2Fy6xDexEi4UaXioJUg9TEtaxWLc60o_ab30N6Ut3w
+        print("Токен валидный")
+    else:
+        print("Токен не валидный")
+    
+    return ans
 
 
 @app.get("/TulaEXEL/{ID}/{name}/{mark}", response_class = FileResponse)
-def download_file(ID, name, mark):
-    return FileResponse(f'Tula{ID}.xlsx', filename=f'ТКП {name} {ID} {mark}.xlsx', media_type='application/xlsx')#, headers=headers)
+def download_file(ID, name, mark, token: Optional[str] = Cookie(default=None)):
+
+    #читаем куки и проверяем валидность токена
+    auth = Auth()
+    ans = auth.get_user(token)
+    if ans["valid"]:
+        os.system(f"cp Tula{ID}.xlsx /files")
+        auth.auth_file(ID, f'ТКП {name} {ID} {mark}.xlsx', ans["user"]["user_id"])
+
+        return FileResponse(f'Tula{ID}.xlsx', filename=f'ТКП {name} {ID} {mark}.xlsx', media_type='application/xlsx')#, headers=headers)
+    else:
+        return RedirectResponse("https://emk.websto.pro/static/select.html")
 
 @app.get("/TulaPDF/{ID}/{name}/{mark}", response_class = FileResponse)
-def download_file(ID, name, mark):
+def download_file(ID, name, mark, token: Optional[str] = Cookie(default=None)):
     os.system(f"unoconv -f pdf Tula{ID}.xlsx")
     os.rename(f"Tula{ID}.pdf", "Tula.pdf")
     os.system(f"unoconv -f pdf Tula{ID}.docx")
@@ -159,8 +167,42 @@ def download_file(ID, name, mark):
          merger.append(pdf)
     merger.write(f"Tula{ID}.pdf")
     merger.close()
-    return FileResponse(f'Tula{ID}.pdf', filename=f'Информация на подпись  {name} {ID} {mark}.pdf', media_type='application/pdf')#, headers=headers)
 
+    #читаем куки и проверяем валидность токена
+    auth = Auth()
+    ans = auth.get_user(token)
+
+    if ans["valid"]:
+        os.system(f"cp Tula{ID}.pdf /files")
+        auth.auth_file(ID, f'Информация на подпись  {name} {ID} {mark}.pdf', ans["user"]["user_id"])
+
+        return FileResponse(f'Tula{ID}.pdf', filename=f'Информация на подпись  {name} {ID} {mark}.pdf', media_type='application/pdf')
+    else:
+        return RedirectResponse("https://emk.websto.pro/static/select.html")
+
+@app.get("/LK")
+def ep4Reductor():
+    return RedirectResponse("https://emk.websto.pro/static/lk.html")
+
+
+
+@app.get("/user_files/{ID}")
+def get_file(ID):
+    auth = Auth()
+    ans = auth.get_files(ID)
+
+    return ans
+
+@app.get("/getFile/{ID}")
+def download_file(ID, token: Optional[str] = Cookie(default=None)):
+    auth=Auth()
+    file_name = auth.download_file(ID)
+    fl_nm = file_name[0]
+    if fl_nm[-3:] == "pdf":
+        fl_rormat = "pdf"
+    else:
+        fl_rormat = fl_nm[-4:]
+    return FileResponse(f'/files/{fl_nm}', filename=file_name[1], media_type=f'application/{fl_rormat}')
 
 @app.post("/DBep")
 def get_param(jsn = Body()):
@@ -280,6 +322,40 @@ def get_mark(jsn = Body()):
     ans = bd.getMark(a)
     print(ans)
     return {"ans" : ans}
+
+@app.post("/login")
+def login(jsn = Body()):
+    user = jsn
+    print(user)
+    #запрос на БД
+    auth = Auth()
+    tkn = auth.get_token(user)
+    #записать в куки
+    return {"token" : tkn}
+
+@app.get("/pdf/{file}")
+def auth(file: str):
+    return RedirectResponse(f"https://emk.websto.pro/pdf/{file}")
+
+@app.get("/pdf/conSchemes/{file}")
+def auth(file: str):
+    return RedirectResponse(f"https://emk.websto.pro/pdf/conSchemes/{file}")
+
+@app.get("/{token}")
+def auth(token: str, response: Response):
+    auth = Auth()
+    ans = auth.get_user(token)
+
+    response = RedirectResponse(f"https://emk.websto.pro/")
+    if ans["valid"]:
+        #вписать токен в куки
+        response.set_cookie(key="token", value=token, samesite=None)
+
+        #response.headers["token"] = token
+        print("Токен валидный")
+    else:
+        print("Токен не валидный")
+    return response
 
 @app.post("/download")
 def download_file(jsn = Body()):
