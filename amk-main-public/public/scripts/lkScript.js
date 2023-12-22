@@ -40,6 +40,8 @@ $(document).ready(function () {
                         $(this).next().toggleClass('hidden');
                     });
                     let ul = $('<ul>').addClass('selectFlexForLk');
+                    ul.addClass('hidden');
+
                     $('#container').append(divForDate);
 
                     $.each(items, function (index, item) {
