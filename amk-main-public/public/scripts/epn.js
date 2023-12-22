@@ -523,24 +523,42 @@ $(document).ready(function () {
             $('#vimuMark').val($('#vimumark-gen').text());
         }
     });
-
-    $(document).on('change', function (e) {
-        if ($('#controle-blocks2').val() || $('#vimucontrole-blocks2').val()) {
-            $('#vimuPanelOptionlabel').hide();
-            $('#PanelOptionlabel').hide();
+    // Обработка доп оснащения в чекбоксе
+    $('.row').on('change', function () {
+        if (document.querySelector("#PanelOption").checked) {
+            document.querySelector("#bluetoothOption").checked = false;
+            $("#bOptionDiv").hide();
+        }
+        else if (document.querySelector("#bluetoothOption").checked) {
             document.querySelector("#PanelOption").checked = false;
-            document.querySelector("#PanelOptionv").checked = false;
+            $("#PanelOptionLabel").hide();
+        }
+        else if ($('#controle-blocks2').val() || $('#vimucontrole-blocks2').val()) {
+            document.querySelector("#PanelOption").checked = false;
+            $('#PanelOptionLabel').hide();
         }
         else {
-            $('#vimuPanelOptionlabel').show();
-            $('#PanelOptionlabel').show();
+            $("#bOptionDiv").show();
+            $('#PanelOptionLabel').show();
         }
+    })
+
+    // Обработка доп оснащения в селекте
+    $('#controle-blocks-options').on('change', function () {
+        if (document.querySelector('#controle-blocks-options').value == 'X' || document.querySelector('#controle-blocks-options').value == 'Y' || document.querySelector('#controle-blocks-options').value == 'Z' || document.querySelector('#controle-blocks-options').value == 'V' || document.querySelector('#controle-blocks-options').value == 'W') {
+            document.querySelector("#tOption").checked = false;
+            $('#tOptionDiv').hide();
+        }
+        else { $('#tOptionDiv').show() }
     });
 
     // МАРКИРОВКА
     $(document).on('change', function (e) {
 
         // ДОП ОПЦИИ ДЛЯ БЛОКА
+        let gOption = '';
+        document.querySelector('#gOption').checked ? (gOption = document.querySelector('#gOption').value) : '';
+
         let tOption = '';
         document.querySelector('#tOption').checked ? (tOption = document.querySelector('#tOption').value) : '';
 
@@ -553,7 +571,7 @@ $(document).ready(function () {
         let regOption = '';
         document.querySelector('#regOption').checked ? (regOption = document.querySelector('#regOption').value) : '';
 
-        let optionssetCheckBox = tOption + PanelOption + bluetoothOption + regOption;
+        let optionssetCheckBox = gOption + tOption + PanelOption + bluetoothOption + regOption;
 
         let mark_gen = $('#mark-gen');
 
@@ -837,12 +855,13 @@ $(document).ready(function () {
         let voptForBu = $('#vimucontrol-block-optionsset option:selected').val() != 'noValue' ? $('#control-block-optionsset option:selected').val() : '';
 
         // ДОП ОПЦИИ
+        let addOptionG = document.querySelector("#gOption").checked ? 'Графический дисплей; ' : '';
         let addOptionT = document.querySelector("#tOption").checked ? 'Твердотельный пускатель; ' : '';
         let addOptionP = document.querySelector('#PanelOption').checked ? 'Механический селектор переключения режима работы местн./дист.; ' : '';
         let addOptionB = document.querySelector("#bluetoothOption").checked ? 'Канал связи "Bluetooth; ' : '';
         let addOptionR = document.querySelector("#regOption").checked ? 'Регистратор параметров состояния и конфигурации привода' : '';
         let addOption180 = document.querySelector('#upTo180f').checked ? 'Рабочий ход до 180 градусов; ' : ' ';
-        let addOptions = addOptionT + addOptionP + addOptionB + addOptionR + addOption180;
+        let addOptions = addOptionG + addOptionT + addOptionP + addOptionB + addOptionR + addOption180;
         // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         // json0
@@ -1276,6 +1295,7 @@ $(document).ready(function () {
             document.querySelector('#tOption').checked = false;
             document.querySelector('#bluetoothOption').checked = false;
             document.querySelector('#regOption').checked = false;
+            document.querySelector('#gOption').checked = false;
             document.querySelector('#control-block-optionsset').style.display = 'none';
             document.querySelector('#control-block-optionssetCheckBox').style.display = 'none';
             document.querySelector('#control-block-optionsset').classList.remove('ReqValueOk');

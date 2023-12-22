@@ -24,16 +24,6 @@ $(document).ready(function () {
         $(el).toggleClass('table-success');
     });
 
-    $(document).on('change', function (e) {
-        if ($('#controle-blocks2').val()) {
-            document.querySelector("#PanelOption").checked = false;
-            $('#PanelOptionLabel').hide();
-        }
-        else {
-            $('#PanelOptionLabel').show();
-        }
-    });
-
     // КОНСТАНТЫ ДЛЯ JSON
     const cheme_img = {
         ep4: {
@@ -596,6 +586,36 @@ $(document).ready(function () {
         };
     });
 
+    // Обработка доп оснащения в чекбоксе
+    $('.row').on('change', function () {
+        if (document.querySelector("#PanelOption").checked) {
+            document.querySelector("#bluetoothOption").checked = false;
+            $("#bOptionDiv").hide();
+        }
+        else if (document.querySelector("#bluetoothOption").checked) {
+            document.querySelector("#PanelOption").checked = false;
+            $("#PanelOptionLabel").hide();
+        }
+        else if ($('#controle-blocks2').val()) {
+            document.querySelector("#PanelOption").checked = false;
+            $('#PanelOptionLabel').hide();
+        }
+        else {
+            $("#bOptionDiv").show();
+            $('#PanelOptionLabel').show();
+        }
+    })
+
+    // Обработка доп оснащения в селекте
+    $('#controle-blocks-options').on('change', function () {
+        if (document.querySelector('#controle-blocks-options').value == 'X' || document.querySelector('#controle-blocks-options').value == 'Y' || document.querySelector('#controle-blocks-options').value == 'Z' || document.querySelector('#controle-blocks-options').value == 'V' || document.querySelector('#controle-blocks-options').value == 'W') {
+            document.querySelector("#tOption").checked = false;
+            $('#tOptionDiv').hide();
+        }
+        else { $('#tOptionDiv').show() }
+    });
+
+
     // ОБРАБОТКА ИСПОЛНЕНИЯ
     $('#executionWrapLegend').on('change', function () {
         switch (true) {
@@ -729,19 +749,22 @@ $(document).ready(function () {
         }
 
         // ДОП ОПЦИИ ДЛЯ БЛОКА
+        let gOption = '';
+        document.querySelector('#gOption').checked ? (gOption = document.querySelector('#gOption').value) : '';
+
         let tOption = '';
-        document.querySelector("#tOption").checked ? tOption = document.querySelector("#tOption").value : '';
+        document.querySelector('#tOption').checked ? (tOption = document.querySelector('#tOption').value) : '';
 
         let PanelOption = '';
-        document.querySelector("#PanelOption").checked ? PanelOption = document.querySelector("#PanelOption").value : '';
+        document.querySelector('#PanelOption').checked ? (PanelOption = document.querySelector('#PanelOption').value) : '';
 
         let bluetoothOption = '';
-        document.querySelector("#bluetoothOption").checked ? bluetoothOption = document.querySelector("#bluetoothOption").value : '';
+        document.querySelector('#bluetoothOption').checked ? (bluetoothOption = document.querySelector('#bluetoothOption').value) : '';
 
         let regOption = '';
-        document.querySelector("#regOption").checked ? regOption = document.querySelector("#regOption").value : '';
+        document.querySelector('#regOption').checked ? (regOption = document.querySelector('#regOption').value) : '';
 
-        let optionssetCheckBox = tOption + PanelOption + bluetoothOption + regOption;
+        let optionssetCheckBox = gOption + tOption + PanelOption + bluetoothOption + regOption;
 
         // //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         let x7 = $('#climatic-modification').val() ? $('#climatic-modification').val() : 'X'; // Номер варианта температурного исполнения
@@ -950,11 +973,12 @@ $(document).ready(function () {
         // if (BoMark == 'Э1' || BoMark == 'ВЭ1' || BoMark == 'Э1S' || BoMark == 'ВЭ') {
         //     addOption2 = 'Плата регистратор';
         // } else { addOption2 = '' };
+        let addOptionG = document.querySelector("#gOption").checked ? 'Графический дисплей; ' : '';
         let addOptionT = document.querySelector("#tOption").checked ? 'Твердотельный пускатель; ' : '';
         let addOptionP = document.querySelector('#PanelOption').checked ? 'Механический селектор переключения режима работы местн./дист.; ' : '';
         let addOptionB = document.querySelector("#bluetoothOption").checked ? 'Канал связи "Bluetooth; ' : '';
         let addOptionR = document.querySelector("#regOption").checked ? 'Регистратор параметров состояния и конфигурации привода' : '';
-        let addOptions = addOptionT + addOptionP + addOptionB + addOptionR;
+        let addOptions = addOptionG + addOptionT + addOptionP + addOptionB + addOptionR;
         // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         // json0

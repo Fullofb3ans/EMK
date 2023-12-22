@@ -81,6 +81,10 @@ $(document).ready(function () {
             // ДОП ОСНАЩЕНИЕ
             '4.2': [
                 {
+                    "id": "Графический дисплей",
+                    "value": "Г"
+                },
+                {
                     "id": "Твердотельный пускатель",
                     "value": "T"
                 },
@@ -286,7 +290,7 @@ $(document).ready(function () {
         // fetchResult[0].sort((a, b) => a - b);
         $.each(jsonListToHtml[4.2], function (key, item) {
             $('#control-block-optionssetCheckBox').append(
-                $('<div>')
+                $('<div>').prop({ id: 'blockOption-' + item.value + 'div' })
                     .prop({ class: 'form-check' })
                     .append(
                         $('<input>').prop({
@@ -450,14 +454,33 @@ $(document).ready(function () {
         $(el).toggleClass('table-success');
     });
 
-    $(document).on('change', function (e) {
-        if ($('#controle-blocks2').val()) {
+    // Обработка доп оснащения в чекбоксе
+    $('.row').on('change', function () {
+        if (document.querySelector("#blockOption-S").checked) {
+            document.querySelector("#blockOption-B").checked = false;
+            $("#blockOption-Bdiv").hide();
+        }
+        else if (document.querySelector("#blockOption-B").checked) {
             document.querySelector("#blockOption-S").checked = false;
-            $('#blockOption-S').closest('.form-check').hide();
+            $("#blockOption-Sdiv").hide();
+        }
+        else if ($('#controle-blocks2').val()) {
+            document.querySelector("#blockOption-S").checked = false;
+            $("#blockOption-Sdiv").hide();
         }
         else {
-            $('#blockOption-S').closest('.form-check').show();
+            $("#blockOption-Bdiv").show();
+            $('#blockOption-Sdiv').show();
         }
+    })
+
+    // Обработка доп оснащения в селекте
+    $('#controle-blocks-options').on('change', function () {
+        if (document.querySelector('#controle-blocks-options').value == 'X' || document.querySelector('#controle-blocks-options').value == 'Y' || document.querySelector('#controle-blocks-options').value == 'Z' || document.querySelector('#controle-blocks-options').value == 'V' || document.querySelector('#controle-blocks-options').value == 'W') {
+            document.querySelector("#blockOption-T").checked = false;
+            $('#blockOption-Tdiv').hide();
+        }
+        else { $('#blockOption-Tdiv').show() }
     });
 
     // Обработка исполнений
@@ -666,6 +689,8 @@ $(document).ready(function () {
         secondVimuBlock = $('#controle-blocks2').val() ? '/' + $('#controle-blocks2').val() : '';
 
         // ДОП ОПЦИИ ДЛЯ БЛОКА
+        let blockOptionG = document.querySelector("#blockOption-Г").checked ? (blockOptionG = document.querySelector('#blockOption-Г').value) : '';
+
         let blockOptionT = '';
         document.querySelector('#blockOption-T').checked ? (blockOptionT = document.querySelector('#blockOption-T').value) : '';
 
@@ -736,11 +761,12 @@ $(document).ready(function () {
         let optForBu = $('#control-block-optionsset option:selected').val() != 'noValue' ? $('#control-block-optionsset option:selected').val() : '';
 
         // ДОП ОПЦИИ
+        let addOptionG = document.querySelector("#blockOption-Г").checked ? 'Графический дисплей; ' : '';
         let addOptionT = document.querySelector("#blockOption-T").checked ? 'Твердотельный пускатель; ' : '';
         let addOptionP = document.querySelector('#blockOption-S').checked ? 'Механический селектор переключения режима работы местн./дист.; ' : '';
         let addOptionB = document.querySelector("#blockOption-B").checked ? 'Канал связи "Bluetooth; ' : '';
         let addOptionR = document.querySelector("#blockOption-R").checked ? 'Регистратор параметров состояния и конфигурации привода' : '';
-        let addOptions = addOptionT + addOptionP + addOptionB + addOptionR;
+        let addOptions = addOptionG + addOptionT + addOptionP + addOptionB + addOptionR;
         // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         // json0

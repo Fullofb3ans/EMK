@@ -132,6 +132,9 @@ $(document).ready(function () {
         let x9 = specialSum ? '-' + specialSum : '';
 
         // ДОП ОПЦИИ ДЛЯ БЛОКА
+        let gOption = '';
+        document.querySelector('#gOptionv').checked ? (gOption = document.querySelector('#gOptionv').value) : '';
+
         let tOption = '';
         document.querySelector('#tOptionv').checked ? (tOption = document.querySelector('#tOptionv').value) : '';
 
@@ -144,7 +147,7 @@ $(document).ready(function () {
         let regOption = '';
         document.querySelector('#regOptionv').checked ? (regOption = document.querySelector('#regOptionv').value) : '';
 
-        let optionssetCheckBox = tOption + PanelOption + bluetoothOption + regOption;
+        let optionssetCheckBox = gOption + tOption + PanelOption + bluetoothOption + regOption;
 
         let optForBu = $('#vimucontrole-blocks-options option:selected').val() != 'noValue' ? $('#vimucontrole-blocks-options option:selected').val() : '';
 
@@ -209,6 +212,34 @@ $(document).ready(function () {
     // Обработка доп платы
     $('#vimuSet').on('change', function (e) {
         $('#vimucontrole-blocks2').val() ? $('#vimusumBlocks').val($('#vimucontrole-blocks').val() + '/' + $('#vimucontrole-blocks2').val()) : $('#vimusumBlocks').val($('#vimucontrole-blocks').val());
+    });
+
+    $('#vimuSet').on('change', function () {
+        if (document.querySelector("#PanelOptionv").checked) {
+            document.querySelector("#bluetoothOptionv").checked = false;
+            document.querySelector("#vimubOptionDiv").style.display = 'none';
+        }
+        else if (document.querySelector("#bluetoothOptionv").checked) {
+            document.querySelector("#PanelOptionv").checked = false;
+            document.querySelector("#vimuPanelOptionLabel").style.display = 'none'
+        }
+        else if ($('#controle-blocks2').val() || $('#vimucontrole-blocks2').val()) {
+            document.querySelector("#PanelOptionv").checked = false;
+            document.querySelector("#vimuPanelOptionLabel").style.display = 'none'
+        }
+        else {
+            document.querySelector("#vimubOptionDiv").style.display = 'block';
+            document.querySelector("#vimuPanelOptionLabel").style.display = 'block';
+        }
+    })
+
+    // Обработка доп оснащения в селекте
+    $('#vimucontrole-blocks-options').on('change', function () {
+        if (document.querySelector('#vimucontrole-blocks-options').value == 'X' || document.querySelector('#vimucontrole-blocks-options').value == 'Y' || document.querySelector('#vimucontrole-blocks-options').value == 'Z' || document.querySelector('#vimucontrole-blocks-options').value == 'V' || document.querySelector('#vimucontrole-blocks-options').value == 'W') {
+            document.querySelector("#tOptionv").checked = false;
+            $('#vimutOptionDiv').hide();
+        }
+        else { $('#vimutOptionDiv').show() }
     });
 
     // КНОПКИ В ТАБЛИЦЕ
