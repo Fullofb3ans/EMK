@@ -34,7 +34,13 @@ $(document).ready(function () {
                 let ress = { date: res };
                 console.log(ress);
                 console.log('resDATE: ' + ress.date);
-                $.each(ress.date, function (date, items) {
+                const arr = Object.entries(ress.date);
+                arr.reverse();
+                const sortedObj = {
+                    date: Object.fromEntries(arr)
+                };
+
+                $.each(sortedObj.date, function (date, items) {
                     let divForDate = $('<div>').text(date).addClass('dataToggle');
                     divForDate.on('click', function () {
                         $(this).next().toggleClass('hidden');
