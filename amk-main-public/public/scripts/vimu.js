@@ -689,7 +689,8 @@ $(document).ready(function () {
         secondVimuBlock = $('#controle-blocks2').val() ? '/' + $('#controle-blocks2').val() : '';
 
         // ДОП ОПЦИИ ДЛЯ БЛОКА
-        let blockOptionG = document.querySelector("#blockOption-Г").checked ? (blockOptionG = document.querySelector('#blockOption-Г').value) : '';
+        let blockOptionG = '';
+        document.querySelector("#blockOption-Г").checked ? (blockOptionG = document.querySelector('#blockOption-Г').value) : '';
 
         let blockOptionT = '';
         document.querySelector('#blockOption-T').checked ? (blockOptionT = document.querySelector('#blockOption-T').value) : '';
