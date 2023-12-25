@@ -677,6 +677,7 @@
 				</button>
 			</div>
 
+			<!-- Модал М1 -->
 			<div class="modal" id="block-configure-m1" tabindex="-1" style="z-index: 99999">
 				<div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
 					<div class="modal-content" style="width: 95%">
@@ -744,6 +745,7 @@
 				</div>
 			</div>
 
+			<!-- Модал Э2 -->
 			<div class="modal" id="block-configure-e2" tabindex="-1">
 				<div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
 					<div class="modal-content" style="width: 95%">
@@ -789,6 +791,7 @@
 				</div>
 			</div>
 
+			<!-- Модал Э1 -->
 			<div class="modal" id="block-configure-e1" tabindex="-1">
 				<div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
 					<div class="modal-content" style="width: 95%">
@@ -1272,6 +1275,99 @@
 				</div>
 			</div>
 
+			<!-- Модал доп платы э17 под э14-->
+			<div class="modal" id="block-configure-e14e17" tabindex="-1">
+				<div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+					<div class="modal-content" style="width: 95%">
+						<div class="modal-header" style="flex-wrap: wrap">
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Закрыть</button>
+							<h5 class="modal-title">Опциональный набор функций ВИМУ и коды исполнения</h5>
+						</div>
+						<div class="modal-body">
+							<table id="e14e17-table" class="table table-bordered">
+								<thead>
+									<tr>
+										<th rowspan="2">Функции</th>
+										<th colspan="10">Код исполнения</th>
+									</tr>
+									<tr>
+										<th data-target="Э16" id="e14e17Э16">Э16</th>
+										<th data-target="Э17" id="e14e17Э17">Э17</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>
+											Базовый набор функций
+											<a href="./pdf/commonFunctions.pdf" target="_blank">
+												<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
+													<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+													<path
+														d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z" />
+												</svg>
+											</a>
+										</td>
+										<td data-target="Э16" class="table-success"></td>
+										<td data-target="Э17" class="table-success"></td>
+									</tr>
+									<tr>
+										<td>Передача информации о положении выходного звена привода посредством токового сигнала (4–20 мА)</td>
+										<td data-target="Э16" class="table-success"></td>
+										<td data-target="Э17" class="table-success"></td>
+									</tr>
+									<tr>
+										<td>Передача текущего значения движущего момента на выходном звене привода посредством токового сигнала (4–20 мА)</td>
+										<td data-target="Э16"></td>
+										<td data-target="Э17" class="table-success"></td>
+									</tr>
+									<tr>
+										<td>Аналоговое управление приводом — прием от дистанционного пульта и отработка токового сигнала (4–20 мА) задания положения выходного звена привода с контролем наличия связи</td>
+										<td data-target="Э16" class="table-success"></td>
+										<td data-target="Э17" class="table-success"></td>
+									</tr>
+									<tr>
+										<td>Цифровое управление и настройка привода посредством цифрового канала связи, интерфейс RS485, протокол обмена — MODBUS RTU</td>
+										<td data-target="Э16"></td>
+										<td data-target="Э17"></td>
+									</tr>
+									<tr>
+										<td>Цифровое управление и настройка привода с дублированием каналов связи посредством цифрового канала связи, интерфейс RS485, протокол обмена — MODBUS RTU</td>
+										<td data-target="Э16"></td>
+										<td data-target="Э17"></td>
+									</tr>
+									<tr>
+										<td>Цифровое управление приводом посредством цифрового канала связи, интерфейс RS485, протокол обмена — PROFIBUS DP</td>
+										<td data-target="Э16"></td>
+										<td data-target="Э17"></td>
+									</tr>
+									<tr>
+										<td>Цифровое управление приводом с дублированием каналов связи посредством цифрового канала связи, интерфейс RS485, протокол обмена — PROFIBUS DP</td>
+										<td data-target="Э16"></td>
+										<td data-target="Э17"></td>
+									</tr>
+									<tr>
+										<td>Диагностирование отказов опциональных модулей</td>
+										<td data-target="Э16" class="table-success"></td>
+										<td data-target="Э17" class="table-success"></td>
+									</tr>
+									<tr>
+										<td>Автоматический выбор активного интерфейса дистанционного управления</td>
+										<td data-target="Э16" class="table-success"></td>
+										<td data-target="Э17" class="table-success"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary" id="e14e17Clear">Сбросить</button>
+							<div class="modal-title m-auto">Код исполнения: <span class="cur-e14e17xecution-value">Э</span></div>
+							<input type="hidden" class="cur-execution-value" value="Э" />
+							<button type="button" class="btn btn-primary" id="e14e17-submit">Применить</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
 			<div class="modal" id="cabelTypeModal" tabindex="-1">
 				<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 					<div class="modal-content">
@@ -1284,6 +1380,7 @@
 					</div>
 				</div>
 			</div>
+
 			<!-- FASTMARK -->
 			<div class="modal" id="markModal" tabindex="-1" style="width: 100%; z-index: 111111">
 				<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" style="width: 100%">

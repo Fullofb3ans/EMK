@@ -375,7 +375,11 @@ transition: 0.2s;
 }
 
 #e1-table td:hover,
-#e1-table th:hover {
+#e1-table th:hover, 
+#e14e17-table td:hover, 
+#e14e17-table th:hover,
+#ve14e17-table td:hover, 
+#ve14e17-table th:hover {
 	cursor: pointer;
 }
 
@@ -698,7 +702,7 @@ th {
 }
 
 #vimumodal-submit,
-#AddNewsubmitE16 {
+#AddNewsubmitE16, #e14e17-submit, #ve14e17-submit {
 	padding: 7px;
 	background: #d1e7dd;
 	transition-duration: 0.4s;
@@ -720,7 +724,7 @@ th {
 }
 
 #vimumodal-submit:hover,
-#AddNewsubmitE16:hover {
+#AddNewsubmitE16:hover, #e14e17-submit:hover, #ve14e17-submit:hover {
 	background-color: rgb(198 198 197 / 19%);
 	color: black;
 }
@@ -865,7 +869,7 @@ th {
 }
 
 #clear-e2,
-#ve22Clear {
+#ve22Clear, #e14e17Clear, #ve14e17Clear {
 	padding: 7px;
 	background: rgb(249 84 0 / 41%);
 	transition-duration: 0.4s;
@@ -921,7 +925,7 @@ th {
 
 #AddNewClear:hover,
 #AddNewClearE16:hover,
-#ve22Clear:hover {
+#ve22Clear:hover, #e14e17Clear:hover, #ve14e17Clear:hover {
 	background-color: #a1a1a1;
 	color: black;
 }

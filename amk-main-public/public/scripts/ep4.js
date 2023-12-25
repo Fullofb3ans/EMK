@@ -22,6 +22,14 @@ $(document).ready(function () {
         $('#ve2-table16 th').removeClass('table-success');
         $(el).toggleClass('table-success');
     });
+    $(document).on('click', '#e14e17-table th, #e14e17-table td', function (e) {
+        let target = $(this).data('target');
+        console.log(target);
+        let el = document.getElementById('e14e17' + target);
+        $('.cur-e14e17xecution-value').text(target).val(target);
+        $('#e14e17-table th').removeClass('table-success');
+        $(el).toggleClass('table-success');
+    });
 
     // КОНСТАНТЫ ДЛЯ JSON
     const cheme_img = {
@@ -845,6 +853,7 @@ $(document).ready(function () {
     // Обработка доп платы
     let vimuBlock2ModalForE16 = new bootstrap.Modal($("#ve2ConfigE16"));
     let vimuBlock2Modal = new bootstrap.Modal($("#ve2Config"));
+    let e14e17BlockModal = new bootstrap.Modal($('#block-configure-e14e17'));
 
     $("#closeve2E16modal").on("click", function (e) {
         vimuBlock2ModalForE16.hide();
@@ -874,6 +883,17 @@ $(document).ready(function () {
         $('#control-block-fieldset').trigger('change');
     });
 
+    $("#e14e17-submit").on("click", function (e) {
+        $("#controle-blocks2").val($('.cur-e14e17xecution-value').text()).trigger("change");
+        e14e17BlockModal.hide();
+    });
+
+    $('#e14e17Clear').on('click', function (e) {
+        $('#controle-blocks2').val('');
+        e14e17BlockModal.hide();
+        $('#control-block-fieldset').trigger('change');
+    });
+
     $('#control-block-fieldset').on('change', function (e) {
         $('#controle-blocks2').val() ? $('#sumBlocks').val($('#controle-blocks').val() + '/' + $('#controle-blocks2').val()) : $('#sumBlocks').val($('#controle-blocks').val());
     });
@@ -889,13 +909,22 @@ $(document).ready(function () {
                 vimuBlock2ModalForE16.show();
             })
         }
-        else if (BU == 'Э18' || BU == 'Э19' || BU == 'Э110' || BU == 'Э14') {
+        else if (BU == 'Э18' || BU == 'Э19' || BU == 'Э110') {
             $("#controle-blocks2").val('');
             $('#control-block-fieldset').trigger('change');
             $("#control-block2-config").off('click');
             $("#control-block2-config").show();
             $("#control-block2-config").on('click', function () {
                 vimuBlock2Modal.show();
+            })
+        }
+        else if (BU == 'Э14') {
+            $("#controle-blocks2").val('');
+            $('#control-block-fieldset').trigger('change');
+            $("#control-block2-config").off('click');
+            $("#control-block2-config").show();
+            $("#control-block2-config").on('click', function () {
+                e14e17BlockModal.show();
             })
         }
         else {

@@ -21,6 +21,15 @@ $(document).ready(function () {
         $('#e2E16-table th').removeClass('table-success');
         $(el).toggleClass('table-success');
     });
+    $(document).on('click', '#e14e17-table th, #e14e17-table td', function (e) {
+        let target = $(this).data('target');
+        console.log(target);
+        let el = document.getElementById('e14e17В' + target);
+        console.log(el);
+        $('.cur-e14e17xecution-value').text(target).val(target);
+        $('#e14e17-table th').removeClass('table-success');
+        $(el).toggleClass('table-success');
+    });
 
     const cheme_img = {
         epn: {
@@ -486,13 +495,22 @@ $(document).ready(function () {
                 vimuBlock2ModalForE16.show();
             })
         }
-        else if (BU == 'ВЭ18' || BU == 'ВЭ19' || BU == 'ВЭ110' || BU == 'ВЭ14') {
+        else if (BU == 'ВЭ18' || BU == 'ВЭ19' || BU == 'ВЭ110') {
             $("#controle-blocks2").val('');
             $('#control-block-fieldset').trigger('change');
             $("#control-block2-config").off('click');
             $("#control-block2-config").show();
             $("#control-block2-config").on('click', function () {
                 vimuBlock2ModalOnlyE16.show();
+            })
+        }
+        else if (BU == 'ВЭ14') {
+            $("#controle-blocks2").val('');
+            $('#control-block-fieldset').trigger('change');
+            $("#control-block2-config").off('click');
+            $("#control-block2-config").show();
+            $("#control-block2-config").on('click', function () {
+                e14e17BlockModal.show();
             })
         }
         else {
@@ -1065,8 +1083,8 @@ $(document).ready(function () {
     let vimuBlock2ModalForE16 = new bootstrap.Modal($('#addNewBlock'));
     let vimuBlock2ModalOnlyE16 = new bootstrap.Modal($('#addNewBlockE16'));
 
-    let addVimuBlockForE16 = new bootstrap.Modal($('#ve2Config'));
-    let addVimuBlockOnlyE16 = new bootstrap.Modal($('#ve2Config2'));
+    let e14e17BlockModal = new bootstrap.Modal($('#block-configure-e14e17'));
+
 
     // Кнопки в таблицу
     $('#m1-form').on('change', function (e) {
@@ -1137,6 +1155,17 @@ $(document).ready(function () {
         vimuBlock2ModalOnlyE16.hide();
         $('#controle-blocks2').val('');
         $(document).trigger('change')
+    });
+
+    $("#e14e17-submit").on("click", function (e) {
+        $("#controle-blocks2").val($('.cur-e14e17xecution-value').text()).trigger("change");
+        e14e17BlockModal.hide();
+    });
+
+    $('#e14e17Clear').on('click', function (e) {
+        $('#controle-blocks2').val('');
+        e14e17BlockModal.hide();
+        $('#control-block-fieldset').trigger('change');
     });
 
     $('#e2-form input').on('change', function (e) {

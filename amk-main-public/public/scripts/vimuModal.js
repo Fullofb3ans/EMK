@@ -31,6 +31,14 @@ $(document).ready(function () {
         $('#ve2-table2 th').removeClass('table-success');
         $(el).toggleClass('table-success');
     });
+    $(document).on('click', '#ve14e17-table th, #ve14e17-table td', function (e) {
+        let target = $(this).data('target');
+        console.log(target);
+        let el = document.getElementById('ve14e17' + target);
+        $('.cur-ve14e17xecution-value').text(target).val(target);
+        $('#ve14e17-table th').removeClass('table-success');
+        $(el).toggleClass('table-success');
+    });
 
     // МАРКИРОВКА
     $('#vimuSet').on('change', function (e) {
@@ -162,6 +170,7 @@ $(document).ready(function () {
     let vimuBlockModal = new bootstrap.Modal($("#ve1Config"));
     let vimuBlock2Modal = new bootstrap.Modal($("#ve2Config"));
     let vimuBlock3Modal = new bootstrap.Modal($("#ve2Config2"));
+    let ve14e17BlockModal = new bootstrap.Modal($('#block-configure-ve14e17'));
 
     $('#vimucontrole-blocks').on('change', function () {
         $('#vimucontrole-blocks2').val('');
@@ -187,8 +196,11 @@ $(document).ready(function () {
         if (BU == 'ВЭ16') {
             vimuBlock2Modal.show()
         }
-        else if (BU == 'ВЭ14' || BU == 'ВЭ18' || BU == 'ВЭ19' || BU == 'ВЭ110') {
+        else if (BU == 'ВЭ18' || BU == 'ВЭ19' || BU == 'ВЭ110') {
             vimuBlock3Modal.show();
+        }
+        else if (BU == 'ВЭ14') {
+            ve14e17BlockModal.show();
         };
     });
 
@@ -258,6 +270,15 @@ $(document).ready(function () {
         $("#vimucontrole-blocks2").val($("input.cur-vexecution22-value").text()).trigger("change");
         vimuBlock3Modal.hide();
         $("#vimuSet").trigger('change');
+    });
+
+    $("#ve14e17-submit").on("click", function (e) {
+        $("#vimucontrole-blocks2").val($('.cur-ve14e17xecution-value').text()).trigger("change");
+        ve14e17BlockModal.hide();
+    });
+
+    $('#ve14e17Clear').on('click', function (e) {
+        ve14e17BlockModal.hide();
     });
 
     $('#ve2Clear').on('click', function (e) {
