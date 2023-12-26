@@ -488,34 +488,6 @@ $(document).ready(function () {
         flangeSelectCreate();
     });
 
-    $('#constructive-scheme-wrap').on('change', function () {
-        cur_constructive_scheme = $("input[name='constructive-scheme']").val();
-
-        // СОКРЫТИЕ КАБЕЛЬНЫЙ ПОДКЛЮЧЕНИЙ ДЛЯ СХем 43/44/430
-        if (cur_constructive_scheme == '43' || cur_constructive_scheme == '430' || cur_constructive_scheme == '44') {
-            $("input[name='connectionForEp4']:checked").prop('checked', false);
-            $(document).trigger('change');
-            document.querySelector("#connectionForEp4-0div").style.display = 'flow';
-            document.querySelector("#connectionForEp4-1div").style.display = 'none';
-            // document.querySelector("#connectionForEp4-2div").checked = '';
-            // document.querySelector("#connectionForEp4-3div").style.display = 'flow';
-            document.querySelector("#connectionForEp4-4div").style.display = 'none';
-            // document.querySelector("#connectionForEp4-5div").style.display = 'flow';
-            document.querySelector("#connectionForEp4-6div").style.display = 'none';
-            // document.querySelector("#connectionForEp4-7div").style.display = 'flow';
-        }
-        else {
-            document.querySelector("#connectionForEp4-0div").style.display = 'flow';
-            document.querySelector("#connectionForEp4-1div").style.display = 'flow';
-            // document.querySelector("#connectionForEp4-3div").style.display = 'flow';
-            document.querySelector("#connectionForEp4-4div").style.display = 'flow';
-            // document.querySelector("#connectionForEp4-5div").style.display = 'flow';
-            document.querySelector("#connectionForEp4-6div").style.display = 'flow';
-            // document.querySelector("#connectionForEp4-7div").style.display = 'flow';
-        }
-
-    });
-
     // Обработка кнопки схем подключения
     $('#step-5').on('change', function () {
         switch ($('#controle-blocks').val()) {
@@ -1112,6 +1084,7 @@ $(document).ready(function () {
         let secondVimuBlock = $('#controle-blocks2').val() ? '/' + VE + $('#controle-blocks2').val() : '';
 
         let optForBu = $('#control-block-optionsset option:selected').val() != 'noValue' ? $('#control-block-optionsset option:selected').val() : '';
+        let optForE2 = document.querySelector("#e2OptionZ").checked ? 'Z' : '';
 
         let tuMpX1 = document.querySelector('#maxStepMp').value;
         let tuMpX2 = document.querySelector('#stepForOne').value;
@@ -1144,6 +1117,7 @@ $(document).ready(function () {
                 x5 +
                 '-' +
                 x6 +
+                secondVimuBlock + optForE2 +
                 optionssetCheckBox +
                 optForBu +
                 '-' +
@@ -1165,7 +1139,7 @@ $(document).ready(function () {
             )
         }
         else {
-            mark_gen.text(x0 + x1 + x2 + '-' + x3 + '-' + x4 + '-' + x5 + '-' + x6 + secondVimuBlock +
+            mark_gen.text(x0 + x1 + x2 + '-' + x3 + '-' + x4 + '-' + x5 + '-' + x6 + secondVimuBlock + optForE2 +
                 optionssetCheckBox + optForBu + '-' + x7 + '-' + x8 + x9 + x10 + x11 + x12 + x13 + suffix);
         }
     });
@@ -1251,6 +1225,7 @@ $(document).ready(function () {
         let tuMpX2 = document.querySelector('#stepForOne').value;
         let TuMp = tuMpX1 ? tuMpX1 + '-' + tuMpX2 : '';
         let optForBu = $('#control-block-optionsset option:selected').val() != 'noValue' ? $('#control-block-optionsset option:selected').val() : '';
+        let optForE2 = document.querySelector("#e2OptionZ").checked ? 'Z' : '';
         let secondBlock = document.querySelector("#controle-blocks2").value;
         // CХЕМА
         let schemeForSend = $("input[name='constructive-scheme']:checked").val();
@@ -1341,17 +1316,17 @@ $(document).ready(function () {
         }
 
         let j38 = 'Одиночные';
-        if (optForBu == 'Z' || optForBu == 'W') {
+        if (optForBu == 'Z' || optForBu == 'W' || optForE2 == 'Z') {
             j38 = 'Сдвоенные';
         } // Промежуточные выключатели
 
         let j39 = 'Одиночные'; // Моментные выключатели
-        if (optForBu == 'Z' || optForBu == 'W') {
+        if (optForBu == 'Z' || optForBu == 'W' || optForE2 == 'Z') {
             j39 = 'Сдвоенные';
         } // Моментные выключатели
 
         let j310 = 'Одиночные'; // Концевые выключатели
-        if (optForBu == 'Z' || optForBu == 'W') {
+        if (optForBu == 'Z' || optForBu == 'W' || optForE2 == 'Z') {
             j310 = 'Сдвоенные';
         } // Концевые выключатели
 
@@ -1759,7 +1734,35 @@ $(document).ready(function () {
             document.querySelector('#control-block-optionsset').classList.remove('ReqValueOk');
             document.querySelector('#control-block-optionsset').classList.add('noReqValue');
         }
+
     });
+
+    $('.row').on('change', function () {
+        if ($('#controle-blocks-series').val() == 'Э2' && $("input[name='constructive-scheme']:checked").val() !== '40') {
+            $('#control-block-optionssetE2').show();
+        }
+        else {
+            $('#control-block-optionssetE2').hide();
+            document.querySelector("#e2OptionZ").checked == false;
+        }
+
+        // СОКРЫТИЕ КАБЕЛЬНЫЙ ПОДКЛЮЧЕНИЙ ДЛЯ СХем 43/44/430
+        let cur_constructive_scheme = $("input[name='constructive-scheme']:checked").val();
+        if ((cur_constructive_scheme == '43' || cur_constructive_scheme == '430' || cur_constructive_scheme == '44') || (document.querySelector("#e2OptionZ").checked)) {
+            document.querySelector('#connectionForEp4-1').checked = false;
+            document.querySelector('#connectionForEp4-4').checked = false;
+            document.querySelector('#connectionForEp4-6').checked = false;
+
+            document.querySelector("#connectionForEp4-1div").style.display = 'none';
+            document.querySelector("#connectionForEp4-4div").style.display = 'none';
+            document.querySelector("#connectionForEp4-6div").style.display = 'none';
+        }
+        else {
+            document.querySelector("#connectionForEp4-1div").style.display = 'flow';
+            document.querySelector("#connectionForEp4-4div").style.display = 'flow';
+            document.querySelector("#connectionForEp4-6div").style.display = 'flow';
+        }
+    })
 
     // СТИЛЬ ДЛЯ ПОЛЯ С ДАННЫМИ
     $('.persInfo').on('change', function (e) {
@@ -2054,8 +2057,10 @@ $(document).ready(function () {
         let BoMark = document.querySelector('#controle-blocks-series').value;
         optForBu = $('#control-block-optionsset option:selected').val() != 'noValue' ? $('#control-block-optionsset option:selected').val() : '';
 
-        if (BoMark == 'Э2') {
+        if (BoMark == 'Э2' && (document.querySelector("#e2OptionZ").checked == false)) {
             return (remoteSignal = 'Привод с шестью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 24 В/220 В; ');
+        } else if (BoMark == 'Э2' && document.querySelector("#e2OptionZ").checked) {
+            return (remoteSignal = 'Привод с двенадцатью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 24 В/220 В; ');
         }
         else if (BoMark == 'Э0' || BoMark == 'Э1S') {
             return (remoteSignal = 'Привод с шестью сигнальными реле и дискретным управлением с использованием пятиканальной линии связи 24 В; ');
