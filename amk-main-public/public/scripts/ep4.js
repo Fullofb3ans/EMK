@@ -56,20 +56,70 @@ $(document).ready(function () {
     const execution_wrap = $('#execution-wrap');
 
     const tuMp = {
-        60: {
-            '24...60': {
-                '6-15': ['5'],
-                '5.5-13': ['10'],
-                '3-6.5': ['20'],
+        '5': {
+            '15': {
+                '6-15': ['1.5-3.75']
+            },
+
+            '30': {
+                '12-30': ['3-7.5']
+            },
+            '60': {
+                '24-60': ['6-15'],
+            },
+            '120': {
+                '48-120': ['12-30']
             },
         },
 
-        120: {
-            '48...120': {
-                '12...30': ['5'],
-                '11...26': ['10'],
-                '6...13': ['20'],
+        '10': {
+            '15': {
+                '6-15': ['1.5-3.75']
             },
+            '30': {
+                '12-30': ['3-7.5']
+            },
+            '60': {
+                '24-60': ['5.5-13'],
+            },
+
+            '120': {
+                '48-120': ['11-26']
+            },
+        },
+    };
+
+    $('.row').on('change', function () {
+        if (document.querySelector('#rotation-frequency').value == '63' || document.querySelector('#rotation-frequency').value == '90') {
+            $('#tuMp10').hide()
+        }
+        else {
+            $('#tuMp10').show()
+        }
+    })
+
+    const tuMpV = {
+        '5': {
+            '4': ['0,3(20)'],
+            '5.6': ['0,5(28)'],
+            '8': ['0,7(40)'],
+            '11': ['0,9(55)'],
+            '16': ['1,3(80)'],
+            '22': ['1,9(110)'],
+            '32': ['2,7(160)'],
+            '45': ['3,7(220)'],
+            '63': ['5,3(320)'],
+            '90': ['7,5(450)'],
+        },
+        '10': {
+            '4': ['0,7(40)'],
+            '5.6': ['0,9(55)'],
+            '8': ['1,3(80)'],
+            '11': ['1,9(110)'],
+            '16': ['2,7(160)'],
+            '22': ['3,7(220)'],
+            '32': ['5,3(320)'],
+            '45': ['7,5(450)'],
         },
     };
 
@@ -77,7 +127,7 @@ $(document).ready(function () {
 
     //ОТКРЫТИЕ БЛОКА С МП МОДУЛЕМ
     $('.tuMpCheck').on('change', function (e) {
-        let check = document.querySelector('#tuMpCheck > input[type=checkbox]');
+        let check = document.querySelector('#mpCheck');
         if (check.checked) {
             $('#tuMpField').removeClass('none');
         } else if (!check.checked) {
@@ -86,91 +136,40 @@ $(document).ready(function () {
     });
 
     // ЗАПОЛНЕНИЕ НОМИНАЛЬНОГО КРУТЯЩЕГО МОМЕНТА С JSON
-    $('#executionWrapLegend').on('change', function (e) {
-        // $('#step-3').show();
 
-        let select = $(document.querySelector('#roundMomentMp'));
-        $(select).empty().append(new Option('Укажите значение', ''));
-
-        ValuesArr = tuMp;
-        // console.log(ValuesArr);
-        let selectArr = [];
-
-        $.each(ValuesArr, function (key, item) {
-            $.each(item, function (index, arr) {
-                {
-                    if (!selectArr.includes(key)) {
-                        selectArr.push(key);
-                        // console.log(selectArr);
-                    }
-                }
-            });
-        });
-        selectArr.sort((a, b) => a - b);
-        $.each(selectArr, function (key, item) {
-            $(select).append(new Option(item, item));
-        });
-    });
-
-    // ЗАПОЛНЕНИЕ КРУТЯЩЕГО МОМЕНТА ПРИВОДА С JSON
+    // ЗАПОЛНЕНИЕ ДиапазонА усилий на штоке модуля С JSON
     $('#roundMomentMp').on('change', function (e) {
         // $('#step-3').show();
 
         let execVal = $('#roundMomentMp').val();
+        let execVal2 = document.querySelector('#upper-limit').value;
         // console.log(execVal);
 
-        let select = $(document.querySelector('#roundMomentEngine'));
+        let select = document.querySelector('#roundMomentInterval');
         $(select).empty().append(new Option('Укажите значение', ''));
 
-        ValuesArr = tuMp[execVal];
-        // console.log(ValuesArr);
-        let selectArr = [];
+        select.append(new Option(Object.keys(tuMp[execVal][execVal2])
+            , Object.keys(tuMp[execVal][execVal2])
+        ));
+        if (select.length == 2) {
+            select.selectedIndex = 1;
+            $('#tuMpField').trigger('change');
+            $('#roundMomentInterval').trigger('change');
+        }
 
-        $.each(ValuesArr, function (key, item) {
-            $.each(item, function (index, arr) {
-                {
-                    if (!selectArr.includes(key)) {
-                        selectArr.push(key);
-                        // console.log(selectArr);
-                    }
-                }
-            });
-        });
-        selectArr.sort((a, b) => a - b);
-        $.each(selectArr, function (key, item) {
-            $(select).append(new Option(item, item));
-        });
-    });
-
-    // ЗАПОЛНЕНИЕ ДиапазонА усилий на штоке модуля С JSON
-    $('#roundMomentEngine').on('change', function (e) {
-        // $('#step-3').show();
-
-        let execVal = $('#roundMomentMp').val();
-        let execVal2 = $('#roundMomentEngine').val();
+        let execVal1r = document.querySelector('#roundMomentMp').value;
+        let execValv = document.querySelector('#rotation-frequency').value;
         // console.log(execVal);
 
-        let select = $(document.querySelector('#roundMomentInterval'));
-        $(select).empty().append(new Option('Укажите значение', ''));
+        let select2 = document.querySelector('#vStepStock');
+        $(select2).empty().append(new Option('Укажите значение', ''));
 
-        ValuesArr = tuMp[execVal][execVal2];
-        // console.log(ValuesArr);
-        let selectArr = [];
-
-        $.each(ValuesArr, function (key, item) {
-            $.each(item, function (index, arr) {
-                {
-                    if (!selectArr.includes(key)) {
-                        selectArr.push(key);
-                        // console.log(selectArr);
-                    }
-                }
-            });
-        });
-        selectArr.sort((a, b) => b - a);
-        $.each(selectArr, function (key, item) {
-            $(select).append(new Option(item, item));
-        });
+        select2.append(new Option((tuMpV[execVal1r][execValv])
+            , (tuMpV[execVal1r][execValv])
+        ));
+        if (select2.length == 2) {
+            select2.selectedIndex = 1;
+        }
     });
 
     // ЗАПОЛНЕНИЕ ХОДА ШТОКА МОДУЛЯ ЗА ОДИН ОБОРОТ С JSON
@@ -178,39 +177,22 @@ $(document).ready(function () {
         // $('#step-3').show();
 
         let execVal = $('#roundMomentMp').val();
-        let execVal2 = $('#roundMomentEngine').val();
+        let execVal2 = document.querySelector('#upper-limit').value;
         let execVal3 = $('#roundMomentInterval').val();
         // console.log(execVal);
 
-        let select = $(document.querySelector('#stepForOne'));
+        let select = document.querySelector('#stepForOne');
         $(select).empty().append(new Option('Укажите значение', ''));
 
-        ValuesArr = tuMp[execVal][execVal2][execVal3];
-        // console.log(ValuesArr);
-        let selectArr = [];
-
-        $.each(
-            [
-                ...new Set(
-                    ValuesArr.sort(function (a, b) {
-                        return a - b;
-                    })
-                ),
-            ],
-            function (index, item) {
-                select.append(new Option(item, item, false, !selectArr.includes(item)));
-            }
-        );
-
-        selectArr.sort();
-        $.each(selectArr, function (key, item) {
-            $(select).append(new Option(item, item));
-        });
+        select.append(new Option(tuMp[execVal][execVal2][execVal3], tuMp[execVal][execVal2][execVal3]));
+        if (select.length == 2) {
+            select.selectedIndex = 1;
+            $('#tuMpField').trigger('change');
+        }
     });
 
 
     // ПРОГРУЗКА ОСНОВНОЙ СТРАНИЦЫ
-    let cur_constructive_scheme = $("input[name='constructive-scheme']:checked").val();
 
     // ПРОГРУЗКА ДАННЫХ ПРЕДЕЛА С ТАБЛИЦЫ
     $('#executionWrapLegend').on('change', function (e) {
@@ -1086,8 +1068,16 @@ $(document).ready(function () {
         let optForBu = $('#control-block-optionsset option:selected').val() != 'noValue' ? $('#control-block-optionsset option:selected').val() : '';
         let optForE2 = document.querySelector("#e2OptionZ").checked ? 'Z' : '';
 
-        let tuMpX1 = document.querySelector('#maxStepMp').value;
-        let tuMpX2 = document.querySelector('#stepForOne').value;
+        let tuMpX1 = document.querySelector('#maxStepMp').value ? document.querySelector('#maxStepMp').value + '-' : '';
+        let tuMpX2 = document.querySelector('#roundMomentMp').value ? document.querySelector('#roundMomentMp').value : '';
+        let tuMpXF = 'МП40';
+        if (document.querySelector('#flange').value == 'АК' || document.querySelector('#flange').value == 'АЧ') {
+            tuMpXF += 'А-';
+        }
+        else if (document.querySelector('#flange').value == 'МК') {
+            tuMpXF += 'М-';
+        };
+
 
         let constructive_scheme = $("input[name='constructive-scheme']:checked").val();
 
@@ -1103,7 +1093,7 @@ $(document).ready(function () {
         }
 
         is_true = [x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12].includes('X');
-        let check = document.querySelector('#tuMpCheck > input[type=checkbox]');
+        let check = document.querySelector('#mpCheck');
         if (check.checked) {
             mark_gen.text(
                 x0 +
@@ -1131,10 +1121,8 @@ $(document).ready(function () {
                 x13 +
                 suffix +
                 '/' +
-                'МП40' +
-                '-' +
+                tuMpXF +
                 tuMpX1 +
-                '-' +
                 tuMpX2
             )
         }
@@ -1221,9 +1209,16 @@ $(document).ready(function () {
 
         let BoMark = document.querySelector('#controle-blocks-series').value;
 
-        let tuMpX1 = document.querySelector('#maxStepMp').value ? 'МП40-' + document.querySelector('#maxStepMp').value : '';
-        let tuMpX2 = document.querySelector('#stepForOne').value;
-        let TuMp = tuMpX1 ? tuMpX1 + '-' + tuMpX2 : '';
+        let tuMpX1 = document.querySelector('#maxStepMp').value ? document.querySelector('#maxStepMp').value + '-' : '';
+        let tuMpX2 = document.querySelector('#roundMomentMp').value ? document.querySelector('#roundMomentMp').value : '';
+        let tuMpXF = 'МП40';
+        if (document.querySelector('#flange').value == 'АК' || document.querySelector('#flange').value == 'АЧ') {
+            tuMpXF += 'А-';
+        }
+        else if (document.querySelector('#flange').value == 'МК') {
+            tuMpXF += 'М-';
+        };
+        let TuMp = tuMpXF + tuMpX1 + tuMpX2;
         let optForBu = $('#control-block-optionsset option:selected').val() != 'noValue' ? $('#control-block-optionsset option:selected').val() : '';
         let optForE2 = document.querySelector("#e2OptionZ").checked ? 'Z' : '';
         let secondBlock = document.querySelector("#controle-blocks2").value;
@@ -1254,7 +1249,7 @@ $(document).ready(function () {
 
         //json1
         let j10 = 'Электроприводы многообортные ЭП4'; //тип арматуры
-        let j11 = TuMp ? document.querySelector('#mark-gen').innerText + '/' + TuMp : document.querySelector('#mark-gen').innerText; //маркировка
+        let j11 = document.querySelector('#mark-gen').innerText; //маркировка
         let j12 = 'АО Тулаэлектропривод'; //завод
         let j13 = document.querySelector('#closingTime').value ? document.querySelector('#closingTime').value : ' '; //время закрытия
         let j14 = document.querySelector('#upper-limit').value; //Максимальный крутящий момент
@@ -1684,14 +1679,16 @@ $(document).ready(function () {
         }
     });
 
-    // Проверка на запорно-регулирующую арматуру для пм модуля
-    $('.timeMode').on('change', function (e) {
-        if ($("input[name='working-mode']:checked").val() == 'Р') {
+    // Проверка на подходящую частоту и крутящий момент для пм модуля
+    $('.row').on('change', function (e) {
+        if ((document.querySelector("#rotation-frequency").value >= 4 && document.querySelector("#rotation-frequency").value <= 90)
+            && (document.querySelector("#upper-limit").value == '30' || document.querySelector("#upper-limit").value == '60' || document.querySelector("#upper-limit").value == '120')
+            && (document.querySelector("#flange").value == 'АК' || document.querySelector("#flange").value == 'АЧ' || document.querySelector("#flange").value == 'МК'
+            )) {
             document.querySelector('.tuMpField').style.display = 'block';
         } else {
             document.querySelector('.tuMpField').style.display = 'none';
-            document.querySelector("#tuMpCheck > input[type=checkbox]").checked = false;
-            $('#tuMpCheck').trigger('change');
+            document.querySelector('#mpCheck').checked = false;
         }
     });
 
@@ -1796,7 +1793,7 @@ $(document).ready(function () {
     });
     // Стиль для модуля Модуль прямоходный
     $('.tuMpField').on('change', function (e) {
-        if (document.querySelector('#tuMpCheck > input[type=checkbox]').checked) {
+        if (document.querySelector('#mpCheck').checked) {
             document.querySelector('.tuMpField ').classList.add('ReqValueOk');
             document.querySelector('.tuMpField ').classList.remove('noReqValue');
         } else {
@@ -1824,16 +1821,6 @@ $(document).ready(function () {
             document.querySelector('#roundMomentMpField').classList.remove('ReqValueOk');
         }
     });
-    // Стиль для модуля Крутящий момент привода
-    $('#tuMpField').on('change', function (e) {
-        if (document.querySelector('#roundMomentEngine').value != '') {
-            document.querySelector('.roundMomentEngine').classList.add('ReqValueOk');
-            document.querySelector('.roundMomentEngine').classList.remove('noReqValue');
-        } else {
-            document.querySelector('.roundMomentEngine').classList.add('noReqValue');
-            document.querySelector('.roundMomentEngine').classList.remove('ReqValueOk');
-        }
-    });
 
     // Стиль для модуля Диапазон усилий на штоке модуля при настройке привода на крутящий момент
     $('#tuMpField').on('change', function (e) {
@@ -1843,6 +1830,15 @@ $(document).ready(function () {
         } else {
             document.querySelector('.roundMomentInterval').classList.add('noReqValue');
             document.querySelector('.roundMomentInterval').classList.remove('ReqValueOk');
+        }
+    });
+    $('#tuMpField').on('change', function (e) {
+        if (document.querySelector('#vStepStock').value != '') {
+            document.querySelector('#vStepStockSet').classList.add('ReqValueOk');
+            document.querySelector('#vStepStockSet').classList.remove('noReqValue');
+        } else {
+            document.querySelector('#vStepStockSet').classList.add('noReqValue');
+            document.querySelector('#vStepStockSet').classList.remove('ReqValueOk');
         }
     });
     // Стиль для модуля Ход штока модуля за один оборот

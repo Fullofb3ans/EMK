@@ -645,7 +645,7 @@
 						<div class="tuMpCheck">
 							<label id="tuMpCheck">
 								<legend class="col-form-label col-sm-3 pt-0">Модуль прямоходный:</legend>
-								<input type="checkbox" value="1" name="mp" /> Добавить
+								<input type="checkbox" value="1" id="mpCheck" /> Добавить
 							</label>
 						</div>
 					</fieldset>
@@ -659,7 +659,12 @@
 									<option value="" selected>Выберите значение</option>
 									<option value="40">40</option>
 									<option value="63">63</option>
+									<option value="100">100</option>
 									<option value="125">125</option>
+									<option value="150">150</option>
+									<option value="175">175</option>
+									<option value="250">250</option>
+									<option value="300">300</option>
 								</select>
 							</div>
 						</fieldset>
@@ -667,26 +672,19 @@
 						<fieldset class="row mb-3 noReqValue roundMomentMp" id="roundMomentMpField">
 							<legend class="blockNumber">17.3</legend>
 							<div class="col-sm-9">
-								<legend class="col-form-label col-sm-3 pt-0">Номинальный крутящий момент:</legend>
+								<legend class="col-form-label col-sm-3 pt-0">Ход штока модуля за один оборот привода, мм:</legend>
 								<select class="form-select" name="roundMomentMp" id="roundMomentMp">
 									<option value="" selected disabled>Выберите значение</option>
-								</select>
-							</div>
-						</fieldset>
-						<fieldset class="row mb-3 noReqValue roundMomentEngine" id="roundMomentEngineField">
-							<legend class="blockNumber">17.4</legend>
-							<div class="col-sm-9">
-								<legend class="col-form-label col-sm-3 pt-0">Крутящий момент привода:</legend>
-								<select class="form-select" name="roundMomentEngine" id="roundMomentEngine">
-									<option value="" selected disabled>Выберите значение</option>
+									<option id="tuMp5" value="5">5</option>
+									<option id="tuMp10" value="10">10</option>
 								</select>
 							</div>
 						</fieldset>
 
 						<fieldset class="row mb-3 classicEpa-only noReqValue roundMomentInterval" id="roundMomentIntervalField">
-							<legend class="blockNumber">17.5</legend>
+							<legend class="blockNumber">17.4</legend>
 							<div class="col-sm-9">
-								<legend class="col-form-label col-sm-3 pt-0">Диапазон усилий на штоке модуля при настройке привода на крутящий момент:</legend>
+								<legend class="col-form-label col-sm-3 pt-0">Крутящий момент привода при настройке от 40% до 100%, кН:</legend>
 								<select class="form-select" name="roundMomentInterval" id="roundMomentInterval">
 									<option value="" selected disabled>Выберите значение</option>
 								</select>
@@ -694,10 +692,20 @@
 						</fieldset>
 
 						<fieldset class="row mb-3 classicEpa-only noReqValue stepForOne" id="stepForOneField">
-							<legend class="blockNumber">17.6</legend>
-							<legend class="col-form-label col-sm-3 pt-0">Ход штока модуля за один оборот:</legend>
+							<legend class="blockNumber">17.5</legend>
+							<legend class="col-form-label col-sm-3 pt-0">Диапазон усилий на штоке модуля при настройке привода на крутящий момент:</legend>
 							<div class="col-sm-9">
 								<select class="form-select" name="stepForOne" id="stepForOne">
+									<option value="" selected disabled>Выберите значение</option>
+								</select>
+							</div>
+						</fieldset>
+
+						<fieldset class="row mb-3 classicEpa-only noReqValue stepForOne" id="vStepStockSet">
+							<legend class="blockNumber">17.6</legend>
+							<legend class="col-form-label col-sm-3 pt-0">Скорость хода штока при выбранной частоте вращения привода(об/мин), мм/с(мм/мин):</legend>
+							<div class="col-sm-9">
+								<select class="form-select" name="vStepStock" id="vStepStock">
 									<option value="" selected disabled>Выберите значение</option>
 								</select>
 							</div>
@@ -705,7 +713,6 @@
 					</div>
 
 					<!-- ОСТАЛЬНОЕ ДЛЯ ЗАКАЗА -->
-
 					<fieldset class="row mb-3 optionalField addRequirements">
 						<legend class="blockNumber">18</legend>
 						<div class="col-sm-9" id="addReq">
