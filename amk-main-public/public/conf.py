@@ -185,7 +185,9 @@ class mk_XL():
         for i in range(16, 40):
             k = 'G' + str(i)
             keys.append(k)
-
+        red_info = ""
+        if a[6][0] != "?":
+            red_info = f"{a[6][0]} (на выходном валу: номинальный крутящий момент редуктора {a[6][2]} Н·м, диапазон крутящих моментов:  {a[6][3]} Н·м. Тип фланца по ISO 5211 для присоединения редуктора к арматуре: {a[6][4]})."
         ans = ans + [
             f'{a[1][0]}', #4 "Поворотный/многооборотный",
             
@@ -216,7 +218,7 @@ class mk_XL():
 
             f'{a[5][2]}', #24 "Требования по функциональной безопасности SIL",
             f'{a[5][3]}', #25 "Специальное исполнение",
-            f'{a[4][5]}', #26 "Особые требования ",
+            f'{red_info} \n {a[4][5]}', #26 "Особые требования ",
         ]
 
         #Характеристики двигателя
@@ -1570,14 +1572,13 @@ class Auth():
                 else:
                     fid_data[f_id]=[{"id" : data[0], "text" : data[1]}]
 
-        print(fid_data, '\n')
-
         dt_fid=dict()
         for f_id in files_id:
             cursor.execute(f"SELECT dt FROM File WHERE f_id = \'{f_id}\' ORDER BY dt DESC;")
             dt = cursor.fetchall()
             for cur_dt in dt:
                 current_date = cur_dt[0]
+                print(current_date)
                 cur_dt = f"{current_date.day}.{current_date.month}.{current_date.year}"
                 if (cur_dt in dt_fid.keys()) and (f_id not in dt_fid[cur_dt]):
                     dt_fid[cur_dt].append(f_id)
@@ -1594,9 +1595,7 @@ class Auth():
             for fid in fids:
                 for fd in fid_data[fid]:
                     data.append(fd)
-            ans[dt] = data
-
-        print(ans)             
+            ans[dt] = data          
         
         cursor.close()
         conn.close()
