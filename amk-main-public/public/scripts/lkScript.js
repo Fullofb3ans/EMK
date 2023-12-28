@@ -50,7 +50,7 @@ $(document).ready(function () {
 
                     $('#container').append(divForDate);
 
-                    $.each(items, function (index, item) {
+                    $.each(items.reverse(), function (index, item) {
                         console.log(items);
                         console.log(item.id);
                         let li = $('<li>').addClass('flexContForLk');
