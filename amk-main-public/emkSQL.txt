@@ -1,0 +1,132 @@
+#СОЗДАНИЕ И НАСТРОЙКА
+
+sudo apt update
+
+sudo apt -y install postgresql
+
+systemctl start postgresql
+
+sudo su - postgres
+
+psql -c "alter user postgres with password 'gfljyjr'"
+
+psql
+
+createuser --interactive
+
+create database emk;
+
+create user emk_u with encrypted password 'cdjkjxm';
+
+grant all privileges on database emk to emk_u;
+
+\q
+
+exit
+
+#подключение
+psql -h localhost -U emk_u emk
+\q
+
+#настройка подключения
+sudo nano /etc/postgresql/14/main/postgresql.conf
+
+sudo nano /etc/postgresql/14/main/pg_hba.conf
+
+sudo service postgresql restart
+
+
+#подключение
+psql -h localhost -U emk_u emk
+
+#СОЗДАНИЕ ТАБЛИЦ
+
+
+
+#ЭП
+CREATE TABLE ElectroDrive
+(
+	Id SERIAL PRIMARY KEY,
+	Mark CHARACTER VARYING(3) NOT NULL,
+	Isp CHARACTER VARYING(3),
+	sh CHARACTER VARYING(3) NOT NULL,
+	flc CHARACTER VARYING(3) NOT NULL,
+	
+	Mom INTEGER NOT NULL,
+	V REAL NOT NULL,
+	Mas INTEGER NOT NULL,
+	
+	N REAL,
+	Ipusk REAL,
+	Inom REAL,
+	U INTEGER,
+	fz INTEGER,
+	
+	flc_type INTEGER,
+	RN CHARACTER VARYING(4),
+	T_pov INTEGER
+);
+
+#ALTER TABLE ElectroDrive ALTER COLUMN Mark SET NOT NULL;
+
+
+#Классика
+CREATE TABLE ClassicElectroDrive
+(
+	Id SERIAL PRIMARY KEY,
+	Isp CHARACTER VARYING(3),
+	flc CHARACTER VARYING(3),
+	Modify INTEGER,
+	N_isp INTEGER,
+	
+	Mom INTEGER NOT NULL,
+	V REAL NOT NULL,
+	Ob INTEGER,
+	Mas INTEGER NOT NULL,
+	
+	N REAL,
+	Ipusk REAL,
+	Inom REAL,
+	U INTEGER,
+	fz INTEGER,
+	
+	BKV_type CHARACTER VARYING(4),
+	elpod CHARACTER VARYING(40)
+);
+
+pip3 install psycopg2-binary
+
+--SELECT * FROM ElectroDrive;
+--SELECT * FROM ClassicElectroDrive;
+
+
+
+#Авторизация и файлоыое хранилище
+
+CREATE TABLE Client
+(
+	Id SERIAL PRIMARY KEY,
+	UUID CHARACTER VARYING(100) NOT NULL,
+	name CHARACTER VARYING(100) NOT NULL,
+	surname CHARACTER VARYING(100) NOT NULL,
+	partronymic CHARACTER VARYING(100) NOT NULL,
+	department CHARACTER VARYING(100)
+	
+);
+
+CREATE TABLE File
+(
+	Id SERIAL PRIMARY KEY,
+	f_id INT  NOT NULL,
+	name CHARACTER VARYING(100) NOT NULL,
+	dt Date
+);
+
+CREATE TABLE Client_File
+(
+	Id SERIAL PRIMARY KEY,
+	client_id INT,
+	file_id INT,
+ 	FOREIGN KEY (client_id) REFERENCES Client (Id) ON DELETE CASCADE, 
+	FOREIGN KEY (file_id) REFERENCES File (f_id) ON DELETE CASCADE
+);
