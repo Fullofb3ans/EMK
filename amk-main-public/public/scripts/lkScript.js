@@ -12,6 +12,9 @@ $(document).ready(function () {
             .then((res) => {
                 if (res.valid == false) { return alertBitrix() }
                 else {
+                    $('#containerForPI').empty();
+                    $('#container').empty();
+                    $('#containerForSearch').show();
                     $('#containerForPI').append(
                         $('<h5 class="textInlk">').text(res.user.fio[1] + ' ' + res.user.fio[0] + ' ' + res.user.fio[2])).append(
                             $('<div class="textInlk">').text(res.user.department));
@@ -47,8 +50,8 @@ $(document).ready(function () {
                     });
                     let ul = $('<ul>').addClass('selectFlexForLk');
                     ul.addClass('hidden');
-
                     $('#container').append(divForDate);
+
 
                     $.each(items.reverse(), function (index, item) {
                         console.log(items);
@@ -57,7 +60,9 @@ $(document).ready(function () {
                         li.on('click', function () {
                             window.open(`https://emk.websto.pro/getFile/${item.id}`)
                         });
-
+                        if (!item.text.toLowerCase().includes($('#searchField').val().toLowerCase())) {
+                            return null;
+                        }
                         let a = $('<p>').text(item.text).css('overflow-wrap', 'break-word');
                         let docxlImg = $('<img>').attr('src', './img/word.png').addClass('typeIcon');
                         let pdfImg = $('<img>').attr('src', './img/pdf.png').addClass('typeIcon');
@@ -75,8 +80,24 @@ $(document).ready(function () {
                     });
 
                     $('#container').append(ul);
+                    removeEmpty();
                 });
             });
     }
-}
-);
+
+    function removeEmpty() {
+        console.log('удаляем');
+        const ulList = document.querySelectorAll('.selectFlexForLk');
+        ulList.forEach(ul => {
+            const divForDate = ul.previousElementSibling;
+            if (ul.childElementCount === 0) {
+                divForDate.remove();
+                ul.remove();
+            }
+        });
+    }
+
+    $('#searchSubmit').on('click', function () {
+        checkUser();
+    });
+});

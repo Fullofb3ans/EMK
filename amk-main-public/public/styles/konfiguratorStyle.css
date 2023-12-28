@@ -1008,7 +1008,19 @@ th {
 	color: black;
 }
 
+#searchSubmit:hover{
+	background-color: rgb(198 198 197 / 19%);
+	color: black;
+}
+
 .btn-info {
+	padding: 7px;
+	background: rgb(249 84 0 / 41%);
+	transition-duration: 0.4s;
+	cursor: pointer;
+	border-radius: 10px;
+}
+#searchSubmit {
 	padding: 7px;
 	background: rgb(249 84 0 / 41%);
 	transition-duration: 0.4s;
@@ -1019,6 +1031,10 @@ th {
 #ralColor {
 	margin-top: 0.5%;
 	margin-left: 1%;
+}
+
+input#searchField::placeholder {
+    color: #0000007d;
 }
 
 @media (max-width: 1000px) {
