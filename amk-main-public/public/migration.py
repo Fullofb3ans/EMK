@@ -12,7 +12,7 @@ cursor =  conn.cursor()
 wb = load_workbook('DB.xlsx')
 sheet = wb['ЭП']
 
-
+ 
 
 def drive_exist(drive, dbName):
     request = ""

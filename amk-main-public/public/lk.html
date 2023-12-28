@@ -3,20 +3,19 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Подбор электроприводов</title>
-
+		<title>Личный кабинет</title>
 		<script
 			src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.1/js/bootstrap.min.js"
 			integrity="sha512-fHY2UiQlipUq0dEabSM4s+phmn+bcxSYzXP4vAXItBvBHU7zAM/mkhCZjtBEIJexhOMzZbgFlPLuErlJF2b+0g=="
 			crossorigin="anonymous"
 			referrerpolicy="no-referrer"></script>
-
 		<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
 		<link rel="stylesheet" href="./styles/materialize.css" />
 		<link rel="icon" href="./img/favicon.ico" />
 		<script src="./scripts/preloaderScript.js"></script>
+		<script src="./scripts/lkScript.js"></script>
 		<link href="./styles/konfiguratorStyle.css" rel="stylesheet" />
 		<link href="./styles/preloader.css" rel="stylesheet" />
 	</head>
@@ -49,13 +48,12 @@
 		<header>
 			<nav style="overflow-y: clip">
 				<a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+
 				<div class="nav-wrapper #ff8a65 deep-orange lighten-2">
 					<ul id="nav" class="left hide-on-med-and-down">
-						<li>
-							<a href="./lk.html"><i class="material-icons">account_circle</i></a>
-						</li>
+						<li><a href="./select.html">Главная</a></li>
 					</ul>
-					<a href="" class="brand-logo center" style="text-shadow: 1px 1px black; position: absolute; cursor: default; pointer-events: none">Подбор электроприводов</a>
+					<a href="" class="brand-logo center" style="text-shadow: 1px 1px black; position: absolute; cursor: default; pointer-events: none">Личный кабинет</a>
 					<ul id="nav-mobile" class="right hide-on-med-and-down">
 						<li><a href="./epn.html">ЭПН</a></li>
 						<li><a href="./ep4.html">ЭП4</a></li>
@@ -77,101 +75,22 @@
 				<li><a href="./vimu.html">ВИМУ</a></li>
 			</ul>
 		</header>
+		<style>
+			.hidden {
+				display: none;
+			}
 
-		<div class="row" style="padding: 3%">
-			<div class="col-sm-8">
-				<div class="selectFlex">
-					<div class="flexCont">
-						<figure>
-							<a href="./epn.html">
-								<figcaption style="padding-bottom: 2%">
-									<b
-										>Электроприводы неполноповоротные
-										<br />
-										серии
-										<br />
-										ЭПН</b
-									>
-								</figcaption>
-								<img src="./img/epn.png" style="width: 100%" />
-							</a>
-							<p>Используются для автоматизации дископоворотых затворов и шаровых кранов.</p>
-						</figure>
-					</div>
+			figcaption {
+				padding-bottom: 2%;
+			}
+			img {
+				padding-top: 12%;
+			}
+		</style>
 
-					<div class="flexCont">
-						<figure>
-							<a href="ep4.html">
-								<figcaption style="padding-bottom: 2%">
-									<b>
-										Электроприводы многообортные
-										<br />
-										серии
-										<br />
-										ЭП4
-									</b>
-								</figcaption>
-								<img style="width: 100%" src="./img/ep4.png" />
-							</a>
-							<p>Применяются для автоматизации задвижек и клапанов.</p>
-						</figure>
-					</div>
-
-					<div class="flexCont">
-						<figure>
-							<a href="./ep4Reductor.html">
-								<figcaption style="padding-bottom: 2%">
-									<b>
-										Электроприводы ЭП4 в комбинации
-										<br />
-										с редукторами серии
-										<br />
-										РН
-									</b>
-								</figcaption>
-								<img src="./img/reductorEp4.png" style="width: 100%" />
-							</a>
-							<p>Комбинация с редуктором позволяет повысить крутящий момент привода до необходимых значений.</p>
-						</figure>
-					</div>
-
-					<div class="flexCont">
-						<figure>
-							<a href="./ClassicEp.html">
-								<figcaption style="padding-bottom: 2%">
-									<b>
-										Электроприводы классической линейки
-										<br />
-										многообортные
-										<br />
-										по ТУ 26-07-015-89
-									</b>
-								</figcaption>
-								<img src="./img/classicEp.png" style="width: 100%" />
-							</a>
-							<p>Используются для комплектации запорной промышленной трубопроводной арматуры.</p>
-						</figure>
-					</div>
-
-					<div class="flexCont">
-						<figure>
-							<a href="./vimu.html">
-								<figcaption style="padding-bottom: 2%">
-									<b>
-										Внешний
-										<br />
-										интеллектуальный модуль управления
-										<br />
-										ВИМУ
-									</b>
-								</figcaption>
-								<img src="./img/vimu.png" style="width: 100%; padding-top: 12%" />
-							</a>
-							<p>Предназначен для настройки и управления приводами.</p>
-						</figure>
-					</div>
-				</div>
-			</div>
+		<div class="flexContainerLk">
+			<div style="padding: 1%" id="container"></div>
+			<div style="padding: 1%" id="containerForPI"></div>
 		</div>
 		<!-- Модал под тп -->
 		<div class="modal" id="modalForTs" tabindex="-1">
