@@ -95,6 +95,9 @@ $(document).ready(function () {
                 ul.remove();
             }
         });
+        if (document.querySelector("#container").childElementCount == '0') {
+            $("#container").append('p').text('По вашему запросу результаты не найдены')
+        }
     }
 
     $('#searchSubmit').on('click', function () {
