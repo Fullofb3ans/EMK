@@ -96,7 +96,7 @@ $(document).ready(function () {
             }
         });
         if (document.querySelector("#container").childElementCount == '0') {
-            $("#container").append('p').text('По вашему запросу результаты не найдены')
+            $("#container").append('p').text('По вашему запросу результаты не найдены.')
         }
     }
 
